@@ -113,8 +113,8 @@
 
 			if (typeof option === 'string') {
 				if ($.inArray(option, allowedMethods) < 0) {
-                    throw "Unknown method: " + option;
-                }
+					throw "Unknown method: " + option;
+				}
 				value = data[option](args[1]);
 			} else {
 				data.init();
