@@ -20,9 +20,9 @@
 		this.$choice.css('width', $el.width() + 'px')
 			.find('span').css('width', ($el.width() - 20) + 'px');
 		this.$drop.css({
-			width: $el.css('width'),
+			width: $el.width() + 'px',
 			top: (this.$choice.offset().top + this.$choice.outerHeight()) + 'px',
-			left: this.$choice.offset().left
+			left: this.$choice.offset().left + 'px'
 		});
 		if (this.options.isopen) {
 			this.open();
@@ -38,7 +38,7 @@
 				html.push(
 					'<li>',
 						'<label>',
-						'<input type="checkbox" name="selectAll" />',
+						'<input type="checkbox" name="selectAll" /> ',
 						'[' + this.options.selectAllText + ']',
 						'</label>',
 					'</li>'
@@ -50,7 +50,7 @@
 				html.push(
 					'<li>',
 						'<label>',
-						'<input type="checkbox" name="selectItem" value="' + value + '" />',
+						'<input type="checkbox" name="selectItem" value="' + value + '" /> ',
 						text,
 						'</label>',
 					'</li>'
