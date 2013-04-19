@@ -65,7 +65,6 @@
 			var that = this;
 			this.$choice.off('click').click(function() {
 				that[that.isopen ? 'close' : 'open']();
-				that.isopen = !that.isopen;
 			});
 			this.$drop.find('input[name="selectAll"]').off('click').click(function() {
 				var checked = $(this).attr('checked') ? true : false;
@@ -74,11 +73,13 @@
 		},
 		
 		open: function() {
+			this.isopen = true;
 			this.$choice.find('>div').addClass('open');
 			this.$drop.show();
 		},
 		
 		close: function() {
+			this.isopen = false;
 			this.$choice.find('>div').removeClass('open');
 			this.$drop.hide();
 			this.$choice.find('>span').text(this.getSelects('text').join(', '));
