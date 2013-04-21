@@ -9,6 +9,7 @@
 	'use strict';
 
 	function MultipleSelect($el, options) {
+		var that = this;
 		this.$el = $el.hide();
 		this.options = options;
 		
@@ -24,6 +25,18 @@
 			top: (this.$choice.offset().top + this.$choice.outerHeight()) + 'px',
 			left: this.$choice.offset().left + 'px'
 		});
+		
+		$('body').click(function(e) {
+			if ($(e.target)[0] === that.$choice[0] || 
+					$(e.target).parents('.ms-choice')[0] === that.$choice[0]) {
+				return;
+			}
+			if ($(e.target)[0] === that.$drop[0] ||
+					$(e.target).parents('.ms-drop')[0] !== that.$drop[0]) {
+				that.close();
+			}
+		});
+		
 		if (this.options.isopen) {
 			this.open();
 		}
@@ -100,7 +113,7 @@
 			args = arguments,
 			
 			value, 
-			allowedMethods = ['open', 'close', 'getSelects'];
+			allowedMethods = ['getSelects'];
 
 		this.each(function() {
 			var $this = $(this), 
