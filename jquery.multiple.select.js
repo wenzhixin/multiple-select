@@ -46,7 +46,8 @@
 		constructor : MultipleSelect,
 		
 		init: function() {
-			var html = ['<ul>'];
+			var html = ['<ul>'],
+				multiple = this.options.multiple;
 			if (this.options.selectAll) {
 				html.push(
 					'<li>',
@@ -61,7 +62,7 @@
 				var value = $(this).attr('value'),
 					text = $(this).text();
 				html.push(
-					'<li>',
+					'<li' + (multiple ? ' class="multiple"' : '') + '>',
 						'<label>',
 						'<input type="checkbox" name="selectItem" value="' + value + '" /> ',
 						text,
@@ -71,6 +72,7 @@
 			});
 			html.push('</ul>');
 			this.$drop.html(html.join(''));
+			this.$drop.find('.multiple').css('width', this.options.multipleWidth + 'px');
 			this.events();
 		},
 		
@@ -118,7 +120,7 @@
 		this.each(function() {
 			var $this = $(this), 
 				data = $this.data('multipleSelect'), 
-				options = $.extend($.fn.multipleSelect.defaults, typeof option === 'object' && option);
+				options = $.extend({}, $.fn.multipleSelect.defaults, typeof option === 'object' && option);
 
 			if (!data) {
 				data = new MultipleSelect($this, options);
@@ -141,6 +143,8 @@
 	$.fn.multipleSelect.defaults = {
 		isopen: false,
 		selectAll: true,
-		selectAllText: 'Select all'
+		selectAllText: 'Select all',
+		multiple: false,
+		multipleWidth: 80
 	};
 })(jQuery); 

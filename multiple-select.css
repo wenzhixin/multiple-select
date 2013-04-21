@@ -43,6 +43,8 @@
 }
 
 .ms-drop {
+    max-height: 250px;
+    overflow: auto;
     display: none;
     margin-top:-1px;
     padding: 0 0 0 8px;
@@ -72,4 +74,13 @@
     list-style: none;
     display: list-item;
     background-image: none;
+}
+
+.ms-drop li.multiple {
+    float: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    float: left;
 }
