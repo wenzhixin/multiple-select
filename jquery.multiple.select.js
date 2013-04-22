@@ -107,6 +107,16 @@
 				values.push(type === 'text' ? $(this).parent().text() : $(this).val());
 			});
 			return values;
+		},
+		
+		setSelects: function(values) {
+			var that = this;
+			this.$drop.find('input[name="selectItem"]').attr('checked', false);
+			$.each(values, function(i, value) {
+				that.$drop
+					.find('input[name="selectItem"][value="' + value + '"]')
+					.attr('checked', true);
+			});
 		}
 	};
 
@@ -115,7 +125,7 @@
 			args = arguments,
 			
 			value, 
-			allowedMethods = ['getSelects'];
+			allowedMethods = ['getSelects', 'setSelects'];
 
 		this.each(function() {
 			var $this = $(this), 
