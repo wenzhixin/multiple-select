@@ -13,10 +13,12 @@
 		this.$el = $el.hide();
 		this.options = options;
 		
+		this.$parent = $('<div class="ms-parent"></div>');
 		this.$choice = $('<div class="ms-choice"><span></span><div></div></div>');
 		this.$drop = $('<div class="ms-drop"></div>');
-		this.$el.after(this.$choice);
-		this.$choice.after(this.$drop);
+		this.$el.after(this.$parent);
+		this.$parent.append(this.$choice);
+		this.$parent.append(this.$drop);
 		
 		this.$choice.css('width', $el.width() + 'px')
 			.find('span').css('width', ($el.width() - 20) + 'px');
