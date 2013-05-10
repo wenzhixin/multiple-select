@@ -4,6 +4,10 @@
  * @blog http://wenzhixin.net.cn
  */
 
+.ms-parent {
+    display: inline-block;
+    position: relative;
+}
 .ms-choice {
     display: block;
     height: 26px;
