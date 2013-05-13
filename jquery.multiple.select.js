@@ -5,7 +5,7 @@
  */
 
 (function($) {
-	
+			
 	'use strict';
 
 	function MultipleSelect($el, options) {
@@ -20,12 +20,13 @@
 		this.$parent.append(this.$choice);
 		this.$parent.append(this.$drop);
 		
+		if (this.$el.attr('disabled')) {
+			this.$choice.addClass('disabled');
+		}
 		this.$choice.css('width', $el.width() + 'px')
 			.find('span').css('width', ($el.width() - 20) + 'px');
 		this.$drop.css({
-			width: $el.width() + 'px',
-			top: (this.$choice.offset().top + this.$choice.outerHeight()) + 'px',
-			left: this.$choice.offset().left + 'px'
+			width: $el.width() + 'px'
 		});
 		
 		$('body').click(function(e) {
@@ -90,6 +91,9 @@
 		},
 		
 		open: function() {
+			if (this.$choice.hasClass('disabled')) {
+				return;
+			}
 			this.isopen = true;
 			this.$choice.find('>div').addClass('open');
 			this.$drop.show();
@@ -119,6 +123,14 @@
 					.find('input[name="selectItem"][value="' + value + '"]')
 					.attr('checked', true);
 			});
+		},
+		
+		enable: function() {
+			this.$choice.removeClass('disabled');
+		},
+		
+		disable: function() {
+			this.$choice.addClass('disabled');
 		}
 	};
 
@@ -127,7 +139,7 @@
 			args = arguments,
 			
 			value, 
-			allowedMethods = ['getSelects', 'setSelects'];
+			allowedMethods = ['getSelects', 'setSelects', 'enable', 'disable'];
 
 		this.each(function() {
 			var $this = $(this), 
@@ -159,4 +171,4 @@
 		multiple: false,
 		multipleWidth: 80
 	};
-})(jQuery); 
+})(jQuery);

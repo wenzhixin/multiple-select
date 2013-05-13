@@ -28,6 +28,12 @@
 
     background-color: #fff;
 }
+.ms-choice.disabled {
+    background-color: #f4f4f4;
+    background-image: none;
+    border: 1px solid #ddd;
+    cursor: default;
+}
 
 .ms-choice>span {
     white-space: nowrap;
