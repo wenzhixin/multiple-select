@@ -30,7 +30,7 @@
 		});
 		
 		$('body').click(function(e) {
-			if ($(e.target)[0] === that.$choice[0] || 
+			if ($(e.target)[0] === that.$choice[0] ||
 					$(e.target).parents('.ms-choice')[0] === that.$choice[0]) {
 				return;
 			}
@@ -88,6 +88,10 @@
 				var checked = $(this).attr('checked') ? true : false;
 				that.$drop.find('input[name="selectItem"]').attr('checked', checked);
 			});
+
+			this.$drop.find('ul').on('click', 'input', function() {
+				that.update();
+			});
 		},
 		
 		open: function() {
@@ -103,9 +107,13 @@
 			this.isopen = false;
 			this.$choice.find('>div').removeClass('open');
 			this.$drop.hide();
-			this.$choice.find('>span').text(this.getSelects('text').join(', '));
+			this.update();
 		},
 		
+		update: function() {
+			this.$choice.find('>span').html(this.getSelects('text').join(','));
+		},
+
 		//value or text, default: 'value'
 		getSelects: function(type) {
 			var values = [];
@@ -135,15 +143,15 @@
 	};
 
 	$.fn.multipleSelect = function() {
-		var option = arguments[0], 
+		var option = arguments[0],
 			args = arguments,
 			
-			value, 
+			value,
 			allowedMethods = ['getSelects', 'setSelects', 'enable', 'disable'];
 
 		this.each(function() {
-			var $this = $(this), 
-				data = $this.data('multipleSelect'), 
+			var $this = $(this),
+				data = $this.data('multipleSelect'),
 				options = $.extend({}, $.fn.multipleSelect.defaults, typeof option === 'object' && option);
 
 			if (!data) {
