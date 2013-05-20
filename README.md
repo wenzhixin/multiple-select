@@ -1,6 +1,6 @@
 ## Multiple Select
 
-Multiple select is a jQuery plugin to select multiple elements.
+Multiple select is a jQuery plugin to select multiple elements with checkboxes :).
 
 To get started checkout examples and documentation at http://wenzhixin.net.cn/p/multiple-select
 
@@ -17,6 +17,7 @@ License or the GPL License.
 You may obtain a copy of the Apache License and the GPL License in the LICENSE file, or at:
 
 http://www.apache.org/licenses/LICENSE-2.0
+
 http://www.gnu.org/licenses/gpl-2.0.html
 
 Unless required by applicable law or agreed to in writing, software distributed under the Apache License 
