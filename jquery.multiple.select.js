@@ -76,6 +76,9 @@
 			html.push('</ul>');
 			this.$drop.html(html.join(''));
 			this.$drop.find('.multiple').css('width', this.options.multipleWidth + 'px');
+			
+			this.$selectAll = this.$drop.find('input[name="selectAll"]');
+			this.$selectItems = this.$drop.find('input[name="selectItem"]');
 			this.events();
 		},
 		
@@ -84,10 +87,13 @@
 			this.$choice.on('click', function() {
 				that[that.options.isopen ? 'close' : 'open']();
 			});
-			this.$drop.find('input[name="selectAll"]').on('click', function() {
-				that.$drop.find('input[name="selectItem"]').prop('checked', $(this).prop('checked'));
+			this.$selectAll.on('click', function() {
+				that.$selectItems.prop('checked', $(this).prop('checked'));
+				that.update();
 			});
-			this.$drop.find('ul').on('click', 'input', function() {
+			this.$selectItems.on('click', function() {
+				that.$selectAll.prop('checked', that.$selectItems.length === 
+					that.$selectItems.filter(':checked').length);
 				that.update();
 			});
 		},
@@ -105,7 +111,6 @@
 			this.options.isopen = false;
 			this.$choice.find('>div').removeClass('open');
 			this.$drop.hide();
-			this.update();
 		},
 		
 		update: function() {
@@ -115,7 +120,7 @@
 		//value or text, default: 'value'
 		getSelects: function(type) {
 			var values = [];
-			this.$drop.find('input[name="selectItem"]:checked').each(function() {
+			this.$selectItems.filter(':checked').each(function() {
 				values.push(type === 'text' ? $(this).parent().text() : $(this).val());
 			});
 			return values;
@@ -123,12 +128,13 @@
 		
 		setSelects: function(values) {
 			var that = this;
-			this.$drop.find('input[name="selectItem"]').prop('checked', false);
+			this.$selectItems.prop('checked', false);
 			$.each(values, function(i, value) {
-				that.$drop
-					.find('input[name="selectItem"][value="' + value + '"]')
-					.prop('checked', true);
+				that.$selectItems.filter('[value="' + value + '"]').prop('checked', true);
 			});
+			this.$selectAll.prop('checked', that.$selectItems.length === 
+				this.$selectItems.filter(':checked').length);
+			this.update();
 		},
 		
 		enable: function() {
