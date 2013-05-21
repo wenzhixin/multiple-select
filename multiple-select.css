@@ -9,6 +9,7 @@
     position: relative;
     vertical-align: middle;
 }
+
 .ms-choice {
     display: block;
     height: 26px;
@@ -29,6 +30,7 @@
 
     background-color: #fff;
 }
+
 .ms-choice.disabled {
     background-color: #f4f4f4;
     background-image: none;
@@ -43,12 +45,14 @@
     display: block;
     float: left;
 }
+
 .ms-choice>div {
     float: right;
     width: 20px;
     height: 25px;
     background: url('multiple-select.png') right top no-repeat;
 }
+
 .ms-choice>div.open {
     background: url('multiple-select.png') left top no-repeat;
 }
@@ -88,12 +92,14 @@
 }
 
 .ms-drop li.multiple {
+    display: block;
     float: left;
+}
+
+.ms-drop li.multiple label {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    display: block;
-    float: left;
 }
 
 .ms-drop input[type="checkbox"] {
