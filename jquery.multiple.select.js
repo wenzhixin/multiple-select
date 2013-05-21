@@ -62,7 +62,7 @@
 				);
 			}
 			this.$el.find('option').each(function() {
-				var value = $(this).prop('value'),
+				var value = $(this).val(),
 					text = $(this).text();
 				html.push(
 					'<li' + (multiple ? ' class="multiple"' : '') + '>',
