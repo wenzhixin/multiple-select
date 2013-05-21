@@ -46,6 +46,10 @@
     float: left;
 }
 
+.ms-choice>span.placeholder {
+    color: #999;
+}
+
 .ms-choice>div {
     float: right;
     width: 20px;

@@ -14,7 +14,8 @@
 		this.options = options;
 		
 		this.$parent = $('<div class="ms-parent"></div>');
-		this.$choice = $('<div class="ms-choice"><span></span><div></div></div>');
+		this.$choice = $('<div class="ms-choice"><span class="placeholder">' + 
+			options.placeholder + '</span><div></div></div>');
 		this.$drop = $('<div class="ms-drop"></div>');
 		this.$el.after(this.$parent);
 		this.$parent.append(this.$choice);
@@ -114,7 +115,13 @@
 		},
 		
 		update: function() {
-			this.$choice.find('>span').html(this.getSelects('text').join(','));
+			var selects = this.getSelects('text'),
+				$span = this.$choice.find('>span');
+			if (selects.length) {
+				$span.removeClass('placeholder').html(selects.join(','));
+			} else {
+				$span.addClass('placeholder').html(this.options.placeholder);
+			}
 		},
 
 		//value or text, default: 'value'
@@ -178,6 +185,7 @@
 	
 	$.fn.multipleSelect.defaults = {
 		isopen: false,
+		placeholder: '',
 		selectAll: true,
 		selectAllText: 'Select all',
 		multiple: false,
