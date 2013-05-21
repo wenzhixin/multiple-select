@@ -95,3 +95,8 @@
     display: block;
     float: left;
 }
+
+.ms-drop input[type="checkbox"] {
+    float: left;
+    margin-right: 5px;
+}
