@@ -20,7 +20,7 @@
 		this.$parent.append(this.$choice);
 		this.$parent.append(this.$drop);
 		
-		if (this.$el.attr('disabled')) {
+		if (this.$el.prop('disabled')) {
 			this.$choice.addClass('disabled');
 		}
 		this.$choice.css('width', $el.width() + 'px')
@@ -62,7 +62,7 @@
 				);
 			}
 			this.$el.find('option').each(function() {
-				var value = $(this).attr('value'),
+				var value = $(this).prop('value'),
 					text = $(this).text();
 				html.push(
 					'<li' + (multiple ? ' class="multiple"' : '') + '>',
@@ -81,14 +81,12 @@
 		
 		events: function() {
 			var that = this;
-			this.$choice.off('click').click(function() {
-				that[that.isopen ? 'close' : 'open']();
+			this.$choice.on('click', function() {
+				that[that.options.isopen ? 'close' : 'open']();
 			});
-			this.$drop.find('input[name="selectAll"]').off('click').click(function() {
-				var checked = $(this).attr('checked') ? true : false;
-				that.$drop.find('input[name="selectItem"]').attr('checked', checked);
+			this.$drop.find('input[name="selectAll"]').on('click', function() {
+				that.$drop.find('input[name="selectItem"]').prop('checked', $(this).prop('checked'));
 			});
-
 			this.$drop.find('ul').on('click', 'input', function() {
 				that.update();
 			});
@@ -98,13 +96,13 @@
 			if (this.$choice.hasClass('disabled')) {
 				return;
 			}
-			this.isopen = true;
+			this.options.isopen = true;
 			this.$choice.find('>div').addClass('open');
 			this.$drop.show();
 		},
 		
 		close: function() {
-			this.isopen = false;
+			this.options.isopen = false;
 			this.$choice.find('>div').removeClass('open');
 			this.$drop.hide();
 			this.update();
@@ -125,11 +123,11 @@
 		
 		setSelects: function(values) {
 			var that = this;
-			this.$drop.find('input[name="selectItem"]').attr('checked', false);
+			this.$drop.find('input[name="selectItem"]').prop('checked', false);
 			$.each(values, function(i, value) {
 				that.$drop
 					.find('input[name="selectItem"][value="' + value + '"]')
-					.attr('checked', true);
+					.prop('checked', true);
 			});
 		},
 		
