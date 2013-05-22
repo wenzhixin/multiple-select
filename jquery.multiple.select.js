@@ -50,41 +50,71 @@
 		constructor : MultipleSelect,
 		
 		init: function() {
-			var html = ['<ul>'],
-				multiple = this.options.multiple;
+			var that = this,
+				html = ['<ul>'];
 			if (this.options.selectAll) {
 				html.push(
 					'<li>',
 						'<label>',
-						'<input type="checkbox" name="selectAll" /> ',
-						'[' + this.options.selectAllText + ']',
+							'<input type="checkbox" name="selectAll" /> ',
+							'[' + this.options.selectAllText + ']',
 						'</label>',
 					'</li>'
 				);
 			}
-			this.$el.find('option').each(function() {
-				var value = $(this).val(),
-					text = $(this).text();
-				html.push(
-					'<li' + (multiple ? ' class="multiple"' : '') + '>',
-						'<label>',
-						'<input type="checkbox" name="selectItem" value="' + value + '" /> ',
-						text,
-						'</label>',
-					'</li>'
-				);
+			$.each(this.$el.children(), function(i, elm) {
+				html.push(that.optionToHtml(i, elm));
 			});
 			html.push('</ul>');
 			this.$drop.html(html.join(''));
 			this.$drop.find('.multiple').css('width', this.options.multipleWidth + 'px');
 			
 			this.$selectAll = this.$drop.find('input[name="selectAll"]');
+			this.$selectGroups = this.$drop.find('label.optgroup');
 			this.$selectItems = this.$drop.find('input[name="selectItem"]');
 			this.events();
 		},
 		
+		optionToHtml: function(i, elm, group) {
+			var that = this,
+				$elm = $(elm),
+				html = [],
+				multiple = this.options.multiple;
+			if ($elm.is('option')) {
+				var value = $elm.val(),
+					text = $elm.text();
+				html.push(
+					'<li' + (multiple ? ' class="multiple"' : '') + '>',
+						'<label>',
+							'<input type="checkbox" name="selectItem" value="' + value + '"' + 
+								(group ? ' data-group="' + group + '"' : '') + 
+								'/> ',
+							text,
+						'</label>',
+					'</li>'
+				);
+			} else if (!group && $elm.is('optgroup')) {
+				var _group = 'group_' + i,
+					label = $elm.attr('label');
+				html.push(
+					'<li>',
+						'<label class="optgroup" data-group="' + _group + '">', 
+							label,
+						'</label>',
+					'</li>');
+				$.each($elm.children(), function(i, elm) {
+					html.push(that.optionToHtml(i, elm, _group));
+				});
+			}
+			return html.join('');
+		},
+		
 		events: function() {
-			var that = this;
+			var that = this,
+				updateSelectAll = function() {
+					that.$selectAll.prop('checked', that.$selectItems.length === 
+						that.$selectItems.filter(':checked').length);
+				};
 			this.$choice.on('click', function() {
 				that[that.options.isopen ? 'close' : 'open']();
 			});
@@ -92,9 +122,15 @@
 				that.$selectItems.prop('checked', $(this).prop('checked'));
 				that.update();
 			});
+			this.$selectGroups.on('click', function() {
+				var group = $(this).attr('data-group'),
+					$children = that.$selectItems.filter('[data-group="' + group + '"]');
+				$children.prop('checked', $children.length !== $children.filter(':checked').length);
+				updateSelectAll();
+				that.update();
+			});
 			this.$selectItems.on('click', function() {
-				that.$selectAll.prop('checked', that.$selectItems.length === 
-					that.$selectItems.filter(':checked').length);
+				updateSelectAll();
 				that.update();
 			});
 		},
