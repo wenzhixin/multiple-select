@@ -17,7 +17,7 @@
 	"dependencies": {
 		"jquery": ">=1.7"
 	},
-	"keywords": ["multiple select", "select list", "multiple choose", "checkbox"],
+	"keywords": ["multiple.select", "select.list", "multiple.choose", "checkbox"],
 	"homepage": "http://wenzhixin.net.cn/p/multiple-select/",
 	"demo": "http://wenzhixin.net.cn/p/multiple-select/",
 	"bugs": {
