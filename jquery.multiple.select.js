@@ -1,7 +1,8 @@
 /**
  * @author zhixin wen <wenzhixin2010@gmail.com>
- * @version 0.0.1
- * @blog http://wenzhixin.net.cn
+ * @version 1.0.0
+ * 
+ * http://wenzhixin.net.cn/p/multiple-select/
  */
 
 (function($) {
