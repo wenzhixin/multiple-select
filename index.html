@@ -1,74 +1,238 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Multiple-select : A jQuery plugin to select multiple elements with checkboxes :)" />
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Multiple-select</title>
+    <meta charset="utf-8" />
+    <title>Multiple Select</title>
+    <meta name="author" content="zhixin" />
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/multiple-select/multiple-select.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="//wenzhixin.net.cn/css/fork.css" />
   </head>
-
   <body>
-
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/wenzhixin/multiple-select">View on GitHub</a>
-
-          <h1 id="project_title">Multiple-select</h1>
-          <h2 id="project_tagline">A jQuery plugin to select multiple elements with checkboxes :)</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/wenzhixin/multiple-select/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/wenzhixin/multiple-select/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="#">Multiple Select</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li><a href="#">Home</a></li>
+              <li><a href="#examples">Examples</a></li>
+              <li><a href="#documentation">Documentation</a></li>
+              <li><a href="#about">About</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>Welcome to GitHub Pages.</h3>
-
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Multiple-select maintained by <a href="https://github.com/wenzhixin">wenzhixin</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
     
-
+    <a href="https://github.com/wenzhixin/multiple-select" class="fork_me"></a>
+    
+    <div class="container">
+      <div class="hero-unit">
+        <h1>Multiple Select</h1>
+        <p>Multiple select is a jQuery plugin to select multiple elements with checkboxes :).</p>
+        <div class="mt30">
+          <a href="https://github.com/wenzhixin/multiple-select/archive/master.zip" class="btn btn-success btn-large mr30">Download &raquo;</a>
+          <iframe src="http://ghbtns.com/github-btn.html?user=wenzhixin&amp;repo=multiple-select&amp;type=watch&amp;count=true&amp;size=large" allowtransparency="true" frameborder="0" scrolling="0" width="150" height="30" style="vertical-align: middle"></iframe>
+          <iframe src="http://ghbtns.com/github-btn.html?user=wenzhixin&amp;repo=multiple-select&amp;type=fork&amp;count=true&amp;size=large" allowtransparency="true" frameborder="0" scrolling="0" width="150" height="30" style="vertical-align: middle"></iframe>
+          <iframe src="http://ghbtns.com/github-btn.html?user=wenzhixin&amp;repo=multiple-select&amp;type=follow&amp;count=true&amp;size=large" allowtransparency="true" frameborder="0" scrolling="0" width="190" height="30" style="vertical-align: middle"></iframe>
+        </div>
+      </div>
+      
+      <div>
+        <h2>Browser Compatibility</h2>
+        <ul>
+          <li>IE 7+</li>
+          <li>Chrome 8+</li>
+          <li>Firefox 10+</li>
+          <li>Safari 3+</li>
+          <li>Opera 10.6+</li>
+        </ul>
+      </div>
+      
+      <div id="examples" class="mt20">
+        <h2>Examples</h2>
+        <hr>
+        <div id="e1" class="row"></div>
+        <div id="e6" class="row"></div>
+        <div id="e3" class="row"></div>
+        <div id="e7" class="row"></div>
+        <div id="e2" class="row"></div>
+        <div id="e4" class="row"></div>
+        <div id="e5" class="row">
+          <div>
+            <p>Multiple Select supports methods that allow programmatic control of the component</p>
+            <p>
+              <button id="setSelects" class="btn btn-success">Set selects</button>
+              <button id="getSelects" class="btn btn-primary">Get selects</button>
+            </p>
+            <p>
+              <button id="enable" class="btn btn-primary">Enable</button>
+              <button id="disable" class="btn">Disabled</button>
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <div id="documentation" class="mt30">
+        <h2>Documentation</h2>
+        <hr>
+        <h3>Constructor</h3>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>isopen</td>
+              <td>boolean</td>
+              <td>
+                <p>Whether or not Multiple Select open the select dropdown. </p>
+                <p>By default this option is set to <code>false</code>.</p></td>
+            </tr>
+            <tr>
+              <td>placeholder</td>
+              <td>string</td>
+              <td>
+                <p>A placeholder value can be defined and will be displayed until you select a item. </p>
+                <p>By default this option is set to <code>''</code>.</p></td>
+            </tr>
+            <tr>
+              <td>selectAll</td>
+              <td>boolean</td>
+              <td>
+                <p>Whether or not Multiple Select show select all checkbox. </p>
+                <p>By default this option is set to <code>true</code>.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>selectAllText</td>
+              <td>string</td>
+              <td>
+                <p>Multiple Select select all checkbox text. </p>
+                <p>By default this option is set to <code>Select all</code>.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>multiple</td>
+              <td>boolean</td>
+              <td>
+                <p>Whether or not Multiple Select show multiple items in a row. </p>
+                <p>By default this option is set to <code>false</code>.</p>
+              </td>
+            </tr>
+            <tr>
+              <td>multipleWidth</td>
+              <td>integer</td>
+              <td>
+                <p>Multiple Select show multiple items width. </p>
+                <p>By default this option is set to <code>80</code>.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>getSelects</h3>
+        <p>Gets the selected values.</p>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>type</td>
+              <td>string</td>
+              <td>
+                <p>The type of selected items. <code>value</code> or <code>text</code></p>
+                <p>The default is <code>value</code>.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          Example:
+          <pre>
+alert('Selected value is: ' + $('#select2').multipleSelect('getSelects'));
+alert('Selected text is: ' + $('#select2').multipleSelect('getSelects', 'text'));</pre>
+        </p>
+        
+        <h3>setSelects</h3>
+        <p>Sets the selected values.</p>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>values</td>
+              <td>array</td>
+              <td>
+                <p>The values of selected items. </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          Example:
+          <pre>
+$('#select2').multipleSelect('setSelects', [1, 3]);</pre>
+        </p>
+      </div>
+      
+      <h3>disable</h3>
+      <p>Disables Select. During this mode the user is not allowed to manipulate the selection.</p>
+  
+      <h3>enable</h3>
+      <p>Enables Select.</p>
+      
+      <div id="about" class="mt30">
+        <h2>About</h2>
+        <hr>
+        <p><a href="http://www.scutech.com">scutech</a></p>
+      </div>
+    </div>
+    
+    <div class="footer">
+      <p>Multiple Selected is licensed under the 
+        <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache Software Foundation License Version 2.0</a>
+         and 
+        <a href="=&quot;http://www.gnu.org/licenses/gpl-2.0.html&quot;">GPL Version 2.0</a>. 
+         Coded by <a href="http://wenzhixin.net.cn">wenzhixin</a>.</p>
+    </div>
+    <script type="text/javascript" src="assets/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/multiple-select/jquery.multiple.select.js"></script>
+    <script type="text/javascript" src="js/example.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-36708951-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
   </body>
 </html>
