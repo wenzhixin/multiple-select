@@ -187,6 +187,18 @@
 		
 		disable: function() {
 			this.$choice.addClass('disabled');
+		},
+		
+		checkAll: function() {
+			this.$selectItems.prop('checked', true);
+			this.$selectAll.prop('checked', true);
+			this.update();
+		},
+		
+		uncheckAll: function() {
+			this.$selectItems.prop('checked', false);
+			this.$selectAll.prop('checked', false);
+			this.update();
 		}
 	};
 
@@ -195,7 +207,7 @@
 			args = arguments,
 			
 			value,
-			allowedMethods = ['getSelects', 'setSelects', 'enable', 'disable'];
+			allowedMethods = ['getSelects', 'setSelects', 'enable', 'disable', 'checkAll', 'uncheckAll'];
 
 		this.each(function() {
 			var $this = $(this),
