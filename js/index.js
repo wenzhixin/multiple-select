@@ -200,10 +200,12 @@ $(function() {
     <link href="multiple-select.css" rel="stylesheet"/>\n\
 </head>\n\
 <body>\n\
-    <button id="setSelects">Set selects</button>\n\
-    <button id="getSelects">Get selects</button>\n\
+    <button id="setSelects">SetSelects</button>\n\
+    <button id="getSelects">GetSelects</button>\n\
     <button id="enable">Enable</button>\n\
-    <button id="disable">Disabled</button>\n\
+	<button id="disable">Disabled</button>\n\
+	<button id="checkAll">CheckAll</button>\n\
+ 	<button id="uncheckAll">UncheckAll</button>\n\
     <select id="select">\n\
         <option value="1">Monday</option>\n\
         ...\n\
@@ -226,6 +228,12 @@ $(function() {
             $("#disable").click(function() {\n\
                $("#select2").multipleSelect("disable");\n\
             });\n\
+	        $("#checkAll").click(function() {\n\
+	           $select.multipleSelect("checkAll");\n\
+	        });\n\
+	        $("#uncheckAll").click(function() {\n\
+	           $select.multipleSelect("uncheckAll");\n\
+	        });\n\
         });\n\
     </script>\n\
 </body>'
@@ -243,6 +251,12 @@ $(function() {
         });
         $('#disable').click(function() {
            $select.multipleSelect('disable');
+        });
+        $('#checkAll').click(function() {
+           $select.multipleSelect('checkAll');
+        });
+        $('#uncheckAll').click(function() {
+           $select.multipleSelect('uncheckAll');
         });
     });
     
