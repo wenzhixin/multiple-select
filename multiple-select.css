@@ -95,6 +95,11 @@
     background-image: none;
 }
 
+.ms-drop li .disabled {
+	opacity: .35;
+	filter: Alpha(Opacity=35);
+}
+
 .ms-drop li.multiple {
     display: block;
     float: left;

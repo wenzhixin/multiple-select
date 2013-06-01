@@ -72,22 +72,26 @@
 			
 			this.$selectAll = this.$drop.find('input[name="selectAll"]');
 			this.$selectGroups = this.$drop.find('label.optgroup');
-			this.$selectItems = this.$drop.find('input[name="selectItem"]');
+			this.$selectItems = this.$drop.find('input[name="selectItem"]:enabled');
 			this.events();
 		},
 		
-		optionToHtml: function(i, elm, group) {
+		optionToHtml: function(i, elm, group, groupDisabled) {
 			var that = this,
 				$elm = $(elm),
 				html = [],
 				multiple = this.options.multiple;
 			if ($elm.is('option')) {
 				var value = $elm.val(),
-					text = $elm.text();
+					text = $elm.text(),
+					selected = $elm.prop('selected'),
+					disabled = groupDisabled || $elm.prop('disabled');
 				html.push(
 					'<li' + (multiple ? ' class="multiple"' : '') + '>',
-						'<label>',
+						'<label' + (disabled ? ' class="disabled"' : '') + '>',
 							'<input type="checkbox" name="selectItem" value="' + value + '"' + 
+								(selected ? ' checked="checked"' : '') +
+								(disabled ? ' disabled="disabled"' : '') +
 								(group ? ' data-group="' + group + '"' : '') + 
 								'/> ',
 							text,
@@ -96,15 +100,16 @@
 				);
 			} else if (!group && $elm.is('optgroup')) {
 				var _group = 'group_' + i,
-					label = $elm.attr('label');
+					label = $elm.attr('label'),
+					disabled = $elm.prop('disabled');
 				html.push(
 					'<li>',
-						'<label class="optgroup" data-group="' + _group + '">', 
+						'<label class="optgroup' + (disabled ? ' disabled' : '') + '" data-group="' + _group + '">', 
 							label,
 						'</label>',
 					'</li>');
 				$.each($elm.children(), function(i, elm) {
-					html.push(that.optionToHtml(i, elm, _group));
+					html.push(that.optionToHtml(i, elm, _group, disabled));
 				});
 			}
 			return html.join('');
@@ -199,6 +204,10 @@
 			this.$selectItems.prop('checked', false);
 			this.$selectAll.prop('checked', false);
 			this.update();
+		},
+		
+		refresh: function() {
+			
 		}
 	};
 
@@ -207,7 +216,7 @@
 			args = arguments,
 			
 			value,
-			allowedMethods = ['getSelects', 'setSelects', 'enable', 'disable', 'checkAll', 'uncheckAll'];
+			allowedMethods = ['getSelects', 'setSelects', 'enable', 'disable', 'checkAll', 'uncheckAll', 'refresh'];
 
 		this.each(function() {
 			var $this = $(this),
