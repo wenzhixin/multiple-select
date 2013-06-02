@@ -89,29 +89,30 @@
     padding: 5px 0;
 }
 
-.ms-drop li {
+.ms-drop ul > li {
     list-style: none;
     display: list-item;
     background-image: none;
+	position: static;
 }
 
-.ms-drop li .disabled {
+.ms-drop ul > li .disabled {
 	opacity: .35;
 	filter: Alpha(Opacity=35);
 }
 
-.ms-drop li.multiple {
+.ms-drop ul > li.multiple {
     display: block;
     float: left;
 }
 
-.ms-drop li.multiple label {
+.ms-drop ul > li.multiple label {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.ms-drop li label.optgroup {
+.ms-drop ul > li label.optgroup {
     font-weight: bold;
 }
 
