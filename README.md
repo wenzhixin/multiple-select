@@ -436,8 +436,8 @@ Multiple Select supports to show multiple items in single row with optgroups.
 ### SetSelects/GetSelects
 
 <p>
-	<button id="setSelects" class="button">SetSelects</button>
-	<button id="getSelects" class="button">GetSelects</button>
+	<button id="setSelectsBtn" class="button">SetSelects</button>
+	<button id="getSelectsBtn" class="button">GetSelects</button>
 </p>
 <p id="e10">
 	<select class="w300" multiple="multiple">
@@ -456,8 +456,8 @@ Multiple Select supports to show multiple items in single row with optgroups.
 	<link href="multiple-select.css" rel="stylesheet"/>
 </head>
 <body>
-	<button id="setSelects">SetSelects</button>
-	<button id="getSelects">GetSelects</button>
+	<button id="setSelectsBtn">SetSelects</button>
+	<button id="getSelectsBtn">GetSelects</button>
     <select multiple="multiple">
         <option value="1">Monday</option>
         ...
@@ -466,10 +466,10 @@ Multiple Select supports to show multiple items in single row with optgroups.
     <script src="jquery.multiple.select.js"></script>
     <script>
         $("select").multipleSelect();
-        $("#setSelects").click(function() {
+        $("#setSelectsBtn").click(function() {
         	$("select").multipleSelect("setSelects", [1, 3]);
         });
-        $("#getSelects").click(function() {
+        $("#getSelectsBtn").click(function() {
         	alert("Selected values: " + $("select").multipleSelect("getSelects"));
             alert("Selected texts: " + $("select").multipleSelect("getSelects", "text"));
         });
@@ -480,8 +480,8 @@ Multiple Select supports to show multiple items in single row with optgroups.
 ### Enable/Disable
 
 <p>
-	<button id="enable" class="button">Enable</button>
-	<button id="disable" class="button">Disable</button>
+	<button id="enableBtn" class="button">Enable</button>
+	<button id="disableBtn" class="button">Disable</button>
 </p>
 <p id="e11">
 	<select class="w300" multiple="multiple">
@@ -500,8 +500,8 @@ Multiple Select supports to show multiple items in single row with optgroups.
 	<link href="multiple-select.css" rel="stylesheet"/>
 </head>
 <body>
-	<button id="enable"">Enable</button>
-	<button id="disable"">Disabled</button>
+	<button id="enableBtn">Enable</button>
+	<button id="disableBtn">Disabled</button>
     <select multiple="multiple">
         <option value="1">Monday</option>
         ...
@@ -510,10 +510,10 @@ Multiple Select supports to show multiple items in single row with optgroups.
     <script src="jquery.multiple.select.js"></script>
     <script>
         $("select").multipleSelect();
-        $("#setSelects").click(function() {
+        $("#setSelectsBtn").click(function() {
         	$("select").multipleSelect("enable");
         });
-        $("#getSelects").click(function() {
+        $("#getSelectsBtn").click(function() {
         	$("select").multipleSelect("disable");
         });
     </script>
@@ -523,8 +523,8 @@ Multiple Select supports to show multiple items in single row with optgroups.
 ### CheckAll/UncheckAll
 
 <p>
-	<button id="checkAll" class="button">CheckAll</button>
-	<button id="uncheckAll" class="button">UncheckAll</button>
+	<button id="checkAllBtn" class="button">CheckAll</button>
+	<button id="uncheckAllBtn" class="button">UncheckAll</button>
 </p>
 <p id="e12">
 	<select class="w300" multiple="multiple">
@@ -543,8 +543,8 @@ Multiple Select supports to show multiple items in single row with optgroups.
 	<link href="multiple-select.css" rel="stylesheet"/>
 </head>
 <body>
-	<button id="enable"">Enable</button>
-	<button id="disable"">Disabled</button>
+	<button id="enableBtn">Enable</button>
+	<button id="disableBtn">Disabled</button>
     <select multiple="multiple">
         <option value="1">Monday</option>
         ...
@@ -553,11 +553,76 @@ Multiple Select supports to show multiple items in single row with optgroups.
     <script src="jquery.multiple.select.js"></script>
     <script>
         $("select").multipleSelect();
-        $("#setSelects").click(function() {
+        $("#setSelectsBtn").click(function() {
         	$("select").multipleSelect("checkAll");
         });
-        $("#getSelects").click(function() {
+        $("#getSelectsBtn").click(function() {
         	$("select").multipleSelect("uncheckAll");
+        });
+    </script>
+</body>
+```
+
+### The Refresh
+
+Reloads the Multiple Select. 
+If you're dynamically adding/removing option tags on the original select via AJAX or DOM manipulation methods, call refresh to reflect the changes.
+
+<p>
+	<input id="refreshInput" type="text" required="required" />
+	<button id="refreshAdd" class="button">Add + Refresh</button>
+	<br />
+	<label><input id="refreshSelected" type="checkbox" />Selected?</label>
+	<label><input id="refreshDisabled" type="checkbox" />Disabled?</label>
+</p>
+<p id="e13">
+	<select class="w300" multiple="multiple">
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+	</select>
+</p>
+
+``` html
+<head>
+	<link href="multiple-select.css" rel="stylesheet"/>
+</head>
+<body>
+	<input id="refreshInput" type="text" required="required" />
+	<button id="refreshAdd">Add + Refresh</button>
+	<br />
+	<label><input id="refreshSelected" type="checkbox" />Selected?</label>
+	<label><input id="refreshDisabled" type="checkbox" />Disabled?</label>
+    <select multiple="multiple">
+        <option value="1">1</option>
+        ...
+        <option value="3">3</option>
+    </select>
+    <script src="jquery.multiple.select.js"></script>
+    <script>
+        $("select").multipleSelect();
+        $("#refreshAdd").click(function() {
+        	var $select = $("select"),
+        		$input = $("#refreshInput"),
+        		$selected = $("#refreshSelected"),
+        		$disabled = $("#refreshDisabled"),
+        		value = $.trim($input.val()),
+        		$opt = $("<option />", {
+					value: value,
+					text: value
+				});
+        	if (!value) {
+        		$input.focus();
+        		return;
+        	}
+			if ($selected.is(":checked")){
+				$opt.prop("selected", true);
+			}
+			if($disabled.is(":checked")){
+				$opt.attr("disabled", true);
+			}
+			$input.val("");
+			$select.append($opt).multipleSelect("refresh");
         });
     </script>
 </body>
@@ -597,7 +662,7 @@ Type: string
 
 Multiple Select select all checkbox text.
 
-By default this option is set to Select all.
+By default this option is set to ```Select all```.
 
 #### multiple
 
@@ -676,6 +741,16 @@ Uncheck all checkboxes.
 
 ``` javascript
 $('select').multipleSelect('uncheckAll');
+```
+
+### refresh
+
+Reloads the Multiple Select. 
+
+If you're dynamically adding/removing option tags on the original select via AJAX or DOM manipulation methods, call refresh to reflect the changes.
+
+``` javascript
+$('select').multipleSelect('refresh');
 ```
 
 ## About
