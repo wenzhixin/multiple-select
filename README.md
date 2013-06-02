@@ -136,7 +136,7 @@ and turns it into:
 	<link href="multiple-select.css" rel="stylesheet"/>
 </head>
 <body>
-	<select multiple="multiple" disabled="disabled">
+	<select multiple="multiple">
 	    <option value="1" selected="selected">January</option>
 		<option value="2" disabled="disabled">February</option>
 	    <option value="3" selected="selected" disabled="disabled">March</option>
