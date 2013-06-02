@@ -74,6 +74,7 @@
 			this.$selectGroups = this.$drop.find('label.optgroup');
 			this.$selectItems = this.$drop.find('input[name="selectItem"]:enabled');
 			this.events();
+			this.update();
 		},
 		
 		optionToHtml: function(i, elm, group, groupDisabled) {
@@ -121,21 +122,21 @@
 					that.$selectAll.prop('checked', that.$selectItems.length === 
 						that.$selectItems.filter(':checked').length);
 				};
-			this.$choice.on('click', function() {
+			this.$choice.off('click').on('click', function() {
 				that[that.options.isopen ? 'close' : 'open']();
 			});
-			this.$selectAll.on('click', function() {
+			this.$selectAll.off('click').on('click', function() {
 				that.$selectItems.prop('checked', $(this).prop('checked'));
 				that.update();
 			});
-			this.$selectGroups.on('click', function() {
+			this.$selectGroups.off('click').on('click', function() {
 				var group = $(this).attr('data-group'),
 					$children = that.$selectItems.filter('[data-group="' + group + '"]');
 				$children.prop('checked', $children.length !== $children.filter(':checked').length);
 				updateSelectAll();
 				that.update();
 			});
-			this.$selectItems.on('click', function() {
+			this.$selectItems.off('click').on('click', function() {
 				updateSelectAll();
 				that.update();
 			});
@@ -169,7 +170,7 @@
 		//value or text, default: 'value'
 		getSelects: function(type) {
 			var values = [];
-			this.$selectItems.filter(':checked').each(function() {
+			this.$drop.find('input[name="selectItem"]:checked').each(function() {
 				values.push(type === 'text' ? $(this).parent().text() : $(this).val());
 			});
 			return values;
