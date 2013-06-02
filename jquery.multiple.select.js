@@ -165,6 +165,8 @@
 			} else {
 				$span.addClass('placeholder').html(this.options.placeholder);
 			}
+			// set selects to select
+			this.$el.val(this.getSelects());
 		},
 
 		//value or text, default: 'value'
@@ -208,7 +210,7 @@
 		},
 		
 		refresh: function() {
-			
+			this.init();
 		}
 	};
 
