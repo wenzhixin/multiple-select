@@ -82,7 +82,6 @@
 }
 
 .ms-drop ul > li {
-	clear: both;
 	list-style: none;
 	display: list-item;
 	background-image: none;
@@ -110,6 +109,5 @@
 }
 
 .ms-drop input[type="checkbox"] {
-	float: left;
-	margin-right: 5px;
+	vertical-align: middle;
 }
