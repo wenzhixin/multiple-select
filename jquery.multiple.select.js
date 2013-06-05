@@ -1,6 +1,6 @@
 /**
  * @author zhixin wen <wenzhixin2010@gmail.com>
- * @version 1.0.2
+ * @version 1.0.3
  * 
  * http://wenzhixin.net.cn/p/multiple-select/
  */
@@ -82,6 +82,7 @@
 			this.$selectAll = this.$drop.find('input[name="selectAll"]');
 			this.$selectGroups = this.$drop.find('label.optgroup');
 			this.$selectItems = this.$drop.find('input[name="selectItem"]:enabled');
+			this.$disableItems = this.$drop.find('input[name="selectItem"]:disabled');
 			this.events();
 			this.update();
 		},
@@ -113,7 +114,7 @@
 					label = $elm.attr('label'),
 					disabled = $elm.prop('disabled');
 				html.push(
-					'<li>',
+					'<li class="group">',
 						'<label class="optgroup' + (disabled ? ' disabled' : '') + '" data-group="' + _group + '">', 
 							label,
 						'</label>',
@@ -126,11 +127,7 @@
 		},
 		
 		events: function() {
-			var that = this,
-				updateSelectAll = function() {
-					that.$selectAll.prop('checked', that.$selectItems.length === 
-						that.$selectItems.filter(':checked').length);
-				};
+			var that = this;
 			this.$choice.off('click').on('click', function() {
 				that[that.options.isopen ? 'close' : 'open']();
 			});
@@ -138,18 +135,20 @@
 				that.filter();
 			});
 			this.$selectAll.off('click').on('click', function() {
-				that.$selectItems.prop('checked', $(this).prop('checked'));
+				var $items = that.$selectItems.filter(':visible');
+				$items.prop('checked', $(this).prop('checked'));
 				that.update();
 			});
 			this.$selectGroups.off('click').on('click', function() {
 				var group = $(this).attr('data-group'),
-					$children = that.$selectItems.filter('[data-group="' + group + '"]');
+					$items = that.$selectItems.filter(':visible'),
+					$children = $items.filter('[data-group="' + group + '"]');
 				$children.prop('checked', $children.length !== $children.filter(':checked').length);
-				updateSelectAll();
+				that.updateSelectAll();
 				that.update();
 			});
 			this.$selectItems.off('click').on('click', function() {
-				updateSelectAll();
+				that.updateSelectAll();
 				that.update();
 			});
 		},
@@ -160,11 +159,11 @@
 			}
 			this.options.isopen = true;
 			this.$choice.find('>div').addClass('open');
+			this.$drop.show();
 			if (this.options.filter) {
 				this.$searchInput.val('');
 				this.filter();
 			}
-			this.$drop.show();
 		},
 		
 		close: function() {
@@ -184,6 +183,12 @@
 			// set selects to select
 			this.$el.val(this.getSelects());
 		},
+		
+		updateSelectAll: function() {
+			var $items = this.$selectItems.filter(':visible');
+			this.$selectAll.prop('checked', $items.length && 
+				$items.length === $items.filter(':checked').length);
+		},
 
 		//value or text, default: 'value'
 		getSelects: function(type) {
@@ -200,7 +205,7 @@
 			$.each(values, function(i, value) {
 				that.$selectItems.filter('[value="' + value + '"]').prop('checked', true);
 			});
-			this.$selectAll.prop('checked', that.$selectItems.length === 
+			this.$selectAll.prop('checked', this.$selectItems.length === 
 				this.$selectItems.filter(':checked').length);
 			this.update();
 		},
@@ -230,11 +235,25 @@
 		},
 		
 		filter: function() {
-			var text = this.$searchInput.val().toLowerCase();
-			this.$selectItems.each(function() {
-				var $parent = $(this).parent();
-				$parent[$parent.text().toLowerCase().indexOf(text) < 0 ? 'hide' : 'show']();
-			});
+			var that = this,
+				text = $.trim(this.$searchInput.val()).toLowerCase();
+			if (text.length === 0) {
+				this.$selectItems.parent().show();
+				this.$disableItems.parent().show();
+				this.$selectGroups.show();
+			} else {
+				this.$selectItems.each(function() {
+					var $parent = $(this).parent();
+					$parent[$parent.text().toLowerCase().indexOf(text) < 0 ? 'hide' : 'show']();
+				});
+				this.$disableItems.parent().hide();
+				this.$selectGroups.each(function() {
+					var group = $(this).attr('data-group'),
+						$items = that.$selectItems.filter(':visible');
+					$(this)[$items.filter('[data-group="' + group + '"]').length === 0 ? 'hide' : 'show']();
+				});
+			}
+			this.updateSelectAll();
 		}
 	};
 

@@ -121,7 +121,6 @@
 	box-sizing: border-box;
 }
 
-
 .ms-drop ul {
 	max-height: 250px;
 	overflow: auto;
@@ -144,6 +143,10 @@
 .ms-drop ul > li.multiple {
 	display: block;
 	float: left;
+}
+
+.ms-drop ul > li.group {
+	clear: both;
 }
 
 .ms-drop ul > li.multiple label {
