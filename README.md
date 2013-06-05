@@ -368,7 +368,7 @@ Multiple Select supports to show multiple items in single row with optgroups.
 			<option value="9">9</option>
 			<option value="10">10</option>
 		</optgroup>
-		<optgroup label="Group 2">
+		<optgroup label="Group 3">
 			<option value="11">11</option>
 			<option value="12">12</option>
 			<option value="13">13</option>
@@ -433,7 +433,7 @@ Multiple Select supports to show multiple items in single row with optgroups.
 </body>
 ```
 
-### The Filter
+### The Filter1
 
 <p id="e14">
 	<select class="w300" multiple="multiple">
@@ -485,6 +485,68 @@ Multiple Select supports to show multiple items in single row with optgroups.
     <script>
         $("select").multipleSelect({
         	filter: true
+        });
+    </script>
+</body>
+```
+
+### The Filter2
+
+<p id="e15">
+	<select class="w300" multiple="multiple">
+		<optgroup label="Group 1">
+			<option value="1">000</option>
+			<option value="2">111</option>
+			<option value="3">222</option>
+			<option value="4">333</option>
+			<option value="5">444</option>
+			<option value="6">555</option>
+			<option value="7">666</option>
+			<option value="8">777</option>
+			<option value="9">888</option>
+			<option value="10">999</option>
+		</optgroup>
+		<optgroup label="Group 2">
+			<option value="11">210</option>
+			<option value="12">321</option>
+			<option value="13">432</option>
+			<option value="14">543</option>
+			<option value="15">654</option>
+			<option value="16">765</option>
+			<option value="17">876</option>
+			<option value="18">987</option>
+			<option value="19">098</option>
+		</optgroup>
+		<optgroup label="Group 3">
+			<option value="20">012</option>
+			<option value="21">123</option>
+			<option value="22">234</option>
+			<option value="23">345</option>
+			<option value="24">456</option>
+			<option value="25">567</option>
+			<option value="26">678</option>
+			<option value="27">789</option>
+			<option value="28">890</option>
+		</optgroup>
+	</select>
+</p>
+
+``` html
+<head>
+	<link href="multiple-select.css" rel="stylesheet"/>
+</head>
+<body>
+    <select multiple="multiple">
+		<optgroup label="Group 1">
+			<option value="1">000</option>
+			...
+		...
+    </select>
+    <script src="jquery.multiple.select.js"></script>
+    <script>
+        $("select").multipleSelect({
+        	filter: true,
+        	multiple: true
         });
     </script>
 </body>

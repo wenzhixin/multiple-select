@@ -64,5 +64,9 @@ $(function() {
         $('#e14').find('select').multipleSelect({
         	filter: true
         });
+        $('#e15').find('select').multipleSelect({
+        	filter: true,
+        	multiple: true
+        });
 	});
 }); 
