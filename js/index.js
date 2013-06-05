@@ -61,5 +61,8 @@ $(function() {
 			$input.val('');
 			$select.append($opt).multipleSelect('refresh');
         });
+        $('#e14').find('select').multipleSelect({
+        	filter: true
+        });
 	});
 }); 

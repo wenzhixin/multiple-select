@@ -433,6 +433,63 @@ Multiple Select supports to show multiple items in single row with optgroups.
 </body>
 ```
 
+### The Filter
+
+<p id="e14">
+	<select class="w300" multiple="multiple">
+		<option value="1">abc</option>
+		<option value="2">bcd</option>
+		<option value="3">cde</option>
+		<option value="4">def</option>
+		<option value="5">efg</option>
+		<option value="6">fgh</option>
+		<option value="7">ghi</option>
+		<option value="8">hij</option>
+		<option value="9">ijk</option>
+		<option value="10">jkl</option>
+		<option value="11">klm</option>
+		<option value="12">lmn</option>
+		<option value="13">mno</option>
+		<option value="14">nop</option>
+		<option value="15">opq</option>
+		<option value="16">pqr</option>
+		<option value="17">qrs</option>
+		<option value="18">rst</option>
+		<option value="19">stu</option>
+		<option value="20">tuv</option>
+		<option value="21">uvw</option>
+		<option value="22">vwx</option>
+		<option value="23">wxy</option>
+		<option value="24">xyz</option>
+		<option value="25">123</option>
+		<option value="26">234</option>
+		<option value="27">345</option>
+		<option value="28">456</option>
+		<option value="29">567</option>
+		<option value="30">678</option>
+		<option value="31">789</option>
+	</select>
+</p>
+
+``` html
+<head>
+	<link href="multiple-select.css" rel="stylesheet"/>
+</head>
+<body>
+    <select multiple="multiple">
+        <option value="1">abc</option>
+        ...
+        <option value="31">789</option>
+    </select>
+    <script src="jquery.multiple.select.js"></script>
+    <script>
+        $("select").multipleSelect({
+        	filter: true
+        });
+    </script>
+</body>
+```
+
 ### SetSelects/GetSelects
 
 <p>
@@ -679,6 +736,14 @@ Type: integer
 Multiple Select show multiple items width.
 
 By default this option is set to ```80```.
+
+#### filter
+
+Type: boolean
+
+Whether or not Multiple Select show a search field to search through checkbox items.
+
+By default this option is set to ```false```.
 
 ### getSelects
 
