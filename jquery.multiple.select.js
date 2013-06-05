@@ -26,7 +26,7 @@
 			this.$choice.addClass('disabled');
 		}
 		this.$choice.css('width', $el.width() + 'px')
-			.find('span').css('width', ($el.width() - 20) + 'px');
+			.find('span').css('width', ($el.width() - 28) + 'px');
 		this.$drop.css({
 			width: $el.width() + 'px'
 		});
@@ -52,7 +52,15 @@
 		
 		init: function() {
 			var that = this,
-				html = ['<ul>'];
+				html = [];
+			if (this.options.filter) {
+				html.push(
+					'<div class="ms-search">',
+						'<input type="text" autocomplete="off" autocorrect="off" autocapitilize="off" spellcheck="false">',
+					'</div>'
+				);
+			}
+			html.push('<ul>');
 			if (this.options.selectAll) {
 				html.push(
 					'<li>',
@@ -70,6 +78,7 @@
 			this.$drop.html(html.join(''));
 			this.$drop.find('.multiple').css('width', this.options.multipleWidth + 'px');
 			
+			this.$searchInput = this.$drop.find('.ms-search input');
 			this.$selectAll = this.$drop.find('input[name="selectAll"]');
 			this.$selectGroups = this.$drop.find('label.optgroup');
 			this.$selectItems = this.$drop.find('input[name="selectItem"]:enabled');
@@ -125,6 +134,9 @@
 			this.$choice.off('click').on('click', function() {
 				that[that.options.isopen ? 'close' : 'open']();
 			});
+			this.$searchInput.off('keyup').on('keyup', function() {
+				that.filter();
+			});
 			this.$selectAll.off('click').on('click', function() {
 				that.$selectItems.prop('checked', $(this).prop('checked'));
 				that.update();
@@ -148,6 +160,10 @@
 			}
 			this.options.isopen = true;
 			this.$choice.find('>div').addClass('open');
+			if (this.options.filter) {
+				this.$searchInput.val('');
+				this.filter();
+			}
 			this.$drop.show();
 		},
 		
@@ -211,6 +227,14 @@
 		
 		refresh: function() {
 			this.init();
+		},
+		
+		filter: function() {
+			var text = this.$searchInput.val().toLowerCase();
+			this.$selectItems.each(function() {
+				var $parent = $(this).parent();
+				$parent[$parent.text().toLowerCase().indexOf(text) < 0 ? 'hide' : 'show']();
+			});
 		}
 	};
 
@@ -250,6 +274,7 @@
 		selectAll: true,
 		selectAllText: 'Select all',
 		multiple: false,
-		multipleWidth: 80
+		multipleWidth: 80,
+		filter: false
 	};
 })(jQuery);
