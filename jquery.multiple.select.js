@@ -76,6 +76,7 @@
 			});
 			html.push('</ul>');
 			this.$drop.html(html.join(''));
+			this.$drop.find('ul').css('max-height', this.options.maxHeight + 'px');
 			this.$drop.find('.multiple').css('width', this.options.multipleWidth + 'px');
 			
 			this.$searchInput = this.$drop.find('.ms-search input');
@@ -294,6 +295,7 @@
 		selectAllText: 'Select all',
 		multiple: false,
 		multipleWidth: 80,
-		filter: false
+		filter: false,
+		maxHeight: 250
 	};
 })(jQuery);
