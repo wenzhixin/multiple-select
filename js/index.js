@@ -68,5 +68,29 @@ $(function() {
         	filter: true,
         	multiple: true
         });
+        var $eventResult = $('#eventResult');
+        $('#e16').find('select').multipleSelect({
+        	onOpen: function() {
+        		$eventResult.text('Select opened!');
+        	},
+        	onClose: function() {
+        		$eventResult.text('Select closed!');
+        	},
+        	onCheckAll: function() {
+        		$eventResult.text('Check all clicked!');
+        	},
+        	onUncheckAll: function() {
+        		$eventResult.text('Uncheck all clicked!');
+        	},
+        	onOptgroupClick: function(view) {
+				var values = $.map(view.children, function(child){
+					return child.value;
+				}).join(', ');
+				$eventResult.text('Optgroup ' + view.label + ' ' + (view.checked ? 'checked' : 'unchecked') + ': ' + values);
+			},
+			onClick: function(view) {
+				$eventResult.text(view.label + '(' + view.value + ') ' + (view.checked ? 'checked' : 'unchecked'));
+			}
+        });
 	});
 }); 

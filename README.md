@@ -2,7 +2,7 @@
 
 Multiple select is a jQuery plugin to select multiple elements with checkboxes :).
 
-*Current version: 1.0.2*
+*Current version: 1.0.3*
 
 ## Features
 
@@ -747,6 +747,92 @@ If you're dynamically adding/removing option tags on the original select via AJA
 </body>
 ```
 
+### The Callbacks/Events
+
+<p id="eventResult" style="color: #444; background-color: #ddd;">Here is the result of event.</p>
+
+<p id="e16">
+	<select class="w300" multiple="multiple">
+		<optgroup label="Group 1">
+			<option value="1">000</option>
+			<option value="2">111</option>
+			<option value="3">222</option>
+			<option value="4">333</option>
+			<option value="5">444</option>
+			<option value="6">555</option>
+			<option value="7">666</option>
+			<option value="8">777</option>
+			<option value="9">888</option>
+			<option value="10">999</option>
+		</optgroup>
+		<optgroup label="Group 2">
+			<option value="11">210</option>
+			<option value="12">321</option>
+			<option value="13">432</option>
+			<option value="14">543</option>
+			<option value="15">654</option>
+			<option value="16">765</option>
+			<option value="17">876</option>
+			<option value="18">987</option>
+			<option value="19">098</option>
+		</optgroup>
+		<optgroup label="Group 3">
+			<option value="20">012</option>
+			<option value="21">123</option>
+			<option value="22">234</option>
+			<option value="23">345</option>
+			<option value="24">456</option>
+			<option value="25">567</option>
+			<option value="26">678</option>
+			<option value="27">789</option>
+			<option value="28">890</option>
+		</optgroup>
+	</select>
+</p>
+
+``` html
+<head>
+	<link href="multiple-select.css" rel="stylesheet"/>
+</head>
+<body>
+	<p id="eventResult">Here is the result of event.</p>
+    <select multiple="multiple">
+        <optgroup label="Group 1">
+			<option value="1">000</option>
+			...
+		...
+    </select>
+    <script src="jquery.multiple.select.js"></script>
+    <script>
+        $("select").multipleSelect({
+        	onOpen: function() {
+        		$eventResult.text('Select opened!');
+        	},
+        	onClose: function() {
+        		$eventResult.text('Select closed!');
+        	},
+        	onCheckAll: function() {
+        		$eventResult.text('Check all clicked!');
+        	},
+        	onUncheckAll: function() {
+        		$eventResult.text('Uncheck all clicked!');
+        	},
+        	onOptgroupClick: function(view) {
+				var values = $.map(view.children, function(child){
+					return child.value;
+				}).join(', ');
+				$eventResult.text('Optgroup ' + view.label + ' ' + 
+					(view.checked ? 'checked' : 'unchecked') + ': ' + values);
+			},
+			onClick: function(view) {
+				$eventResult.text(view.label + '(' + view.value + ') ' + 
+					(view.checked ? 'checked' : 'unchecked'));
+			}
+        });
+    </script>
+</body>
+```
+
 ## Documentation
 
 ### Constructor
@@ -807,7 +893,70 @@ Whether or not Multiple Select show a search field to search through checkbox it
 
 By default this option is set to ```false```.
 
-### getSelects
+#### width
+
+Type: integer
+
+Define the width property of the dropdown list.
+
+By default this option is set to ```undefined```. Which is the same as the select input field.
+
+#### maxHeight
+
+Type: integer
+
+Define the maximum height property of the dropdown list.
+
+By default this option is set to ```250```.
+
+### Events
+
+#### onOpen
+
+Fires when the dropdown list is open.
+
+#### onClose
+
+Fires when the dropdown list is close.
+
+#### onCheckAll
+
+Fires when all the options are checked by either clicking the "Select all" checkbox, or when the "checkall" method is programatically called.
+
+#### onUncheckAll
+
+Fires when all the options are all unchecked by either clicking the "Select all" checkbox, or when the "uncheckall" method is programatically called. 
+
+#### onOptgroupClick
+
+Fires when a an optgroup label is clicked on. 
+
+```javascript
+onOptgroupClick: function(view) {
+	/*
+	view.label: the text of the optgroup
+	view.checked: the checked of the optgroup
+	view.children: an array of the checkboxes (DOM elements) inside the optgroup
+	*/
+}
+```
+
+#### onClick
+
+Fires when a checkbox is checked or unchecked. 
+
+```javascript
+onOptgroupClick: function(view) {
+	/*
+	view.label: the text of the checkbox item
+	view.checked: the checked of the checkbox item
+	*/
+}
+```
+
+### Methods
+
+#### getSelects
 
 Gets the selected values.
 
@@ -824,7 +973,7 @@ alert('Selected values: ' + $('select').multipleSelect('getSelects'));
 alert('Selected texts: ' + $('select').multipleSelect('getSelects', 'text'));
 ```
 
-### setSelects
+#### setSelects
 
 Sets the selected values.
 
@@ -838,7 +987,7 @@ The values of selected items.
 $('select').multipleSelect('setSelects', [1, 3]);
 ```
 
-### enable
+#### enable
 
 Enables Select.
 
@@ -846,7 +995,7 @@ Enables Select.
 $('select').multipleSelect('enable');
 ```
 
-### disable
+#### disable
 
 Disables Select. During this mode the user is not allowed to manipulate the selection.
 
@@ -854,7 +1003,7 @@ Disables Select. During this mode the user is not allowed to manipulate the sele
 $('select').multipleSelect('disable');
 ```
 
-### checkAll
+#### checkAll
 
 Check all checkboxes.
 
@@ -862,7 +1011,7 @@ Check all checkboxes.
 $('select').multipleSelect('checkAll');
 ```
 
-### uncheckAll
+#### uncheckAll
 
 Uncheck all checkboxes.
 
@@ -870,7 +1019,7 @@ Uncheck all checkboxes.
 $('select').multipleSelect('uncheckAll');
 ```
 
-### refresh
+#### refresh
 
 Reloads the Multiple Select. 
 
