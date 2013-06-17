@@ -28,7 +28,7 @@
 		this.$choice.css('width', $el.width() + 'px')
 			.find('span').css('width', ($el.width() - 28) + 'px');
 		this.$drop.css({
-			width: $el.width() + 'px'
+			width: (options.width || $el.width()) + 'px'
 		});
 		
 		$('body').click(function(e) {
@@ -310,6 +310,7 @@
 		multiple: false,
 		multipleWidth: 80,
 		filter: false,
+		width: undefined,
 		maxHeight: 250,
 		
 		onOpen: function() {return false;},
