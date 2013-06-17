@@ -137,20 +137,30 @@
 			});
 			this.$selectAll.off('click').on('click', function() {
 				var $items = that.$selectItems.filter(':visible');
-				$items.prop('checked', $(this).prop('checked'));
-				that.update();
+				that[$(this).prop('checked') ? 'checkAll' : 'uncheckAll']();
 			});
 			this.$selectGroups.off('click').on('click', function() {
 				var group = $(this).attr('data-group'),
 					$items = that.$selectItems.filter(':visible'),
-					$children = $items.filter('[data-group="' + group + '"]');
-				$children.prop('checked', $children.length !== $children.filter(':checked').length);
+					$children = $items.filter('[data-group="' + group + '"]'),
+					checked = $children.length !== $children.filter(':checked').length;
+				$children.prop('checked', checked);
 				that.updateSelectAll();
 				that.update();
+				that.options.onOptgroupClick({
+					label: $(this).text(),
+					checked: checked,
+					children: $children.get()
+				});
 			});
 			this.$selectItems.off('click').on('click', function() {
 				that.updateSelectAll();
 				that.update();
+				that.options.onClick({
+					label: $(this).parent().text(),
+					value: $(this).val(),
+					checked: $(this).prop('checked')
+				});
 			});
 		},
 		
@@ -165,12 +175,14 @@
 				this.$searchInput.val('');
 				this.filter();
 			}
+			this.options.onOpen();
 		},
 		
 		close: function() {
 			this.options.isopen = false;
 			this.$choice.find('>div').removeClass('open');
 			this.$drop.hide();
+			this.options.onClose();
 		},
 		
 		update: function() {
@@ -223,12 +235,14 @@
 			this.$selectItems.prop('checked', true);
 			this.$selectAll.prop('checked', true);
 			this.update();
+			this.options.onCheckAll();
 		},
 		
 		uncheckAll: function() {
 			this.$selectItems.prop('checked', false);
 			this.$selectAll.prop('checked', false);
 			this.update();
+			this.options.onUncheckAll();
 		},
 		
 		refresh: function() {
@@ -296,6 +310,13 @@
 		multiple: false,
 		multipleWidth: 80,
 		filter: false,
-		maxHeight: 250
+		maxHeight: 250,
+		
+		onOpen: function() {return false;},
+		onClose: function() {return false;},
+		onCheckAll: function() {return false;},
+		onUncheckAll: function() {return false;},
+		onOptgroupClick: function() {return false;},
+		onClick: function() {return false;}
 	};
 })(jQuery);
