@@ -1,6 +1,6 @@
 /**
  * @author zhixin wen <wenzhixin2010@gmail.com>
- * @version 1.0.3
+ * @version 1.0.4
  * 
  * http://wenzhixin.net.cn/p/multiple-select/
  */
@@ -136,8 +136,14 @@
 				that.filter();
 			});
 			this.$selectAll.off('click').on('click', function() {
-				var $items = that.$selectItems.filter(':visible');
-				that[$(this).prop('checked') ? 'checkAll' : 'uncheckAll']();
+				var checked = $(this).prop('checked'),
+					$items = that.$selectItems.filter(':visible');
+				if ($items.length === that.$selectItems.length) {
+					that[checked ? 'checkAll' : 'uncheckAll']();
+				} else { // when the filter option is true
+					$items.prop('checked', checked);
+					that.update();
+				}
 			});
 			this.$selectGroups.off('click').on('click', function() {
 				var group = $(this).attr('data-group'),
