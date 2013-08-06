@@ -11,6 +11,7 @@
 
 	function MultipleSelect($el, options) {
 		var that = this;
+		var elWidth = $el.width();
 		this.$el = $el.hide();
 		this.options = options;
 		
@@ -25,10 +26,10 @@
 		if (this.$el.prop('disabled')) {
 			this.$choice.addClass('disabled');
 		}
-		this.$choice.css('width', $el.width() + 'px')
-			.find('span').css('width', ($el.width() - 28) + 'px');
+		this.$choice.css('width', elWidth + 'px')
+			.find('span').css('width', (elWidth - 28) + 'px');
 		this.$drop.css({
-			width: (options.width || $el.width()) + 'px'
+			width: (options.width || elWidth) + 'px'
 		});
 		
 		$('body').click(function(e) {
