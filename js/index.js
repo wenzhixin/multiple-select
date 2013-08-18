@@ -1,6 +1,10 @@
 $(function() {
+	var readme = 'README.md';
+	if (location.href.indexOf('locale=zh_CN') !== -1) {
+		readme = 'README-ZH-CN.md';
+	}
 	Flatdoc.run({
-		fetcher : Flatdoc.file('README.md')
+		fetcher : Flatdoc.file(readme)
 	});
 	$(document).on('flatdoc:ready', function() {
 		$('#e1_t, #e2_t, #e3_t, #e4_t, #e5_t').each(function() {
