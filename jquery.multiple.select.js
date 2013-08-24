@@ -10,8 +10,9 @@
 	'use strict';
 
 	function MultipleSelect($el, options) {
-		var that = this;
-		var elWidth = $el.width();
+		var that = this,
+			elWidth = $el.width();
+			
 		this.$el = $el.hide();
 		this.options = options;
 		
@@ -37,8 +38,9 @@
 					$(e.target).parents('.ms-choice')[0] === that.$choice[0]) {
 				return;
 			}
-			if ($(e.target)[0] === that.$drop[0] ||
-					$(e.target).parents('.ms-drop')[0] !== that.$drop[0]) {
+			if (($(e.target)[0] === that.$drop[0] ||
+					$(e.target).parents('.ms-drop')[0] !== that.$drop[0]) &&
+					that.options.isopen) {
 				that.close();
 			}
 		});
