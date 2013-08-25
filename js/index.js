@@ -14,7 +14,12 @@ $(function() {
 		$('#e6').find('select').multipleSelect({
         	placeholder: 'Here is the placeholder'
         });
-        $('#e7, #e8').find('select').multipleSelect({
+        $('#e7').find('select').multipleSelect({
+        	width: 460,
+        	multiple: true,
+            multipleWidth: 55
+        });
+        $('#e8').find('select').multipleSelect({
         	multiple: true,
             multipleWidth: 55
         });

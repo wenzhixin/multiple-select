@@ -345,6 +345,7 @@ Multiple Select supports to show multiple items in single row.
     <script src="jquery.multiple.select.js"></script>
     <script>
         $("select").multipleSelect({
+        	width: 460,
         	multiple: true,
             multipleWidth: 55
         });

@@ -345,6 +345,7 @@ Multiple Select 支持在一行中显示多个选项：
     <script src="jquery.multiple.select.js"></script>
     <script>
         $("select").multipleSelect({
+        	width: 460,
         	multiple: true,
             multipleWidth: 55
         });
