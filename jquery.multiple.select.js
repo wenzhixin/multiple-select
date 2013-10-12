@@ -1,6 +1,6 @@
 /**
  * @author zhixin wen <wenzhixin2010@gmail.com>
- * @version 1.0.4
+ * @version 1.0.5
  * 
  * http://wenzhixin.net.cn/p/multiple-select/
  */
@@ -28,7 +28,7 @@
 			this.$choice.addClass('disabled');
 		}
 		this.$choice.css('width', elWidth + 'px')
-			.find('span').css('width', (elWidth - 28) + 'px');
+			.find('span').css('width', (elWidth - 30) + 'px');
 		this.$drop.css({
 			width: (options.width || elWidth) + 'px'
 		});
