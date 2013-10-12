@@ -16,6 +16,7 @@
 	position: relative;
 	cursor: pointer;
 	border: 1px solid #aaa;
+	text-align: left;
 	white-space: nowrap;
 	line-height: 26px;
 	color: #444;
