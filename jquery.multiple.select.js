@@ -120,7 +120,7 @@
 				html.push(
 					'<li class="group">',
 						'<label class="optgroup' + (disabled ? ' disabled' : '') + '" data-group="' + _group + '">',
-                            '<input type="checkbox" name="selectGroup" /> ',
+							'<input type="checkbox" name="selectGroup" /> ',
 							label,
 						'</label>',
 					'</li>');
@@ -136,21 +136,14 @@
 			this.$choice.off('click').on('click', function() {
 				that[that.options.isopen ? 'close' : 'open']();
 			});
-            this.$parent.off('keydown').on('keydown', function(e) {
-                switch (e.which) {
-                    case 27: // esc key
-                        that.close();
-                        that.$choice.focus();
-                        break;
-                }
-            });
-            this.$parent.off('focusout').on('focusout', function() {
-                setTimeout(function() {
-                    if (that.$parent.has(document.activeElement).length === 0) {
-                        that.close();
-                    }
-                }, 1000);
-            });
+			this.$parent.off('keydown').on('keydown', function(e) {
+				switch (e.which) {
+					case 27: // esc key
+						that.close();
+						that.$choice.focus();
+						break;
+				}
+			});
 			this.$searchInput.off('keyup').on('keyup', function() {
 				that.filter();
 			});
@@ -181,7 +174,7 @@
 			this.$selectItems.off('click').on('click', function() {
 				that.updateSelectAll();
 				that.update();
-                that.updateOptGroupSelect();
+				that.updateOptGroupSelect();
 				that.options.onClick({
 					label: $(this).parent().text(),
 					value: $(this).val(),
@@ -229,15 +222,15 @@
 				$items.length === $items.filter(':checked').length);
 		},
 
-        updateOptGroupSelect: function() {
-            var $items = this.$selectItems.filter(':visible');
-            $.each(this.$selectGroups, function(i, val) {
-                var group = $(val).parent().attr('data-group'),
-                    $children = $items.filter('[data-group="' + group + '"]');
-                $(val).prop('checked', $children.length &&
-                    $children.length === $children.filter(':checked').length);
-            });
-        },
+		updateOptGroupSelect: function() {
+			var $items = this.$selectItems.filter(':visible');
+			$.each(this.$selectGroups, function(i, val) {
+				var group = $(val).parent().attr('data-group'),
+					$children = $items.filter('[data-group="' + group + '"]');
+				$(val).prop('checked', $children.length &&
+					$children.length === $children.filter(':checked').length);
+			});
+		},
 
 		//value or text, default: 'value'
 		getSelects: function(type) {
@@ -269,7 +262,7 @@
 		
 		checkAll: function() {
 			this.$selectItems.prop('checked', true);
-            this.$selectGroups.prop('checked', true);
+			this.$selectGroups.prop('checked', true);
 			this.$selectAll.prop('checked', true);
 			this.update();
 			this.options.onCheckAll();
@@ -277,7 +270,7 @@
 		
 		uncheckAll: function() {
 			this.$selectItems.prop('checked', false);
-            this.$selectGroups.prop('checked', false);
+			this.$selectGroups.prop('checked', false);
 			this.$selectAll.prop('checked', false);
 			this.update();
 			this.options.onUncheckAll();
