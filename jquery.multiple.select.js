@@ -153,6 +153,7 @@
 				if ($items.length === that.$selectItems.length) {
 					that[checked ? 'checkAll' : 'uncheckAll']();
 				} else { // when the filter option is true
+					that.$selectGroups.prop('checked', checked);
 					$items.prop('checked', checked);
 					that.update();
 				}
@@ -286,7 +287,7 @@
 			if (text.length === 0) {
 				this.$selectItems.parent().show();
 				this.$disableItems.parent().show();
-				this.$selectGroups.show();
+				this.$selectGroups.parent().show();
 			} else {
 				this.$selectItems.each(function() {
 					var $parent = $(this).parent();
@@ -294,11 +295,13 @@
 				});
 				this.$disableItems.parent().hide();
 				this.$selectGroups.each(function() {
-					var group = $(this).attr('data-group'),
+					var $parent = $(this).parent();
+					var group = $parent.attr('data-group'),
 						$items = that.$selectItems.filter(':visible');
-					$(this)[$items.filter('[data-group="' + group + '"]').length === 0 ? 'hide' : 'show']();
+					$parent[$items.filter('[data-group="' + group + '"]').length === 0 ? 'hide' : 'show']();
 				});
 			}
+			this.updateOptGroupSelect();
 			this.updateSelectAll();
 		}
 	};
