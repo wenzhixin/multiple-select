@@ -120,7 +120,7 @@
 				html.push(
 					'<li class="group">',
 						'<label class="optgroup' + (disabled ? ' disabled' : '') + '" data-group="' + _group + '">',
-							'<input type="checkbox" name="selectGroup" /> ',
+							'<input type="checkbox" name="selectGroup"' + (disabled ? ' disabled="disabled"' : '') + ' /> ',
 							label,
 						'</label>',
 					'</li>');
