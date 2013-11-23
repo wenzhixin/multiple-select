@@ -27,8 +27,7 @@
 		if (this.$el.prop('disabled')) {
 			this.$choice.addClass('disabled');
 		}
-		this.$choice.css('width', elWidth + 'px')
-			.find('span').css('width', (elWidth - 30) + 'px');
+		this.$choice.css('width', elWidth + 'px');
 		this.$drop.css({
 			width: (options.width || elWidth) + 'px'
 		});

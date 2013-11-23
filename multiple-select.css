@@ -13,7 +13,6 @@
 	height: 26px;
 	padding: 0;
 	overflow: hidden;
-	position: relative;
 	cursor: pointer;
 	border: 1px solid #aaa;
 	text-align: left;
@@ -35,11 +34,14 @@
 }
 
 .ms-choice > span {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 20px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: block;
-	float: left;
 	padding-left: 8px;
 }
 
@@ -48,7 +50,9 @@
 }
 
 .ms-choice > div {
-	float: right;
+	position: absolute;
+	top: 0;
+	right: 0;
 	width: 20px;
 	height: 25px;
 	background: url('multiple-select.png') right top no-repeat;
