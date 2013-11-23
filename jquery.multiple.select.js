@@ -95,12 +95,15 @@
 			var that = this,
 				$elm = $(elm),
 				html = [],
-				multiple = this.options.multiple;
+				multiple = this.options.multiple,
+				disabled;
+				
 			if ($elm.is('option')) {
 				var value = $elm.val(),
 					text = $elm.text(),
-					selected = $elm.prop('selected'),
-					disabled = groupDisabled || $elm.prop('disabled');
+					selected = $elm.prop('selected');
+					
+				disabled = groupDisabled || $elm.prop('disabled');
 				html.push(
 					'<li' + (multiple ? ' class="multiple"' : '') + '>',
 						'<label' + (disabled ? ' class="disabled"' : '') + '>',
@@ -115,8 +118,9 @@
 				);
 			} else if (!group && $elm.is('optgroup')) {
 				var _group = 'group_' + i,
-					label = $elm.attr('label'),
-					disabled = $elm.prop('disabled');
+					label = $elm.attr('label');
+					
+				disabled = $elm.prop('disabled');
 				html.push(
 					'<li class="group">',
 						'<label class="optgroup' + (disabled ? ' disabled' : '') + '" data-group="' + _group + '">',
