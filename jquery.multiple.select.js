@@ -212,7 +212,7 @@
 			var selects = this.getSelects('text'),
 				$span = this.$choice.find('>span');
 			if (selects.length) {
-				$span.removeClass('placeholder').html(selects.join(','));
+				$span.removeClass('placeholder').html(selects.join(', '));
 			} else {
 				$span.addClass('placeholder').html(this.options.placeholder);
 			}
@@ -238,11 +238,41 @@
 
 		//value or text, default: 'value'
 		getSelects: function(type) {
-			var values = [];
+			var that = this,
+				texts = [],
+				values = [];
 			this.$drop.find('input[name="selectItem"]:checked').each(function() {
-				values.push(type === 'text' ? $(this).parent().text() : $(this).val());
+				texts.push($(this).parent().text());
+				values.push($(this).val());
 			});
-			return values;
+			
+			if (type === 'text' && this.$selectGroups.length) {
+				texts = [];
+				this.$selectGroups.each(function() {
+					var html = [],
+						text = $.trim($(this).parent().text()),
+						group = $(this).parent().data('group'),
+						$children = that.$drop.find('[name="selectItem"][data-group="' + group + '"]'),
+						$selected = $children.filter(':checked');
+					
+					if ($selected.length === 0) {
+						return;
+					}
+					
+					html.push('[');
+					html.push(text);
+					if ($children.length > $selected.length) {
+						var list = [];
+						$selected.each(function() {
+							list.push($(this).parent().text());
+						});
+						html.push(': ' + list.join(', '));
+					}
+					html.push(']');
+					texts.push(html.join(''));
+				});
+			}
+			return type === 'text' ? texts : values;
 		},
 		
 		setSelects: function(values) {
