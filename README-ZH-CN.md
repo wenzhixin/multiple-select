@@ -2,7 +2,7 @@
 
 Multiple select 是一个通过复选框来选择多元素的 jQuery 插件:).
 
-*当前版本: 1.0.4*
+*当前版本: 1.0.5*
 
 ## Requirements
 
@@ -28,7 +28,7 @@ Multiple select 是一个通过复选框来选择多元素的 jQuery 插件:).
 
 ### The Basics1
 
-Multiple Select 可以将标准的复选框变：
+Multiple Select 可以将标准的复选框：
 
 <p id="e1_f">
 	<select class="w300" multiple="multiple">
@@ -70,7 +70,7 @@ Multiple Select 可以将标准的复选框变：
 
 ### The Basics2
 
-Multiple Select 可以将标准的复选框变：
+Multiple Select 可以将标准的复选框：
 
 <p id="e2_f">
 	<select class="w300" multiple="multiple" disabled="disabled">
@@ -112,7 +112,7 @@ Multiple Select 可以将标准的复选框变：
 
 ### The Basics3
 
-Multiple Select 可以将标准的复选框变：
+Multiple Select 可以将标准的复选框：
 
 <p id="e3_f">
 	<select class="w300" multiple="multiple">
@@ -155,7 +155,7 @@ Multiple Select 可以将标准的复选框变：
 
 ### With Optgroups1
 
-Multiple Select 可以将标准的复选框变：
+Multiple Select 可以将标准的复选框：
 
 <p id="e4_f">
 	<select class="w300" multiple="multiple">
@@ -206,7 +206,7 @@ Multiple Select 可以将标准的复选框变：
 
 ### With Optgroups2
 
-Multiple Select 可以将标准的复选框变：
+Multiple Select 可以将标准的复选框：
 
 <p id="e5_f">
 	<select class="w300" multiple="multiple">
