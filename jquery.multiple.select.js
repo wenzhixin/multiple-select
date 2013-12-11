@@ -194,6 +194,11 @@
 			this.options.isopen = true;
 			this.$choice.find('>div').addClass('open');
 			this.$drop.show();
+			if (this.options.container) {
+			    var offset = this.$drop.offset();
+			    this.$drop.appendTo($(this.options.container));
+			    this.$drop.offset({ top: offset.top, left: offset.left });
+			}
 			if (this.options.filter) {
 				this.$searchInput.val('');
 				this.filter();
@@ -205,6 +210,13 @@
 			this.options.isopen = false;
 			this.$choice.find('>div').removeClass('open');
 			this.$drop.hide();
+			if (this.options.container) {
+			    this.$parent.append(this.$drop);
+			    this.$drop.css({
+			        'top': 'auto',
+			        'left': 'auto'
+			    })
+			}
 			this.options.onClose();
 		},
 		
@@ -379,6 +391,7 @@
 		filter: false,
 		width: undefined,
 		maxHeight: 250,
+		container: null,
 		
 		onOpen: function() {return false;},
 		onClose: function() {return false;},
