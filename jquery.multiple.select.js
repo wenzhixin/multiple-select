@@ -223,7 +223,9 @@
 		update: function() {
 			var selects = this.getSelects('text'),
 				$span = this.$choice.find('>span');
-			if (selects.length) {
+			if(selects.length == this.$selectItems.length && this.options.overrideButtonText) {
+				$span.removeClass('placeholder').html(this.options.selectAllText);
+			} else if (selects.length) {
 				$span.removeClass('placeholder').html(selects.join(', '));
 			} else {
 				$span.addClass('placeholder').html(this.options.placeholder);
