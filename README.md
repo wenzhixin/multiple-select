@@ -2,7 +2,7 @@
 
 Multiple select is a jQuery plugin to select multiple elements with checkboxes :).
 
-*Current version: 1.0.5*
+*Current version: 1.0.6*
 
 ## Requirements
 
@@ -433,6 +433,36 @@ Multiple Select supports to show multiple items in single row with optgroups.
     <script>
         $("select").multipleSelect({
         	selectAll: false
+        });
+    </script>
+</body>
+```
+
+### The Single Row
+
+<p id="e17">
+	<select class="w300" multiple="multiple">
+		<option value="1">First</option>
+        <option value="2">Second</option>
+        <option value="3">Third</option>
+        <option value="4" selected="selected">Fourth</option>
+	</select>
+</p>
+
+``` html
+<head>
+	<link href="multiple-select.css" rel="stylesheet"/>
+</head>
+<body>
+    <select multiple="multiple">
+        <option value="1">First</option>
+        ...
+        <option value="4" selected="selected">Fourth</option>
+    </select>
+    <script src="jquery.multiple.select.js"></script>
+    <script>
+        $("select").multipleSelect({
+        	single: true
         });
     </script>
 </body>
@@ -889,6 +919,14 @@ Type: integer
 Multiple Select show multiple items width.
 
 By default this option is set to ```80```.
+
+#### single
+
+Type: boolean
+
+Whether or not Multiple Select allows you to select only one option.
+
+By default this option is set to ```false```.
 
 #### filter
 

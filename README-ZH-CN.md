@@ -2,7 +2,7 @@
 
 Multiple select 是一个通过复选框来选择多元素的 jQuery 插件:).
 
-*当前版本: 1.0.5*
+*当前版本: 1.0.6*
 
 ## Requirements
 
@@ -433,6 +433,36 @@ Multiple Select 支持在一行中显示多个选项以及支持分组。
     <script>
         $("select").multipleSelect({
         	selectAll: false
+        });
+    </script>
+</body>
+```
+
+### The Single Row
+
+<p id="e17">
+	<select class="w300" multiple="multiple">
+		<option value="1">First</option>
+        <option value="2">Second</option>
+        <option value="3">Third</option>
+        <option value="4" selected="selected">Fourth</option>
+	</select>
+</p>
+
+``` html
+<head>
+	<link href="multiple-select.css" rel="stylesheet"/>
+</head>
+<body>
+    <select multiple="multiple">
+        <option value="1">First</option>
+        ...
+        <option value="4" selected="selected">Fourth</option>
+    </select>
+    <script src="jquery.multiple.select.js"></script>
+    <script>
+        $("select").multipleSelect({
+        	single: true
         });
     </script>
 </body>
@@ -889,6 +919,14 @@ Multiple Select 支持在一行中显示多个选项以及支持分组。
 一行中每个选项的宽度。
 
 默认值为 ```80```。
+
+#### single
+
+类型: boolean
+
+是否只允许你选择一行。
+
+默认值为 ```false```。
 
 #### filter
 
