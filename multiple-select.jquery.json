@@ -1,6 +1,6 @@
 {
     "name": "multiple-select",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "title": "Multiple Select",
     "description": "Multiple select is a jQuery plugin to select multiple elements with checkboxes :).",
     "author": {
@@ -18,7 +18,7 @@
         }
     ],
     "dependencies": {
-        "jquery": ">=1.6"
+        "jquery": ">=1.7"
     },
     "keywords": ["multiple.select", "select.list", "multiple.choose", "checkbox"],
     "homepage": "http://wenzhixin.net.cn/p/multiple-select/",
