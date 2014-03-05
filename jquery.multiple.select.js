@@ -1,6 +1,6 @@
 /**
  * @author zhixin wen <wenzhixin2010@gmail.com>
- * @version 1.0.6
+ * @version 1.0.7
  * 
  * http://wenzhixin.net.cn/p/multiple-select/
  */
@@ -332,7 +332,7 @@
         filter: function() {
             var that = this,
                 text = $.trim(this.$searchInput.val()).toLowerCase();
-            if (selects.length === 0) {
+            if (text.length === 0) {
                 this.$selectItems.parent().show();
                 this.$disableItems.parent().show();
                 this.$selectGroups.parent().show();
