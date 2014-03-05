@@ -2,7 +2,7 @@
 
 Multiple select 是一个通过复选框来选择多元素的 jQuery 插件:).
 
-*当前版本: 1.0.6*
+*当前版本: 1.0.7*
 
 ## Requirements
 
