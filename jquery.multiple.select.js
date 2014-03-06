@@ -19,7 +19,7 @@
         this.$parent = $('<div class="ms-parent"></div>');
         this.$choice = $('<button type="button" class="ms-choice"><span class="placeholder">' +
             options.placeholder + '</span><div></div></button>');
-        this.$drop = $('<div class="ms-drop"></div>');
+        this.$drop = $('<div class="ms-drop ' + options.position + '"></div>');
         this.$el.after(this.$parent);
         this.$parent.append(this.$choice);
         this.$parent.append(this.$drop);
@@ -396,6 +396,7 @@
         width: undefined,
         maxHeight: 250,
         container: null,
+        position: 'bottom', // 'bottom' or 'top'
 
         onOpen: function() {return false;},
         onClose: function() {return false;},
