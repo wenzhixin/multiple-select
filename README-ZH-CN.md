@@ -468,6 +468,46 @@ Multiple Select 支持在一行中显示多个选项以及支持分组。
 </body>
 ```
 
+### The Position
+
+设置下拉列表显示在上方。
+
+<p id="e18">
+	<select class="w300" multiple="multiple">
+	    <option value="1">January</option>
+		<option value="2">February</option>
+	    <option value="3">March</option>
+	    <option value="4">April</option>
+	    <option value="5">May</option>
+	    <option value="6">June</option>
+	    <option value="7">July</option>
+	    <option value="8">August</option>
+	    <option value="9">September</option>
+	    <option value="10">October</option>
+	    <option value="11">November</option>
+	    <option value="12">December</option>
+	</select>
+</p>
+
+``` html
+<head>
+	<link href="multiple-select.css" rel="stylesheet"/>
+</head>
+<body>
+	<select multiple="multiple" disabled="disabled">
+	    <option value="1">January</option>
+	    ...
+	    <option value="12">December</option>
+	</select>
+	<script src="jquery.multiple.select.js"></script>
+	<script>
+		$('select').multipleSelect({
+		    position: 'top'
+		});
+	</script>
+</body>
+```
+
 ### The Filter1
 
 <p id="e14">
@@ -927,6 +967,14 @@ Multiple Select 支持在一行中显示多个选项以及支持分组。
 是否只允许你选择一行。
 
 默认值为 ```false```。
+
+#### position
+
+类型: string
+
+定义下拉列表的位置，只能是 ```bottom``` 或者 ```top```。
+
+默认值为 ```bottom```.
 
 #### filter
 

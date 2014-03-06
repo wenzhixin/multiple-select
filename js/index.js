@@ -110,5 +110,8 @@ $(function() {
         $('#e17').find('select').multipleSelect({
             single: true
         });
+        $('#e18').find('select').multipleSelect({
+            position: 'top'
+        });
     });
 }); 

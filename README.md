@@ -468,6 +468,46 @@ Multiple Select supports to show multiple items in single row with optgroups.
 </body>
 ```
 
+### The Position
+
+Set the select dropdown in top position.
+
+<p id="e18">
+	<select class="w300" multiple="multiple">
+	    <option value="1">January</option>
+		<option value="2">February</option>
+	    <option value="3">March</option>
+	    <option value="4">April</option>
+	    <option value="5">May</option>
+	    <option value="6">June</option>
+	    <option value="7">July</option>
+	    <option value="8">August</option>
+	    <option value="9">September</option>
+	    <option value="10">October</option>
+	    <option value="11">November</option>
+	    <option value="12">December</option>
+	</select>
+</p>
+
+``` html
+<head>
+	<link href="multiple-select.css" rel="stylesheet"/>
+</head>
+<body>
+	<select multiple="multiple" disabled="disabled">
+	    <option value="1">January</option>
+	    ...
+	    <option value="12">December</option>
+	</select>
+	<script src="jquery.multiple.select.js"></script>
+	<script>
+		$('select').multipleSelect({
+		    position: 'top'
+		});
+	</script>
+</body>
+```
+
 ### The Filter1
 
 <p id="e14">
@@ -927,6 +967,14 @@ Type: boolean
 Whether or not Multiple Select allows you to select only one option.
 
 By default this option is set to ```false```.
+
+#### position
+
+Type: string
+
+Defines the position of select dropdown, can only be ```bottom``` or ```top```.
+
+By default this option is set to ```bottom```.
 
 #### filter
 
