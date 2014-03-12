@@ -177,3 +177,7 @@
 .ms-drop input[type="checkbox"] {
     vertical-align: middle;
 }
+
+.ms-drop .ms-no-results {
+    display: none;
+}

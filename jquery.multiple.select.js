@@ -76,6 +76,7 @@
             $.each(this.$el.children(), function(i, elm) {
                 html.push(that.optionToHtml(i, elm));
             });
+            html.push('<li class="ms-no-results">No matches found</li>');
             html.push('</ul>');
             this.$drop.html(html.join(''));
             this.$drop.find('ul').css('max-height', this.options.maxHeight + 'px');
@@ -86,6 +87,7 @@
             this.$selectGroups = this.$drop.find('input[name="selectGroup"]');
             this.$selectItems = this.$drop.find('input[name="selectItem"]:enabled');
             this.$disableItems = this.$drop.find('input[name="selectItem"]:disabled');
+            this.$noResults = this.$drop.find('.ms-no-results');
             this.events();
             this.update();
         },
@@ -348,6 +350,15 @@
                         $items = that.$selectItems.filter(':visible');
                     $parent[$items.filter('[data-group="' + group + '"]').length === 0 ? 'hide' : 'show']();
                 });
+
+                //Check if no matches found
+                if (this.$selectItems.filter(':visible').length) {
+                    this.$selectAll.parent().show();
+                    this.$noResults.hide();
+                } else {
+                    this.$selectAll.parent().hide();
+                    this.$noResults.show();
+                }
             }
             this.updateOptGroupSelect();
             this.updateSelectAll();
