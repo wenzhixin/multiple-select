@@ -1,6 +1,6 @@
 {
     "name": "multiple-select",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "title": "Multiple Select",
     "description": "Multiple select is a jQuery plugin to select multiple elements with checkboxes :).",
     "author": {
@@ -10,11 +10,8 @@
     },
     "licenses": [
         {
-            "type": "Apache License",
-            "url": "http://www.apache.org/licenses/LICENSE-2.0"
-        }, {
-            "type": "GPL",
-            "url": "http://www.gnu.org/licenses/gpl-2.0.html"
+            "type": "MIT License",
+            "url": "http://opensource.org/licenses/MIT"
         }
     ],
     "dependencies": {
