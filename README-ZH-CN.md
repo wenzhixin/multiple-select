@@ -2,7 +2,7 @@
 
 Multiple select 是一个通过复选框来选择多元素的 jQuery 插件:).
 
-*当前版本: 1.0.7*
+*当前版本: 1.0.8*
 
 ## Requirements
 
@@ -1128,7 +1128,7 @@ $('select').multipleSelect('refresh');
 
 ## Acknowledgements
 
-© 2013, Multiple Selected is licensed under the Apache Software Foundation License Version 2.0 and GPL Version 2.0. Coded by wenzhixin.
+© 2012-2014, Multiple Selected is licensed under the The MIT License. Coded by wenzhixin.
 
 我的网站 ([wenzhixin.net.cn](http://wenzhixin.net.cn))
 
