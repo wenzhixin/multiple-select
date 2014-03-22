@@ -328,6 +328,14 @@
             this.options.onUncheckAll();
         },
 
+        focus: function() {
+            this.$choice.focus();
+        },
+
+        blur: function() {
+            this.$choice.blur();
+        },
+
         refresh: function() {
             this.init();
         },
@@ -371,7 +379,13 @@
             args = arguments,
 
             value,
-            allowedMethods = ['getSelects', 'setSelects', 'enable', 'disable', 'checkAll', 'uncheckAll', 'refresh'];
+            allowedMethods = [
+                'getSelects', 'setSelects',
+                'enable', 'disable',
+                'checkAll', 'uncheckAll',
+                'focus', 'blur',
+                'refresh'
+            ];
 
         this.each(function() {
             var $this = $(this),
