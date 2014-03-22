@@ -141,7 +141,10 @@
             var that = this;
             this.$choice.off('click').on('click', function() {
                 that[that.options.isopen ? 'close' : 'open']();
-            });
+            })
+                .off('focus').on('focus', this.options.onFocus)
+                .off('blur').on('blur', this.options.onBlur);
+
             this.$parent.off('keydown').on('keydown', function(e) {
                 switch (e.which) {
                     case 27: // esc key
@@ -330,10 +333,12 @@
 
         focus: function() {
             this.$choice.focus();
+            this.options.onFocus();
         },
 
         blur: function() {
             this.$choice.blur();
+            this.options.onBlur();
         },
 
         refresh: function() {
@@ -428,6 +433,8 @@
         onClose: function() {return false;},
         onCheckAll: function() {return false;},
         onUncheckAll: function() {return false;},
+        onFocus: function() {return false;},
+        onBlur: function() {return false;},
         onOptgroupClick: function() {return false;},
         onClick: function() {return false;}
     };
