@@ -27,7 +27,7 @@ $(function() {
             selectAll: false
         });
         
-        $('#e10, #e11, #e12, #e13').find('select').multipleSelect();
+        $('#e10, #e11, #e12, #e13, #e19').find('select').multipleSelect();
         $('#setSelectsBtn').click(function() {
             $('#e10').find('select').multipleSelect('setSelects', [1, 3]);
         });
@@ -46,6 +46,12 @@ $(function() {
         });
         $('#uncheckAllBtn').click(function() {
             $('#e12').find('select').multipleSelect('uncheckAll');
+        });
+        $("#focusBtn").click(function() {
+            $('#e19').find('select').multipleSelect("focus");
+        });
+        $("#blurBtn").click(function() {
+            $('#e19').find('select').multipleSelect("blur");
         });
         $('#refreshAdd').click(function() {
             var $select = $('#e13').find('select'),
@@ -71,13 +77,7 @@ $(function() {
             $select.append($opt).multipleSelect('refresh');
         });
         $('#e14').find('select').multipleSelect({
-            filter: true,
-            onCheckAll: function() {
-                console.log('Check all clicked!');
-            },
-            onUncheckAll: function() {
-                console.log('Uncheck all clicked!');
-            }
+            filter: true
         });
         $('#e15').find('select').multipleSelect({
             filter: true,
@@ -96,6 +96,12 @@ $(function() {
             },
             onUncheckAll: function() {
                 $eventResult.text('Uncheck all clicked!');
+            },
+            onFocus: function() {
+                $eventResult.text('focus!');
+            },
+            onBlur: function() {
+                $eventResult.text('blur!');
             },
             onOptgroupClick: function(view) {
                 var values = $.map(view.children, function(child){

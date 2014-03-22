@@ -737,8 +737,8 @@ Set the select dropdown in top position.
 	<link href="multiple-select.css" rel="stylesheet"/>
 </head>
 <body>
-	<button id="enableBtn">Enable</button>
-	<button id="disableBtn">Disabled</button>
+	<button id="checkAllBtn" class="button">CheckAll</button>
+    <button id="uncheckAllBtn" class="button">UncheckAll</button>
     <select multiple="multiple">
         <option value="1">Monday</option>
         ...
@@ -752,6 +752,49 @@ Set the select dropdown in top position.
         });
         $("#getSelectsBtn").click(function() {
         	$("select").multipleSelect("uncheckAll");
+        });
+    </script>
+</body>
+```
+
+### Focus/Blur
+
+<p>
+	<button id="focusBtn" class="button">Focus</button>
+	<button id="blurBtn" class="button">Blur</button>
+</p>
+<p id="e19">
+	<select class="w300" multiple="multiple">
+		<option value="1">Monday</option>
+		<option value="2">Tuesday</option>
+		<option value="3">Wednesday</option>
+		<option value="4">Thursday</option>
+		<option value="5">Friday</option>
+		<option value="6">Saturday</option>
+		<option value="7">Sunday</option>
+	</select>
+</p>
+
+``` html
+<head>
+	<link href="multiple-select.css" rel="stylesheet"/>
+</head>
+<body>
+	<button id="focusBtn" class="button">Focus</button>
+	<button id="blurBtn" class="button">Blur</button>
+    <select multiple="multiple">
+        <option value="1">Monday</option>
+        ...
+        <option value="7">Sunday</option>
+    </select>
+    <script src="jquery.multiple.select.js"></script>
+    <script>
+        $("select").multipleSelect();
+        $("#focusBtn").click(function() {
+        	$("select").multipleSelect("focus");
+        });
+        $("#blurBtn").click(function() {
+        	$("select").multipleSelect("blur");
         });
     </script>
 </body>
@@ -892,6 +935,12 @@ If you're dynamically adding/removing option tags on the original select via AJA
         	onUncheckAll: function() {
         		$eventResult.text('Uncheck all clicked!');
         	},
+        	onFocus: function() {
+        		$eventResult.text('focus!');
+        	},
+        	onBlur: function() {
+        		$eventResult.text('blur!');
+        	},
         	onOptgroupClick: function(view) {
 				var values = $.map(view.children, function(child){
 					return child.value;
@@ -1016,7 +1065,13 @@ Fires when all the options are checked by either clicking the "Select all" check
 
 #### onUncheckAll
 
-Fires when all the options are all unchecked by either clicking the "Select all" checkbox, or when the "uncheckall" method is programatically called. 
+#### onFocus
+
+Bind an event handler to the "focus".
+
+#### onBlur
+
+Bind an event handler to the "blur"
 
 #### onOptgroupClick
 
@@ -1108,6 +1163,22 @@ Uncheck all checkboxes.
 
 ``` javascript
 $('select').multipleSelect('uncheckAll');
+```
+
+#### focus
+
+Focus the multiple select.
+
+``` javascript
+$('select').multipleSelect('focus');
+```
+
+#### blur
+
+Blur the multiple select.
+
+``` javascript
+$('select').multipleSelect('blur');
 ```
 
 #### refresh
