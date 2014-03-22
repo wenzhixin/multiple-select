@@ -161,6 +161,7 @@
                 } else { // when the filter option is true
                     that.$selectGroups.prop('checked', checked);
                     $items.prop('checked', checked);
+                    that.options[checked ? 'onCheckAll' : 'onUncheckAll']();
                     that.update();
                 }
             });
