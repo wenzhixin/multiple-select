@@ -39,12 +39,12 @@
             }
             if (($(e.target)[0] === that.$drop[0] ||
                     $(e.target).parents('.ms-drop')[0] !== that.$drop[0]) &&
-                    that.options.isopen) {
+                    that.options.isOpen) {
                 that.close();
             }
         });
 
-        if (this.options.isopen) {
+        if (this.options.isOpen) {
             this.open();
         }
     }
@@ -140,7 +140,7 @@
         events: function() {
             var that = this;
             this.$choice.off('click').on('click', function() {
-                that[that.options.isopen ? 'close' : 'open']();
+                that[that.options.isOpen ? 'close' : 'open']();
             })
                 .off('focus').on('focus', this.options.onFocus)
                 .off('blur').on('blur', this.options.onBlur);
@@ -198,7 +198,7 @@
             if (this.$choice.hasClass('disabled')) {
                 return;
             }
-            this.options.isopen = true;
+            this.options.isOpen = true;
             this.$choice.find('>div').addClass('open');
             this.$drop.show();
             if (this.options.container) {
@@ -214,7 +214,7 @@
         },
 
         close: function() {
-            this.options.isopen = false;
+            this.options.isOpen = false;
             this.$choice.find('>div').removeClass('open');
             this.$drop.hide();
             if (this.options.container) {
@@ -230,8 +230,10 @@
         update: function() {
             var selects = this.getSelects('text'),
                 $span = this.$choice.find('>span');
-            if(selects.length == this.$selectItems.length && this.options.overrideButtonText) {
-                $span.removeClass('placeholder').html(this.options.selectAllText);
+            if (selects.length == this.$selectItems.length && this.options.allSelected) {
+                $span.removeClass('placeholder').html(this.options.allSelected);
+            } else if (selects.length > this.options.minumimCountSelected && this.options.countSelected) {
+                $span.removeClass('placeholder').html(this.options.countSelected.replace('#', selects.length).replace('%', this.$selectItems.length));
             } else if (selects.length) {
                 $span.removeClass('placeholder').html(selects.join(', '));
             } else {
@@ -416,10 +418,13 @@
     };
 
     $.fn.multipleSelect.defaults = {
-        isopen: false,
+        isOpen: false,
         placeholder: '',
         selectAll: true,
         selectAllText: 'Select all',
+        allSelected: 'All selected', // false or string
+        minumimCountSelected: 3, // int - 'countSelectedText' will be shown only if more than X items where selected
+        countSelected: '# of % selected', // false or string - '#' is replaced with the count of selected items, '%' is replaces with total items
         multiple: false,
         multipleWidth: 80,
         single: false,
