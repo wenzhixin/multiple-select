@@ -233,7 +233,7 @@
             if (selects.length == this.$selectItems.length && this.options.allSelected) {
                 $span.removeClass('placeholder').html(this.options.allSelected);
             } else if (selects.length > this.options.minumimCountSelected && this.options.countSelected) {
-                $span.removeClass('placeholder').html(this.options.countSelected.replace('#', selects.length).replace('%', this.$selectItems.length));
+                $span.removeClass('placeholder').html(this.options.countSelected.replace('#', selects.length).replace('%', this.$selectItems.length + this.$disableItems.length));
             } else if (selects.length) {
                 $span.removeClass('placeholder').html(selects.join(', '));
             } else {
