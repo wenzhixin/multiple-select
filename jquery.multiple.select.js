@@ -139,7 +139,8 @@
 
         events: function() {
             var that = this;
-            this.$choice.off('click').on('click', function() {
+            this.$choice.off('click').on('click', function(e) {
+                e.preventDefault();
                 that[that.options.isOpen ? 'close' : 'open']();
             })
                 .off('focus').on('focus', this.options.onFocus)
