@@ -912,7 +912,7 @@ Multiple Select 支持在一行中显示多个选项以及支持分组。
 
 ### Constructor
 
-#### isopen
+#### isOpen
 
 类型: boolean	
 
