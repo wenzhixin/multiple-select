@@ -494,7 +494,7 @@ Set the select dropdown in top position.
 	<link href="multiple-select.css" rel="stylesheet"/>
 </head>
 <body>
-	<select multiple="multiple" disabled="disabled">
+	<select multiple="multiple">
 	    <option value="1">January</option>
 	    ...
 	    <option value="12">December</option>
@@ -961,7 +961,7 @@ If you're dynamically adding/removing option tags on the original select via AJA
 
 ### Constructor
 
-#### isopen
+#### isOpen
 
 Type: boolean	
 
@@ -992,6 +992,30 @@ Type: string
 Multiple Select select all checkbox text.
 
 By default this option is set to ```Select all```.
+
+#### allSelected
+
+Type: false or string
+
+The text displays when the select all selected.
+
+By default this option is set to ```All selected```.
+
+#### minumimCountSelected
+
+Type: int
+
+```countSelected``` will be shown only if more than X items where selected.
+
+By default this option is set to ```3```.
+
+#### countSelected
+
+Type: false or string
+
+'#' is replaced with the count of selected items, '%' is replaces with total items.
+
+By default this option is set to ```# of % selected```.
 
 #### multiple
 
