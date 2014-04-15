@@ -103,11 +103,12 @@
             if ($elm.is('option')) {
                 var value = $elm.val(),
                     text = $elm.text(),
-                    selected = $elm.prop('selected');
+                    selected = $elm.prop('selected'),
+                    style = this.options.styler(value) ? ' style="' + this.options.styler(value) + '"' : '';
 
                 disabled = groupDisabled || $elm.prop('disabled');
                 html.push(
-                    '<li' + (multiple ? ' class="multiple"' : '') + '>',
+                    '<li' + (multiple ? ' class="multiple"' : '') + style + '>',
                         '<label' + (disabled ? ' class="disabled"' : '') + '>',
                             '<input type="' + type + '" name="selectItem" value="' + value + '"' +
                                 (selected ? ' checked="checked"' : '') +
@@ -436,6 +437,8 @@
         maxHeight: 250,
         container: null,
         position: 'bottom', // 'bottom' or 'top'
+
+        styler: function() {return false;},
 
         onOpen: function() {return false;},
         onClose: function() {return false;},
