@@ -119,5 +119,15 @@ $(function() {
         $('#e18').find('select').multipleSelect({
             position: 'top'
         });
+        $('#e20').find('select').multipleSelect({
+            styler: function(value) {
+                if (value == '1') {
+                    return 'background-color: #ffee00; color: #ff0000;';
+                }
+                if (value == '6') {
+                    return 'background-color: #000; color: #fff;';
+                }
+            }
+        });
     });
 }); 

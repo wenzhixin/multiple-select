@@ -627,6 +627,53 @@ Set the select dropdown in top position.
 </body>
 ```
 
+### The Styler
+
+Custom the item style.
+
+<p id="e20">
+	<select class="w300" multiple="multiple">
+	    <option value="1">January</option>
+		<option value="2">February</option>
+	    <option value="3">March</option>
+	    <option value="4">April</option>
+	    <option value="5">May</option>
+	    <option value="6">June</option>
+	    <option value="7">July</option>
+	    <option value="8">August</option>
+	    <option value="9">September</option>
+	    <option value="10">October</option>
+	    <option value="11">November</option>
+	    <option value="12">December</option>
+	</select>
+</p>
+
+``` html
+<head>
+	<link href="multiple-select.css" rel="stylesheet"/>
+</head>
+<body>
+	<select multiple="multiple">
+	    <option value="1">January</option>
+	    ...
+	    <option value="12">December</option>
+	</select>
+	<script src="jquery.multiple.select.js"></script>
+	<script>
+		$('select').multipleSelect({
+		    styler: function(value) {
+		        if (value == '1') {
+                    return 'background-color: #ffee00; color: #ff0000;';
+                }
+                if (value == '6') {
+                    return 'background-color: #000; color: #fff;';
+                }
+		    }
+		});
+	</script>
+</body>
+```
+
 ### SetSelects/GetSelects
 
 <p>
@@ -1072,6 +1119,21 @@ Type: integer
 Define the maximum height property of the dropdown list.
 
 By default this option is set to ```250```.
+
+#### styler
+
+Type: function
+
+The item styler function, return style string to custom the item style such as ```background: red```.
+The function take one parameter: value.
+
+```javascript
+styler: function(value) {
+    if (value == '1') {
+        return 'background-color: #ffee00; color: red;';
+    }
+}
+```
 
 ### Events
 
