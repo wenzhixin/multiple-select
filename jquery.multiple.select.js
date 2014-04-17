@@ -11,6 +11,7 @@
 
     function MultipleSelect($el, options) {
         var that = this,
+            name = $el.attr('name') || options.name || '',
             elWidth = $el.width();
 
         this.$el = $el.hide();
@@ -44,6 +45,10 @@
             }
         });
 
+        this.selectAllName = 'name="selectAll' + name + '"';
+        this.selectGroupName = 'name="selectGroup' + name + '"';
+        this.selectItemName = 'name="selectItem' + name + '"';
+
         if (this.options.isOpen) {
             this.open();
         }
@@ -67,7 +72,7 @@
                 html.push(
                     '<li>',
                         '<label>',
-                            '<input type="checkbox" name="selectAll" /> ',
+                            '<input type="checkbox" ' + this.selectAllName + ' /> ',
                             '[' + this.options.selectAllText + ']',
                         '</label>',
                     '</li>'
@@ -83,10 +88,10 @@
             this.$drop.find('.multiple').css('width', this.options.multipleWidth + 'px');
 
             this.$searchInput = this.$drop.find('.ms-search input');
-            this.$selectAll = this.$drop.find('input[name="selectAll"]');
-            this.$selectGroups = this.$drop.find('input[name="selectGroup"]');
-            this.$selectItems = this.$drop.find('input[name="selectItem"]:enabled');
-            this.$disableItems = this.$drop.find('input[name="selectItem"]:disabled');
+            this.$selectAll = this.$drop.find('input[' + this.selectAllName + ']');
+            this.$selectGroups = this.$drop.find('input[' + this.selectGroupName + ']');
+            this.$selectItems = this.$drop.find('input[' + this.selectItemName + ']:enabled');
+            this.$disableItems = this.$drop.find('input[' + this.selectItemName + ']:disabled');
             this.$noResults = this.$drop.find('.ms-no-results');
             this.events();
             this.update();
@@ -110,7 +115,7 @@
                 html.push(
                     '<li' + (multiple ? ' class="multiple"' : '') + style + '>',
                         '<label' + (disabled ? ' class="disabled"' : '') + '>',
-                            '<input type="' + type + '" name="selectItem" value="' + value + '"' +
+                            '<input type="' + type + '" ' + this.selectItemName + ' value="' + value + '"' +
                                 (selected ? ' checked="checked"' : '') +
                                 (disabled ? ' disabled="disabled"' : '') +
                                 (group ? ' data-group="' + group + '"' : '') +
@@ -127,7 +132,8 @@
                 html.push(
                     '<li class="group">',
                         '<label class="optgroup' + (disabled ? ' disabled' : '') + '" data-group="' + _group + '">',
-                            '<input type="checkbox" name="selectGroup"' + (disabled ? ' disabled="disabled"' : '') + ' /> ',
+                            '<input type="checkbox" ' + this.selectGroupName +
+                                (disabled ? ' disabled="disabled"' : '') + ' /> ',
                             label,
                         '</label>',
                     '</li>');
@@ -268,7 +274,7 @@
             var that = this,
                 texts = [],
                 values = [];
-            this.$drop.find('input[name="selectItem"]:checked').each(function() {
+            this.$drop.find('input[' + this.selectItemName + ']:checked').each(function() {
                 texts.push($(this).parent().text());
                 values.push($(this).val());
             });
@@ -279,7 +285,7 @@
                     var html = [],
                         text = $.trim($(this).parent().text()),
                         group = $(this).parent().data('group'),
-                        $children = that.$drop.find('[name="selectItem"][data-group="' + group + '"]'),
+                        $children = that.$drop.find('[' + that.selectItemName + '][data-group="' + group + '"]'),
                         $selected = $children.filter(':checked');
 
                     if ($selected.length === 0) {
@@ -422,13 +428,14 @@
     };
 
     $.fn.multipleSelect.defaults = {
+        name: '',
         isOpen: false,
         placeholder: '',
         selectAll: true,
         selectAllText: 'Select all',
-        allSelected: 'All selected', // false or string
-        minumimCountSelected: 3, // int - 'countSelectedText' will be shown only if more than X items where selected
-        countSelected: '# of % selected', // false or string - '#' is replaced with the count of selected items, '%' is replaces with total items
+        allSelected: 'All selected',
+        minumimCountSelected: 3,
+        countSelected: '# of % selected',
         multiple: false,
         multipleWidth: 80,
         single: false,
@@ -436,7 +443,7 @@
         width: undefined,
         maxHeight: 250,
         container: null,
-        position: 'bottom', // 'bottom' or 'top'
+        position: 'bottom',
 
         styler: function() {return false;},
 
