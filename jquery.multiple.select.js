@@ -407,7 +407,8 @@
         this.each(function() {
             var $this = $(this),
                 data = $this.data('multipleSelect'),
-                options = $.extend({}, $.fn.multipleSelect.defaults, typeof option === 'object' && option);
+                options = $.extend({}, $.fn.multipleSelect.defaults,
+                    $this.data(), typeof option === 'object' && option);
 
             if (!data) {
                 data = new MultipleSelect($this, options);
