@@ -257,6 +257,9 @@
             var $items = this.$selectItems.filter(':visible');
             this.$selectAll.prop('checked', $items.length &&
                 $items.length === $items.filter(':checked').length);
+            if (this.$selectAll.prop('checked')) {
+                this.options.onCheckAll();
+            }
         },
 
         updateOptGroupSelect: function() {
