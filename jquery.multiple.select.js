@@ -48,10 +48,6 @@
         this.selectAllName = 'name="selectAll' + name + '"';
         this.selectGroupName = 'name="selectGroup' + name + '"';
         this.selectItemName = 'name="selectItem' + name + '"';
-
-        if (this.options.isOpen) {
-            this.open();
-        }
     }
 
     MultipleSelect.prototype = {
@@ -95,6 +91,10 @@
             this.$noResults = this.$drop.find('.ms-no-results');
             this.events();
             this.update();
+
+            if (this.options.isOpen) {
+                this.open();
+            }
         },
 
         optionToHtml: function(i, elm, group, groupDisabled) {
