@@ -129,5 +129,9 @@ $(function() {
                 }
             }
         });
+        $('#e21').find('select').multipleSelect({
+            isOpen: true,
+            keepOpen: true
+        });
     });
 }); 

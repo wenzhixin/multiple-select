@@ -4,7 +4,7 @@ Multiple select is a jQuery plugin to select multiple elements with checkboxes :
 
 **Multiple Selected is licensed under the The MIT License. Completely free, you can arbitrarily use and modify this plugin. If you like this plugin, you can give me a <a href="https://github.com/wenzhixin/multiple-select/">star</a>, and I will do better, thanks.**
 
-*Current version: 1.0.9*
+*Current version: 1.1.0*
 
 ## Requirements
 
@@ -629,6 +629,45 @@ Set the select dropdown in top position.
 </body>
 ```
 
+### The Keep Open
+
+<p id="e21">
+	<select class="w300" multiple="multiple">
+	    <option value="1">January</option>
+		<option value="2">February</option>
+	    <option value="3">March</option>
+	    <option value="4">April</option>
+	    <option value="5">May</option>
+	    <option value="6">June</option>
+	    <option value="7">July</option>
+	    <option value="8">August</option>
+	    <option value="9">September</option>
+	    <option value="10">October</option>
+	    <option value="11">November</option>
+	    <option value="12">December</option>
+	</select>
+</p>
+
+``` html
+<head>
+	<link href="multiple-select.css" rel="stylesheet"/>
+</head>
+<body>
+	<select multiple="multiple">
+	    <option value="1">January</option>
+	    ...
+	    <option value="12">December</option>
+	</select>
+	<script src="jquery.multiple.select.js"></script>
+	<script>
+		$('select').multipleSelect({
+		    isOpen: true,
+		    keeyOpen: true
+		});
+	</script>
+</body>
+```
+
 ### The Styler
 
 Custom the item style.
@@ -1121,6 +1160,14 @@ Type: integer
 Define the maximum height property of the dropdown list.
 
 By default this option is set to ```250```.
+
+#### keepOpen
+
+Type: boolean
+
+Keep the select dropdown always open.
+
+By default this option is set to ```false```.
 
 #### styler
 
