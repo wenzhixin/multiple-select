@@ -33,17 +33,19 @@
             width: (options.width || elWidth) + 'px'
         });
 
-        $('body').click(function(e) {
-            if ($(e.target)[0] === that.$choice[0] ||
+        if (!this.options.keepOpen) {
+            $('body').click(function(e) {
+                if ($(e.target)[0] === that.$choice[0] ||
                     $(e.target).parents('.ms-choice')[0] === that.$choice[0]) {
-                return;
-            }
-            if (($(e.target)[0] === that.$drop[0] ||
+                    return;
+                }
+                if (($(e.target)[0] === that.$drop[0] ||
                     $(e.target).parents('.ms-drop')[0] !== that.$drop[0]) &&
                     that.options.isOpen) {
-                that.close();
-            }
-        });
+                    that.close();
+                }
+            });
+        }
 
         this.selectAllName = 'name="selectAll' + name + '"';
         this.selectGroupName = 'name="selectGroup' + name + '"';
@@ -448,6 +450,7 @@
         maxHeight: 250,
         container: null,
         position: 'bottom',
+        keepOpen: false,
 
         styler: function() {return false;},
 
