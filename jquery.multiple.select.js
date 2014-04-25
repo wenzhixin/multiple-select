@@ -201,6 +201,10 @@
                     value: $(this).val(),
                     checked: $(this).prop('checked')
                 });
+
+                if (that.options.single && that.options.isOpen && !that.options.keepOpen) {
+                    that.close();
+                }
             });
         },
 
