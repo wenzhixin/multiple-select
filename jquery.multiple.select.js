@@ -215,6 +215,11 @@
             this.options.isOpen = true;
             this.$choice.find('>div').addClass('open');
             this.$drop.show();
+
+            // fix filter bug: no results show
+            this.$selectAll.parent().show();
+            this.$noResults.hide();
+
             if (this.options.container) {
                 var offset = this.$drop.offset();
                 this.$drop.appendTo($(this.options.container));
