@@ -10,6 +10,7 @@
 
 .ms-choice {
     display: block;
+    width: 100%;
     height: 26px;
     padding: 0;
     overflow: hidden;
@@ -63,6 +64,7 @@
 }
 
 .ms-drop {
+    width: 100%;
     overflow: hidden;
     display: none;
     margin-top: -1px;
@@ -168,6 +170,10 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.ms-drop ul > li label {
+    font-weight: normal;
 }
 
 .ms-drop ul > li label.optgroup {

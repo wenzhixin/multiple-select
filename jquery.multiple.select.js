@@ -12,7 +12,7 @@
     function MultipleSelect($el, options) {
         var that = this,
             name = $el.attr('name') || options.name || '',
-            elWidth = $el.width();
+            elWidth = $el.outerWidth();
 
         this.$el = $el.hide();
         this.options = options;
@@ -28,10 +28,7 @@
         if (this.$el.prop('disabled')) {
             this.$choice.addClass('disabled');
         }
-        this.$choice.css('width', elWidth + 'px');
-        this.$drop.css({
-            width: (options.width || elWidth) + 'px'
-        });
+        this.$parent.css('width', options.width || elWidth);
 
         if (!this.options.keepOpen) {
             $('body').click(function(e) {
@@ -241,7 +238,7 @@
                 this.$drop.css({
                     'top': 'auto',
                     'left': 'auto'
-                })
+                });
             }
             this.options.onClose();
         },
