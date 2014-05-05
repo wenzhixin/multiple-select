@@ -21,7 +21,8 @@ $(function() {
         });
         $('#e8').find('select').multipleSelect({
             multiple: true,
-            multipleWidth: 55
+            multipleWidth: 55,
+            width: '100%'
         });
         $('#e9').find('select').multipleSelect({
             selectAll: false

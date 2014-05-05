@@ -404,7 +404,8 @@ Multiple Select supports to show multiple items in single row with optgroups.
     <script>
         $("select").multipleSelect({
         	multiple: true,
-            multipleWidth: 55
+            multipleWidth: 55,
+            width: '100%'
         });
     </script>
 </body>
@@ -1147,9 +1148,9 @@ By default this option is set to ```false```.
 
 #### width
 
-Type: integer
+Type: integer/string
 
-Define the width property of the dropdown list.
+Define the width property of the dropdown list, support a percentage setting.
 
 By default this option is set to ```undefined```. Which is the same as the select input field.
 
