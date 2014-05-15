@@ -107,7 +107,7 @@
             if ($elm.is('option')) {
                 var value = $elm.val(),
                     text = $elm.text(),
-                    selected = $elm.prop('selected'),
+                    selected = (that.$el.attr('multiple') != undefined) ? $elm.prop('selected') : ($elm.attr('selected') == 'selected'),
                     style = this.options.styler(value) ? ' style="' + this.options.styler(value) + '"' : '';
 
                 disabled = groupDisabled || $elm.prop('disabled');
