@@ -76,7 +76,7 @@
             $.each(this.$el.children(), function(i, elm) {
                 html.push(that.optionToHtml(i, elm));
             });
-            html.push('<li class="ms-no-results">No matches found</li>');
+            html.push('<li class="ms-no-results">'+this.options.noMatchesFound+'</li>');
             html.push('</ul>');
             this.$drop.html(html.join(''));
             this.$drop.find('ul').css('max-height', this.options.maxHeight + 'px');
@@ -448,6 +448,7 @@
         allSelected: 'All selected',
         minumimCountSelected: 3,
         countSelected: '# of % selected',
+        noMatchesFound: 'No matches found',
         multiple: false,
         multipleWidth: 80,
         single: false,
