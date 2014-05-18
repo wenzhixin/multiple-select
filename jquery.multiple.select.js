@@ -244,7 +244,7 @@
         },
 
         update: function() {
-            var selects = this.getSelects('text'),
+            var selects = this.getSelects(),
                 $span = this.$choice.find('>span');
             if (selects.length === this.$selectItems.length + this.$disableItems.length && this.options.allSelected) {
                 $span.removeClass('placeholder').html(this.options.allSelected);
@@ -253,7 +253,7 @@
                     .replace('#', selects.length)
                     .replace('%', this.$selectItems.length + this.$disableItems.length));
             } else if (selects.length) {
-                $span.removeClass('placeholder').html(selects.join(', '));
+                $span.removeClass('placeholder').html(this.getSelects('text').join(', '));
             } else {
                 $span.addClass('placeholder').html(this.options.placeholder);
             }
