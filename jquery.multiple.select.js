@@ -111,18 +111,28 @@
                     style = this.options.styler(value) ? ' style="' + this.options.styler(value) + '"' : '';
 
                 disabled = groupDisabled || $elm.prop('disabled');
-                html.push(
-                    '<li' + (multiple ? ' class="multiple"' : '') + style + '>',
-                        '<label' + (disabled ? ' class="disabled"' : '') + '>',
-                            '<input type="' + type + '" ' + this.selectItemName + ' value="' + value + '"' +
-                                (selected ? ' checked="checked"' : '') +
-                                (disabled ? ' disabled="disabled"' : '') +
-                                (group ? ' data-group="' + group + '"' : '') +
-                                '/> ',
-                            text,
-                        '</label>',
-                    '</li>'
-                );
+                if ((this.options.blockSeperator>"") && (this.options.blockSeperator==$elm.val())) {
+	                html.push(
+		                    '<li' + (multiple ? ' class="multiple"' : '') + style + '>',
+		                        '<label class="' + this.options.blockSeperator + (disabled ? 'disabled' : '') + '">',
+		                            text,
+		                        '</label>',
+		                    '</li>'
+	                );                	
+                } else {
+	                html.push(
+		                    '<li' + (multiple ? ' class="multiple"' : '') + style + '>',
+		                        '<label' + (disabled ? ' class="disabled"' : '') + '>',
+		                            '<input type="' + type + '" ' + this.selectItemName + ' value="' + value + '"' +
+		                                (selected ? ' checked="checked"' : '') +
+		                                (disabled ? ' disabled="disabled"' : '') +
+		                                (group ? ' data-group="' + group + '"' : '') +
+		                                '/> ',
+		                            text,
+		                        '</label>',
+		                    '</li>'
+	                );
+                }
             } else if (!group && $elm.is('optgroup')) {
                 var _group = 'group_' + i,
                     label = $elm.attr('label');
@@ -458,6 +468,7 @@
         container: null,
         position: 'bottom',
         keepOpen: false,
+        blockSeperator: '',
 
         styler: function() {return false;},
 
