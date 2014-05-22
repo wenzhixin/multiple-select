@@ -111,10 +111,10 @@
                     style = this.options.styler(value) ? ' style="' + this.options.styler(value) + '"' : '';
 
                 disabled = groupDisabled || $elm.prop('disabled');
-                if ((this.options.blockSeperator>"") && (this.options.blockSeperator==$elm.val())) {
+                if ((this.options.blockSeparator>"") && (this.options.blockSeparator==$elm.val())) {
 	                html.push(
 		                    '<li' + (multiple ? ' class="multiple"' : '') + style + '>',
-		                        '<label class="' + this.options.blockSeperator + (disabled ? 'disabled' : '') + '">',
+		                        '<label class="' + this.options.blockSeparator + (disabled ? 'disabled' : '') + '">',
 		                            text,
 		                        '</label>',
 		                    '</li>'
@@ -468,7 +468,7 @@
         container: null,
         position: 'bottom',
         keepOpen: false,
-        blockSeperator: '',
+        blockSeparator: '',
 
         styler: function() {return false;},
 
