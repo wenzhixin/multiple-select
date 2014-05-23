@@ -79,6 +79,7 @@
             html.push('<li class="ms-no-results">' + this.options.noMatchesFound + '</li>');
             html.push('</ul>');
             this.$drop.html(html.join(''));
+
             this.$drop.find('ul').css('max-height', this.options.maxHeight + 'px');
             this.$drop.find('.multiple').css('width', this.options.multipleWidth + 'px');
 
@@ -227,6 +228,12 @@
             this.$selectAll.parent().show();
             this.$noResults.hide();
 
+            // Fix #77: 'All selected' when no options
+            if (this.$el.children().length === 0) {
+                this.$selectAll.parent().hide();
+                this.$noResults.show();
+            }
+
             if (this.options.container) {
                 var offset = this.$drop.offset();
                 this.$drop.appendTo($(this.options.container));
@@ -256,7 +263,8 @@
         update: function() {
             var selects = this.getSelects(),
                 $span = this.$choice.find('>span');
-            if (selects.length === this.$selectItems.length + this.$disableItems.length && this.options.allSelected) {
+
+            if (selects.length && selects.length === this.$selectItems.length + this.$disableItems.length && this.options.allSelected) {
                 $span.removeClass('placeholder').html(this.options.allSelected);
             } else if (selects.length > this.options.minumimCountSelected && this.options.countSelected) {
                 $span.removeClass('placeholder').html(this.options.countSelected
