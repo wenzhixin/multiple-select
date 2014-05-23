@@ -264,16 +264,18 @@
             var selects = this.getSelects(),
                 $span = this.$choice.find('>span');
 
-            if (selects.length && selects.length === this.$selectItems.length + this.$disableItems.length && this.options.allSelected) {
+            if (selects.length === 0) {
+                $span.addClass('placeholder').html(this.options.placeholder);
+            } else if (this.options.countSelected && selects.length < this.options.minumimCountSelected) {
+                $span.removeClass('placeholder').html(this.getSelects('text').join(', '));
+            } else if (this.options.allSelected && selects.length === this.$selectItems.length + this.$disableItems.length) {
                 $span.removeClass('placeholder').html(this.options.allSelected);
-            } else if (selects.length > this.options.minumimCountSelected && this.options.countSelected) {
+            } else if (this.options.countSelected && selects.length > this.options.minumimCountSelected) {
                 $span.removeClass('placeholder').html(this.options.countSelected
                     .replace('#', selects.length)
                     .replace('%', this.$selectItems.length + this.$disableItems.length));
-            } else if (selects.length) {
-                $span.removeClass('placeholder').html(this.getSelects('text').join(', '));
             } else {
-                $span.addClass('placeholder').html(this.options.placeholder);
+                $span.removeClass('placeholder').html(this.getSelects('text').join(', '));
             }
             // set selects to select
             this.$el.val(this.getSelects());
