@@ -36,7 +36,9 @@
 <script src="../jquery.multiple.select.js"></script>
 <script>
     $(function() {
-        $('#ms').multipleSelect();
+        $('#ms').change(function() {
+            console.log($(this).val());
+        }).multipleSelect();
     });
 </script>
 </body>

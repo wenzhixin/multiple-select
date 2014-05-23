@@ -90,7 +90,7 @@
             this.$disableItems = this.$drop.find('input[' + this.selectItemName + ']:disabled');
             this.$noResults = this.$drop.find('.ms-no-results');
             this.events();
-            this.update();
+            this.update(true);
 
             if (this.options.isOpen) {
                 this.open();
@@ -260,7 +260,7 @@
             this.options.onClose();
         },
 
-        update: function() {
+        update: function(isInit) {
             var selects = this.getSelects(),
                 $span = this.$choice.find('>span');
 
@@ -279,6 +279,11 @@
             }
             // set selects to select
             this.$el.val(this.getSelects());
+
+            // trigger <select> change event
+            if (!isInit) {
+                this.$el.trigger('change');
+            }
         },
 
         updateSelectAll: function() {
