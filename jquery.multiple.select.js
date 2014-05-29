@@ -246,6 +246,7 @@
         update: function() {
             var selects = this.getSelects(),
                 $span = this.$choice.find('>span');
+
             if (selects.length === this.$selectItems.length + this.$disableItems.length && this.options.allSelected) {
                 $span.removeClass('placeholder').html(this.options.allSelected);
             } else if (selects.length > this.options.minumimCountSelected && this.options.countSelected) {
@@ -253,7 +254,7 @@
                     .replace('#', selects.length)
                     .replace('%', this.$selectItems.length + this.$disableItems.length));
             } else if (selects.length) {
-                $span.removeClass('placeholder').html(this.getSelects('text').join(', '));
+                $span.removeClass('placeholder').html( ( this.options.displayValues ? selects : this.getSelects('text') ).join(this.options.delimiter));
             } else {
                 $span.addClass('placeholder').html(this.options.placeholder);
             }
@@ -458,6 +459,8 @@
         container: null,
         position: 'bottom',
         keepOpen: false,
+        displayValues: false,
+        delimiter: ', ',
 
         styler: function() {return false;},
 
