@@ -171,7 +171,11 @@
                         break;
                 }
             });
-            this.$searchInput.off('keyup').on('keyup', function(e) {
+            this.$searchInput.off('keydown').on('keydown', function (e) {
+                if (e.keyCode === 9 && e.shiftKey) { // Ensure shift-tab causes lost focus from filter as with clicking away
+                    that.close();
+                }
+            }).off('keyup').on('keyup', function(e) {
                 if (that.options.filterAcceptOnEnter &&
                     (e.which === 13 || e.which == 32) && // enter or space
                     that.$searchInput.val() // Avoid selecting/deselecting if no choices made
