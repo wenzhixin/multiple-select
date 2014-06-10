@@ -113,26 +113,26 @@
 
                 disabled = groupDisabled || $elm.prop('disabled');
                 if ((this.options.blockSeparator>"") && (this.options.blockSeparator==$elm.val())) {
-	                html.push(
-		                    '<li' + (multiple ? ' class="multiple"' : '') + style + '>',
-		                        '<label class="' + this.options.blockSeparator + (disabled ? 'disabled' : '') + '">',
-		                            text,
-		                        '</label>',
-		                    '</li>'
-	                );                	
+                    html.push(
+                            '<li' + (multiple ? ' class="multiple"' : '') + style + '>',
+                                '<label class="' + this.options.blockSeparator + (disabled ? 'disabled' : '') + '">',
+                                    text,
+                                '</label>',
+                            '</li>'
+                    );
                 } else {
-	                html.push(
-		                    '<li' + (multiple ? ' class="multiple"' : '') + style + '>',
-		                        '<label' + (disabled ? ' class="disabled"' : '') + '>',
-		                            '<input type="' + type + '" ' + this.selectItemName + ' value="' + value + '"' +
-		                                (selected ? ' checked="checked"' : '') +
-		                                (disabled ? ' disabled="disabled"' : '') +
-		                                (group ? ' data-group="' + group + '"' : '') +
-		                                '/> ',
-		                            text,
-		                        '</label>',
-		                    '</li>'
-	                );
+                    html.push(
+                            '<li' + (multiple ? ' class="multiple"' : '') + style + '>',
+                                '<label' + (disabled ? ' class="disabled"' : '') + '>',
+                                    '<input type="' + type + '" ' + this.selectItemName + ' value="' + value + '"' +
+                                        (selected ? ' checked="checked"' : '') +
+                                        (disabled ? ' disabled="disabled"' : '') +
+                                        (group ? ' data-group="' + group + '"' : '') +
+                                        '/> ',
+                                    text,
+                                '</label>',
+                            '</li>'
+                    );
                 }
             } else if (!group && $elm.is('optgroup')) {
                 var _group = 'group_' + i,
