@@ -171,7 +171,16 @@
                         break;
                 }
             });
-            this.$searchInput.off('keyup').on('keyup', function() {
+            this.$searchInput.off('keyup').on('keyup', function(e) {
+                if (that.options.filterAcceptOnEnter &&
+                    (e.which === 13 || e.which == 32) && // enter or space
+                    that.$searchInput.val() // Avoid selecting/deselecting if no choices made
+                ) {
+                    that.$selectAll.click();
+                    that.close();
+                    that.focus();
+                    return;
+                }
                 that.filter();
             });
             this.$selectAll.off('click').on('click', function() {
