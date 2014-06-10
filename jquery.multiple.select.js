@@ -458,6 +458,9 @@
                 value = data[option](args[1]);
             } else {
                 data.init();
+                if (args[1]) {
+                    value = data[args[1]].apply(data, [].slice.call(args, 2));
+                }
             }
         });
 
