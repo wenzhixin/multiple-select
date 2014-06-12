@@ -62,10 +62,10 @@
                     '</div>'
                 );
             }
-            html.push('<ul>');
+            html.push('<ul' + (this.$el.attr('class') ? (' class="' + this.$el.attr('class') + '"') : '') + '>');
             if (this.options.selectAll && !this.options.single) {
                 html.push(
-                    '<li>',
+                    '<li class="ms-select-all">',
                         '<label>',
                             '<input type="checkbox" ' + this.selectAllName + ' /> ',
                             '[' + this.options.selectAllText + ']',
@@ -100,8 +100,10 @@
         optionToHtml: function(i, elm, group, groupDisabled) {
             var that = this,
                 $elm = $(elm),
+                classValue = $elm.attr('class'),
                 html = [],
                 multiple = this.options.multiple,
+                clss = (multiple || classValue) ? (' class="' + ((multiple ? 'multiple' : '') + (classValue ? ((multiple ? ' ' : '') + classValue) : '')) + '"') : '',
                 disabled,
                 type = this.options.single ? 'radio' : 'checkbox';
 
@@ -114,7 +116,7 @@
                 disabled = groupDisabled || $elm.prop('disabled');
                 if ((this.options.blockSeparator>"") && (this.options.blockSeparator==$elm.val())) {
                     html.push(
-                            '<li' + (multiple ? ' class="multiple"' : '') + style + '>',
+                            '<li' + clss + style + '>',
                                 '<label class="' + this.options.blockSeparator + (disabled ? 'disabled' : '') + '">',
                                     text,
                                 '</label>',
@@ -122,7 +124,7 @@
                     );                    
                 } else {
                     html.push(
-                            '<li' + (multiple ? ' class="multiple"' : '') + style + '>',
+                            '<li' + clss + style + '>',
                                 '<label' + (disabled ? ' class="disabled"' : '') + '>',
                                     '<input type="' + type + '" ' + this.selectItemName + ' value="' + value + '"' +
                                         (selected ? ' checked="checked"' : '') +
