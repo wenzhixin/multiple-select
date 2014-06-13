@@ -156,10 +156,24 @@
 
         events: function() {
             var that = this;
-            this.$choice.off('click').on('click', function(e) {
+            function toggleOpen (e) {
                 e.preventDefault();
                 that[that.options.isOpen ? 'close' : 'open']();
-            })
+            }
+            var label = this.$el.parent().closest('label')[0] || $('label[for=' + this.$el.attr('id') + ']')[0];
+            if (label) {
+                $(label).off('click').on('click', function (e) {
+                    if (e.target.nodeName.toLowerCase() !== 'label') {
+                        return;
+                    }
+                    toggleOpen(e);
+                    if (!that.options.filter || !that.options.isOpen) {
+                        that.focus();
+                    }
+                    e.stopPropagation(); // Causes lost focus otherwise
+                });
+            }
+            this.$choice.off('click').on('click', toggleOpen)
                 .off('focus').on('focus', this.options.onFocus)
                 .off('blur').on('blur', this.options.onBlur);
 
