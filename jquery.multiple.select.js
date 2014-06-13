@@ -16,8 +16,11 @@
 
         this.$el = $el.hide();
         this.options = options;
-
-        this.$parent = $('<div class="ms-parent"></div>');
+        this.$parent = $('<div' + $.map(['class', 'title'], function (att) {
+            var attValue = that.$el.attr(att) || '';
+            attValue = (att === 'class' ? ('ms-parent' + (attValue ? ' ' : '')) : '') + attValue;
+            return attValue ? (' ' + att + '="' + attValue + '"') : '';
+        }).join('') + '>');
         this.$choice = $('<button type="button" class="ms-choice"><span class="placeholder">' +
             options.placeholder + '</span><div></div></button>');
         this.$drop = $('<div class="ms-drop ' + options.position + '"></div>');
@@ -62,7 +65,7 @@
                     '</div>'
                 );
             }
-            html.push('<ul' + (this.$el.attr('class') ? (' class="' + this.$el.attr('class') + '"') : '') + '>');
+            html.push('<ul>');
             if (this.options.selectAll && !this.options.single) {
                 html.push(
                     '<li class="ms-select-all">',
@@ -100,10 +103,16 @@
         optionToHtml: function(i, elm, group, groupDisabled) {
             var that = this,
                 $elm = $(elm),
-                classValue = $elm.attr('class'),
                 html = [],
                 multiple = this.options.multiple,
-                clss = (multiple || classValue) ? (' class="' + ((multiple ? 'multiple' : '') + (classValue ? ((multiple ? ' ' : '') + classValue) : '')) + '"') : '',
+                optAttributesToCopy = ['class', 'title'],
+                clss = $.map(optAttributesToCopy, function (att, i) {
+                    var isMultiple = att === 'class' && multiple;
+                    var attValue = $elm.attr(att) || '';
+                    return (isMultiple || attValue) ?
+                        (' ' + att + '="' + (isMultiple ? ('multiple' + (attValue ? ' ' : '')) : '') + attValue + '"') :
+                        '';
+                }).join(''),
                 disabled,
                 type = this.options.single ? 'radio' : 'checkbox';
 
