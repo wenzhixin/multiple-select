@@ -163,7 +163,7 @@
             var label = this.$el.parent().closest('label')[0] || $('label[for=' + this.$el.attr('id') + ']')[0];
             if (label) {
                 $(label).off('click').on('click', function (e) {
-                    if (e.target.nodeName.toLowerCase() !== 'label') {
+                    if (e.target.nodeName.toLowerCase() !== 'label' || e.target !== this) {
                         return;
                     }
                     toggleOpen(e);
