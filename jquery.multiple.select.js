@@ -142,7 +142,7 @@
                 html.push(
                     '<li class="group">',
                         '<label class="optgroup' + (disabled ? ' disabled' : '') + '" data-group="' + _group + '">',
-                            (this.options.hideOptgroups ? '' : '<input type="checkbox" ' + this.selectGroupName +
+                            (this.options.hideOptgroupCheckboxes ? '' : '<input type="checkbox" ' + this.selectGroupName +
                                 (disabled ? ' disabled="disabled"' : '') + ' /> '),
                             label,
                         '</label>',
