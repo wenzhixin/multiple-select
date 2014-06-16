@@ -142,8 +142,8 @@
                 html.push(
                     '<li class="group">',
                         '<label class="optgroup' + (disabled ? ' disabled' : '') + '" data-group="' + _group + '">',
-                            '<input type="checkbox" ' + this.selectGroupName +
-                                (disabled ? ' disabled="disabled"' : '') + ' /> ',
+                            (this.options.hideOptgroups ? '' : '<input type="checkbox" ' + this.selectGroupName +
+                                (disabled ? ' disabled="disabled"' : '') + ' /> '),
                             label,
                         '</label>',
                     '</li>');
