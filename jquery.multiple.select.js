@@ -16,8 +16,11 @@
 
         this.$el = $el.hide();
         this.options = options;
-
-        this.$parent = $('<div class="ms-parent"></div>');
+        this.$parent = $('<div' + $.map(['class', 'title'], function (att) {
+            var attValue = that.$el.attr(att) || '';
+            attValue = (att === 'class' ? ('ms-parent' + (attValue ? ' ' : '')) : '') + attValue;
+            return attValue ? (' ' + att + '="' + attValue + '"') : '';
+        }).join('') + '>');
         this.$choice = $('<button type="button" class="ms-choice"><span class="placeholder">' +
             options.placeholder + '</span><div></div></button>');
         this.$drop = $('<div class="ms-drop ' + options.position + '"></div>');
@@ -65,7 +68,7 @@
             html.push('<ul>');
             if (this.options.selectAll && !this.options.single) {
                 html.push(
-                    '<li>',
+                    '<li class="ms-select-all">',
                         '<label>',
                             '<input type="checkbox" ' + this.selectAllName + ' /> ',
                             '[' + this.options.selectAllText + ']',
@@ -102,6 +105,14 @@
                 $elm = $(elm),
                 html = [],
                 multiple = this.options.multiple,
+                optAttributesToCopy = ['class', 'title'],
+                clss = $.map(optAttributesToCopy, function (att, i) {
+                    var isMultiple = att === 'class' && multiple;
+                    var attValue = $elm.attr(att) || '';
+                    return (isMultiple || attValue) ?
+                        (' ' + att + '="' + (isMultiple ? ('multiple' + (attValue ? ' ' : '')) : '') + attValue + '"') :
+                        '';
+                }).join(''),
                 disabled,
                 type = this.options.single ? 'radio' : 'checkbox';
 
@@ -114,7 +125,7 @@
                 disabled = groupDisabled || $elm.prop('disabled');
                 if ((this.options.blockSeparator>"") && (this.options.blockSeparator==$elm.val())) {
                     html.push(
-                            '<li' + (multiple ? ' class="multiple"' : '') + style + '>',
+                            '<li' + clss + style + '>',
                                 '<label class="' + this.options.blockSeparator + (disabled ? 'disabled' : '') + '">',
                                     text,
                                 '</label>',
@@ -122,7 +133,7 @@
                     );                    
                 } else {
                     html.push(
-                            '<li' + (multiple ? ' class="multiple"' : '') + style + '>',
+                            '<li' + clss + style + '>',
                                 '<label' + (disabled ? ' class="disabled"' : '') + '>',
                                     '<input type="' + type + '" ' + this.selectItemName + ' value="' + value + '"' +
                                         (selected ? ' checked="checked"' : '') +
