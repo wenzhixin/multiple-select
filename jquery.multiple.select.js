@@ -281,15 +281,20 @@
             if (selects.length === 0) {
                 $span.addClass('placeholder').html(this.options.placeholder);
             } else if (this.options.countSelected && selects.length < this.options.minumimCountSelected) {
-                $span.removeClass('placeholder').html(this.getSelects('text').join(', '));
-            } else if (this.options.allSelected && selects.length === this.$selectItems.length + this.$disableItems.length) {
+                $span.removeClass('placeholder').html(
+                    (this.options.displayValues ? selects : this.getSelects('text'))
+                    .join(this.options.delimiter));
+            } else if (this.options.allSelected &&
+                    selects.length === this.$selectItems.length + this.$disableItems.length) {
                 $span.removeClass('placeholder').html(this.options.allSelected);
             } else if (this.options.countSelected && selects.length > this.options.minumimCountSelected) {
                 $span.removeClass('placeholder').html(this.options.countSelected
                     .replace('#', selects.length)
                     .replace('%', this.$selectItems.length + this.$disableItems.length));
             } else {
-                $span.removeClass('placeholder').html(this.getSelects('text').join(', '));
+                $span.removeClass('placeholder').html(
+                    (this.options.displayValues ? selects : this.getSelects('text'))
+                    .join(this.options.delimiter));
             }
             // set selects to select
             this.$el.val(this.getSelects());
@@ -501,6 +506,8 @@
         position: 'bottom',
         keepOpen: false,
         blockSeparator: '',
+        displayValues: false,
+        delimiter: ', ',
 
         styler: function() {return false;},
 
