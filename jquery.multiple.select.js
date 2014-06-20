@@ -16,8 +16,11 @@
 
         this.$el = $el.hide();
         this.options = options;
-
-        this.$parent = $('<div class="ms-parent"></div>');
+        this.$parent = $('<div' + $.map(['class', 'title'], function (att) {
+            var attValue = that.$el.attr(att) || '';
+            attValue = (att === 'class' ? ('ms-parent' + (attValue ? ' ' : '')) : '') + attValue;
+            return attValue ? (' ' + att + '="' + attValue + '"') : '';
+        }).join('') + '>');
         this.$choice = $('<button type="button" class="ms-choice"><span class="placeholder">' +
             options.placeholder + '</span><div></div></button>');
         this.$drop = $('<div class="ms-drop ' + options.position + '"></div>');
@@ -65,7 +68,7 @@
             html.push('<ul>');
             if (this.options.selectAll && !this.options.single) {
                 html.push(
-                    '<li>',
+                    '<li class="ms-select-all">',
                         '<label>',
                             '<input type="checkbox" ' + this.selectAllName + ' /> ',
                             '[' + this.options.selectAllText + ']',
@@ -102,6 +105,14 @@
                 $elm = $(elm),
                 html = [],
                 multiple = this.options.multiple,
+                optAttributesToCopy = ['class', 'title'],
+                clss = $.map(optAttributesToCopy, function (att, i) {
+                    var isMultiple = att === 'class' && multiple;
+                    var attValue = $elm.attr(att) || '';
+                    return (isMultiple || attValue) ?
+                        (' ' + att + '="' + (isMultiple ? ('multiple' + (attValue ? ' ' : '')) : '') + attValue + '"') :
+                        '';
+                }).join(''),
                 disabled,
                 type = this.options.single ? 'radio' : 'checkbox';
 
@@ -114,7 +125,7 @@
                 disabled = groupDisabled || $elm.prop('disabled');
                 if ((this.options.blockSeparator>"") && (this.options.blockSeparator==$elm.val())) {
                     html.push(
-                            '<li' + (multiple ? ' class="multiple"' : '') + style + '>',
+                            '<li' + clss + style + '>',
                                 '<label class="' + this.options.blockSeparator + (disabled ? 'disabled' : '') + '">',
                                     text,
                                 '</label>',
@@ -122,7 +133,7 @@
                     );                    
                 } else {
                     html.push(
-                            '<li' + (multiple ? ' class="multiple"' : '') + style + '>',
+                            '<li' + clss + style + '>',
                                 '<label' + (disabled ? ' class="disabled"' : '') + '>',
                                     '<input type="' + type + '" ' + this.selectItemName + ' value="' + value + '"' +
                                         (selected ? ' checked="checked"' : '') +
@@ -142,8 +153,8 @@
                 html.push(
                     '<li class="group">',
                         '<label class="optgroup' + (disabled ? ' disabled' : '') + '" data-group="' + _group + '">',
-                            '<input type="checkbox" ' + this.selectGroupName +
-                                (disabled ? ' disabled="disabled"' : '') + ' /> ',
+                            (this.options.hideOptgroupCheckboxes ? '' : '<input type="checkbox" ' + this.selectGroupName +
+                                (disabled ? ' disabled="disabled"' : '') + ' /> '),
                             label,
                         '</label>',
                     '</li>');
@@ -156,10 +167,24 @@
 
         events: function() {
             var that = this;
-            this.$choice.off('click').on('click', function(e) {
+            function toggleOpen (e) {
                 e.preventDefault();
                 that[that.options.isOpen ? 'close' : 'open']();
-            })
+            }
+            var label = this.$el.parent().closest('label')[0] || $('label[for=' + this.$el.attr('id') + ']')[0];
+            if (label) {
+                $(label).off('click').on('click', function (e) {
+                    if (e.target.nodeName.toLowerCase() !== 'label' || e.target !== this) {
+                        return;
+                    }
+                    toggleOpen(e);
+                    if (!that.options.filter || !that.options.isOpen) {
+                        that.focus();
+                    }
+                    e.stopPropagation(); // Causes lost focus otherwise
+                });
+            }
+            this.$choice.off('click').on('click', toggleOpen)
                 .off('focus').on('focus', this.options.onFocus)
                 .off('blur').on('blur', this.options.onBlur);
 
@@ -281,15 +306,20 @@
             if (selects.length === 0) {
                 $span.addClass('placeholder').html(this.options.placeholder);
             } else if (this.options.countSelected && selects.length < this.options.minumimCountSelected) {
-                $span.removeClass('placeholder').html(this.getSelects('text').join(', '));
-            } else if (this.options.allSelected && selects.length === this.$selectItems.length + this.$disableItems.length) {
+                $span.removeClass('placeholder').html(
+                    (this.options.displayValues ? selects : this.getSelects('text'))
+                    .join(this.options.delimiter));
+            } else if (this.options.allSelected &&
+                    selects.length === this.$selectItems.length + this.$disableItems.length) {
                 $span.removeClass('placeholder').html(this.options.allSelected);
             } else if (this.options.countSelected && selects.length > this.options.minumimCountSelected) {
                 $span.removeClass('placeholder').html(this.options.countSelected
                     .replace('#', selects.length)
                     .replace('%', this.$selectItems.length + this.$disableItems.length));
             } else {
-                $span.removeClass('placeholder').html(this.getSelects('text').join(', '));
+                $span.removeClass('placeholder').html(
+                    (this.options.displayValues ? selects : this.getSelects('text'))
+                    .join(this.options.delimiter));
             }
             // set selects to select
             this.$el.val(this.getSelects());
@@ -501,6 +531,8 @@
         position: 'bottom',
         keepOpen: false,
         blockSeparator: '',
+        displayValues: false,
+        delimiter: ', ',
 
         styler: function() {return false;},
 
