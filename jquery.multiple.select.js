@@ -118,7 +118,7 @@
 
             if ($elm.is('option')) {
                 var value = $elm.val(),
-                    text = $elm.text(),
+                    text = that.options.textTemplate($elm.text()),
                     selected = (that.$el.attr('multiple') != undefined) ? $elm.prop('selected') : ($elm.attr('selected') == 'selected'),
                     style = this.options.styler(value) ? ' style="' + this.options.styler(value) + '"' : '';
 
@@ -535,7 +535,8 @@
         delimiter: ', ',
 
         styler: function() {return false;},
-
+		textTemplate: function (text){return text;},
+		
         onOpen: function() {return false;},
         onClose: function() {return false;},
         onCheckAll: function() {return false;},
