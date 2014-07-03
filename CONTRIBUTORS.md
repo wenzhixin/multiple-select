@@ -16,7 +16,7 @@ Multiple select is due to the excellent work of the following contributors:
 <td><a href="https://github.com/wenzhixin">wenzhixin</a></td>
 <td>Guangzhou, China</td>
 <td><a href="http://wenzhixin.net.cn">http://wenzhixin.net.cn</a></td>
-<td>125</td>
+<td>126</td>
 <tr>
 <tr>
 <td><img src="https://avatars.githubusercontent.com/u/20234?" width="32" height="32"> Brett Zamir</td>
@@ -28,7 +28,7 @@ Multiple select is due to the excellent work of the following contributors:
 <tr>
 <td><img src="https://avatars.githubusercontent.com/u/1726913?" width="32" height="32"> Sergio</td>
 <td><a href="https://github.com/sergiomcalzada">sergiomcalzada</a></td>
-<td>null</td>
+<td></td>
 <td></td>
 <td>2</td>
 <tr>
@@ -49,14 +49,14 @@ Multiple select is due to the excellent work of the following contributors:
 <tr>
 <td><img src="https://avatars.githubusercontent.com/u/1297559?" width="32" height="32"> Jona Goldman</td>
 <td><a href="https://github.com/jonagoldman">jonagoldman</a></td>
-<td>null</td>
+<td></td>
 <td></td>
 <td>1</td>
 <tr>
 <tr>
 <td><img src="https://avatars.githubusercontent.com/u/7594976?" width="32" height="32"> topas08</td>
 <td><a href="https://github.com/topas08">topas08</a></td>
-<td>undefined</td>
+<td></td>
 <td></td>
 <td>1</td>
 <tr>
@@ -91,7 +91,7 @@ Multiple select is due to the excellent work of the following contributors:
 <tr>
 <td><img src="https://avatars.githubusercontent.com/u/2584275?" width="32" height="32"> guli</td>
 <td><a href="https://github.com/guli">guli</a></td>
-<td>undefined</td>
+<td></td>
 <td></td>
 <td>1</td>
 <tr>
@@ -105,11 +105,11 @@ Multiple select is due to the excellent work of the following contributors:
 <tr>
 <td><img src="https://avatars.githubusercontent.com/u/2769778?" width="32" height="32"> jwheadon</td>
 <td><a href="https://github.com/jwheadon">jwheadon</a></td>
-<td>undefined</td>
+<td></td>
 <td></td>
 <td>1</td>
 <tr>
 
-Update date: 2014-07-03, created width https://github.com/wenzhixin/github-contributors
-
 </table>
+
+Update date: 2014-07-03, created width https://github.com/wenzhixin/github-contributors
