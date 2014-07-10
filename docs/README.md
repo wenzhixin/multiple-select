@@ -1082,6 +1082,14 @@ Multiple Select select all checkbox text.
 
 By default this option is set to ```Select all```.
 
+#### selectAllDelimiter
+
+Type: Array	
+
+Multiple Select select all checkbox delimiter.
+
+By default this option is set to ```['[',']']```.
+
 #### allSelected
 
 Type: false or string
