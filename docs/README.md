@@ -1106,6 +1106,14 @@ Type: false or string
 
 By default this option is set to ```# of % selected```.
 
+#### etcaetera
+
+Type: boolean
+
+Add "..." after selected options if minumimCountSelected is set. Overrides countSelected option.
+
+By default this option is set to ```false```.
+
 #### multiple
 
 Type: boolean	
