@@ -71,7 +71,7 @@
                     '<li class="ms-select-all">',
                         '<label>',
                             '<input type="checkbox" ' + this.selectAllName + ' /> ',
-                            '[' + this.options.selectAllText + ']',
+                            this.options.selectAllDelimiter[0] + this.options.selectAllText + this.options.selectAllDelimiter[1],
                         '</label>',
                     '</li>'
                 );
@@ -517,6 +517,7 @@
         placeholder: '',
         selectAll: true,
         selectAllText: 'Select all',
+		selectAllDelimiter: ['[',']'],
         allSelected: 'All selected',
         minumimCountSelected: 3,
         countSelected: '# of % selected',
