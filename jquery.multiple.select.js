@@ -355,7 +355,7 @@
                 texts = [],
                 values = [];
             this.$drop.find('input[' + this.selectItemName + ']:checked').each(function () {
-                texts.push($(this).parent().text());
+                texts.push($(this).parents('li').first().text());
                 values.push($(this).val());
             });
 
