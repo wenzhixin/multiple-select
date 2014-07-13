@@ -323,6 +323,12 @@
             }
             // set selects to select
             this.$el.val(this.getSelects());
+			
+			// add selected class to selected li
+			this.$drop.find('li').removeClass('selected');
+			this.$drop.find('input[' + this.selectItemName + ']:checked').each(function () {
+                $(this).parents('li').first().addClass('selected');
+            });
 
             // trigger <select> change event
             if (!isInit) {
