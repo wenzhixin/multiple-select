@@ -1,7 +1,7 @@
 /**
  * @author zhixin wen <wenzhixin2010@gmail.com>
  * @version 1.1.0
- * 
+ *
  * http://wenzhixin.net.cn/p/multiple-select/
  */
 
@@ -16,7 +16,7 @@
 
         this.$el = $el.hide();
         this.options = options;
-        this.$parent = $('<div' + $.map(['class', 'title'], function (att) {
+        this.$parent = $('<div' + $.map(['class', 'title'],function (att) {
             var attValue = that.$el.attr(att) || '';
             attValue = (att === 'class' ? ('ms-parent' + (attValue ? ' ' : '')) : '') + attValue;
             return attValue ? (' ' + att + '="' + attValue + '"') : '';
@@ -61,7 +61,7 @@
             if (this.options.filter) {
                 html.push(
                     '<div class="ms-search">',
-                        '<input type="text" autocomplete="off" autocorrect="off" autocapitilize="off" spellcheck="false">',
+                    '<input type="text" autocomplete="off" autocorrect="off" autocapitilize="off" spellcheck="false">',
                     '</div>'
                 );
             }
@@ -69,10 +69,10 @@
             if (this.options.selectAll && !this.options.single) {
                 html.push(
                     '<li class="ms-select-all">',
-                        '<label>',
-                            '<input type="checkbox" ' + this.selectAllName + ' /> ',
-                            this.options.selectAllDelimiter[0] + this.options.selectAllText + this.options.selectAllDelimiter[1],
-                        '</label>',
+                    '<label>',
+                    '<input type="checkbox" ' + this.selectAllName + ' /> ',
+                    this.options.selectAllDelimiter[0] + this.options.selectAllText + this.options.selectAllDelimiter[1],
+                    '</label>',
                     '</li>'
                 );
             }
@@ -125,24 +125,24 @@
                 disabled = groupDisabled || $elm.prop('disabled');
                 if ((this.options.blockSeparator > "") && (this.options.blockSeparator == $elm.val())) {
                     html.push(
-                            '<li' + clss + style + '>',
-                                '<label class="' + this.options.blockSeparator + (disabled ? 'disabled' : '') + '">',
-                                    text,
-                                '</label>',
-                            '</li>'
+                        '<li' + clss + style + '>',
+                        '<label class="' + this.options.blockSeparator + (disabled ? 'disabled' : '') + '">',
+                        text,
+                        '</label>',
+                        '</li>'
                     );
                 } else {
                     html.push(
-                            '<li' + clss + style + '>',
-                                '<label' + (disabled ? ' class="disabled"' : '') + '>',
-                                    '<input type="' + type + '" ' + this.selectItemName + ' value="' + value + '"' +
-                                        (selected ? ' checked="checked"' : '') +
-                                        (disabled ? ' disabled="disabled"' : '') +
-                                        (group ? ' data-group="' + group + '"' : '') +
-                                        '/> ',
-                                    text,
-                                '</label>',
-                            '</li>'
+                        '<li' + clss + style + '>',
+                        '<label' + (disabled ? ' class="disabled"' : '') + '>',
+                        '<input type="' + type + '" ' + this.selectItemName + ' value="' + value + '"' +
+                            (selected ? ' checked="checked"' : '') +
+                            (disabled ? ' disabled="disabled"' : '') +
+                            (group ? ' data-group="' + group + '"' : '') +
+                            '/> ',
+                        text,
+                        '</label>',
+                        '</li>'
                     );
                 }
             } else if (!group && $elm.is('optgroup')) {
@@ -152,11 +152,11 @@
                 disabled = $elm.prop('disabled');
                 html.push(
                     '<li class="group">',
-                        '<label class="optgroup' + (disabled ? ' disabled' : '') + '" data-group="' + _group + '">',
-                            (this.options.hideOptgroupCheckboxes ? '' : '<input type="checkbox" ' + this.selectGroupName +
-                                (disabled ? ' disabled="disabled"' : '') + ' /> '),
-                            label,
-                        '</label>',
+                    '<label class="optgroup' + (disabled ? ' disabled' : '') + '" data-group="' + _group + '">',
+                    (this.options.hideOptgroupCheckboxes ? '' : '<input type="checkbox" ' + this.selectGroupName +
+                        (disabled ? ' disabled="disabled"' : '') + ' /> '),
+                    label,
+                    '</label>',
                     '</li>');
                 $.each($elm.children(), function (i, elm) {
                     html.push(that.optionToHtml(i, elm, _group, disabled));
@@ -167,10 +167,12 @@
 
         events: function () {
             var that = this;
+
             function toggleOpen(e) {
                 e.preventDefault();
                 that[that.options.isOpen ? 'close' : 'open']();
             }
+
             var label = this.$el.parent().closest('label')[0] || $('label[for=' + this.$el.attr('id') + ']')[0];
             if (label) {
                 $(label).off('click').on('click', function (e) {
@@ -196,22 +198,22 @@
                         break;
                 }
             });
-            this.$searchInput.off('keydown').on('keydown', function (e) {
+            this.$searchInput.off('keydown').on('keydown',function (e) {
                 if (e.keyCode === 9 && e.shiftKey) { // Ensure shift-tab causes lost focus from filter as with clicking away
                     that.close();
                 }
             }).off('keyup').on('keyup', function (e) {
-                if (that.options.filterAcceptOnEnter &&
-                    (e.which === 13 || e.which == 32) && // enter or space
-                    that.$searchInput.val() // Avoid selecting/deselecting if no choices made
-                ) {
-                    that.$selectAll.click();
-                    that.close();
-                    that.focus();
-                    return;
-                }
-                that.filter();
-            });
+                    if (that.options.filterAcceptOnEnter &&
+                        (e.which === 13 || e.which == 32) && // enter or space
+                        that.$searchInput.val() // Avoid selecting/deselecting if no choices made
+                        ) {
+                        that.$selectAll.click();
+                        that.close();
+                        that.focus();
+                        return;
+                    }
+                    that.filter();
+                });
             this.$selectAll.off('click').on('click', function () {
                 var checked = $(this).prop('checked'),
                     $items = that.$selectItems.filter(':visible');
@@ -308,32 +310,30 @@
             } else if (this.options.countSelected && selects.length < this.options.minumimCountSelected) {
                 $span.removeClass('placeholder').html(
                     (this.options.displayValues ? selects : this.getSelects('text'))
-                    .join(this.options.delimiter));
+                        .join(this.options.delimiter));
             } else if (this.options.allSelected &&
-                    selects.length === this.$selectItems.length + this.$disableItems.length) {
+                selects.length === this.$selectItems.length + this.$disableItems.length) {
                 $span.removeClass('placeholder').html(this.options.allSelected);
             } else if ((this.options.countSelected || this.options.etcaetera) && selects.length > this.options.minumimCountSelected) {
-				if(this.options.etcaetera)
-				{
-					$span.removeClass('placeholder').html((this.options.displayValues ? selects : this.getSelects('text').slice(0, this.options.minumimCountSelected)).join(this.options.delimiter)+'...');
-				}
-				else
-				{
-					$span.removeClass('placeholder').html(this.options.countSelected
-						.replace('#', selects.length)
-						.replace('%', this.$selectItems.length + this.$disableItems.length));
-				}
+                if (this.options.etcaetera) {
+                    $span.removeClass('placeholder').html((this.options.displayValues ? selects : this.getSelects('text').slice(0, this.options.minumimCountSelected)).join(this.options.delimiter) + '...');
+                }
+                else {
+                    $span.removeClass('placeholder').html(this.options.countSelected
+                        .replace('#', selects.length)
+                        .replace('%', this.$selectItems.length + this.$disableItems.length));
+                }
             } else {
                 $span.removeClass('placeholder').html(
                     (this.options.displayValues ? selects : this.getSelects('text'))
-                    .join(this.options.delimiter));
+                        .join(this.options.delimiter));
             }
             // set selects to select
             this.$el.val(this.getSelects());
-			
-			// add selected class to selected li
-			this.$drop.find('li').removeClass('selected');
-			this.$drop.find('input[' + this.selectItemName + ']:checked').each(function () {
+
+            // add selected class to selected li
+            this.$drop.find('li').removeClass('selected');
+            this.$drop.find('input[' + this.selectItemName + ']:checked').each(function () {
                 $(this).parents('li').first().addClass('selected');
             });
 
@@ -530,7 +530,7 @@
         placeholder: '',
         selectAll: true,
         selectAllText: 'Select all',
-		selectAllDelimiter: ['[',']'],
+        selectAllDelimiter: ['[', ']'],
         allSelected: 'All selected',
         minumimCountSelected: 3,
         countSelected: '# of % selected',
@@ -548,16 +548,36 @@
         displayValues: false,
         delimiter: ', ',
 
-        styler: function () { return false; },
-        textTemplate: function ($elm) { return $elm.text(); },
+        styler: function () {
+            return false;
+        },
+        textTemplate: function ($elm) {
+            return $elm.text();
+        },
 
-        onOpen: function () { return false; },
-        onClose: function () { return false; },
-        onCheckAll: function () { return false; },
-        onUncheckAll: function () { return false; },
-        onFocus: function () { return false; },
-        onBlur: function () { return false; },
-        onOptgroupClick: function () { return false; },
-        onClick: function () { return false; }
+        onOpen: function () {
+            return false;
+        },
+        onClose: function () {
+            return false;
+        },
+        onCheckAll: function () {
+            return false;
+        },
+        onUncheckAll: function () {
+            return false;
+        },
+        onFocus: function () {
+            return false;
+        },
+        onBlur: function () {
+            return false;
+        },
+        onOptgroupClick: function () {
+            return false;
+        },
+        onClick: function () {
+            return false;
+        }
     };
 })(jQuery);
