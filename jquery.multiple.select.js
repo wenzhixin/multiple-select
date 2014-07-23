@@ -11,8 +11,12 @@
 
     function MultipleSelect($el, options) {
         var that = this,
-            name = $el.attr('name') || options.name || '',
-            elWidth = $el.outerWidth();
+            name = $el.attr('name') || options.name || ''
+
+        $el.parent().hide();
+        var elWidth = $el.css("width");
+        $el.parent().show();
+        if (elWidth=="0px") {elWidth = $el.outerWidth()+20}
 
         this.$el = $el.hide();
         this.options = options;
@@ -93,6 +97,7 @@
             this.$disableItems = this.$drop.find('input[' + this.selectItemName + ']:disabled');
             this.$noResults = this.$drop.find('.ms-no-results');
             this.events();
+            this.updateSelectAll(true);
             this.update(true);
 
             if (this.options.isOpen) {
@@ -343,8 +348,9 @@
             }
         },
 
-        updateSelectAll: function () {
-            var $items = this.$selectItems.filter(':visible');
+        updateSelectAll: function (Init) {
+            var $items = this.$selectItems;
+            if (!Init) { $items = $items.filter(':visible'); }
             this.$selectAll.prop('checked', $items.length &&
                 $items.length === $items.filter(':checked').length);
             if (this.$selectAll.prop('checked')) {
