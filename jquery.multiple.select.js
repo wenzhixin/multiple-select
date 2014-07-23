@@ -24,7 +24,7 @@
             var attValue = that.$el.attr(att) || '';
             attValue = (att === 'class' ? ('ms-parent' + (attValue ? ' ' : '')) : '') + attValue;
             return attValue ? (' ' + att + '="' + attValue + '"') : '';
-        }).join('') + '>');
+        }).join('') + ' />');
         this.$choice = $('<button type="button" class="ms-choice"><span class="placeholder">' +
             options.placeholder + '</span><div></div></button>');
         this.$drop = $('<div class="ms-drop ' + options.position + '"></div>');
