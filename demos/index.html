@@ -15,7 +15,7 @@
 
     <div class="form-group">
         <label>Month</label>
-        <select id="ms" multiple="multiple" class="form-control">
+        <select id="ms" multiple="multiple">
             <option value="1">January</option>
             <option value="2">February</option>
             <option value="3">March</option>
@@ -38,7 +38,9 @@
     $(function() {
         $('#ms').change(function() {
             console.log($(this).val());
-        }).multipleSelect();
+        }).multipleSelect({
+            width: '100%'
+        });
     });
 </script>
 </body>
