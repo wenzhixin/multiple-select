@@ -1098,7 +1098,7 @@ The text displays when the select all selected.
 
 By default this option is set to ```All selected```.
 
-#### minumimCountSelected
+#### minimumCountSelected
 
 Type: int
 
@@ -1118,7 +1118,7 @@ By default this option is set to ```# of % selected```.
 
 Type: boolean
 
-Add "..." after selected options if minumimCountSelected is set. Overrides countSelected option.
+Add "..." after selected options if minimumCountSelected is set. Overrides countSelected option.
 
 By default this option is set to ```false```.
 

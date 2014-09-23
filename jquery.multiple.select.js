@@ -312,16 +312,16 @@
 
             if (selects.length === 0) {
                 $span.addClass('placeholder').html(this.options.placeholder);
-            } else if (this.options.countSelected && selects.length < this.options.minumimCountSelected) {
+            } else if (this.options.countSelected && selects.length < this.options.minimumCountSelected) {
                 $span.removeClass('placeholder').html(
                     (this.options.displayValues ? selects : this.getSelects('text'))
                         .join(this.options.delimiter));
             } else if (this.options.allSelected &&
                 selects.length === this.$selectItems.length + this.$disableItems.length) {
                 $span.removeClass('placeholder').html(this.options.allSelected);
-            } else if ((this.options.countSelected || this.options.etcaetera) && selects.length > this.options.minumimCountSelected) {
+            } else if ((this.options.countSelected || this.options.etcaetera) && selects.length > this.options.minimumCountSelected) {
                 if (this.options.etcaetera) {
-                    $span.removeClass('placeholder').html((this.options.displayValues ? selects : this.getSelects('text').slice(0, this.options.minumimCountSelected)).join(this.options.delimiter) + '...');
+                    $span.removeClass('placeholder').html((this.options.displayValues ? selects : this.getSelects('text').slice(0, this.options.minimumCountSelected)).join(this.options.delimiter) + '...');
                 }
                 else {
                     $span.removeClass('placeholder').html(this.options.countSelected
@@ -538,7 +538,7 @@
         selectAllText: 'Select all',
         selectAllDelimiter: ['[', ']'],
         allSelected: 'All selected',
-        minumimCountSelected: 3,
+        minimumCountSelected: 3,
         countSelected: '# of % selected',
         noMatchesFound: 'No matches found',
         multiple: false,

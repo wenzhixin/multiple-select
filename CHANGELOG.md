@@ -12,7 +12,7 @@
 
 * Fix #42: Add ```styler``` option to custom item style.
 * Fix firefox click bug.
-* Add ```allSelected```, ```minumimCountSelected``` and ```countSelected``` options.
+* Add ```allSelected```, ```minimumCountSelected``` and ```countSelected``` options.
 * Fix #35: Add ```onFocus``` and ```onBlur``` events.
 * Fix #25: Add ```focus``` and ```blur``` methods.
 * Fix #31: Trigger the onCheckAll & onUncheckAll events when use filter to select all.
