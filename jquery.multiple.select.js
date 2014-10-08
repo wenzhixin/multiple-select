@@ -51,9 +51,9 @@
             });
         }
 
-        this.selectAllName = 'name="selectAll' + name + '"';
-        this.selectGroupName = 'name="selectGroup' + name + '"';
-        this.selectItemName = 'name="selectItem' + name + '"';
+        this.selectAllName = 'data-name="selectAll' + name + '"';
+        this.selectGroupName = 'data-name="selectGroup' + name + '"';
+        this.selectItemName = 'data-name="selectItem' + name + '"';
     }
 
     MultipleSelect.prototype = {
