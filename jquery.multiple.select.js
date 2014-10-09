@@ -155,6 +155,11 @@
                     label = $elm.attr('label');
 
                 disabled = $elm.prop('disabled');
+
+                if( this.options.separateUl === true ) {
+                    html.push( '</ul><ul>' );
+                }
+
                 html.push(
                     '<li class="group">',
                     '<label class="optgroup' + (disabled ? ' disabled' : '') + '" data-group="' + _group + '">',
@@ -553,6 +558,7 @@
         blockSeparator: '',
         displayValues: false,
         delimiter: ', ',
+        separateUl: false,
 
         styler: function () {
             return false;
