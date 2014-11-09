@@ -178,7 +178,10 @@
                 that[that.options.isOpen ? 'close' : 'open']();
             }
 
-            var label = this.$el.parent().closest('label')[0] || $('label[for=' + this.$el.attr('id') + ']')[0];
+            var escapedId = this.$el.attr('id').split(':').join('\\:');
+
+            var label = this.$el.parent().closest('label')[0] || $('label[for=' + escapedId + ']')[0];
+
             if (label) {
                 $(label).off('click').on('click', function (e) {
                     if (e.target.nodeName.toLowerCase() !== 'label' || e.target !== this) {
