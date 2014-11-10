@@ -178,9 +178,7 @@
                 that[that.options.isOpen ? 'close' : 'open']();
             }
 
-            var escapedId = this.$el.attr('id').split(':').join('\\:');
-
-            var label = this.$el.parent().closest('label')[0] || $('label[for=' + escapedId + ']')[0];
+            var label = this.$el.parent().closest('label')[0] || $('label[for=' + this.$el.attr('id').split(':').join('\\:') + ']')[0];
 
             if (label) {
                 $(label).off('click').on('click', function (e) {
