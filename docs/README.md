@@ -1244,7 +1244,7 @@ onOptgroupClick: function(view) {
 Fires when a checkbox is checked or unchecked. 
 
 ```javascript
-onOptgroupClick: function(view) {
+onClick: function(view) {
 	/*
 	view.label: the text of the checkbox item
 	view.checked: the checked of the checkbox item
