@@ -71,11 +71,11 @@
             var ul = $('<ul></ul>');
             if (this.options.selectAll && !this.options.single) {
                 ul.append(
-                    '<li class="ms-select-all">',
-                    '<label>',
-                    '<input type="checkbox" ' + this.selectAllName + ' /> ',
-                    this.options.selectAllDelimiter[0] + this.options.selectAllText + this.options.selectAllDelimiter[1],
-                    '</label>',
+                    '<li class="ms-select-all">' +
+                    '<label>' +
+                    '<input type="checkbox" ' + this.selectAllName + ' /> ' +
+                    this.options.selectAllDelimiter[0] + this.options.selectAllText + this.options.selectAllDelimiter[1] +
+                    '</label>' +
                     '</li>'
                 );
             }
