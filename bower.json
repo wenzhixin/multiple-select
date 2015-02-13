@@ -1,6 +1,6 @@
 {
   "name": "multiple-select",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "homepage": "https://github.com/wenzhixin/multiple-select",
   "authors": [
     "文翼 <wenzhixin2010@gmail.com>"
@@ -8,6 +8,6 @@
   "description": "A jQuery plugin to select multiple elements with checkboxes",
   "license": "MIT",
   "dependencies": {
-    "jquery": ">=1.7.0"
+    "jquery": "1.7.x"
   }
 }
