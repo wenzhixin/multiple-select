@@ -11,12 +11,12 @@
 
     function MultipleSelect($el, options) {
         var that = this,
-            name = $el.attr('name') || options.name || ''
+            name = $el.attr('name') || options.name || '';
 
         $el.parent().hide();
         var elWidth = $el.css("width");
         $el.parent().show();
-        if (elWidth=="0px") {elWidth = $el.outerWidth()+20}
+        if (elWidth=="0px") {elWidth = $el.outerWidth()+20;}
 
         this.$el = $el.hide();
         this.options = options;
@@ -38,7 +38,7 @@
         this.$parent.css('width', options.width || elWidth);
 
         if (!this.options.keepOpen) {
-            $('body').click(function (e) {
+            $('body').mousedown(function (e) {
                 if ($(e.target)[0] === that.$choice[0] ||
                     $(e.target).parents('.ms-choice')[0] === that.$choice[0]) {
                     return;
@@ -55,6 +55,13 @@
         this.selectAllName = 'name="selectAll' + name + '"';
         this.selectGroupName = 'name="selectGroup' + name + '"';
         this.selectItemName = 'name="selectItem' + name + '"';
+        
+        this.clickTarget = $('<div id="ms-clicktarget"></div>');
+        this.clickTarget.click(function(){
+        	$(this).css('display', 'none');
+        	that.close();
+        });
+        $('body').append(this.clickTarget);
     }
 
     MultipleSelect.prototype = {
@@ -291,6 +298,9 @@
                 this.filter();
             }
             this.options.onOpen();
+            
+            this.clickTarget.css('display', 'block');
+            
         },
 
         close: function () {

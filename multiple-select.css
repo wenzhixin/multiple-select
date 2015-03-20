@@ -189,3 +189,14 @@
 .ms-drop .ms-no-results {
     display: none;
 }
+
+#ms-clicktarget {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: none;
+	display: none;
+	z-index: 100;
+}
