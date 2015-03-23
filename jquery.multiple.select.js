@@ -38,7 +38,7 @@
         this.$parent.css('width', options.width || elWidth);
 
         if (!this.options.keepOpen) {
-            $('body').mousedown(function (e) {
+            $('body').click(function (e) {
                 if ($(e.target)[0] === that.$choice[0] ||
                     $(e.target).parents('.ms-choice')[0] === that.$choice[0]) {
                     return;
