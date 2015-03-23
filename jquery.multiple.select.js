@@ -50,18 +50,20 @@
                     that.close();
                 }
             });
+	
+		        this.clickTarget = $('<div id="ms-clicktarget"></div>');
+		        this.clickTarget.click(function(){
+		        	$(this).css('display', 'none');
+		        	that.close();
+		        });
+		        $('body').append(this.clickTarget);
+
         }
 
         this.selectAllName = 'name="selectAll' + name + '"';
         this.selectGroupName = 'name="selectGroup' + name + '"';
         this.selectItemName = 'name="selectItem' + name + '"';
         
-        this.clickTarget = $('<div id="ms-clicktarget"></div>');
-        this.clickTarget.click(function(){
-        	$(this).css('display', 'none');
-        	that.close();
-        });
-        $('body').append(this.clickTarget);
     }
 
     MultipleSelect.prototype = {
@@ -299,7 +301,9 @@
             }
             this.options.onOpen();
             
-            this.clickTarget.css('display', 'block');
+            if (this.clickTarget){
+            	this.clickTarget.css('display', 'block');
+          	}
             
         },
 
