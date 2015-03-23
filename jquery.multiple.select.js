@@ -51,12 +51,12 @@
                 }
             });
 	
-		        this.clickTarget = $('<div id="ms-clicktarget"></div>');
-		        this.clickTarget.click(function(){
-		        	$(this).css('display', 'none');
-		        	that.close();
-		        });
-		        $('body').append(this.clickTarget);
+			this.clickTarget = $('<div id="ms-clicktarget"></div>');
+			this.clickTarget.click(function(){
+				$(this).css('display', 'none');
+				that.close();
+			});
+			$('body').append(this.clickTarget);
 
         }
 
@@ -301,9 +301,9 @@
             }
             this.options.onOpen();
             
-            if (this.clickTarget){
-            	this.clickTarget.css('display', 'block');
-          	}
+			if (this.clickTarget){
+				this.clickTarget.css('display', 'block');
+			}
             
         },
 
