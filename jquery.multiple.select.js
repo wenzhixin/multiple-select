@@ -38,12 +38,13 @@
         this.$parent.css('width', options.width || elWidth);
 
         if (!this.options.keepOpen) {
-            $('body').click(function (e) {
+            $('html').click(function (e) {
                 if ($(e.target)[0] === that.$choice[0] ||
                     $(e.target).parents('.ms-choice')[0] === that.$choice[0]) {
                     return;
                 }
-                if (e.target.tagName.toUpperCase() === "INPUT" &&
+                if (
+		  //e.target.tagName.toUpperCase() === "INPUT" &&
                     ($(e.target)[0] === that.$drop[0] ||
                     $(e.target).parents('.ms-drop')[0] !== that.$drop[0]) &&
                     that.options.isOpen) {
