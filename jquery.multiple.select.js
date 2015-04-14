@@ -478,7 +478,7 @@
                 });
 
                 //Check if no matches found
-                if (this.$selectItems.filter(':visible').length) {
+                if (this.$selectItems.parent().filter(':visible').length) {
                     this.$selectAll.parent().show();
                     this.$noResults.hide();
                 } else {
