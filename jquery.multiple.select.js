@@ -194,8 +194,8 @@
                 });
             }
             this.$choice.off('click').on('click', toggleOpen)
-                .off('focus').on('focus', this.options.onFocus)
-                .off('blur').on('blur', this.options.onBlur);
+                .off('focus').on('focus', function () { this.options.onFocus(this); })
+                .off('blur').on('blur', function () { this.options.onBlur(this); });
 
             this.$parent.off('keydown').on('keydown', function (e) {
                 switch (e.which) {
@@ -229,7 +229,7 @@
                 } else { // when the filter option is true
                     that.$selectGroups.prop('checked', checked);
                     $items.prop('checked', checked);
-                    that.options[checked ? 'onCheckAll' : 'onUncheckAll']();
+                    that.options[checked ? 'onCheckAll' : 'onUncheckAll'](this);
                     that.update();
                 }
             });
@@ -245,7 +245,7 @@
                     label: $(this).parent().text(),
                     checked: checked,
                     children: $children.get()
-                });
+                }, this);
             });
             this.$selectItems.off('click').on('click', function () {
                 that.updateSelectAll();
@@ -255,7 +255,7 @@
                     label: $(this).parent().text(),
                     value: $(this).val(),
                     checked: $(this).prop('checked')
-                });
+                }, this);
 
                 if (that.options.single && that.options.isOpen && !that.options.keepOpen) {
                     that.close();
@@ -291,7 +291,7 @@
                 this.$searchInput.focus();
                 this.filter();
             }
-            this.options.onOpen();
+            this.options.onOpen(this);
         },
 
         close: function () {
@@ -305,7 +305,7 @@
                     'left': 'auto'
                 });
             }
-            this.options.onClose();
+            this.options.onClose(this);
         },
 
         update: function (isInit) {
@@ -356,7 +356,7 @@
             this.$selectAll.prop('checked', $items.length &&
                 $items.length === $items.filter(':checked').length);
             if (this.$selectAll.prop('checked')) {
-                this.options.onCheckAll();
+                this.options.onCheckAll(this);
             }
         },
 
@@ -433,7 +433,7 @@
             this.$selectGroups.prop('checked', true);
             this.$selectAll.prop('checked', true);
             this.update();
-            this.options.onCheckAll();
+            this.options.onCheckAll(this);
         },
 
         uncheckAll: function () {
@@ -441,17 +441,17 @@
             this.$selectGroups.prop('checked', false);
             this.$selectAll.prop('checked', false);
             this.update();
-            this.options.onUncheckAll();
+            this.options.onUncheckAll(this);
         },
 
         focus: function () {
             this.$choice.focus();
-            this.options.onFocus();
+            this.options.onFocus(this);
         },
 
         blur: function () {
             this.$choice.blur();
-            this.options.onBlur();
+            this.options.onBlur(this);
         },
 
         refresh: function () {

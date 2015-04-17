@@ -1012,32 +1012,32 @@ If you're dynamically adding/removing option tags on the original select via AJA
     <script src="jquery.multiple.select.js"></script>
     <script>
         $("select").multipleSelect({
-        	onOpen: function() {
+        	onOpen: function(select) {
         		$eventResult.text('Select opened!');
         	},
-        	onClose: function() {
+        	onClose: function(select) {
         		$eventResult.text('Select closed!');
         	},
-        	onCheckAll: function() {
+        	onCheckAll: function(select) {
         		$eventResult.text('Check all clicked!');
         	},
-        	onUncheckAll: function() {
+        	onUncheckAll: function(select) {
         		$eventResult.text('Uncheck all clicked!');
         	},
-        	onFocus: function() {
+        	onFocus: function(select) {
         		$eventResult.text('focus!');
         	},
-        	onBlur: function() {
+        	onBlur: function(select) {
         		$eventResult.text('blur!');
         	},
-        	onOptgroupClick: function(view) {
+        	onOptgroupClick: function(view, select) {
 				var values = $.map(view.children, function(child){
 					return child.value;
 				}).join(', ');
 				$eventResult.text('Optgroup ' + view.label + ' ' + 
 					(view.checked ? 'checked' : 'unchecked') + ': ' + values);
 			},
-			onClick: function(view) {
+			onClick: function(view, select) {
 				$eventResult.text(view.label + '(' + view.value + ') ' + 
 					(view.checked ? 'checked' : 'unchecked'));
 			}
@@ -1207,13 +1207,37 @@ styler: function(value) {
 
 Fires when the dropdown list is open.
 
+```javascript
+onOpen: function(select) {
+	/*
+	select: the Multiple Select object
+	*/
+}
+```
+
 #### onClose
 
-Fires when the dropdown list is close.
+Fires when the dropdown list is closed.
+
+```javascript
+onClose: function(select) {
+	/*
+	select: the Multiple Select object
+	*/
+}
+```
 
 #### onCheckAll
 
 Fires when all the options are checked by either clicking the "Select all" checkbox, or when the "checkall" method is programatically called.
+
+```javascript
+onCheckAll: function(select) {
+	/*
+	select: the Multiple Select object
+	*/
+}
+```
 
 #### onUncheckAll
 
@@ -1221,20 +1245,37 @@ Fires when all the options are checked by either clicking the "Select all" check
 
 Bind an event handler to the "focus".
 
+```javascript
+onFocus: function(select) {
+	/*
+	select: the Multiple Select object
+	*/
+}
+```
+
 #### onBlur
 
 Bind an event handler to the "blur"
+
+```javascript
+onBlur: function(select) {
+	/*
+	select: the Multiple Select object
+	*/
+}
+```
 
 #### onOptgroupClick
 
 Fires when a an optgroup label is clicked on. 
 
 ```javascript
-onOptgroupClick: function(view) {
+onOptgroupClick: function(view, select) {
 	/*
 	view.label: the text of the optgroup
 	view.checked: the checked of the optgroup
 	view.children: an array of the checkboxes (DOM elements) inside the optgroup
+	select: the Multiple Select object
 	*/
 }
 ```
@@ -1244,10 +1285,11 @@ onOptgroupClick: function(view) {
 Fires when a checkbox is checked or unchecked. 
 
 ```javascript
-onClick: function(view) {
+onClick: function(view, select) {
 	/*
 	view.label: the text of the checkbox item
 	view.checked: the checked of the checkbox item
+	select: the Multiple Select object
 	*/
 }
 ```
