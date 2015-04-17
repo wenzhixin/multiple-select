@@ -1252,6 +1252,18 @@ onClick: function(view) {
 }
 ```
 
+#### onAfterCreate
+
+Fires after the Multiple Select is created
+
+```javascript
+onAfterCreate: function(select) {
+	/*
+	select: the Multiple Select object
+	*/
+}
+```
+
 ### Methods
 
 #### getSelects
