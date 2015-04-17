@@ -55,6 +55,7 @@
         this.selectAllName = 'name="selectAll' + name + '"';
         this.selectGroupName = 'name="selectGroup' + name + '"';
         this.selectItemName = 'name="selectItem' + name + '"';
+        this.options.onAfterCreate(this);
     }
 
     MultipleSelect.prototype = {
@@ -584,6 +585,9 @@
             return false;
         },
         onClick: function () {
+            return false;
+        },
+        onAfterCreate: function () {
             return false;
         }
     };
