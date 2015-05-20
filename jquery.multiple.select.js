@@ -334,6 +334,9 @@
                     (this.options.displayValues ? selects : this.getSelects('text'))
                         .join(this.options.delimiter));
             }
+            if (this.options.addTitle)
+                $span.prop('title', this.getSelects('text'));
+                
             // set selects to select
             this.$el.val(this.getSelects());
 
@@ -554,6 +557,7 @@
         blockSeparator: '',
         displayValues: false,
         delimiter: ', ',
+        addTitle: false,
 
         styler: function () {
             return false;
