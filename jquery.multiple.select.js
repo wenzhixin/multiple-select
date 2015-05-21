@@ -416,6 +416,14 @@
             });
             this.$selectAll.prop('checked', this.$selectItems.length ===
                 this.$selectItems.filter(':checked').length);
+				
+            $.each(that.$selectGroups, function (i, val) {
+                var group = $(val).parent().attr('data-group'),
+                    $children = that.$selectItems.filter('[data-group="' + group + '"]');
+                $(val).prop('checked', $children.length &&
+                    $children.length === $children.filter(':checked').length);
+            });		
+			
             this.update();
         },
 
