@@ -307,7 +307,7 @@
             this.options.onClose();
         },
 
-        update: function (isInit) {
+        update: function (ignoreTrigger) {
             var selects = this.getSelects(),
                 $span = this.$choice.find('>span');
 
@@ -344,7 +344,7 @@
             });
 
             // trigger <select> change event
-            if (!isInit) {
+            if (!ignoreTrigger) {
                 this.$el.trigger('change');
             }
         },
@@ -416,7 +416,7 @@
             });
             this.$selectAll.prop('checked', this.$selectItems.length ===
                 this.$selectItems.filter(':checked').length);
-            this.update();
+            this.update(this.options.ignoreSetChangeEvent || false);
         },
 
         enable: function () {
