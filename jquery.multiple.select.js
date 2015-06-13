@@ -13,9 +13,10 @@
         var that = this,
             name = $el.attr('name') || options.name || ''
 
+        var originalParentStyle = $el.parent().attr('style') || '';
         $el.parent().hide();
         var elWidth = $el.css("width");
-        $el.parent().show();
+        $el.parent().show().attr('style', originalParentStyle);
         if (elWidth=="0px") {elWidth = $el.outerWidth()+20}
 
         this.$el = $el.hide();
