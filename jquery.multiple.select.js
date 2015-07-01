@@ -338,7 +338,7 @@
             }
             if (this.options.addTitle)
                 $span.prop('title', this.getSelects('text'));
-                
+
             // set selects to select
             this.$el.val(this.getSelects());
 
@@ -359,7 +359,7 @@
             if (!Init) { $items = $items.filter(':visible'); }
             this.$selectAll.prop('checked', $items.length &&
                 $items.length === $items.filter(':checked').length);
-            if (this.$selectAll.prop('checked')) {
+            if (!Init && this.$selectAll.prop('checked')) {
                 this.options.onCheckAll();
             }
         },
