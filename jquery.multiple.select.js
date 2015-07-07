@@ -416,14 +416,16 @@
         setSelects: function (values) {
             var that = this;
             this.$selectItems.prop('checked', false);
+            this.$disableItems.prop('checked', false);
             $.each(values, function (i, value) {
                 that.$selectItems.filter('[value="' + value + '"]').prop('checked', true);
+                that.$disableItems.filter('[value="' + value + '"]').prop('checked', true);
             });
             this.$selectAll.prop('checked', this.$selectItems.length ===
-                this.$selectItems.filter(':checked').length);
+                (this.$selectItems.filter(':checked').length + this.$disableItems.filter(':checked').length));
             this.update();
         },
-
+        
         enable: function () {
             this.$choice.removeClass('disabled');
         },
