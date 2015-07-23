@@ -152,6 +152,7 @@
                 }
             } else if (!group && $elm.is('optgroup')) {
                 var _group = 'group_' + i,
+                    text = that.options.textTemplate($elm)  || '',
                     label = $elm.attr('label');
 
                 disabled = $elm.prop('disabled');
