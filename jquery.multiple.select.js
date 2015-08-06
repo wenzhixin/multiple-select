@@ -340,7 +340,7 @@
                 $span.prop('title', this.getSelects('text'));
                 
             // set selects to select
-            this.$el.val(this.getSelects());
+            this.$el.val(this.getSelects()).trigger('change');
 
             // add selected class to selected li
             this.$drop.find('li').removeClass('selected');
