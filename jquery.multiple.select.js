@@ -62,6 +62,9 @@
 
         init: function () {
             var that = this;
+            
+            this.$drop.children().remove();
+            
             if (this.options.filter) {
                 this.$drop.append(
                     '<div class="ms-search">',
