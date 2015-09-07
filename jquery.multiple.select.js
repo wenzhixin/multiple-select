@@ -52,9 +52,9 @@
             });
         }
 
-        this.selectAllName = 'name="selectAll' + name + '"';
-        this.selectGroupName = 'name="selectGroup' + name + '"';
-        this.selectItemName = 'name="selectItem' + name + '"';
+        this.selectAllName = 'data-ident="selectAll' + name + '"';
+        this.selectGroupName = 'data-ident="selectGroup' + name + '"';
+        this.selectItemName = 'data-ident="selectItem' + name + '"';
     }
 
     MultipleSelect.prototype = {
@@ -261,6 +261,16 @@
                 if (that.options.single && that.options.isOpen && !that.options.keepOpen) {
                     that.close();
                 }
+
+                if (that.options.single) {
+                    var clickedVal = $(this).val();
+                    that.$selectItems.filter(function() {
+                        return $(this).val() == clickedVal ? false : true;
+                    }).each(function() {
+                        $(this).prop('checked', false);
+                    });
+                    that.update();
+                }
             });
         },
 
@@ -338,7 +348,7 @@
             }
             if (this.options.addTitle)
                 $span.prop('title', this.getSelects('text'));
-                
+
             // set selects to select
             this.$el.val(this.getSelects());
 
