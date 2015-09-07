@@ -152,7 +152,7 @@
                 }
             } else if (!group && $elm.is('optgroup')) {
                 var _group = 'group_' + i,
-                    label = $elm.attr('label');
+                    label = that.options.labelTemplate($elm);
 
                 disabled = $elm.prop('disabled');
                 var group = $('<div/>');
@@ -161,10 +161,9 @@
                     '<label class="optgroup' + (disabled ? ' disabled' : '') + '" data-group="' + _group + '">' +
                     (this.options.hideOptgroupCheckboxes ? '' : '<input type="checkbox" ' + this.selectGroupName +
                         (disabled ? ' disabled="disabled"' : '') + ' /> ') +
-                    label +
                     '</label>' +
                     '</li>');
-                li.find('label').append(document.createTextNode(text));
+                group.find('label').append(document.createTextNode(label));
                 $.each($elm.children(), function (i, elm) {
                     group.append(that.optionToHtml(i, elm, _group, disabled));
                 });
@@ -338,7 +337,7 @@
             }
             if (this.options.addTitle)
                 $span.prop('title', this.getSelects('text'));
-                
+
             // set selects to select
             this.$el.val(this.getSelects());
 
@@ -566,6 +565,9 @@
         },
         textTemplate: function ($elm) {
             return $elm.text();
+        },
+        labelTemplate: function ($elm) {
+            return $elm.attr('label');
         },
 
         onOpen: function () {
