@@ -11,13 +11,13 @@
 
     function MultipleSelect($el, options) {
         var that = this,
-            name = $el.attr('name') || options.name || ''
+            name = $el.attr('name') || options.name || '';
 
         var originalParentStyle = $el.parent().attr('style') || '';
         $el.parent().hide();
         var elWidth = $el.css("width");
         $el.parent().show().attr('style', originalParentStyle);
-        if (elWidth=="0px") {elWidth = $el.outerWidth()+20}
+        if (elWidth=="0px") {elWidth = $el.outerWidth()+20;}
 
         this.$el = $el.hide();
         this.options = options;
@@ -39,7 +39,7 @@
         this.$parent.css('width', options.width || elWidth);
 
         if (!this.options.keepOpen) {
-            $('body').click(function (e) {
+            $(document).click(function (e) {
                 if ($(e.target)[0] === that.$choice[0] ||
                     $(e.target).parents('.ms-choice')[0] === that.$choice[0]) {
                     return;
@@ -336,8 +336,10 @@
                     (this.options.displayValues ? selects : this.getSelects('text'))
                         .join(this.options.delimiter));
             }
-            if (this.options.addTitle)
+
+            if (this.options.addTitle) {
                 $span.prop('title', this.getSelects('text'));
+            }
                 
             // set selects to select
             this.$el.val(this.getSelects());
