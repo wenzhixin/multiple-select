@@ -1,8 +1,7 @@
 /**
- * @author zhixin wen <wenzhixin2010@gmail.com>
- * @version 1.1.0
+ * @author Danila Dergachev <gnomdan@yandex.ru>
+ * @version 1.1.1
  *
- * http://wenzhixin.net.cn/p/multiple-select/
  */
 
 (function (factory) {
