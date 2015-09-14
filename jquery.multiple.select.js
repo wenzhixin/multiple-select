@@ -21,7 +21,7 @@
 
     function MultipleSelect($el, options) {
         var that = this,
-            name = $el.attr('name') || options.name || ''
+            name = $el.attr('name') || options.name || '';
 
         var originalParentStyle = $el.parent().attr('style') || '';
         $el.parent().hide();
@@ -346,8 +346,9 @@
                     (this.options.displayValues ? selects : this.getSelects('text'))
                         .join(this.options.delimiter));
             }
-            if (this.options.addTitle)
+            if (this.options.addTitle) {
                 $span.prop('title', this.getSelects('text'));
+            }
                 
             // set selects to select
             this.$el.val(this.getSelects());
