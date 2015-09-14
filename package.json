@@ -1,7 +1,7 @@
 {
   "name": "multiple-select-prog666",
   "main": "jquery.multiple.select.js",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "title": "Multiple Select",
   "description": "Multiple select is a jQuery plugin to select multiple elements with checkboxes :).",
   "author": {
