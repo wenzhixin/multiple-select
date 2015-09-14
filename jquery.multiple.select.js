@@ -144,8 +144,6 @@
                         '</label>',
                         '</li>'
                     );
-                    li.find('label').append(document.createTextNode(text));
-                    return li;
                 } else {
                     li = $(
                         '<li' + clss + style + '>' +
@@ -158,9 +156,9 @@
                         '</label>' +
                         '</li>');
                     li.find('input').val(value);
-                    li.find('label').append(document.createTextNode(text));
-                    return li;
                 }
+                li.find('label').append(document.createTextNode(text));
+                return li;
             } else if (!group && $elm.is('optgroup')) {
                 var _group = 'group_' + i,
                     label = $elm.attr('label');
