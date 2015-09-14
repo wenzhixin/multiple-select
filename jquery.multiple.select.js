@@ -28,7 +28,7 @@
         var elWidth = $el.css("width");
         $el.parent().show().attr('style', originalParentStyle);
         if (elWidth=="0px") {
-            elWidth = $el.outerWidth()+20;
+            elWidth = $el.outerWidth() + 20;
         }
 
         this.$el = $el.hide();
