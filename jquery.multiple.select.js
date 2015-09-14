@@ -1,23 +1,34 @@
 /**
- * @author zhixin wen <wenzhixin2010@gmail.com>
- * @version 1.1.0
+ * @author Danila Dergachev <gnomdan@yandex.ru>
+ * @version 1.1.1
  *
- * http://wenzhixin.net.cn/p/multiple-select/
  */
 
-(function ($) {
-
+(function (factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(['jquery'], factory);
+    } else if (typeof module === 'object' && module.exports) {
+        // Node/CommonJS
+        module.exports = factory(require('jquery'));
+    } else {
+        // Browser globals
+        factory(jQuery);
+    }
+}(function ($) {
     'use strict';
 
     function MultipleSelect($el, options) {
         var that = this,
-            name = $el.attr('name') || options.name || ''
+            name = $el.attr('name') || options.name || '';
 
         var originalParentStyle = $el.parent().attr('style') || '';
         $el.parent().hide();
         var elWidth = $el.css("width");
         $el.parent().show().attr('style', originalParentStyle);
-        if (elWidth=="0px") {elWidth = $el.outerWidth()+20}
+        if (elWidth=="0px") {
+            elWidth = $el.outerWidth() + 20;
+        }
 
         this.$el = $el.hide();
         this.options = options;
@@ -52,9 +63,9 @@
             });
         }
 
-        this.selectAllName = 'name="selectAll' + name + '"';
-        this.selectGroupName = 'name="selectGroup' + name + '"';
-        this.selectItemName = 'name="selectItem' + name + '"';
+        this.selectAllName = 'data-ident="selectAll' + name + '"';
+        this.selectGroupName = 'data-ident="selectGroup' + name + '"';
+        this.selectItemName = 'data-ident="selectItem' + name + '"';
     }
 
     MultipleSelect.prototype = {
@@ -123,20 +134,19 @@
                 var value = $elm.val(),
                     text = that.options.textTemplate($elm),
                     selected = $elm.prop('selected'),
-                    style = this.options.styler(value) ? ' style="' + this.options.styler(value) + '"' : '';
+                    style = this.options.styler(value) ? ' style="' + this.options.styler(value) + '"' : '',
+                    li;
 
                 disabled = groupDisabled || $elm.prop('disabled');
                 if ((this.options.blockSeparator > "") && (this.options.blockSeparator == $elm.val())) {
-                    var li = $(
+                    li = $(
                         '<li' + clss + style + '>',
                         '<label class="' + this.options.blockSeparator + (disabled ? 'disabled' : '') + '">',
                         '</label>',
                         '</li>'
                     );
-                    li.find('label').append(document.createTextNode(text));
-                    return li;
                 } else {
-                    var li = $(
+                    li = $(
                         '<li' + clss + style + '>' +
                         '<label' + (disabled ? ' class="disabled"' : '') + '>' +
                         '<input type="' + type + '" ' + this.selectItemName +
@@ -147,9 +157,9 @@
                         '</label>' +
                         '</li>');
                     li.find('input').val(value);
-                    li.find('label').append(document.createTextNode(text));
-                    return li;
                 }
+                li.find('label').append(document.createTextNode(text));
+                return li;
             } else if (!group && $elm.is('optgroup')) {
                 var _group = 'group_' + i,
                     label = $elm.attr('label');
@@ -261,6 +271,16 @@
                 if (that.options.single && that.options.isOpen && !that.options.keepOpen) {
                     that.close();
                 }
+
+                if (that.options.single) {
+                    var clickedVal = $(this).val();
+                    that.$selectItems.filter(function() {
+                        return $(this).val() == clickedVal ? false : true;
+                    }).each(function() {
+                        $(this).prop('checked', false);
+                    });
+                    that.update();
+                }
             });
         },
 
@@ -336,8 +356,9 @@
                     (this.options.displayValues ? selects : this.getSelects('text'))
                         .join(this.options.delimiter));
             }
-            if (this.options.addTitle)
+            if (this.options.addTitle) {
                 $span.prop('title', this.getSelects('text'));
+            }
                 
             // set selects to select
             this.$el.val(this.getSelects());
@@ -593,4 +614,4 @@
             return false;
         }
     };
-})(jQuery);
+}));
