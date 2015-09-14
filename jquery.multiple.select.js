@@ -133,11 +133,12 @@
                 var value = $elm.val(),
                     text = that.options.textTemplate($elm),
                     selected = $elm.prop('selected'),
-                    style = this.options.styler(value) ? ' style="' + this.options.styler(value) + '"' : '';
+                    style = this.options.styler(value) ? ' style="' + this.options.styler(value) + '"' : '',
+                    li;
 
                 disabled = groupDisabled || $elm.prop('disabled');
                 if ((this.options.blockSeparator > "") && (this.options.blockSeparator == $elm.val())) {
-                    var li = $(
+                    li = $(
                         '<li' + clss + style + '>',
                         '<label class="' + this.options.blockSeparator + (disabled ? 'disabled' : '') + '">',
                         '</label>',
@@ -146,7 +147,7 @@
                     li.find('label').append(document.createTextNode(text));
                     return li;
                 } else {
-                    var li = $(
+                    li = $(
                         '<li' + clss + style + '>' +
                         '<label' + (disabled ? ' class="disabled"' : '') + '>' +
                         '<input type="' + type + '" ' + this.selectItemName +
