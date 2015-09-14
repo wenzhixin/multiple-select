@@ -1,4 +1,11 @@
-# Multiple Select
+# Multiple Select fork with UMD support
+
+```bash
+npm i multiple-select-prog666
+```
+```bash
+bower i multiple-select-prog666
+```
 
 Multiple select is a jQuery plugin to select multiple elements with checkboxes :).
 
