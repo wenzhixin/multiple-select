@@ -317,7 +317,8 @@
                 $span.addClass('placeholder').html(this.options.placeholder);
             } else if (this.options.countSelected && selects.length < this.options.minimumCountSelected) {
                 $span.removeClass('placeholder').text(
-                    (this.options.displayValues ? selects : this.getSelects('text'))
+                    (this.options.displayPlaceholderWithValues ? this.options.placeholder + ": " : "")
+                    + (this.options.displayValues ? selects : this.getSelects('text'))
                         .join(this.options.delimiter));
             } else if (this.options.allSelected &&
                 selects.length === this.$selectItems.length + this.$disableItems.length) {
@@ -560,6 +561,7 @@
         displayValues: false,
         delimiter: ', ',
         addTitle: false,
+        displayPlaceholderWithValues: false,
 
         styler: function () {
             return false;
