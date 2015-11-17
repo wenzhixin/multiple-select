@@ -322,19 +322,24 @@
                         .join(this.options.delimiter));
             } else if (this.options.allSelected &&
                 selects.length === this.$selectItems.length + this.$disableItems.length) {
-                $span.removeClass('placeholder').html(this.options.allSelected);
+                $span.removeClass('placeholder').html( (this.options.displayPlaceholderWithValues ? this.options.placeholder + ": " : "") + this.options.allSelected);
             } else if ((this.options.countSelected || this.options.etcaetera) && selects.length > this.options.minimumCountSelected) {
                 if (this.options.etcaetera) {
-                    $span.removeClass('placeholder').text((this.options.displayValues ? selects : this.getSelects('text').slice(0, this.options.minimumCountSelected)).join(this.options.delimiter) + '...');
+                    $span.removeClass('placeholder').text(
+                        (this.options.displayPlaceholderWithValues ? this.options.placeholder + ": " : "")
+                        + (this.options.displayValues ? selects : this.getSelects('text').slice(0, this.options.minimumCountSelected)).join(this.options.delimiter) + '...');
                 }
                 else {
-                    $span.removeClass('placeholder').html(this.options.countSelected
+                    $span.removeClass('placeholder').html(
+                        (this.options.displayPlaceholderWithValues ? this.options.placeholder + ": " : "") 
+                        + this.options.countSelected
                         .replace('#', selects.length)
                         .replace('%', this.$selectItems.length + this.$disableItems.length));
                 }
             } else {
                 $span.removeClass('placeholder').text(
-                    (this.options.displayValues ? selects : this.getSelects('text'))
+                    (this.options.displayPlaceholderWithValues ? this.options.placeholder + ": " : "")
+                    + (this.options.displayValues ? selects : this.getSelects('text'))
                         .join(this.options.delimiter));
             }
             if (this.options.addTitle)
