@@ -2,6 +2,7 @@
 
 ### 1.2.0
 
+* [bug] Fix #184: prevented the dropdown handle error.
 * [enh] INPUT tags should be nameless.
 * [bug] Fix #48: auto hide when the single option is set to true.
 * [bug] Fix #65: show selectAll and hide noResults when open.
