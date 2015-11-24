@@ -836,10 +836,10 @@ Custom the item style.
     <script src="multiple-select.js"></script>
     <script>
         $("select").multipleSelect();
-        $("#setSelectsBtn").click(function() {
+        $("#checkAllBtn").click(function() {
         	$("select").multipleSelect("checkAll");
         });
-        $("#getSelectsBtn").click(function() {
+        $("#uncheckAllBtn").click(function() {
         	$("select").multipleSelect("uncheckAll");
         });
     </script>
