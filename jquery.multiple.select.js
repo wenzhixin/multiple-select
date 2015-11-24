@@ -272,7 +272,8 @@
                 that.options.onOptgroupClick({
                     label: $(this).parent().text(),
                     checked: checked,
-                    children: $children.get()
+                    children: $children.get(),
+                    instance: that
                 });
             });
             this.$selectItems.off('click').on('click', function () {
@@ -282,7 +283,8 @@
                 that.options.onClick({
                     label: $(this).parent().text(),
                     value: $(this).val(),
-                    checked: $(this).prop('checked')
+                    checked: $(this).prop('checked'),
+                    instance: that
                 });
 
                 if (that.options.single && that.options.isOpen && !that.options.keepOpen) {
@@ -365,7 +367,7 @@
             }
                 
             // set selects to select
-            this.$el.val(this.getSelects());
+            this.$el.val(this.getSelects()).trigger('change');
 
             // add selected class to selected li
             this.$drop.find('li').removeClass('selected');
