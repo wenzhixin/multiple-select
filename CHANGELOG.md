@@ -2,6 +2,7 @@
 
 ### 1.2.0
 
+* [bug] Prevents `updateSelectAll()` from calling `options.onCheckAll()` on init.
 * [enh] Added `labelTemplate` option.
 * [bug] Fix #188: Automatically set Group when all child was selected.
 * [bug] Fixed filter functionality with 'no-results' label behavior.
