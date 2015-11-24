@@ -499,6 +499,11 @@
         refresh: function () {
             this.init();
         },
+        
+        refreshAll: function () {
+            this.$drop.html('');
+            this.init();
+        },
 
         filter: function () {
             var that = this,
@@ -544,7 +549,7 @@
                 'enable', 'disable',
                 'checkAll', 'uncheckAll',
                 'focus', 'blur',
-                'refresh', 'close'
+                'refresh', 'refreshAll', 'close'
             ];
 
         this.each(function () {
