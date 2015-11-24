@@ -2,6 +2,7 @@
 
 ### 1.2.0
 
+* [enh] INPUT tags should be nameless.
 * [bug] Fix #48: auto hide when the single option is set to true.
 * [bug] Fix #65: show selectAll and hide noResults when open.
 * [bug] Fix #45, #64: update width option to support a percentage setting.

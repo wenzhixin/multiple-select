@@ -28,7 +28,8 @@
     };
 
     function MultipleSelect($el, options) {
-        var name = $el.attr('name') || options.name || '';
+        var that = this,
+            name = $el.attr('name') || options.name || '';
 
         this.options = options;
 
@@ -72,6 +73,20 @@
         this.selectAllName = 'data-name="selectAll' + name + '"';
         this.selectGroupName = 'data-name="selectGroup' + name + '"';
         this.selectItemName = 'data-name="selectItem' + name + '"';
+
+        if (!this.options.keepOpen) {
+            $('body').click(function (e) {
+                if ($(e.target)[0] === that.$choice[0] ||
+                    $(e.target).parents('.ms-choice')[0] === that.$choice[0]) {
+                    return;
+                }
+                if (($(e.target)[0] === that.$drop[0] ||
+                    $(e.target).parents('.ms-drop')[0] !== that.$drop[0] && e.target !== $el[0]) &&
+                    that.options.isOpen) {
+                    that.close();
+                }
+            });
+        }
     }
 
     MultipleSelect.prototype = {
@@ -124,20 +139,6 @@
 
             if (this.options.isOpen) {
                 this.open();
-            }
-
-            if (!this.options.keepOpen) {
-                $('body').click(function (e) {
-                    if ($(e.target)[0] === that.$choice[0] ||
-                        $(e.target).parents('.ms-choice')[0] === that.$choice[0]) {
-                        return;
-                    }
-                    if (($(e.target)[0] === that.$drop[0] ||
-                        $(e.target).parents('.ms-drop')[0] !== that.$drop[0]) &&
-                        that.options.isOpen) {
-                        that.close();
-                    }
-                });
             }
         },
 
