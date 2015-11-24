@@ -96,6 +96,8 @@
             var that = this,
                 $ul = $('<ul></ul>');
 
+            this.$drop.html('');
+
             if (this.options.filter) {
                 this.$drop.append([
                     '<div class="ms-search">',
@@ -121,7 +123,7 @@
                 $ul.append(that.optionToHtml(i, elm));
             });
             $ul.append(sprintf('<li class="ms-no-results">%s</li>', this.options.noMatchesFound));
-            this.$drop.html('').append($ul);
+            this.$drop.append($ul);
 
             this.$drop.find('ul').css('max-height', this.options.maxHeight + 'px');
             this.$drop.find('.multiple').css('width', this.options.multipleWidth + 'px');
