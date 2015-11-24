@@ -516,9 +516,11 @@
             var that = this,
                 text = $.trim(this.$searchInput.val()).toLowerCase();
             if (text.length === 0) {
+                this.$selectAll.parent().show();
                 this.$selectItems.parent().show();
                 this.$disableItems.parent().show();
                 this.$selectGroups.parent().show();
+                this.$noResults.hide();
             } else {
                 this.$selectItems.each(function () {
                     var $parent = $(this).parent();
