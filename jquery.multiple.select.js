@@ -75,7 +75,7 @@
         this.selectItemName = 'data-name="selectItem' + name + '"';
 
         if (!this.options.keepOpen) {
-            $('html').click(function (e) {
+            $(document).click(function (e) {
                 if ($(e.target)[0] === that.$choice[0] ||
                     $(e.target).parents('.ms-choice')[0] === that.$choice[0]) {
                     return;
