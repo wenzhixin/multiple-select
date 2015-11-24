@@ -2,6 +2,7 @@
 
 ### 1.2.0
 
+* [enh] Update `jquery.multiple.select.js` to `multiple-select.js`.
 * [enh] Trigger change for select after set of new value.
 * [bug] Prevents `updateSelectAll()` from calling `options.onCheckAll()` on init.
 * [enh] Added `labelTemplate` option.

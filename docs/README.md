@@ -63,7 +63,7 @@ and turns it into:
 	    ...
 	    <option value="12">December</option>
 	</select>
-	<script src="jquery.multiple.select.js"></script>
+	<script src="multiple-select.js"></script>
 	<script>
 		$('select').multipleSelect();
 	</script>
@@ -105,7 +105,7 @@ and turns it into:
 	    ...
 	    <option value="12">December</option>
 	</select>
-	<script src="jquery.multiple.select.js"></script>
+	<script src="multiple-select.js"></script>
 	<script>
 		$('select').multipleSelect();
 	</script>
@@ -148,7 +148,7 @@ and turns it into:
 	    <option value="3" selected="selected" disabled="disabled">March</option>
 	    ...
 	</select>
-	<script src="jquery.multiple.select.js"></script>
+	<script src="multiple-select.js"></script>
 	<script>
 		$('select').multipleSelect();
 	</script>
@@ -199,7 +199,7 @@ and turns it into:
 			<option value="9">Option 9</option>
 		</optgroup>
 	</select>
-	<script src="jquery.multiple.select.js"></script>
+	<script src="multiple-select.js"></script>
 	<script>
 		$('select').multipleSelect();
 	</script>
@@ -250,7 +250,7 @@ and turns it into:
 			<option value="9">Option 9</option>
 		</optgroup>
 	</select>
-	<script src="jquery.multiple.select.js"></script>
+	<script src="multiple-select.js"></script>
 	<script>
 		$('select').multipleSelect();
 	</script>
@@ -286,7 +286,7 @@ and turns it into:
         ...
         <option value="12">December</option>
     </select>
-    <script src="jquery.multiple.select.js"></script>
+    <script src="multiple-select.js"></script>
     <script>
         $("select").multipleSelect({
         	placeholder: "Here is the placeholder"
@@ -344,7 +344,7 @@ Multiple Select supports to show multiple items in single row.
         ...
         <option value="30">30</option>
     </select>
-    <script src="jquery.multiple.select.js"></script>
+    <script src="multiple-select.js"></script>
     <script>
         $("select").multipleSelect({
         	width: 460,
@@ -400,7 +400,7 @@ Multiple Select supports to show multiple items in single row with optgroups.
 			<option value="15">15</option>
 		</optgroup>
     </select>
-    <script src="jquery.multiple.select.js"></script>
+    <script src="multiple-select.js"></script>
     <script>
         $("select").multipleSelect({
         	multiple: true,
@@ -432,7 +432,7 @@ Multiple Select supports to show multiple items in single row with optgroups.
         ...
         <option value="4">Fourth</option>
     </select>
-    <script src="jquery.multiple.select.js"></script>
+    <script src="multiple-select.js"></script>
     <script>
         $("select").multipleSelect({
         	selectAll: false
@@ -462,7 +462,7 @@ Multiple Select supports to show multiple items in single row with optgroups.
         ...
         <option value="4" selected="selected">Fourth</option>
     </select>
-    <script src="jquery.multiple.select.js"></script>
+    <script src="multiple-select.js"></script>
     <script>
         $("select").multipleSelect({
         	single: true
@@ -502,7 +502,7 @@ Set the select dropdown in top position.
 	    ...
 	    <option value="12">December</option>
 	</select>
-	<script src="jquery.multiple.select.js"></script>
+	<script src="multiple-select.js"></script>
 	<script>
 		$('select').multipleSelect({
 		    position: 'top'
@@ -559,7 +559,7 @@ Set the select dropdown in top position.
         ...
         <option value="31">789</option>
     </select>
-    <script src="jquery.multiple.select.js"></script>
+    <script src="multiple-select.js"></script>
     <script>
         $("select").multipleSelect({
         	filter: true
@@ -620,7 +620,7 @@ Set the select dropdown in top position.
 			...
 		...
     </select>
-    <script src="jquery.multiple.select.js"></script>
+    <script src="multiple-select.js"></script>
     <script>
         $("select").multipleSelect({
         	filter: true,
@@ -659,7 +659,7 @@ Set the select dropdown in top position.
 	    ...
 	    <option value="12">December</option>
 	</select>
-	<script src="jquery.multiple.select.js"></script>
+	<script src="multiple-select.js"></script>
 	<script>
 		$('select').multipleSelect({
 		    isOpen: true,
@@ -700,7 +700,7 @@ Custom the item style.
 	    ...
 	    <option value="12">December</option>
 	</select>
-	<script src="jquery.multiple.select.js"></script>
+	<script src="multiple-select.js"></script>
 	<script>
 		$('select').multipleSelect({
 		    styler: function(value) {
@@ -746,7 +746,7 @@ Custom the item style.
         ...
         <option value="7">Sunday</option>
     </select>
-    <script src="jquery.multiple.select.js"></script>
+    <script src="multiple-select.js"></script>
     <script>
         $("select").multipleSelect();
         $("#setSelectsBtn").click(function() {
@@ -790,7 +790,7 @@ Custom the item style.
         ...
         <option value="7">Sunday</option>
     </select>
-    <script src="jquery.multiple.select.js"></script>
+    <script src="multiple-select.js"></script>
     <script>
         $("select").multipleSelect();
         $("#setSelectsBtn").click(function() {
@@ -833,7 +833,7 @@ Custom the item style.
         ...
         <option value="7">Sunday</option>
     </select>
-    <script src="jquery.multiple.select.js"></script>
+    <script src="multiple-select.js"></script>
     <script>
         $("select").multipleSelect();
         $("#setSelectsBtn").click(function() {
@@ -876,7 +876,7 @@ Custom the item style.
         ...
         <option value="7">Sunday</option>
     </select>
-    <script src="jquery.multiple.select.js"></script>
+    <script src="multiple-select.js"></script>
     <script>
         $("select").multipleSelect();
         $("#focusBtn").click(function() {
@@ -924,7 +924,7 @@ If you're dynamically adding/removing option tags on the original select via AJA
         ...
         <option value="3">3</option>
     </select>
-    <script src="jquery.multiple.select.js"></script>
+    <script src="multiple-select.js"></script>
     <script>
         $("select").multipleSelect();
         $("#refreshAdd").click(function() {
@@ -1009,7 +1009,7 @@ If you're dynamically adding/removing option tags on the original select via AJA
 			...
 		...
     </select>
-    <script src="jquery.multiple.select.js"></script>
+    <script src="multiple-select.js"></script>
     <script>
         $("select").multipleSelect({
         	onOpen: function() {

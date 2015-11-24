@@ -8,7 +8,7 @@
   "main" : [
     "multiple-select.css",
     "multiple-select.png",
-    "jquery.multiple.select.js"
+    "multiple-select.js"
   ],
   "description": "A jQuery plugin to select multiple elements with checkboxes",
   "license": "MIT",
