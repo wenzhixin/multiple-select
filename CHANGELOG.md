@@ -2,6 +2,9 @@
 
 ### 1.2.0
 
+* [enh] Added `labelTemplate` option.
+* [bug] Fix #188: Automatically set Group when all child was selected.
+* [bug] Fixed filter functionality with 'no-results' label behavior.
 * [bug] Fix #184: prevented the dropdown handle error.
 * [enh] INPUT tags should be nameless.
 * [bug] Fix #48: auto hide when the single option is set to true.

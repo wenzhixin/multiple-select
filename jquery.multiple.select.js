@@ -175,8 +175,7 @@
             }
             if ($elm.is('optgroup')) {
                 var group = 'group_' + i,
-                    label = $elm.attr('label'),
-                    text = that.options.textTemplate($elm),
+                    label = that.options.labelTemplate($elm),
                     $group = $('<div/>');
 
                 disabled = $elm.prop('disabled');
@@ -606,6 +605,9 @@
         },
         textTemplate: function ($elm) {
             return $elm.text();
+        },
+        labelTemplate: function ($elm) {
+            return $elm.attr('label');
         },
 
         onOpen: function () {
