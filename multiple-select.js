@@ -185,7 +185,8 @@
                 $group.append([
                     '<li class="group">',
                     sprintf('<label class="optgroup %s" data-group="%s">', disabled ? 'disabled' : '', group),
-                    this.options.hideOptgroupCheckboxes ? '' : sprintf('<input type="checkbox" %s %s>',
+                    this.options.hideOptgroupCheckboxes || this.options.single ? '' :
+                        sprintf('<input type="checkbox" %s %s>',
                         this.selectGroupName, disabled ? 'disabled="disabled"' : ''),
                     label,
                     '</label>',
