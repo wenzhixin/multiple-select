@@ -316,7 +316,7 @@
             }
             this.options.isOpen = true;
             this.$choice.find('>div').addClass('open');
-            this.$drop.show();
+            this.$drop[this.animateMethod('show')]();
 
             // fix filter bug: no results show
             this.$selectAll.parent().show();
@@ -348,7 +348,7 @@
         close: function () {
             this.options.isOpen = false;
             this.$choice.find('>div').removeClass('open');
-            this.$drop.hide();
+            this.$drop[this.animateMethod('hide')]();
             if (this.options.container) {
                 this.$parent.append(this.$drop);
                 this.$drop.css({
@@ -357,6 +357,21 @@
                 });
             }
             this.options.onClose();
+        },
+
+        animateMethod: function (method) {
+            var methods = {
+                show: {
+                    fade: 'fadeIn',
+                    slide: 'slideDown'
+                },
+                hide: {
+                    fade: 'fadeOut',
+                    slide: 'slideUp'
+                }
+            };
+
+            return methods[method][this.options.animate] || method;
         },
 
         update: function (isInit) {
@@ -614,6 +629,7 @@
         container: null,
         position: 'bottom',
         keepOpen: false,
+        animate: 'none', // 'none', 'fade', 'slide'
         displayValues: false,
         delimiter: ', ',
         addTitle: false,
@@ -659,7 +675,7 @@
         onClick: function () {
             return false;
         },
-        onFilter: function (text) {
+        onFilter: function () {
             return false;
         }
     };
