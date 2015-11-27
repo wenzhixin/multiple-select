@@ -380,7 +380,7 @@
             if (this.options.addTitle) {
                 $span.prop('title', this.getSelects('text'));
             }
-                
+
             // set selects to select
             this.$el.val(this.getSelects()).trigger('change');
 
@@ -466,14 +466,14 @@
             });
             this.$selectAll.prop('checked', this.$selectItems.length ===
                 this.$selectItems.filter(':checked').length);
-				
+
             $.each(that.$selectGroups, function (i, val) {
                 var group = $(val).parent().attr('data-group'),
                     $children = that.$selectItems.filter('[data-group="' + group + '"]');
                 $(val).prop('checked', $children.length &&
                     $children.length === $children.filter(':checked').length);
-            });		
-			
+            });
+
             this.update();
         },
 
@@ -559,6 +559,7 @@
             allowedMethods = [
                 'getSelects', 'setSelects',
                 'enable', 'disable',
+                'open','close',
                 'checkAll', 'uncheckAll',
                 'focus', 'blur',
                 'refresh', 'close'
