@@ -520,6 +520,7 @@
         filter: function () {
             var that = this,
                 text = $.trim(this.$searchInput.val()).toLowerCase();
+
             if (text.length === 0) {
                 this.$selectAll.parent().show();
                 this.$selectItems.parent().show();
@@ -550,6 +551,7 @@
             }
             this.updateOptGroupSelect();
             this.updateSelectAll();
+            this.options.onFilter(text);
         }
     };
 
@@ -655,6 +657,9 @@
             return false;
         },
         onClick: function () {
+            return false;
+        },
+        onFilter: function (text) {
             return false;
         }
     };
