@@ -561,7 +561,7 @@
             allowedMethods = [
                 'getSelects', 'setSelects',
                 'enable', 'disable',
-                'open','close',
+                'open', 'close',
                 'checkAll', 'uncheckAll',
                 'focus', 'blur',
                 'refresh', 'close'

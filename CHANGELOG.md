@@ -5,6 +5,7 @@
 * [bug] Fix #84: single select with Optgroups bug.
 * [bug] Fix #154: special character problem.
 * [enh] Added `dropWidth` option.
+* [enh] Added `open` and `close` methods.
 
 ### 1.2.0
 
