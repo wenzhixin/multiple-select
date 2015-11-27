@@ -56,7 +56,9 @@
             this.options.placeholder));
 
         // default position is bottom
-        this.$drop = $(sprintf('<div class="ms-drop %s"></div>', this.options.position));
+        this.$drop = $(sprintf('<div class="ms-drop %s"%s></div>',
+            this.options.position,
+            sprintf(' style="width: %s"', this.options.dropWidth)));
 
         this.$el.after(this.$parent);
         this.$parent.append(this.$choice);
@@ -178,10 +180,10 @@
                 return $el;
             }
             if ($elm.is('optgroup')) {
-                var group = 'group_' + i,
-                    label = that.options.labelTemplate($elm),
+                var label = that.options.labelTemplate($elm),
                     $group = $('<div/>');
 
+                group = 'group_' + i;
                 disabled = $elm.prop('disabled');
 
                 $group.append([
@@ -299,7 +301,7 @@
                 if (that.options.single) {
                     var clickedVal = $(this).val();
                     that.$selectItems.filter(function() {
-                        return $(this).val() == clickedVal ? false : true;
+                        return $(this).val() !== clickedVal;
                     }).each(function() {
                         $(this).prop('checked', false);
                     });
@@ -534,7 +536,7 @@
                     var $parent = $(this).parent();
                     var group = $parent.attr('data-group'),
                         $items = that.$selectItems.filter(':visible');
-                    $parent[$items.filter('[data-group="' + group + '"]').length === 0 ? 'hide' : 'show']();
+                    $parent[$items.filter(sprintf('[data-group="%s"]', group)).length ? 'show' : 'hide']();
                 });
 
                 //Check if no matches found
@@ -605,6 +607,7 @@
         single: false,
         filter: false,
         width: undefined,
+        dropWidth: undefined,
         maxHeight: 250,
         container: null,
         position: 'bottom',

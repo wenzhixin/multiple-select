@@ -1,5 +1,11 @@
 ## Changelog
 
+### 1.2.1
+
+* [bug] Fix #84: single select with Optgroups bug.
+* [bug] Fix #154: special character problem.
+* [enh] Added `dropWidth` option.
+
 ### 1.2.0
 
 * [enh] Update `jquery.multiple.select.js` to `multiple-select.js`.
