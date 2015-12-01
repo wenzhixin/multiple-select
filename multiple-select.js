@@ -37,8 +37,10 @@
         this.$el = $el.hide();
 
         // label element
-        this.$label = this.$el.closest('label') ||
-            this.$el.attr('id') && $(sprintf('label[for="%s"]', this.$el.attr('id').replace(/:/g, '\\:')));
+        this.$label = this.$el.closest('label');
+        if (this.$label.length === 0 && this.$el.attr('id')) {
+            this.$label = $(sprintf('label[for="%s"]', this.$el.attr('id').replace(/:/g, '\\:')));
+        }
 
         // restore class and title from select element
         this.$parent = $(sprintf(
