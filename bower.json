@@ -13,6 +13,6 @@
   "description": "A jQuery plugin to select multiple elements with checkboxes",
   "license": "MIT",
   "dependencies": {
-    "jquery": "1.7.x"
+    "jquery": ">=1.7.0"
   }
 }
