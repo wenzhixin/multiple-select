@@ -480,11 +480,13 @@
         setSelects: function (values) {
             var that = this;
             this.$selectItems.prop('checked', false);
+            this.$disableItems.prop('checked', false);
             $.each(values, function (i, value) {
                 that.$selectItems.filter(sprintf('[value="%s"]', value)).prop('checked', true);
+                that.$disableItems.filter(sprintf('[value="%s"]', value)).prop('checked', true);
             });
             this.$selectAll.prop('checked', this.$selectItems.length ===
-                this.$selectItems.filter(':checked').length);
+                this.$selectItems.filter(':checked').length + this.$disableItems.filter(':checked').length));
 
             $.each(that.$selectGroups, function (i, val) {
                 var group = $(val).parent().attr('data-group'),
