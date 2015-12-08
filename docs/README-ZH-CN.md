@@ -2,7 +2,7 @@
 
 Multiple select 是一个通过复选框来选择多元素的 jQuery 插件:).
 
-*当前版本: 1.0.9*
+*当前版本: 1.2.0*
 
 ## Requirements
 
@@ -61,7 +61,7 @@ Multiple Select 可以将标准的复选框：
 	    ...
 	    <option value="12">December</option>
 	</select>
-	<script src="jquery.multiple.select.js"></script>
+	<script src="multiple-select.js"></script>
 	<script>
 		$('select').multipleSelect();
 	</script>
@@ -103,7 +103,7 @@ Multiple Select 可以将标准的复选框：
 	    ...
 	    <option value="12">December</option>
 	</select>
-	<script src="jquery.multiple.select.js"></script>
+	<script src="multiple-select.js"></script>
 	<script>
 		$('select').multipleSelect();
 	</script>
@@ -146,7 +146,7 @@ Multiple Select 可以将标准的复选框：
 	    <option value="3" selected="selected" disabled="disabled">March</option>
 	    ...
 	</select>
-	<script src="jquery.multiple.select.js"></script>
+	<script src="multiple-select.js"></script>
 	<script>
 		$('select').multipleSelect();
 	</script>
@@ -197,7 +197,7 @@ Multiple Select 可以将标准的复选框：
 			<option value="9">Option 9</option>
 		</optgroup>
 	</select>
-	<script src="jquery.multiple.select.js"></script>
+	<script src="multiple-select.js"></script>
 	<script>
 		$('select').multipleSelect();
 	</script>
@@ -248,7 +248,7 @@ Multiple Select 可以将标准的复选框：
 			<option value="9">Option 9</option>
 		</optgroup>
 	</select>
-	<script src="jquery.multiple.select.js"></script>
+	<script src="multiple-select.js"></script>
 	<script>
 		$('select').multipleSelect();
 	</script>
@@ -284,7 +284,7 @@ Multiple Select 可以将标准的复选框：
         ...
         <option value="12">December</option>
     </select>
-    <script src="jquery.multiple.select.js"></script>
+    <script src="multiple-select.js"></script>
     <script>
         $("select").multipleSelect({
         	placeholder: "Here is the placeholder"
@@ -342,7 +342,7 @@ Multiple Select 支持在一行中显示多个选项：
         ...
         <option value="30">30</option>
     </select>
-    <script src="jquery.multiple.select.js"></script>
+    <script src="multiple-select.js"></script>
     <script>
         $("select").multipleSelect({
         	width: 460,
@@ -398,7 +398,7 @@ Multiple Select 支持在一行中显示多个选项以及支持分组。
 			<option value="15">15</option>
 		</optgroup>
     </select>
-    <script src="jquery.multiple.select.js"></script>
+    <script src="multiple-select.js"></script>
     <script>
         $("select").multipleSelect({
         	multiple: true,
@@ -429,7 +429,7 @@ Multiple Select 支持在一行中显示多个选项以及支持分组。
         ...
         <option value="4">Fourth</option>
     </select>
-    <script src="jquery.multiple.select.js"></script>
+    <script src="multiple-select.js"></script>
     <script>
         $("select").multipleSelect({
         	selectAll: false
@@ -459,7 +459,7 @@ Multiple Select 支持在一行中显示多个选项以及支持分组。
         ...
         <option value="4" selected="selected">Fourth</option>
     </select>
-    <script src="jquery.multiple.select.js"></script>
+    <script src="multiple-select.js"></script>
     <script>
         $("select").multipleSelect({
         	single: true
@@ -499,7 +499,7 @@ Multiple Select 支持在一行中显示多个选项以及支持分组。
 	    ...
 	    <option value="12">December</option>
 	</select>
-	<script src="jquery.multiple.select.js"></script>
+	<script src="multiple-select.js"></script>
 	<script>
 		$('select').multipleSelect({
 		    position: 'top'
@@ -556,7 +556,7 @@ Multiple Select 支持在一行中显示多个选项以及支持分组。
         ...
         <option value="31">789</option>
     </select>
-    <script src="jquery.multiple.select.js"></script>
+    <script src="multiple-select.js"></script>
     <script>
         $("select").multipleSelect({
         	filter: true
@@ -617,7 +617,7 @@ Multiple Select 支持在一行中显示多个选项以及支持分组。
 			...
 		...
     </select>
-    <script src="jquery.multiple.select.js"></script>
+    <script src="multiple-select.js"></script>
     <script>
         $("select").multipleSelect({
         	filter: true,
@@ -657,7 +657,7 @@ Multiple Select 支持在一行中显示多个选项以及支持分组。
         ...
         <option value="7">Sunday</option>
     </select>
-    <script src="jquery.multiple.select.js"></script>
+    <script src="multiple-select.js"></script>
     <script>
         $("select").multipleSelect();
         $("#setSelectsBtn").click(function() {
@@ -701,7 +701,7 @@ Multiple Select 支持在一行中显示多个选项以及支持分组。
         ...
         <option value="7">Sunday</option>
     </select>
-    <script src="jquery.multiple.select.js"></script>
+    <script src="multiple-select.js"></script>
     <script>
         $("select").multipleSelect();
         $("#setSelectsBtn").click(function() {
@@ -744,7 +744,7 @@ Multiple Select 支持在一行中显示多个选项以及支持分组。
         ...
         <option value="7">Sunday</option>
     </select>
-    <script src="jquery.multiple.select.js"></script>
+    <script src="multiple-select.js"></script>
     <script>
         $("select").multipleSelect();
         $("#setSelectsBtn").click(function() {
@@ -792,7 +792,7 @@ Multiple Select 支持在一行中显示多个选项以及支持分组。
         ...
         <option value="3">3</option>
     </select>
-    <script src="jquery.multiple.select.js"></script>
+    <script src="multiple-select.js"></script>
     <script>
         $("select").multipleSelect();
         $("#refreshAdd").click(function() {
@@ -877,7 +877,7 @@ Multiple Select 支持在一行中显示多个选项以及支持分组。
 			...
 		...
     </select>
-    <script src="jquery.multiple.select.js"></script>
+    <script src="multiple-select.js"></script>
     <script>
         $("select").multipleSelect({
         	onOpen: function() {

@@ -1,5 +1,49 @@
 ## Changelog
 
+### 1.2.1
+
+* [bug] Fix #84: single select with Optgroups bug.
+* [bug] Fix #154: special character problem.
+* [enh] Added `dropWidth` option.
+* [enh] Added `open` and `close` methods.
+
+### 1.2.0
+
+* [enh] Update `jquery.multiple.select.js` to `multiple-select.js`.
+* [bug] Fix filter not match bug.
+* [enh] Trigger change for select after set of new value.
+* [bug] Prevents `updateSelectAll()` from calling `options.onCheckAll()` on init.
+* [enh] Added `labelTemplate` option.
+* [bug] Fix #188: Automatically set Group when all child was selected.
+* [bug] Fixed filter functionality with 'no-results' label behavior.
+* [bug] Fix #184: prevented the dropdown handle error.
+* [enh] INPUT tags should be nameless.
+* [bug] Fix #48: auto hide when the single option is set to true.
+* [bug] Fix #65: show selectAll and hide noResults when open.
+* [bug] Fix #45, #64: update width option to support a percentage setting.
+* [bug] Trigger the checkbox on the entire line.
+* [bug] Added `noMatchesFound` option.
+* [bug] Update `seperator` to `separator`.
+* [enh] Allow object of options along with initial method.
+* [enh] Add a `filterAcceptOnEnter` option.
+* [enh] Put class on ms-parent div instead of ul.
+* [bug] Fixed #99: connect select back to its label.
+* [enh] Added `hideOptgroupCheckboxes` option to hide optgroup checkboxes.
+* [enh] Added `displayValues` and `delimiter` options.
+* [enh] Added `textTemplate` option to custom the text.
+* [enh] Added `selectAllDelimiter` option.
+* [enh] Added `ellipsis` option.
+* [enh] Get percentage width, if used.
+* [bug] Fix #134: spelling error.
+* [bug] Fixed the error when element id's contain colons.
+* [bug] Fix current selected element not displayed in newer jquery versions.
+* [bug] Fix #148 plain text stored to HTML.
+* [bug] Update multiple-select.png.
+* [enh] Added 'close' to allowedMethods.
+* [bug] Prevent dropdown from closing occasionally when clicking on checkbox.
+* [bug] Fixed dropdown not closing when focus was lost.
+* [enh] Support for add title (tooltip) on the select list.
+
 ### 1.1.0
 
 * Fix #63: Add ```keepOpen``` option.
