@@ -405,7 +405,7 @@
 
             // add selected class to selected li
             this.$drop.find('li').removeClass('selected');
-            this.$drop.find(sprintf('input[%s]:checked', this.selectItemName)).each(function () {
+            this.$drop.find('input:checked').each(function () {
                 $(this).parents('li').first().addClass('selected');
             });
 
