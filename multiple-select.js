@@ -211,9 +211,7 @@
                     '<li class="ms-select-all">',
                     '<label>',
                     sprintf('<input type="checkbox" %s /> ', this.selectAllName),
-                    this.options.selectAllDelimiter[0],
-                    this.options.selectAllText,
-                    this.options.selectAllDelimiter[1],
+                    this.options.formatSelectAll(),
                     '</label>',
                     '</li>'
                 ].join(''));
@@ -222,7 +220,7 @@
             $.each(this.$el.children(), function (i, elm) {
                 $ul.append(that.optionToHtml(i, elm));
             });
-            $ul.append(sprintf('<li class="ms-no-results">%s</li>', this.options.noMatchesFound));
+            $ul.append(sprintf('<li class="ms-no-results">%s</li>', this.options.formatNoMatchesFound()));
             this.$drop.append($ul);
 
             this.$drop.find('ul').css('max-height', this.options.maxHeight + 'px');
@@ -244,7 +242,7 @@
             }
 
             if (this.options.openOnHover) {
-                $(".ms-parent").hover(function (e) {
+                $('.ms-parent').hover(function (e) {
                     that.open();
                 });
             }
@@ -485,13 +483,13 @@
 
             if (sl === 0) {
                 $span.addClass('placeholder').html(this.options.placeholder);
-            } else if (this.options.allSelected && sl === this.$selectItems.length + this.$disableItems.length) {
-                $span.removeClass('placeholder').html(this.options.allSelected);
+            } else if (this.options.formatAllSelected() && sl === this.$selectItems.length + this.$disableItems.length) {
+                $span.removeClass('placeholder').html(this.options.formatAllSelected);
             } else if (this.options.ellipsis && sl > this.options.minimumCountSelected) {
                 $span.removeClass('placeholder').text(selects.slice(0, this.options.minimumCountSelected)
                     .join(this.options.delimiter) + '...');
-            } else if (this.options.countSelected && sl > this.options.minimumCountSelected) {
-                $span.removeClass('placeholder').html(this.options.countSelected
+            } else if (this.options.formatCountSelected() && sl > this.options.minimumCountSelected) {
+                $span.removeClass('placeholder').html(this.options.formatCountSelected()
                     .replace('#', selects.length)
                     .replace('%', this.$selectItems.length + this.$disableItems.length));
             } else {
@@ -608,12 +606,6 @@
             this.$choice.addClass('disabled');
         },
 
-        destroy: function () {
-            this.$el.show();
-            this.$parent.remove();
-            delete $.fn.multipleSelect;
-        },
-
         checkAll: function () {
             this.$selectItems.prop('checked', true);
             this.$selectGroups.prop('checked', true);
@@ -685,6 +677,12 @@
             this.updateOptGroupSelect();
             this.updateSelectAll();
             this.options.onFilter(text);
+        },
+
+        destroy: function () {
+            this.$el.before(this.$parent);
+            this.$parent.remove();
+            delete $.fn.multipleSelect;
         }
     };
 
@@ -718,6 +716,10 @@
                     throw 'Unknown method: ' + option;
                 }
                 value = data[option](args[1]);
+
+                if (option === 'destroy') {
+                    $this.removeData('multipleSelect');
+                }
             } else {
                 data.init();
                 if (args[1]) {
@@ -731,34 +733,48 @@
 
     $.fn.multipleSelect.defaults = {
         name: '',
-        isOpen: false,
         placeholder: '',
         selectAll: true,
-        selectAllDelimiter: ['[', ']'],
+        allSelected: true,
+
+        displayType: 'countSelected',
+        displayValues: false,
+        displayTitle: false,
+        displayDelimiter: ', ',
         minimumCountSelected: 3,
         ellipsis: false,
+
+        single: false,
         multiple: false,
         multipleWidth: 80,
-        single: false,
-        filter: false,
+        hideOptgroupCheckboxes: false,
         width: undefined,
         dropWidth: undefined,
         maxHeight: 250,
-        container: null,
         position: 'bottom',
+
+        isOpen: false,
         keepOpen: false,
-        animate: 'none', // 'none', 'fade', 'slide'
-        displayValues: false,
-        delimiter: ', ',
-        addTitle: false,
-        filterAcceptOnEnter: false,
-        hideOptgroupCheckboxes: false,
         openOnHover: false,
 
-        selectAllText: 'Select all',
-        allSelected: 'All selected',
-        countSelected: '# of % selected',
-        noMatchesFound: 'No matches found',
+        filter: false,
+        filterPlaceholder: '',
+        filterAcceptOnEnter: false,
+        container: null,
+        animate: 'none',
+
+        formatSelectAll: function () {
+            return '[Select all]';
+        },
+        formatAllSelected: function () {
+            return 'All selected';
+        },
+        formatCountSelected: function () {
+            return '# of % selected';
+        },
+        formatNoMatchesFound: function () {
+            return 'No matches found';
+        },
 
         styler: function () {
             return false;
