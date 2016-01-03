@@ -745,7 +745,7 @@
             return false;
         },
         textTemplate: function ($elm) {
-            return $elm.text();
+            return $elm.html();
         },
         labelTemplate: function ($elm) {
             return $elm.attr('label');
