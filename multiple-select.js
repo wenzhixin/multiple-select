@@ -254,7 +254,7 @@
 
             if ($elm.is('option')) {
                 var value = $elm.val(),
-                    text = that.options.textTemplate($elm),
+                    html = $elm.html(),
                     selected = $elm.prop('selected'),
                     style = sprintf('style="%s"', this.options.styler(value)),
                     $el;
@@ -269,7 +269,7 @@
                         selected ? ' checked="checked"' : '',
                         disabled ? ' disabled="disabled"' : '',
                         sprintf(' data-group="%s"', group)),
-                    text,
+                    html,
                     '</label>',
                     '</li>'
                 ].join(''));
