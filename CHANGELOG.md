@@ -13,6 +13,7 @@
 * [bug] Fixed disable issue.
 * [enh] Add selected class to 'select all' option.
 * [enh] Added logic to perform accent insensitive compare when filtering values.
+* [bug] Fix #264: updated the default of textTemplate to .html().
 
 ### 1.2.0
 
