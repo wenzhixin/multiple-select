@@ -1,2 +1,6 @@
 /bower_components/
 /tools
+*.name
+.idea/encodings.xml
+*.xml
+.idea/multiple-select.iml
