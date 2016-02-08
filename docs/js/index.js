@@ -134,5 +134,9 @@ $(function() {
             isOpen: true,
             keepOpen: true
         });
+
+        $('#e22').find('select').multipleSelect({
+            openOnHover: true
+        });
     });
 }); 
