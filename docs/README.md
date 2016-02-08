@@ -1088,6 +1088,39 @@ $('select').multipleSelect('destroy');
 </body>
 ```
 
+### OpenOnHover
+
+<p id="e22">
+	<select class="w300" multiple="multiple">
+		<option value="1">Monday</option>
+		<option value="2">Tuesday</option>
+		<option value="3">Wednesday</option>
+		<option value="4">Thursday</option>
+		<option value="5">Friday</option>
+		<option value="6">Saturday</option>
+		<option value="7">Sunday</option>
+	</select>
+</p>
+
+``` html
+<head>
+	<link href="multiple-select.css" rel="stylesheet"/>
+</head>
+<body>
+	<select multiple="multiple">
+        <option value="1">Monday</option>
+        ...
+        <option value="7">Sunday</option>
+    </select>
+    <script src="multiple-select.js"></script>
+    <script>
+        $("select").multipleSelect({
+            openOnHover: true
+        });
+    </script>
+</body>
+```
+
 ## Documentation
 
 ### Constructor

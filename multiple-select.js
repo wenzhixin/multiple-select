@@ -242,6 +242,12 @@
             if (this.options.isOpen) {
                 this.open();
             }
+
+            if (this.options.openOnHover) {
+                $(".ms-parent").hover(function (e) {
+                    that.open();
+                });
+            }
         },
 
         optionToHtml: function (i, elm, group, groupDisabled) {
@@ -741,6 +747,7 @@
         addTitle: false,
         filterAcceptOnEnter: false,
         hideOptgroupCheckboxes: false,
+        openOnHover: false,
 
         selectAllText: 'Select all',
         allSelected: 'All selected',
