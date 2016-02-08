@@ -608,6 +608,12 @@
             this.$choice.addClass('disabled');
         },
 
+        destroy: function () {
+            this.$el.show();
+            this.$parent.remove();
+            delete $.fn.multipleSelect;
+        },
+
         checkAll: function () {
             this.$selectItems.prop('checked', true);
             this.$selectGroups.prop('checked', true);
@@ -687,7 +693,8 @@
                 'open', 'close',
                 'checkAll', 'uncheckAll',
                 'focus', 'blur',
-                'refresh', 'close'
+                'refresh', 'close',
+                'destroy'
             ];
 
         this.each(function () {
