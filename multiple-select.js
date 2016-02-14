@@ -242,6 +242,12 @@
             if (this.options.isOpen) {
                 this.open();
             }
+
+            if (this.options.openOnHover) {
+                $(".ms-parent").hover(function (e) {
+                    that.open();
+                });
+            }
         },
 
         optionToHtml: function (i, elm, group, groupDisabled) {
@@ -602,6 +608,12 @@
             this.$choice.addClass('disabled');
         },
 
+        destroy: function () {
+            this.$el.show();
+            this.$parent.remove();
+            delete $.fn.multipleSelect;
+        },
+
         checkAll: function () {
             this.$selectItems.prop('checked', true);
             this.$selectGroups.prop('checked', true);
@@ -681,7 +693,8 @@
                 'open', 'close',
                 'checkAll', 'uncheckAll',
                 'focus', 'blur',
-                'refresh', 'close'
+                'refresh', 'close',
+                'destroy'
             ];
 
         this.each(function () {
@@ -735,6 +748,7 @@
         addTitle: false,
         filterAcceptOnEnter: false,
         hideOptgroupCheckboxes: false,
+        openOnHover: false,
 
         selectAllText: 'Select all',
         allSelected: 'All selected',
