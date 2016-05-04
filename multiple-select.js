@@ -454,7 +454,7 @@
                     'left': 'auto'
                 });
             }
-            this.options.onClose();
+            this.options.onClose(this.$el);
         },
 
         animateMethod: function (method) {
