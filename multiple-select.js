@@ -497,8 +497,8 @@
             }
 
             // trigger change on initial setting unless changeOnInit is set
-            // to 0
-            if (this.options.changeOnInit !== 0) {
+            // to false
+            if (this.options.changeOnInit !== false) {
                 this.$el.bind('ms-init-change', function() {
                     $(this).trigger('change');
                 });
