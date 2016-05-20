@@ -496,8 +496,16 @@
                 $span.prop('title', this.getSelects('text'));
             }
 
+            // trigger change on initial setting unless changeOnInit is set
+            // to 0
+            if (this.options.changeOnInit !== 0) {
+                this.$el.bind('ms-init-change', function() {
+                    $(this).trigger('change');
+                });
+            }
+
             // set selects to select
-            this.$el.val(this.getSelects()).trigger('change');
+            this.$el.val(this.getSelects()).trigger('ms-init-change');
 
             // add selected class to selected li
             this.$drop.find('li').removeClass('selected');
