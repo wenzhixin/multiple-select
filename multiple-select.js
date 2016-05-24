@@ -238,6 +238,7 @@
             this.events();
             this.updateSelectAll(true);
             this.update(true);
+            this.updateOptGroupSelect();
 
             if (this.options.isOpen) {
                 this.open();
