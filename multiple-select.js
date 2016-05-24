@@ -367,7 +367,9 @@
             });
             this.$selectGroups.off('click').on('click', function () {
                 var group = $(this).parent().attr('data-group'),
-                    $items = that.$selectItems.filter(':visible'),
+                    $items = that.options.multipleSelectFilteredOnly
+                               ? that.$selectItems.filter(':visible')
+                               : that.$selectItems,
                     $children = $items.filter(sprintf('[data-group="%s"]', group)),
                     checked = $children.length !== $children.filter(':checked').length;
 
@@ -735,6 +737,7 @@
         addTitle: false,
         filterAcceptOnEnter: false,
         hideOptgroupCheckboxes: false,
+        multipleSelectFilteredOnly: true,
 
         selectAllText: 'Select all',
         allSelected: 'All selected',
