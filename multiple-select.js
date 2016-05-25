@@ -473,21 +473,45 @@
         },
 
         update: function (isInit) {
-            var selects = this.options.displayValues ? this.getSelects() : this.getSelects('text'),
+            var that = this,
+                selects = this.options.displayValues ? this.getSelects() : this.getSelects('text'),
                 $span = this.$choice.find('>span'),
-                sl = selects.length;
+                select_len,
+                total_len;
 
-            if (sl === 0) {
+            if (this.$selectGroups.length != 0) {
+                var counts =
+                    this.$selectGroups.get().reduce( function(sums, current) {
+                        var $current = $(current),
+                            group = $current.parent().data('group'),
+                            $children = that.$drop.find(sprintf('[%s][data-group="%s"]', that.selectItemName, group)),
+                            $selected = $children.filter(':checked');
+                        return [ sums[0] + $selected.length, sums[1] + $children.length ];
+                    }, [0, 0])
+                select_len = counts[0];
+                total_len = counts[1];
+            } else {
+                select_len = selects.length;
+                total_len = this.$selectItems.length + this.$disableItems.length;
+            }
+
+
+            if (select_len === 0) {
                 $span.addClass('placeholder').html(this.options.placeholder);
-            } else if (this.options.allSelected && sl === this.$selectItems.length + this.$disableItems.length) {
+            } else if ( this.options.allSelected
+                        && select_len === this.$selectItems.length + this.$disableItems.length) {
                 $span.removeClass('placeholder').html(this.options.allSelected);
-            } else if (this.options.ellipsis && sl > this.options.minimumCountSelected) {
+            } else if ( this.options.ellipsis
+                        && select_len > this.options.minimumCountSelected) {
                 $span.removeClass('placeholder').text(selects.slice(0, this.options.minimumCountSelected)
                     .join(this.options.delimiter) + '...');
-            } else if (this.options.countSelected && sl > this.options.minimumCountSelected) {
-                $span.removeClass('placeholder').html(this.options.countSelected
-                    .replace('#', selects.length)
-                    .replace('%', this.$selectItems.length + this.$disableItems.length));
+            } else if ( this.options.countSelected
+                        && select_len > this.options.minimumCountSelected) {
+                $span.removeClass('placeholder').html(
+                    this.options.countSelected
+                        .replace('#', select_len )
+                        .replace('%', total_len )
+                );
             } else {
                 $span.removeClass('placeholder').text(selects.join(this.options.delimiter));
             }
