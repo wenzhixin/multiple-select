@@ -527,7 +527,9 @@
         },
 
         updateOptGroupSelect: function () {
-            var $items = this.$selectItems.filter(':visible');
+            var $items = this.options.multipleSelectFilteredOnly
+                             ? this.$selectItems.filter(':visible')
+                             : this.$selectItems;
             $.each(this.$selectGroups, function (i, val) {
                 var group = $(val).parent().attr('data-group'),
                     $children = $items.filter(sprintf('[data-group="%s"]', group));
