@@ -644,7 +644,7 @@
                 this.$noResults.hide();
             } else {
                 this.$selectItems.each(function () {
-                    $(this).parent()[ that.options.filterFunction(this, text) ? 'hide' : 'show']();
+                    $(this).parent()[ that.options.filterFunction(this, text) ? 'show' : 'hide']();
                 });
                 this.$disableItems.parent().hide();
                 this.$selectGroups.each(function () {
@@ -751,7 +751,7 @@
         },
         filterFunction: function (item, text) {
             return removeDiacritics( $(item).parent().text().toLowerCase() )
-                .indexOf(removeDiacritics(text)) < 0
+                .indexOf(removeDiacritics(text)) >= 0
         },
 
         onOpen: function () {
