@@ -644,8 +644,7 @@
                 this.$noResults.hide();
             } else {
                 this.$selectItems.each(function () {
-                    var $parent = $(this).parent();
-                    $parent[removeDiacritics($parent.text().toLowerCase()).indexOf(removeDiacritics(text)) < 0 ? 'hide' : 'show']();
+                    $(this).parent()[ that.options.filterFunction(this, text) ? 'hide' : 'show']();
                 });
                 this.$disableItems.parent().hide();
                 this.$selectGroups.each(function () {
@@ -749,6 +748,10 @@
         },
         labelTemplate: function ($elm) {
             return $elm.attr('label');
+        },
+        filterFunction: function (item, text) {
+            return removeDiacritics( $(item).parent().text().toLowerCase() )
+                .indexOf(removeDiacritics(text)) < 0
         },
 
         onOpen: function () {
