@@ -244,6 +244,12 @@
             }
         },
 
+        destroy: function(){
+            this.$el.val( this.$el.find('option:first').val() );
+            this.$el.show();
+            this.$el.siblings('.ms-parent').hide();
+        },
+
         optionToHtml: function (i, elm, group, groupDisabled) {
             var that = this,
                 $elm = $(elm),
@@ -681,7 +687,8 @@
                 'open', 'close',
                 'checkAll', 'uncheckAll',
                 'focus', 'blur',
-                'refresh', 'close'
+                'refresh', 'close', 
+                'destroy'
             ];
 
         this.each(function () {
