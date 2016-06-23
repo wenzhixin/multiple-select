@@ -628,6 +628,10 @@
             this.options.onBlur();
         },
 
+        destroy: function () {
+            this.$drop.empty();
+        }
+
         refresh: function () {
             this.init();
         },
