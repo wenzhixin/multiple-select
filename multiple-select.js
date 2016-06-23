@@ -633,6 +633,7 @@
         }
 
         refresh: function () {
+            this.destroy();
             this.init();
         },
 
