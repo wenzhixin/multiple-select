@@ -323,8 +323,8 @@
             }
 
             this.$choice.off('click').on('click', toggleOpen)
-                .off('focus').on('focus', this.options.onFocus)
-                .off('blur').on('blur', this.options.onBlur);
+                .off('focus').on('focus', $.proxy(this.options.onFocus, this.options.callbackContext || this))
+                .off('blur').on('blur', $.proxy(this.options.onBlur, this.options.callbackContext || this));
 
             this.$parent.off('keydown').on('keydown', function (e) {
                 switch (e.which) {
@@ -374,7 +374,7 @@
                 $children.prop('checked', checked);
                 that.updateSelectAll();
                 that.update();
-                that.options.onOptgroupClick({
+                that.options.onOptgroupClick.call(that.options.callbackContext || that, {
                     label: $(this).parent().text(),
                     checked: checked,
                     children: $children.get(),
@@ -385,7 +385,7 @@
                 that.updateSelectAll();
                 that.update();
                 that.updateOptGroupSelect();
-                that.options.onClick({
+                that.options.onClick.call(that.options.callbackContext || that, {
                     label: $(this).parent().text(),
                     value: $(this).val(),
                     checked: $(this).prop('checked'),
@@ -440,7 +440,7 @@
                 this.$searchInput.focus();
                 this.filter();
             }
-            this.options.onOpen();
+            this.options.onOpen.call(this.options.callbackContext || this);
         },
 
         close: function () {
@@ -454,7 +454,7 @@
                     'left': 'auto'
                 });
             }
-            this.options.onClose();
+            this.options.onClose.call(this.options.callbackContext || this);
         },
 
         animateMethod: function (method) {
@@ -520,7 +520,7 @@
             this.$selectAll.prop('checked', $items.length &&
                 $items.length === $items.filter(':checked').length);
             if (!isInit && this.$selectAll.prop('checked')) {
-                this.options.onCheckAll();
+                this.options.onCheckAll.call(this.options.callbackContext || this);
             }
         },
 
@@ -607,7 +607,7 @@
             this.$selectGroups.prop('checked', true);
             this.$selectAll.prop('checked', true);
             this.update();
-            this.options.onCheckAll();
+            this.options.onCheckAll.call(this.options.callbackContext || this);
         },
 
         uncheckAll: function () {
@@ -615,17 +615,17 @@
             this.$selectGroups.prop('checked', false);
             this.$selectAll.prop('checked', false);
             this.update();
-            this.options.onUncheckAll();
+            this.options.onUncheckAll.call(this.options.callbackContext || this);
         },
 
         focus: function () {
             this.$choice.focus();
-            this.options.onFocus();
+            this.options.onFocus.call(this.options.callbackContext || this);
         },
 
         blur: function () {
             this.$choice.blur();
-            this.options.onBlur();
+            this.options.onBlur.call(this.options.callbackContext || this);
         },
 
         refresh: function () {
@@ -666,7 +666,7 @@
             }
             this.updateOptGroupSelect();
             this.updateSelectAll();
-            this.options.onFilter(text);
+            this.options.onFilter.call(this.options.callbackContext || this, text);
         }
     };
 
@@ -727,6 +727,7 @@
         dropWidth: undefined,
         maxHeight: 250,
         container: null,
+        callbackContext: null,
         position: 'bottom',
         keepOpen: false,
         animate: 'none', // 'none', 'fade', 'slide'

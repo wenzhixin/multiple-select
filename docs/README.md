@@ -1200,6 +1200,14 @@ styler: function(value) {
     }
 }
 ```
+### Events Context
+
+#### callbackContext
+
+Define the context which will be used to call
+your event handlers registered for the multipleSelect.
+If context not given, than default MultipleSelect context 
+will be used.
 
 ### Events
 
