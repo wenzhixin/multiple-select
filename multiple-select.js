@@ -592,6 +592,7 @@
             });
 
             this.update();
+            this.options.onSetSelectsAfter();
         },
 
         enable: function () {
@@ -778,5 +779,8 @@
         onFilter: function () {
             return false;
         }
+        onSetSelectsAfter: function () {
+            return false;
+        }         
     };
 })(jQuery);
