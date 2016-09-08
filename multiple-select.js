@@ -778,7 +778,7 @@
         },
         onFilter: function () {
             return false;
-        }
+        },
         onSetSelectsAfter: function () {
             return false;
         }         
