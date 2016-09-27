@@ -657,8 +657,19 @@
             } else {
                 this.$selectItems.each(function () {
                     var $parent = $(this).parent();
-                    $parent[removeDiacritics($parent.text().toLowerCase()).indexOf(removeDiacritics(text)) < 0 ? 'hide' : 'show']();
+                    
+                    if (removeDiacritics($parent.text().toLowerCase()).indexOf(removeDiacritics(text)) < 0 ) {
+                        $parent.addClass('option-hidden');
+                        $parent.removeClass('option-visible');
+                    } else {
+                        $parent.removeClass('option-hidden');
+                        $parent.addClass('option-visible');
+                    }
                 });
+                
+                $('.option-hidden', this.$ul).hide();
+                $('.option-visible', this.$ul).show();
+                
                 this.$disableItems.parent().hide();
                 this.$selectGroups.each(function () {
                     var $parent = $(this).parent();
