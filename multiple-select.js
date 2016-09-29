@@ -648,11 +648,27 @@
                     $parent[removeDiacritics($parent.text().toLowerCase()).indexOf(removeDiacritics(text)) < 0 ? 'hide' : 'show']();
                 });
                 this.$disableItems.parent().hide();
+                
+                var filterGroup = this.options.filterGroup;
                 this.$selectGroups.each(function () {
                     var $parent = $(this).parent();
-                    var group = $parent.attr('data-group'),
-                        $items = that.$selectItems.filter(':visible');
-                    $parent[$items.filter(sprintf('[data-group="%s"]', group)).length ? 'show' : 'hide']();
+                    var group   = $parent.attr('data-group');
+                    if (filterGroup) {
+                        $parent[$parent.text().toLowerCase().indexOf(text) < 0 ? 'hide' : 'show']();
+
+                        var $items  = that.$selectItems.filter('[data-group="' + group + '"]');
+                        if ($parent.text().toLowerCase().indexOf(text) < 0) {
+                            $parent[$items.filter(':visible').length === 0 ? 'hide' : 'show']();
+                        } else {
+                            $items.each(function () {
+                                var $parent = $(this).parent();
+                                $parent.show();
+                            });
+                        }
+                    } else {
+                        var $items = that.$selectItems.filter(':visible');
+                        $parent[$items.filter('[data-group="' + group + '"]').length === 0 ? 'hide' : 'show']();
+                    }
                 });
 
                 //Check if no matches found
@@ -723,6 +739,7 @@
         multipleWidth: 80,
         single: false,
         filter: false,
+        filterGroup: false,
         width: undefined,
         dropWidth: undefined,
         maxHeight: 250,
