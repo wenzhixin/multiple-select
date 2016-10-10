@@ -406,7 +406,7 @@
                     that.update();
                 }
             });
-            this.options.onComplete({}, that);
+            this.options.onComplete({instance: that});
         },
 
         open: function () {
@@ -779,7 +779,7 @@
         onFilter: function () {
             return false;
         },
-		onComplete: function () {
+	onComplete: function () {
             return false;
         }
     };
