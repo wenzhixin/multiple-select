@@ -406,6 +406,7 @@
                     that.update();
                 }
             });
+            this.options.onComplete({}, that);
         },
 
         open: function () {
@@ -776,6 +777,9 @@
             return false;
         },
         onFilter: function () {
+            return false;
+        },
+		onComplete: function () {
             return false;
         }
     };
