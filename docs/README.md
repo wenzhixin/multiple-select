@@ -954,6 +954,48 @@ If you're dynamically adding/removing option tags on the original select via AJA
 </body>
 ```
 
+### The Destroy
+
+Destroy the Multiple Select. 
+
+If you want remove the multiple select properly.
+
+``` javascript
+$('select').multipleSelect('destroy');
+```
+
+<p>
+	<button id="destroy" class="button">Destroy</button>
+</p>
+<p id="e13">
+	<select class="w300" multiple="multiple">
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+	</select>
+</p>
+
+``` html
+<head>
+	<link href="multiple-select.css" rel="stylesheet"/>
+</head>
+<body>
+    <select multiple="multiple">
+        <option value="1">1</option>
+        ...
+        <option value="3">3</option>
+    </select>
+	<button id="destroy" class="button">Destroy</button>
+    <script src="multiple-select.js"></script>
+    <script>
+        $("select").multipleSelect();
+        $("#destroy").click(function() {
+			$("select").multipleSelect("destroy");
+        });
+    </script>
+</body>
+```
+
 ### The Callbacks/Events
 
 <p id="eventResult" style="color: #444; background-color: #ddd;">Here is the result of event.</p>
@@ -1341,6 +1383,16 @@ If you're dynamically adding/removing option tags on the original select via AJA
 
 ``` javascript
 $('select').multipleSelect('refresh');
+```
+
+#### destroy
+
+Destroy the Multiple Select. 
+
+If you want remove the multiple select properly.
+
+``` javascript
+$('select').multipleSelect('destroy');
 ```
 
 ## About
