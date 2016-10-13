@@ -137,6 +137,25 @@
     box-sizing: border-box;
 }
 
+.ms-filterchecked {
+    display: inline-block;
+    margin: 0;
+    padding: 4px;
+    position: relative;
+    text-align: right;
+    white-space: nowrap;
+    width: 100%;
+    z-index: 10000;
+}
+
+.ms-filterchecked.withfilter {
+    padding-top: 0;
+}
+
+.ms-filterchecked a {
+    cursor: pointer;
+}
+
 .ms-drop ul {
     overflow: auto;
     margin: 0;

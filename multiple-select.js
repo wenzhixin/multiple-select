@@ -206,6 +206,14 @@
                 );
             }
 
+            if (this.options.filterChecked && !this.options.single) {
+                this.$drop.append([
+                    '<div class="ms-filterchecked' + (this.options.filter?' withfilter':'') + '">',
+                    '<a>' + this.options.filterCheckedText + '</a>',
+                    '</div>'].join('')
+                );
+            }
+
             if (this.options.selectAll && !this.options.single) {
                 $ul.append([
                     '<li class="ms-select-all">',
@@ -229,6 +237,7 @@
             this.$drop.find('.multiple').css('width', this.options.multipleWidth + 'px');
 
             this.$searchInput = this.$drop.find('.ms-search input');
+            this.$filterChecked = this.$drop.find('.ms-filterchecked a');
             this.$selectAll = this.$drop.find('input[' + this.selectAllName + ']');
             this.$selectGroups = this.$drop.find('input[' + this.selectGroupName + ']');
             this.$selectItems = this.$drop.find('input[' + this.selectItemName + ']:enabled');
@@ -349,7 +358,11 @@
                     that.focus();
                     return;
                 }
-                that.filter();
+                that.filter('search');
+            });
+
+            this.$filterChecked.off('click').on('click', function () {
+                that.filter('checked');
             });
 
             this.$selectAll.off('click').on('click', function () {
@@ -438,7 +451,7 @@
             if (this.options.filter) {
                 this.$searchInput.val('');
                 this.$searchInput.focus();
-                this.filter();
+                this.filter('search');
             }
             this.options.onOpen();
         },
@@ -632,11 +645,23 @@
             this.init();
         },
 
-        filter: function () {
+        filter: function (type) {
             var that = this,
-                text = $.trim(this.$searchInput.val()).toLowerCase();
 
-            if (text.length === 0) {
+                text = '',
+                filterType = '';
+
+            if (type === 'search') {
+                var text = $.trim(this.$searchInput.val()).toLowerCase();
+                this.$filterChecked.data('type', 'checked');
+            } else {
+                var filterType = this.$filterChecked.data('type');
+                this.$filterChecked.data('type', (filterType === 'checked' ? '' : 'checked'));
+                this.$searchInput.val('');
+            }
+
+            if ((type === 'search' && text.length === 0) || filterType === 'checked') {
+                this.$filterChecked.data('type', '');
                 this.$selectAll.parent().show();
                 this.$selectItems.parent().show();
                 this.$disableItems.parent().show();
@@ -645,7 +670,11 @@
             } else {
                 this.$selectItems.each(function () {
                     var $parent = $(this).parent();
-                    $parent[removeDiacritics($parent.text().toLowerCase()).indexOf(removeDiacritics(text)) < 0 ? 'hide' : 'show']();
+                    if (type === 'search') {
+                        $parent[removeDiacritics($parent.text().toLowerCase()).indexOf(removeDiacritics(text)) < 0 ? 'hide' : 'show']();
+                    } else {
+                        $parent[$(this).is(':checked') ? 'show' : 'hide']();
+                    }
                 });
                 this.$disableItems.parent().hide();
                 this.$selectGroups.each(function () {
@@ -735,11 +764,13 @@
         addTitle: false,
         filterAcceptOnEnter: false,
         hideOptgroupCheckboxes: false,
+        filterChecked: false,
 
         selectAllText: 'Select all',
         allSelected: 'All selected',
         countSelected: '# of % selected',
         noMatchesFound: 'No matches found',
+        filterCheckedText: 'Show all / Show selected items',
 
         styler: function () {
             return false;
