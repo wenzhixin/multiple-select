@@ -497,7 +497,7 @@
             }
 
             // set selects to select
-            this.$el.val(this.getSelects()).trigger('change');
+            this.$el.val(this.getSelects());
 
             // add selected class to selected li
             this.$drop.find('li').removeClass('selected');
