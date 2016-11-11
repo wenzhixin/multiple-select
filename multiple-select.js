@@ -504,11 +504,6 @@
             this.$drop.find('input:checked').each(function () {
                 $(this).parents('li').first().addClass('selected');
             });
-
-            // trigger <select> change event
-            if (!isInit) {
-                this.$el.trigger('change');
-            }
         },
 
         updateSelectAll: function (isInit) {
