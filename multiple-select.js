@@ -238,6 +238,7 @@
             this.events();
             this.updateSelectAll(true);
             this.update(true);
+            this.updateOptGroupSelect(true);
 
             if (this.options.isOpen) {
                 this.open();
@@ -524,8 +525,12 @@
             }
         },
 
-        updateOptGroupSelect: function () {
-            var $items = this.$selectItems.filter(':visible');
+        updateOptGroupSelect: function (isInit) {
+            var $items = this.$selectItems;
+            
+            if (!isInit) {
+                $items = $items.filter(':visible');
+            }
             $.each(this.$selectGroups, function (i, val) {
                 var group = $(val).parent().attr('data-group'),
                     $children = $items.filter(sprintf('[data-group="%s"]', group));
