@@ -645,7 +645,7 @@
             } else {
                 this.$selectItems.each(function () {
                     var $parent = $(this).parent();
-                    $parent[removeDiacritics($parent.text().toLowerCase()).indexOf(removeDiacritics(text)) < 0 ? 'hide' : 'show']();
+                    $parent.parent()[removeDiacritics($parent.text().toLowerCase()).indexOf(removeDiacritics(text)) < 0 ? 'hide' : 'show']();
                 });
                 this.$disableItems.parent().hide();
                 this.$selectGroups.each(function () {
