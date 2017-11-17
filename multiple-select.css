@@ -184,8 +184,24 @@
 
 .ms-drop input[type="checkbox"] {
     vertical-align: middle;
+    margin:5px 10px 5px 5px;
 }
 
 .ms-drop .ms-no-results {
     display: none;
+}
+
+.ms-drop ul > li:hover  
+{
+  color: #333;
+  background-color: #d4d4d4;
+  border-color: #8c8c8c;
+}
+
+.selected ,
+.ms-drop ul > li.selected :hover  
+{
+  color: #333;
+  background-color:#337AB7;
+  border-color: #8c8c8c;
 }
