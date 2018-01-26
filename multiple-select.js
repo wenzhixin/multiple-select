@@ -479,7 +479,7 @@
 
             if (sl === 0) {
                 $span.addClass('placeholder').html(this.options.placeholder);
-            } else if (this.options.allSelected && sl === this.$selectItems.length + this.$disableItems.length) {
+            } else if (this.options.allSelected && sl > 1 &&sl === this.$selectItems.length + this.$disableItems.length) {
                 $span.removeClass('placeholder').html(this.options.allSelected);
             } else if (this.options.ellipsis && sl > this.options.minimumCountSelected) {
                 $span.removeClass('placeholder').text(selects.slice(0, this.options.minimumCountSelected)
@@ -543,33 +543,7 @@
                 texts.push($(this).parents('li').first().text());
                 values.push($(this).val());
             });
-
-            if (type === 'text' && this.$selectGroups.length) {
-                texts = [];
-                this.$selectGroups.each(function () {
-                    var html = [],
-                        text = $.trim($(this).parent().text()),
-                        group = $(this).parent().data('group'),
-                        $children = that.$drop.find(sprintf('[%s][data-group="%s"]', that.selectItemName, group)),
-                        $selected = $children.filter(':checked');
-
-                    if (!$selected.length) {
-                        return;
-                    }
-
-                    html.push('[');
-                    html.push(text);
-                    if ($children.length > $selected.length) {
-                        var list = [];
-                        $selected.each(function () {
-                            list.push($(this).parent().text());
-                        });
-                        html.push(': ' + list.join(', '));
-                    }
-                    html.push(']');
-                    texts.push(html.join(''));
-                });
-            }
+            
             return type === 'text' ? texts : values;
         },
 
@@ -732,7 +706,7 @@
         animate: 'none', // 'none', 'fade', 'slide'
         displayValues: false,
         delimiter: ', ',
-        addTitle: false,
+        addTitle: true,
         filterAcceptOnEnter: false,
         hideOptgroupCheckboxes: false,
 
