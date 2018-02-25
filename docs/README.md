@@ -990,7 +990,7 @@ $('select').multipleSelect('destroy');
     <script>
         $("select").multipleSelect();
         $("#destroy").click(function() {
-			$("select").multipleSelect("destroy");
+            $("select").multipleSelect("destroy");
         });
     </script>
 </body>
