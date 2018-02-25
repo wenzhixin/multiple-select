@@ -632,11 +632,11 @@
             this.init();
         },
 		
-		destroy: function () {
+        destroy: function () {
             this.$el.show();
             this.$parent.remove();
             this.$el.data('multipleSelect', null);
-		},
+        },
 
         filter: function () {
             var that = this,
