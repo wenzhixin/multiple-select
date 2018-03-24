@@ -1,5 +1,27 @@
 ## Changelog
 
+### ?
+
+- Breaking change: Moved file to `dist/multiple-select-umd.js`; for the
+    new ES6 Modules build, must use `addMultipleSelect(jQuery)` to add
+    plugin to a jQuery instance.
+- Build: Add Rollup (for ES6 Modules) with Babel and uglify
+- Fix: Ensure additional arguments are passed (e.g., to `optionToHtml`)
+    when method passed in as string without preceding options object
+- Refactoring: Move to ES6 (use templates over `sprintf`,
+    `String.prototype.normalize` over custom removeDiacritics, use `class`)
+- Linting: Add ESLint
+- Bower: Remove `bower.json` (service deprecated)
+- Docs: Comment out a failing analytics file
+- Demo: In place of keeping assets in repo (and to avoid more recent
+    browser restrictions on non-descendant paths), use `node_modules`
+    with static server
+- npm: Bump jQuery version
+- npm: Add `package-lock.json` per later versions of npm
+- npm: Add scripts for docs, demo, static server, rollup, and eslint
+- yarn: Add `yarn.lock` as alternative to npm
+- gitignore: Add `node_modules`
+
 ### 1.2.1
 
 * [bug] Fix #84: single select with Optgroups bug.

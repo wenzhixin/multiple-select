@@ -1,14 +1,15 @@
-$(function() {
-    var readme = 'README.md';
+/* globals $, Flatdoc */
+$(function () {
+    let readme = 'README.md';
     if (location.href.indexOf('locale=zh_CN') !== -1) {
         readme = 'README-ZH-CN.md';
     }
     Flatdoc.run({
-        fetcher : Flatdoc.file(readme)
+        fetcher: Flatdoc.file(readme)
     });
-    $(document).on('flatdoc:ready', function() {
-        $('#e1_t, #e2_t, #e3_t, #e4_t, #e5_t').each(function() {
-            var $this = $(this);
+    $(document).on('flatdoc:ready', function () {
+        $('#e1_t, #e2_t, #e3_t, #e4_t, #e5_t').each(function () {
+            const $this = $(this);
             $this.html($('#' + $this.attr('id').replace('t', 'f')).html()).find('select').multipleSelect();
         });
         $('#e6').find('select').multipleSelect({
@@ -27,39 +28,39 @@ $(function() {
         $('#e9').find('select').multipleSelect({
             selectAll: false
         });
-        
+
         $('#e10, #e11, #e12, #e13, #e19').find('select').multipleSelect();
-        $('#setSelectsBtn').click(function() {
+        $('#setSelectsBtn').click(function () {
             $('#e10').find('select').multipleSelect('setSelects', [1, 3]);
         });
-        $('#getSelectsBtn').click(function() {
+        $('#getSelectsBtn').click(function () {
             alert('Selected values: ' + $('#e10').find('select').multipleSelect('getSelects'));
             alert('Selected texts: ' + $('#e10').find('select').multipleSelect('getSelects', 'text'));
         });
-        $('#enableBtn').click(function() {
+        $('#enableBtn').click(function () {
             $('#e11').find('select').multipleSelect('enable');
         });
-        $('#disableBtn').click(function() {
+        $('#disableBtn').click(function () {
             $('#e11').find('select').multipleSelect('disable');
         });
-        $('#checkAllBtn').click(function() {
+        $('#checkAllBtn').click(function () {
             $('#e12').find('select').multipleSelect('checkAll');
         });
-        $('#uncheckAllBtn').click(function() {
+        $('#uncheckAllBtn').click(function () {
             $('#e12').find('select').multipleSelect('uncheckAll');
         });
-        $("#focusBtn").click(function() {
-            $('#e19').find('select').multipleSelect("focus");
+        $('#focusBtn').click(function () {
+            $('#e19').find('select').multipleSelect('focus');
         });
-        $("#blurBtn").click(function() {
-            $('#e19').find('select').multipleSelect("blur");
+        $('#blurBtn').click(function () {
+            $('#e19').find('select').multipleSelect('blur');
         });
-        $('#refreshAdd').click(function() {
-            var $select = $('#e13').find('select'),
+        $('#refreshAdd').click(function () {
+            const $select = $('#e13').find('select'),
                 $input = $('#refreshInput'),
                 $selected = $('#refreshSelected'),
                 $disabled = $('#refreshDisabled'),
-            value = $.trim($input.val()),
+                value = $.trim($input.val()),
                 $opt = $('<option />', {
                     value: value,
                     text: value
@@ -68,10 +69,10 @@ $(function() {
                 $input.focus();
                 return;
             }
-            if ($selected.is(':checked')){
+            if ($selected.is(':checked')) {
                 $opt.prop('selected', true);
             }
-            if($disabled.is(':checked')){
+            if ($disabled.is(':checked')) {
                 $opt.attr('disabled', true);
             }
             $input.val('');
@@ -84,33 +85,33 @@ $(function() {
             filter: true,
             multiple: true
         });
-        var $eventResult = $('#eventResult');
+        const $eventResult = $('#eventResult');
         $('#e16').find('select').multipleSelect({
-            onOpen: function() {
+            onOpen () {
                 $eventResult.text('Select opened!');
             },
-            onClose: function() {
+            onClose () {
                 $eventResult.text('Select closed!');
             },
-            onCheckAll: function() {
+            onCheckAll () {
                 $eventResult.text('Check all clicked!');
             },
-            onUncheckAll: function() {
+            onUncheckAll () {
                 $eventResult.text('Uncheck all clicked!');
             },
-            onFocus: function() {
+            onFocus () {
                 $eventResult.text('focus!');
             },
-            onBlur: function() {
+            onBlur () {
                 $eventResult.text('blur!');
             },
-            onOptgroupClick: function(view) {
-                var values = $.map(view.children, function(child){
+            onOptgroupClick (view) {
+                const values = $.map(view.children, function (child) {
                     return child.value;
                 }).join(', ');
                 $eventResult.text('Optgroup ' + view.label + ' ' + (view.checked ? 'checked' : 'unchecked') + ': ' + values);
             },
-            onClick: function(view) {
+            onClick (view) {
                 $eventResult.text(view.label + '(' + view.value + ') ' + (view.checked ? 'checked' : 'unchecked'));
             }
         });
@@ -121,11 +122,11 @@ $(function() {
             position: 'top'
         });
         $('#e20').find('select').multipleSelect({
-            styler: function(value) {
-                if (value == '1') {
+            styler (value) {
+                if (value === '1') {
                     return 'background-color: #ffee00; color: #ff0000;';
                 }
-                if (value == '6') {
+                if (value === '6') {
                     return 'background-color: #000; color: #fff;';
                 }
             }
@@ -135,4 +136,4 @@ $(function() {
             keepOpen: true
         });
     });
-}); 
+});

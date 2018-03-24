@@ -1,6 +1,7 @@
 {
   "name": "multiple-select",
-  "main": "multiple-select.js",
+  "main": "dist/multiple-select-umd.js",
+  "module": "dist/multiple-select-es.js",
   "version": "1.2.1",
   "title": "Multiple Select",
   "description": "Multiple select is a jQuery plugin to select multiple elements with checkboxes :).",
@@ -9,13 +10,48 @@
     "email": "wenzhixin2010@gmail.com",
     "url": "http://wenzhixin.net.cn/"
   },
+  "contributors": [
+    "Brett Zamir"
+  ],
+  "engines": {},
+  "scripts": {
+    "rollup": "rollup -c",
+    "eslint": "eslint .",
+    "docs": "npm run eslint && npm run rollup && opn http://localhost:8091/docs/ && npm run start",
+    "demo": "npm run eslint && npm run rollup && opn http://localhost:8091/demos/ && npm run start",
+    "start": "static -p 8091"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/wenzhixin/multiple-select.git"
   },
   "license": "MIT",
   "dependencies": {
-    "jquery": ">=1.7"
+    "jquery": ">=3.3"
+  },
+  "devDependencies": {
+    "babel-core": "6.26.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "bootstrap": "^4.0.0",
+    "eslint": "4.19.1",
+    "eslint-config-standard": "11.0.0",
+    "eslint-plugin-import": "2.9.0",
+    "eslint-plugin-node": "6.0.1",
+    "eslint-plugin-promise": "3.7.0",
+    "eslint-plugin-standard": "3.0.1",
+    "node-static": "0.7.10",
+    "opn-cli": "^3.1.0",
+    "rollup": "0.57.1",
+    "rollup-plugin-babel": "^3.0.3",
+    "rollup-plugin-commonjs": "^9.1.0",
+    "rollup-plugin-json": "^2.3.0",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-re": "^1.0.6",
+    "rollup-plugin-uglify": "^3.0.0",
+    "uglify-es": "^3.3.9"
   },
   "keywords": [
     "multiple.select",
