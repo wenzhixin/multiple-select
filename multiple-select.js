@@ -473,6 +473,8 @@
         },
 
         update: function (isInit) {
+           	// allow placeholder taken from html 
+	    this.options.placeholder = this.options.placeholder ? this.options.placeholder : this.$el.attr("placeholder");
             var selects = this.options.displayValues ? this.getSelects() : this.getSelects('text'),
                 $span = this.$choice.find('>span'),
                 sl = selects.length;
