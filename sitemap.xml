@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>http://multiple-select.wenzhixin.net.cn/</loc>
+        <lastmod>2018-12-19T05:40:16+00:00</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    
+    <url>
+        <loc>http://multiple-select.wenzhixin.net.cn/documentation/</loc>
+        <lastmod>2018-12-19T05:40:16+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    
+    
+    <url>
+        <loc>http://multiple-select.wenzhixin.net.cn/donate/</loc>
+        <lastmod>2018-12-19T05:40:16+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    
+    
+    <url>
+        <loc>http://multiple-select.wenzhixin.net.cn/getting-started/</loc>
+        <lastmod>2018-12-19T05:40:16+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    
+    
+    
+</urlset>
