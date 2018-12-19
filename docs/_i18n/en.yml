@@ -1,0 +1,23 @@
+pages:
+  home:
+    title: "Multiple Select"
+    lead: "Multiple Select is a jQuery plugin to select multiple elements with checkboxes :)."
+    sub_title: "Designed for HTML Select tag"
+    sub_lead: "Multiple Select has been designed to reduce development time and to require no specific knowledge from developers. It is both featherweight and feature-rich."
+    download: "Download"
+    current_version: "Current version:"
+  getting_started:
+    title: "Getting started"
+    lead: "An overview of Multiple Select, how to download and use, basic templates, and more."
+  examples:
+    title: "Examples"
+    lead: "The examples of Multiple Select."
+  documentation:
+    title: "Documentation"
+    lead: "The documentation contains Constructor, Events, Methods."
+  donate:
+    title: "Donate"
+    lead: "If you like Multiple Select, if your project uses Multiple Select, if you want Multiple Select do better..."
+common:
+  social_tip: "If you like Multiple Select: "
+  help: "Questions/Helps: "
