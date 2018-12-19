@@ -2,7 +2,7 @@
 
 Multiple select is a jQuery plugin to select multiple elements with checkboxes :).
 
-To get started checkout examples and documentation at http://wenzhixin.net.cn/p/multiple-select
+To get started checkout examples and documentation at http://multiple-select.wenzhixin.net.cn
 
 ## jsFiddle examples
 
