@@ -1,0 +1,23 @@
+pages:
+  home:
+    title: "Multiple Select"
+    lead: "Multiple Select 是一个通过复选框来选择多元素的 jQuery 插件:)."
+    sub_title: "专为 HTML Select 标签设计"
+    sub_lead: "Multiple Select 通过简单的设置，就可以拥有强大的功能，大大提高工作效率，减少开发时间。"
+    download: "下载"
+    current_version: "当前版本："
+  getting_started:
+    title: "开始使用"
+    lead: "Multiple Select的简单介绍，例如如何下载和使用，基本的模板等等。"
+  examples:
+    title: "例子"
+    lead: "使用Multiple Select的例子。"
+  documentation:
+    title: "文档"
+    lead: "文档包含了属性、事件、方法。"
+  donate:
+    title: "捐助"
+    lead: "假如你喜欢 Multiple Select，假如你的项目使用到 Multiple Select，假如你想让 Multiple Select 更好……"
+common:
+  social_tip: "假如您喜欢 Multiple Select："
+  help: "问题/帮助："
