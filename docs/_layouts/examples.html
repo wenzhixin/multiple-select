@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Meta, title, CSS, favicons, etc. -->
+    {% include header.html %}
+    <link href="../assets/css/examples.css?v={{ site.current_version }}" rel="stylesheet">
+  </head>
+  <body>
+    <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <!-- Docs master nav -->
+    {% include nav.html %}
+
+    {{ content }}
+
+    {% include footer.html %}
+    <script src="../assets/js/examples.js?v={{ site.current_version }}"></script>
+  </body>
+</html>

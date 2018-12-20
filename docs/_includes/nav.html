@@ -18,9 +18,14 @@
         <li {% if page.slug == "documentation" %} class="active"{% endif %}>
           <a href="../documentation/">{% t pages.documentation.title %}</a>
         </li>
-        <!-- <li {% if page.slug == "examples" %} class="active"{% endif %}>
-          <a href="../examples">{% t pages.examples.title %}</a>
-        </li> -->
+        <li {% if page.slug == "examples" %} class="active"{% endif %}>
+          <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+            <span>{% t pages.examples.title %}</span> <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            {% include example-list.md %}
+          </ul>
+        </li>
         <li {% if page.slug == "donate" %} class="active"{% endif %}>
           <a href="../donate/">{% t pages.donate.title %}</a>
         </li>

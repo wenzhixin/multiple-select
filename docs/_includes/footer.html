@@ -1,6 +1,8 @@
 <!-- Footer
 ================================================== -->
-{% tf footer.html %}
+{% if page.layout != "examples" %}
+  {% tf footer.html %}
+{% endif %}
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
@@ -9,6 +11,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://unpkg.com/bootstrap-table/dist/bootstrap-table.min.js"></script>
 <script src="https://unpkg.com/bootstrap-table/dist/extensions/mobile/bootstrap-table-mobile.min.js"></script>
+<script>$.browser = {}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-hashchange/1.3/jquery.ba-hashchange.min.js"></script>
 
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="../assets/js/ie10-viewport-bug-workaround.js"></script>
