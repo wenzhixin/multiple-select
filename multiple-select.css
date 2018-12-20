@@ -184,6 +184,7 @@
 
 .ms-drop input[type="checkbox"] {
     vertical-align: middle;
+    margin: 5px;
 }
 
 .ms-drop .ms-no-results {

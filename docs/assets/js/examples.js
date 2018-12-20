@@ -44,6 +44,10 @@ $(function () {
     initNavigation(href)
   })
 
+  $(window).on('blur',function() {
+    $('.dropdown-toggle').parent().removeClass('open')
+  })
+
   var href = location.hash.substring(1) || 'basic.html'
   loadUrl(href)
   initNavigation(href)
