@@ -8,8 +8,8 @@
 
 | Name       | Parameter | Description                                                                                                  |
 |------------|-----------|--------------------------------------------------------------------------------------------------------------|
-| getSelects | type      | 获取选定的值。 'type'可以是'value'或'text'，默认是'value'。                                                      |
-| setSelects | values    | 所选项目的值。                                                                                                |
+| getSelects | type      | 获取选定的值。'type'可以是'value'或'text'，默认是'value'。                                                      |
+| setSelects | values    | 设置选定的值。values的类型为数组。                                                                                                |
 | enable     | -         | 启用 multiple select。                                                                                       |
 | disable    | -         | 禁用 multiple select。在此模式下，用户不允许操作。                                                               |
 | checkAll   | -         | 选中所有复选框。                                                                                              |
