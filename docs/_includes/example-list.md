@@ -18,4 +18,4 @@
 <li><a href="../examples#checkAll-uncheckAll.html">checkAll/uncheckAll</a></li>
 <li><a href="../examples#focus-blur.html">focus/blur</a></li>
 <li><a href="../examples#refresh.html">the refresh</a></li>
-<!-- <li><a href="../examples#destroy.html">the destroy</a></li> -->
+<li><a href="../examples#destroy.html">the destroy</a></li>

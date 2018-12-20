@@ -27,7 +27,7 @@ languages: ["en", "zh-cn"]
 languages_string: ["English", "简体中文"]
 
 # Custom vars
-current_version: 1.2.1
+current_version: 1.2.2
 repo: https://github.com/wenzhixin/multiple-select
 website: http://wenzhixin.net.cn
 repos: http://repos.wenzhixin.net.cn
