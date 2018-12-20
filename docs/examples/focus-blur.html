@@ -1,0 +1,50 @@
+<script>
+  init({
+    title: 'focus/blur',
+    desc: 'Methods: <code>$select.multipleSelect(\'focus\')</code> and <code>$select.multipleSelect(\'blur\')</code>',
+    links: ['multiple-select.css'],
+    scripts: ['multiple-select.js']
+  })
+</script>
+
+<style>
+select {
+  width: 500px;
+}
+</style>
+
+<p>
+  <button id="focusBtn" class="btn btn-default">Focus</button>
+  <button id="blurBtn" class="btn btn-default">Blur</button>
+</p>
+
+<select multiple="multiple">
+  <option value="1">January</option>
+  <option value="2">February</option>
+  <option value="3">March</option>
+  <option value="4">April</option>
+  <option value="5">May</option>
+  <option value="6">June</option>
+  <option value="7">July</option>
+  <option value="8">August</option>
+  <option value="9">September</option>
+  <option value="10">October</option>
+  <option value="11">November</option>
+  <option value="12">December</option>
+</select>
+
+<script>
+  var $select = $('select')
+
+  function mounted() {
+    $select.multipleSelect()
+
+    $('#focusBtn').click(function () {
+      $select.multipleSelect('focus')
+    })
+
+    $('#blurBtn').click(function () {
+      $select.multipleSelect('blur')
+    })
+  }
+</script>

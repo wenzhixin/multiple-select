@@ -1,22 +1,27 @@
 <script>
   init({
-    title: 'selected/disabled options',
-    desc: 'Multiple Select can take from selected and disabled options',
+    title: 'the position',
+    desc: 'Use <code>position: \'top\'</code> to set the select dropdown in top position',
     links: ['multiple-select.css'],
     scripts: ['multiple-select.js']
   })
 </script>
 
 <style>
+.position {
+  margin-bottom: 100px;
+}
 select {
   width: 500px;
 }
 </style>
 
+<div class="position"></div>
+
 <select multiple="multiple">
-  <option value="1" selected="selected">January</option>
-  <option value="2" disabled="disabled">February</option>
-  <option value="3" selected="selected" disabled="disabled">March</option>
+  <option value="1">January</option>
+  <option value="2">February</option>
+  <option value="3">March</option>
   <option value="4">April</option>
   <option value="5">May</option>
   <option value="6">June</option>
@@ -30,6 +35,8 @@ select {
 
 <script>
   function mounted() {
-    $('select').multipleSelect()
+    $('select').multipleSelect({
+      position: 'top'
+    })
   }
 </script>

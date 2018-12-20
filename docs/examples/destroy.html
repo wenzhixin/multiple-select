@@ -1,7 +1,7 @@
 <script>
   init({
-    title: 'selected/disabled options',
-    desc: 'Multiple Select can take from selected and disabled options',
+    title: 'the destroy',
+    desc: 'Use <code>$select.multiple(\destroy\')</code> to destroy the Multiple Select',
     links: ['multiple-select.css'],
     scripts: ['multiple-select.js']
   })
@@ -13,10 +13,14 @@ select {
 }
 </style>
 
+<p>
+  <button id="destroyBtn" class="btn btn-danger">Destroy</button>
+</p>
+
 <select multiple="multiple">
-  <option value="1" selected="selected">January</option>
-  <option value="2" disabled="disabled">February</option>
-  <option value="3" selected="selected" disabled="disabled">March</option>
+  <option value="1">January</option>
+  <option value="2">February</option>
+  <option value="3">March</option>
   <option value="4">April</option>
   <option value="5">May</option>
   <option value="6">June</option>
@@ -29,7 +33,13 @@ select {
 </select>
 
 <script>
+  var $select = $('select')
+
   function mounted() {
-    $('select').multipleSelect()
+    $select.multipleSelect()
   }
+
+  $('#destroyBtn').click(function () {
+    $select.multipleSelect('destroy')
+  })
 </script>

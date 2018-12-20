@@ -1,7 +1,7 @@
 <script>
   init({
-    title: '',
-    desc: '',
+    title: '@title@',
+    desc: '@desc@',
     links: ['multiple-select.css'],
     scripts: ['multiple-select.js']
   })
