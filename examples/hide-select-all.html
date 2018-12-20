@@ -1,0 +1,29 @@
+<script>
+  init({
+    title: 'hide select all',
+    desc: 'Use <code>selectAll: false</code> to hide select all',
+    links: ['multiple-select.css'],
+    scripts: ['multiple-select.js']
+  })
+</script>
+
+<style>
+select {
+  width: 500px;
+}
+</style>
+
+<select multiple="multiple">
+  <option value="1">First</option>
+  <option value="2">Second</option>
+  <option value="3">Third</option>
+  <option value="4">Fourth</option>
+</select>
+
+<script>
+  function mounted() {
+    $('select').multipleSelect({
+      selectAll: false
+    })
+  }
+</script>

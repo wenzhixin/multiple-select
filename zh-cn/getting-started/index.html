@@ -22,7 +22,7 @@
 <link href="../assets/css/docs.min.css" rel="stylesheet">
 <link href="../assets/css/sidenav.css?v=1.2.1" rel="stylesheet">
 <link href="../assets/css/style.css?v=1.2.1" rel="stylesheet">
-<link href="../assets/css/ads.css" rel="stylesheet">
+<link href="../assets/css/ads.css?v=1.2.1" rel="stylesheet">
 
 <!--[if lt IE 9]><script src="../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 <script src="../assets/js/ie-emulation-modes-warning.js"></script>
@@ -77,9 +77,35 @@
         <li >
           <a href="../documentation/">文档</a>
         </li>
-        <!-- <li >
-          <a href="../examples">例子</a>
-        </li> -->
+        <li >
+          <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+            <span>例子</span> <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="../examples#basic.html">basic select</a></li>
+<li><a href="../examples#disabled.html">disabled select</a></li>
+<li><a href="../examples#selected-disabled.html">selected/disabled options</a></li>
+<li><a href="../examples#basic-optgroups.html">basic optgroups</a></li>
+<li><a href="../examples#disabled-optgroups.html">disabled optgroups</a></li>
+<li><a href="../examples#placeholder.html">the placeholder</a></li>
+<li><a href="../examples#multiple-items.html">the multiple items</a></li>
+<li><a href="../examples#multiple-items-optgroups.html">multiple items optgroups</a></li>
+<li><a href="../examples#hide-select-all.html">hide select all</a></li>
+<li><a href="../examples#single-row.html">single row</a></li>
+<li><a href="../examples#position.html">the position</a></li>
+<li><a href="../examples#basic-filter.html">basic filter</a></li>
+<li><a href="../examples#optgroup-filter.html">optgroup filter</a></li>
+<li><a href="../examples#keep-open.html">keep open</a></li>
+<li><a href="../examples#styler.html">the styler</a></li>
+<li><a href="../examples#setSelects-getSelects.html">setSelects/getSelects</a></li>
+<li><a href="../examples#enable-disable.html">enable/disable</a></li>
+<li><a href="../examples#checkAll-uncheckAll.html">checkAll/uncheckAll</a></li>
+<li><a href="../examples#focus-blur.html">focus/blur</a></li>
+<li><a href="../examples#refresh.html">the refresh</a></li>
+<!-- <li><a href="../examples#destroy.html">the destroy</a></li> -->
+
+          </ul>
+        </li>
         <li >
           <a href="../donate/">捐助</a>
         </li>
@@ -290,7 +316,8 @@ Multiple Select (当前版本 v1.2.1) 可以有几种快速入门的方法，每
 
     <!-- Footer
 ================================================== -->
-<footer class="bs-docs-footer" role="contentinfo">
+
+  <footer class="bs-docs-footer" role="contentinfo">
   <div class="container">
     <div class="bs-docs-social">
   假如您喜欢 Multiple Select：
@@ -343,6 +370,7 @@ Multiple Select (当前版本 v1.2.1) 可以有几种快速入门的方法，每
 </footer>
 
 
+
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
@@ -350,6 +378,8 @@ Multiple Select (当前版本 v1.2.1) 可以有几种快速入门的方法，每
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://unpkg.com/bootstrap-table/dist/bootstrap-table.min.js"></script>
 <script src="https://unpkg.com/bootstrap-table/dist/extensions/mobile/bootstrap-table-mobile.min.js"></script>
+<script>$.browser = {}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-hashchange/1.3/jquery.ba-hashchange.min.js"></script>
 
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="../assets/js/ie10-viewport-bug-workaround.js"></script>
