@@ -18,7 +18,7 @@ $(function () {
 window._config = {
   isDebug: location.hash.slice(1) === 'is-debug',
   cdnUrl: 'https://unpkg.com/multiple-select/',
-  localUrl: '../src/'
+  localUrl: 'http://localhost:8080/github/multiple-select/'
 }
 
 function _link(file) {
