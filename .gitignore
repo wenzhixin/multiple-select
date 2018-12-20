@@ -1,2 +1,25 @@
-/bower_components/
-/tools
+node_modules
+bower_components
+
+# docs site
+_gh_pages
+
+# check the locale file on README
+check.js
+
+# Common IDE files
+nbproject
+.~lock.*
+package-lock.json
+*.lock
+.buildpath
+.idea
+.project
+.settings
+*.iml
+
+# OS X Finder internal system files
+.DS_Store
+.localized
+Icon
+.vscode

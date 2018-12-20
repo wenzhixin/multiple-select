@@ -1,0 +1,65 @@
+<script>
+  init({
+    title: 'the refresh',
+    desc: 'Reloads the Multiple Select.' +
+      'If you\'re dynamically adding/removing option tags on the original select via AJAX or DOM manipulation methods, call refresh to reflect the changes.',
+    links: ['multiple-select.css'],
+    scripts: ['multiple-select.js']
+  })
+</script>
+
+<style>
+#refreshInput {
+  width: 150px;
+  display: inline-block;
+}
+select {
+  width: 500px;
+}
+</style>
+
+<p>
+  <input id="refreshInput" class="form-control" type="text"
+    required="required" placeholder="Enter text">
+  <label><input id="refreshSelected" type="checkbox" />Selected?</label>
+  <label><input id="refreshDisabled" type="checkbox" />Disabled?</label>
+  <button id="refreshAdd" class="btn btn-default">Add + Refresh</button>
+</p>
+
+<select class="w300" multiple="multiple">
+  <option value="text1">text1</option>
+  <option value="text2">text2</option>
+  <option value="text3">text3</option>
+</select>
+
+<script>
+  var $select = $('select')
+
+  function mounted() {
+    $select.multipleSelect()
+
+    $('#refreshAdd').click(function() {
+      var $input = $('#refreshInput')
+      var $selected = $('#refreshSelected')
+      var $disabled = $('#refreshDisabled')
+      var value = $.trim($input.val())
+      var $opt = $('<option />', {
+        value: value,
+        text: value
+      })
+
+      if (!value) {
+        $input.focus()
+        return
+      }
+      if ($selected.is(':checked')){
+        $opt.prop('selected', true)
+      }
+      if($disabled.is(':checked')){
+        $opt.attr('disabled', true)
+      }
+      $input.val('')
+      $select.append($opt).multipleSelect('refresh')
+    })
+  }
+</script>

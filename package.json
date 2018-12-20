@@ -14,9 +14,6 @@
     "url": "git://github.com/wenzhixin/multiple-select.git"
   },
   "license": "MIT",
-  "dependencies": {
-    "jquery": ">=1.7"
-  },
   "keywords": [
     "multiple.select",
     "select.list",
@@ -29,5 +26,8 @@
     "url": "https://github.com/wenzhixin/multiple-select/issues"
   },
   "docs": "http://wenzhixin.net.cn/p/multiple-select/#documentation",
-  "download": "https://github.com/wenzhixin/multiple-select/archive/master.zip"
+  "download": "https://github.com/wenzhixin/multiple-select/archive/master.zip",
+  "devDependencies": {
+    "getopts": "^2.2.3"
+  }
 }
