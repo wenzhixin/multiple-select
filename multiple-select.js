@@ -478,7 +478,7 @@
             return methods[method][this.options.animate] || method;
         },
 
-        update: function (isInit) {
+        update: function (ignoreTrigger) {
             var selects = this.options.displayValues ? this.getSelects() : this.getSelects('text'),
                 $span = this.$choice.find('>span'),
                 sl = selects.length;
@@ -512,7 +512,7 @@
             });
 
             // trigger <select> change event
-            if (!isInit) {
+            if (!ignoreTrigger) {
                 this.$el.trigger('change');
             }
         },
@@ -597,7 +597,7 @@
                     $children.length === $children.filter(':checked').length);
             });
 
-            this.update();
+            this.update(false);
         },
 
         enable: function () {
