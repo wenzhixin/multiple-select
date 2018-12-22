@@ -187,6 +187,8 @@
                 }
             });
         }
+
+        this.options.onAfterCreate();
     }
 
     MultipleSelect.prototype = {
@@ -811,6 +813,9 @@
             return false;
         },
         onFilter: function () {
+            return false;
+        },
+        onAfterCreate: function () {
             return false;
         }
     };

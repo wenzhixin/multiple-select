@@ -28,3 +28,4 @@ $('#select').on('event-name.multile.select', function (e, arg1, arg2, ...) {
 | onBlur          | blur.multile.select           | -         | Bind an event handler to the "blur".                                                                                                             |
 | onOptgroupClick | optgroup-click.multile.select | view      | Fires when a an optgroup label is clicked on.                                                                                                    |
 | onClick         | click.multile.select          | view      | Fires when a checkbox is checked or unchecked.                                                                                                   |
+| onAfterCreate   | after-create                  | -         | Fires after the Multiple Select is created                                                                                                       |

@@ -28,3 +28,4 @@ $('#select').on('event-name.multile.select', function (e, arg1, arg2, ...) {
 | onBlur          | blur.multile.select           | -    | 将事件处理程序绑定到"blur"。                                                 |
 | onOptgroupClick | optgroup-click.multile.select | view | 点击optgroup标签时触发。                                                     |
 | onClick         | click.multile.select          | view | 选中或取消选中复选框时触发。                                                 |
+| onAfterCreate   | after-create                  | -    | Multiple Select 创建完成后触发。                                             |
