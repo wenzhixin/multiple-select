@@ -638,12 +638,6 @@
             this.init();
         },
 
-        destroy: function () {
-            this.$el.show();
-            this.$parent.remove();
-            this.$el.data('multipleSelect', null);
-        },
-
         filter: function () {
             var that = this,
                 text = $.trim(this.$searchInput.val()).toLowerCase();
