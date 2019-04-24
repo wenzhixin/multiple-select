@@ -176,6 +176,7 @@
     font-weight: normal;
     display: block;
     white-space: nowrap;
+    cursor: pointer;
 }
 
 .ms-drop ul > li label.optgroup {
