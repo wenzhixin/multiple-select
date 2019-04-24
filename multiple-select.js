@@ -399,7 +399,7 @@
                         $(this).prop('checked', false);
                     });
                 }
-		    
+
                 that.updateSelectAll();
                 that.update();
                 that.updateOptGroupSelect();
@@ -683,9 +683,8 @@
         },
 
         destroy: function () {
-            this.$el.before(this.$parent);
+            this.$el.before(this.$parent).show();
             this.$parent.remove();
-            delete $.fn.multipleSelect;
         }
     };
 
