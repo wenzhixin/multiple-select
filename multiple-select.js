@@ -391,6 +391,15 @@
                 });
             });
             this.$selectItems.off('click').on('click', function () {
+                if (that.options.single) {
+                    var clickedVal = $(this).val();
+                    that.$selectItems.filter(function() {
+                        return $(this).val() !== clickedVal;
+                    }).each(function() {
+                        $(this).prop('checked', false);
+                    });
+                }
+		    
                 that.updateSelectAll();
                 that.update();
                 that.updateOptGroupSelect();
@@ -405,15 +414,6 @@
                     that.close();
                 }
 
-                if (that.options.single) {
-                    var clickedVal = $(this).val();
-                    that.$selectItems.filter(function() {
-                        return $(this).val() !== clickedVal;
-                    }).each(function() {
-                        $(this).prop('checked', false);
-                    });
-                    that.update();
-                }
             });
         },
 
