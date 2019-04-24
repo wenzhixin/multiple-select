@@ -145,7 +145,8 @@
             sprintf('title="%s"', $el.attr('title'))));
 
         // add placeholder to choice button
-        this.options.placeholder = this.options.placeholder || this.$el.attr('placeholder');
+        this.options.placeholder = this.options.placeholder ||
+            this.$el.attr('placeholder') || '';
         this.$choice = $(sprintf([
                 '<button type="button" class="ms-choice">',
                 '<span class="placeholder">%s</span>',
