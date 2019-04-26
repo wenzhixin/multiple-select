@@ -489,16 +489,16 @@
             if (sl === 0) {
                 $span.addClass('placeholder').html(this.options.placeholder);
             } else if (this.options.formatAllSelected() && sl === this.$selectItems.length + this.$disableItems.length) {
-                $span.removeClass('placeholder').html(this.options.formatAllSelected);
+                $span.removeClass('placeholder').html(this.options.formatAllSelected());
             } else if (this.options.ellipsis && sl > this.options.minimumCountSelected) {
                 $span.removeClass('placeholder').text(selects.slice(0, this.options.minimumCountSelected)
-                    .join(this.options.delimiter) + '...');
+                    .join(this.options.displayDelimiter) + '...');
             } else if (this.options.formatCountSelected() && sl > this.options.minimumCountSelected) {
                 $span.removeClass('placeholder').html(this.options.formatCountSelected()
                     .replace('#', selects.length)
                     .replace('%', this.$selectItems.length + this.$disableItems.length));
             } else {
-                $span.removeClass('placeholder').text(selects.join(this.options.delimiter));
+                $span.removeClass('placeholder').text(selects.join(this.options.displayDelimiter));
             }
 
             if (this.options.addTitle) {
