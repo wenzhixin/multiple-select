@@ -7,8 +7,6 @@
 
 (function ($) {
 
-    'use strict';
-
     // it only does '%s', and return '' when arguments are undefined
     var sprintf = function (str) {
         var args = arguments,
