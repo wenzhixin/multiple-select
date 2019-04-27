@@ -2,6 +2,7 @@
 
 ### 1.2.3
 
+- **New:** Added `onAfterCreate` event ([#196](https://github.com/wenzhixin/multiple-select/pull/196)).
 - **New:** Made option labels appear clickable ([#374](https://github.com/wenzhixin/multiple-select/pull/374)).
 - **New:** Allowed `placeholder` from html ([#408](https://github.com/wenzhixin/multiple-select/pull/408)).
 - **Update:** Fixed groups don't get `checked` by default ([#346](https://github.com/wenzhixin/multiple-select/pull/346)).
