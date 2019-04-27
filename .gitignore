@@ -3,6 +3,10 @@ node_modules
 # docs site
 _gh_pages
 
+# use scss instead
+src/multiple-select.css
+src/multiple-select.css.map
+
 # Common IDE files
 nbproject
 .~lock.*
