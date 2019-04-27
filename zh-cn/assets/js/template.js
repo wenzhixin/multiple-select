@@ -16,7 +16,8 @@ $(function () {
 })
 
 window._config = {
-  isDebug: location.hash.slice(1) === 'is-debug',
+  isDebug: location.hash.slice(1) === 'is-debug' ||
+  ['localhost'].indexOf(location.hostname) > -1,
   cdnUrl: 'https://unpkg.com/multiple-select/',
   localUrl: 'http://localhost:8080/github/multiple-select/'
 }
@@ -27,7 +28,7 @@ function _link(file) {
     url = window._config.cdnUrl + file
 
     if (window._config.isDebug) {
-      url = window._config.localUrl + file.replace(/\.min/, '')
+      url = window._config.localUrl + file.replace(/\.min/, '') + '?t=' + (+new Date())
     }
   }
   $('head').append('<link href="' + url + '" rel="stylesheet"></link>')
@@ -41,7 +42,7 @@ function _script(file, callback) {
     url = window._config.cdnUrl + file
 
     if (window._config.isDebug) {
-      url = window._config.localUrl + file.replace(/\.min/, '')
+      url = window._config.localUrl + file.replace(/\.min/, '') + '?t=' + (+new Date())
     }
   }
   script.src = url
