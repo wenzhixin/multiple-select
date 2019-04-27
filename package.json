@@ -22,6 +22,7 @@
     "css:build:base": "find src -name '*.css' | sed -e 'p;s/src/dist/' | xargs -n2 cp",
     "css:build:min": "find dist -name '*.css' | sed -e 'p;s/.css/.min.css/' | xargs -n2 cssmin",
     "css:build:banner": "find dist -name '*.min.css' -exec headr {} -o {} --version --homepage --author --license \\;",
+    "image:build": "cp src/multiple-select.png dist/multiple-select.png",
     "css:build": "run-s css:build:*",
     "clean": "rm -rf dist",
     "build": "run-s lint clean *:build",
