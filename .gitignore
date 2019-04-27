@@ -1,11 +1,7 @@
 node_modules
-bower_components
 
 # docs site
 _gh_pages
-
-# check the locale file on README
-check.js
 
 # Common IDE files
 nbproject

@@ -1,6 +1,7 @@
 {
   "name": "multiple-select",
-  "main": "multiple-select.js",
+  "main": "dist/multiple-select-umd.js",
+  "module": "dist/multiple-select-es.js",
   "version": "1.2.3",
   "title": "Multiple Select",
   "description": "Multiple select is a jQuery plugin to select multiple elements with checkboxes :).",
@@ -8,6 +9,15 @@
     "name": "zhixin wen",
     "email": "wenzhixin2010@gmail.com",
     "url": "http://wenzhixin.net.cn/"
+  },
+  "contributors": [
+    "Brett Zamir"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "lint": "eslint .",
+    "docs": "bundle exec jekyll build",
+    "docs-serve": "bundle exec jekyll serve"
   },
   "repository": {
     "type": "git",
@@ -28,6 +38,7 @@
   "docs": "http://wenzhixin.net.cn/p/multiple-select/#documentation",
   "download": "https://github.com/wenzhixin/multiple-select/archive/master.zip",
   "devDependencies": {
+    "eslint": "^5.16.0",
     "getopts": "^2.2.3"
   }
 }
