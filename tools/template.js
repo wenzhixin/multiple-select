@@ -10,7 +10,7 @@ const options = getopts(process.argv.slice(2), {
   }
 })
 
-function showHelp() {
+function showHelp () {
   const baseCmd = 'node tools/template.js'
 
   console.info(`usage:
@@ -25,7 +25,7 @@ function showHelp() {
   `)
 }
 
-function run() {
+function run () {
   if (options.help || Object.keys(options).length === 1) {
     return showHelp()
   }

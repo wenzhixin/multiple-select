@@ -1,6 +1,6 @@
 {
   "name": "multiple-select",
-  "main": "multiple-select.js",
+  "main": "dist/multiple-select.min.js",
   "version": "1.2.3",
   "title": "Multiple Select",
   "description": "Multiple select is a jQuery plugin to select multiple elements with checkboxes :).",
@@ -8,6 +8,29 @@
     "name": "zhixin wen",
     "email": "wenzhixin2010@gmail.com",
     "url": "http://wenzhixin.net.cn/"
+  },
+  "contributors": [
+    "Brett Zamir"
+  ],
+  "scripts": {
+    "lint": "eslint .",
+    "js:build:base": "rollup -c",
+    "js:build:min": "NODE_ENV=production rollup -c",
+    "js:build:banner": "find dist -name '*.min.js' -exec headr {} -o {} --version --homepage --author --license \\;",
+    "js:build": "run-s js:build:*",
+    "css:build:scss": "find src -name '*.scss' | sed -e 'p;s/scss/css/' | xargs -n2 sass",
+    "css:build:base": "find src -name '*.css' | sed -e 'p;s/src/dist/' | xargs -n2 cp",
+    "css:build:min": "find dist -name '*.css' | sed -e 'p;s/.css/.min.css/' | xargs -n2 cssmin",
+    "css:build:banner": "find dist -name '*.min.css' -exec headr {} -o {} --version --homepage --author --license \\;",
+    "image:build": "cp src/multiple-select.png dist/multiple-select.png",
+    "css:build": "run-s css:build:*",
+    "clean": "rm -rf dist",
+    "build": "run-s lint clean *:build",
+    "docs": "bundle exec jekyll build",
+    "docs-serve": "bundle exec jekyll serve"
+  },
+  "peerDependencies": {
+    "jquery": "1.9.1 - 3"
   },
   "repository": {
     "type": "git",
@@ -20,14 +43,25 @@
     "multiple.choose",
     "checkbox"
   ],
-  "homepage": "http://wenzhixin.net.cn/p/multiple-select/",
-  "demo": "http://wenzhixin.net.cn/p/multiple-select/#examples",
+  "homepage": "http://multiple-select.wenzhixin.net.cn",
+  "demo": "http://multiple-select.wenzhixin.net.cn/examples",
   "bugs": {
     "url": "https://github.com/wenzhixin/multiple-select/issues"
   },
-  "docs": "http://wenzhixin.net.cn/p/multiple-select/#documentation",
+  "docs": "http://multiple-select.wenzhixin.net.cn/documentation",
   "download": "https://github.com/wenzhixin/multiple-select/archive/master.zip",
   "devDependencies": {
-    "getopts": "^2.2.3"
+    "cssmin-cli": "^0.0.5",
+    "eslint": "^5.16.0",
+    "getopts": "^2.2.3",
+    "headr": "^0.0.4",
+    "npm-run-all": "^4.1.5",
+    "rollup": "^1.10.1",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-babel-minify": "^8.0.0",
+    "rollup-plugin-commonjs": "^9.3.4",
+    "rollup-plugin-inject": "^2.2.0",
+    "rollup-plugin-node-resolve": "^4.2.3",
+    "sass": "^1.19.0"
   }
 }
