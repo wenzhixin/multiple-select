@@ -1,13 +1,11 @@
 /**
  * @author zhixin wen <wenzhixin2010@gmail.com>
- * @version 1.2.2
+ * @version 1.2.3
  *
  * http://wenzhixin.net.cn/p/multiple-select/
  */
 
 (function ($) {
-
-    'use strict';
 
     // it only does '%s', and return '' when arguments are undefined
     var sprintf = function (str) {
@@ -145,6 +143,8 @@
             sprintf('title="%s"', $el.attr('title'))));
 
         // add placeholder to choice button
+        this.options.placeholder = this.options.placeholder ||
+            this.$el.attr('placeholder') || '';
         this.$choice = $(sprintf([
                 '<button type="button" class="ms-choice">',
                 '<span class="placeholder">%s</span>',
@@ -187,6 +187,8 @@
                 }
             });
         }
+
+        this.options.onAfterCreate();
     }
 
     MultipleSelect.prototype = {
@@ -210,7 +212,7 @@
                 $ul.append([
                     '<li class="ms-select-all">',
                     '<label>',
-                    sprintf('<input type="checkbox" %s /> ', this.selectAllName),
+                    sprintf('<input type="checkbox" %s />', this.selectAllName),
                     this.options.formatSelectAll(),
                     '</label>',
                     '</li>'
@@ -236,6 +238,7 @@
             this.events();
             this.updateSelectAll(true);
             this.update(true);
+            this.updateOptGroupSelect(true);
 
             if (this.options.isOpen) {
                 this.open();
@@ -386,6 +389,15 @@
                 });
             });
             this.$selectItems.off('click').on('click', function () {
+                if (that.options.single) {
+                    var clickedVal = $(this).val();
+                    that.$selectItems.filter(function() {
+                        return $(this).val() !== clickedVal;
+                    }).each(function() {
+                        $(this).prop('checked', false);
+                    });
+                }
+
                 that.updateSelectAll();
                 that.update();
                 that.updateOptGroupSelect();
@@ -400,15 +412,6 @@
                     that.close();
                 }
 
-                if (that.options.single) {
-                    var clickedVal = $(this).val();
-                    that.$selectItems.filter(function() {
-                        return $(this).val() !== clickedVal;
-                    }).each(function() {
-                        $(this).prop('checked', false);
-                    });
-                    that.update();
-                }
             });
         },
 
@@ -476,7 +479,7 @@
             return methods[method][this.options.animate] || method;
         },
 
-        update: function (isInit) {
+        update: function (ignoreTrigger) {
             var selects = this.options.displayValues ? this.getSelects() : this.getSelects('text'),
                 $span = this.$choice.find('>span'),
                 sl = selects.length;
@@ -484,16 +487,16 @@
             if (sl === 0) {
                 $span.addClass('placeholder').html(this.options.placeholder);
             } else if (this.options.formatAllSelected() && sl === this.$selectItems.length + this.$disableItems.length) {
-                $span.removeClass('placeholder').html(this.options.formatAllSelected);
+                $span.removeClass('placeholder').html(this.options.formatAllSelected());
             } else if (this.options.ellipsis && sl > this.options.minimumCountSelected) {
                 $span.removeClass('placeholder').text(selects.slice(0, this.options.minimumCountSelected)
-                    .join(this.options.delimiter) + '...');
+                    .join(this.options.displayDelimiter) + '...');
             } else if (this.options.formatCountSelected() && sl > this.options.minimumCountSelected) {
                 $span.removeClass('placeholder').html(this.options.formatCountSelected()
                     .replace('#', selects.length)
                     .replace('%', this.$selectItems.length + this.$disableItems.length));
             } else {
-                $span.removeClass('placeholder').text(selects.join(this.options.delimiter));
+                $span.removeClass('placeholder').text(selects.join(this.options.displayDelimiter));
             }
 
             if (this.options.addTitle) {
@@ -501,7 +504,7 @@
             }
 
             // set selects to select
-            this.$el.val(this.getSelects()).trigger('change');
+            this.$el.val(this.getSelects());
 
             // add selected class to selected li
             this.$drop.find('li').removeClass('selected');
@@ -510,7 +513,7 @@
             });
 
             // trigger <select> change event
-            if (!isInit) {
+            if (!ignoreTrigger) {
                 this.$el.trigger('change');
             }
         },
@@ -528,8 +531,12 @@
             }
         },
 
-        updateOptGroupSelect: function () {
-            var $items = this.$selectItems.filter(':visible');
+        updateOptGroupSelect: function (isInit) {
+            var $items = this.$selectItems;
+
+            if (!isInit) {
+                $items = $items.filter(':visible');
+            }
             $.each(this.$selectGroups, function (i, val) {
                 var group = $(val).parent().attr('data-group'),
                     $children = $items.filter(sprintf('[data-group="%s"]', group));
@@ -595,7 +602,7 @@
                     $children.length === $children.filter(':checked').length);
             });
 
-            this.update();
+            this.update(false);
         },
 
         enable: function () {
@@ -636,12 +643,6 @@
             this.init();
         },
 
-        destroy: function () {
-            this.$el.show();
-            this.$parent.remove();
-            this.$el.data('multipleSelect', null);
-        },
-
         filter: function () {
             var that = this,
                 text = $.trim(this.$searchInput.val()).toLowerCase();
@@ -680,9 +681,8 @@
         },
 
         destroy: function () {
-            this.$el.before(this.$parent);
+            this.$el.before(this.$parent).show();
             this.$parent.remove();
-            delete $.fn.multipleSelect;
         }
     };
 
@@ -811,6 +811,9 @@
             return false;
         },
         onFilter: function () {
+            return false;
+        },
+        onAfterCreate: function () {
             return false;
         }
     };

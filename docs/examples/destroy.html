@@ -15,6 +15,7 @@ select {
 
 <p>
   <button id="destroyBtn" class="btn btn-danger">Destroy</button>
+  <button id="buildBtn" class="btn btn-primary">Build</button>
 </p>
 
 <select multiple="multiple">
@@ -41,5 +42,9 @@ select {
 
   $('#destroyBtn').click(function () {
     $select.multipleSelect('destroy')
+  })
+
+  $('#buildBtn').click(function () {
+    $select.multipleSelect()
   })
 </script>

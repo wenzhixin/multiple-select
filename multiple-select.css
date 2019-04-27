@@ -126,7 +126,7 @@
     background: url('multiple-select.png') no-repeat 100% -22px, -moz-linear-gradient(center bottom, white 85%, #eeeeee 99%);
     background: url('multiple-select.png') no-repeat 100% -22px, -o-linear-gradient(bottom, white 85%, #eeeeee 99%);
     background: url('multiple-select.png') no-repeat 100% -22px, -ms-linear-gradient(top, #ffffff 85%, #eeeeee 99%);
-    background: url('multiple-select.png') no-repeat 100% -22px, linear-gradient(top, #ffffff 85%, #eeeeee 99%);
+    background: url('multiple-select.png') no-repeat 100% -22px, linear-gradient(to bottom, #ffffff 85%, #eeeeee 99%);
 }
 
 .ms-search, .ms-search input {
@@ -176,12 +176,14 @@
     font-weight: normal;
     display: block;
     white-space: nowrap;
+    cursor: pointer;
 }
 
 .ms-drop ul > li label.optgroup {
     font-weight: bold;
 }
 
+.ms-drop input[type="radio"],
 .ms-drop input[type="checkbox"] {
     vertical-align: middle;
     margin: 5px;
