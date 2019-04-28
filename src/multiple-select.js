@@ -115,7 +115,6 @@ const removeDiacritics = str => {
   }
 
   return str
-
 }
 
 class MultipleSelect {
@@ -130,7 +129,7 @@ class MultipleSelect {
     // label element
     this.$label = this.$el.closest('label')
     if (this.$label.length === 0 && this.$el.attr('id')) {
-      this.$label = $(sprintf('label[for="%s"]', this.$el.attr('id').replace(/:/g, '\\:')))
+      this.$label = $(sprintf('label[for="%s"]', $.escapeSelector(this.$el.attr('id'))))
     }
 
     // restore class and title from select element
@@ -493,8 +492,8 @@ class MultipleSelect {
         .join(this.options.displayDelimiter)}...`)
     } else if (this.options.formatCountSelected() && sl > this.options.minimumCountSelected) {
       $span.removeClass('placeholder').html(this.options.formatCountSelected()
-        .replace('#', selects.length)
-        .replace('%', this.$selectItems.length + this.$disableItems.length))
+        .replace(/#/g, selects.length)
+        .replace(/%/g, this.$selectItems.length + this.$disableItems.length))
     } else {
       $span.removeClass('placeholder').text(selects.join(this.options.displayDelimiter))
     }
