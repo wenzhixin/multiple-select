@@ -50,6 +50,8 @@
   },
   "docs": "http://multiple-select.wenzhixin.net.cn/documentation",
   "download": "https://github.com/wenzhixin/multiple-select/archive/master.zip",
+  "engines": {},
+  "dependencies": {},
   "devDependencies": {
     "cssmin-cli": "^0.0.5",
     "eslint": "^5.16.0",
