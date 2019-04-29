@@ -1,6 +1,7 @@
 {
   "name": "multiple-select",
   "main": "dist/multiple-select.min.js",
+  "module": "dist/multiple-select-es.min.js",
   "version": "1.2.3",
   "title": "Multiple Select",
   "description": "Multiple select is a jQuery plugin to select multiple elements with checkboxes :).",

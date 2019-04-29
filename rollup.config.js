@@ -45,21 +45,17 @@ config.push({
   plugins
 })
 
-// out = 'dist/multiple-select-vue.js'
-// if (process.env.NODE_ENV === 'production') {
-//   out = out.replace(/.js$/, '.min.js')
-// }
-// config.push({
-//   input: 'src/MultipleSelect.vue',
-//   output: {
-//     name: 'MultipleSelect',
-//     file: out,
-//     format: 'esm'
-//   },
-//   plugins: [
-//     vue(),
-//     ...plugins
-//   ]
-// })
+out = 'dist/multiple-select-es.js'
+if (process.env.NODE_ENV === 'production') {
+  out = out.replace(/.js$/, '.min.js')
+}
+config.push({
+  input: 'src/multiple-select.js',
+  output: {
+    file: out,
+    format: 'esm'
+  },
+  plugins: plugins.slice(1)
+})
 
 export default config
