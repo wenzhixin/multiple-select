@@ -10,7 +10,23 @@ module.exports = {
     'sourceType': 'module'
   },
   'extends': [
-    'eslint:recommended'
+    'ash-nazg/sauron-node'
+  ],
+  'overrides': [
+    {
+      'files': ['rollup*', 'tools/template.js'],
+      'env': {
+        'browser': false
+      }
+    },
+    {
+      'files': ['tools/template.js'],
+      'rules': {
+        'import/no-commonjs': 'off',
+        'import/unambiguous': 'off',
+        'node/no-unsupported-features/node-builtins': 'off'
+      }
+    }
   ],
   'rules': {
     'indent': ['error',
@@ -64,7 +80,11 @@ module.exports = {
     'no-useless-constructor': 'warn',
     'comma-dangle': ['error', 'never'],
     'no-param-reassign': 'off',
-    'space-before-function-paren': ["error", "always"]
+    'space-before-function-paren': ["error", "always"],
+    'quote-props': 'off',
+    'arrow-parens': 'off',
+    'require-unicode-regexp': 'off',
+    'max-len': 'off'
   },
   'globals': {
     '$': true,

@@ -1,4 +1,4 @@
-const fs = require('fs')
+const fs = require('fs').promises
 const getopts = require('getopts')
 
 const options = getopts(process.argv.slice(2), {
@@ -10,6 +10,10 @@ const options = getopts(process.argv.slice(2), {
   }
 })
 
+/**
+ * Logs help.
+ * @returns {void}
+ */
 function showHelp () {
   const baseCmd = 'node tools/template.js'
 
@@ -25,27 +29,33 @@ function showHelp () {
   `)
 }
 
-function run () {
+/**
+ * Perform document file writing.
+ * @returns {void}
+ */
+async function run () {
   if (options.help || Object.keys(options).length === 1) {
-    return showHelp()
+    showHelp()
+    return
   }
   if (!options.name) {
-    return console.error('You need to input -n, --name argv')
+    console.error('You need to input -n, --name argv')
+    return
   }
   if (!options.title) {
     options.title = options.name.split('-').join(' ')
   }
 
-  let content = fs.readFileSync(`${__dirname}/example.tpl`).toString()
+  let content = (await fs.readFile(`${__dirname}/example.tpl`)).toString()
   content = content.replace(/@title@/, options.title || '')
     .replace(/@desc@/, options.desc || '')
 
-  fs.writeFileSync(`${__dirname}/../docs/examples/${options.name}.html`, content)
+  await fs.writeFile(`${__dirname}/../docs/examples/${options.name}.html`, content)
   console.info(`${options.name}.html`)
 
-  let list = fs.readFileSync(`${__dirname}/../docs/_includes/example-list.md`).toString()
+  let list = (await fs.readFile(`${__dirname}/../docs/_includes/example-list.md`)).toString()
   list += `<li><a href="../examples#${options.name}.html">${options.title}</a></li>\n`
-  fs.writeFileSync(`${__dirname}/../docs/_includes/example-list.md`, list)
+  await fs.writeFile(`${__dirname}/../docs/_includes/example-list.md`, list)
 }
 
 run()
