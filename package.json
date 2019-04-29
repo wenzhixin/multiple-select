@@ -1,6 +1,7 @@
 {
   "name": "multiple-select",
   "main": "dist/multiple-select.min.js",
+  "module": "dist/multiple-select-es.min.js",
   "version": "1.2.3",
   "title": "Multiple Select",
   "description": "Multiple select is a jQuery plugin to select multiple elements with checkboxes :).",
@@ -53,6 +54,7 @@
   "engines": {},
   "dependencies": {},
   "devDependencies": {
+    "@babel/preset-env": "^7.4.4",
     "cssmin-cli": "^0.0.5",
     "eslint": "^5.16.0",
     "getopts": "^2.2.3",
