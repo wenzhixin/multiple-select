@@ -10,7 +10,8 @@ module.exports = {
     'sourceType': 'module'
   },
   'extends': [
-    'ash-nazg/sauron-node'
+    'ash-nazg/sauron-node',
+    'plugin:testcafe/recommended'
   ],
   'overrides': [
     {
