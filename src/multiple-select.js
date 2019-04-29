@@ -1,3 +1,5 @@
+/* eslint-disable import/unambiguous, unicorn/no-fn-reference-in-iterator */
+
 /**
  * @author zhixin wen <wenzhixin2010@gmail.com>
  * @version 1.2.3
@@ -24,6 +26,7 @@ const sprintf = (_str, ...args) => {
 
 const removeDiacritics = str => {
   const defaultDiacriticsRemovalMap = [
+    /* eslint-disable comma-spacing */
     {'base': 'A', 'letters': /[\u0041\u24B6\uFF21\u00C0\u00C1\u00C2\u1EA6\u1EA4\u1EAA\u1EA8\u00C3\u0100\u0102\u1EB0\u1EAE\u1EB4\u1EB2\u0226\u01E0\u00C4\u01DE\u1EA2\u00C5\u01FA\u01CD\u0200\u0202\u1EA0\u1EAC\u1EB6\u1E00\u0104\u023A\u2C6F]/g},
     {'base': 'AA','letters': /[\uA732]/g},
     {'base': 'AE','letters': /[\u00C6\u01FC\u01E2]/g},
@@ -108,6 +111,7 @@ const removeDiacritics = str => {
     {'base': 'x','letters': /[\u0078\u24E7\uFF58\u1E8B\u1E8D]/g},
     {'base': 'y','letters': /[\u0079\u24E8\uFF59\u1EF3\u00FD\u0177\u1EF9\u0233\u1E8F\u00FF\u1EF7\u1E99\u1EF5\u01B4\u024F\u1EFF]/g},
     {'base': 'z','letters': /[\u007A\u24E9\uFF5A\u017A\u1E91\u017C\u017E\u1E93\u1E95\u01B6\u0225\u0240\u2C6C\uA763]/g}
+    /* eslint-enable comma-spacing */
   ]
 
   for (let i = 0; i < defaultDiacriticsRemovalMap.length; i++) {
@@ -136,7 +140,8 @@ class MultipleSelect {
     this.$parent = $(sprintf(
       '<div class="ms-parent %s" %s/>',
       $el.attr('class') || '',
-      sprintf('title="%s"', $el.attr('title'))))
+      sprintf('title="%s"', $el.attr('title'))
+    ))
 
     // add placeholder to choice button
     this.options.placeholder = this.options.placeholder ||
@@ -179,8 +184,8 @@ class MultipleSelect {
         }
         if (
           ($(e.target)[0] === this.$drop[0] ||
-          $(e.target).parents('.ms-drop')[0] !== this.$drop[0] &&
-          e.target !== $el[0]) &&
+          ($(e.target).parents('.ms-drop')[0] !== this.$drop[0] &&
+          e.target !== $el[0])) &&
           this.options.isOpen
         ) {
           this.close()
@@ -200,8 +205,8 @@ class MultipleSelect {
       this.$drop.append([
         '<div class="ms-search">',
         '<input type="text" autocomplete="off" autocorrect="off" autocapitilize="off" spellcheck="false">',
-        '</div>'].join('')
-      )
+        '</div>'
+      ].join(''))
     }
 
     if (this.options.selectAll && !this.options.single) {
@@ -288,19 +293,22 @@ class MultipleSelect {
       $group.append([
         '<li class="group">',
         sprintf('<label class="optgroup %s" data-group="%s">', disabled ? 'disabled' : '', group),
-        this.options.hideOptgroupCheckboxes || this.options.single ? '' :
-          sprintf('<input type="checkbox" %s %s>',
+        this.options.hideOptgroupCheckboxes || this.options.single
+          ? ''
+          : sprintf('<input type="checkbox" %s %s>',
             this.selectGroupName, disabled ? 'disabled="disabled"' : ''),
         label,
         '</label>',
         '</li>'
       ].join(''))
 
-      $.each($elm.children(), (i, elm) => {
-        $group.append(this.optionToHtml(i, elm, group, disabled))
+      $.each($elm.children(), (j, elem) => {
+        $group.append(this.optionToHtml(j, elem, group, disabled))
       })
       return $group.html()
     }
+    // Append nothing
+    return undefined
   }
 
   events () {
@@ -334,7 +342,7 @@ class MultipleSelect {
       }
     })
 
-    this.$searchInput.off('keydown').on('keydown',e => {
+    this.$searchInput.off('keydown').on('keydown', e => {
       // Ensure shift-tab causes lost focus from filter as with clicking away
       if (e.keyCode === 9 && e.shiftKey) {
         this.close()
@@ -410,7 +418,6 @@ class MultipleSelect {
       if (this.options.single && this.options.isOpen && !this.options.keepOpen) {
         this.close()
       }
-
     })
   }
 
@@ -570,8 +577,8 @@ class MultipleSelect {
         html.push(text)
         if ($children.length > $selected.length) {
           const list = []
-          $selected.each((i, el) => {
-            list.push($(el).parent().text())
+          $selected.each((j, elem) => {
+            list.push($(elem).parent().text())
           })
           html.push(`: ${list.join(', ')}`)
         }

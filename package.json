@@ -55,8 +55,21 @@
   "dependencies": {},
   "devDependencies": {
     "@babel/preset-env": "^7.4.4",
+    "@mysticatea/eslint-plugin": "^10.0.2",
     "cssmin-cli": "^0.0.5",
     "eslint": "^5.16.0",
+    "eslint-config-ash-nazg": "^3.0.1",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-compat": "^3.1.1",
+    "eslint-plugin-eslint-comments": "^3.1.1",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-jsdoc": "^4.8.3",
+    "eslint-plugin-markdown": "^1.0.0",
+    "eslint-plugin-no-use-extend-native": "^0.4.0",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.1.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "eslint-plugin-unicorn": "^8.0.2",
     "getopts": "^2.2.3",
     "headr": "^0.0.4",
     "npm-run-all": "^4.1.5",
@@ -66,6 +79,7 @@
     "rollup-plugin-commonjs": "^9.3.4",
     "rollup-plugin-inject": "^2.2.0",
     "rollup-plugin-node-resolve": "^4.2.3",
-    "sass": "^1.19.0"
+    "sass": "^1.19.0",
+    "typescript": "^3.4.5"
   }
 }
