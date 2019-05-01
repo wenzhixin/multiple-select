@@ -28,7 +28,8 @@
     "clean": "rm -rf dist",
     "build": "run-s lint clean *:build",
     "docs": "bundle exec jekyll build",
-    "docs-serve": "bundle exec jekyll serve"
+    "docs-serve": "bundle exec jekyll serve",
+    "test": "testcafe chrome test/**/*.js --skip-js-errors"
   },
   "peerDependencies": {
     "jquery": "1.9.1 - 3"
@@ -56,6 +57,7 @@
   "devDependencies": {
     "@babel/preset-env": "^7.4.4",
     "@mysticatea/eslint-plugin": "^10.0.2",
+    "axe-testcafe": "^1.1.0",
     "cssmin-cli": "^0.0.5",
     "eslint": "^5.16.0",
     "eslint-config-ash-nazg": "^3.0.1",
@@ -69,6 +71,7 @@
     "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-promise": "^4.1.1",
     "eslint-plugin-standard": "^4.0.0",
+    "eslint-plugin-testcafe": "^0.2.1",
     "eslint-plugin-unicorn": "^8.0.2",
     "getopts": "^2.2.3",
     "headr": "^0.0.4",
@@ -80,6 +83,7 @@
     "rollup-plugin-inject": "^2.2.0",
     "rollup-plugin-node-resolve": "^4.2.3",
     "sass": "^1.19.0",
+    "testcafe": "^1.1.3",
     "typescript": "^3.4.5"
   }
 }
