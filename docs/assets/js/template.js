@@ -8,8 +8,7 @@ $(function () {
     cache: true, // (warning: setting it to false will cause a timestamp and will call the request twice)
     success: function (data) {
       $('#example').html(data)
-      $('#source').text(data.replace(/( +function mounted)/,
-        '  // Here the mounted function is same as $(function() {})\n$1'))
+      $('#source').text(_beautifySource(data))
       window.hljs.initHighlightingOnLoad()
     }
   })
@@ -22,7 +21,7 @@ window._config = {
   localUrl: 'http://localhost:8080/github/multiple-select/src/'
 }
 
-function _link(file) {
+function _getLink(file) {
   var url = file
   if (!/^http/.test(file)) {
     url = window._config.cdnUrl + file
@@ -31,21 +30,33 @@ function _link(file) {
       url = window._config.localUrl + file.replace(/\.min/, '') + '?t=' + (+new Date())
     }
   }
-  $('head').append('<link href="' + url + '" rel="stylesheet"></link>')
+  return '<link href="' + url + '" rel="stylesheet">'
+}
+
+function _getScript(file, isScriptTag) {
+  var url = file
+  if (!/^http/.test(file)) {
+    url = window._config.cdnUrl + file
+
+    if (window._config.isDebug) {
+      url = window._config.localUrl + file.replace(/\.min/, '') + '?t=' + (+new Date())
+    }
+  }
+  if (isScriptTag) {
+    return '<script src="' + url + '"></script>'
+  }
+  return url
+}
+
+function _link(file) {
+  $('head').append(_getLink(file))
 }
 
 function _script(file, callback) {
   var head = document.getElementsByTagName('head')[0]
   var script = document.createElement('script')
-  var url = file
-  if (!/^http/.test(file)) {
-    url = window._config.cdnUrl + file
 
-    if (window._config.isDebug) {
-      url = window._config.localUrl + file.replace(/\.min/, '') + '?t=' + (+new Date())
-    }
-  }
-  script.src = url
+  script.src = _getScript(file)
 
   var done = false
   // Attach handlers for all browsers
@@ -92,6 +103,34 @@ function _scripts(scripts, callback) {
   eachSeries(scripts, _script, function () {
     callback()
   })
+}
+
+function _beautifySource(data) {
+  var lines = data.split('\n')
+  var scriptStart = lines.indexOf('<script>')
+  var scriptEnd = lines.indexOf('</script>', scriptStart)
+  var strings = lines.slice(scriptStart + 1, scriptEnd)
+  strings = $.map(strings, function (s) {
+    return $.trim(s)
+  })
+  /* eslint-disable no-control-regex */
+  var obj = eval('(' + strings.join('').replace(/[^\u0000-\u007E]/g, '')
+    .replace(/^init\((.*)\)$/, '$1') + ')')
+
+  var result = []
+  result = result.concat($.map(obj.links, _getLink))
+  result.push('')
+  result = result.concat($.map(obj.scripts, function (script) {
+    return _getScript(script, true)
+  }))
+  lines = result.concat(lines.slice(scriptEnd + 1))
+
+  var mountedStart = lines.indexOf('  function mounted() {')
+  var mountedEnd = lines.indexOf('  }', mountedStart)
+  lines[mountedStart] = '  $(function() {'
+  lines[mountedEnd] = '  })'
+
+  return lines.join('\n')
 }
 
 window.init = function (options_) {
