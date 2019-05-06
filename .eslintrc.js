@@ -17,11 +17,17 @@ module.exports = {
     {
       'files': ['rollup*', 'tools/template.js'],
       'env': {
+        'node': true,
         'browser': false
       }
     },
     {
       'files': ['tools/template.js'],
+      // These are being overwritten for some reason, despite `node: true`
+      'globals': {
+        require: 'readonly',
+        __dirname: 'readonly'
+      },
       'rules': {
         'import/no-commonjs': 'off',
         'import/unambiguous': 'off',
