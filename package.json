@@ -58,6 +58,7 @@
     "@babel/preset-env": "^7.4.4",
     "@mysticatea/eslint-plugin": "^10.0.3",
     "axe-testcafe": "^1.1.0",
+    "css.escape": "^1.5.1",
     "cssmin-cli": "^0.0.5",
     "eslint": "^5.16.0",
     "eslint-config-ash-nazg": "^4.0.0",

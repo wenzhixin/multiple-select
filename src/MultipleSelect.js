@@ -1,14 +1,14 @@
 /* eslint-disable unicorn/no-fn-reference-in-iterator */
 
-import removeDiacritics from './removeDiacritics.js'
-import sprintf from './sprintf.js'
+import cssEscape from 'css.escape'
 
-// sprintf format specifiers
-const s = 's'
+import removeDiacritics from './removeDiacritics.js'
+import {s, sprintf} from './sprintf.js'
 
 class MultipleSelect {
   constructor ($el, options) {
-    const name = $el.attr('name') || options.name || ''
+    const el = $el[0]
+    const name = el.getAttribute('name') || options.name || ''
 
     this.options = $.extend({}, defaults, options)
 
@@ -17,19 +17,19 @@ class MultipleSelect {
 
     // label element
     this.$label = this.$el.closest('label')
-    if (this.$label.length === 0 && this.$el.attr('id')) {
-      this.$label = $(sprintf`label[for="${s}"]`($.escapeSelector(this.$el.attr('id'))))
+    if (this.$label.length === 0 && el.getAttribute('id')) {
+      this.$label = $(sprintf`label[for="${s}"]`(cssEscape(el.getAttribute('id'))))
     }
 
     // restore class and title from select element
     this.$parent = $(sprintf`<div class="ms-parent ${s}" ${s}/>`(
-      $el.attr('class') || '',
-      sprintf`title="${s}"`($el.attr('title'))
+      el.getAttribute('class') || '',
+      sprintf`title="${s}"`(el.getAttribute('title'))
     ))
 
     // add placeholder to choice button
     this.options.placeholder = this.options.placeholder ||
-      this.$el.attr('placeholder') || ''
+      el.getAttribute('placeholder') || ''
     this.$choice = $(sprintf`
       <button type="button" class="ms-choice">
       <span class="placeholder">${s}</span>
@@ -47,7 +47,7 @@ class MultipleSelect {
     this.$parent.append(this.$choice)
     this.$parent.append(this.$drop)
 
-    if (this.$el.prop('disabled')) {
+    if (el.disabled) {
       this.$choice.addClass('disabled')
     }
     this.$parent.css('width',
@@ -70,7 +70,7 @@ class MultipleSelect {
         if (
           ($(e.target)[0] === this.$drop[0] ||
           ($(e.target).parents('.ms-drop')[0] !== this.$drop[0] &&
-          e.target !== $el[0])) &&
+          e.target !== el)) &&
           this.options.isOpen
         ) {
           this.close()
@@ -87,11 +87,12 @@ class MultipleSelect {
     this.$drop.html('')
 
     if (this.options.filter) {
-      this.$drop.append([
-        '<div class="ms-search">',
-        '<input type="text" autocomplete="off" autocorrect="off" autocapitilize="off" spellcheck="false">',
-        '</div>'
-      ].join(''))
+      this.$drop.append(`
+        <div class="ms-search">
+          <input type="text" autocomplete="off" autocorrect="off"
+            autocapitilize="off" spellcheck="false">
+        </div>
+      `)
     }
 
     if (this.options.selectAll && !this.options.single) {
@@ -141,19 +142,19 @@ class MultipleSelect {
 
   optionToHtml (i, elm, group, groupDisabled) {
     const $elm = $(elm)
-    const classes = $elm.attr('class') || ''
-    const title = sprintf`title="${s}"`($elm.attr('title'))
+    const el = $elm[0]
+    const classes = el.getAttribute('class') || ''
+    const title = sprintf`title="${s}"`(el.getAttribute('title'))
     const multiple = this.options.multiple ? 'multiple' : ''
     let disabled
     const type = this.options.single ? 'radio' : 'checkbox'
 
     if ($elm.is('option')) {
-      const value = $elm.val()
       const text = this.options.textTemplate($elm)
-      const selected = $elm.prop('selected')
+      const {value, selected} = el
       const style = sprintf`style="${s}"`(this.options.styler(value))
 
-      disabled = groupDisabled || $elm.prop('disabled')
+      disabled = groupDisabled || el.disabled
 
       const $el = $([
         sprintf`<li class="${s} ${s}" ${s} ${s}>`(multiple, classes, title, style),
@@ -175,8 +176,8 @@ class MultipleSelect {
       const label = this.options.labelTemplate($elm)
       const $group = $('<div/>')
 
-      group = `group_${i}`
-      disabled = $elm.prop('disabled')
+      group = `group_${i}`;
+      ({disabled} = el)
 
       $group.append([
         '<li class="group">',
@@ -261,7 +262,7 @@ class MultipleSelect {
       if ($items.length === this.$selectItems.length) {
         this[checked ? 'checkAll' : 'uncheckAll']()
       } else { // when the filter option is true
-        this.$selectGroups.prop('checked', checked)
+        this.$selectGroups[0].checked = checked
         $items.prop('checked', checked)
         this.options[checked ? 'onCheckAll' : 'onUncheckAll']()
         this.update()
@@ -269,7 +270,7 @@ class MultipleSelect {
     })
     this.$selectGroups.off('click').on('click', e => {
       const $this = $(e.currentTarget)
-      const group = $this.parent().attr('data-group')
+      const group = $this.parent()[0].getAttribute('data-group')
       const $items = this.$selectItems.filter(':visible')
       const $children = $items.filter(sprintf`[data-group="${s}"]`(group))
       const checked = $children.length !== $children.filter(':checked').length
@@ -435,7 +436,7 @@ class MultipleSelect {
       $items = $items.filter(':visible')
     }
     $.each(this.$selectGroups, (i, val) => {
-      const group = $(val).parent().attr('data-group')
+      const group = $(val).parent()[0].getAttribute('data-group')
       const $children = $items.filter(sprintf`[data-group="${s}"]`(group))
       $(val).prop('checked', $children.length &&
         $children.length === $children.filter(':checked').length)
@@ -494,7 +495,7 @@ class MultipleSelect {
       this.$selectItems.filter(':checked').length + this.$disableItems.filter(':checked').length)
 
     $.each(this.$selectGroups, (i, val) => {
-      const group = $(val).parent().attr('data-group')
+      const group = $(val).parent()[0].getAttribute('data-group')
       const $children = this.$selectItems.filter(`[data-group="${group}"]`)
       $(val).prop('checked', $children.length &&
         $children.length === $children.filter(':checked').length)
@@ -558,7 +559,7 @@ class MultipleSelect {
       this.$disableItems.parent().hide()
       this.$selectGroups.each((i, el) => {
         const $parent = $(el).parent()
-        const group = $parent.attr('data-group')
+        const group = $parent[0].getAttribute('data-group')
         const $items = this.$selectItems.filter(':visible')
         $parent[$items.filter(sprintf`[data-group="${s}"]`(group)).length ? 'show' : 'hide']()
       })
@@ -632,10 +633,12 @@ const defaults = {
     return false
   },
   textTemplate ($elm) {
-    return $elm.html()
+    const el = $elm[0]
+    return el.innerHTML
   },
   labelTemplate ($elm) {
-    return $elm.attr('label')
+    const el = $elm[0]
+    return el.getAttribute('label')
   },
 
   onOpen () {

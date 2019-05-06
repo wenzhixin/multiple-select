@@ -1,3 +1,6 @@
+// sprintf format specifiers
+const s = 's'
+
 // it only does '%s', and return '' when arguments are undefined
 const sprintf = (strings, ...formats) => {
   return (...args) => {
@@ -19,4 +22,5 @@ const sprintf = (strings, ...formats) => {
       : ''
   }
 }
-export default sprintf
+
+export {s, sprintf}
