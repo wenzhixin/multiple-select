@@ -1,2 +1,4 @@
 tools
 docs
+test
+rollup.config.js
