@@ -11,7 +11,7 @@ const sprintf = (strings, ...formats) => {
           throw new TypeError('Unrecognized sprintf format')
         case 's':
           const arg = args[i]
-          if (arg === undefined) {
+          if (arg === null || arg === undefined) {
             return true
           }
           retStr += str + arg

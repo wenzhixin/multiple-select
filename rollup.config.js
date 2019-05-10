@@ -5,7 +5,8 @@ import minify from 'rollup-plugin-babel-minify'
 import inject from 'rollup-plugin-inject'
 // import vue from 'rollup-plugin-vue'
 
-const production = process.argv[3] === '--config-production'
+const production = process.env.PRODUCTION === 'true'
+const dev = process.env.DEV === 'true'
 
 const external = ['jquery']
 const globals = {
@@ -34,6 +35,8 @@ if (production) {
 let out = 'dist/multiple-select.js'
 if (production) {
   out = out.replace(/.js$/, '.min.js')
+} else if (dev) {
+  out = out.replace(/^dist/, 'docs/assets/js')
 }
 config.push({
   input: 'src/multiple-select.js',
@@ -47,17 +50,19 @@ config.push({
   plugins
 })
 
-out = 'dist/multiple-select-es.js'
-if (production) {
-  out = out.replace(/.js$/, '.min.js')
+if (!dev) {
+  out = 'dist/multiple-select-es.js'
+  if (production) {
+    out = out.replace(/.js$/, '.min.js')
+  }
+  config.push({
+    input: 'src/multiple-select.js',
+    output: {
+      file: out,
+      format: 'esm'
+    },
+    plugins: plugins.slice(1)
+  })
 }
-config.push({
-  input: 'src/multiple-select.js',
-  output: {
-    file: out,
-    format: 'esm'
-  },
-  plugins: plugins.slice(1)
-})
 
 export default config
