@@ -18,8 +18,8 @@ const sprintf = (strings, ...formats) => {
           return false
       }
     })
-      ? retStr + strings.slice(-1)
-      : ''
+      ? ''
+      : retStr + strings.slice(-1)
   }
 }
 

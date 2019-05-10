@@ -3,7 +3,7 @@
 import {Selector} from 'testcafe'
 
 fixture`TestCafe UI tests`
-  .page`http://0.0.0.0:4000/examples/#basic.html`
+  .page`http://localhost:4000/examples/#basic.html`
 
 test('Basic select', async (t) => {
   await t.expect(Selector('*[data-name="selectItem"]')).ok('Has select option')

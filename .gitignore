@@ -3,6 +3,9 @@ dist
 
 # docs site
 _gh_pages
+docs/assets/css/multiple-select.css
+docs/assets/js/multiple-select.js
+docs/assets/css/multiple-select.png
 
 # use scss instead
 src/multiple-select.css

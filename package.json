@@ -27,9 +27,9 @@
     "css:build": "run-s css:build:*",
     "clean": "rm -rf dist",
     "build": "run-s lint clean *:build",
-    "copy-js-for-docs": "cp dist/multiple-select.js docs/assets/js/multiple-select.js && cp dist/multiple-select.js _gh_pages/assets/js/multiple-select.js",
-    "docs": "npm run copy-js-for-docs && bundle exec jekyll build",
-    "docs-serve": "npm run copy-js-for-docs &&bundle exec jekyll serve",
+    "copy-for-docs": "cp dist/multiple-select.js docs/assets/js/multiple-select.js && cp dist/multiple-select.js _gh_pages/assets/js/multiple-select.js && cp dist/multiple-select.css docs/assets/css/multiple-select.css && cp dist/multiple-select.css _gh_pages/assets/css/multiple-select.css && cp dist/multiple-select.png docs/assets/css/multiple-select.png && cp dist/multiple-select.png _gh_pages/assets/css/multiple-select.png",
+    "docs": "npm run copy-for-docs && bundle exec jekyll build",
+    "docs-serve": "npm run copy-for-docs && bundle exec jekyll serve",
     "test": "testcafe chrome test/**/*.js --skip-js-errors"
   },
   "peerDependencies": {

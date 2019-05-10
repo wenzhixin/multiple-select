@@ -33,7 +33,7 @@ function axeCheckWithConfig (t) {
 }
 
 fixture`TestCafe Axe accessibility tests (Main page)`
-  .page`http://0.0.0.0:4000/home/`
+  .page`http://localhost:4000/home/`
 
 test('Main page', async (t) => {
   await axeCheckWithConfig(t)
