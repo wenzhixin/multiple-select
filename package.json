@@ -16,7 +16,7 @@
   "scripts": {
     "lint": "eslint .",
     "js:build:base": "rollup -c",
-    "js:build:min": "NODE_ENV=production rollup -c",
+    "js:build:min": "rollup -c --config-production",
     "js:build:banner": "find dist -name '*.min.js' -exec headr {} -o {} --version --homepage --author --license \\;",
     "js:build": "run-s js:build:*",
     "css:build:scss": "find src -name '*.scss' | sed -e 'p;s/scss/css/' | xargs -n2 sass",
@@ -27,8 +27,9 @@
     "css:build": "run-s css:build:*",
     "clean": "rm -rf dist",
     "build": "run-s lint clean *:build",
-    "docs": "bundle exec jekyll build",
-    "docs-serve": "bundle exec jekyll serve",
+    "copy-js-for-docs": "cp dist/multiple-select.js docs/assets/js/multiple-select.js && cp dist/multiple-select.js _gh_pages/assets/js/multiple-select.js",
+    "docs": "npm run copy-js-for-docs && bundle exec jekyll build",
+    "docs-serve": "npm run copy-js-for-docs &&bundle exec jekyll serve",
     "test": "testcafe chrome test/**/*.js --skip-js-errors"
   },
   "peerDependencies": {

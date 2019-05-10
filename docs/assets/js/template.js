@@ -18,7 +18,7 @@ window._config = {
   isDebug: location.hash.slice(1) === 'is-debug' ||
   ['localhost'].indexOf(location.hostname) > -1,
   cdnUrl: 'https://unpkg.com/multiple-select/',
-  localUrl: 'http://localhost:8080/github/multiple-select/src/'
+  localUrl: 'http://localhost:4000/assets/js/'
 }
 
 function _getLink(file) {
