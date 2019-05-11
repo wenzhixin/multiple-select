@@ -6,7 +6,7 @@ import inject from 'rollup-plugin-inject'
 // import vue from 'rollup-plugin-vue'
 
 let found
-const env = process.argv.find((flag) => {
+const env = process.argv.find(flag => {
   if (found) {
     return true
   }
