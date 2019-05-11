@@ -5,8 +5,17 @@ import minify from 'rollup-plugin-babel-minify'
 import inject from 'rollup-plugin-inject'
 // import vue from 'rollup-plugin-vue'
 
-const production = process.env.PRODUCTION === 'true'
-const dev = process.env.DEV === 'true'
+let found
+const env = process.argv.find((flag) => {
+  if (found) {
+    return true
+  }
+  found = flag === '--config-env'
+  return false
+})
+
+const production = env === 'PRODUCTION'
+const dev = env === 'DEV'
 
 const external = ['jquery']
 const globals = {
