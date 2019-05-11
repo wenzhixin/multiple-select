@@ -91,8 +91,7 @@ module.exports = {
     'quote-props': 'off',
     'arrow-parens': 'off',
     'require-unicode-regexp': 'off',
-    'max-len': 'off',
-    'no-process-env': 'off',
+    'max-len': 'off'
   },
   'globals': {
     '$': true,
