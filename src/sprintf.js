@@ -5,21 +5,21 @@ const s = 's'
 const sprintf = (strings, ...formats) => {
   return (...args) => {
     let retStr = ''
-    return strings.some((str, i) => {
+    return strings.slice(0, -1).some((str, i) => {
       switch (formats[i]) {
         default:
           throw new TypeError('Unrecognized sprintf format')
         case 's':
           const arg = args[i]
-          if (arg === undefined) {
+          if (arg === null || arg === undefined) {
             return true
           }
           retStr += str + arg
           return false
       }
     })
-      ? retStr
-      : ''
+      ? ''
+      : retStr + strings.slice(-1)
   }
 }
 

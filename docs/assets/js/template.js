@@ -18,7 +18,8 @@ window._config = {
   isDebug: location.hash.slice(1) === 'is-debug' ||
   ['localhost'].indexOf(location.hostname) > -1,
   cdnUrl: 'https://unpkg.com/multiple-select/',
-  localUrl: 'http://localhost:8080/github/multiple-select/src/'
+  localUrl: 'http://localhost:4000/assets/js/',
+  localLinkUrl: 'http://localhost:4000/assets/css/'
 }
 
 function _getLink(file) {
@@ -27,7 +28,7 @@ function _getLink(file) {
     url = window._config.cdnUrl + file
 
     if (window._config.isDebug) {
-      url = window._config.localUrl + file.replace(/\.min/, '') + '?t=' + (+new Date())
+      url = window._config.localLinkUrl + file.replace(/\.min/, '') + '?t=' + (+new Date())
     }
   }
   return '<link href="' + url + '" rel="stylesheet">'
