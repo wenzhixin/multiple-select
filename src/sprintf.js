@@ -9,13 +9,14 @@ const sprintf = (strings, ...formats) => {
       switch (formats[i]) {
         default:
           throw new TypeError('Unrecognized sprintf format')
-        case 's':
+        case 's': {
           const arg = args[i]
           if (arg === null || arg === undefined) {
             return true
           }
           retStr += str + arg
           return false
+        }
       }
     })
       ? ''
