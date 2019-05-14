@@ -42,3 +42,9 @@
 <li><a href="../examples#focus-blur.html">The focus/blur</a></li>
 <li><a href="../examples#refresh.html">The refresh</a></li>
 <li><a href="../examples#destroy.html">The destroy</a></li>
+<li role="separator" class="divider"></li>
+<li class="dropdown-header">Events</li>
+<li><a href="../examples#events.html">The Events</a></li>
+<li role="separator" class="divider"></li>
+<li class="dropdown-header">I18N</li>
+<li><a href="../examples#i18n.html">The i18n</a></li>

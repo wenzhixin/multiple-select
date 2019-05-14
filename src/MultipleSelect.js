@@ -98,14 +98,14 @@ class MultipleSelect {
     }
 
     if (this.options.selectAll && !this.options.single) {
-      $ul.append(`
-        <li class="ms-select-all">
-          <label>
-            ${sprintf`<input type="checkbox" ${s} />`(this.selectAllName)}
-            ${this.options.formatSelectAll()}
-          </label>
-        </li>
-      `)
+      $ul.append([
+        '<li class="ms-select-all">',
+        '<label>',
+        sprintf`<input type="checkbox" ${s} />`(this.selectAllName),
+        `<span>${this.options.formatSelectAll()}</span>`,
+        '</label>',
+        '</li>'
+      ].join(''))
     }
 
     $.each(this.$el.children(), (i, elm) => {
