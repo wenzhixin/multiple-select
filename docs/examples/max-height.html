@@ -1,7 +1,7 @@
 <script>
   init({
-    title: 'enable/disable',
-    desc: 'Methods: <code>$select.multipleSelect(\'enable\')</code> and <code>$select.multipleSelect(\'disable\')</code>.',
+    title: 'Max Height',
+    desc: 'Use <code>maxHeight: 140</code> option to custom the dropdown max height.',
     links: ['multiple-select.css'],
     scripts: ['multiple-select.js']
   })
@@ -12,11 +12,6 @@ select {
   width: 500px;
 }
 </style>
-
-<p>
-  <button id="enableBtn" class="btn btn-default">Enable</button>
-  <button id="disableBtn" class="btn btn-default">Disable</button>
-</p>
 
 <select multiple="multiple">
   <option value="1">January</option>
@@ -34,17 +29,9 @@ select {
 </select>
 
 <script>
-  var $select = $('select')
-
   function mounted() {
-    $select.multipleSelect()
-
-    $('#enableBtn').click(function () {
-      $select.multipleSelect('enable')
-    })
-
-    $('#disableBtn').click(function () {
-      $select.multipleSelect('disable')
+    $('select').multipleSelect({
+      maxHeight: 140
     })
   }
 </script>

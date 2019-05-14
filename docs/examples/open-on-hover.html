@@ -1,7 +1,7 @@
 <script>
   init({
-    title: 'enable/disable',
-    desc: 'Methods: <code>$select.multipleSelect(\'enable\')</code> and <code>$select.multipleSelect(\'disable\')</code>.',
+    title: 'Open On Hover',
+    desc: 'Use <code>openOnHover: true</code> to open the select dropdown by hover instead of click.',
     links: ['multiple-select.css'],
     scripts: ['multiple-select.js']
   })
@@ -12,11 +12,6 @@ select {
   width: 500px;
 }
 </style>
-
-<p>
-  <button id="enableBtn" class="btn btn-default">Enable</button>
-  <button id="disableBtn" class="btn btn-default">Disable</button>
-</p>
 
 <select multiple="multiple">
   <option value="1">January</option>
@@ -34,17 +29,9 @@ select {
 </select>
 
 <script>
-  var $select = $('select')
-
   function mounted() {
-    $select.multipleSelect()
-
-    $('#enableBtn').click(function () {
-      $select.multipleSelect('enable')
-    })
-
-    $('#disableBtn').click(function () {
-      $select.multipleSelect('disable')
+    $('select').multipleSelect({
+      openOnHover: true
     })
   }
 </script>

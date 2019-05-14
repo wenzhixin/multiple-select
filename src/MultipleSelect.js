@@ -38,10 +38,11 @@ class MultipleSelect {
     `(this.options.placeholder))
 
     // default position is bottom
-    this.$drop = $(sprintf`<div class="ms-drop ${s}"${s}></div>`(
-      this.options.position,
-      sprintf` style="width: ${s}"`(this.options.dropWidth)
-    ))
+    this.$drop = $(sprintf`<div class="ms-drop ${s}"></div>`(this.options.position))
+
+    if (this.options.dropWidth) {
+      this.$drop.css('width', this.options.dropWidth)
+    }
 
     this.$el.after(this.$parent)
     this.$parent.append(this.$choice)
@@ -90,7 +91,8 @@ class MultipleSelect {
       this.$drop.append(`
         <div class="ms-search">
           <input type="text" autocomplete="off" autocorrect="off"
-            autocapitilize="off" spellcheck="false">
+            autocapitilize="off" spellcheck="false"
+            ${sprintf`placeholder="${s}"`(this.options.filterPlaceholder)}>
         </div>
       `)
     }
@@ -136,6 +138,8 @@ class MultipleSelect {
     if (this.options.openOnHover) {
       $('.ms-parent').hover(() => {
         this.open()
+      }, () => {
+        this.close()
       })
     }
   }
@@ -262,7 +266,7 @@ class MultipleSelect {
       if ($items.length === this.$selectItems.length) {
         this[checked ? 'checkAll' : 'uncheckAll']()
       } else { // when the filter option is true
-        this.$selectGroups[0].checked = checked
+        this.$selectGroups.prop('checked', checked)
         $items.prop('checked', checked)
         this.options[checked ? 'onCheckAll' : 'onUncheckAll']()
         this.update()
@@ -484,7 +488,6 @@ class MultipleSelect {
   }
 
   setSelects (values) {
-    console.log(values)
     this.$selectItems.prop('checked', false)
     this.$disableItems.prop('checked', false)
     $.each(values, (i, value) => {
@@ -552,16 +555,24 @@ class MultipleSelect {
       this.$selectGroups.parent().show()
       this.$noResults.hide()
     } else {
-      this.$selectItems.each((i, el) => {
-        const $parent = $(el).parent()
-        $parent[!removeDiacritics($parent.text().toLowerCase()).includes(removeDiacritics(text)) ? 'hide' : 'show']()
-      })
+      if (!this.options.filterGroup) {
+        this.$selectItems.each((i, el) => {
+          const $parent = $(el).parent()
+          $parent[!removeDiacritics($parent.text().toLowerCase()).includes(removeDiacritics(text)) ? 'hide' : 'show']()
+        })
+      }
       this.$disableItems.parent().hide()
       this.$selectGroups.each((i, el) => {
         const $parent = $(el).parent()
         const group = $parent[0].getAttribute('data-group')
-        const $items = this.$selectItems.filter(':visible')
-        $parent[$items.filter(sprintf`[data-group="${s}"]`(group)).length ? 'show' : 'hide']()
+        if (this.options.filterGroup) {
+          const func = !removeDiacritics($parent.text().toLowerCase()).includes(removeDiacritics(text)) ? 'hide' : 'show'
+          $parent[func]()
+          this.$selectItems.filter(`[data-group="${group}"]`).parent()[func]()
+        } else {
+          const $items = this.$selectItems.filter(':visible')
+          $parent[$items.filter(sprintf`[data-group="${s}"]`(group)).length ? 'show' : 'hide']()
+        }
       })
 
       // Check if no matches found
@@ -587,34 +598,43 @@ class MultipleSelect {
 const defaults = {
   name: '',
   placeholder: '',
+
   selectAll: true,
-  allSelected: true,
-
-  displayType: 'countSelected',
-  displayValues: false,
-  displayTitle: false,
-  displayDelimiter: ', ',
-  minimumCountSelected: 3,
-  ellipsis: false,
-
   single: false,
   multiple: false,
-  multipleWidth: 80,
   hideOptgroupCheckboxes: false,
+  multipleWidth: 80,
   width: undefined,
   dropWidth: undefined,
   maxHeight: 250,
   position: 'bottom',
 
+  displayValues: false,
+  displayDelimiter: ', ',
+  minimumCountSelected: 3,
+  ellipsis: false,
+
   isOpen: false,
   keepOpen: false,
   openOnHover: false,
+  container: null,
 
   filter: false,
+  filterGroup: false,
   filterPlaceholder: '',
   filterAcceptOnEnter: false,
-  container: null,
-  animate: 'none',
+
+  animate: undefined,
+
+  styler () {
+    return false
+  },
+  textTemplate ($elm) {
+    return $elm[0].innerHTML
+  },
+  labelTemplate ($elm) {
+    return $elm[0].getAttribute('label')
+  },
 
   formatSelectAll () {
     return '[Select all]'
@@ -627,18 +647,6 @@ const defaults = {
   },
   formatNoMatchesFound () {
     return 'No matches found'
-  },
-
-  styler () {
-    return false
-  },
-  textTemplate ($elm) {
-    const el = $elm[0]
-    return el.innerHTML
-  },
-  labelTemplate ($elm) {
-    const el = $elm[0]
-    return el.getAttribute('label')
   },
 
   onOpen () {

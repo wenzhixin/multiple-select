@@ -1,7 +1,7 @@
 <script>
   init({
-    title: 'Multiple Items Optgroups',
-    desc: 'Use <code>multiple</code> and <code>multipleWidth</code> options to enable multiple items optgroups.',
+    title: 'Hide Optgroup Checkboxes',
+    desc: 'Use <code>hideOptgroupCheckboxes: true</code> option to hide the optgroup checkboxes.',
     links: ['multiple-select.css'],
     scripts: ['multiple-select.js']
   })
@@ -35,6 +35,7 @@
   function mounted() {
     $('select').multipleSelect({
       multiple: true,
+      hideOptgroupCheckboxes: true,
       width: 460,
       multipleWidth: 55
     })

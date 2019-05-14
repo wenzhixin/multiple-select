@@ -1,7 +1,7 @@
 <script>
   init({
-    title: 'enable/disable',
-    desc: 'Methods: <code>$select.multipleSelect(\'enable\')</code> and <code>$select.multipleSelect(\'disable\')</code>.',
+    title: 'The Ellipsis',
+    desc: 'Use <code>ellipsis: true</code> option to display <code>...</code> after selected options instead of <code># of % selected</code>.',
     links: ['multiple-select.css'],
     scripts: ['multiple-select.js']
   })
@@ -12,11 +12,6 @@ select {
   width: 500px;
 }
 </style>
-
-<p>
-  <button id="enableBtn" class="btn btn-default">Enable</button>
-  <button id="disableBtn" class="btn btn-default">Disable</button>
-</p>
 
 <select multiple="multiple">
   <option value="1">January</option>
@@ -34,17 +29,10 @@ select {
 </select>
 
 <script>
-  var $select = $('select')
-
   function mounted() {
-    $select.multipleSelect()
-
-    $('#enableBtn').click(function () {
-      $select.multipleSelect('enable')
-    })
-
-    $('#disableBtn').click(function () {
-      $select.multipleSelect('disable')
+    $('select').multipleSelect({
+      ellipsis: true,
+      minimumCountSelected: 6
     })
   }
 </script>

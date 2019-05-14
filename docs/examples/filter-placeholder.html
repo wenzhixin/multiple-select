@@ -1,7 +1,7 @@
 <script>
   init({
-    title: 'Basic Filter',
-    desc: 'Use <code>filter: true</code> to enable filter feature.',
+    title: 'Filter Placeholder',
+    desc: 'Use <code>filterPlaceholder: \'The filter placeholder\'</code> to set the filter placeholder.',
     links: ['multiple-select.css'],
     scripts: ['multiple-select.js']
   })
@@ -50,7 +50,8 @@ select {
 <script>
   function mounted() {
     $('select').multipleSelect({
-      filter: true
+      filter: true,
+      filterPlaceholder: 'The filter placeholder'
     })
   }
 </script>

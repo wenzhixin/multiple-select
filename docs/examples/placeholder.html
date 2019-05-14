@@ -1,7 +1,7 @@
 <script>
   init({
-    title: 'the placeholder',
-    desc: 'Use <code>placeholder: \'\'</code> option to set placeholder',
+    title: 'The Placeholder',
+    desc: 'Use <code>placeholder</code> attribute or <code>placeholder: \'\'</code> option to set placeholder.',
     links: ['multiple-select.css'],
     scripts: ['multiple-select.js']
   })
@@ -13,7 +13,7 @@ select {
 }
 </style>
 
-<select multiple="multiple">
+<select multiple="multiple" placeholder="Here is the placeholder">
   <option value="1">January</option>
   <option value="2">February</option>
   <option value="3">March</option>
@@ -30,8 +30,6 @@ select {
 
 <script>
   function mounted() {
-    $('select').multipleSelect({
-      placeholder: 'Here is the placeholder'
-    })
+    $('select').multipleSelect()
   }
 </script>

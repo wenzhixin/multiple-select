@@ -1,7 +1,7 @@
 <script>
   init({
-    title: 'keep open',
-    desc: 'Use <code>keepOpen: true</code> to keep the dropdown open',
+    title: 'Keep Open',
+    desc: 'Use <code>keepOpen: true</code> to keep the select dropdown always open.',
     links: ['multiple-select.css'],
     scripts: ['multiple-select.js']
   })
@@ -31,7 +31,6 @@ select {
 <script>
   function mounted() {
     $('select').multipleSelect({
-      isOpen: true,
       keepOpen: true
     })
   }
