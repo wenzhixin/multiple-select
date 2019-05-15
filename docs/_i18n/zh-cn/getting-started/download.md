@@ -18,17 +18,14 @@ Multiple Select (当前版本 v{{ site.current_version }}) 可以有几种快速
 
 ## CDN
 
-[CDNJS](http://www.cdnjs.com/libraries/multiple-select) 或者 [bootcss](http://open.bootcss.com/multiple-select/) 提供了 CDN 来支持 Multiple Select 的 CSS 和 JavaScript 文件链接。
+[UNPKG](https://unpkg.com/multiple-select) 提供了 CDN 来支持 Multiple Select 的 CSS 和 JavaScript 文件链接。
 
 ```html
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/multiple-select/{{ site.current_version }}/multiple-select.min.css">
+<link rel="stylesheet" href="https://unpkg.com/multiple-select@{{ site.current_version }}/dist/multiple-select.min.css">
 
 <!-- Latest compiled and minified JavaScript -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/multiple-select/{{ site.current_version }}/multiple-select.min.js"></script>
-
-<!-- Latest compiled and minified Locales -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/multiple-select/{{ site.current_version }}/locale/multiple-select-zh-CN.min.js"></script>
+<script src="https://unpkg.com/multiple-select@{{ site.current_version }}/dist/multiple-select.min.js"></script>
 ```
 
 ## NPM

@@ -18,14 +18,14 @@ Source css, JavaScript, locales, and extensions, along with our docs.
 
 ## CDN
 
-The folks over at [CDNJS](http://www.cdnjs.com/libraries/multiple-select) and [bootcss](http://open.bootcss.com/multiple-select/) graciously provide CDN support for CSS and JavaScript of Multiple Select. Just use these CDN links.
+The folks over at [UNPKG](https://unpkg.com/multiple-select) graciously provide CDN support for CSS and JavaScript of Multiple Select. Just use these CDN links.
 
 ```html
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/multiple-select/{{ site.current_version }}/multiple-select.min.css">
+<link rel="stylesheet" href="https://unpkg.com/multiple-select@{{ site.current_version }}/dist/multiple-select.min.css">
 
 <!-- Latest compiled and minified JavaScript -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/multiple-select/{{ site.current_version }}/multiple-select.min.js"></script>
+<script src="https://unpkg.com/multiple-select@{{ site.current_version }}/dist/multiple-select.min.js"></script>
 ```
 
 ## NPM
