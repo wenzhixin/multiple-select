@@ -2,8 +2,8 @@
 
 import cssEscape from 'css.escape'
 
-import removeDiacritics from './removeDiacritics.js'
-import {s, sprintf} from './sprintf.js'
+import removeDiacritics from './utils/removeDiacritics.js'
+import {s, sprintf} from './utils/sprintf.js'
 
 class MultipleSelect {
   constructor ($el, options) {
