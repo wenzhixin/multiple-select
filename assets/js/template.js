@@ -1,8 +1,8 @@
 $(function () {
-  var url = location.search.replace(/\?v=\d+&/, '').replace(/\?v=153&/, '')
+  var url = location.search.replace(/\?v=\d+&/, '').replace(/\?v=154&/, '')
   $.ajax({
     type: 'GET',
-    url: url + '?v=153', // todo: add version to solve cache problem
+    url: url + '?v=154', // todo: add version to solve cache problem
     dataType: 'html',
     global: false,
     cache: true, // (warning: setting it to false will cause a timestamp and will call the request twice)
@@ -18,7 +18,8 @@ window._config = {
   isDebug: location.hash.slice(1) === 'is-debug' ||
   ['localhost'].indexOf(location.hostname) > -1,
   cdnUrl: 'https://unpkg.com/multiple-select/',
-  localUrl: 'http://localhost:8080/github/multiple-select/'
+  localUrl: 'http://localhost:4000/assets/js/',
+  localLinkUrl: 'http://localhost:4000/assets/css/'
 }
 
 function _getLink(file) {
@@ -27,7 +28,7 @@ function _getLink(file) {
     url = window._config.cdnUrl + file
 
     if (window._config.isDebug) {
-      url = window._config.localUrl + file.replace(/\.min/, '') + '?t=' + (+new Date())
+      url = window._config.localLinkUrl + file.replace(/\.min/, '') + '?t=' + (+new Date())
     }
   }
   return '<link href="' + url + '" rel="stylesheet">'
@@ -120,6 +121,7 @@ function _beautifySource(data) {
   var result = []
   result = result.concat($.map(obj.links, _getLink))
   result.push('')
+  result.push('<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>')
   result = result.concat($.map(obj.scripts, function (script) {
     return _getScript(script, true)
   }))

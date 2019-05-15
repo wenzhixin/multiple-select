@@ -1,17 +1,11 @@
 <script>
   init({
-    title: 'multiple items optgroups',
-    desc: 'Use <code>multiple</code> and <code>multipleWidth</code> options to enable multiple items optgroups',
+    title: 'Multiple Items Optgroups',
+    desc: 'Use <code>multiple</code> and <code>multipleWidth</code> options to enable multiple items optgroups.',
     links: ['multiple-select.css'],
     scripts: ['multiple-select.js']
   })
 </script>
-
-<style>
-select {
-  width: 500px;
-}
-</style>
 
 <select multiple="multiple">
   <optgroup label="Group 1">
@@ -40,8 +34,8 @@ select {
 <script>
   function mounted() {
     $('select').multipleSelect({
-      width: 460,
       multiple: true,
+      width: 460,
       multipleWidth: 55
     })
   }
