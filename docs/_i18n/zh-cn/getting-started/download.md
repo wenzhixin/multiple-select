@@ -31,10 +31,10 @@ Multiple Select (当前版本 v{{ site.current_version }}) 可以有几种快速
 <script src="//cdnjs.cloudflare.com/ajax/libs/multiple-select/{{ site.current_version }}/locale/multiple-select-zh-CN.min.js"></script>
 ```
 
-## Bower
+## NPM
 
-通过 [Bower](http://bower.io/) 来安装和管理 Multiple Select 的 CSS，JavaScript。
+通过 [NPM](http://npmjs.com) 来安装和管理 Multiple Select 的 CSS，JavaScript。
 
 ```bash
-$ bower install multiple-select
+$ npm install multiple-select
 ```

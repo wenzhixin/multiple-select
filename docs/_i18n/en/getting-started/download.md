@@ -28,10 +28,10 @@ The folks over at [CDNJS](http://www.cdnjs.com/libraries/multiple-select) and [b
 <script src="//cdnjs.cloudflare.com/ajax/libs/multiple-select/{{ site.current_version }}/multiple-select.min.js"></script>
 ```
 
-## Bower
+## NPM
 
-Install and manage Multiple Select's CSS, JavaScript using [Bower](http://bower.io/).
+Install and manage Multiple Select's CSS, JavaScript using [NPM](http://npmjs.com).
 
 ```bash
-$ bower install multiple-select
+$ npm install multiple-select
 ```

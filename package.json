@@ -1,13 +1,37 @@
 {
   "name": "multiple-select",
-  "main": "multiple-select.js",
-  "version": "1.2.3",
+  "main": "dist/multiple-select.min.js",
+  "module": "dist/multiple-select-es.min.js",
+  "version": "1.3.0",
   "title": "Multiple Select",
   "description": "Multiple select is a jQuery plugin to select multiple elements with checkboxes :).",
-  "author": {
-    "name": "zhixin wen",
-    "email": "wenzhixin2010@gmail.com",
-    "url": "http://wenzhixin.net.cn/"
+  "author": "wenzhixin <wenzhixin2010@gmail.com> (http://wenzhixin.net.cn/)",
+  "contributors": [
+    "Brett Zamir"
+  ],
+  "scripts": {
+    "lint": "eslint .",
+    "js:build:base": "rollup -c",
+    "js:build:min": "rollup -c --config-env PRODUCTION",
+    "js:build:banner": "find dist -name '*.min.js' -exec headr {} -o {} --version --homepage --author --license \\;",
+    "js:build": "run-s js:build:*",
+    "css:build:scss": "find src -name '*.scss' | sed -e 'p;s/scss/css/' | xargs -n2 sass",
+    "css:build:base": "find src -name '*.css' | sed -e 'p;s/src/dist/' | xargs -n2 cp",
+    "css:build:min": "find dist -name '*.css' | sed -e 'p;s/.css/.min.css/' | xargs -n2 cssmin",
+    "css:build:banner": "find dist -name '*.min.css' -exec headr {} -o {} --version --homepage --author --license \\;",
+    "image:build": "cp src/multiple-select.png dist/multiple-select.png",
+    "css:build": "run-s css:build:*",
+    "clean": "rm -rf dist",
+    "build": "run-s lint clean *:build",
+    "docs": "bundle exec jekyll build",
+    "docs-server": "bundle exec jekyll serve",
+    "js:dev": "rollup -c --config-env DEV -w src/**/*.js",
+    "css:dev": "sass --watch src/multiple-select.scss docs/assets/css/multiple-select.css",
+    "dev": "npm run js:dev & npm run css:dev & npm run docs-server",
+    "test": "testcafe chrome test/**/*.js --skip-js-errors"
+  },
+  "peerDependencies": {
+    "jquery": "1.9.1 - 3"
   },
   "repository": {
     "type": "git",
@@ -20,14 +44,46 @@
     "multiple.choose",
     "checkbox"
   ],
-  "homepage": "http://wenzhixin.net.cn/p/multiple-select/",
-  "demo": "http://wenzhixin.net.cn/p/multiple-select/#examples",
+  "homepage": "http://multiple-select.wenzhixin.net.cn",
+  "demo": "http://multiple-select.wenzhixin.net.cn/examples",
   "bugs": {
     "url": "https://github.com/wenzhixin/multiple-select/issues"
   },
-  "docs": "http://wenzhixin.net.cn/p/multiple-select/#documentation",
+  "docs": "http://multiple-select.wenzhixin.net.cn/documentation",
   "download": "https://github.com/wenzhixin/multiple-select/archive/master.zip",
+  "engines": {},
+  "dependencies": {},
   "devDependencies": {
-    "getopts": "^2.2.3"
+    "@babel/preset-env": "^7.4.4",
+    "@mysticatea/eslint-plugin": "^10.0.3",
+    "axe-testcafe": "^1.1.0",
+    "css.escape": "^1.5.1",
+    "cssmin-cli": "^0.0.5",
+    "eslint": "^5.16.0",
+    "eslint-config-ash-nazg": "^4.0.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-compat": "^3.1.1",
+    "eslint-plugin-eslint-comments": "^3.1.1",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-jsdoc": "^4.8.3",
+    "eslint-plugin-markdown": "^1.0.0",
+    "eslint-plugin-no-use-extend-native": "^0.4.0",
+    "eslint-plugin-node": "^9.0.1",
+    "eslint-plugin-promise": "^4.1.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "eslint-plugin-testcafe": "^0.2.1",
+    "eslint-plugin-unicorn": "^8.0.2",
+    "getopts": "^2.2.4",
+    "headr": "^0.0.4",
+    "npm-run-all": "^4.1.5",
+    "rollup": "^1.11.3",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-babel-minify": "^8.0.0",
+    "rollup-plugin-commonjs": "^9.3.4",
+    "rollup-plugin-inject": "^2.2.0",
+    "rollup-plugin-node-resolve": "^4.2.3",
+    "sass": "^1.20.1",
+    "testcafe": "^1.1.3",
+    "typescript": "^3.4.5"
   }
 }

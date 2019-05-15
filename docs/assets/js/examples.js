@@ -23,6 +23,19 @@ function initNavigation(href) {
   var $prev = $el.parent().prev('li')
   var $next = $el.parent().next('li')
 
+  if ($prev.is('.dropdown-header')) {
+    $prev = $prev.prev()
+  }
+  if ($prev.is('.divider')) {
+    $prev = $prev.prev()
+  }
+  if ($next.is('.divider')) {
+    $next = $next.next()
+  }
+  if ($next.is('.dropdown-header')) {
+    $next = $next.next()
+  }
+
   if ($prev.text()) {
     $('.navigation.previous').show()
       .attr('href', $prev.find('a').attr('href'))

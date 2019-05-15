@@ -46,6 +46,11 @@
   top: 20px;
 }
 
+.dropdown-menu {
+  max-height: 410px;
+  overflow: auto;
+}
+
 .tc {
   text-align: center;
 }
