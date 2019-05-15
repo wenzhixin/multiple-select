@@ -121,6 +121,7 @@ function _beautifySource(data) {
   var result = []
   result = result.concat($.map(obj.links, _getLink))
   result.push('')
+  result.push('<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>')
   result = result.concat($.map(obj.scripts, function (script) {
     return _getScript(script, true)
   }))

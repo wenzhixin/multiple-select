@@ -1,7 +1,7 @@
 <script>
   init({
-    title: 'Multiple Items',
-    desc: 'Use <code>multiple</code> and <code>multipleWidth</code> options to enable multiple items.',
+    title: 'Custom Dropdown Width',
+    desc: 'Use <code>dropWidth: 580</code> option to custom the dropdown width.',
     links: ['multiple-select.css'],
     scripts: ['multiple-select.js']
   })
@@ -45,7 +45,8 @@
     $('select').multipleSelect({
       multiple: true,
       width: 460,
-      multipleWidth: 55
+      multipleWidth: 55,
+      dropWidth: 580
     })
   }
 </script>

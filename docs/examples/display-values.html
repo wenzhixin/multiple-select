@@ -1,7 +1,7 @@
 <script>
   init({
-    title: 'The focus/blur',
-    desc: 'Methods: <code>$select.multipleSelect(\'focus\')</code> and <code>$select.multipleSelect(\'blur\')</code>.',
+    title: 'Display Values',
+    desc: 'Use <code>displayValues: true</code> option to display selected values instead text.',
     links: ['multiple-select.css'],
     scripts: ['multiple-select.js']
   })
@@ -12,11 +12,6 @@ select {
   width: 500px;
 }
 </style>
-
-<p>
-  <button id="focusBtn" class="btn btn-default">Focus</button>
-  <button id="blurBtn" class="btn btn-default">Blur</button>
-</p>
 
 <select multiple="multiple">
   <option value="1">January</option>
@@ -34,17 +29,9 @@ select {
 </select>
 
 <script>
-  var $select = $('select')
-
   function mounted() {
-    $select.multipleSelect()
-
-    $('#focusBtn').click(function () {
-      $select.multipleSelect('focus')
-    })
-
-    $('#blurBtn').click(function () {
-      $select.multipleSelect('blur')
+    $('select').multipleSelect({
+      displayValues: true
     })
   }
 </script>

@@ -1,7 +1,7 @@
 <script>
   init({
-    title: 'Disabled Optgroups',
-    desc: 'Multiple Select can take from disabled optgroups.',
+    title: 'Label Template',
+    desc: 'Use <code>labelTemplate</code> to custom the optgroup label template.',
     links: ['multiple-select.css'],
     scripts: ['multiple-select.js']
   })
@@ -14,7 +14,7 @@ select {
 </style>
 
 <select multiple="multiple">
-  <optgroup label="Group 1" disabled="disabled">
+  <optgroup label="Group 1">
     <option value="1">Option 1</option>
     <option value="2">Option 2</option>
     <option value="3">Option 3</option>
@@ -33,6 +33,10 @@ select {
 
 <script>
   function mounted() {
-    $('select').multipleSelect()
+    $('select').multipleSelect({
+      labelTemplate: function ($el) {
+        return '<i class="fa fa-star"></i>' + $el.attr('label')
+      }
+    })
   }
 </script>
