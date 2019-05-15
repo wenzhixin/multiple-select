@@ -1,15 +1,10 @@
-### Latest release (2019-04-27)
+### Latest release (2019-05-15)
 
-### 1.2.3
+### 1.3.0
 
-- **New:** Added `onAfterCreate` event ([#196](https://github.com/wenzhixin/multiple-select/pull/196)).
-- **New:** Made option labels appear clickable ([#374](https://github.com/wenzhixin/multiple-select/pull/374)).
-- **New:** Allowed `placeholder` from html ([#408](https://github.com/wenzhixin/multiple-select/pull/408)).
-- **Update:** Fixed groups don't get `checked` by default ([#346](https://github.com/wenzhixin/multiple-select/pull/346)).
-- **Update:** Fixed `getSelects` bug with `single` option ([#370](https://github.com/wenzhixin/multiple-select/pull/370)).
-- **Update:** Removed duplicate `destroy` method ([#400](https://github.com/wenzhixin/multiple-select/pull/400)).
-- **Update:** Fixed outdated CSS syntax in linear-gradient ([#400](https://github.com/wenzhixin/multiple-select/pull/400)).
-- **Update:** Removed `selectAll` whitespace ([#409](https://github.com/wenzhixin/multiple-select/pull/409)).
-- **Update:** Fixed `selectAllText/allSelected` doesn't work ([#410](https://github.com/wenzhixin/multiple-select/pull/410)).
-- **Update:** Fixed IE 11 crashing bug ([#410](https://github.com/wenzhixin/multiple-select/pull/410)).
-- **Update:** Fixed radio style bug ([11e5e74](https://github.com/wenzhixin/multiple-select/commit/11e5e74c99d2407605492608ec0f150eadfc59ad)).
+- **New:** Rewrote code to ES6. ([#412](https://github.com/wenzhixin/multiple-select/pull/412)).
+- **New:** Added `filterGroup` option ([#429](https://github.com/wenzhixin/multiple-select/pull/429)).
+- **New:** Added `babel` and refined the code ([#413](https://github.com/wenzhixin/multiple-select/pull/413)).
+- **New:** Used `dist` to output the build files ([#414](https://github.com/wenzhixin/multiple-select/pull/414)).
+- **New:** Added full examples ([#429](https://github.com/wenzhixin/multiple-select/pull/429)).
+- **Update:** Fixed css escape bug ([#423](https://github.com/wenzhixin/multiple-select/pull/423)).
