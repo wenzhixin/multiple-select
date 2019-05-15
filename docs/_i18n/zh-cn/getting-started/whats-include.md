@@ -7,9 +7,21 @@
 ```bash
 multiple-select/
 ├── docs/
-├── multiple-select.css
-├── multiple-select.js
-└── multiple-select.png
+├── src
+|   ├── utils
+│   ├── MultipleSelect.js
+│   ├── multiple-select.css
+│   ├── multiple-select.js
+│   ├── multiple-select.png
+├── dist
+│   ├── multiple-select-es.js
+│   ├── multiple-select-es.min.js
+│   ├── multiple-select.css
+│   ├── multiple-select.js
+│   ├── multiple-select.min.css
+│   ├── multiple-select.min.js
+│   └── multiple-select.png
+└── README.md
 ```
 
 `src/`是我们的 CSS，JavaScript 的源码。`dist/`文件夹包含了所有`src/`下压缩并扰乱的文件。`docs/`文件夹包含了我们文档的源码。另外，我们提供了包信息，License 信息，和其他的信息。

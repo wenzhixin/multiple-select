@@ -17,27 +17,7 @@ Include jQuery library and `multiple-select.min.js` in the head tag or at the ve
 
 ---
 
-The Multiple Select plugin displays data in a tabular format, via data attributes or JavaScript.
-
-## Via data attributes
-
-Activate Multiple Select without writing JavaScript. Set `data-toggle="select"` on a normal select.
-
-```html
-<select multiple="multiple" data-toggle="select">
-    <option value="1">January</option>
-    ...
-    <option value="12">December</option>
-</select>
-```
-
-We can also use remote url data by setting `data-url="data1.json"` on a normal select.
-
-```html
-<select data-toggle="select" data-url="data1.json"></select>
-```
-
-## Via JavaScript
+The Multiple Select plugin displays data in a tabular format, via JavaScript.
 
 Call a multiple select with id select with JavaScript.
 
@@ -50,17 +30,53 @@ Call a multiple select with id select with JavaScript.
 ```
 
 ```js
-$('#select').multipleSelect();
+$('#select').multipleSelect()
 ```
 
-We can also use remote url data by setting `url: 'data1.json'`.
+---
+
+## Starter template
+
+Be sure to have your pages set up with the latest design and development standards. That means using an HTML5 doctype and including a viewport meta tag for proper responsive behaviors.
+
+Put it all together and your pages should look like this:
 
 ```html
-<select id="select" multiple="multiple"></select>
-```
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Hello, Multiple Select!</title>
 
-```js
-$('#select').multipleSelect({
-    url: 'data1.json'
-});
+    <link rel="stylesheet" href="https://unpkg.com/multiple-select@{{ site.current_version }}/dist/multiple-select.min.css">
+  </head>
+  <body>
+    <select id="select" multiple="multiple">
+      <option value="1">January</option>
+      <option value="2">February</option>
+      <option value="3">March</option>
+      <option value="4">April</option>
+      <option value="5">May</option>
+      <option value="6">June</option>
+      <option value="7">July</option>
+      <option value="8">August</option>
+      <option value="9">September</option>
+      <option value="10">October</option>
+      <option value="11">November</option>
+      <option value="12">December</option>
+    </select>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://unpkg.com/multiple-select@{{ site.current_version }}/dist/multiple-select.min.js"></script>
+    <script>
+      $(function () {
+        $('#select').multipleSelect({
+          width: 500
+        })
+      })
+    </script>
+  </body>
+</html>
 ```
