@@ -382,23 +382,24 @@ class MultipleSelect {
   }
 
   update (ignoreTrigger) {
-    const selects = this.options.displayValues ? this.getSelects() : this.getSelects('text')
+    const valueSelects = this.getSelects()
+    const textSelects = this.options.displayValues ? valueSelects : this.getSelects('text')
     const $span = this.$choice.find('>span')
-    const sl = selects.length
+    const sl = valueSelects.length
 
     if (sl === 0) {
       $span.addClass('placeholder').html(this.options.placeholder)
     } else if (this.options.formatAllSelected() && sl === this.$selectItems.length + this.$disableItems.length) {
       $span.removeClass('placeholder').html(this.options.formatAllSelected())
     } else if (this.options.ellipsis && sl > this.options.minimumCountSelected) {
-      $span.removeClass('placeholder').text(`${selects.slice(0, this.options.minimumCountSelected)
+      $span.removeClass('placeholder').text(`${textSelects.slice(0, this.options.minimumCountSelected)
         .join(this.options.displayDelimiter)}...`)
     } else if (this.options.formatCountSelected() && sl > this.options.minimumCountSelected) {
       $span.removeClass('placeholder').html(this.options.formatCountSelected()
-        .replace(/#/g, selects.length)
+        .replace(/#/g, sl)
         .replace(/%/g, this.$selectItems.length + this.$disableItems.length))
     } else {
-      $span.removeClass('placeholder').text(selects.join(this.options.displayDelimiter))
+      $span.removeClass('placeholder').text(textSelects.join(this.options.displayDelimiter))
     }
 
     if (this.options.addTitle) {
