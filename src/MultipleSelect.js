@@ -156,7 +156,8 @@ class MultipleSelect {
     if ($elm.is('option')) {
       const text = this.options.textTemplate($elm)
       const {value, selected} = el
-      const style = sprintf`style="${s}"`(this.options.styler(value))
+      const customStyle = this.options.styler(value)
+      const style = customStyle ? sprintf`style="${s}"`(customStyle) : ''
 
       disabled = groupDisabled || el.disabled
 
@@ -559,7 +560,9 @@ class MultipleSelect {
       if (!this.options.filterGroup) {
         this.$selectItems.each((i, el) => {
           const $parent = $(el).parent()
-          $parent[!removeDiacritics($parent.text().toLowerCase()).includes(removeDiacritics(text)) ? 'hide' : 'show']()
+          const hasText = removeDiacritics($parent.text().toLowerCase())
+            .includes(removeDiacritics(text))
+          $parent.closest('li')[hasText ? 'show' : 'hide']()
         })
       }
       this.$disableItems.parent().hide()
@@ -567,12 +570,15 @@ class MultipleSelect {
         const $parent = $(el).parent()
         const group = $parent[0].getAttribute('data-group')
         if (this.options.filterGroup) {
-          const func = !removeDiacritics($parent.text().toLowerCase()).includes(removeDiacritics(text)) ? 'hide' : 'show'
-          $parent[func]()
-          this.$selectItems.filter(`[data-group="${group}"]`).parent()[func]()
+          const hasText = removeDiacritics($parent.text().toLowerCase())
+            .includes(removeDiacritics(text))
+          const func = hasText ? 'show' : 'hide'
+          $parent.closest('li')[func]()
+          this.$selectItems.filter(`[data-group="${group}"]`).closest('li')[func]()
         } else {
           const $items = this.$selectItems.filter(':visible')
-          $parent[$items.filter(sprintf`[data-group="${s}"]`(group)).length ? 'show' : 'hide']()
+          const hasText = $items.filter(sprintf`[data-group="${s}"]`(group)).length
+          $parent.closest('li')[hasText ? 'show' : 'hide']()
         }
       })
 
