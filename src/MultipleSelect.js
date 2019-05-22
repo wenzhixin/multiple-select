@@ -343,6 +343,7 @@ class MultipleSelect {
         top: offset.top,
         left: offset.left
       })
+      this.$drop.outerWidth(this.$parent.outerWidth())
     }
 
     if (this.options.filter) {
