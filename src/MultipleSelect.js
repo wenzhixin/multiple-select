@@ -346,7 +346,7 @@ class MultipleSelect {
       this.$drop.outerWidth(this.$parent.outerWidth())
     }
 
-    if (this.options.filter) {
+    if (this.$el.children().length && this.options.filter) {
       this.$searchInput.val('')
       this.$searchInput.focus()
       this.filter()
