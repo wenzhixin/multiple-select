@@ -19,7 +19,12 @@ function axeCheckWithConfig (t) {
     t,
     // context: https://github.com/dequelabs/axe-core/blob/develop/doc/API.md#context-parameter
     {
-      exclude: ['.carbon-wrap > a.carbon-img']
+      exclude: [
+        // Ignore bootstrap docs (should be fixed by them)
+        ['.bs-docs-footer'],
+        // Ignore codefund
+        ['*[class|="cf"]']
+      ]
     },
     // https://github.com/dequelabs/axe-core/blob/develop/doc/API.md#options-parameter
     {
