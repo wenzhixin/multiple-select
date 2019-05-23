@@ -404,7 +404,7 @@ class MultipleSelect {
       $span.removeClass('placeholder').text(textSelects.join(this.options.displayDelimiter))
     }
 
-    if (this.options.addTitle) {
+    if (this.options.displayTitle) {
       $span.prop('title', this.getSelects('text'))
     }
 
@@ -618,6 +618,7 @@ const defaults = {
   position: 'bottom',
 
   displayValues: false,
+  displayTitle: false,
   displayDelimiter: ', ',
   minimumCountSelected: 3,
   ellipsis: false,
