@@ -31,7 +31,7 @@ function showHelp () {
 
 /**
  * Perform document file writing.
- * @returns {void}
+ * @returns {Promise<void>}
  */
 async function run () {
   if (options.help || Object.keys(options).length === 1) {
