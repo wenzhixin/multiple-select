@@ -91,7 +91,7 @@ class MultipleSelect {
       this.$drop.append(`
         <div class="ms-search">
           <input type="text" autocomplete="off" autocorrect="off"
-            autocapitilize="off" spellcheck="false"
+            autocapitalize="off" spellcheck="false"
             ${sprintf`placeholder="${s}"`(this.options.filterPlaceholder)}>
         </div>
       `)
