@@ -12,7 +12,7 @@
 <li><a href="../examples#single-row.html">Single Row</a></li>
 <li><a href="../examples#multiple-items.html">Multiple Items</a></li>
 <li><a href="../examples#multiple-items-optgroups.html">Multiple Items Optgroups</a></li>
-<li><a href="../examples#hide-optgroup-checkboxes.html">Hide Optgroup Check
+<li><a href="../examples#hide-optgroup-checkboxes.html">Hide Optgroup Check</a></li>
 <li><a href="../examples#custom-dropdown-width.html">Custom Dropdown Width</a></li>
 <li><a href="../examples#max-height.html">Max Height</a></li>
 <li><a href="../examples#position.html">The Position</a></li>

@@ -273,6 +273,7 @@ class MultipleSelect {
         this.update()
       }
     })
+
     this.$selectGroups.off('click').on('click', e => {
       const $this = $(e.currentTarget)
       const group = $this.parent()[0].getAttribute('data-group')
@@ -286,8 +287,13 @@ class MultipleSelect {
       this.options.onOptgroupClick({
         label: $this.parent().text(),
         checked,
-        children: $children.get(),
-        instance: this
+        children: $children.get().map(el => {
+          return {
+            label: $(el).parent().text(),
+            value: $(el).val(),
+            check: $(el).prop('checked')
+          }
+        })
       })
     })
     this.$selectItems.off('click').on('click', e => {
@@ -308,8 +314,7 @@ class MultipleSelect {
       this.options.onClick({
         label: $this.parent().text(),
         value: $this.val(),
-        checked: $this.prop('checked'),
-        instance: this
+        checked: $this.prop('checked')
       })
 
       if (this.options.single && this.options.isOpen && !this.options.keepOpen) {
@@ -552,10 +557,10 @@ class MultipleSelect {
     const text = $.trim(this.$searchInput.val()).toLowerCase()
 
     if (text.length === 0) {
-      this.$selectAll.parent().show()
-      this.$selectItems.parent().show()
-      this.$disableItems.parent().show()
-      this.$selectGroups.parent().show()
+      this.$selectAll.closest('li').show()
+      this.$selectItems.closest('li').show()
+      this.$disableItems.closest('li').show()
+      this.$selectGroups.closest('li').show()
       this.$noResults.hide()
     } else {
       if (!this.options.filterGroup) {
@@ -585,10 +590,10 @@ class MultipleSelect {
 
       // Check if no matches found
       if (this.$selectItems.parent().filter(':visible').length) {
-        this.$selectAll.parent().show()
+        this.$selectAll.closest('li').show()
         this.$noResults.hide()
       } else {
-        this.$selectAll.parent().hide()
+        this.$selectAll.closest('li').hide()
         this.$noResults.show()
       }
     }

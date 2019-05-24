@@ -30,11 +30,4 @@ $(function () {
     $(this).find('a').attr('href', baseDir +
       (language === 'en' ? '' : language + '/') + pathDir)
   })
-
-  $('.start-table').next().bootstrapTable({
-    search: true,
-    showToggle: true,
-    showColumns: true,
-    mobileResponsive: true
-  })
 })
