@@ -136,7 +136,7 @@ class MultipleSelect {
     }
 
     if (this.options.openOnHover) {
-      $('.ms-parent').hover(() => {
+      this.$parent.hover(() => {
         this.open()
       }, () => {
         this.close()
