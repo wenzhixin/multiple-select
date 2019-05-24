@@ -7,6 +7,7 @@
 - **Update:** Fixed container outer width bug ([#431](https://github.com/wenzhixin/multiple-select/pull/431)).
 - **Update:** Updated `addTitle` option to `displayTitle` option ([#431](https://github.com/wenzhixin/multiple-select/pull/431)).
 - **Update:** Fixed filter with no select options display bug ([#431](https://github.com/wenzhixin/multiple-select/pull/431)).
+- **Update:** Fixed openOnHover bug ([#435](https://github.com/wenzhixin/multiple-select/pull/435)).
 
 ### 1.3.0
 
