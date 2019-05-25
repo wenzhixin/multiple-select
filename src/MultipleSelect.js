@@ -91,7 +91,7 @@ class MultipleSelect {
       this.$drop.append(`
         <div class="ms-search">
           <input type="text" autocomplete="off" autocorrect="off"
-            autocapitilize="off" spellcheck="false"
+            autocapitalize="off" spellcheck="false"
             ${sprintf`placeholder="${s}"`(this.options.filterPlaceholder)}>
         </div>
       `)
@@ -136,7 +136,7 @@ class MultipleSelect {
     }
 
     if (this.options.openOnHover) {
-      $('.ms-parent').hover(() => {
+      this.$parent.hover(() => {
         this.open()
       }, () => {
         this.close()
@@ -156,7 +156,8 @@ class MultipleSelect {
     if ($elm.is('option')) {
       const text = this.options.textTemplate($elm)
       const {value, selected} = el
-      const style = sprintf`style="${s}"`(this.options.styler(value))
+      const customStyle = this.options.styler(value)
+      const style = customStyle ? sprintf`style="${s}"`(customStyle) : ''
 
       disabled = groupDisabled || el.disabled
 
@@ -272,6 +273,7 @@ class MultipleSelect {
         this.update()
       }
     })
+
     this.$selectGroups.off('click').on('click', e => {
       const $this = $(e.currentTarget)
       const group = $this.parent()[0].getAttribute('data-group')
@@ -285,8 +287,13 @@ class MultipleSelect {
       this.options.onOptgroupClick({
         label: $this.parent().text(),
         checked,
-        children: $children.get(),
-        instance: this
+        children: $children.get().map(el => {
+          return {
+            label: $(el).parent().text(),
+            value: $(el).val(),
+            check: $(el).prop('checked')
+          }
+        })
       })
     })
     this.$selectItems.off('click').on('click', e => {
@@ -307,8 +314,7 @@ class MultipleSelect {
       this.options.onClick({
         label: $this.parent().text(),
         value: $this.val(),
-        checked: $this.prop('checked'),
-        instance: this
+        checked: $this.prop('checked')
       })
 
       if (this.options.single && this.options.isOpen && !this.options.keepOpen) {
@@ -342,9 +348,10 @@ class MultipleSelect {
         top: offset.top,
         left: offset.left
       })
+      this.$drop.outerWidth(this.$parent.outerWidth())
     }
 
-    if (this.options.filter) {
+    if (this.$el.children().length && this.options.filter) {
       this.$searchInput.val('')
       this.$searchInput.focus()
       this.filter()
@@ -382,26 +389,27 @@ class MultipleSelect {
   }
 
   update (ignoreTrigger) {
-    const selects = this.options.displayValues ? this.getSelects() : this.getSelects('text')
+    const valueSelects = this.getSelects()
+    const textSelects = this.options.displayValues ? valueSelects : this.getSelects('text')
     const $span = this.$choice.find('>span')
-    const sl = selects.length
+    const sl = valueSelects.length
 
     if (sl === 0) {
       $span.addClass('placeholder').html(this.options.placeholder)
     } else if (this.options.formatAllSelected() && sl === this.$selectItems.length + this.$disableItems.length) {
       $span.removeClass('placeholder').html(this.options.formatAllSelected())
     } else if (this.options.ellipsis && sl > this.options.minimumCountSelected) {
-      $span.removeClass('placeholder').text(`${selects.slice(0, this.options.minimumCountSelected)
+      $span.removeClass('placeholder').text(`${textSelects.slice(0, this.options.minimumCountSelected)
         .join(this.options.displayDelimiter)}...`)
     } else if (this.options.formatCountSelected() && sl > this.options.minimumCountSelected) {
-      $span.removeClass('placeholder').html(this.options.formatCountSelected()
-        .replace(/#/g, selects.length)
-        .replace(/%/g, this.$selectItems.length + this.$disableItems.length))
+      $span.removeClass('placeholder').html(this.options.formatCountSelected(
+        sl, this.$selectItems.length + this.$disableItems.length
+      ))
     } else {
-      $span.removeClass('placeholder').text(selects.join(this.options.displayDelimiter))
+      $span.removeClass('placeholder').text(textSelects.join(this.options.displayDelimiter))
     }
 
-    if (this.options.addTitle) {
+    if (this.options.displayTitle) {
       $span.prop('title', this.getSelects('text'))
     }
 
@@ -549,16 +557,18 @@ class MultipleSelect {
     const text = $.trim(this.$searchInput.val()).toLowerCase()
 
     if (text.length === 0) {
-      this.$selectAll.parent().show()
-      this.$selectItems.parent().show()
-      this.$disableItems.parent().show()
-      this.$selectGroups.parent().show()
+      this.$selectAll.closest('li').show()
+      this.$selectItems.closest('li').show()
+      this.$disableItems.closest('li').show()
+      this.$selectGroups.closest('li').show()
       this.$noResults.hide()
     } else {
       if (!this.options.filterGroup) {
         this.$selectItems.each((i, el) => {
           const $parent = $(el).parent()
-          $parent[!removeDiacritics($parent.text().toLowerCase()).includes(removeDiacritics(text)) ? 'hide' : 'show']()
+          const hasText = removeDiacritics($parent.text().toLowerCase())
+            .includes(removeDiacritics(text))
+          $parent.closest('li')[hasText ? 'show' : 'hide']()
         })
       }
       this.$disableItems.parent().hide()
@@ -566,21 +576,24 @@ class MultipleSelect {
         const $parent = $(el).parent()
         const group = $parent[0].getAttribute('data-group')
         if (this.options.filterGroup) {
-          const func = !removeDiacritics($parent.text().toLowerCase()).includes(removeDiacritics(text)) ? 'hide' : 'show'
-          $parent[func]()
-          this.$selectItems.filter(`[data-group="${group}"]`).parent()[func]()
+          const hasText = removeDiacritics($parent.text().toLowerCase())
+            .includes(removeDiacritics(text))
+          const func = hasText ? 'show' : 'hide'
+          $parent.closest('li')[func]()
+          this.$selectItems.filter(`[data-group="${group}"]`).closest('li')[func]()
         } else {
           const $items = this.$selectItems.filter(':visible')
-          $parent[$items.filter(sprintf`[data-group="${s}"]`(group)).length ? 'show' : 'hide']()
+          const hasText = $items.filter(sprintf`[data-group="${s}"]`(group)).length
+          $parent.closest('li')[hasText ? 'show' : 'hide']()
         }
       })
 
       // Check if no matches found
       if (this.$selectItems.parent().filter(':visible').length) {
-        this.$selectAll.parent().show()
+        this.$selectAll.closest('li').show()
         this.$noResults.hide()
       } else {
-        this.$selectAll.parent().hide()
+        this.$selectAll.closest('li').hide()
         this.$noResults.show()
       }
     }
@@ -610,6 +623,7 @@ const defaults = {
   position: 'bottom',
 
   displayValues: false,
+  displayTitle: false,
   displayDelimiter: ', ',
   minimumCountSelected: 3,
   ellipsis: false,
@@ -642,8 +656,8 @@ const defaults = {
   formatAllSelected () {
     return 'All selected'
   },
-  formatCountSelected () {
-    return '# of % selected'
+  formatCountSelected (count, total) {
+    return count + ' of ' + total + ' selected'
   },
   formatNoMatchesFound () {
     return 'No matches found'

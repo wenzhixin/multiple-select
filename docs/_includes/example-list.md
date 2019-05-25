@@ -12,11 +12,12 @@
 <li><a href="../examples#single-row.html">Single Row</a></li>
 <li><a href="../examples#multiple-items.html">Multiple Items</a></li>
 <li><a href="../examples#multiple-items-optgroups.html">Multiple Items Optgroups</a></li>
-<li><a href="../examples#hide-optgroup-checkboxes.html">Hide Optgroup Check
+<li><a href="../examples#hide-optgroup-checkboxes.html">Hide Optgroup Check</a></li>
 <li><a href="../examples#custom-dropdown-width.html">Custom Dropdown Width</a></li>
 <li><a href="../examples#max-height.html">Max Height</a></li>
 <li><a href="../examples#position.html">The Position</a></li>
 <li><a href="../examples#display-values.html">Display Values</a></li>
+<li><a href="../examples#display-title.html">Display Title</a></li>
 <li><a href="../examples#display-delimiter.html">Display Delimiter</a></li>
 <li><a href="../examples#minimum-count-selected.html">Minimum Count Selected</a></li>
 <li><a href="../examples#ellipsis.html">The Ellipsis</a></li>
