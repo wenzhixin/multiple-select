@@ -9,6 +9,7 @@
 - **Update:** Fixed filter with no select options display bug ([#431](https://github.com/wenzhixin/multiple-select/pull/431)).
 - **Update:** Fixed openOnHover bug ([#435](https://github.com/wenzhixin/multiple-select/pull/435)).
 - **Update:** Updated `onOptgroupClick` and `onClick` parameters ([#436](https://github.com/wenzhixin/multiple-select/pull/436)).
+- **Update:** Updated `formatCountSelected` parameters ([#436](https://github.com/wenzhixin/multiple-select/pull/436)).
 
 ### 1.3.0
 

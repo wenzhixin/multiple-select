@@ -44,7 +44,7 @@ Example: [The Event](../examples/#events.html)
 
 - **Detail:** Bind an event handler to the "focus".
 
-# onBlur
+## onBlur
 
 - **Parameter:** -
 

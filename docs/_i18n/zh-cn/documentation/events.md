@@ -16,60 +16,60 @@ $('#select').multipleSelect({
 
 ## onOpen
 
-- **Parameter:**  -
+- **参数：**  -
 
-- **Detail:** 当下拉列表被打开时触发。
+- **说明：** 当下拉列表被打开时触发。
 
 ## onClose
 
-- **Parameter:**  -
+- **参数：**  -
 
-- **Detail:** 当下拉列表被关闭时触发。
+- **说明：** 当下拉列表被关闭时触发。
 
 ## onCheckAll
 
-- **Parameter:**  -
+- **参数：**  -
 
-- **Detail:** 通过点击“全选”复选框或以编程方式调用“checkall”方法选中所有选项时触发。
+- **说明：** 通过点击“全选”复选框或以编程方式调用“checkall”方法选中所有选项时触发。
 
 ## onUncheckAll
 
-- **Parameter:**  -
+- **参数：**  -
 
-- **Detail:** 通过点击“全选”复选框或以编程方式调用“uncheckall”方法取消选中所有选项时触发。
+- **说明：** 通过点击“全选”复选框或以编程方式调用“uncheckall”方法取消选中所有选项时触发。
 
 ## onFocus
 
-- **Parameter:**  -
+- **参数：**  -
 
-- **Detail:** 将事件处理程序绑定到“focus”。
+- **说明：** 将事件处理程序绑定到“focus”。
 
 ## onBlur
 
-- **Parameter:**  -
+- **参数：**  -
 
-- **Detail:** 将事件处理程序绑定到"blur"。
+- **说明：** 将事件处理程序绑定到"blur"。
 
 ## onOptgroupClick
 
-- **Parameter:** `view`
+- **参数：** `view`
 
-- **Detail:** 点击optgroup标签时触发。`view` 参数是一个对象，它包含 `label, checked, children`。
+- **说明：** 点击optgroup标签时触发。`view` 参数是一个对象，它包含 `label, checked, children`。
 
 ## onClick
 
-- **Parameter:** `view`
+- **参数：** `view`
 
-- **Detail:** 选中或取消选中复选框时触发。`view` 参数是一个对象，它包含 `label, value, checked`。
+- **说明：** 选中或取消选中复选框时触发。`view` 参数是一个对象，它包含 `label, value, checked`。
 
 ## onFilter
 
-- **Parameter:** `text`
+- **参数：** `text`
 
-- **Detail:** Multiple Select 进行过滤的时候触发。
+- **说明：** Multiple Select 进行过滤的时候触发。
 
 ## onAfterCreate
 
-- **Parameter:**  -
+- **参数：**  -
 
-- **Detail:** Multiple Select 创建完成后触发。
+- **说明：** Multiple Select 创建完成后触发。

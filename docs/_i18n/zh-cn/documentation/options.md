@@ -1,4 +1,4 @@
-# Options []({{ site.repo }}/blob/develop/docs/_i18n/{{ site.lang }}/documentation/options.md)
+# 选项 []({{ site.repo }}/blob/develop/docs/_i18n/{{ site.lang }}/documentation/options.md)
 
 ---
 
@@ -6,279 +6,279 @@
 
 ## name
 
-**Type:** String
+**类型：** String
 
-**Detail:** select 元素的 name 属性。
+**说明：** select 元素的 name 属性。
 
-**Default:** `''`
+**默认：** `''`
 
 ## placeholder
 
-**Type:** String
+**类型：** String
 
-**Detail:** 可以定义 placeholder 值，并在您选择项目之前显示 placeholder 值。
+**说明：** 可以定义 placeholder 值，并在您选择项目之前显示 placeholder 值。
 
-**Default:** `''`
+**默认：** `''`
 
-**Example:** <a href="../examples#placeholder.html">The Placeholder</a>
+**例子：** <a href="../examples#placeholder.html">The Placeholder</a>
 
 ## selectAll
 
-**Type:** Boolean
+**类型：** Boolean
 
-**Detail:** 显示选中所有复选框。
+**说明：** 显示选中所有复选框。
 
-**Default:** `true`
+**默认：** `true`
 
-**Example:** <a href="../examples#hide-select-all.html">Hide Select All</a>
+**例子：** <a href="../examples#hide-select-all.html">Hide Select All</a>
 
 ## single
 
-**Type:** Boolean
+**类型：** Boolean
 
-**Detail:** 允许您只选择一个选项。
+**说明：** 允许您只选择一个选项。
 
-**Default:** `false`
+**默认：** `false`
 
-**Example:** <a href="../examples#single-row.html">Single Row</a>
+**例子：** <a href="../examples#single-row.html">Single Row</a>
 
 ## multiple
 
-**Type:** Boolean
+**类型：** Boolean
 
-**Detail:** 在一行中显示多个项目。
+**说明：** 在一行中显示多个项目。
 
-**Default:** `false`
+**默认：** `false`
 
-**Example:** <a href="../examples#multiple-items.html">Multiple Items</a>
+**例子：** <a href="../examples#multiple-items.html">Multiple Items</a>
 
 ## hideOptgroupCheckboxes
 
-**Type:** Boolean
+**类型：** Boolean
 
-**Detail:** 隐藏 optgroup 复选框。
+**说明：** 隐藏 optgroup 复选框。
 
-**Default:** `false`
+**默认：** `false`
 
-**Example:** <a href="../examples#hide-optgroup-checkboxes.html">Hide Optgroup Check</a>
+**例子：** <a href="../examples#hide-optgroup-checkboxes.html">Hide Optgroup Check</a>
 
 ## multipleWidth
 
-**Type:** Number
+**类型：** Number
 
-**Detail:** 显示多个项目的宽度。
+**说明：** 显示多个项目的宽度。
 
-**Default:** `80`
+**默认：** `80`
 
-**Example:** <li><a href="../examples#multiple-items.html">Multiple Items</a></li>
+**例子：** <li><a href="../examples#multiple-items.html">Multiple Items</a></li>
 
 ## width
 
-**Type:** undefined
+**类型：** undefined
 
-**Detail:** 定义 select 的 width 属性，支持百分比设置。
+**说明：** 定义 select 的 width 属性，支持百分比设置。
 
-**Default:** `undefined`
+**默认：** `undefined`
 
-**Example:** <a href="../examples#custom-dropdown-width.html">Custom Dropdown Width</a>
+**例子：** <a href="../examples#custom-dropdown-width.html">Custom Dropdown Width</a>
 
 ## dropWidth
 
-**Type:** undefined
+**类型：** undefined
 
-**Detail:** 定义下拉框的宽度。
+**说明：** 定义下拉框的宽度。
 
-**Default:** `undefined`
+**默认：** `undefined`
 
-**Example:** <a href="../examples#custom-dropdown-width.html">Custom Dropdown Width</a>
+**例子：** <a href="../examples#custom-dropdown-width.html">Custom Dropdown Width</a>
 
 ## maxHeight
 
-**Type:** Number
+**类型：** Number
 
-**Detail:** 定义下拉列表的最大高度属性。
+**说明：** 定义下拉列表的最大高度属性。
 
-**Default:** `250`
+**默认：** `250`
 
-**Example:** <a href="../examples#max-height.html">Max Height</a>
+**例子：** <a href="../examples#max-height.html">Max Height</a>
 
 ## position
 
-**Type:** String
+**类型：** String
 
-**Detail:** 定义选择下拉列表的位置，只能是 'bottom' 或 'top'。
+**说明：** 定义选择下拉列表的位置，只能是 'bottom' 或 'top'。
 
-**Default:** `bottom`
+**默认：** `bottom`
 
-**Example:** <a href="../examples#position.html">The Position</a>
+**例子：** <a href="../examples#position.html">The Position</a>
 
 ## displayValues
 
-**Type:** Boolean
+**类型：** Boolean
 
-**Detail:** 显示所选值而不是文本。
+**说明：** 显示所选值而不是文本。
 
-**Default:** `false`
+**默认：** `false`
 
-**Example:** <a href="../examples#display-values.html">Display Values</a>
+**例子：** <a href="../examples#display-values.html">Display Values</a>
 
 ## displayTitle
 
-**Type:** Boolean
+**类型：** Boolean
 
-**Detail:** 显示所选文本的 `title`。
+**说明：** 显示所选文本的 `title`。
 
-**Default:** `false`
+**默认：** `false`
 
-**Example:** <a href="../examples#display-title.html">Display Title</a>
+**例子：** <a href="../examples#display-title.html">Display Title</a>
 
 ## displayDelimiter
 
-**Type:** String
+**类型：** String
 
-**Detail:** 自定义显示分隔符。
+**说明：** 自定义显示分隔符。
 
-**Default:** `, `
+**默认：** `, `
 
-**Example:** <a href="../examples#display-delimiter.html">Display Delimiter</a>
+**例子：** <a href="../examples#display-delimiter.html">Display Delimiter</a>
 
 ## minimumCountSelected
 
-**Type:** Number
+**类型：** Number
 
-**Detail:** 仅当选择了多于 `minimumCountSelected` 项时，才会显示
+**说明：** 仅当选择了多于 `minimumCountSelected` 项时，才会显示
  `formatCountSelected`。
 
-**Default:** `3`
+**默认：** `3`
 
-**Example:** <a href="../examples#minimum-count-selected.html">Minimum Count Selected</a>
+**例子：** <a href="../examples#minimum-count-selected.html">Minimum Count Selected</a>
 
 ## ellipsis
 
-**Type:** Boolean
+**类型：** Boolean
 
-**Detail:** 如果设置了 `minimumCountSelected`，则在所选选项后添加 `'...'`。覆盖 `formatCountSelected` 选项。
+**说明：** 如果设置了 `minimumCountSelected`，则在所选选项后添加 `'...'`。覆盖 `formatCountSelected` 选项。
 
-**Default:** `false`
+**默认：** `false`
 
-**Example:** <a href="../examples#ellipsis.html">The Ellipsis</a>
+**例子：** <a href="../examples#ellipsis.html">The Ellipsis</a>
 
 ## isOpen
 
-**Type:** Boolean
+**类型：** Boolean
 
-**Detail:** 默认情况下打开选择下拉列表。
+**说明：** 默认情况下打开选择下拉列表。
 
-**Default:** `false`
+**默认：** `false`
 
-**Example:** <a href="../examples#is-open.html">Is Open</a>
+**例子：** <a href="../examples#is-open.html">Is Open</a>
 
 ## keepOpen
 
-**Type:** Boolean
+**类型：** Boolean
 
-**Detail:** 始终打开选择下拉列表。
+**说明：** 始终打开选择下拉列表。
 
-**Default:** `false`
+**默认：** `false`
 
-**Example:** <a href="../examples#keep-open.html">Keep Open</a>
+**例子：** <a href="../examples#keep-open.html">Keep Open</a>
 
 ## openOnHover
 
-**Type:** Boolean
+**类型：** Boolean
 
-**Detail:** 通过鼠标经过而不是点击来打开选择下拉列表。
+**说明：** 通过鼠标经过而不是点击来打开选择下拉列表。
 
-**Default:** `false`
+**默认：** `false`
 
-**Example:** <a href="../examples#open-on-hover.html">Open On Hover</a>
+**例子：** <a href="../examples#open-on-hover.html">Open On Hover</a>
 
 ## container
 
-**Type:** object
+**类型：** object
 
-**Detail:** 定义自定义容器以解决显示错误问题，例如父节点是 `overflow: hidden`.
+**说明：** 定义自定义容器以解决显示错误问题，例如父节点是 `overflow: hidden`.
 
-**Default:** `null`
+**默认：** `null`
 
-**Example:** <a href="../examples#container.html">The Container</a>
+**例子：** <a href="../examples#container.html">The Container</a>
 
 ## filter
 
-**Type:** Boolean
+**类型：** Boolean
 
-**Detail:** 显示搜索字段以显示搜索框项。
+**说明：** 显示搜索字段以显示搜索框项。
 
-**Default:** `false`
+**默认：** `false`
 
-**Example:** <a href="../examples#basic-filter.html">Basic Filter</a> <a href="../examples#optgroup-filter.html">Filter With Optgroup</a>
+**例子：** <a href="../examples#basic-filter.html">Basic Filter</a> <a href="../examples#optgroup-filter.html">Filter With Optgroup</a>
 
 ## filterGroup
 
-**Type:** Boolean
+**类型：** Boolean
 
-**Detail:** 仅筛选 optgroups 而不筛选选项。
+**说明：** 仅筛选 optgroups 而不筛选选项。
 
-**Default:** `false`
+**默认：** `false`
 
-**Example:** <a href="../examples#filter-group.html">Filter Only Optgroup</a>
+**例子：** <a href="../examples#filter-group.html">Filter Only Optgroup</a>
 
 ## filterPlaceholder
 
-**Type:** String
+**类型：** String
 
-**Detail:** 设置过滤器的 placeholder.
+**说明：** 设置过滤器的 placeholder.
 
-**Default:** ``
+**默认：** ``
 
-**Example:** <a href="../examples#filter-placeholder.html">Filter Placeholder</a>
+**例子：** <a href="../examples#filter-placeholder.html">Filter Placeholder</a>
 
 ## filterAcceptOnEnter
 
-**Type:** Boolean
+**类型：** Boolean
 
-**Detail:** 加快键盘使用。输入过滤器文本然后按 `Enter` 或空格将自动单击全选并关闭下拉列表。
+**说明：** 加快键盘使用。输入过滤器文本然后按 `Enter` 或空格将自动单击全选并关闭下拉列表。
 
-**Default:** `false`
+**默认：** `false`
 
-**Example:** <a href="../examples#filter-accept-on-enter.html">Filter Accept On Enter</a>
+**例子：** <a href="../examples#filter-accept-on-enter.html">Filter Accept On Enter</a>
 
 ## animate
 
-**Type:** undefined
+**类型：** undefined
 
-**Detail:** 定义打开或关闭下拉列表的动画。可以是 `undefined`，`'fade'` 和 `'slide'`。
+**说明：** 定义打开或关闭下拉列表的动画。可以是 `undefined`，`'fade'` 和 `'slide'`。
 
-**Default:** `undefined`
+**默认：** `undefined`
 
-**Example:** <a href="../examples#animate.html">The Animate</a>
+**例子：** <a href="../examples#animate.html">The Animate</a>
 
 ## styler
 
-**Type:** function
+**类型：** function
 
-**Detail:** 项目样式器函数，返回样式字符串以自定义项样式，包含参数： `value`。
+**说明：** 项目样式器函数，返回样式字符串以自定义项样式，包含参数： `value`。
 
-**Default:** `{ return false }`
+**默认：** `{ return false }`
 
-**Example:** <a href="../examples#styler.html">The Styler</a>
+**例子：** <a href="../examples#styler.html">The Styler</a>
 
 ## textTemplate
 
-**Type:** function
+**类型：** function
 
-**Detail:** 项目 textTemplate 函数，返回字符串以自定义项目文本，包含参数：`$elm`。
+**说明：** 项目 textTemplate 函数，返回字符串以自定义项目文本，包含参数：`$elm`。
 
-**Default:** `{ return $elm[0].innerHTML }`
+**默认：** `{ return $elm[0].innerHTML }`
 
-**Example:** <a href="../examples#text-template.html">Text Template</a>
+**例子：** <a href="../examples#text-template.html">Text Template</a>
 
 ## labelTemplate
 
-**Type:** function
+**类型：** function
 
-**Detail:** 项目 labelTemplate 函数，返回自定义 optgroup 标签的字符串，包含参数：`$elm`。
+**说明：** 项目 labelTemplate 函数，返回自定义 optgroup 标签的字符串，包含参数：`$elm`。
 
-**Default:** `{ return $elm[0].getAttribute('label') }`
+**默认：** `{ return $elm[0].getAttribute('label') }`
 
-**Example:** <a href="../examples#label-template.html">Label Template</a>
+**例子：** <a href="../examples#label-template.html">Label Template</a>

@@ -402,9 +402,9 @@ class MultipleSelect {
       $span.removeClass('placeholder').text(`${textSelects.slice(0, this.options.minimumCountSelected)
         .join(this.options.displayDelimiter)}...`)
     } else if (this.options.formatCountSelected() && sl > this.options.minimumCountSelected) {
-      $span.removeClass('placeholder').html(this.options.formatCountSelected()
-        .replace(/#/g, sl)
-        .replace(/%/g, this.$selectItems.length + this.$disableItems.length))
+      $span.removeClass('placeholder').html(this.options.formatCountSelected(
+        sl, this.$selectItems.length + this.$disableItems.length
+      ))
     } else {
       $span.removeClass('placeholder').text(textSelects.join(this.options.displayDelimiter))
     }
@@ -656,8 +656,8 @@ const defaults = {
   formatAllSelected () {
     return 'All selected'
   },
-  formatCountSelected () {
-    return '# of % selected'
+  formatCountSelected (count, total) {
+    return count + ' of ' + total + ' selected'
   },
   formatNoMatchesFound () {
     return 'No matches found'
