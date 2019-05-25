@@ -1,6 +1,6 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(require('jquery'), require('core-js/modules/es.array.filter'), require('core-js/modules/es.array.find'), require('core-js/modules/es.array.includes'), require('core-js/modules/es.array.join'), require('core-js/modules/es.array.slice'), require('core-js/modules/es.function.name'), require('core-js/modules/es.string.includes'), require('core-js/modules/es.string.replace'), require('core-js/modules/es.string.trim')) :
-  typeof define === 'function' && define.amd ? define(['jquery', 'core-js/modules/es.array.filter', 'core-js/modules/es.array.find', 'core-js/modules/es.array.includes', 'core-js/modules/es.array.join', 'core-js/modules/es.array.slice', 'core-js/modules/es.function.name', 'core-js/modules/es.string.includes', 'core-js/modules/es.string.replace', 'core-js/modules/es.string.trim'], factory) :
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(require('jquery'), require('core-js/modules/es.array.filter'), require('core-js/modules/es.array.find'), require('core-js/modules/es.array.includes'), require('core-js/modules/es.array.join'), require('core-js/modules/es.array.map'), require('core-js/modules/es.array.slice'), require('core-js/modules/es.function.name'), require('core-js/modules/es.string.includes'), require('core-js/modules/es.string.trim'), require('core-js/modules/es.string.replace')) :
+  typeof define === 'function' && define.amd ? define(['jquery', 'core-js/modules/es.array.filter', 'core-js/modules/es.array.find', 'core-js/modules/es.array.includes', 'core-js/modules/es.array.join', 'core-js/modules/es.array.map', 'core-js/modules/es.array.slice', 'core-js/modules/es.function.name', 'core-js/modules/es.string.includes', 'core-js/modules/es.string.trim', 'core-js/modules/es.string.replace'], factory) :
   (global = global || self, factory(global.jQuery));
 }(this, function ($) { 'use strict';
 
@@ -778,7 +778,7 @@
         this.$drop.html('');
 
         if (this.options.filter) {
-          this.$drop.append("\n        <div class=\"ms-search\">\n          <input type=\"text\" autocomplete=\"off\" autocorrect=\"off\"\n            autocapitilize=\"off\" spellcheck=\"false\"\n            ".concat(sprintf(_templateObject6(), s)(this.options.filterPlaceholder), ">\n        </div>\n      "));
+          this.$drop.append("\n        <div class=\"ms-search\">\n          <input type=\"text\" autocomplete=\"off\" autocorrect=\"off\"\n            autocapitalize=\"off\" spellcheck=\"false\"\n            ".concat(sprintf(_templateObject6(), s)(this.options.filterPlaceholder), ">\n        </div>\n      "));
         }
 
         if (this.options.selectAll && !this.options.single) {
@@ -808,7 +808,7 @@
         }
 
         if (this.options.openOnHover) {
-          $('.ms-parent').hover(function () {
+          this.$parent.hover(function () {
             _this2.open();
           }, function () {
             _this2.close();
@@ -832,7 +832,8 @@
           var text = this.options.textTemplate($elm);
           var value = el.value,
               selected = el.selected;
-          var style = sprintf(_templateObject10(), s)(this.options.styler(value));
+          var customStyle = this.options.styler(value);
+          var style = customStyle ? sprintf(_templateObject10(), s)(customStyle) : '';
           disabled = groupDisabled || el.disabled;
           var $el = $([sprintf(_templateObject11(), s, s, s, s)(multiple, classes, title, style), sprintf(_templateObject12(), s)(disabled ? 'disabled' : ''), sprintf(_templateObject13(), s, s, s, s, s)(type, this.selectItemName, selected ? ' checked="checked"' : '', disabled ? ' disabled="disabled"' : '', sprintf(_templateObject14(), s)(group)), sprintf(_templateObject15(), s)(text), '</label>', '</li>'].join(''));
           $el.find('input').val(value);
@@ -945,8 +946,13 @@
           _this4.options.onOptgroupClick({
             label: $this.parent().text(),
             checked: checked,
-            children: $children.get(),
-            instance: _this4
+            children: $children.get().map(function (el) {
+              return {
+                label: $(el).parent().text(),
+                value: $(el).val(),
+                check: $(el).prop('checked')
+              };
+            })
           });
         });
         this.$selectItems.off('click').on('click', function (e) {
@@ -971,8 +977,7 @@
           _this4.options.onClick({
             label: $this.parent().text(),
             value: $this.val(),
-            checked: $this.prop('checked'),
-            instance: _this4
+            checked: $this.prop('checked')
           });
 
           if (_this4.options.single && _this4.options.isOpen && !_this4.options.keepOpen) {
@@ -1006,9 +1011,10 @@
             top: offset.top,
             left: offset.left
           });
+          this.$drop.outerWidth(this.$parent.outerWidth());
         }
 
-        if (this.options.filter) {
+        if (this.$el.children().length && this.options.filter) {
           this.$searchInput.val('');
           this.$searchInput.focus();
           this.filter();
@@ -1051,23 +1057,24 @@
     }, {
       key: "update",
       value: function update(ignoreTrigger) {
-        var selects = this.options.displayValues ? this.getSelects() : this.getSelects('text');
+        var valueSelects = this.getSelects();
+        var textSelects = this.options.displayValues ? valueSelects : this.getSelects('text');
         var $span = this.$choice.find('>span');
-        var sl = selects.length;
+        var sl = valueSelects.length;
 
         if (sl === 0) {
           $span.addClass('placeholder').html(this.options.placeholder);
         } else if (this.options.formatAllSelected() && sl === this.$selectItems.length + this.$disableItems.length) {
           $span.removeClass('placeholder').html(this.options.formatAllSelected());
         } else if (this.options.ellipsis && sl > this.options.minimumCountSelected) {
-          $span.removeClass('placeholder').text("".concat(selects.slice(0, this.options.minimumCountSelected).join(this.options.displayDelimiter), "..."));
+          $span.removeClass('placeholder').text("".concat(textSelects.slice(0, this.options.minimumCountSelected).join(this.options.displayDelimiter), "..."));
         } else if (this.options.formatCountSelected() && sl > this.options.minimumCountSelected) {
-          $span.removeClass('placeholder').html(this.options.formatCountSelected().replace(/#/g, selects.length).replace(/%/g, this.$selectItems.length + this.$disableItems.length));
+          $span.removeClass('placeholder').html(this.options.formatCountSelected(sl, this.$selectItems.length + this.$disableItems.length));
         } else {
-          $span.removeClass('placeholder').text(selects.join(this.options.displayDelimiter));
+          $span.removeClass('placeholder').text(textSelects.join(this.options.displayDelimiter));
         }
 
-        if (this.options.addTitle) {
+        if (this.options.displayTitle) {
           $span.prop('title', this.getSelects('text'));
         } // set selects to select
 
@@ -1234,16 +1241,17 @@
         var text = $.trim(this.$searchInput.val()).toLowerCase();
 
         if (text.length === 0) {
-          this.$selectAll.parent().show();
-          this.$selectItems.parent().show();
-          this.$disableItems.parent().show();
-          this.$selectGroups.parent().show();
+          this.$selectAll.closest('li').show();
+          this.$selectItems.closest('li').show();
+          this.$disableItems.closest('li').show();
+          this.$selectGroups.closest('li').show();
           this.$noResults.hide();
         } else {
           if (!this.options.filterGroup) {
             this.$selectItems.each(function (i, el) {
               var $parent = $(el).parent();
-              $parent[!removeDiacritics($parent.text().toLowerCase()).includes(removeDiacritics(text)) ? 'hide' : 'show']();
+              var hasText = removeDiacritics($parent.text().toLowerCase()).includes(removeDiacritics(text));
+              $parent.closest('li')[hasText ? 'show' : 'hide']();
             });
           }
 
@@ -1253,22 +1261,24 @@
             var group = $parent[0].getAttribute('data-group');
 
             if (_this7.options.filterGroup) {
-              var func = !removeDiacritics($parent.text().toLowerCase()).includes(removeDiacritics(text)) ? 'hide' : 'show';
-              $parent[func]();
+              var hasText = removeDiacritics($parent.text().toLowerCase()).includes(removeDiacritics(text));
+              var func = hasText ? 'show' : 'hide';
+              $parent.closest('li')[func]();
 
-              _this7.$selectItems.filter("[data-group=\"".concat(group, "\"]")).parent()[func]();
+              _this7.$selectItems.filter("[data-group=\"".concat(group, "\"]")).closest('li')[func]();
             } else {
               var $items = _this7.$selectItems.filter(':visible');
 
-              $parent[$items.filter(sprintf(_templateObject24(), s)(group)).length ? 'show' : 'hide']();
+              var _hasText = $items.filter(sprintf(_templateObject24(), s)(group)).length;
+              $parent.closest('li')[_hasText ? 'show' : 'hide']();
             }
           }); // Check if no matches found
 
           if (this.$selectItems.parent().filter(':visible').length) {
-            this.$selectAll.parent().show();
+            this.$selectAll.closest('li').show();
             this.$noResults.hide();
           } else {
-            this.$selectAll.parent().hide();
+            this.$selectAll.closest('li').hide();
             this.$noResults.show();
           }
         }
@@ -1301,6 +1311,7 @@
     maxHeight: 250,
     position: 'bottom',
     displayValues: false,
+    displayTitle: false,
     displayDelimiter: ', ',
     minimumCountSelected: 3,
     ellipsis: false,
@@ -1328,8 +1339,8 @@
     formatAllSelected: function formatAllSelected() {
       return 'All selected';
     },
-    formatCountSelected: function formatCountSelected() {
-      return '# of % selected';
+    formatCountSelected: function formatCountSelected(count, total) {
+      return count + ' of ' + total + ' selected';
     },
     formatNoMatchesFound: function formatNoMatchesFound() {
       return 'No matches found';
