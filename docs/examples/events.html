@@ -39,34 +39,34 @@ select {
 
     $('select').multipleSelect({
       filter: true,
-      onOpen () {
+      onOpen: function () {
         $log.append('onOpen event fire!\n')
       },
-      onClose () {
+      onClose: function () {
         $log.append('onClose event fire!\n')
       },
-      onCheckAll () {
+      onCheckAll: function () {
         $log.append('onCheckAll event fire!\n')
       },
-      onUncheckAll () {
+      onUncheckAll: function () {
         $log.append('onUncheckAll event fire!\n')
       },
-      onFocus () {
+      onFocus: function () {
         $log.append('onFocus event fire!\n')
       },
-      onBlur () {
+      onBlur: function () {
         $log.append('onBlur event fire!\n')
       },
-      onOptgroupClick () {
-        $log.append('onOptgroupClick event fire!\n')
+      onOptgroupClick: function (view) {
+        $log.append('onOptgroupClick event fire! view: ' + JSON.stringify(view) + '\n')
       },
-      onClick () {
-        $log.append('onClick event fire!\n')
+      onClick: function (view) {
+        $log.append('onClick event fire! view: ' + JSON.stringify(view) + '\n')
       },
-      onFilter () {
-        $log.append('onFilter event fire!\n')
+      onFilter: function (text) {
+        $log.append('onFilter event fire! text: ' + text + '\n')
       },
-      onAfterCreate () {
+      onAfterCreate: function () {
         $log.append('onAfterCreate event fire!\n')
       }
     })

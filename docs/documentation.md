@@ -10,3 +10,5 @@ lead: pages.documentation.lead
 {% tf documentation/events.md %}
 
 {% tf documentation/methods.md %}
+
+{% tf documentation/localizations.md %}

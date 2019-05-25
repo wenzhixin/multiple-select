@@ -273,6 +273,7 @@ class MultipleSelect {
         this.update()
       }
     })
+
     this.$selectGroups.off('click').on('click', e => {
       const $this = $(e.currentTarget)
       const group = $this.parent()[0].getAttribute('data-group')
@@ -286,8 +287,13 @@ class MultipleSelect {
       this.options.onOptgroupClick({
         label: $this.parent().text(),
         checked,
-        children: $children.get(),
-        instance: this
+        children: $children.get().map(el => {
+          return {
+            label: $(el).parent().text(),
+            value: $(el).val(),
+            check: $(el).prop('checked')
+          }
+        })
       })
     })
     this.$selectItems.off('click').on('click', e => {
@@ -308,8 +314,7 @@ class MultipleSelect {
       this.options.onClick({
         label: $this.parent().text(),
         value: $this.val(),
-        checked: $this.prop('checked'),
-        instance: this
+        checked: $this.prop('checked')
       })
 
       if (this.options.single && this.options.isOpen && !this.options.keepOpen) {
@@ -397,9 +402,9 @@ class MultipleSelect {
       $span.removeClass('placeholder').text(`${textSelects.slice(0, this.options.minimumCountSelected)
         .join(this.options.displayDelimiter)}...`)
     } else if (this.options.formatCountSelected() && sl > this.options.minimumCountSelected) {
-      $span.removeClass('placeholder').html(this.options.formatCountSelected()
-        .replace(/#/g, sl)
-        .replace(/%/g, this.$selectItems.length + this.$disableItems.length))
+      $span.removeClass('placeholder').html(this.options.formatCountSelected(
+        sl, this.$selectItems.length + this.$disableItems.length
+      ))
     } else {
       $span.removeClass('placeholder').text(textSelects.join(this.options.displayDelimiter))
     }
@@ -552,10 +557,10 @@ class MultipleSelect {
     const text = $.trim(this.$searchInput.val()).toLowerCase()
 
     if (text.length === 0) {
-      this.$selectAll.parent().show()
-      this.$selectItems.parent().show()
-      this.$disableItems.parent().show()
-      this.$selectGroups.parent().show()
+      this.$selectAll.closest('li').show()
+      this.$selectItems.closest('li').show()
+      this.$disableItems.closest('li').show()
+      this.$selectGroups.closest('li').show()
       this.$noResults.hide()
     } else {
       if (!this.options.filterGroup) {
@@ -585,10 +590,10 @@ class MultipleSelect {
 
       // Check if no matches found
       if (this.$selectItems.parent().filter(':visible').length) {
-        this.$selectAll.parent().show()
+        this.$selectAll.closest('li').show()
         this.$noResults.hide()
       } else {
-        this.$selectAll.parent().hide()
+        this.$selectAll.closest('li').hide()
         this.$noResults.show()
       }
     }
@@ -651,8 +656,8 @@ const defaults = {
   formatAllSelected () {
     return 'All selected'
   },
-  formatCountSelected () {
-    return '# of % selected'
+  formatCountSelected (count, total) {
+    return count + ' of ' + total + ' selected'
   },
   formatNoMatchesFound () {
     return 'No matches found'
