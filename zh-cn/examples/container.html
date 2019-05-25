@@ -11,6 +11,7 @@
 .parent {
   overflow: hidden;
 }
+.outer,
 select {
   width: 500px;
 }
@@ -38,8 +39,7 @@ select {
 <script>
   function mounted() {
     $('select').multipleSelect({
-      container: '.outer',
-      dropWidth: 500
+      container: '.outer'
     })
   }
 </script>

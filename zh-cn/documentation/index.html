@@ -18,11 +18,13 @@
 <!-- Bootstrap CSS -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
-<link href="https://unpkg.com/bootstrap-table/dist/bootstrap-table.min.css" rel="stylesheet"></link>
+<link href="https://unpkg.com/bootstrap-table/dist/bootstrap-table.min.css" rel="stylesheet">
 <link href="../assets/css/docs.min.css" rel="stylesheet">
-<link href="../assets/css/sidenav.css?v=1.3.0" rel="stylesheet">
-<link href="../assets/css/style.css?v=1.3.0&m=1" rel="stylesheet">
-<link href="../assets/css/ads.css?v=1.3.0" rel="stylesheet">
+<link href="../assets/css/sidenav.css?v=1.3.1" rel="stylesheet">
+<link href="../assets/css/style.css?v=1.3.1&m=1" rel="stylesheet">
+<link href="../assets/css/ads.css?v=1.3.1" rel="stylesheet">
+
+<link href="data:image/x-icon;," type="image/x-icon" rel="shortcut icon" />
 
 <!--[if lt IE 9]><script src="../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 <script src="../assets/js/ie-emulation-modes-warning.js"></script>
@@ -96,11 +98,12 @@
 <li><a href="../examples#single-row.html">Single Row</a></li>
 <li><a href="../examples#multiple-items.html">Multiple Items</a></li>
 <li><a href="../examples#multiple-items-optgroups.html">Multiple Items Optgroups</a></li>
-<li><a href="../examples#hide-optgroup-checkboxes.html">Hide Optgroup Check
+<li><a href="../examples#hide-optgroup-checkboxes.html">Hide Optgroup Check</a></li>
 <li><a href="../examples#custom-dropdown-width.html">Custom Dropdown Width</a></li>
 <li><a href="../examples#max-height.html">Max Height</a></li>
 <li><a href="../examples#position.html">The Position</a></li>
 <li><a href="../examples#display-values.html">Display Values</a></li>
+<li><a href="../examples#display-title.html">Display Title</a></li>
 <li><a href="../examples#display-delimiter.html">Display Delimiter</a></li>
 <li><a href="../examples#minimum-count-selected.html">Minimum Count Selected</a></li>
 <li><a href="../examples#ellipsis.html">The Ellipsis</a></li>
@@ -231,157 +234,290 @@
           data-hs="h1,h2"
           data-smart-id="true"
           data-bottom=".bs-docs-footer">
-          <h1>属性 <a href="https://github.com/wenzhixin/multiple-select/blob/develop/docs/_i18n/zh-cn/documentation/options.md"></a></h1>
+          <h1>选项 <a href="https://github.com/wenzhixin/multiple-select/blob/develop/docs/_i18n/zh-cn/documentation/options.md"></a></h1>
 
 <p><hr></p>
 
 <p>选项定义于 <code>jQuery.fn.multipleSelect.defaults</code>。</p>
 
-<div class="start-table"></div>
+<h2>name</h2>
 
-<table><thead>
-<tr>
-<th>名称</th>
-<th>标签</th>
-<th>类型</th>
-<th>默认</th>
-<th>描述</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>-</td>
-<td>data-toggle</td>
-<td>String</td>
-<td>&#39;select&#39;</td>
-<td>不使用 JavaScript 启用 multiple select。</td>
-</tr>
-<tr>
-<td>isOpen</td>
-<td>data-is-open</td>
-<td>Boolean</td>
-<td>false</td>
-<td>是否打开下拉列表。</td>
-</tr>
-<tr>
-<td>placeholder</td>
-<td>data-placeholder</td>
-<td>String</td>
-<td>&#39;&#39;</td>
-<td>显示默认的提示信息。</td>
-</tr>
-<tr>
-<td>selectAll</td>
-<td>data-select-all</td>
-<td>Boolean</td>
-<td>true</td>
-<td>是否显示全选复选框。</td>
-</tr>
-<tr>
-<td>selectAllText</td>
-<td>data-select-all-text</td>
-<td>String</td>
-<td>&#39;Select all&#39;</td>
-<td>全选复选框的显示内容。</td>
-</tr>
-<tr>
-<td>selectAllDelimiter</td>
-<td>data-select-all-delimiter</td>
-<td>Array</td>
-<td>[&#39;[&#39;, &#39;]&#39;]</td>
-<td>Multiple Select 全选复选框分隔符。</td>
-</tr>
-<tr>
-<td>allSelected</td>
-<td>data-all-selected</td>
-<td>String</td>
-<td>&#39;All selected&#39;</td>
-<td>全部选中时显示的文本。</td>
-</tr>
-<tr>
-<td>countSelected</td>
-<td>data-count-selected</td>
-<td>String</td>
-<td>&#39;# of % selected&#39;</td>
-<td>&#39;＃&#39;将替换为所选项目的计数，&#39;％&#39;将替换为总数目。</td>
-</tr>
-<tr>
-<td>minimumCountSelected</td>
-<td>data-minimum-count-selected</td>
-<td>Number</td>
-<td>3</td>
-<td>只有选择了多于X个项目时才会显示<code>countSelected</code>。</td>
-</tr>
-<tr>
-<td>ellipsis</td>
-<td>data-ellipsis</td>
-<td>Boolean</td>
-<td>false</td>
-<td>如果设置了<code>minimumCountSelected</code>，则在选定选项后添加”...”。覆盖<code>countSelected</code>选项。</td>
-</tr>
-<tr>
-<td>multiple</td>
-<td>data-multiple</td>
-<td>Boolean</td>
-<td>false</td>
-<td>是否在一行中显示多个选项。</td>
-</tr>
-<tr>
-<td>multipleWidth</td>
-<td>data-multiple-width</td>
-<td>Number</td>
-<td>80</td>
-<td>一行中每个选项的宽度。</td>
-</tr>
-<tr>
-<td>single</td>
-<td>data-single</td>
-<td>Boolean</td>
-<td>false</td>
-<td>是否只允许你选择一行。</td>
-</tr>
-<tr>
-<td>position</td>
-<td>data-position</td>
-<td>String</td>
-<td>&#39;bottom&#39;</td>
-<td>定义下拉列表的位置，只能是 &#39;bottom&#39; 或者 &#39;top&#39;.</td>
-</tr>
-<tr>
-<td>filter</td>
-<td>data-filter</td>
-<td>Boolean</td>
-<td>false</td>
-<td>是否开启过滤功能。</td>
-</tr>
-<tr>
-<td>width</td>
-<td>data-width</td>
-<td>Number</td>
-<td>undefined</td>
-<td>定义下拉列表的宽度，支持百分比，默认与 select 的宽度相同。</td>
-</tr>
-<tr>
-<td>maxHeight</td>
-<td>data-max-height</td>
-<td>Number</td>
-<td>250</td>
-<td>下拉列表的最大高度。</td>
-</tr>
-<tr>
-<td>keepOpen</td>
-<td>data-keep-open</td>
-<td>Boolean</td>
-<td>false</td>
-<td>保持选择下拉列表始终打开。</td>
-</tr>
-<tr>
-<td>styler</td>
-<td>data-styler</td>
-<td>Function</td>
-<td><code>function(value) {return false}</code></td>
-<td>项目样式器函数，返回样式字符串以自定义项目样式，包含一个参数：value。</td>
-</tr>
-</tbody></table>
+<p><strong>类型：</strong> String</p>
+
+<p><strong>说明：</strong> select 元素的 name 属性。</p>
+
+<p><strong>默认：</strong> <code>&#39;&#39;</code></p>
+
+<h2>placeholder</h2>
+
+<p><strong>类型：</strong> String</p>
+
+<p><strong>说明：</strong> 可以定义 placeholder 值，并在您选择项目之前显示 placeholder 值。</p>
+
+<p><strong>默认：</strong> <code>&#39;&#39;</code></p>
+
+<p><strong>例子：</strong> <a href="../examples#placeholder.html">The Placeholder</a></p>
+
+<h2>selectAll</h2>
+
+<p><strong>类型：</strong> Boolean</p>
+
+<p><strong>说明：</strong> 显示选中所有复选框。</p>
+
+<p><strong>默认：</strong> <code>true</code></p>
+
+<p><strong>例子：</strong> <a href="../examples#hide-select-all.html">Hide Select All</a></p>
+
+<h2>single</h2>
+
+<p><strong>类型：</strong> Boolean</p>
+
+<p><strong>说明：</strong> 允许您只选择一个选项。</p>
+
+<p><strong>默认：</strong> <code>false</code></p>
+
+<p><strong>例子：</strong> <a href="../examples#single-row.html">Single Row</a></p>
+
+<h2>multiple</h2>
+
+<p><strong>类型：</strong> Boolean</p>
+
+<p><strong>说明：</strong> 在一行中显示多个项目。</p>
+
+<p><strong>默认：</strong> <code>false</code></p>
+
+<p><strong>例子：</strong> <a href="../examples#multiple-items.html">Multiple Items</a></p>
+
+<h2>hideOptgroupCheckboxes</h2>
+
+<p><strong>类型：</strong> Boolean</p>
+
+<p><strong>说明：</strong> 隐藏 optgroup 复选框。</p>
+
+<p><strong>默认：</strong> <code>false</code></p>
+
+<p><strong>例子：</strong> <a href="../examples#hide-optgroup-checkboxes.html">Hide Optgroup Check</a></p>
+
+<h2>multipleWidth</h2>
+
+<p><strong>类型：</strong> Number</p>
+
+<p><strong>说明：</strong> 显示多个项目的宽度。</p>
+
+<p><strong>默认：</strong> <code>80</code></p>
+
+<p><strong>例子：</strong> <li><a href="../examples#multiple-items.html">Multiple Items</a></li></p>
+
+<h2>width</h2>
+
+<p><strong>类型：</strong> undefined</p>
+
+<p><strong>说明：</strong> 定义 select 的 width 属性，支持百分比设置。</p>
+
+<p><strong>默认：</strong> <code>undefined</code></p>
+
+<p><strong>例子：</strong> <a href="../examples#custom-dropdown-width.html">Custom Dropdown Width</a></p>
+
+<h2>dropWidth</h2>
+
+<p><strong>类型：</strong> undefined</p>
+
+<p><strong>说明：</strong> 定义下拉框的宽度。</p>
+
+<p><strong>默认：</strong> <code>undefined</code></p>
+
+<p><strong>例子：</strong> <a href="../examples#custom-dropdown-width.html">Custom Dropdown Width</a></p>
+
+<h2>maxHeight</h2>
+
+<p><strong>类型：</strong> Number</p>
+
+<p><strong>说明：</strong> 定义下拉列表的最大高度属性。</p>
+
+<p><strong>默认：</strong> <code>250</code></p>
+
+<p><strong>例子：</strong> <a href="../examples#max-height.html">Max Height</a></p>
+
+<h2>position</h2>
+
+<p><strong>类型：</strong> String</p>
+
+<p><strong>说明：</strong> 定义选择下拉列表的位置，只能是 &#39;bottom&#39; 或 &#39;top&#39;。</p>
+
+<p><strong>默认：</strong> <code>bottom</code></p>
+
+<p><strong>例子：</strong> <a href="../examples#position.html">The Position</a></p>
+
+<h2>displayValues</h2>
+
+<p><strong>类型：</strong> Boolean</p>
+
+<p><strong>说明：</strong> 显示所选值而不是文本。</p>
+
+<p><strong>默认：</strong> <code>false</code></p>
+
+<p><strong>例子：</strong> <a href="../examples#display-values.html">Display Values</a></p>
+
+<h2>displayTitle</h2>
+
+<p><strong>类型：</strong> Boolean</p>
+
+<p><strong>说明：</strong> 显示所选文本的 <code>title</code>。</p>
+
+<p><strong>默认：</strong> <code>false</code></p>
+
+<p><strong>例子：</strong> <a href="../examples#display-title.html">Display Title</a></p>
+
+<h2>displayDelimiter</h2>
+
+<p><strong>类型：</strong> String</p>
+
+<p><strong>说明：</strong> 自定义显示分隔符。</p>
+
+<p><strong>默认：</strong> <code>,</code></p>
+
+<p><strong>例子：</strong> <a href="../examples#display-delimiter.html">Display Delimiter</a></p>
+
+<h2>minimumCountSelected</h2>
+
+<p><strong>类型：</strong> Number</p>
+
+<p><strong>说明：</strong> 仅当选择了多于 <code>minimumCountSelected</code> 项时，才会显示
+ <code>formatCountSelected</code>。</p>
+
+<p><strong>默认：</strong> <code>3</code></p>
+
+<p><strong>例子：</strong> <a href="../examples#minimum-count-selected.html">Minimum Count Selected</a></p>
+
+<h2>ellipsis</h2>
+
+<p><strong>类型：</strong> Boolean</p>
+
+<p><strong>说明：</strong> 如果设置了 <code>minimumCountSelected</code>，则在所选选项后添加 <code>&#39;...&#39;</code>。覆盖 <code>formatCountSelected</code> 选项。</p>
+
+<p><strong>默认：</strong> <code>false</code></p>
+
+<p><strong>例子：</strong> <a href="../examples#ellipsis.html">The Ellipsis</a></p>
+
+<h2>isOpen</h2>
+
+<p><strong>类型：</strong> Boolean</p>
+
+<p><strong>说明：</strong> 默认情况下打开选择下拉列表。</p>
+
+<p><strong>默认：</strong> <code>false</code></p>
+
+<p><strong>例子：</strong> <a href="../examples#is-open.html">Is Open</a></p>
+
+<h2>keepOpen</h2>
+
+<p><strong>类型：</strong> Boolean</p>
+
+<p><strong>说明：</strong> 始终打开选择下拉列表。</p>
+
+<p><strong>默认：</strong> <code>false</code></p>
+
+<p><strong>例子：</strong> <a href="../examples#keep-open.html">Keep Open</a></p>
+
+<h2>openOnHover</h2>
+
+<p><strong>类型：</strong> Boolean</p>
+
+<p><strong>说明：</strong> 通过鼠标经过而不是点击来打开选择下拉列表。</p>
+
+<p><strong>默认：</strong> <code>false</code></p>
+
+<p><strong>例子：</strong> <a href="../examples#open-on-hover.html">Open On Hover</a></p>
+
+<h2>container</h2>
+
+<p><strong>类型：</strong> object</p>
+
+<p><strong>说明：</strong> 定义自定义容器以解决显示错误问题，例如父节点是 <code>overflow: hidden</code>.</p>
+
+<p><strong>默认：</strong> <code>null</code></p>
+
+<p><strong>例子：</strong> <a href="../examples#container.html">The Container</a></p>
+
+<h2>filter</h2>
+
+<p><strong>类型：</strong> Boolean</p>
+
+<p><strong>说明：</strong> 显示搜索字段以显示搜索框项。</p>
+
+<p><strong>默认：</strong> <code>false</code></p>
+
+<p><strong>例子：</strong> <a href="../examples#basic-filter.html">Basic Filter</a> <a href="../examples#optgroup-filter.html">Filter With Optgroup</a></p>
+
+<h2>filterGroup</h2>
+
+<p><strong>类型：</strong> Boolean</p>
+
+<p><strong>说明：</strong> 仅筛选 optgroups 而不筛选选项。</p>
+
+<p><strong>默认：</strong> <code>false</code></p>
+
+<p><strong>例子：</strong> <a href="../examples#filter-group.html">Filter Only Optgroup</a></p>
+
+<h2>filterPlaceholder</h2>
+
+<p><strong>类型：</strong> String</p>
+
+<p><strong>说明：</strong> 设置过滤器的 placeholder.</p>
+
+<p><strong>默认：</strong> ``</p>
+
+<p><strong>例子：</strong> <a href="../examples#filter-placeholder.html">Filter Placeholder</a></p>
+
+<h2>filterAcceptOnEnter</h2>
+
+<p><strong>类型：</strong> Boolean</p>
+
+<p><strong>说明：</strong> 加快键盘使用。输入过滤器文本然后按 <code>Enter</code> 或空格将自动单击全选并关闭下拉列表。</p>
+
+<p><strong>默认：</strong> <code>false</code></p>
+
+<p><strong>例子：</strong> <a href="../examples#filter-accept-on-enter.html">Filter Accept On Enter</a></p>
+
+<h2>animate</h2>
+
+<p><strong>类型：</strong> undefined</p>
+
+<p><strong>说明：</strong> 定义打开或关闭下拉列表的动画。可以是 <code>undefined</code>，<code>&#39;fade&#39;</code> 和 <code>&#39;slide&#39;</code>。</p>
+
+<p><strong>默认：</strong> <code>undefined</code></p>
+
+<p><strong>例子：</strong> <a href="../examples#animate.html">The Animate</a></p>
+
+<h2>styler</h2>
+
+<p><strong>类型：</strong> function</p>
+
+<p><strong>说明：</strong> 项目样式器函数，返回样式字符串以自定义项样式，包含参数： <code>value</code>。</p>
+
+<p><strong>默认：</strong> <code>{ return false }</code></p>
+
+<p><strong>例子：</strong> <a href="../examples#styler.html">The Styler</a></p>
+
+<h2>textTemplate</h2>
+
+<p><strong>类型：</strong> function</p>
+
+<p><strong>说明：</strong> 项目 textTemplate 函数，返回字符串以自定义项目文本，包含参数：<code>$elm</code>。</p>
+
+<p><strong>默认：</strong> <code>{ return $elm[0].innerHTML }</code></p>
+
+<p><strong>例子：</strong> <a href="../examples#text-template.html">Text Template</a></p>
+
+<h2>labelTemplate</h2>
+
+<p><strong>类型：</strong> function</p>
+
+<p><strong>说明：</strong> 项目 labelTemplate 函数，返回自定义 optgroup 标签的字符串，包含参数：<code>$elm</code>。</p>
+
+<p><strong>默认：</strong> <code>{ return $elm[0].getAttribute(&#39;label&#39;) }</code></p>
+
+<p><strong>例子：</strong> <a href="../examples#label-template.html">Label Template</a></p>
 
 <h1>事件 <a href="https://github.com/wenzhixin/multiple-select/blob/develop/docs/_i18n/zh-cn/documentation/events.md"></a></h1>
 
@@ -393,145 +529,224 @@
   <span class="na">onEventName</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">arg1</span><span class="p">,</span> <span class="nx">arg2</span><span class="p">,</span> <span class="p">...)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
   <span class="p">}</span>
-<span class="p">});</span>
-
-<span class="nx">$</span><span class="p">(</span><span class="s1">'#select'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'event-name.multile.select'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">arg1</span><span class="p">,</span> <span class="nx">arg2</span><span class="p">,</span> <span class="p">...)</span> <span class="p">{</span>
-  <span class="c1">// ...</span>
-<span class="p">});</span>
+<span class="p">})</span>
 </code></pre></div>
 
-<div class="start-table"></div>
+<p>例子：<a href="../examples/#events.html">The Event</a></p>
 
-<table><thead>
-<tr>
-<th>Option 事件</th>
-<th>jQuery 事件</th>
-<th>参数</th>
-<th>描述</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>onOpen</td>
-<td>open.multile.select</td>
-<td>-</td>
-<td>当下拉列表被打开时触发。</td>
-</tr>
-<tr>
-<td>onClose</td>
-<td>close.multile.select</td>
-<td>-</td>
-<td>当下拉列表被关闭时触发。</td>
-</tr>
-<tr>
-<td>onCheckAll</td>
-<td>check-all.multile.select</td>
-<td>-</td>
-<td>通过点击“全选”复选框或以编程方式调用“checkall”方法选中所有选项时触发。</td>
-</tr>
-<tr>
-<td>onUncheckAll</td>
-<td>uncheck-all.multile.select</td>
-<td>-</td>
-<td>通过点击“全选”复选框或以编程方式调用“uncheckall”方法取消选中所有选项时触发。</td>
-</tr>
-<tr>
-<td>onFocus</td>
-<td>focus.multile.select</td>
-<td>-</td>
-<td>将事件处理程序绑定到“focus”。</td>
-</tr>
-<tr>
-<td>onBlur</td>
-<td>blur.multile.select</td>
-<td>-</td>
-<td>将事件处理程序绑定到&quot;blur&quot;。</td>
-</tr>
-<tr>
-<td>onOptgroupClick</td>
-<td>optgroup-click.multile.select</td>
-<td>view</td>
-<td>点击optgroup标签时触发。</td>
-</tr>
-<tr>
-<td>onClick</td>
-<td>click.multile.select</td>
-<td>view</td>
-<td>选中或取消选中复选框时触发。</td>
-</tr>
-<tr>
-<td>onAfterCreate</td>
-<td>after-create</td>
-<td>-</td>
-<td>Multiple Select 创建完成后触发。</td>
-</tr>
-</tbody></table>
+<h2>onOpen</h2>
+
+<ul>
+<li><p><strong>参数：</strong>  -</p></li>
+<li><p><strong>说明：</strong> 当下拉列表被打开时触发。</p></li>
+</ul>
+
+<h2>onClose</h2>
+
+<ul>
+<li><p><strong>参数：</strong>  -</p></li>
+<li><p><strong>说明：</strong> 当下拉列表被关闭时触发。</p></li>
+</ul>
+
+<h2>onCheckAll</h2>
+
+<ul>
+<li><p><strong>参数：</strong>  -</p></li>
+<li><p><strong>说明：</strong> 通过点击“全选”复选框或以编程方式调用“checkall”方法选中所有选项时触发。</p></li>
+</ul>
+
+<h2>onUncheckAll</h2>
+
+<ul>
+<li><p><strong>参数：</strong>  -</p></li>
+<li><p><strong>说明：</strong> 通过点击“全选”复选框或以编程方式调用“uncheckall”方法取消选中所有选项时触发。</p></li>
+</ul>
+
+<h2>onFocus</h2>
+
+<ul>
+<li><p><strong>参数：</strong>  -</p></li>
+<li><p><strong>说明：</strong> 将事件处理程序绑定到“focus”。</p></li>
+</ul>
+
+<h2>onBlur</h2>
+
+<ul>
+<li><p><strong>参数：</strong>  -</p></li>
+<li><p><strong>说明：</strong> 将事件处理程序绑定到&quot;blur&quot;。</p></li>
+</ul>
+
+<h2>onOptgroupClick</h2>
+
+<ul>
+<li><p><strong>参数：</strong> <code>view</code></p></li>
+<li><p><strong>说明：</strong> 点击optgroup标签时触发。<code>view</code> 参数是一个对象，它包含 <code>label, checked, children</code>。</p></li>
+</ul>
+
+<h2>onClick</h2>
+
+<ul>
+<li><p><strong>参数：</strong> <code>view</code></p></li>
+<li><p><strong>说明：</strong> 选中或取消选中复选框时触发。<code>view</code> 参数是一个对象，它包含 <code>label, value, checked</code>。</p></li>
+</ul>
+
+<h2>onFilter</h2>
+
+<ul>
+<li><p><strong>参数：</strong> <code>text</code></p></li>
+<li><p><strong>说明：</strong> Multiple Select 进行过滤的时候触发。</p></li>
+</ul>
+
+<h2>onAfterCreate</h2>
+
+<ul>
+<li><p><strong>参数：</strong>  -</p></li>
+<li><p><strong>说明：</strong> Multiple Select 创建完成后触发。</p></li>
+</ul>
 
 <h1>方法 <a href="https://github.com/wenzhixin/multiple-select/blob/develop/docs/_i18n/zh-cn/documentation/methods.md"></a></h1>
 
 <p><hr></p>
 
-<p>使用方法的语法：<code>$(&#39;#multiple&#39;).multipleSelect(&#39;method&#39;, parameter);</code>.</p>
+<p>使用方法的语法：</p>
 
-<div class="start-table"></div>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">'#multiple'</span><span class="p">).</span><span class="nx">multipleSelect</span><span class="p">(</span><span class="s1">'method'</span><span class="p">,</span> <span class="nx">parameter</span><span class="p">)</span>
+</code></pre></div>
 
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>getSelects</td>
-<td>type</td>
-<td>获取选定的值。&#39;type&#39;可以是&#39;value&#39;或&#39;text&#39;，默认是&#39;value&#39;。</td>
-</tr>
-<tr>
-<td>setSelects</td>
-<td>values</td>
-<td>设置选定的值。values的类型为数组。</td>
-</tr>
-<tr>
-<td>enable</td>
-<td>-</td>
-<td>启用 multiple select。</td>
-</tr>
-<tr>
-<td>disable</td>
-<td>-</td>
-<td>禁用 multiple select。在此模式下，用户不允许操作。</td>
-</tr>
-<tr>
-<td>checkAll</td>
-<td>-</td>
-<td>选中所有复选框。</td>
-</tr>
-<tr>
-<td>uncheckAll</td>
-<td>-</td>
-<td>取消选中所有复选框。</td>
-</tr>
-<tr>
-<td>focus</td>
-<td>-</td>
-<td>使 multiple select 获得焦点.</td>
-</tr>
-<tr>
-<td>blur</td>
-<td>-</td>
-<td>使 multiple select 失去焦点.</td>
-</tr>
-<tr>
-<td>refresh</td>
-<td>-</td>
-<td>重新加载 multiple select。如果您通过 AJAX 或 DOM 操作方法在原始选择上动态添加/删除选项标记，请调用refresh进行更新。</td>
-</tr>
-<tr>
-<td>destroy</td>
-<td>-</td>
-<td>销毁  Multiple Select。如果你想删除 multiple select 的属性。</td>
-</tr>
-</tbody></table>
+<h2>getSelects</h2>
+
+<ul>
+<li><p><strong>参数：</strong> <code>type</code></p></li>
+<li><p><strong>说明：</strong> 获取选定的值。<code>type</code> 可以是 <code>&#39;value&#39;</code> 或 <code>&#39;text&#39;</code>，默认是 <code>&#39;value&#39;</code>。</p></li>
+<li><p><strong>例子：</strong> <a href="../examples/#setSelects-getSelects.html">setSelects-getSelects</a></p></li>
+</ul>
+
+<h2>setSelects</h2>
+
+<ul>
+<li><p><strong>参数：</strong>  <code>values</code></p></li>
+<li><p><strong>说明：</strong> 设置选定的值。<code>values</code> 的类型为数组。</p></li>
+<li><p><strong>例子：</strong> <a href="../examples/#setSelects-getSelects.html">setSelects-getSelects</a></p></li>
+</ul>
+
+<h2>enable</h2>
+
+<ul>
+<li><p><strong>参数：</strong>  -</p></li>
+<li><p><strong>说明：</strong> 启用 multiple select。</p></li>
+<li><p><strong>例子：</strong> <a href="../examples/#enable-disable.html">enable-disable</a></p></li>
+</ul>
+
+<h2>disable</h2>
+
+<ul>
+<li><p><strong>参数：</strong>  -</p></li>
+<li><p><strong>说明：</strong> 禁用 multiple select。在此模式下，用户不允许操作。</p></li>
+<li><p><strong>例子：</strong> <a href="../examples/#enable-disable.html">enable-disable</a></p></li>
+</ul>
+
+<h2>open</h2>
+
+<ul>
+<li><p><strong>参数：</strong>  -</p></li>
+<li><p><strong>说明：</strong> 打开 multiple select。</p></li>
+<li><p><strong>例子：</strong> <a href="../examples/#open-close.html">open-close</a></p></li>
+</ul>
+
+<h2>close</h2>
+
+<ul>
+<li><p><strong>参数：</strong>  -</p></li>
+<li><p><strong>说明：</strong> 关闭 multiple select。</p></li>
+<li><p><strong>例子：</strong> <a href="../examples/#open-close.html">open-close</a></p></li>
+</ul>
+
+<h2>checkAll</h2>
+
+<ul>
+<li><p><strong>参数：</strong>  -</p></li>
+<li><p><strong>说明：</strong> 选中所有复选框。</p></li>
+<li><p><strong>例子：</strong> <a href="../examples/#checkAll-uncheckAll.html">checkAll-uncheckAll</a></p></li>
+</ul>
+
+<h2>uncheckAll</h2>
+
+<ul>
+<li><p><strong>参数：</strong>  -</p></li>
+<li><p><strong>说明：</strong> 取消选中所有复选框。</p></li>
+<li><p><strong>例子：</strong> <a href="../examples/#checkAll-uncheckAll.html">checkAll-uncheckAll</a></p></li>
+</ul>
+
+<h2>focus</h2>
+
+<ul>
+<li><p><strong>参数：</strong>  -</p></li>
+<li><p><strong>说明：</strong> 使 multiple select 获得焦点。</p></li>
+<li><p><strong>例子：</strong> <a href="../examples/#focus-blur.html">focus-blur</a></p></li>
+</ul>
+
+<h2>blur</h2>
+
+<ul>
+<li><p><strong>参数：</strong>  -</p></li>
+<li><p><strong>说明：</strong> 使 multiple select 失去焦点。</p></li>
+<li><p><strong>例子：</strong> <a href="../examples/#focus-blur.html">focus-blur</a></p></li>
+</ul>
+
+<h2>refresh</h2>
+
+<ul>
+<li><p><strong>参数：</strong>  -</p></li>
+<li><p><strong>说明：</strong> 重新加载 multiple select。如果您通过 AJAX 或 DOM 操作方法在原始选择上动态添加/删除选项标记，请调用 refresh 进行更新。</p></li>
+<li><p><strong>例子：</strong> <a href="../examples/#refresh.html">refresh</a></p></li>
+</ul>
+
+<h2>destroy</h2>
+
+<ul>
+<li><p><strong>参数：</strong>  -</p></li>
+<li><p><strong>说明：</strong> 销毁 Multiple Select。如果你想删除 multiple select 的属性。</p></li>
+<li><p><strong>例子：</strong> <a href="../examples/#destroy.html">destroy</a></p></li>
+</ul>
+
+<h1>多语言 <a href="https://github.com/wenzhixin/multiple-select/blob/develop/docs/_i18n/zh-cn/documentation/localizations.md"></a></h1>
+
+<p><hr></p>
+
+<p>多语言的使用语法：</p>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">'#multiple'</span><span class="p">).</span><span class="nx">multipleSelect</span><span class="p">({</span>
+  <span class="na">formatMessage</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s1">'Format message'</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div>
+
+<p>例子：<a href="../examples/#i18n.html">The i18n</a></p>
+
+<h2>formatSelectAll</h2>
+
+<p><strong>参数：</strong> <code>undefined</code></p>
+
+<p><strong>默认：</strong> <code>&#39;[Select all]&#39;</code></p>
+
+<h2>formatAllSelected</h2>
+
+<p><strong>参数：</strong> <code>undefined</code></p>
+
+<p><strong>默认：</strong> <code>&#39;All selected&#39;</code></p>
+
+<h2>formatCountSelected</h2>
+
+<p><strong>参数：</strong> <code>count, total</code></p>
+
+<p><strong>默认：</strong> <code>count + &#39; of &#39; + total + &#39; selected&#39;</code></p>
+
+<h2>formatNoMatchesFound</h2>
+
+<p><strong>参数：</strong> <code>undefined</code></p>
+
+<p><strong>默认：</strong> <code>&#39;No matches found&#39;</code></p>
 
         </div>
         
@@ -578,7 +793,7 @@
     <p>由 <a href="https://github.com/wenzhixin" target="_blank">@wenzhixin</a> 开发维护，以及其他 <a href="https://github.com/wenzhixin/multiple-select/graphs/contributors" target="_blank">贡献者</a>帮忙维护。</p>
     <p>代码许可：<a href="https://github.com/wenzhixin/multiple-select/blob/master/LICENSE" target="_blank">MIT</a>，文档许可：<a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>。</p>
     <ul class="bs-docs-footer-links muted">
-      <li>当前版本： v1.3.0</li>
+      <li>当前版本： v1.3.1</li>
       <li>&middot;</li>
       <li><a href="https://github.com/wenzhixin/multiple-select">GitHub</a></li>
       <li>&middot;</li>
@@ -612,8 +827,8 @@
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="../assets/js/ie10-viewport-bug-workaround.js"></script>
 
-<script src="../assets/js/sidenav.js?v=1.3.0"></script>
-<script src="../assets/js/common.js?v=1.3.0"></script>
+<script src="../assets/js/sidenav.js?v=1.3.1"></script>
+<script src="../assets/js/common.js?v=1.3.1"></script>
 
   </body>
 </html>

@@ -1,8 +1,8 @@
 $(function () {
-  var url = location.search.replace(/\?v=\d+&/, '').replace(/\?v=157&/, '')
+  var url = location.search.replace(/\?v=\d+&/, '').replace(/\?v=158&/, '')
   $.ajax({
     type: 'GET',
-    url: url + '?v=157', // todo: add version to solve cache problem
+    url: url + '?v=158', // todo: add version to solve cache problem
     dataType: 'html',
     global: false,
     cache: true, // (warning: setting it to false will cause a timestamp and will call the request twice)
@@ -17,7 +17,7 @@ $(function () {
 window._config = {
   isDebug: location.hash.slice(1) === 'is-debug' ||
   ['localhost'].indexOf(location.hostname) > -1,
-  cdnUrl: 'https://unpkg.com/multiple-select@1.3.0/dist/',
+  cdnUrl: 'https://unpkg.com/multiple-select@1.3.1/dist/',
   localUrl: 'http://localhost:4000/assets/js/',
   localLinkUrl: 'http://localhost:4000/assets/css/'
 }
