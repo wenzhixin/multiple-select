@@ -38,8 +38,8 @@ select {
       formatAllSelected () {
         return '已选择所有记录'
       },
-      formatCountSelected () {
-        return '已从 % 中选择 # 条记录'
+      formatCountSelected (count, total) {
+        return '已从 ' + total + ' 中选择 ' + count + ' 条记录'
       },
       formatNoMatchesFound () {
         return '没有找到记录'
