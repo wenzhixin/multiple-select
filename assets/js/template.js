@@ -1,8 +1,8 @@
 $(function () {
-  var url = location.search.replace(/\?v=\d+&/, '').replace(/\?v=159&/, '')
+  var url = location.search.replace(/\?v=\d+&/, '').replace(/\?v=160&/, '')
   $.ajax({
     type: 'GET',
-    url: url + '?v=159', // todo: add version to solve cache problem
+    url: url + '?v=160', // todo: add version to solve cache problem
     dataType: 'html',
     global: false,
     cache: true, // (warning: setting it to false will cause a timestamp and will call the request twice)
