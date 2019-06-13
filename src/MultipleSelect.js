@@ -688,7 +688,7 @@ const defaults = {
     return false
   },
   onClick () {
-    return false
+    return true
   },
   onFilter () {
     return false
