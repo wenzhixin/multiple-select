@@ -299,6 +299,14 @@ class MultipleSelect {
     this.$selectItems.off('click').on('click', e => {
       const $this = $(e.currentTarget)
 
+      if(this.options.onClick({
+        label: $this.parent().text(),
+        value: $this.val(),
+        checked: !$this.prop('checked')
+      }) === false) {
+        return false;
+      }
+
       if (this.options.single) {
         const clickedVal = $(e.currentTarget).val()
         this.$selectItems.filter((i, el) => {
@@ -311,11 +319,6 @@ class MultipleSelect {
       this.updateSelectAll()
       this.update()
       this.updateOptGroupSelect()
-      this.options.onClick({
-        label: $this.parent().text(),
-        value: $this.val(),
-        checked: $this.prop('checked')
-      })
 
       if (this.options.single && this.options.isOpen && !this.options.keepOpen) {
         this.close()
