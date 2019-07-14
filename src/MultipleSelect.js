@@ -82,7 +82,7 @@ class MultipleSelect {
     this.options.onAfterCreate()
   }
 
-  initDrop () {
+  init () {
     const $ul = $('<ul></ul>')
 
     this.$drop.html('')
@@ -118,10 +118,6 @@ class MultipleSelect {
 
     this.$drop.find('ul').css('max-height', `${this.options.maxHeight}px`)
     this.$drop.find('.multiple').css('width', `${this.options.multipleWidth}px`)
-  }
-
-  init () {
-    this.initDrop()
 
     this.$searchInput = this.$drop.find('.ms-search input')
     this.$selectAll = this.$drop.find(`input[${this.selectAllName}]`)
@@ -554,7 +550,7 @@ class MultipleSelect {
   }
 
   refresh () {
-    this.initDrop()
+    this.init()
   }
 
   filter () {
