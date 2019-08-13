@@ -22,6 +22,44 @@ The Options are defined in `jQuery.fn.multipleSelect.defaults`.
 
 **Example:** <a href="../examples#placeholder.html">The Placeholder</a>
 
+## data
+
+**Type:** Array
+
+**Detail:** The data to be loaded.
+
+Group format:
+
+```js
+[
+  {
+    type: 'optgroup',
+    label: 'Group 1',
+    children: [
+      {
+        text: 'Option 1',
+        value: 1
+      }
+    ]
+  }
+]
+```
+
+Option format:
+
+```js
+[
+  {
+    text: 'Option 1',
+    value: 1
+  }
+]
+```
+
+**Default:** []
+
+**Example:** <a href="../examples#basic-data.html">Basic Data</a> and <a href="./examples#optgroup-data.html">Optgroup Data</a>.
+
 ## selectAll
 
 **Type:** Boolean

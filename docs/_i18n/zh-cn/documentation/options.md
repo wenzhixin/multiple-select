@@ -22,6 +22,44 @@
 
 **例子：** <a href="../examples#placeholder.html">The Placeholder</a>
 
+## data
+
+**类型：** Array
+
+**说明：** 需要加载的数据。
+
+Group 格式：
+
+```js
+[
+  {
+    type: 'optgroup',
+    label: 'Group 1',
+    children: [
+      {
+        text: 'Option 1',
+        value: 1
+      }
+    ]
+  }
+]
+```
+
+Option 格式：
+
+```js
+[
+  {
+    text: 'Option 1',
+    value: 1
+  }
+]
+```
+
+**默认：** []
+
+**例子：** <a href="../examples#basic-data.html">Basic Data</a> 和 <a href="./examples#optgroup-data.html">Optgroup Data</a>
+
 ## selectAll
 
 **类型：** Boolean
