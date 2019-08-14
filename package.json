@@ -58,7 +58,6 @@
     "@mysticatea/eslint-plugin": "^10.0.3",
     "axe-testcafe": "^3.0.0",
     "core-js": "^3.1.4",
-    "css.escape": "^1.5.1",
     "cssmin-cli": "^0.0.5",
     "eslint": "^6.0.1",
     "eslint-config-ash-nazg": "^7.0.1",

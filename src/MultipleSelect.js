@@ -1,7 +1,5 @@
 /* eslint-disable unicorn/no-fn-reference-in-iterator */
 
-import cssEscape from 'css.escape'
-
 import removeDiacritics from './utils/removeDiacritics.js'
 import {s, sprintf} from './utils/sprintf.js'
 
@@ -26,8 +24,8 @@ class MultipleSelect {
 
     // label element
     this.$label = this.$el.closest('label')
-    if (this.$label.length === 0 && el.getAttribute('id')) {
-      this.$label = $(sprintf`label[for="${s}"]`(cssEscape(el.getAttribute('id'))))
+    if (!this.$label.length && this.$el.attr('id')) {
+      this.$label = $(`label[for="${this.$el.attr('id')}"]`)
     }
 
     // restore class and title from select element
@@ -279,9 +277,9 @@ class MultipleSelect {
       this[this.options.isOpen ? 'close' : 'open']()
     }
 
-    if (this.$label) {
+    if (this.$label.length) {
       this.$label.off('click').on('click', e => {
-        if (e.target.nodeName.toLowerCase() !== 'label' || e.target !== this) {
+        if (e.target.nodeName.toLowerCase() !== 'label') {
           return
         }
         toggleOpen(e)
