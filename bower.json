@@ -1,0 +1,26 @@
+{
+    "name": "multiple-select",
+    "homepage": "https://github.com/wenzhixin/multiple-select",
+    "authors": [
+        "zhixin <wenzhixin2010@gmail.com>"
+    ],
+    "description": "A jQuery plugin to select multiple elements with checkboxes :)",
+    "main": [
+        "dist/multiple-select.min.css",
+        "dist/multiple-select.min.js",
+        "dist/multiple-select.png"
+    ],
+    "keywords": [
+        "multiple.select",
+        "select.list",
+        "multiple.choose",
+        "checkbox"
+    ],
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "docs"
+    ]
+}
