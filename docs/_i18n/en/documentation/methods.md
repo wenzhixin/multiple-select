@@ -8,6 +8,14 @@ The calling method syntax:
 $('#multiple').multipleSelect('method', parameter)
 ```
 
+## getOptions
+
+- **Parameter:** -
+
+- **Detail:** Gets the options object (from v1.4.0).
+
+- **Example:** [getOptions](../examples/#getOptions.html)
+
 ## getSelects
 
 - **Parameter:** `type`

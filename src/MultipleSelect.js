@@ -525,6 +525,13 @@ class MultipleSelect {
     })
   }
 
+  getOptions () {
+    // deep copy and remove data
+    const options = $.extend({}, this.options)
+    delete options.data
+    return $.extend(true, {}, options)
+  }
+
   // value or text, default: 'value'
   getSelects (type) {
     let texts = []

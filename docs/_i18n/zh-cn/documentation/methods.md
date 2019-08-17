@@ -8,6 +8,14 @@
 $('#multiple').multipleSelect('method', parameter)
 ```
 
+## getOptions
+
+- **参数：** -
+
+- **说明：** 获取 options 对象 （v1.4.0）。
+
+- **例子：** [getOptions](../examples/#getOptions.html)
+
 ## getSelects
 
 - **参数：** `type`

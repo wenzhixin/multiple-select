@@ -11,6 +11,7 @@ $.fn.multipleSelect = function (option, ...args) {
   let value
 
   const allowedMethods = [
+    'getOptions',
     'getSelects', 'setSelects',
     'enable', 'disable',
     'open', 'close',
