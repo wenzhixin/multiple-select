@@ -154,7 +154,7 @@ class MultipleSelect {
   initDrop () {
     this.initList()
     this.events()
-    this.updateSelectAll(true)
+    this.updateSelectAll()
     this.update(true)
     this.updateOptGroupSelect(true)
 
@@ -345,7 +345,7 @@ class MultipleSelect {
       const checked = $children.length !== $children.filter(':checked').length
 
       $children.prop('checked', checked)
-      this.updateSelectAll()
+      this.updateSelectAll(true)
       this.update()
       this.options.onOptgroupClick({
         label: $this.parent().text(),
@@ -371,7 +371,7 @@ class MultipleSelect {
         })
       }
 
-      this.updateSelectAll()
+      this.updateSelectAll(true)
       this.update()
       this.updateOptGroupSelect()
       this.options.onClick({
@@ -498,16 +498,23 @@ class MultipleSelect {
     }
   }
 
-  updateSelectAll (isInit) {
-    let $items = this.$selectItems
+  updateSelectAll (triggerEvent) {
+    const $items = this.$selectItems.filter(':visible')
 
-    if (!isInit) {
-      $items = $items.filter(':visible')
+    if (!$items.length) {
+      return
     }
-    this.$selectAll.prop('checked', $items.length &&
-      $items.length === $items.filter(':checked').length)
-    if (!isInit && this.$selectAll.prop('checked')) {
-      this.options.onCheckAll()
+
+    const selectedLength = $items.filter(':checked').length
+
+    this.$selectAll.prop('checked', selectedLength === $items.length)
+
+    if (triggerEvent) {
+      if (selectedLength === $items.length) {
+        this.options.onCheckAll()
+      } else if (selectedLength === 0) {
+        this.options.onUncheckAll()
+      }
     }
   }
 
