@@ -201,11 +201,9 @@ class MultipleSelect {
       return this.initListItem(row)
     }).join(''))
 
-    if (!this.data.length) {
-      html.push(sprintf`<li class="ms-no-results">${s}</li>`(
-        this.options.formatNoMatchesFound()
-      ))
-    }
+    html.push(sprintf`<li class="ms-no-results">${s}</li>`(
+      this.options.formatNoMatchesFound()
+    ))
 
     html.push('</ul>')
 
@@ -655,7 +653,7 @@ class MultipleSelect {
           $parent.closest('li')[hasText ? 'show' : 'hide']()
         })
       }
-      this.$disableItems.parent().hide()
+      this.$disableItems.closest('li').hide()
       this.$selectGroups.each((i, el) => {
         const $parent = $(el).parent()
         const group = $parent[0].getAttribute('data-group')
@@ -673,7 +671,7 @@ class MultipleSelect {
       })
 
       // Check if no matches found
-      if (this.$selectItems.parent().filter(':visible').length) {
+      if (this.$selectItems.filter(':visible').length) {
         this.$selectAll.closest('li').show()
         this.$noResults.hide()
       } else {
