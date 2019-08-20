@@ -251,9 +251,14 @@ class MultipleSelect {
 
     const customStyle = this.options.styler(row.value)
     const style = customStyle ? sprintf`style="${s}"`(customStyle) : ''
+    let classes = row.classes
+
+    if (this.options.single && !this.options.singleRadio) {
+      classes += ' hide-radio'
+    }
 
     return [
-      sprintf`<li class="${s} ${s}" ${s} ${s}>`(multiple, row.classes || '', title, style),
+      sprintf`<li class="${s} ${s}" ${s} ${s}>`(multiple, classes || '', title, style),
       sprintf`<label class="${s}">`(row.disabled ? 'disabled' : ''),
       sprintf`<input type="${s}" value="${s}" ${s}${s}${s}${s}>`(
         type,
@@ -357,11 +362,12 @@ class MultipleSelect {
         })
       })
     })
+
     this.$selectItems.off('click').on('click', e => {
       const $this = $(e.currentTarget)
 
       if (this.options.single) {
-        const clickedVal = $(e.currentTarget).val()
+        const clickedVal = $this.val()
         this.$selectItems.filter((i, el) => {
           return $(el).val() !== clickedVal
         }).each((i, el) => {
@@ -697,6 +703,7 @@ const defaults = {
 
   selectAll: true,
   single: false,
+  singleRadio: false,
   multiple: false,
   hideOptgroupCheckboxes: false,
   multipleWidth: 80,

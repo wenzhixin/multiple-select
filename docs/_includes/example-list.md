@@ -12,6 +12,7 @@
 <li><a href="../examples#placeholder.html">The Placeholder</a></li>
 <li><a href="../examples#hide-select-all.html">Hide Select All</a></li>
 <li><a href="../examples#single-row.html">Single Row</a></li>
+<li><a href="../examples#single-radio.html">Single Radio</a></li>
 <li><a href="../examples#multiple-items.html">Multiple Items</a></li>
 <li><a href="../examples#multiple-items-optgroups.html">Multiple Items Optgroups</a></li>
 <li><a href="../examples#hide-optgroup-checkboxes.html">Hide Optgroup Check</a></li>

@@ -1,0 +1,30 @@
+<script>
+  init({
+    title: 'Single Radio',
+    desc: 'Use <code>singleRadio: true</code> to show the radio input.',
+    links: ['multiple-select.css'],
+    scripts: ['multiple-select.js']
+  })
+</script>
+
+<style>
+select {
+  width: 500px;
+}
+</style>
+
+<select multiple="multiple">
+  <option value="1">First</option>
+  <option value="2">Second</option>
+  <option value="3">Third</option>
+  <option value="4" selected="selected">Fourth</option>
+</select>
+
+<script>
+  function mounted() {
+    $('select').multipleSelect({
+      single: true,
+      singleRadio: true
+    })
+  }
+</script>

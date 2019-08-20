@@ -80,6 +80,16 @@ Option 格式：
 
 **例子：** <a href="../examples#single-row.html">Single Row</a>
 
+## singleRadio
+
+**类型：** Boolean
+
+**说明：** 当 `single` 设置为 `true` 的时候允许显示单选框（v1.4.0）。
+
+**默认：** `false`
+
+**例子：** <a href="../examples#single-radio.html">Single Radio</a>
+
 ## multiple
 
 **类型：** Boolean
