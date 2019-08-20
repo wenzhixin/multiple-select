@@ -145,13 +145,14 @@
   ul {
     overflow: auto;
     margin: 0;
-    padding: 5px 8px;
+    padding: 5px 0;
 
     > li {
       list-style: none;
       display: list-item;
       background-image: none;
       position: static;
+      padding: 0 8px;
 
       .disabled {
         opacity: .35;
@@ -183,6 +184,27 @@
 
         &.optgroup {
           font-weight: bold;
+        }
+      }
+
+      &.hide-radio {
+        &:focus,
+        &:hover {
+          background-color: #f8f9fa;
+        }
+
+        &.selected {
+          color: #fff;
+          background-color: #007bff;
+        }
+
+        label {
+          margin-bottom: 0;
+          padding: 5px 0;
+        }
+
+        input {
+          display: none;
         }
       }
     }

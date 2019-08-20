@@ -80,6 +80,16 @@ Option format:
 
 **Example:** <a href="../examples#single-row.html">Single Row</a>
 
+## singleRadio
+
+**Type:** Boolean
+
+**Detail:** Allows you to show the radio input when `single` is set to `true` (from v1.4.0).
+
+**Default:** `false`
+
+**Example:** <a href="../examples#single-radio.html">Single Radio</a>
+
 ## multiple
 
 **Type:** Boolean
