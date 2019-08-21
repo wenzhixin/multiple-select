@@ -1,11 +1,46 @@
-/**
- * Strips diacritics.
- * @param {string} str diacritics string
- * @returns {string} removed diacritics string
- */
-function removeDiacritics (str) {
-  // A polyfill for `normalize` will be even larger than our code below, so
-  //   not practical to embed
+// sprintf format specifiers
+const s = 's'
+
+const sprintf = (strings, ...formats) => {
+  return (...args) => {
+    let retStr = ''
+    return strings.slice(0, -1).some((str, i) => {
+      switch (formats[i]) {
+        default:
+          throw new TypeError('Unrecognized sprintf format')
+        case 's': {
+          const arg = args[i]
+          if (arg === null || arg === undefined) {
+            return true
+          }
+          retStr += str + arg
+          return false
+        }
+      }
+    })
+      ? ''
+      : retStr + strings.slice(-1)
+  }
+}
+
+const compareObjects = (objectA, objectB, compareLength) => {
+  const aKeys = Object.keys(objectA)
+  const bKeys = Object.keys(objectB)
+
+  if (compareLength && aKeys.length !== bKeys.length) {
+    return false
+  }
+
+  for (const key of aKeys) {
+    if (bKeys.includes(key) && objectA[key] !== objectB[key]) {
+      return false
+    }
+  }
+
+  return true
+}
+
+const removeDiacritics = str => {
   if (str.normalize) {
     return str.normalize('NFD').replace(/[\u0300-\u036F]/g, '')
   }
@@ -96,9 +131,14 @@ function removeDiacritics (str) {
     {'base': 'z', 'letters': /[\u007A\u24E9\uFF5A\u017A\u1E91\u017C\u017E\u1E93\u1E95\u01B6\u0225\u0240\u2C6C\uA763]/g}
   ]
 
-  return defaultDiacriticsRemovalMap.reduce((s, {letters, base}) => {
-    return s.replace(letters, base)
+  return defaultDiacriticsRemovalMap.reduce((string, {letters, base}) => {
+    return string.replace(letters, base)
   }, str)
 }
 
-export default removeDiacritics
+export {
+  s,
+  sprintf,
+  compareObjects,
+  removeDiacritics
+}

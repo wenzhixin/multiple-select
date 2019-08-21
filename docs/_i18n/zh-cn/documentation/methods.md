@@ -16,6 +16,16 @@ $('#multiple').multipleSelect('method', parameter)
 
 - **例子：** [getOptions](../examples/#getOptions.html)
 
+## refreshOptions
+
+- **参数：** `options`
+
+- **说明：**
+
+  刷新 `options` 对象（v1.4.0）。
+
+- **例子：** [refreshOptions](../examples/#refreshOptions.html)
+
 ## getSelects
 
 - **参数：** `type`
