@@ -7,6 +7,7 @@
 <li><a href="../examples#two-select.html">Two Select</a></li>
 <li><a href="../examples#basic-data.html">Basic Data</a></li>
 <li><a href="../examples#optgroup-data.html">Optgroup Data</a></li>
+<li><a href="../examples#locale.html">The Locale</a></li>
 <li role="separator" class="divider"></li>
 <li class="dropdown-header">Options</li>
 <li><a href="../examples#placeholder.html">The Placeholder</a></li>
