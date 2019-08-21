@@ -1,18 +1,40 @@
 /* eslint-disable unicorn/no-fn-reference-in-iterator */
 
+import Constants from './constants/index.js'
 import removeDiacritics from './utils/removeDiacritics.js'
 import {s, sprintf} from './utils/sprintf.js'
 
 class MultipleSelect {
   constructor ($el, options) {
     this.$el = $el
-    this.options = $.extend({}, defaults, options)
+    this.options = $.extend({}, Constants.DEFAULTS, options)
   }
 
   init () {
+    this.initLocale()
     this.initContainer()
     this.initData()
     this.initDrop()
+  }
+
+  initLocale () {
+    if (this.options.locale) {
+      const {locales} = $.fn.multipleSelect
+      const parts = this.options.locale.split(/-|_/)
+
+      parts[0] = parts[0].toLowerCase()
+      if (parts[1]) {
+        parts[1] = parts[1].toUpperCase()
+      }
+
+      if (locales[this.options.locale]) {
+        $.extend(this.options, locales[this.options.locale])
+      } else if (locales[parts.join('-')]) {
+        $.extend(this.options, locales[parts.join('-')])
+      } else if (locales[parts[0]]) {
+        $.extend(this.options, locales[parts[0]])
+      }
+    }
   }
 
   initContainer () {
@@ -251,7 +273,7 @@ class MultipleSelect {
 
     const customStyle = this.options.styler(row.value)
     const style = customStyle ? sprintf`style="${s}"`(customStyle) : ''
-    let classes = row.classes
+    let {classes} = row
 
     if (this.options.single && !this.options.singleRadio) {
       classes += ' hide-radio'
@@ -691,97 +713,11 @@ class MultipleSelect {
   }
 
   destroy () {
+    if (!this.$parent) {
+      return
+    }
     this.$el.before(this.$parent).show()
     this.$parent.remove()
-  }
-}
-
-const defaults = {
-  name: '',
-  placeholder: '',
-  data: undefined,
-
-  selectAll: true,
-  single: false,
-  singleRadio: false,
-  multiple: false,
-  hideOptgroupCheckboxes: false,
-  multipleWidth: 80,
-  width: undefined,
-  dropWidth: undefined,
-  maxHeight: 250,
-  position: 'bottom',
-
-  displayValues: false,
-  displayTitle: false,
-  displayDelimiter: ', ',
-  minimumCountSelected: 3,
-  ellipsis: false,
-
-  isOpen: false,
-  keepOpen: false,
-  openOnHover: false,
-  container: null,
-
-  filter: false,
-  filterGroup: false,
-  filterPlaceholder: '',
-  filterAcceptOnEnter: false,
-
-  animate: undefined,
-
-  styler () {
-    return false
-  },
-  textTemplate ($elm) {
-    return $elm[0].innerHTML
-  },
-  labelTemplate ($elm) {
-    return $elm[0].getAttribute('label')
-  },
-
-  formatSelectAll () {
-    return '[Select all]'
-  },
-  formatAllSelected () {
-    return 'All selected'
-  },
-  formatCountSelected (count, total) {
-    return count + ' of ' + total + ' selected'
-  },
-  formatNoMatchesFound () {
-    return 'No matches found'
-  },
-
-  onOpen () {
-    return false
-  },
-  onClose () {
-    return false
-  },
-  onCheckAll () {
-    return false
-  },
-  onUncheckAll () {
-    return false
-  },
-  onFocus () {
-    return false
-  },
-  onBlur () {
-    return false
-  },
-  onOptgroupClick () {
-    return false
-  },
-  onClick () {
-    return false
-  },
-  onFilter () {
-    return false
-  },
-  onAfterCreate () {
-    return false
   }
 }
 

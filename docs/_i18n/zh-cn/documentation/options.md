@@ -60,6 +60,28 @@ Option 格式：
 
 **例子：** <a href="../examples#basic-data.html">Basic Data</a> 和 <a href="./examples#optgroup-data.html">Optgroup Data</a>
 
+## locale
+
+- **标签属性：** `data-locale`
+
+- **类型：** `String`
+
+- **详细描述：**
+
+  设置要使用的多语言（例如 `'zh-CN'`）。设置的多语言文件必须预先加载。
+  允许同时加载多个多语言文件，假如已加载，按照以下的顺序：
+
+  * 首先尝试指定的多语言，
+  * 然后尝试将 '_' 翻译为 '-' 并将区域代码设置为大写的多语言，
+  * 然后尝试短的多语言代码（即 `'zh'` 而不是 `'zh-CN'`），
+  * 最后将使用加载的最后一个多语言文件（如果没有加载多语言，则使用默认的多语言）。
+
+  如果保留 `undefined` 或空字符串，请使用最后加载的多语言（如果没有加载多语言文件，则使用 'en-US'）。
+
+- **默认：** `undefined`
+
+**例子：** <a href="../examples#locale.html">The Locale</a>
+
 ## selectAll
 
 **类型：** Boolean

@@ -5,20 +5,11 @@
  * http://wenzhixin.net.cn/p/multiple-select/
  */
 
+import Constants from './constants/index.js'
 import MultipleSelect from './MultipleSelect.js'
 
 $.fn.multipleSelect = function (option, ...args) {
   let value
-
-  const allowedMethods = [
-    'getOptions',
-    'getSelects', 'setSelects',
-    'enable', 'disable',
-    'open', 'close',
-    'checkAll', 'uncheckAll',
-    'focus', 'blur',
-    'refresh', 'destroy'
-  ]
 
   this.each((i, el) => {
     const $this = $(el)
@@ -36,7 +27,7 @@ $.fn.multipleSelect = function (option, ...args) {
     }
 
     if (typeof option === 'string') {
-      if ($.inArray(option, allowedMethods) < 0) {
+      if ($.inArray(option, Constants.METHODS) < 0) {
         throw new Error(`Unknown method: ${option}`)
       }
       value = data[option](...args)
@@ -51,3 +42,7 @@ $.fn.multipleSelect = function (option, ...args) {
 
   return typeof value !== 'undefined' ? value : this
 }
+
+$.fn.multipleSelect.defaults = Constants.DEFAULTS
+$.fn.multipleSelect.locales = Constants.LOCALES
+$.fn.multipleSelect.methods = Constants.METHODS

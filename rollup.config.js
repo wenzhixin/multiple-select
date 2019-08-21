@@ -1,9 +1,10 @@
+import glob from 'glob'
 import babel from 'rollup-plugin-babel'
 import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
 import minify from 'rollup-plugin-babel-minify'
 import inject from 'rollup-plugin-inject'
-// import vue from 'rollup-plugin-vue'
+import multiEntry from 'rollup-plugin-multi-entry'
 
 let found
 const env = process.argv.find(flag => {
@@ -71,6 +72,45 @@ if (!dev) {
       format: 'esm'
     },
     plugins: plugins.slice(1)
+  })
+}
+
+out = 'dist/multiple-select-locale-all.js'
+if (production) {
+  out = out.replace(/.js$/, '.min.js')
+}
+config.push({
+  input: 'src/locale/**/*.js',
+  output: {
+    name: 'MultipleSelect',
+    file: out,
+    format: 'umd',
+    globals
+  },
+  external,
+  plugins: [
+    multiEntry(),
+    ...plugins
+  ]
+})
+
+const files = glob.sync('src/locale/**/*.js')
+
+for (const file of files) {
+  out = `dist/${file.replace('src/', '')}`
+  if (production) {
+    out = out.replace(/.js$/, '.min.js')
+  }
+  config.push({
+    input: file,
+    output: {
+      name: 'MultipleSelect',
+      file: out,
+      format: 'umd',
+      globals
+    },
+    external,
+    plugins
   })
 }
 

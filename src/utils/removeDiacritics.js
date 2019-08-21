@@ -1,7 +1,7 @@
 /**
  * Strips diacritics.
- * @param {string} str
- * @returns {string}
+ * @param {string} str diacritics string
+ * @returns {string} removed diacritics string
  */
 function removeDiacritics (str) {
   // A polyfill for `normalize` will be even larger than our code below, so
