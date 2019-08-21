@@ -1,8 +1,7 @@
 /* eslint-disable unicorn/no-fn-reference-in-iterator */
 
 import Constants from './constants/index.js'
-import removeDiacritics from './utils/removeDiacritics.js'
-import {s, sprintf} from './utils/sprintf.js'
+import {s, sprintf, compareObjects, removeDiacritics} from './utils/index.js'
 
 class MultipleSelect {
   constructor ($el, options) {
@@ -563,6 +562,16 @@ class MultipleSelect {
     const options = $.extend({}, this.options)
     delete options.data
     return $.extend(true, {}, options)
+  }
+
+  refreshOptions (options) {
+    // If the objects are equivalent then avoid the call of destroy / init methods
+    if (compareObjects(this.options, options, true)) {
+      return
+    }
+    this.options = $.extend(this.options, options)
+    this.destroy()
+    this.init()
   }
 
   // value or text, default: 'value'

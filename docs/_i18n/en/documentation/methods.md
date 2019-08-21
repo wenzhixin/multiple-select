@@ -16,6 +16,16 @@ $('#multiple').multipleSelect('method', parameter)
 
 - **Example:** [getOptions](../examples/#getOptions.html)
 
+## refreshOptions
+
+- **Parameter:** `options`
+
+- **Detail:**
+
+  Refresh the `options` object (from v1.4.0).
+
+- **Example:** [refreshOptions](../examples/#refreshOptions.html)
+
 ## getSelects
 
 - **Parameter:** `type`

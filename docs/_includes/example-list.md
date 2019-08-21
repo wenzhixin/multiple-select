@@ -41,6 +41,7 @@
 <li role="separator" class="divider"></li>
 <li class="dropdown-header">Methods</li>
 <li><a href="../examples#getOptions.html">The getOptions</a></li>
+<li><a href="../examples#refreshOptions.html">The refreshOptions</a></li>
 <li><a href="../examples#setSelects-getSelects.html">The setSelects/getSelects</a></li>
 <li><a href="../examples#enable-disable.html">The enable/disable</a></li>
 <li><a href="../examples#open-close.html">The open/close</a></li>
