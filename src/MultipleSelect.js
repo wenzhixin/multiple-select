@@ -699,7 +699,7 @@ class MultipleSelect {
       })
 
       // Check if no matches found
-      if (this.$selectItems.filter(':visible').length) {
+      if (this.$selectItems.closest('li').filter(':visible').length) {
         this.$selectAll.closest('li').show()
         this.$noResults.hide()
       } else {
