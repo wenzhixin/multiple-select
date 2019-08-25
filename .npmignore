@@ -1,5 +1,4 @@
 tools
-docs
+site
 test
 rollup.config.js
-src

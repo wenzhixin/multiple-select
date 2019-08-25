@@ -1,0 +1,17 @@
+{
+  "getting_started": {
+    "Getting started": [
+      "download",
+      "whats-include",
+      "usage"
+    ]
+  },
+  "documentation": {
+    "Documentation": [
+      "options",
+      "events",
+      "methods",
+      "localizations"
+    ]
+  }
+}
