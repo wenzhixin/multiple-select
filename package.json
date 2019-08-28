@@ -23,11 +23,10 @@
     "css:build": "run-s css:build:*",
     "clean": "rm -rf dist",
     "build": "run-s lint clean *:build",
-    "docs": "bundle exec jekyll build",
-    "docs-server": "bundle exec jekyll serve",
-    "js:dev": "rollup -c --config-env DEV -w src",
-    "css:dev": "sass --watch src/multiple-select.scss docs/assets/css/multiple-select.css",
-    "dev": "npm run js:dev & npm run css:dev & npm run docs-server",
+    "docs": "cd site/website && npm run build",
+    "docs-server": "cd site/website && npm run start",
+    "css:dev": "sass --watch src/multiple-select.scss src/multiple-select.css",
+    "dev": "npm run css:dev & npm run docs-server",
     "test": "testcafe chrome test/**/*.js --skip-js-errors"
   },
   "peerDependencies": {

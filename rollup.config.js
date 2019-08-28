@@ -16,7 +16,6 @@ const env = process.argv.find(flag => {
 })
 
 const production = env === 'PRODUCTION'
-const dev = env === 'DEV'
 
 const external = ['jquery']
 const globals = {
@@ -45,8 +44,6 @@ if (production) {
 let out = 'dist/multiple-select.js'
 if (production) {
   out = out.replace(/.js$/, '.min.js')
-} else if (dev) {
-  out = out.replace(/^dist/, 'docs/assets/js')
 }
 config.push({
   input: 'src/multiple-select.js',
@@ -60,20 +57,18 @@ config.push({
   plugins
 })
 
-if (!dev) {
-  out = 'dist/multiple-select-es.js'
-  if (production) {
-    out = out.replace(/.js$/, '.min.js')
-  }
-  config.push({
-    input: 'src/multiple-select.js',
-    output: {
-      file: out,
-      format: 'esm'
-    },
-    plugins: plugins.slice(1)
-  })
+out = 'dist/multiple-select-es.js'
+if (production) {
+  out = out.replace(/.js$/, '.min.js')
 }
+config.push({
+  input: 'src/multiple-select.js',
+  output: {
+    file: out,
+    format: 'esm'
+  },
+  plugins: plugins.slice(1)
+})
 
 out = 'dist/multiple-select-locale-all.js'
 if (production) {
