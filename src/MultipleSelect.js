@@ -1,5 +1,3 @@
-/* eslint-disable unicorn/no-fn-reference-in-iterator */
-
 import Constants from './constants/index.js'
 import {s, sprintf, compareObjects, removeDiacritics} from './utils/index.js'
 

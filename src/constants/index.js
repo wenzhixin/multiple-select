@@ -102,7 +102,6 @@ const METHODS = [
   'refresh', 'destroy'
 ]
 
-// eslint-disable-next-line compat/compat
 Object.assign(DEFAULTS, EN)
 
 const Constants = {
