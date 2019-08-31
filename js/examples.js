@@ -6,7 +6,7 @@ function loadUrl(url) {
   } else if (location.search.slice(1) === 'is-debug') {
     hash = '#is-debug'
   }
-  $('iframe').attr('src', template + '?v=161&' + url + hash)
+  $('iframe').attr('src', template + '?v=162&' + url + hash)
 
   $('.navGroup li.navListItemActive').removeClass('navListItemActive')
   $('a[href="../examples#' + url + '"]').parent().addClass('navListItemActive')
