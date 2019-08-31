@@ -1,4 +1,4 @@
-const VERSION = '1.3.1'
+const VERSION = '1.4.0'
 
 const DEFAULTS = {
   name: '',

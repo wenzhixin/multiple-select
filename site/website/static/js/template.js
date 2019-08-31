@@ -17,7 +17,7 @@ $(function () {
 window._config = {
   isDebug: location.hash.slice(1) === 'is-debug' ||
   ['localhost'].indexOf(location.hostname) > -1,
-  cdnUrl: 'https://unpkg.com/multiple-select@1.3.1/dist/',
+  cdnUrl: 'https://unpkg.com/multiple-select@1.4.0/dist/',
   localUrl: 'http://localhost:8080/github/multiple-select/src/'
 }
 
