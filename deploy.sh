@@ -6,7 +6,7 @@ TARGET_BRANCH="gh-pages"
 
 function doCompile {
     npm run docs
-    cp -r site/website/build build
+    cp -r site/website/build/multiple-select/* build
 }
 
 # Pull requests and commits to other branches shouldn't try to deploy, just build to verify
