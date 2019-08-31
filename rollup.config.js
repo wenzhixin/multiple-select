@@ -5,6 +5,7 @@ import commonjs from 'rollup-plugin-commonjs'
 import minify from 'rollup-plugin-babel-minify'
 import inject from 'rollup-plugin-inject'
 import multiEntry from 'rollup-plugin-multi-entry'
+import vue from 'rollup-plugin-vue'
 
 let found
 const env = process.argv.find(flag => {
@@ -108,5 +109,39 @@ for (const file of files) {
     plugins
   })
 }
+
+out = 'dist/multiple-select-vue.js'
+if (production) {
+  out = out.replace(/.js$/, '.min.js')
+}
+config.push({
+  input: 'src/vue/index.js',
+  output: {
+    name: 'MultipleSelect',
+    file: out,
+    format: 'umd'
+  },
+  plugins: [
+    vue(),
+    ...plugins
+  ]
+})
+
+out = 'dist/multiple-select-vue.es.js'
+if (production) {
+  out = out.replace(/.js$/, '.min.js')
+}
+config.push({
+  input: 'src/vue/MultipleSelect.vue',
+  output: {
+    name: 'MultipleSelect',
+    file: out,
+    format: 'esm'
+  },
+  plugins: [
+    vue(),
+    ...plugins
+  ]
+})
 
 export default config
