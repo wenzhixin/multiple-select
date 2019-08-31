@@ -112,7 +112,6 @@
     margin: 0;
     outline: 0;
     font-family: sans-serif;
-    font-size: 1em;
     border: 1px solid #aaa;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
@@ -145,13 +144,14 @@
   ul {
     overflow: auto;
     margin: 0;
-    padding: 5px 8px;
+    padding: 5px 0;
 
     > li {
       list-style: none;
       display: list-item;
       background-image: none;
       position: static;
+      padding: 0 8px;
 
       .disabled {
         opacity: .35;
@@ -185,12 +185,32 @@
           font-weight: bold;
         }
       }
+
+      &.hide-radio {
+        &:focus,
+        &:hover {
+          background-color: #f8f9fa;
+        }
+
+        &.selected {
+          color: #fff;
+          background-color: #007bff;
+        }
+
+        label {
+          margin-bottom: 0;
+          padding: 5px 0;
+        }
+
+        input {
+          display: none;
+        }
+      }
     }
   }
 
   input {
     &[type="radio"], &[type="checkbox"] {
-      vertical-align: middle;
       margin: 5px;
     }
   }

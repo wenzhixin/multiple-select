@@ -1,0 +1,38 @@
+<script>
+  init({
+    title: 'The getOptions',
+    desc: 'Gets the options object',
+    links: ['multiple-select.css'],
+    scripts: ['multiple-select.js']
+  })
+</script>
+
+<style>
+select {
+  width: 500px;
+}
+</style>
+
+<p>
+  <button id="getOptions" class="btn btn-secondary">getOptions</button>
+</p>
+
+<select class="w300" multiple="multiple">
+  <option value="text1">text1</option>
+  <option value="text2">text2</option>
+  <option value="text3">text3</option>
+</select>
+
+<script>
+  var $select = $('select')
+
+  function mounted() {
+    $select.multipleSelect({
+      filter: true
+    })
+
+    $('#getOptions').click(function() {
+      alert(JSON.stringify($select.multipleSelect('getOptions'), null, 4))
+    })
+  }
+</script>

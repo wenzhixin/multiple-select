@@ -10,7 +10,6 @@ module.exports = {
     'sourceType': 'module'
   },
   'extends': [
-    'ash-nazg/sauron-node',
     'plugin:testcafe/recommended'
   ],
   'overrides': [
@@ -22,7 +21,7 @@ module.exports = {
       }
     },
     {
-      'files': ['tools/template.js'],
+      'files': ['src/locale/*.js', 'tools/*.js'],
       // These are being overwritten for some reason, despite `node: true`
       'globals': {
         require: 'readonly',

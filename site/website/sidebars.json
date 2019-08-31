@@ -1,0 +1,25 @@
+{
+  "getting-started": {
+    "Getting started": [
+      "download",
+      "whats-include",
+      "usage"
+    ]
+  },
+  "documentation": {
+    "Documentation": [
+      "options",
+      "events",
+      "methods",
+      "localizations"
+    ]
+  },
+  "vue-component": {
+    "Vue Component": [
+      "introduction",
+      "browser",
+      "webpack",
+      "component"
+    ]
+  }
+}

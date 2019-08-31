@@ -1,24 +1,50 @@
-/* eslint-disable unicorn/no-fn-reference-in-iterator */
-
-import cssEscape from 'css.escape'
-
-import removeDiacritics from './utils/removeDiacritics.js'
-import {s, sprintf} from './utils/sprintf.js'
+import Constants from './constants/index.js'
+import {s, sprintf, compareObjects, removeDiacritics} from './utils/index.js'
 
 class MultipleSelect {
   constructor ($el, options) {
-    const el = $el[0]
-    const name = el.getAttribute('name') || options.name || ''
+    this.$el = $el
+    this.options = $.extend({}, Constants.DEFAULTS, options)
+  }
 
-    this.options = $.extend({}, defaults, options)
+  init () {
+    this.initLocale()
+    this.initContainer()
+    this.initData()
+    this.initDrop()
+  }
+
+  initLocale () {
+    if (this.options.locale) {
+      const {locales} = $.fn.multipleSelect
+      const parts = this.options.locale.split(/-|_/)
+
+      parts[0] = parts[0].toLowerCase()
+      if (parts[1]) {
+        parts[1] = parts[1].toUpperCase()
+      }
+
+      if (locales[this.options.locale]) {
+        $.extend(this.options, locales[this.options.locale])
+      } else if (locales[parts.join('-')]) {
+        $.extend(this.options, locales[parts.join('-')])
+      } else if (locales[parts[0]]) {
+        $.extend(this.options, locales[parts[0]])
+      }
+    }
+  }
+
+  initContainer () {
+    const el = this.$el[0]
+    const name = el.getAttribute('name') || this.options.name || ''
 
     // hide select element
-    this.$el = $el.hide()
+    this.$el = this.$el.hide()
 
     // label element
     this.$label = this.$el.closest('label')
-    if (this.$label.length === 0 && el.getAttribute('id')) {
-      this.$label = $(sprintf`label[for="${s}"]`(cssEscape(el.getAttribute('id'))))
+    if (!this.$label.length && this.$el.attr('id')) {
+      this.$label = $(`label[for="${this.$el.attr('id')}"]`)
     }
 
     // restore class and title from select element
@@ -82,52 +108,72 @@ class MultipleSelect {
     this.options.onAfterCreate()
   }
 
-  init () {
-    const $ul = $('<ul></ul>')
+  initData () {
+    const data = []
 
-    this.$drop.html('')
+    if (this.options.data) {
+      this.options.data.forEach((row, i) => {
+        if (row.type === 'optgroup') {
+          row.group = row.group || `group_${i}`
 
-    if (this.options.filter) {
-      this.$drop.append(`
-        <div class="ms-search">
-          <input type="text" autocomplete="off" autocorrect="off"
-            autocapitalize="off" spellcheck="false"
-            ${sprintf`placeholder="${s}"`(this.options.filterPlaceholder)}>
-        </div>
-      `)
-    }
-
-    if (this.options.selectAll && !this.options.single) {
-      $ul.append([
-        '<li class="ms-select-all">',
-        '<label>',
-        sprintf`<input type="checkbox" ${s} />`(this.selectAllName),
-        `<span>${this.options.formatSelectAll()}</span>`,
-        '</label>',
-        '</li>'
-      ].join(''))
+          row.children.forEach(child => {
+            child.group = child.group || row.group
+          })
+        }
+      })
+      this.data = this.options.data
+      return
     }
 
     $.each(this.$el.children(), (i, elm) => {
-      $ul.append(this.optionToHtml(i, elm))
+      const row = this.initRow(i, elm)
+      if (row) {
+        data.push(this.initRow(i, elm))
+      }
     })
-    $ul.append(sprintf`<li class="ms-no-results">${s}</li>`(
-      this.options.formatNoMatchesFound()
-    ))
-    this.$drop.append($ul)
 
-    this.$drop.find('ul').css('max-height', `${this.options.maxHeight}px`)
-    this.$drop.find('.multiple').css('width', `${this.options.multipleWidth}px`)
+    this.options.data = data
+    this.data = data
+  }
 
-    this.$searchInput = this.$drop.find('.ms-search input')
-    this.$selectAll = this.$drop.find(`input[${this.selectAllName}]`)
-    this.$selectGroups = this.$drop.find(`input[${this.selectGroupName}]`)
-    this.$selectItems = this.$drop.find(`input[${this.selectItemName}]:enabled`)
-    this.$disableItems = this.$drop.find(`input[${this.selectItemName}]:disabled`)
-    this.$noResults = this.$drop.find('.ms-no-results')
+  initRow (i, elm, group, groupDisabled) {
+    const row = {}
+    const $elm = $(elm)
 
+    if ($elm.is('option')) {
+      row.type = 'option'
+      row.group = group
+      row.text = this.options.textTemplate($elm)
+      row.value = elm.value
+      row.selected = elm.selected
+      row.disabled = groupDisabled || elm.disabled
+      row.classes = elm.getAttribute('class') || ''
+      row.title = elm.getAttribute('title')
+
+      return row
+    }
+
+    if ($elm.is('optgroup')) {
+      row.type = 'optgroup'
+      row.group = `group_${i}`
+      row.label = this.options.labelTemplate($elm)
+      row.disabled = elm.disabled
+      row.children = []
+
+      $.each($elm.children(), (j, elem) => {
+        row.children.push(this.initRow(j, elem, row.group, row.disabled))
+      })
+
+      return row
+    }
+
+    return null
+  }
+
+  initDrop () {
+    this.initList()
     this.events()
-    this.updateSelectAll(true)
+    this.updateSelectAll()
     this.update(true)
     this.updateOptGroupSelect(true)
 
@@ -144,68 +190,107 @@ class MultipleSelect {
     }
   }
 
-  optionToHtml (i, elm, group, groupDisabled) {
-    const $elm = $(elm)
-    const el = $elm[0]
-    const classes = el.getAttribute('class') || ''
-    const title = sprintf`title="${s}"`(el.getAttribute('title'))
-    const multiple = this.options.multiple ? 'multiple' : ''
-    let disabled
-    const type = this.options.single ? 'radio' : 'checkbox'
+  initList () {
+    const html = []
 
-    if ($elm.is('option')) {
-      const text = this.options.textTemplate($elm)
-      const {value, selected} = el
-      const customStyle = this.options.styler(value)
-      const style = customStyle ? sprintf`style="${s}"`(customStyle) : ''
+    if (this.options.filter) {
+      html.push(`
+        <div class="ms-search">
+          <input type="text" autocomplete="off" autocorrect="off"
+            autocapitalize="off" spellcheck="false"
+            ${sprintf`placeholder="${s}"`(this.options.filterPlaceholder)}>
+        </div>
+      `)
+    }
 
-      disabled = groupDisabled || el.disabled
+    html.push('<ul>')
 
-      const $el = $([
-        sprintf`<li class="${s} ${s}" ${s} ${s}>`(multiple, classes, title, style),
-        sprintf`<label class="${s}">`(disabled ? 'disabled' : ''),
-        sprintf`<input type="${s}" ${s}${s}${s}${s}>`(
-          type, this.selectItemName,
-          selected ? ' checked="checked"' : '',
-          disabled ? ' disabled="disabled"' : '',
-          sprintf` data-group="${s}"`(group)
-        ),
-        sprintf`<span>${s}</span>`(text),
+    if (this.options.selectAll && !this.options.single) {
+      html.push([
+        '<li class="ms-select-all">',
+        '<label>',
+        sprintf`<input type="checkbox" ${s} />`(this.selectAllName),
+        `<span>${this.options.formatSelectAll()}</span>`,
         '</label>',
         '</li>'
       ].join(''))
-      $el.find('input').val(value)
-      return $el
     }
-    if ($elm.is('optgroup')) {
-      const label = this.options.labelTemplate($elm)
-      const $group = $('<div/>')
 
-      group = `group_${i}`;
-      ({disabled} = el)
+    html.push(this.data.map(row => {
+      return this.initListItem(row)
+    }).join(''))
 
-      $group.append([
+    html.push(sprintf`<li class="ms-no-results">${s}</li>`(
+      this.options.formatNoMatchesFound()
+    ))
+
+    html.push('</ul>')
+
+    this.$drop.html(html.join(''))
+    this.$drop.find('ul').css('max-height', `${this.options.maxHeight}px`)
+    this.$drop.find('.multiple').css('width', `${this.options.multipleWidth}px`)
+
+    this.$searchInput = this.$drop.find('.ms-search input')
+    this.$selectAll = this.$drop.find(`input[${this.selectAllName}]`)
+    this.$selectGroups = this.$drop.find(`input[${this.selectGroupName}]`)
+    this.$selectItems = this.$drop.find(`input[${this.selectItemName}]:enabled`)
+    this.$disableItems = this.$drop.find(`input[${this.selectItemName}]:disabled`)
+    this.$noResults = this.$drop.find('.ms-no-results')
+  }
+
+  initListItem (row) {
+    const title = sprintf`title="${s}"`(row.title)
+    const multiple = this.options.multiple ? 'multiple' : ''
+    const type = this.options.single ? 'radio' : 'checkbox'
+
+    if (row.type === 'optgroup') {
+      const html = []
+
+      html.push([
         '<li class="group">',
         sprintf`<label class="optgroup ${s}" data-group="${s}">`(
-          disabled ? 'disabled' : '', group
+          row.disabled ? 'disabled' : '', row.group
         ),
         this.options.hideOptgroupCheckboxes || this.options.single
           ? ''
           : sprintf`<input type="checkbox" ${s} ${s}>`(
-            this.selectGroupName, disabled ? 'disabled="disabled"' : ''
+            this.selectGroupName, row.disabled ? 'disabled="disabled"' : ''
           ),
-        label,
+        row.label,
         '</label>',
         '</li>'
       ].join(''))
 
-      $.each($elm.children(), (j, elem) => {
-        $group.append(this.optionToHtml(j, elem, group, disabled))
-      })
-      return $group.html()
+      html.push(row.children.map(child => {
+        return this.initListItem(child)
+      }).join(''))
+
+      return html.join('')
     }
-    // Append nothing
-    return undefined
+
+    const customStyle = this.options.styler(row.value)
+    const style = customStyle ? sprintf`style="${s}"`(customStyle) : ''
+    let {classes} = row
+
+    if (this.options.single && !this.options.singleRadio) {
+      classes += ' hide-radio'
+    }
+
+    return [
+      sprintf`<li class="${s} ${s}" ${s} ${s}>`(multiple, classes || '', title, style),
+      sprintf`<label class="${s}">`(row.disabled ? 'disabled' : ''),
+      sprintf`<input type="${s}" value="${s}" ${s}${s}${s}${s}>`(
+        type,
+        row.value,
+        this.selectItemName,
+        row.selected ? ' checked="checked"' : '',
+        row.disabled ? ' disabled="disabled"' : '',
+        sprintf` data-group="${s}"`(row.group)
+      ),
+      sprintf`<span>${s}</span>`(row.text),
+      '</label>',
+      '</li>'
+    ].join('')
   }
 
   events () {
@@ -214,9 +299,9 @@ class MultipleSelect {
       this[this.options.isOpen ? 'close' : 'open']()
     }
 
-    if (this.$label) {
+    if (this.$label.length) {
       this.$label.off('click').on('click', e => {
-        if (e.target.nodeName.toLowerCase() !== 'label' || e.target !== this) {
+        if (e.target.nodeName.toLowerCase() !== 'label') {
           return
         }
         toggleOpen(e)
@@ -282,7 +367,7 @@ class MultipleSelect {
       const checked = $children.length !== $children.filter(':checked').length
 
       $children.prop('checked', checked)
-      this.updateSelectAll()
+      this.updateSelectAll(true)
       this.update()
       this.options.onOptgroupClick({
         label: $this.parent().text(),
@@ -296,11 +381,12 @@ class MultipleSelect {
         })
       })
     })
+
     this.$selectItems.off('click').on('click', e => {
       const $this = $(e.currentTarget)
 
       if (this.options.single) {
-        const clickedVal = $(e.currentTarget).val()
+        const clickedVal = $this.val()
         this.$selectItems.filter((i, el) => {
           return $(el).val() !== clickedVal
         }).each((i, el) => {
@@ -308,7 +394,7 @@ class MultipleSelect {
         })
       }
 
-      this.updateSelectAll()
+      this.updateSelectAll(true)
       this.update()
       this.updateOptGroupSelect()
       this.options.onClick({
@@ -336,7 +422,7 @@ class MultipleSelect {
     this.$noResults.hide()
 
     // Fix #77: 'All selected' when no options
-    if (!this.$el.children().length) {
+    if (!this.data.length) {
       this.$selectAll.parent().hide()
       this.$noResults.show()
     }
@@ -351,7 +437,7 @@ class MultipleSelect {
       this.$drop.outerWidth(this.$parent.outerWidth())
     }
 
-    if (this.$el.children().length && this.options.filter) {
+    if (this.data.length && this.options.filter) {
       this.$searchInput.val('')
       this.$searchInput.focus()
       this.filter()
@@ -393,20 +479,27 @@ class MultipleSelect {
     const textSelects = this.options.displayValues ? valueSelects : this.getSelects('text')
     const $span = this.$choice.find('>span')
     const sl = valueSelects.length
+    let html = ''
 
     if (sl === 0) {
       $span.addClass('placeholder').html(this.options.placeholder)
+    } else if (sl < this.options.minimumCountSelected) {
+      html = textSelects.join(this.options.displayDelimiter)
     } else if (this.options.formatAllSelected() && sl === this.$selectItems.length + this.$disableItems.length) {
-      $span.removeClass('placeholder').html(this.options.formatAllSelected())
+      html = this.options.formatAllSelected()
     } else if (this.options.ellipsis && sl > this.options.minimumCountSelected) {
-      $span.removeClass('placeholder').text(`${textSelects.slice(0, this.options.minimumCountSelected)
-        .join(this.options.displayDelimiter)}...`)
+      html = `${textSelects.slice(0, this.options.minimumCountSelected)
+        .join(this.options.displayDelimiter)}...`
     } else if (this.options.formatCountSelected() && sl > this.options.minimumCountSelected) {
-      $span.removeClass('placeholder').html(this.options.formatCountSelected(
+      html = this.options.formatCountSelected(
         sl, this.$selectItems.length + this.$disableItems.length
-      ))
+      )
     } else {
-      $span.removeClass('placeholder').text(textSelects.join(this.options.displayDelimiter))
+      html = textSelects.join(this.options.displayDelimiter)
+    }
+
+    if (html) {
+      $span.removeClass('placeholder').html(html)
     }
 
     if (this.options.displayTitle) {
@@ -428,16 +521,23 @@ class MultipleSelect {
     }
   }
 
-  updateSelectAll (isInit) {
-    let $items = this.$selectItems
+  updateSelectAll (triggerEvent) {
+    const $items = this.$selectItems.filter(':visible')
 
-    if (!isInit) {
-      $items = $items.filter(':visible')
+    if (!$items.length) {
+      return
     }
-    this.$selectAll.prop('checked', $items.length &&
-      $items.length === $items.filter(':checked').length)
-    if (!isInit && this.$selectAll.prop('checked')) {
-      this.options.onCheckAll()
+
+    const selectedLength = $items.filter(':checked').length
+
+    this.$selectAll.prop('checked', selectedLength === $items.length)
+
+    if (triggerEvent) {
+      if (selectedLength === $items.length) {
+        this.options.onCheckAll()
+      } else if (selectedLength === 0) {
+        this.options.onUncheckAll()
+      }
     }
   }
 
@@ -453,6 +553,23 @@ class MultipleSelect {
       $(val).prop('checked', $children.length &&
         $children.length === $children.filter(':checked').length)
     })
+  }
+
+  getOptions () {
+    // deep copy and remove data
+    const options = $.extend({}, this.options)
+    delete options.data
+    return $.extend(true, {}, options)
+  }
+
+  refreshOptions (options) {
+    // If the objects are equivalent then avoid the call of destroy / init methods
+    if (compareObjects(this.options, options, true)) {
+      return
+    }
+    this.options = $.extend(this.options, options)
+    this.destroy()
+    this.init()
   }
 
   // value or text, default: 'value'
@@ -571,7 +688,7 @@ class MultipleSelect {
           $parent.closest('li')[hasText ? 'show' : 'hide']()
         })
       }
-      this.$disableItems.parent().hide()
+      this.$disableItems.closest('li').hide()
       this.$selectGroups.each((i, el) => {
         const $parent = $(el).parent()
         const group = $parent[0].getAttribute('data-group')
@@ -589,7 +706,7 @@ class MultipleSelect {
       })
 
       // Check if no matches found
-      if (this.$selectItems.parent().filter(':visible').length) {
+      if (this.$selectItems.closest('li').filter(':visible').length) {
         this.$selectAll.closest('li').show()
         this.$noResults.hide()
       } else {
@@ -603,95 +720,11 @@ class MultipleSelect {
   }
 
   destroy () {
+    if (!this.$parent) {
+      return
+    }
     this.$el.before(this.$parent).show()
     this.$parent.remove()
-  }
-}
-
-const defaults = {
-  name: '',
-  placeholder: '',
-
-  selectAll: true,
-  single: false,
-  multiple: false,
-  hideOptgroupCheckboxes: false,
-  multipleWidth: 80,
-  width: undefined,
-  dropWidth: undefined,
-  maxHeight: 250,
-  position: 'bottom',
-
-  displayValues: false,
-  displayTitle: false,
-  displayDelimiter: ', ',
-  minimumCountSelected: 3,
-  ellipsis: false,
-
-  isOpen: false,
-  keepOpen: false,
-  openOnHover: false,
-  container: null,
-
-  filter: false,
-  filterGroup: false,
-  filterPlaceholder: '',
-  filterAcceptOnEnter: false,
-
-  animate: undefined,
-
-  styler () {
-    return false
-  },
-  textTemplate ($elm) {
-    return $elm[0].innerHTML
-  },
-  labelTemplate ($elm) {
-    return $elm[0].getAttribute('label')
-  },
-
-  formatSelectAll () {
-    return '[Select all]'
-  },
-  formatAllSelected () {
-    return 'All selected'
-  },
-  formatCountSelected (count, total) {
-    return count + ' of ' + total + ' selected'
-  },
-  formatNoMatchesFound () {
-    return 'No matches found'
-  },
-
-  onOpen () {
-    return false
-  },
-  onClose () {
-    return false
-  },
-  onCheckAll () {
-    return false
-  },
-  onUncheckAll () {
-    return false
-  },
-  onFocus () {
-    return false
-  },
-  onBlur () {
-    return false
-  },
-  onOptgroupClick () {
-    return false
-  },
-  onClick () {
-    return false
-  },
-  onFilter () {
-    return false
-  },
-  onAfterCreate () {
-    return false
   }
 }
 

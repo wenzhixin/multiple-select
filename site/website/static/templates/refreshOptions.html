@@ -1,0 +1,41 @@
+<script>
+  init({
+    title: 'The refreshOptions',
+    desc: 'Refresh the options object',
+    links: ['multiple-select.css'],
+    scripts: ['multiple-select.js']
+  })
+</script>
+
+<style>
+select {
+  width: 500px;
+}
+</style>
+
+<p>
+  <button id="refreshOptions" class="btn btn-secondary">refreshOptions</button>
+</p>
+
+<select class="w300" multiple="multiple">
+  <option value="text1">text1</option>
+  <option value="text2">text2</option>
+  <option value="text3">text3</option>
+</select>
+
+<script>
+  var $select = $('select')
+
+  function mounted() {
+    $select.multipleSelect({
+      filter: true
+    })
+
+    $('#refreshOptions').click(function() {
+      $select.multipleSelect('refreshOptions', {
+        single: true,
+        filter: false
+      })
+    })
+  }
+</script>

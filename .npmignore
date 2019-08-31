@@ -1,5 +1,10 @@
-tools
-docs
+site
 test
+tools
+vue-starter
+.browserslistrc
+.eslintignore
+.eslintrc.js
+.ncurc.json
+.travis.yml
 rollup.config.js
-src
