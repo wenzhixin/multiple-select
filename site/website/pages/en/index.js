@@ -99,15 +99,21 @@ class Index extends React.Component {
 
             <div className="blockElement fourByGridBlock">
               <div className="blockContent">
-                <h2>Latest release v1.3.1 (2019-05-25)</h2>
-                <MarkdownBlock>- **Update:** Fixed optgroup selected item display bug ([#431](https://github.com/wenzhixin/multiple-select/pull/431)).</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Fixed filter li display blank space bug ([#431](https://github.com/wenzhixin/multiple-select/pull/431)).</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Fixed container outer width bug ([#431](https://github.com/wenzhixin/multiple-select/pull/431)).</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Updated `addTitle` option to `displayTitle` option ([#431](https://github.com/wenzhixin/multiple-select/pull/431)).</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Fixed filter with no select options display bug ([#431](https://github.com/wenzhixin/multiple-select/pull/431)).</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Fixed openOnHover bug ([#435](https://github.com/wenzhixin/multiple-select/pull/435)).</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Updated `onOptgroupClick` and `onClick` parameters ([#436](https://github.com/wenzhixin/multiple-select/pull/436)).</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Updated `formatCountSelected` parameters ([#436](https://github.com/wenzhixin/multiple-select/pull/436)).</MarkdownBlock>
+                <h2>Latest release v1.4.0 (2019-09-01)</h2>
+                <MarkdownBlock>- **New:** Added `data` support.</MarkdownBlock>
+                <MarkdownBlock>- **New:** Added vue component.</MarkdownBlock>
+                <MarkdownBlock>- **New:** Added `locale` support.</MarkdownBlock>
+                <MarkdownBlock>- **New:** Added `getOptions` method.</MarkdownBlock>
+                <MarkdownBlock>- **New:** Added `singleRadio` option to support hide radio buttons.</MarkdownBlock>
+                <MarkdownBlock>- **New:** Added new website.</MarkdownBlock>
+                <MarkdownBlock>- **New:** Added bower.json.</MarkdownBlock>
+                <MarkdownBlock>- **New:** Added vue-starter example.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Improved the label element for select.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Improved text display only one option.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Fixed IE build error with core-js devDependencies.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Fixed `onCheckAll/onUncheckAll` trigger bug.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Fixed `disabled` options cannot show after filtering.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Fixed `single` filter bug.</MarkdownBlock>
               </div>
             </div>
           </div>
