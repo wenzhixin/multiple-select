@@ -1,38 +1,55 @@
 ## Changelog
 
+### 1.4.0
+
+- **New:** Added `data` support.
+- **New:** Added vue component.
+- **New:** Added `locale` support.
+- **New:** Added `getOptions` method.
+- **New:** Added `singleRadio` option to support hide radio buttons.
+- **New:** Added new website.
+- **New:** Added bower.json.
+- **New:** Added vue-starter example.
+- **Update:** Improved the label element for select.
+- **Update:** Improved text display only one option.
+- **Update:** Fixed IE build error with core-js devDependencies.
+- **Update:** Fixed `onCheckAll/onUncheckAll` trigger bug.
+- **Update:** Fixed `disabled` options cannot show after filtering.
+- **Update:** Fixed `single` filter bug.
+
 ### 1.3.1
 
-- **Update:** Fixed optgroup selected item display bug ([#431](https://github.com/wenzhixin/multiple-select/pull/431)).
-- **Update:** Fixed filter li display blank space bug ([#431](https://github.com/wenzhixin/multiple-select/pull/431)).
-- **Update:** Fixed container outer width bug ([#431](https://github.com/wenzhixin/multiple-select/pull/431)).
-- **Update:** Updated `addTitle` option to `displayTitle` option ([#431](https://github.com/wenzhixin/multiple-select/pull/431)).
-- **Update:** Fixed filter with no select options display bug ([#431](https://github.com/wenzhixin/multiple-select/pull/431)).
-- **Update:** Fixed openOnHover bug ([#435](https://github.com/wenzhixin/multiple-select/pull/435)).
-- **Update:** Updated `onOptgroupClick` and `onClick` parameters ([#436](https://github.com/wenzhixin/multiple-select/pull/436)).
-- **Update:** Updated `formatCountSelected` parameters ([#436](https://github.com/wenzhixin/multiple-select/pull/436)).
+- **Update:** Fixed optgroup selected item display bug.
+- **Update:** Fixed filter li display blank space bug.
+- **Update:** Fixed container outer width bug.
+- **Update:** Updated `addTitle` option to `displayTitle` option.
+- **Update:** Fixed filter with no select options display bug.
+- **Update:** Fixed openOnHover bug.
+- **Update:** Updated `onOptgroupClick` and `onClick` parameters.
+- **Update:** Updated `formatCountSelected` parameters.
 
 ### 1.3.0
 
-- **New:** Rewrote code to ES6. ([#412](https://github.com/wenzhixin/multiple-select/pull/412)).
-- **New:** Added `filterGroup` option ([#429](https://github.com/wenzhixin/multiple-select/pull/429)).
-- **New:** Added `babel` and refined the code ([#413](https://github.com/wenzhixin/multiple-select/pull/413)).
-- **New:** Used `dist` to output the build files ([#414](https://github.com/wenzhixin/multiple-select/pull/414)).
-- **New:** Added full examples ([#429](https://github.com/wenzhixin/multiple-select/pull/429)).
-- **Update:** Fixed css escape bug ([#423](https://github.com/wenzhixin/multiple-select/pull/423)).
+- **New:** Rewrote code to ES6.
+- **New:** Added `filterGroup` option.
+- **New:** Added `babel` and refined the code.
+- **New:** Used `dist` to output the build files.
+- **New:** Added full examples.
+- **Update:** Fixed css escape bug.
 
 ### 1.2.3
 
-- **New:** Added `onAfterCreate` event ([#196](https://github.com/wenzhixin/multiple-select/pull/196)).
-- **New:** Made option labels appear clickable ([#374](https://github.com/wenzhixin/multiple-select/pull/374)).
-- **New:** Allowed `placeholder` from html ([#408](https://github.com/wenzhixin/multiple-select/pull/408)).
-- **Update:** Fixed groups don't get `checked` by default ([#346](https://github.com/wenzhixin/multiple-select/pull/346)).
-- **Update:** Fixed `getSelects` bug with `single` option ([#370](https://github.com/wenzhixin/multiple-select/pull/370)).
-- **Update:** Removed duplicate `destroy` method ([#400](https://github.com/wenzhixin/multiple-select/pull/400)).
-- **Update:** Fixed outdated CSS syntax in linear-gradient ([#400](https://github.com/wenzhixin/multiple-select/pull/400)).
-- **Update:** Removed `selectAll` whitespace ([#409](https://github.com/wenzhixin/multiple-select/pull/409)).
-- **Update:** Fixed `selectAllText/allSelected` doesn't work ([#410](https://github.com/wenzhixin/multiple-select/pull/410)).
-- **Update:** Fixed IE 11 crashing bug ([#410](https://github.com/wenzhixin/multiple-select/pull/410)).
-- **Update:** Fixed radio style bug ([11e5e74](https://github.com/wenzhixin/multiple-select/commit/11e5e74c99d2407605492608ec0f150eadfc59ad)).
+- **New:** Added `onAfterCreate` event.
+- **New:** Made option labels appear clickable.
+- **New:** Allowed `placeholder` from html.
+- **Update:** Fixed groups don't get `checked` by default.
+- **Update:** Fixed `getSelects` bug with `single` option.
+- **Update:** Removed duplicate `destroy` method.
+- **Update:** Fixed outdated CSS syntax in linear-gradient.
+- **Update:** Removed `selectAll` whitespace.
+- **Update:** Fixed `selectAllText/allSelected` doesn't work.
+- **Update:** Fixed IE 11 crashing bug.
+- **Update:** Fixed radio style bug.
 
 ### 1.2.2
 
