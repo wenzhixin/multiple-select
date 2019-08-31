@@ -1,0 +1,147 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Methods · Multiple Select</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="The methods API of Multiple Select."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Methods · Multiple Select"/><meta property="og:type" content="website"/><meta property="og:url" content="http://multiple-select.wenzhixin.net.cn/"/><meta property="og:description" content="The methods API of Multiple Select."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://codefund.io/properties/292/funder.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/favicon.png" alt="Multiple Select"/><h2 class="headerTitleWithLogo">Multiple Select</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/download" target="_self">Getting started</a></li><li class="siteNavGroupActive"><a href="/docs/en/options" target="_self">Documentation</a></li><li class=""><a href="/docs/en/introduction" target="_self">Vue Component</a></li><li class=""><a href="/examples" target="_self">Examples</a></li><li class=""><a href="http://multiple-select-live.wenzhixin.net.cn" target="_blank">Online Editor</a></li><li class=""><a href="/donate" target="_self">Donate</a></li><li class=""><a href="https://github.com/wenzhixin/multiple-select" target="_blank">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Documentation</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Documentation</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/en/options">Options</a></li><li class="navListItem"><a class="navItem" href="/docs/en/events">Events</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/en/methods">Methods</a></li><li class="navListItem"><a class="navItem" href="/docs/en/localizations">Localizations</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Methods</h1></header><article><div><span><p>The methods API of Multiple Select.</p>
+<div id="codefund"></div>
+<p>The calling method syntax:</p>
+<pre><code class="hljs css language-js">$(<span class="hljs-string">'#multiple'</span>).multipleSelect(<span class="hljs-string">'method'</span>, parameter)
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="getoptions"></a><a href="#getoptions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>getOptions</h2>
+<ul>
+<li><p><strong>Parameter:</strong> -</p></li>
+<li><p><strong>Detail:</strong> Gets the options object (from v1.4.0).</p></li>
+<li><p><strong>Example:</strong> <a href="/examples#getOptions.html">getOptions</a></p></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="refreshoptions"></a><a href="#refreshoptions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>refreshOptions</h2>
+<ul>
+<li><p><strong>Parameter:</strong> <code>options</code></p></li>
+<li><p><strong>Detail:</strong></p>
+<p>Refresh the <code>options</code> object (from v1.4.0).</p></li>
+<li><p><strong>Example:</strong> <a href="/examples#refreshOptions.html">refreshOptions</a></p></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="getselects"></a><a href="#getselects" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>getSelects</h2>
+<ul>
+<li><p><strong>Parameter:</strong> <code>type</code></p></li>
+<li><p><strong>Detail:</strong> Gets the selected values. The <code>type</code> can be <code>'value'</code> or <code>'text'</code>, default is <code>'value'</code>.</p></li>
+<li><p><strong>Example:</strong> <a href="/examples#setSelects-getSelects.html">setSelects-getSelects</a></p></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="setselects"></a><a href="#setselects" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>setSelects</h2>
+<ul>
+<li><p><strong>Parameter:</strong>  <code>values</code></p></li>
+<li><p><strong>Detail:</strong> Sets the selected values. The <code>values</code> should be an array.</p></li>
+<li><p><strong>Example:</strong> <a href="/examples#setSelects-getSelects.html">setSelects-getSelects</a></p></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="enable"></a><a href="#enable" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>enable</h2>
+<ul>
+<li><p><strong>Parameter:</strong>  -</p></li>
+<li><p><strong>Detail:</strong> Enables multiple select.</p></li>
+<li><p><strong>Example:</strong> <a href="/examples#enable-disable.html">enable-disable</a></p></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="disable"></a><a href="#disable" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>disable</h2>
+<ul>
+<li><p><strong>Parameter:</strong>  -</p></li>
+<li><p><strong>Detail:</strong> Disables multiple select. During this mode, the user is not allowed to manipulate the selection.</p></li>
+<li><p><strong>Example:</strong> <a href="/examples#enable-disable.html">enable-disable</a></p></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="open"></a><a href="#open" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>open</h2>
+<ul>
+<li><p><strong>Parameter:</strong>  -</p></li>
+<li><p><strong>Detail:</strong> Open multiple select.</p></li>
+<li><p><strong>Example:</strong> <a href="/examples#open-close.html">open-close</a></p></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="close"></a><a href="#close" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>close</h2>
+<ul>
+<li><p><strong>Parameter:</strong>  -</p></li>
+<li><p><strong>Detail:</strong> Close multiple select.</p></li>
+<li><p><strong>Example:</strong> <a href="/examples#open-close.html">open-close</a></p></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="checkall"></a><a href="#checkall" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>checkAll</h2>
+<ul>
+<li><p><strong>Parameter:</strong>  -</p></li>
+<li><p><strong>Detail:</strong> Check all checkboxes.</p></li>
+<li><p><strong>Example:</strong> <a href="/examples#checkAll-uncheckAll.html">checkAll-uncheckAll</a></p></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="uncheckall"></a><a href="#uncheckall" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>uncheckAll</h2>
+<ul>
+<li><p><strong>Parameter:</strong>  -</p></li>
+<li><p><strong>Detail:</strong> Uncheck all checkboxes.</p></li>
+<li><p><strong>Example:</strong> <a href="/examples#checkAll-uncheckAll.html">checkAll-uncheckAll</a></p></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="focus"></a><a href="#focus" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>focus</h2>
+<ul>
+<li><p><strong>Parameter:</strong>  -</p></li>
+<li><p><strong>Detail:</strong> Focus the multiple select.</p></li>
+<li><p><strong>Example:</strong> <a href="/examples#focus-blur.html">focus-blur</a></p></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="blur"></a><a href="#blur" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>blur</h2>
+<ul>
+<li><p><strong>Parameter:</strong>  -</p></li>
+<li><p><strong>Detail:</strong> Blur the multiple select.</p></li>
+<li><p><strong>Example:</strong> <a href="/examples#focus-blur.html">focus-blur</a></p></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="refresh"></a><a href="#refresh" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>refresh</h2>
+<ul>
+<li><p><strong>Parameter:</strong>  -</p></li>
+<li><p><strong>Detail:</strong> Reloads the Multiple Select. If you're dynamically adding/removing option tags on the original select via AJAX or DOM manipulation methods, call refresh to reflect the changes.</p></li>
+<li><p><strong>Example:</strong> <a href="/examples#refresh.html">refresh</a></p></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="destroy"></a><a href="#destroy" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>destroy</h2>
+<ul>
+<li><p><strong>Parameter:</strong>  -</p></li>
+<li><p><strong>Detail:</strong> Destroy the Multiple Select. If you want remove the multiple select properties.</p></li>
+<li><p><strong>Example:</strong> <a href="/examples#destroy.html">destroy</a></p></li>
+</ul>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/events"><span class="arrow-prev">← </span><span>Events</span></a><a class="docs-next button" href="/docs/en/localizations"><span>Localizations</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#getoptions">getOptions</a></li><li><a href="#refreshoptions">refreshOptions</a></li><li><a href="#getselects">getSelects</a></li><li><a href="#setselects">setSelects</a></li><li><a href="#enable">enable</a></li><li><a href="#disable">disable</a></li><li><a href="#open">open</a></li><li><a href="#close">close</a></li><li><a href="#checkall">checkAll</a></li><li><a href="#uncheckall">uncheckAll</a></li><li><a href="#focus">focus</a></li><li><a href="#blur">blur</a></li><li><a href="#refresh">refresh</a></li><li><a href="#destroy">destroy</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="copyright">Copyright © 2010-2019 wenzhixin.net.cn</section></footer></div></body></html>

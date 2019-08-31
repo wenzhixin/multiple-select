@@ -1,0 +1,32 @@
+<script>
+  init({
+    title: 'Large Select',
+    desc: 'Large select with filter.',
+    links: ['multiple-select.css'],
+    scripts: ['multiple-select.js']
+  })
+</script>
+
+<style>
+select {
+  width: 500px;
+}
+</style>
+
+<form>
+  <select multiple="multiple" id="select">
+    <option value="1">January</option>
+  </select>
+</form>
+
+<script>
+  function mounted() {
+    var html = []
+    for (var i = 0; i < 2000; i++) {
+      html.push('<option value="' + i + '">' + i + '</option>')
+    }
+    $('#select').html(html.join('')).multipleSelect({
+      filter: true
+    })
+  }
+</script>

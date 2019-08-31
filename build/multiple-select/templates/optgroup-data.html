@@ -1,0 +1,85 @@
+<script>
+  init({
+    title: 'Optgroup Data',
+    desc: 'Multiple Select can use data to set the optgroup select.',
+    links: ['multiple-select.css'],
+    scripts: ['multiple-select.js']
+  })
+</script>
+
+<style>
+select {
+  width: 500px;
+}
+</style>
+
+<select multiple="multiple"></select>
+
+<script>
+  function mounted() {
+    $('select').multipleSelect({
+      data: [
+        {
+          type: 'optgroup',
+          label: 'Group 1',
+          children: [
+            {
+              text: 'January',
+              value: 1
+            },
+            {
+              text: 'February',
+              value: 2
+            },
+            {
+              text: 'March',
+              value: 3
+            },
+            {
+              text: 'April',
+              value: 4
+            },
+            {
+              text: 'May',
+              value: 5
+            },
+            {
+              text: 'June',
+              value: 6
+            }
+          ]
+        },
+        {
+          type: 'optgroup',
+          label: 'Group 2',
+          children: [
+            {
+              text: 'July',
+              value: 7
+            },
+            {
+              text: 'August',
+              value: 8
+            },
+            {
+              text: 'September',
+              value: 9
+            },
+            {
+              text: 'October',
+              value: 10
+            },
+            {
+              text: 'November',
+              value: 11
+            },
+            {
+              text: 'December',
+              value: 12
+            }
+          ]
+        }
+      ]
+    })
+  }
+</script>

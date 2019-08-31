@@ -1,0 +1,178 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Webpack · Multiple Select</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;div id=&quot;codefund&quot;&gt;&lt;/div&gt;"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Webpack · Multiple Select"/><meta property="og:type" content="website"/><meta property="og:url" content="http://multiple-select.wenzhixin.net.cn/"/><meta property="og:description" content="&lt;div id=&quot;codefund&quot;&gt;&lt;/div&gt;"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://codefund.io/properties/292/funder.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/favicon.png" alt="Multiple Select"/><h2 class="headerTitleWithLogo">Multiple Select</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/download" target="_self">Getting started</a></li><li class=""><a href="/docs/en/options" target="_self">Documentation</a></li><li class="siteNavGroupActive"><a href="/docs/en/introduction" target="_self">Vue Component</a></li><li class=""><a href="/examples" target="_self">Examples</a></li><li class=""><a href="http://multiple-select-live.wenzhixin.net.cn" target="_blank">Online Editor</a></li><li class=""><a href="/donate" target="_self">Donate</a></li><li class=""><a href="https://github.com/wenzhixin/multiple-select" target="_blank">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Vue Component</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Vue Component</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/en/introduction">Introduction</a></li><li class="navListItem"><a class="navItem" href="/docs/en/browser">Browser</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/en/webpack">Webpack</a></li><li class="navListItem"><a class="navItem" href="/docs/en/component">Component</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Webpack</h1></header><article><div><span><div id="codefund"></div>
+<h2><a class="anchor" aria-hidden="true" id="importing-javascript"></a><a href="#importing-javascript" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Importing JavaScript</h2>
+<p>Import Multiple Select’s JavaScript by adding this line to your app’s entry point (usually <code>index.js</code> or <code>app.js</code>):</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">import</span> <span class="hljs-string">'multiple-select/dist/multiple-select.js'</span>
+</code></pre>
+<p>Of course, you can also import locales you need:</p>
+<pre><code class="hljs css language-js"><span class="hljs-comment">// import locale</span>
+<span class="hljs-keyword">import</span> <span class="hljs-string">'multiple-select/dist/locale/multiple-select-zh-CN.js'</span>
+</code></pre>
+<p>By default, Multiple Select is dependent on <a href="https://jquery.com/">jQuery</a>, these are defined as peerDependencies, this means that you will have to make sure to add both of them to your <code>package.json</code> using <code>npm install --save jquery</code>.</p>
+<h2><a class="anchor" aria-hidden="true" id="importing-css"></a><a href="#importing-css" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Importing CSS</h2>
+<p>Import Multiple Select’s CSS by adding this line to your app’s entry point:</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">import</span> <span class="hljs-string">'multiple-select/dist/multiple-select.min.css'</span>
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="usage"></a><a href="#usage" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Usage</h2>
+<pre><code class="hljs css language-vue">&lt;<span class="hljs-keyword">template</span>&gt;
+  &lt;div <span class="hljs-keyword">class</span>="hello"&gt;
+    &lt;MultipleSelect
+      v-model="months"
+      <span class="hljs-type">name</span>="months"
+      width="200"
+      :<span class="hljs-keyword">options</span>="options"
+      @change="onChange"
+    &gt;
+      &lt;<span class="hljs-keyword">option</span> <span class="hljs-keyword">value</span>="1"&gt;January&lt;/<span class="hljs-keyword">option</span>&gt;
+      &lt;<span class="hljs-keyword">option</span> <span class="hljs-keyword">value</span>="2"&gt;February&lt;/<span class="hljs-keyword">option</span>&gt;
+      &lt;<span class="hljs-keyword">option</span> <span class="hljs-keyword">value</span>="3"&gt;March&lt;/<span class="hljs-keyword">option</span>&gt;
+      &lt;<span class="hljs-keyword">option</span> <span class="hljs-keyword">value</span>="4"&gt;April&lt;/<span class="hljs-keyword">option</span>&gt;
+      &lt;<span class="hljs-keyword">option</span> <span class="hljs-keyword">value</span>="5"&gt;May&lt;/<span class="hljs-keyword">option</span>&gt;
+      &lt;<span class="hljs-keyword">option</span> <span class="hljs-keyword">value</span>="6"&gt;June&lt;/<span class="hljs-keyword">option</span>&gt;
+      &lt;<span class="hljs-keyword">option</span> <span class="hljs-keyword">value</span>="7"&gt;July&lt;/<span class="hljs-keyword">option</span>&gt;
+      &lt;<span class="hljs-keyword">option</span> <span class="hljs-keyword">value</span>="8"&gt;August&lt;/<span class="hljs-keyword">option</span>&gt;
+      &lt;<span class="hljs-keyword">option</span> <span class="hljs-keyword">value</span>="9"&gt;September&lt;/<span class="hljs-keyword">option</span>&gt;
+      &lt;<span class="hljs-keyword">option</span> <span class="hljs-keyword">value</span>="10"&gt;October&lt;/<span class="hljs-keyword">option</span>&gt;
+      &lt;<span class="hljs-keyword">option</span> <span class="hljs-keyword">value</span>="11"&gt;November&lt;/<span class="hljs-keyword">option</span>&gt;
+      &lt;<span class="hljs-keyword">option</span> <span class="hljs-keyword">value</span>="12"&gt;December&lt;/<span class="hljs-keyword">option</span>&gt;
+    &lt;/MultipleSelect&gt;
+  &lt;/div&gt;
+&lt;/<span class="hljs-keyword">template</span>&gt;
+
+&lt;script&gt;
+export <span class="hljs-keyword">default</span> {
+  data () {
+    <span class="hljs-keyword">return</span> {
+      months: [],
+      <span class="hljs-keyword">options</span>: {
+        <span class="hljs-keyword">filter</span>: <span class="hljs-keyword">true</span>
+      }
+    }
+  },
+  methods: {
+    onChange () {
+      console.log(this.months)
+    }
+  }
+}
+&lt;/script&gt;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="starter-template"></a><a href="#starter-template" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Starter template</h2>
+<p>There is an <a href="https://github.com/wenzhixin/multiple-select/tree/develop/vue-starter">vue-starter</a> example in our project.</p>
+<p><code>plugins/jquery.js</code></p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">import</span> jQuery <span class="hljs-keyword">from</span> <span class="hljs-string">'jquery'</span>
+<span class="hljs-built_in">window</span>.jQuery = jQuery
+</code></pre>
+<p><code>plugins/select.js</code></p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">import</span> <span class="hljs-string">'multiple-select/dist/multiple-select.min.css'</span>
+
+<span class="hljs-keyword">import</span> <span class="hljs-string">'./jquery.js'</span>
+<span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">'vue'</span>
+<span class="hljs-keyword">import</span> <span class="hljs-string">'multiple-select/dist/multiple-select.es.js'</span>
+<span class="hljs-keyword">import</span> MultipleSelect <span class="hljs-keyword">from</span> <span class="hljs-string">'multiple-select/dist/multiple-select-vue.es.js'</span>
+
+Vue.component(<span class="hljs-string">'MultipleSelect'</span>, MultipleSelect)
+</code></pre>
+<p><code>main.js</code></p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">import</span> <span class="hljs-string">'./plugins/select.js'</span>
+</code></pre>
+<p><code>View.vue</code></p>
+<pre><code class="hljs css language-vue">&lt;<span class="hljs-keyword">template</span>&gt;
+  &lt;div <span class="hljs-keyword">class</span>="hello"&gt;
+    &lt;MultipleSelect
+      v-model="months"
+      <span class="hljs-type">name</span>="months"
+      width="200"
+      :<span class="hljs-keyword">options</span>="options"
+      @change="onChange"
+    &gt;
+      &lt;<span class="hljs-keyword">option</span> <span class="hljs-keyword">value</span>="1"&gt;January&lt;/<span class="hljs-keyword">option</span>&gt;
+      &lt;<span class="hljs-keyword">option</span> <span class="hljs-keyword">value</span>="2"&gt;February&lt;/<span class="hljs-keyword">option</span>&gt;
+      &lt;<span class="hljs-keyword">option</span> <span class="hljs-keyword">value</span>="3"&gt;March&lt;/<span class="hljs-keyword">option</span>&gt;
+      &lt;<span class="hljs-keyword">option</span> <span class="hljs-keyword">value</span>="4"&gt;April&lt;/<span class="hljs-keyword">option</span>&gt;
+      &lt;<span class="hljs-keyword">option</span> <span class="hljs-keyword">value</span>="5"&gt;May&lt;/<span class="hljs-keyword">option</span>&gt;
+      &lt;<span class="hljs-keyword">option</span> <span class="hljs-keyword">value</span>="6"&gt;June&lt;/<span class="hljs-keyword">option</span>&gt;
+      &lt;<span class="hljs-keyword">option</span> <span class="hljs-keyword">value</span>="7"&gt;July&lt;/<span class="hljs-keyword">option</span>&gt;
+      &lt;<span class="hljs-keyword">option</span> <span class="hljs-keyword">value</span>="8"&gt;August&lt;/<span class="hljs-keyword">option</span>&gt;
+      &lt;<span class="hljs-keyword">option</span> <span class="hljs-keyword">value</span>="9"&gt;September&lt;/<span class="hljs-keyword">option</span>&gt;
+      &lt;<span class="hljs-keyword">option</span> <span class="hljs-keyword">value</span>="10"&gt;October&lt;/<span class="hljs-keyword">option</span>&gt;
+      &lt;<span class="hljs-keyword">option</span> <span class="hljs-keyword">value</span>="11"&gt;November&lt;/<span class="hljs-keyword">option</span>&gt;
+      &lt;<span class="hljs-keyword">option</span> <span class="hljs-keyword">value</span>="12"&gt;December&lt;/<span class="hljs-keyword">option</span>&gt;
+    &lt;/MultipleSelect&gt;
+  &lt;/div&gt;
+&lt;/<span class="hljs-keyword">template</span>&gt;
+
+&lt;script&gt;
+export <span class="hljs-keyword">default</span> {
+  data () {
+    <span class="hljs-keyword">return</span> {
+      months: [],
+      <span class="hljs-keyword">options</span>: {
+        <span class="hljs-keyword">filter</span>: <span class="hljs-keyword">true</span>
+      }
+    }
+  },
+  methods: {
+    onChange () {
+      console.log(this.months)
+    }
+  }
+}
+&lt;/script&gt;
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/browser"><span class="arrow-prev">← </span><span>Browser</span></a><a class="docs-next button" href="/docs/en/component"><span>Component</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#importing-javascript">Importing JavaScript</a></li><li><a href="#importing-css">Importing CSS</a></li><li><a href="#usage">Usage</a></li><li><a href="#starter-template">Starter template</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="copyright">Copyright © 2010-2019 wenzhixin.net.cn</section></footer></div></body></html>
