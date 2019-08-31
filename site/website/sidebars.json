@@ -1,5 +1,5 @@
 {
-  "getting_started": {
+  "getting-started": {
     "Getting started": [
       "download",
       "whats-include",
@@ -12,6 +12,14 @@
       "events",
       "methods",
       "localizations"
+    ]
+  },
+  "vue-component": {
+    "Vue Component": [
+      "introduction",
+      "browser",
+      "webpack",
+      "component"
     ]
   }
 }

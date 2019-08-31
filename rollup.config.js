@@ -127,7 +127,7 @@ config.push({
   ]
 })
 
-out = 'dist/multiple-select-vue.esm.js'
+out = 'dist/multiple-select-vue.es.js'
 if (production) {
   out = out.replace(/.js$/, '.min.js')
 }

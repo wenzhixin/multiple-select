@@ -12,6 +12,7 @@ const siteConfig = {
   headerLinks: [
     {doc: 'download', label: 'Getting started'},
     {doc: 'options', label: 'Documentation'},
+    {doc: 'introduction', label: 'Vue Component'},
     {page: 'examples', label: 'Examples'},
     {href: "http://multiple-select-live.wenzhixin.net.cn", external: true, label: "Online Editor"},
     {page: 'donate', label: 'Donate'},

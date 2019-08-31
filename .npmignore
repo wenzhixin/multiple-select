@@ -1,6 +1,7 @@
 site
 test
 tools
+vue-starter
 .browserslistrc
 .eslintignore
 .eslintrc.js
