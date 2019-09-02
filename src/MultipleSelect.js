@@ -79,8 +79,7 @@ class MultipleSelect {
     }
     this.$parent.css('width',
       this.options.width ||
-      this.$el.css('width') ||
-      this.$el.outerWidth() + 20)
+      this.$el.outerWidth() + 10)
 
     this.selectAllName = `data-name="selectAll${name}"`
     this.selectGroupName = `data-name="selectGroup${name}"`
