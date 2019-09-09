@@ -58,6 +58,14 @@ export default {
   },
 
   watch: {
+    value () {
+      if (this.currentValue === this.value) {
+        return
+      }
+      this.currentValue = this.value
+      this.setSelects(typeof this.currentValue === 'string' ?
+        [this.currentValue] : this.currentValue)
+    },
     options: {
       handler () {
         this._initSelect()
@@ -67,7 +75,7 @@ export default {
 
     data: {
       handler () {
-        this.load(deepCopy(this.data))
+        this._initSelect()
       },
       deep: true
     }
@@ -75,9 +83,9 @@ export default {
 
   mounted () {
     this.$select = $(this.$el).change(() => {
-      const value = this.$select.val()
-      this.$emit('input', value)
-      this.$emit('change', value)
+      this.currentValue = this.$select.val()
+      this.$emit('input', this.currentValue)
+      this.$emit('change', this.currentValue)
     })
 
     for (const event in $.fn.multipleSelect.defaults) {
