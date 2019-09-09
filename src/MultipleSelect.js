@@ -172,7 +172,7 @@ class MultipleSelect {
   initDrop () {
     this.initList()
     this.events()
-    this.updateSelectAll()
+    this.updateSelectAll(false, true)
     this.update(true)
     this.updateOptGroupSelect(true)
 
@@ -520,11 +520,11 @@ class MultipleSelect {
     }
   }
 
-  updateSelectAll (triggerEvent) {
-    const $items = this.$selectItems.filter(':visible')
+  updateSelectAll (triggerEvent, isInit = false) {
+    let $items = this.$selectItems
 
-    if (!$items.length) {
-      return
+    if (!isInit) {
+      $items = $items.filter(':visible')
     }
 
     const selectedLength = $items.filter(':checked').length
