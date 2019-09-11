@@ -46,6 +46,9 @@ class MultipleSelect {
     if (!this.$label.length && this.$el.attr('id')) {
       this.$label = $(`label[for="${this.$el.attr('id')}"]`)
     }
+    if (this.$label.find('>input').length) {
+      this.$label = null
+    }
 
     // restore class and title from select element
     this.$parent = $(sprintf`<div class="ms-parent ${s}" ${s}/>`(
@@ -298,7 +301,7 @@ class MultipleSelect {
       this[this.options.isOpen ? 'close' : 'open']()
     }
 
-    if (this.$label.length) {
+    if (this.$label && this.$label.length) {
       this.$label.off('click').on('click', e => {
         if (e.target.nodeName.toLowerCase() !== 'label') {
           return

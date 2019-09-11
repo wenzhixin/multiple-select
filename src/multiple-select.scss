@@ -163,6 +163,8 @@
       }
 
       &.hide-radio {
+        padding: 0;
+
         &:focus,
         &:hover {
           background-color: #f8f9fa;
@@ -175,7 +177,7 @@
 
         label {
           margin-bottom: 0;
-          padding: 5px 0;
+          padding: 5px 8px;
         }
 
         input {
