@@ -3,6 +3,7 @@
     v-model="currentValue"
     :name="name"
     :multiple="!single"
+    :disabled="disabled"
   >
     <slot/>
   </select>
@@ -30,6 +31,10 @@ export default {
       default: undefined
     },
     single: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
       type: Boolean,
       default: false
     },
@@ -65,6 +70,19 @@ export default {
       this.currentValue = this.value
       this.setSelects(typeof this.currentValue === 'string' ?
         [this.currentValue] : this.currentValue)
+    },
+    single () {
+      this._initSelect()
+    },
+    disabled () {
+      if (this.disabled) {
+        this.disable()
+      } else {
+        this.enable()
+      }
+    },
+    width () {
+      this._initSelect()
     },
     options: {
       handler () {

@@ -49,6 +49,16 @@ title: Component
 
 - **Default:** `false`
 
+### disabled
+
+- **Type:** `Boolean`
+
+- **Detail:**
+
+  The disabled attribute of select.
+
+- **Default:** `false`
+
 ### width
 
 - **Type:** `Number | String`
