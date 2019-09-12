@@ -504,10 +504,16 @@ class MultipleSelect {
   }
 
   update (ignoreTrigger) {
-    const valueSelects = this.getSelects()
-    const textSelects = this.options.displayValues ? valueSelects : this.getSelects('text')
+    let textSelects = this.getSelects('text')
+
+    if (this.options.displayHtml) {
+      textSelects = this.getSelects('html')
+    } else if (this.options.displayValues) {
+      textSelects = this.getSelects()
+    }
+
     const $span = this.$choice.find('>span')
-    const sl = valueSelects.length
+    const sl = textSelects.length
     let html = ''
 
     if (sl === 0) {
@@ -601,12 +607,12 @@ class MultipleSelect {
     this.init()
   }
 
-  // value or text, default: 'value'
+  // value html, or text, default: 'value'
   getSelects (type) {
     let texts = []
     const values = []
     this.$drop.find(sprintf`input[${s}]:checked`(this.selectItemName)).each((i, el) => {
-      texts.push($(el).parents('li').first().text())
+      texts.push($(el).next()[type === 'html' ? 'html' : 'text']())
       values.push($(el).val())
     })
 
@@ -638,7 +644,7 @@ class MultipleSelect {
         texts.push(html.join(''))
       })
     }
-    return type === 'text' ? texts : values
+    return ['html', 'text'].includes(type) ? texts : values
   }
 
   setSelects (values) {

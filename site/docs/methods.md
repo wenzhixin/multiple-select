@@ -35,7 +35,7 @@ $('#multiple').multipleSelect('method', parameter)
 
 - **Parameter:** `type`
 
-- **Detail:** Gets the selected values. The `type` can be `'value'` or `'text'`, default is `'value'`.
+- **Detail:** Gets the selected values. The `type` can be `'value'`, `'text'` or 'html', default is `'value'`.
 
 - **Example:** [setSelects-getSelects](/examples#setSelects-getSelects.html)
 

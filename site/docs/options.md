@@ -185,6 +185,16 @@ Option format:
 
 **Example:** <a href="/examples#position.html">The Position</a>
 
+## displayHtml
+
+**Type:** Boolean
+
+**Detail:** Display html values instead text.
+
+**Default:** `false`
+
+**Example:** <a href="/examples#text-template.html">Text Template</a>
+
 ## displayValues
 
 **Type:** Boolean

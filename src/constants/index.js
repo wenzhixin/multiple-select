@@ -17,6 +17,7 @@ const DEFAULTS = {
   maxHeight: 250,
   position: 'bottom',
 
+  displayHtml: false,
   displayValues: false,
   displayTitle: false,
   displayDelimiter: ', ',
