@@ -675,20 +675,35 @@ class MultipleSelect {
     this.$choice.addClass('disabled')
   }
 
-  checkAll () {
-    this.$selectItems.prop('checked', true)
-    this.$selectGroups.prop('checked', true)
-    this.$selectAll.prop('checked', true)
+  check (value) {
+    this._check(value, true)
+  }
+
+  uncheck (value) {
+    this._check(value, false)
+  }
+
+  _check (value, checked) {
+    this.$selectItems.filter(sprintf`[value="${s}"]`(value)).prop('checked', checked)
+    this.$disableItems.filter(sprintf`[value="${s}"]`(value)).prop('checked', checked)
     this.update()
+  }
+
+  checkAll () {
+    this._checkAll(true)
     this.options.onCheckAll()
   }
 
   uncheckAll () {
-    this.$selectItems.prop('checked', false)
-    this.$selectGroups.prop('checked', false)
-    this.$selectAll.prop('checked', false)
-    this.update()
+    this._checkAll(false)
     this.options.onUncheckAll()
+  }
+
+  _checkAll (checked) {
+    this.$selectItems.prop('checked', checked)
+    this.$selectGroups.prop('checked', checked)
+    this.$selectAll.prop('checked', checked)
+    this.update()
   }
 
   focus () {
