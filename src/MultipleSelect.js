@@ -340,7 +340,14 @@ class MultipleSelect {
         [13, 32].includes(e.which) &&
         this.$searchInput.val()
       ) {
-        this.$selectAll.click()
+        if (this.options.single) {
+          const $items = this.$selectItems.closest('li').filter(':visible')
+          if ($items.length) {
+            this.setSelects([$items.first().find(`input[${this.selectItemName}]`).val()])
+          }
+        } else {
+          this.$selectAll.click()
+        }
         this.close()
         this.focus()
         return
