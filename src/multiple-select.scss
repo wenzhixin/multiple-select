@@ -185,6 +185,12 @@
           display: none;
         }
       }
+
+      &.option-level-1 {
+        label {
+          padding-left: 28px;
+        }
+      }
     }
   }
 

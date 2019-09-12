@@ -239,16 +239,21 @@ class MultipleSelect {
     this.$noResults = this.$drop.find('.ms-no-results')
   }
 
-  initListItem (row) {
+  initListItem (row, level = 0) {
     const title = sprintf`title="${s}"`(row.title)
     const multiple = this.options.multiple ? 'multiple' : ''
     const type = this.options.single ? 'radio' : 'checkbox'
+    let classes = ''
+
+    if (this.options.single && !this.options.singleRadio) {
+      classes = 'hide-radio '
+    }
 
     if (row.type === 'optgroup') {
       const html = []
 
       html.push([
-        '<li class="group">',
+        `<li class="group ${classes}">`,
         sprintf`<label class="optgroup ${s}" data-group="${s}">`(
           row.disabled ? 'disabled' : '', row.group
         ),
@@ -263,7 +268,7 @@ class MultipleSelect {
       ].join(''))
 
       html.push(row.children.map(child => {
-        return this.initListItem(child)
+        return this.initListItem(child, 1)
       }).join(''))
 
       return html.join('')
@@ -271,14 +276,14 @@ class MultipleSelect {
 
     const customStyle = this.options.styler(row.value)
     const style = customStyle ? sprintf`style="${s}"`(customStyle) : ''
-    let {classes} = row
+    classes += (row.classes || '')
 
-    if (this.options.single && !this.options.singleRadio) {
-      classes = ['hide-radio', classes || ''].join(' ')
+    if (level) {
+      classes += `option-level-${level} `
     }
 
     return [
-      sprintf`<li class="${s} ${s}" ${s} ${s}>`(multiple, classes || '', title, style),
+      sprintf`<li class="${s} ${s}" ${s} ${s}>`(multiple, classes, title, style),
       sprintf`<label class="${s}">`(row.disabled ? 'disabled' : ''),
       sprintf`<input type="${s}" value="${s}" ${s}${s}${s}${s}>`(
         type,
