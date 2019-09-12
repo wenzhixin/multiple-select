@@ -23,7 +23,7 @@ export default {
 
   props: {
     value: {
-      type: [String, Array],
+      type: [String, Number, Array],
       default: undefined
     },
     name: {
@@ -68,8 +68,7 @@ export default {
         return
       }
       this.currentValue = this.value
-      this.setSelects(typeof this.currentValue === 'string' ?
-        [this.currentValue] : this.currentValue)
+      this._initDefaultValue()
     },
     single () {
       this._initSelect()
@@ -101,7 +100,9 @@ export default {
 
   mounted () {
     this.$select = $(this.$el).change(() => {
-      this.currentValue = this.$select.val()
+      const selects = this.getSelects()
+      this.currentValue = Array.isArray(this.currentValue) ?
+        selects : selects[0]
       this.$emit('input', this.currentValue)
       this.$emit('change', this.currentValue)
     })
@@ -115,6 +116,7 @@ export default {
     }
 
     this._initSelect()
+    this._initDefaultValue()
   },
 
   methods: {
@@ -131,6 +133,11 @@ export default {
       } else {
         this.refreshOptions(options)
       }
+    },
+
+    _initDefaultValue () {
+      this.setSelects(Array.isArray(this.currentValue) ?
+        this.currentValue : [this.currentValue])
     },
 
     ...(() => {
