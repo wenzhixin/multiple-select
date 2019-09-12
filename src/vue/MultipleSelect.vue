@@ -74,11 +74,13 @@ export default {
       this._initSelect()
     },
     disabled () {
-      if (this.disabled) {
-        this.disable()
-      } else {
-        this.enable()
-      }
+      this.$nextTick(() => {
+        if (this.disabled) {
+          this.disable()
+        } else {
+          this.enable()
+        }
+      })
     },
     width () {
       this._initSelect()

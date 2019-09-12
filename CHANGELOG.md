@@ -2,8 +2,11 @@
 
 ### 1.4.1
 
+- **New:** Added `displayHtml` option.
+- **New:** Added `html` type of `getSelects` method.
+- **New:** Added level support for single group.
 - **New:** Added `es-ES` locale.
-- **New:** Added disabled prop of vue component.
+- **New:** Added `disabled` prop of vue component.
 - **New:** Added Number support for `v-model` of vue component.
 - **Update:** Improved default `width` of select.
 - **Update:** Improved `single` select style and label bug.
