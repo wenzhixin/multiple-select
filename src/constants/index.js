@@ -98,6 +98,7 @@ const METHODS = [
   'getSelects', 'setSelects',
   'enable', 'disable',
   'open', 'close',
+  'check', 'uncheck',
   'checkAll', 'uncheckAll',
   'focus', 'blur',
   'refresh', 'destroy'
