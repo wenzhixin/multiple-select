@@ -1,5 +1,18 @@
 ## Changelog
 
+### 1.4.1
+
+- **New:** Added `es-ES` locale.
+- **New:** Added disabled prop of vue component.
+- **New:** Added Number support for `v-model` of vue component.
+- **Update:** Improved default `width` of select.
+- **Update:** Improved `single` select style and label bug.
+- **Update:** Improved `v-model` and data of vue component.
+- **Update:** Fixed init cannot select all bug.
+- **Update:** Fixed refresh method bug.
+- **Update:** Fixed `filterAcceptOnEnter` bug with `single` option.
+- **Update:** Removed multiple-select png.
+
 ### 1.4.0
 
 - **New:** Added `data` support.
