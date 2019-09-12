@@ -12,6 +12,7 @@ class MultipleSelect {
     this.initContainer()
     this.initData()
     this.initDrop()
+    this.initView()
   }
 
   initLocale () {
@@ -80,9 +81,6 @@ class MultipleSelect {
     if (el.disabled) {
       this.$choice.addClass('disabled')
     }
-    this.$parent.css('width',
-      this.options.width ||
-      this.$el.outerWidth() + 10)
 
     this.selectAllName = `data-name="selectAll${name}"`
     this.selectGroupName = `data-name="selectGroup${name}"`
@@ -276,7 +274,7 @@ class MultipleSelect {
     let {classes} = row
 
     if (this.options.single && !this.options.singleRadio) {
-      classes += ' hide-radio'
+      classes = ['hide-radio', classes || ''].join(' ')
     }
 
     return [
@@ -294,6 +292,22 @@ class MultipleSelect {
       '</label>',
       '</li>'
     ].join('')
+  }
+
+  initView () {
+    let computedWidth
+
+    if (window.getComputedStyle) {
+      computedWidth = window.getComputedStyle(this.$el[0]).width
+
+      if (computedWidth === 'auto') {
+        computedWidth = this.$drop.outerWidth() + 20
+      }
+    } else {
+      computedWidth = this.$el.outerWidth() + 20
+    }
+
+    this.$parent.css('width', this.options.width || computedWidth)
   }
 
   events () {

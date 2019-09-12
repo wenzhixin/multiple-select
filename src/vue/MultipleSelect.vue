@@ -101,6 +101,10 @@ export default {
   mounted () {
     this.$select = $(this.$el).change(() => {
       const selects = this.getSelects()
+      if (!selects.length) {
+        return
+      }
+
       this.currentValue = Array.isArray(this.currentValue) ?
         selects : selects[0]
       this.$emit('input', this.currentValue)
@@ -136,8 +140,10 @@ export default {
     },
 
     _initDefaultValue () {
-      this.setSelects(Array.isArray(this.currentValue) ?
-        this.currentValue : [this.currentValue])
+      this.$nextTick(() => {
+        this.setSelects(Array.isArray(this.currentValue) ?
+          this.currentValue : [this.currentValue])
+      })
     },
 
     ...(() => {
