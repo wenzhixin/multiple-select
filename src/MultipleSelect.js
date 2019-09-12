@@ -136,6 +136,7 @@ class MultipleSelect {
 
     this.options.data = data
     this.data = data
+    this.fromHtml = true
   }
 
   initRow (i, elm, group, groupDisabled) {
@@ -669,6 +670,7 @@ class MultipleSelect {
   }
 
   refresh () {
+    this.destroy()
     this.init()
   }
 
@@ -727,6 +729,11 @@ class MultipleSelect {
     }
     this.$el.before(this.$parent).show()
     this.$parent.remove()
+
+    if (this.fromHtml) {
+      delete this.options.data
+      this.fromHtml = false
+    }
   }
 }
 
