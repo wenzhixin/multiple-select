@@ -340,7 +340,7 @@ class MultipleSelect {
 
     this.$parent.off('keydown').on('keydown', e => {
       // esc key
-      if (e.which === 27) {
+      if (e.which === 27 && !this.options.keepOpen) {
         this.close()
         this.$choice.focus()
       }
