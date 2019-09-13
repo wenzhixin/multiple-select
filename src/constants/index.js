@@ -33,6 +33,9 @@ const DEFAULTS = {
   filterGroup: false,
   filterPlaceholder: '',
   filterAcceptOnEnter: false,
+  customFilter (label, text) { // originalLabel, originalText
+    return label.includes(text)
+  },
 
   animate: undefined,
 
