@@ -103,7 +103,7 @@ Option format:
 
 **Default:** `false`
 
-**Example:** <a href="/examples#single-row.html">Single Row</a>
+**Example:** <a href="/examples#single-row.html">Single Row</a> and <a href="/examples#single-optgroups.html">Single Optgroups</a>
 
 ## singleRadio
 

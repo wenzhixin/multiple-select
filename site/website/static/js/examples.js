@@ -18,6 +18,6 @@ $(function () {
     loadUrl(href)
   })
 
-  var href = location.hash.substring(1) || 'basic.html'
+  var href = location.hash.substring(1) || 'single-row.html'
   loadUrl(href)
 })

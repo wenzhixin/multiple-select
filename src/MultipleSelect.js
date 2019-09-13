@@ -278,7 +278,7 @@ class MultipleSelect {
     const style = customStyle ? sprintf`style="${s}"`(customStyle) : ''
     classes += (row.classes || '')
 
-    if (level) {
+    if (level && this.options.single) {
       classes += `option-level-${level} `
     }
 
