@@ -722,7 +722,8 @@ class MultipleSelect {
   }
 
   filter () {
-    const text = $.trim(this.$searchInput.val()).toLowerCase()
+    const originalText = $.trim(this.$searchInput.val())
+    const text = originalText.toLowerCase()
 
     if (text.length === 0) {
       this.$selectAll.closest('li').show()
@@ -734,8 +735,10 @@ class MultipleSelect {
       if (!this.options.filterGroup) {
         this.$selectItems.each((i, el) => {
           const $parent = $(el).parent()
-          const hasText = removeDiacritics($parent.text().toLowerCase())
-            .includes(removeDiacritics(text))
+          const hasText = this.options.customFilter(
+            removeDiacritics($parent.text().toLowerCase()),
+            removeDiacritics(text),
+            $parent.text(), originalText)
           $parent.closest('li')[hasText ? 'show' : 'hide']()
         })
       }
@@ -744,8 +747,10 @@ class MultipleSelect {
         const $parent = $(el).parent()
         const group = $parent[0].getAttribute('data-group')
         if (this.options.filterGroup) {
-          const hasText = removeDiacritics($parent.text().toLowerCase())
-            .includes(removeDiacritics(text))
+          const hasText = this.options.customFilter(
+            removeDiacritics($parent.text().toLowerCase()),
+            removeDiacritics(text),
+            $parent.text(), originalText)
           const func = hasText ? 'show' : 'hide'
           $parent.closest('li')[func]()
           this.$selectItems.filter(`[data-group="${group}"]`).closest('li')[func]()

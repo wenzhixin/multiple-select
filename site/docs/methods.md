@@ -79,6 +79,22 @@ $('#multiple').multipleSelect('method', parameter)
 
 - **Example:** [open-close](/examples#open-close.html)
 
+## check
+
+- **Parameter:**  `value`
+
+- **Detail:** Check an option.
+
+- **Example:** [check-uncheck](/examples#check-uncheck.html)
+
+## uncheck
+
+- **Parameter:**  -
+
+- **Detail:** Uncheck an option.
+
+- **Example:** [check-uncheck](/examples#check-uncheck.html)
+
 ## checkAll
 
 - **Parameter:**  -

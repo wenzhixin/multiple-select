@@ -325,6 +325,16 @@ Option format:
 
 **Example:** <a href="/examples#filter-accept-on-enter.html">Filter Accept On Enter</a>
 
+## customFilter
+
+**Type:** function
+
+**Detail:** The custom filter function, return boolean to filter or not, contains parameter: `label, text, originalLabel, originalText`.
+
+**Default:** `{ return label.includes(text) }`
+
+**Example:** <a href="/examples#custom-filter.html">Custom Filter</a>
+
 ## animate
 
 **Type:** undefined
