@@ -5,6 +5,8 @@
 - **New:** Added `displayHtml` option.
 - **New:** Added `html` type of `getSelects` method.
 - **New:** Added level support for single group.
+- **New:** Added `customFilter` option support.
+- **New:** Added `check` and `uncheck` methods.
 - **New:** Added `es-ES` locale.
 - **New:** Added `disabled` prop of vue component.
 - **New:** Added Number support for `v-model` of vue component.
@@ -15,6 +17,7 @@
 - **Update:** Fixed refresh method bug.
 - **Update:** Fixed `filterAcceptOnEnter` bug with `single` option.
 - **Update:** Removed multiple-select png.
+- **Update:** Disabled `esc` action when `keepOpen` is true.
 
 ### 1.4.0
 
