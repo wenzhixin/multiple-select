@@ -1,0 +1,94 @@
+<script>
+  init({
+    title: 'Vue Component',
+    desc: 'Use Plugin: <a href="https://vuejs.org/" target="_blank">Vue.js</a> and multiple-select-vue.',
+    links: ['multiple-select.css'],
+    scripts: [
+      'https://cdn.jsdelivr.net/npm/vue',
+      'multiple-select.js',
+      'https://unpkg.com/multiple-select@1.4.0/dist/multiple-select-vue.min.js'
+    ],
+  })
+</script>
+
+<style>
+.mt20 {
+  margin-bottom: 20px;
+}
+</style>
+
+<div class="select">
+  <div class="mt20">
+    Options:
+    <label><input type="checkbox" v-model="single"> single</label>
+    <label><input type="checkbox" v-model="disabled"> disabled</label>
+    <label><input type="checkbox" v-model="options.filter"> filter</label>
+  </div>
+
+  <div class="mt20">
+    Methods:
+    <button class="btn btn-secondary" @click="getSelects">getSelects</button>
+  </div>
+
+  <multiple-select
+    ref="select"
+    v-model="value"
+    :single="single"
+    :disabled="disabled"
+    width="500"
+    :options="options"
+    :data="data"
+  ></multiple-select>
+</div>
+
+<script>
+  function mounted() {
+    new Vue({
+      el: '.select',
+      components: {
+        MultipleSelect
+      },
+      data () {
+        return {
+          value: 1, // or [1, 2] with multiple select
+          single: true,
+          disabled: false,
+          options: {
+            filter: false
+          },
+          data: [
+            {
+              text: 'January',
+              value: 1
+            },
+            {
+              text: 'February',
+              value: 2
+            },
+            {
+              text: 'March',
+              value: 3
+            },
+            {
+              text: 'April',
+              value: 4
+            },
+            {
+              text: 'May',
+              value: 5
+            },
+            {
+              text: 'June',
+              value: 6
+            }
+          ]
+        }
+      },
+      methods: {
+        getSelects () {
+          alert(this.$refs.select.getSelects())
+        }
+      }
+    })
+  }
+</script>
