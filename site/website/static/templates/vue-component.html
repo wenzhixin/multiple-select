@@ -11,40 +11,52 @@
   })
 </script>
 
-<style>
-.mt20 {
-  margin-bottom: 20px;
-}
-</style>
+<div id="app">
+  <div class="form-group row">
+    <label class="col-sm-2">
+      Options
+    </label>
 
-<div class="select">
-  <div class="mt20">
-    Options:
-    <label><input type="checkbox" v-model="single"> single</label>
-    <label><input type="checkbox" v-model="disabled"> disabled</label>
-    <label><input type="checkbox" v-model="options.filter"> filter</label>
+    <div class="col-sm-10">
+      <label><input type="checkbox" v-model="single"> single</label>
+      <label><input type="checkbox" v-model="disabled"> disabled</label>
+      <label><input type="checkbox" v-model="options.filter"> filter</label>
+    </div>
   </div>
 
-  <div class="mt20">
-    Methods:
-    <button class="btn btn-secondary" @click="getSelects">getSelects</button>
+  <div class="form-group row">
+    <label class="col-sm-2">
+      Component
+    </label>
+
+    <div class="col-sm-10">
+      <multiple-select
+        ref="select"
+        v-model="value"
+        :single="single"
+        :disabled="disabled"
+        width="100%"
+        :options="options"
+        :data="data"
+      ></multiple-select>
+    </div>
   </div>
 
-  <multiple-select
-    ref="select"
-    v-model="value"
-    :single="single"
-    :disabled="disabled"
-    width="500"
-    :options="options"
-    :data="data"
-  ></multiple-select>
+  <div class="form-group row">
+    <label class="col-sm-2">
+      Methods
+    </label>
+
+    <div class="col-sm-10">
+      <button class="btn btn-secondary" @click="getSelects">getSelects</button>
+    </div>
+  </div>
 </div>
 
 <script>
   function mounted() {
     new Vue({
-      el: '.select',
+      el: '#app',
       components: {
         MultipleSelect
       },

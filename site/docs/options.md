@@ -17,6 +17,8 @@ The Options are defined in `jQuery.fn.multipleSelect.defaults`.
 
 **Default:** `''`
 
+**Example:** <a href="/examples#submit-select.html">Submit Select</a>
+
 ## placeholder
 
 **Type:** String
@@ -63,7 +65,7 @@ Option format:
 
 **Default:** []
 
-**Example:** <a href="/examples#basic-data.html">Basic Data</a> and <a href="/examples#optgroup-data.html">Optgroup Data</a>.
+**Example:** <a href="/examples#data.html">The Data</a>.
 
 ## locale
 
@@ -103,7 +105,7 @@ Option format:
 
 **Default:** `false`
 
-**Example:** <a href="/examples#single-row.html">Single Row</a> and <a href="/examples#single-optgroups.html">Single Optgroups</a>
+**Example:** <a href="/examples#single-row.html">Single Row</a>
 
 ## singleRadio
 
