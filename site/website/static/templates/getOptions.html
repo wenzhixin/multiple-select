@@ -1,7 +1,7 @@
 <script>
   init({
     title: 'The getOptions',
-    desc: 'Gets the options object',
+    desc: 'Use <code>multipleSelect(\'getOptions\')</code> to get the options object.',
     links: ['multiple-select.css'],
     scripts: ['multiple-select.js']
   })
@@ -9,19 +9,35 @@
 
 <style>
 select {
-  width: 500px;
+  width: 100%;
 }
 </style>
 
-<p>
-  <button id="getOptions" class="btn btn-secondary">getOptions</button>
-</p>
+<div>
+  <div class="form-group row">
+    <label class="col-sm-2">
+      Methods
+    </label>
 
-<select class="w300" multiple="multiple">
-  <option value="text1">text1</option>
-  <option value="text2">text2</option>
-  <option value="text3">text3</option>
-</select>
+    <div class="col-sm-10">
+      <button id="getOptions" class="btn btn-secondary">getOptions</button>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2">
+      Basic Select
+    </label>
+
+    <div class="col-sm-10">
+      <select class="w300" multiple="multiple">
+        <option value="text1">text1</option>
+        <option value="text2">text2</option>
+        <option value="text3">text3</option>
+      </select>
+    </div>
+  </div>
+</div>
 
 <script>
   var $select = $('select')

@@ -1,12 +1,30 @@
-function loadUrl(url) {
-  var template = 'templates/template.html'
-  var hash = ''
-  if (location.search.slice(1) === 'view-source') {
-    hash = '#view-source'
-  } else if (location.search.slice(1) === 'is-debug') {
-    hash = '#is-debug'
+window._config = {
+  isDebug: ['localhost'].indexOf(location.hostname) > -1,
+  isViewSource: false
+}
+
+function initUrl() {
+  var href = location.hash.substring(1)
+  window._config.isViewSource = false
+  if (href.indexOf('view-source') > -1) {
+    href = href.replace('#view-source', '').replace('view-source', '')
+    window._config.isViewSource = true
   }
-  $('iframe').attr('src', template + '?v=VERSION&' + url + hash)
+  return href || 'single-row.html'
+}
+
+function loadUrl(url_) {
+  var template = 'templates/template.html'
+
+  var url = template + '?v=VERSION&url=' + url_
+  if (window._config.isDebug) {
+    url = template + '?t=' + (+new Date()) + '&url=' + url_
+  }
+  if (window._config.isViewSource) {
+    url = template + '?v=VERSION&view-source&url=' + url_ + '#view-source'
+  }
+  console.log(url)
+  $('iframe').attr('src', url)
 
   $('.navGroup li.navListItemActive').removeClass('navListItemActive')
   $('a[href="../examples#' + url + '"]').parent().addClass('navListItemActive')
@@ -20,13 +38,32 @@ function autoScrollNavigation () {
   }
 }
 
+function initViewSource () {
+  var isSource = /view-source$/.test(location.hash)
+  var title = 'View Source'
+  if (isSource) {
+    title = 'View Example'
+  }
+  $('.corner-ribbon').off('click').click(function () {
+    if (isSource) {
+      location.hash = location.hash.replace('#view-source', '')
+    } else {
+      if (location.hash.indexOf('view-source') === -1) {
+        location.hash += '#view-source'
+      }
+    }
+  }).attr('title', title).text(title)
+}
+
 $(function () {
   $(window).hashchange(function () {
-    var href = location.hash.substring(1)
+    var href = initUrl()
     loadUrl(href)
+    initViewSource()
   })
 
-  var href = location.hash.substring(1) || 'single-row.html'
+  var href = initUrl()
   loadUrl(href)
   autoScrollNavigation()
+  initViewSource()
 })

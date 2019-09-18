@@ -1,7 +1,7 @@
 <script>
   init({
     title: 'The check/uncheck',
-    desc: 'Methods: <code>$select.multipleSelect(\'check\', 2)</code> and <code>$select.multipleSelect(\'uncheck\', 2)</code>.',
+    desc: 'Methods: <code>multipleSelect(\'check\', 2)</code> and <code>multipleSelect(\'uncheck\', 2)</code> to check and uncheck a select option.',
     links: ['multiple-select.css'],
     scripts: ['multiple-select.js']
   })
@@ -9,42 +9,80 @@
 
 <style>
 select {
-  width: 500px;
+  width: 100%;
 }
 </style>
 
-<p>
-  <button id="checkBtn" class="btn btn-secondary">Check</button>
-  <button id="uncheckBtn" class="btn btn-secondary">Uncheck</button>
-</p>
+<div>
+  <div class="form-group row">
+    <label class="col-sm-2">
+      Methods
+    </label>
 
-<select multiple="multiple">
-  <option value="1">January</option>
-  <option value="2">February</option>
-  <option value="3">March</option>
-  <option value="4">April</option>
-  <option value="5">May</option>
-  <option value="6">June</option>
-  <option value="7">July</option>
-  <option value="8">August</option>
-  <option value="9">September</option>
-  <option value="10">October</option>
-  <option value="11">November</option>
-  <option value="12">December</option>
-</select>
+    <div class="col-sm-10">
+      <button id="checkBtn" class="btn btn-secondary">Check</button>
+      <button id="uncheckBtn" class="btn btn-secondary">Uncheck</button>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2">
+      Single Select
+    </label>
+
+    <div class="col-sm-10">
+      <select data-single="true">
+        <option value="1">Value 1</option>
+        <option value="2">Value 2</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2">
+      Multiple Select
+    </label>
+
+    <div class="col-sm-10">
+      <select multiple="multiple">
+        <option value="1" selected>Value 1</option>
+        <option value="2">Value 2</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2">
+      Group Select
+    </label>
+
+    <div class="col-sm-10">
+      <select multiple="multiple">
+        <optgroup label="Group 1">
+          <option value="1" selected>Value 1</option>
+          <option value="2">Value 2</option>
+        </optgroup>
+        <optgroup label="Group 2">
+            <option value="3" selected>Value 3</option>
+            <option value="4">Value 4</option>
+          </optgroup>
+      </select>
+    </div>
+  </div>
+</div>
 
 <script>
-    var $select = $('select')
+  var $select = $('select')
 
-    function mounted() {
-      $select.multipleSelect()
+  function mounted() {
+    $select.multipleSelect()
 
-      $('#checkBtn').click(function () {
-        $select.multipleSelect('check', 2)
-      })
+    $('#checkBtn').click(function () {
+      $select.multipleSelect('check', 2)
+    })
 
-      $('#uncheckBtn').click(function () {
-        $select.multipleSelect('uncheck', 2)
-      })
-    }
-  </script>
+    $('#uncheckBtn').click(function () {
+      $select.multipleSelect('uncheck', 2)
+    })
+  }
+</script>

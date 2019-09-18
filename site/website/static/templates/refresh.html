@@ -1,35 +1,63 @@
 <script>
   init({
     title: 'The refresh',
-    desc: 'Reloads the Multiple Select. If you\'re dynamically adding/removing option tags on the original select via AJAX or DOM manipulation methods, call refresh to reflect the changes.',
+    desc: 'Use <code>multiple(\'refresh\')</code> to refresh/reload the Multiple Select. If you\'re dynamically adding/removing option tags on the original select via AJAX or DOM manipulation methods, call refresh to reflect the changes.',
     links: ['multiple-select.css'],
     scripts: ['multiple-select.js']
   })
 </script>
 
 <style>
-#refreshInput {
-  width: 150px;
-  display: inline-block;
-}
 select {
-  width: 500px;
+  width: 100%;
 }
 </style>
 
-<p>
-  <input id="refreshInput" class="form-control" type="text"
-    required="required" placeholder="Enter text">
-  <label><input id="refreshSelected" type="checkbox"> Selected?</label>
-  <label><input id="refreshDisabled" type="checkbox"> Disabled?</label>
-  <button id="refreshAdd" class="btn btn-secondary">Add + Refresh</button>
-</p>
+<div>
+  <div class="form-group row">
+    <label class="col-sm-2">
+      Option text
+    </label>
+    <div class="col-sm-10">
+      <input id="refreshInput" class="form-control" type="text"
+        required="required" placeholder="Enter text">
+    </div>
+  </div>
 
-<select class="w300" multiple="multiple">
-  <option value="text1">text1</option>
-  <option value="text2">text2</option>
-  <option value="text3">text3</option>
-</select>
+  <div class="form-group row">
+    <label class="col-sm-2">
+      Option attribute
+    </label>
+    <div class="col-sm-10">
+      <label class="checkbox">
+        <input id="refreshSelected" type="checkbox"> Selected
+      </label>
+      <label class="checkbox">
+        <input id="refreshDisabled" type="checkbox"> Disabled
+      </label>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2"></label>
+    <div class="col-sm-10">
+      <button id="refreshAdd" class="btn btn-secondary">Add + Refresh</button>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2">
+      Result Select
+    </label>
+    <div class="col-sm-10">
+      <select class="w300" multiple="multiple">
+        <option value="text1">text1</option>
+        <option value="text2">text2</option>
+        <option value="text3">text3</option>
+      </select>
+    </div>
+  </div>
+</div>
 
 <script>
   var $select = $('select')
