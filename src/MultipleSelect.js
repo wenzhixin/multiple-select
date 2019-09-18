@@ -250,10 +250,12 @@ class MultipleSelect {
     }
 
     if (row.type === 'optgroup') {
+      const customStyle = this.options.styler(row)
+      const style = customStyle ? sprintf`style="${s}"`(customStyle) : ''
       const html = []
 
       html.push([
-        `<li class="group ${classes}">`,
+        `<li class="group ${classes}" ${style}>`,
         sprintf`<label class="optgroup ${s}" data-group="${s}">`(
           row.disabled ? 'disabled' : '', row.group
         ),
@@ -274,7 +276,7 @@ class MultipleSelect {
       return html.join('')
     }
 
-    const customStyle = this.options.styler(row.value)
+    const customStyle = this.options.styler(row)
     const style = customStyle ? sprintf`style="${s}"`(customStyle) : ''
     classes += (row.classes || '')
 
