@@ -17,6 +17,8 @@ The Options are defined in `jQuery.fn.multipleSelect.defaults`.
 
 **Default:** `''`
 
+**Example:** <a href="/examples#submit-select.html">Submit Select</a>
+
 ## placeholder
 
 **Type:** String
@@ -63,7 +65,7 @@ Option format:
 
 **Default:** []
 
-**Example:** <a href="/examples#basic-data.html">Basic Data</a> and <a href="/examples#optgroup-data.html">Optgroup Data</a>.
+**Example:** <a href="/examples#data.html">The Data</a>.
 
 ## locale
 
@@ -103,7 +105,7 @@ Option format:
 
 **Default:** `false`
 
-**Example:** <a href="/examples#single-row.html">Single Row</a> and <a href="/examples#single-optgroups.html">Single Optgroups</a>
+**Example:** <a href="/examples#single-row.html">Single Row</a>
 
 ## singleRadio
 
@@ -293,7 +295,7 @@ Option format:
 
 **Default:** `false`
 
-**Example:** <a href="/examples#basic-filter.html">Basic Filter</a> <a href="/examples#optgroup-filter.html">Filter With Optgroup</a>
+**Example:** <a href="/examples#filter.html">The Filter</a>
 
 ## filterGroup
 
@@ -349,7 +351,7 @@ Option format:
 
 **Type:** function
 
-**Detail:** The item styler function, return style string to custom the item style, contains parameter: `value`.
+**Detail:** The item styler function, return style string to custom the item style, contains parameter: `row`. (updated 1.4.1)
 
 **Default:** `{ return false }`
 
