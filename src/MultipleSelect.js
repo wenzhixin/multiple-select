@@ -463,7 +463,8 @@ class MultipleSelect {
         top: offset.top,
         left: offset.left
       })
-      this.$drop.outerWidth(this.$parent.outerWidth())
+        .css('min-width', 'auto')
+        .outerWidth(this.$parent.outerWidth())
     }
 
     if (this.data.length && this.options.filter) {
