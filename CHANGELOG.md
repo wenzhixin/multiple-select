@@ -8,6 +8,7 @@
 - **New:** Added `customFilter` option support.
 - **New:** Added optgroup `styler` support and updated parameter.
 - **New:** Added `check` and `uncheck` methods.
+- **New:** Added checkInvert method.
 - **New:** Added `es-ES` locale.
 - **New:** Added `disabled` prop of vue component.
 - **New:** Added Number support for `v-model` of vue component.

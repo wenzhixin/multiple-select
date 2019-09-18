@@ -191,7 +191,7 @@ Option format:
 
 **Type:** Boolean
 
-**Detail:** Display html values instead text.
+**Detail:** Display html values instead text (from 1.4.1).
 
 **Default:** `false`
 
@@ -331,7 +331,7 @@ Option format:
 
 **Type:** function
 
-**Detail:** The custom filter function, return boolean to filter or not, contains parameter: `label, text, originalLabel, originalText`.
+**Detail:** The custom filter function, return boolean to filter or not, contains parameter: `label, text, originalLabel, originalText` (from 1.4.1).
 
 **Default:** `{ return label.includes(text) }`
 

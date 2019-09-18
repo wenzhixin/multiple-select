@@ -103,6 +103,7 @@ const METHODS = [
   'open', 'close',
   'check', 'uncheck',
   'checkAll', 'uncheckAll',
+  'checkInvert',
   'focus', 'blur',
   'refresh', 'destroy'
 ]

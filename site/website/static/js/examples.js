@@ -23,11 +23,10 @@ function loadUrl(url_) {
   if (window._config.isViewSource) {
     url = template + '?v=VERSION&view-source&url=' + url_ + '#view-source'
   }
-  console.log(url)
   $('iframe').attr('src', url)
 
   $('.navGroup li.navListItemActive').removeClass('navListItemActive')
-  $('a[href="../examples#' + url + '"]').parent().addClass('navListItemActive')
+  $('a[href="../examples#' + url_ + '"]').parent().addClass('navListItemActive')
 }
 
 function autoScrollNavigation () {
@@ -59,6 +58,7 @@ $(function () {
   $(window).hashchange(function () {
     var href = initUrl()
     loadUrl(href)
+    autoScrollNavigation()
     initViewSource()
   })
 
