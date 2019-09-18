@@ -295,7 +295,7 @@ Option format:
 
 **Default:** `false`
 
-**Example:** <a href="/examples#basic-filter.html">Basic Filter</a> <a href="/examples#optgroup-filter.html">Filter With Optgroup</a>
+**Example:** <a href="/examples#filter.html">The Filter</a>
 
 ## filterGroup
 
@@ -351,7 +351,7 @@ Option format:
 
 **Type:** function
 
-**Detail:** The item styler function, return style string to custom the item style, contains parameter: `value`.
+**Detail:** The item styler function, return style string to custom the item style, contains parameter: `row`. (updated 1.4.1)
 
 **Default:** `{ return false }`
 

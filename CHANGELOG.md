@@ -6,6 +6,7 @@
 - **New:** Added `html` type of `getSelects` method.
 - **New:** Added level support for single group.
 - **New:** Added `customFilter` option support.
+- **New:** Added optgroup `styler` support and updated parameter.
 - **New:** Added `check` and `uncheck` methods.
 - **New:** Added `es-ES` locale.
 - **New:** Added `disabled` prop of vue component.

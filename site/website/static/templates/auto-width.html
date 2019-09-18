@@ -1,0 +1,114 @@
+<script>
+  init({
+    title: 'Auto Width',
+    desc: 'Auto width by default without setting width style.',
+    links: ['multiple-select.css'],
+    scripts: ['multiple-select.js']
+  })
+</script>
+
+<div>
+  <div class="form-group row">
+    <label class="col-sm-2">
+      Auto width
+    </label>
+
+    <div class="col-sm-10">
+      <select data-single="true">
+        <option value="1">First</option>
+        <option value="2">Second</option>
+        <option value="3">Third</option>
+        <option value="4">Fourth</option>
+      </select>
+    </div>
+  </div>
+
+
+  <div class="form-group row">
+    <label class="col-sm-2">
+      Large width
+    </label>
+
+    <div class="col-sm-10">
+      <select data-single="true">
+        <option value="1">This is the first option and value is 1</option>
+        <option value="2">This is the second option and value is 2</option>
+        <option value="3">This is the third option and value is 3</option>
+        <option value="4">This is the fourth option and value is 4</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2">
+      Dropdown width
+    </label>
+
+    <div class="col-sm-10">
+      <select data-single="true" data-width="200">
+        <option value="1">This is the first option and value is 1</option>
+        <option value="2">This is the second option and value is 2</option>
+        <option value="3">This is the third option and value is 3</option>
+        <option value="4">This is the fourth option and value is 4</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2">
+      Group Select
+    </label>
+
+    <div class="col-sm-10">
+      <select multiple="multiple">
+        <optgroup label="Group 1">
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+          <option value="3">Option 3</option>
+        </optgroup>
+        <optgroup label="Group 2">
+          <option value="4">Option 4</option>
+          <option value="5">Option 5</option>
+          <option value="6">Option 6</option>
+        </optgroup>
+        <optgroup label="Group 3">
+          <option value="7">Option 7</option>
+          <option value="8">Option 8</option>
+          <option value="9">Option 9</option>
+        </optgroup>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2">
+        Large Group
+    </label>
+
+    <div class="col-sm-10">
+      <select multiple="multiple">
+        <optgroup label="This is group 1">
+          <option value="1">This is option 1</option>
+          <option value="2">This is option 2</option>
+          <option value="3">This is option 3</option>
+        </optgroup>
+        <optgroup label="This is group 2">
+          <option value="4">This is option 4</option>
+          <option value="5">This is option 5</option>
+          <option value="6">This is option 6</option>
+        </optgroup>
+        <optgroup label="This is group 3">
+          <option value="7">This is option 7</option>
+          <option value="8">This is option 8</option>
+          <option value="9">This is option 9</option>
+        </optgroup>
+      </select>
+    </div>
+  </div>
+</div>
+
+<script>
+  function mounted() {
+    $('select').multipleSelect()
+  }
+</script>

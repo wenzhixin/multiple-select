@@ -12,6 +12,14 @@ function loadUrl(url) {
   $('a[href="../examples#' + url + '"]').parent().addClass('navListItemActive')
 }
 
+function autoScrollNavigation () {
+  var $el = $('.docsNavContainer li.navListItemActive')
+  $('.docsNavContainer').scrollTop(0)
+  if ($el.length && $el.offset().top > $(window).height() / 2) {
+    $('.docsNavContainer').scrollTop($el.offset().top - $(window).height() / 2)
+  }
+}
+
 $(function () {
   $(window).hashchange(function () {
     var href = location.hash.substring(1)
@@ -20,4 +28,5 @@ $(function () {
 
   var href = location.hash.substring(1) || 'single-row.html'
   loadUrl(href)
+  autoScrollNavigation()
 })
