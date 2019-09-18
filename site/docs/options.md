@@ -11,29 +11,35 @@ The Options are defined in `jQuery.fn.multipleSelect.defaults`.
 
 ## name
 
-**Type:** String
+- **Attribute:** `name`
 
-**Detail:** The name of select element.
+- **Type:** String
 
-**Default:** `''`
+- **Detail:** The name of select element.
 
-**Example:** <a href="/examples#submit-select.html">Submit Select</a>
+- **Default:** `''`
+
+- **Example:** <a href="/examples#submit-select.html">Submit Select</a>
 
 ## placeholder
 
-**Type:** String
+- **Attribute:** `placeholder`
 
-**Detail:** A placeholder value can be defined and will be displayed until you select an item.
+- **Type:** String
 
-**Default:** `''`
+- **Detail:** A placeholder value can be defined and will be displayed until you select an item.
 
-**Example:** <a href="/examples#placeholder.html">The Placeholder</a>
+- **Default:** `''`
+
+- **Example:** <a href="/examples#placeholder.html">The Placeholder</a>
 
 ## data
 
-**Type:** Array
+- **Attribute:** `-`
 
-**Detail:** The data to be loaded.
+- **Type:** Array
+
+- **Detail:** The data to be loaded.
 
 Group format:
 
@@ -63,11 +69,13 @@ Option format:
 ]
 ```
 
-**Default:** []
+- **Default:** []
 
-**Example:** <a href="/examples#data.html">The Data</a>.
+- **Example:** <a href="/examples#data.html">The Data</a>.
 
 ## locale
+
+- **Attribute:** `data-locale`
 
 - **Type:** `String`
 
@@ -85,304 +93,364 @@ Option format:
 
 - **Default:** `undefined`
 
-**Example:** <a href="/examples#locale.html">The Locale</a>
+- **Example:** <a href="/examples#locale.html">The Locale</a>
 
 ## selectAll
 
-**Type:** Boolean
+- **Attribute:** `data-select-all`
 
-**Detail:** Show selects all checkbox.
+- **Type:** Boolean
 
-**Default:** `true`
+- **Detail:** Show selects all checkbox.
 
-**Example:** <a href="/examples#hide-select-all.html">Hide Select All</a>
+- **Default:** `true`
+
+- **Example:** <a href="/examples#hide-select-all.html">Hide Select All</a>
 
 ## single
 
-**Type:** Boolean
+- **Attribute:** `data-single`
 
-**Detail:** Allows you to select only one option.
+- **Type:** Boolean
 
-**Default:** `false`
+- **Detail:** Allows you to select only one option.
 
-**Example:** <a href="/examples#single-row.html">Single Row</a>
+- **Default:** `false`
+
+- **Example:** <a href="/examples#single-row.html">Single Row</a>
 
 ## singleRadio
 
-**Type:** Boolean
+- **Attribute:** `data-single-radio`
 
-**Detail:** Allows you to show the radio input when `single` is set to `true` (from v1.4.0).
+- **Type:** Boolean
 
-**Default:** `false`
+- **Detail:** Allows you to show the radio input when `single` is set to `true` (from v1.4.0).
 
-**Example:** <a href="/examples#single-radio.html">Single Radio</a>
+- **Default:** `false`
+
+- **Example:** <a href="/examples#single-radio.html">Single Radio</a>
 
 ## multiple
 
-**Type:** Boolean
+- **Attribute:** `data-multiple`
 
-**Detail:** Show multiple items in a row.
+- **Type:** Boolean
 
-**Default:** `false`
+- **Detail:** Show multiple items in a row.
 
-**Example:** <a href="/examples#multiple-items.html">Multiple Items</a>
+- **Default:** `false`
+
+- **Example:** <a href="/examples#multiple-items.html">Multiple Items</a>
 
 ## hideOptgroupCheckboxes
 
-**Type:** Boolean
+- **Attribute:** `data-hide-optgroup-checkboxes`
 
-**Detail:** Hide the optgroup checkboxes.
+- **Type:** Boolean
 
-**Default:** `false`
+- **Detail:** Hide the optgroup checkboxes.
 
-**Example:** <a href="/examples#hide-optgroup-checkboxes.html">Hide Optgroup Check</a>
+- **Default:** `false`
+
+- **Example:** <a href="/examples#hide-optgroup-checkboxes.html">Hide Optgroup Check</a>
 
 ## multipleWidth
 
-**Type:** Number
+- **Attribute:** `data-multiple-width`
 
-**Detail:** Show multiple items width.
+- **Type:** Number
 
-**Default:** `80`
+- **Detail:** Show multiple items width.
 
-**Example:** <li><a href="/examples#multiple-items.html">Multiple Items</a></li>
+- **Default:** `80`
+
+- **Example:** <li><a href="/examples#multiple-items.html">Multiple Items</a></li>
 
 ## width
 
-**Type:** undefined
+- **Attribute:** `data-width`
 
-**Detail:** Define the width property of the select, support a percentage setting.
+- **Type:** undefined
 
-**Default:** `undefined`
+- **Detail:** Define the width property of the select, support a percentage setting.
 
-**Example:** <a href="/examples#custom-dropdown-width.html">Custom Dropdown Width</a>
+- **Default:** `undefined`
+
+- **Example:** <a href="/examples#custom-dropdown-width.html">Custom Dropdown Width</a>
 
 ## dropWidth
 
-**Type:** undefined
+- **Attribute:** `data-drop-width`
 
-**Detail:** Define the dropdown width.
+- **Type:** undefined
 
-**Default:** `undefined`
+- **Detail:** Define the dropdown width.
 
-**Example:** <a href="/examples#custom-dropdown-width.html">Custom Dropdown Width</a>
+- **Default:** `undefined`
+
+- **Example:** <a href="/examples#custom-dropdown-width.html">Custom Dropdown Width</a>
 
 ## maxHeight
 
-**Type:** Number
+- **Attribute:** `data-max-height`
 
-**Detail:** Define the maximum height property of the dropdown list.
+- **Type:** Number
 
-**Default:** `250`
+- **Detail:** Define the maximum height property of the dropdown list.
 
-**Example:** <a href="/examples#max-height.html">Max Height</a>
+- **Default:** `250`
+
+- **Example:** <a href="/examples#max-height.html">Max Height</a>
 
 ## position
 
-**Type:** String
+- **Attribute:** `data-position`
 
-**Detail:** Defines the position of the select dropdown, can only be 'bottom' or 'top'.
+- **Type:** String
 
-**Default:** `bottom`
+- **Detail:** Defines the position of the select dropdown, can only be 'bottom' or 'top'.
 
-**Example:** <a href="/examples#position.html">The Position</a>
+- **Default:** `bottom`
+
+- **Example:** <a href="/examples#position.html">The Position</a>
 
 ## displayHtml
 
-**Type:** Boolean
+- **Attribute:** `data-display-html`
 
-**Detail:** Display html values instead text (from 1.4.1).
+- **Type:** Boolean
 
-**Default:** `false`
+- **Detail:** Display html values instead text (from 1.4.1).
 
-**Example:** <a href="/examples#text-template.html">Text Template</a>
+- **Default:** `false`
+
+- **Example:** <a href="/examples#text-template.html">Text Template</a>
 
 ## displayValues
 
-**Type:** Boolean
+- **Attribute:** `data-display-values`
 
-**Detail:** Display selected values instead text.
+- **Type:** Boolean
 
-**Default:** `false`
+- **Detail:** Display selected values instead text.
 
-**Example:** <a href="/examples#display-values.html">Display Values</a>
+- **Default:** `false`
+
+- **Example:** <a href="/examples#display-values.html">Display Values</a>
 
 ## displayTitle
 
-**Type:** Boolean
+- **Attribute:** `data-display-title`
 
-**Detail:** Display the `title` of selected text.
+- **Type:** Boolean
 
-**Default:** `false`
+- **Detail:** Display the `title` of selected text.
 
-**Example:** <a href="/examples#display-title.html">Display Title</a>
+- **Default:** `false`
+
+- **Example:** <a href="/examples#display-title.html">Display Title</a>
 
 ## displayDelimiter
 
-**Type:** String
+- **Attribute:** `data-display-delimiter`
 
-**Detail:** Custom the display delimiter.
+- **Type:** String
 
-**Default:** `, `
+- **Detail:** Custom the display delimiter.
 
-**Example:** <a href="/examples#display-delimiter.html">Display Delimiter</a>
+- **Default:** `, `
+
+- **Example:** <a href="/examples#display-delimiter.html">Display Delimiter</a>
 
 ## minimumCountSelected
 
-**Type:** Number
+- **Attribute:** `data-minimum-count-selected`
 
-**Detail:** `formatCountSelected` will be shown only if more than `minimumCountSelected` items where selected.
+- **Type:** Number
 
-**Default:** `3`
+- **Detail:** `formatCountSelected` will be shown only if more than `minimumCountSelected` items where selected.
 
-**Example:** <a href="/examples#minimum-count-selected.html">Minimum Count Selected</a>
+- **Default:** `3`
+
+- **Example:** <a href="/examples#minimum-count-selected.html">Minimum Count Selected</a>
 
 ## ellipsis
 
-**Type:** Boolean
+- **Attribute:** `data-ellipsis`
 
-**Detail:** Add `'...'` after selected options if `minimumCountSelected` is set. Overrides `formatCountSelected` option.
+- **Type:** Boolean
 
-**Default:** `false`
+- **Detail:** Add `'...'` after selected options if `minimumCountSelected` is set. Overrides `formatCountSelected` option.
 
-**Example:** <a href="/examples#ellipsis.html">The Ellipsis</a>
+- **Default:** `false`
+
+- **Example:** <a href="/examples#ellipsis.html">The Ellipsis</a>
 
 ## isOpen
 
-**Type:** Boolean
+- **Attribute:** `data-is-open`
 
-**Detail:** Open the select dropdown by default.
+- **Type:** Boolean
 
-**Default:** `false`
+- **Detail:** Open the select dropdown by default.
 
-**Example:** <a href="/examples#is-open.html">Is Open</a>
+- **Default:** `false`
+
+- **Example:** <a href="/examples#is-open.html">Is Open</a>
 
 ## keepOpen
 
-**Type:** Boolean
+- **Attribute:** `data-keep-open`
 
-**Detail:** Keep the select dropdown always open.
+- **Type:** Boolean
 
-**Default:** `false`
+- **Detail:** Keep the select dropdown always open.
 
-**Example:** <a href="/examples#keep-open.html">Keep Open</a>
+- **Default:** `false`
+
+- **Example:** <a href="/examples#keep-open.html">Keep Open</a>
 
 ## openOnHover
 
-**Type:** Boolean
+- **Attribute:** `data-open-on-hover`
 
-**Detail:** Open the select dropdown by hover instead of click.
+- **Type:** Boolean
 
-**Default:** `false`
+- **Detail:** Open the select dropdown by hover instead of click.
 
-**Example:** <a href="/examples#open-on-hover.html">Open On Hover</a>
+- **Default:** `false`
+
+- **Example:** <a href="/examples#open-on-hover.html">Open On Hover</a>
 
 ## container
 
-**Type:** object
+- **Attribute:** `data-container`
 
-**Detail:** Define custom container to solve the cut off problem for example parent node is `overflow: hidden`.
+- **Type:** object
 
-**Default:** `null`
+- **Detail:** Define custom container to solve the cut off problem for example parent node is `overflow: hidden`.
 
-**Example:** <a href="/examples#container.html">The Container</a>
+- **Default:** `null`
+
+- **Example:** <a href="/examples#container.html">The Container</a>
 
 ## filter
 
-**Type:** Boolean
+- **Attribute:** `data-filter`
 
-**Detail:** Show a search field to search through checkbox items.
+- **Type:** Boolean
 
-**Default:** `false`
+- **Detail:** Show a search field to search through checkbox items.
 
-**Example:** <a href="/examples#filter.html">The Filter</a>
+- **Default:** `false`
+
+- **Example:** <a href="/examples#filter.html">The Filter</a>
 
 ## filterGroup
 
-**Type:** Boolean
+- **Attribute:** `data-group`
 
-**Detail:** Filter optgroups only and not options.
+- **Type:** Boolean
 
-**Default:** `false`
+- **Detail:** Filter optgroups only and not options.
 
-**Example:** <a href="/examples#filter-group.html">Filter Only Optgroup</a>
+- **Default:** `false`
+
+- **Example:** <a href="/examples#filter-group.html">Filter Only Optgroup</a>
 
 ## filterPlaceholder
 
-**Type:** String
+- **Attribute:** `data-filter-placeholder`
 
-**Detail:** Set the filter placeholder.
+- **Type:** String
 
-**Default:** ``
+- **Detail:** Set the filter placeholder.
 
-**Example:** <a href="/examples#filter-placeholder.html">Filter Placeholder</a>
+- **Default:** ``
+
+- **Example:** <a href="/examples#filter-placeholder.html">Filter Placeholder</a>
 
 ## filterAcceptOnEnter
 
-**Type:** Boolean
+- **Attribute:** `data-filter-accept-on-enter`
 
-**Detail:** Speed up keyboard use. Enter filter text and then hit `enter` or `space` will auto click `select all` and close the dropdown.
+- **Type:** Boolean
 
-**Default:** `false`
+- **Detail:** Speed up keyboard use. Enter filter text and then hit `enter` or `space` will auto click `select all` and close the dropdown.
 
-**Example:** <a href="/examples#filter-accept-on-enter.html">Filter Accept On Enter</a>
+- **Default:** `false`
+
+- **Example:** <a href="/examples#filter-accept-on-enter.html">Filter Accept On Enter</a>
 
 ## filterByDataLength
 
-**Type:** Number
+- **Attribute:** `data-filter-by-data-length`
 
-**Detail:** Auto enable filter when the data(options) length is more than the set number (from 1.4.1).
+- **Type:** Number
 
-**Default:** `undefined`
+- **Detail:** Auto enable filter when the data(options) length is more than the set number (from 1.4.1).
 
-**Example:** <a href="/examples#filter-by-data-length.html">Filter By Data Length</a>
+- **Default:** `undefined`
+
+- **Example:** <a href="/examples#filter-by-data-length.html">Filter By Data Length</a>
 
 ## customFilter
 
-**Type:** function
+- **Attribute:** `-`
 
-**Detail:** The custom filter function, return boolean to filter or not, contains parameter: `label, text, originalLabel, originalText` (from 1.4.1).
+- **Type:** function
 
-**Default:** `{ return label.includes(text) }`
+- **Detail:** The custom filter function, return boolean to filter or not, contains parameter: `label, text, originalLabel, originalText` (from 1.4.1).
 
-**Example:** <a href="/examples#custom-filter.html">Custom Filter</a>
+- **Default:** `{ return label.includes(text) }`
+
+- **Example:** <a href="/examples#custom-filter.html">Custom Filter</a>
 
 ## animate
 
-**Type:** undefined
+- **Attribute:** `data-animate`
 
-**Detail:** Define the animate of open or close the dropdown. Can be `undefined`, `'fade'` and `'slide'`.
+- **Type:** undefined
 
-**Default:** `undefined`
+- **Detail:** Define the animate of open or close the dropdown. Can be `undefined`, `'fade'` and `'slide'`.
 
-**Example:** <a href="/examples#animate.html">The Animate</a>
+- **Default:** `undefined`
+
+- **Example:** <a href="/examples#animate.html">The Animate</a>
 
 ## styler
 
-**Type:** function
+- **Attribute:** `-`
 
-**Detail:** The item styler function, return style string to custom the item style, contains parameter: `row`. (updated 1.4.1)
+- **Type:** function
 
-**Default:** `{ return false }`
+- **Detail:** The item styler function, return style string to custom the item style, contains parameter: `row`. (updated 1.4.1)
 
-**Example:** <a href="/examples#styler.html">The Styler</a>
+- **Default:** `{ return false }`
+
+- **Example:** <a href="/examples#styler.html">The Styler</a>
 
 ## textTemplate
 
-**Type:** function
+- **Attribute:** `-`
 
-**Detail:** The item textTemplate function, return string to custom the item text, contains parameter: `$elm`.
+- **Type:** function
 
-**Default:** `{ return $elm[0].innerHTML }`
+- **Detail:** The item textTemplate function, return string to custom the item text, contains parameter: `$elm`.
 
-**Example:** <a href="/examples#text-template.html">Text Template</a>
+- **Default:** `{ return $elm[0].innerHTML }`
+
+- **Example:** <a href="/examples#text-template.html">Text Template</a>
 
 ## labelTemplate
 
-**Type:** function
+- **Attribute:** `-`
 
-**Detail:** The item labelTemplate function, return string to custom the optgroup label, contains parameter: `$elm`.
+- **Type:** function
 
-**Default:** `{ return $elm[0].getAttribute('label') }`
+- **Detail:** The item labelTemplate function, return string to custom the optgroup label, contains parameter: `$elm`.
 
-**Example:** <a href="/examples#label-template.html">Label Template</a>
+- **Default:** `{ return $elm[0].getAttribute('label') }`
+
+- **Example:** <a href="/examples#label-template.html">Label Template</a>

@@ -11,6 +11,7 @@
 - **New:** Added `check` and `uncheck` methods.
 - **New:** Added checkInvert method.
 - **New:** Added `es-ES` locale.
+- **New:** Added data-* attributes support.
 - **New:** Added `disabled` prop of vue component.
 - **New:** Added Number support for `v-model` of vue component.
 - **Update:** Improved default `width` of select.
