@@ -11,6 +11,7 @@ class MultipleSelect {
     this.initLocale()
     this.initContainer()
     this.initData()
+    this.initFilter()
     this.initDrop()
     this.initView()
   }
@@ -169,6 +170,23 @@ class MultipleSelect {
     }
 
     return null
+  }
+
+  initFilter () {
+    if (this.options.filter || !this.options.filterByDataLength) {
+      return
+    }
+
+    let length = 0
+    for (const option of this.data) {
+      if (option.type === 'optgroup') {
+        length += option.children.length
+      } else {
+        length += 1
+      }
+    }
+
+    this.options.filter = length > this.options.filterByDataLength
   }
 
   initDrop () {

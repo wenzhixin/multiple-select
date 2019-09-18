@@ -327,6 +327,16 @@ Option format:
 
 **Example:** <a href="/examples#filter-accept-on-enter.html">Filter Accept On Enter</a>
 
+## filterByDataLength
+
+**Type:** Number
+
+**Detail:** Auto enable filter when the data(options) length is more than the set number (from 1.4.1).
+
+**Default:** `undefined`
+
+**Example:** <a href="/examples#filter-by-data-length.html">Filter By Data Length</a>
+
 ## customFilter
 
 **Type:** function

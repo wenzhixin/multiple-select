@@ -33,6 +33,7 @@ const DEFAULTS = {
   filterGroup: false,
   filterPlaceholder: '',
   filterAcceptOnEnter: false,
+  filterByDataLength: undefined,
   customFilter (label, text) { // originalLabel, originalText
     return label.includes(text)
   },
