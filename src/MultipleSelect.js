@@ -174,9 +174,9 @@ class MultipleSelect {
   initDrop () {
     this.initList()
     this.events()
-    this.updateSelectAll(false, true)
     this.update(true)
     this.updateOptGroupSelect(true)
+    this.updateSelectAll(false, true)
 
     if (this.options.isOpen) {
       this.open()
@@ -559,10 +559,10 @@ class MultipleSelect {
     }
   }
 
-  updateSelectAll (triggerEvent, isInit = false) {
+  updateSelectAll (triggerEvent, all = false) {
     let $items = this.$selectItems
 
-    if (!isInit) {
+    if (!all) {
       $items = $items.filter(':visible')
     }
 
@@ -579,10 +579,10 @@ class MultipleSelect {
     }
   }
 
-  updateOptGroupSelect (isInit) {
+  updateOptGroupSelect (all = false) {
     let $items = this.$selectItems
 
-    if (!isInit) {
+    if (!all) {
       $items = $items.filter(':visible')
     }
     $.each(this.$selectGroups, (i, val) => {
@@ -679,6 +679,10 @@ class MultipleSelect {
   }
 
   check (value) {
+    if (this.options.single) {
+      this.$selectItems.prop('checked', false)
+      this.$disableItems.prop('checked', false)
+    }
     this._check(value, true)
   }
 
@@ -690,6 +694,8 @@ class MultipleSelect {
     this.$selectItems.filter(sprintf`[value="${s}"]`(value)).prop('checked', checked)
     this.$disableItems.filter(sprintf`[value="${s}"]`(value)).prop('checked', checked)
     this.update()
+    this.updateOptGroupSelect(true)
+    this.updateSelectAll(true, true)
   }
 
   checkAll () {
@@ -707,6 +713,18 @@ class MultipleSelect {
     this.$selectGroups.prop('checked', checked)
     this.$selectAll.prop('checked', checked)
     this.update()
+  }
+
+  checkInvert () {
+    if (this.options.single) {
+      return
+    }
+    this.$selectItems.each((i, el) => {
+      $(el).prop('checked', !$(el).prop('checked'))
+    })
+    this.update()
+    this.updateOptGroupSelect(true)
+    this.updateSelectAll(true, true)
   }
 
   focus () {
