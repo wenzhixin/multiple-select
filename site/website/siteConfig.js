@@ -45,6 +45,11 @@ const siteConfig = {
     'https://codefund.io/properties/292/funder.js'
   ],
 
+  separateCss: [
+    'static/css/examples.css',
+    'static/css/template.css'
+  ],
+
   // On page navigation for the current documentation page.
   onPageNav: 'separate',
   // No .html extensions for paths.
