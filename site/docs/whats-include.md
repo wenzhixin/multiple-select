@@ -20,7 +20,6 @@ multiple-select/
 │   ├── MultipleSelect.js
 │   ├── multiple-select.css
 │   ├── multiple-select.js
-│   ├── multiple-select.png
 ├── dist
 │   ├── multiple-select-es.js
 │   ├── multiple-select-es.min.js
@@ -28,7 +27,6 @@ multiple-select/
 │   ├── multiple-select.js
 │   ├── multiple-select.min.css
 │   ├── multiple-select.min.js
-│   └── multiple-select.png
 └── README.md
 ```
 

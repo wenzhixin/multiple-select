@@ -1,5 +1,28 @@
 ## Changelog
 
+### 1.4.1
+
+- **New:** Added `displayHtml` option.
+- **New:** Added `html` type of `getSelects` method.
+- **New:** Added level support for single group.
+- **New:** Added `filterByDataLength` option.
+- **New:** Added `customFilter` option support.
+- **New:** Added optgroup `styler` support and updated parameter.
+- **New:** Added `check` and `uncheck` methods.
+- **New:** Added checkInvert method.
+- **New:** Added `es-ES` locale.
+- **New:** Added data-* attributes support.
+- **New:** Added `disabled` prop of vue component.
+- **New:** Added Number support for `v-model` of vue component.
+- **Update:** Improved default `width` of select.
+- **Update:** Improved `single` select style and label bug.
+- **Update:** Improved `v-model` and data of vue component.
+- **Update:** Fixed init cannot select all bug.
+- **Update:** Fixed refresh method bug.
+- **Update:** Fixed `filterAcceptOnEnter` bug with `single` option.
+- **Update:** Removed multiple-select png.
+- **Update:** Disabled `esc` action when `keepOpen` is true.
+
 ### 1.4.0
 
 - **New:** Added `data` support.

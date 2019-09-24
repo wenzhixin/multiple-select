@@ -11,7 +11,9 @@ class MultipleSelect {
     this.initLocale()
     this.initContainer()
     this.initData()
+    this.initFilter()
     this.initDrop()
+    this.initView()
   }
 
   initLocale () {
@@ -46,6 +48,9 @@ class MultipleSelect {
     if (!this.$label.length && this.$el.attr('id')) {
       this.$label = $(`label[for="${this.$el.attr('id')}"]`)
     }
+    if (this.$label.find('>input').length) {
+      this.$label = null
+    }
 
     // restore class and title from select element
     this.$parent = $(sprintf`<div class="ms-parent ${s}" ${s}/>`(
@@ -77,10 +82,6 @@ class MultipleSelect {
     if (el.disabled) {
       this.$choice.addClass('disabled')
     }
-    this.$parent.css('width',
-      this.options.width ||
-      this.$el.css('width') ||
-      this.$el.outerWidth() + 20)
 
     this.selectAllName = `data-name="selectAll${name}"`
     this.selectGroupName = `data-name="selectGroup${name}"`
@@ -134,6 +135,7 @@ class MultipleSelect {
 
     this.options.data = data
     this.data = data
+    this.fromHtml = true
   }
 
   initRow (i, elm, group, groupDisabled) {
@@ -170,12 +172,29 @@ class MultipleSelect {
     return null
   }
 
+  initFilter () {
+    if (this.options.filter || !this.options.filterByDataLength) {
+      return
+    }
+
+    let length = 0
+    for (const option of this.data) {
+      if (option.type === 'optgroup') {
+        length += option.children.length
+      } else {
+        length += 1
+      }
+    }
+
+    this.options.filter = length > this.options.filterByDataLength
+  }
+
   initDrop () {
     this.initList()
     this.events()
-    this.updateSelectAll()
     this.update(true)
     this.updateOptGroupSelect(true)
+    this.updateSelectAll(false, true)
 
     if (this.options.isOpen) {
       this.open()
@@ -238,16 +257,23 @@ class MultipleSelect {
     this.$noResults = this.$drop.find('.ms-no-results')
   }
 
-  initListItem (row) {
+  initListItem (row, level = 0) {
     const title = sprintf`title="${s}"`(row.title)
     const multiple = this.options.multiple ? 'multiple' : ''
     const type = this.options.single ? 'radio' : 'checkbox'
+    let classes = ''
+
+    if (this.options.single && !this.options.singleRadio) {
+      classes = 'hide-radio '
+    }
 
     if (row.type === 'optgroup') {
+      const customStyle = this.options.styler(row)
+      const style = customStyle ? sprintf`style="${s}"`(customStyle) : ''
       const html = []
 
       html.push([
-        '<li class="group">',
+        `<li class="group ${classes}" ${style}>`,
         sprintf`<label class="optgroup ${s}" data-group="${s}">`(
           row.disabled ? 'disabled' : '', row.group
         ),
@@ -262,22 +288,22 @@ class MultipleSelect {
       ].join(''))
 
       html.push(row.children.map(child => {
-        return this.initListItem(child)
+        return this.initListItem(child, 1)
       }).join(''))
 
       return html.join('')
     }
 
-    const customStyle = this.options.styler(row.value)
+    const customStyle = this.options.styler(row)
     const style = customStyle ? sprintf`style="${s}"`(customStyle) : ''
-    let {classes} = row
+    classes += (row.classes || '')
 
-    if (this.options.single && !this.options.singleRadio) {
-      classes += ' hide-radio'
+    if (level && this.options.single) {
+      classes += `option-level-${level} `
     }
 
     return [
-      sprintf`<li class="${s} ${s}" ${s} ${s}>`(multiple, classes || '', title, style),
+      sprintf`<li class="${s} ${s}" ${s} ${s}>`(multiple, classes, title, style),
       sprintf`<label class="${s}">`(row.disabled ? 'disabled' : ''),
       sprintf`<input type="${s}" value="${s}" ${s}${s}${s}${s}>`(
         type,
@@ -293,13 +319,29 @@ class MultipleSelect {
     ].join('')
   }
 
+  initView () {
+    let computedWidth
+
+    if (window.getComputedStyle) {
+      computedWidth = window.getComputedStyle(this.$el[0]).width
+
+      if (computedWidth === 'auto') {
+        computedWidth = this.$drop.outerWidth() + 20
+      }
+    } else {
+      computedWidth = this.$el.outerWidth() + 20
+    }
+
+    this.$parent.css('width', this.options.width || computedWidth)
+  }
+
   events () {
     const toggleOpen = e => {
       e.preventDefault()
       this[this.options.isOpen ? 'close' : 'open']()
     }
 
-    if (this.$label.length) {
+    if (this.$label && this.$label.length) {
       this.$label.off('click').on('click', e => {
         if (e.target.nodeName.toLowerCase() !== 'label') {
           return
@@ -318,7 +360,7 @@ class MultipleSelect {
 
     this.$parent.off('keydown').on('keydown', e => {
       // esc key
-      if (e.which === 27) {
+      if (e.which === 27 && !this.options.keepOpen) {
         this.close()
         this.$choice.focus()
       }
@@ -337,7 +379,14 @@ class MultipleSelect {
         [13, 32].includes(e.which) &&
         this.$searchInput.val()
       ) {
-        this.$selectAll.click()
+        if (this.options.single) {
+          const $items = this.$selectItems.closest('li').filter(':visible')
+          if ($items.length) {
+            this.setSelects([$items.first().find(`input[${this.selectItemName}]`).val()])
+          }
+        } else {
+          this.$selectAll.click()
+        }
         this.close()
         this.focus()
         return
@@ -434,7 +483,8 @@ class MultipleSelect {
         top: offset.top,
         left: offset.left
       })
-      this.$drop.outerWidth(this.$parent.outerWidth())
+        .css('min-width', 'auto')
+        .outerWidth(this.$parent.outerWidth())
     }
 
     if (this.data.length && this.options.filter) {
@@ -475,10 +525,16 @@ class MultipleSelect {
   }
 
   update (ignoreTrigger) {
-    const valueSelects = this.getSelects()
-    const textSelects = this.options.displayValues ? valueSelects : this.getSelects('text')
+    let textSelects = this.getSelects('text')
+
+    if (this.options.displayHtml) {
+      textSelects = this.getSelects('html')
+    } else if (this.options.displayValues) {
+      textSelects = this.getSelects()
+    }
+
     const $span = this.$choice.find('>span')
-    const sl = valueSelects.length
+    const sl = textSelects.length
     let html = ''
 
     if (sl === 0) {
@@ -521,11 +577,11 @@ class MultipleSelect {
     }
   }
 
-  updateSelectAll (triggerEvent) {
-    const $items = this.$selectItems.filter(':visible')
+  updateSelectAll (triggerEvent, all = false) {
+    let $items = this.$selectItems
 
-    if (!$items.length) {
-      return
+    if (!all) {
+      $items = $items.filter(':visible')
     }
 
     const selectedLength = $items.filter(':checked').length
@@ -541,10 +597,10 @@ class MultipleSelect {
     }
   }
 
-  updateOptGroupSelect (isInit) {
+  updateOptGroupSelect (all = false) {
     let $items = this.$selectItems
 
-    if (!isInit) {
+    if (!all) {
       $items = $items.filter(':visible')
     }
     $.each(this.$selectGroups, (i, val) => {
@@ -572,12 +628,12 @@ class MultipleSelect {
     this.init()
   }
 
-  // value or text, default: 'value'
+  // value html, or text, default: 'value'
   getSelects (type) {
     let texts = []
     const values = []
     this.$drop.find(sprintf`input[${s}]:checked`(this.selectItemName)).each((i, el) => {
-      texts.push($(el).parents('li').first().text())
+      texts.push($(el).next()[type === 'html' ? 'html' : 'text']())
       values.push($(el).val())
     })
 
@@ -609,7 +665,7 @@ class MultipleSelect {
         texts.push(html.join(''))
       })
     }
-    return type === 'text' ? texts : values
+    return ['html', 'text'].includes(type) ? texts : values
   }
 
   setSelects (values) {
@@ -640,20 +696,53 @@ class MultipleSelect {
     this.$choice.addClass('disabled')
   }
 
-  checkAll () {
-    this.$selectItems.prop('checked', true)
-    this.$selectGroups.prop('checked', true)
-    this.$selectAll.prop('checked', true)
+  check (value) {
+    if (this.options.single) {
+      this.$selectItems.prop('checked', false)
+      this.$disableItems.prop('checked', false)
+    }
+    this._check(value, true)
+  }
+
+  uncheck (value) {
+    this._check(value, false)
+  }
+
+  _check (value, checked) {
+    this.$selectItems.filter(sprintf`[value="${s}"]`(value)).prop('checked', checked)
+    this.$disableItems.filter(sprintf`[value="${s}"]`(value)).prop('checked', checked)
     this.update()
+    this.updateOptGroupSelect(true)
+    this.updateSelectAll(true, true)
+  }
+
+  checkAll () {
+    this._checkAll(true)
     this.options.onCheckAll()
   }
 
   uncheckAll () {
-    this.$selectItems.prop('checked', false)
-    this.$selectGroups.prop('checked', false)
-    this.$selectAll.prop('checked', false)
-    this.update()
+    this._checkAll(false)
     this.options.onUncheckAll()
+  }
+
+  _checkAll (checked) {
+    this.$selectItems.prop('checked', checked)
+    this.$selectGroups.prop('checked', checked)
+    this.$selectAll.prop('checked', checked)
+    this.update()
+  }
+
+  checkInvert () {
+    if (this.options.single) {
+      return
+    }
+    this.$selectItems.each((i, el) => {
+      $(el).prop('checked', !$(el).prop('checked'))
+    })
+    this.update()
+    this.updateOptGroupSelect(true)
+    this.updateSelectAll(true, true)
   }
 
   focus () {
@@ -667,11 +756,13 @@ class MultipleSelect {
   }
 
   refresh () {
+    this.destroy()
     this.init()
   }
 
   filter () {
-    const text = $.trim(this.$searchInput.val()).toLowerCase()
+    const originalText = $.trim(this.$searchInput.val())
+    const text = originalText.toLowerCase()
 
     if (text.length === 0) {
       this.$selectAll.closest('li').show()
@@ -683,8 +774,10 @@ class MultipleSelect {
       if (!this.options.filterGroup) {
         this.$selectItems.each((i, el) => {
           const $parent = $(el).parent()
-          const hasText = removeDiacritics($parent.text().toLowerCase())
-            .includes(removeDiacritics(text))
+          const hasText = this.options.customFilter(
+            removeDiacritics($parent.text().toLowerCase()),
+            removeDiacritics(text),
+            $parent.text(), originalText)
           $parent.closest('li')[hasText ? 'show' : 'hide']()
         })
       }
@@ -693,8 +786,10 @@ class MultipleSelect {
         const $parent = $(el).parent()
         const group = $parent[0].getAttribute('data-group')
         if (this.options.filterGroup) {
-          const hasText = removeDiacritics($parent.text().toLowerCase())
-            .includes(removeDiacritics(text))
+          const hasText = this.options.customFilter(
+            removeDiacritics($parent.text().toLowerCase()),
+            removeDiacritics(text),
+            $parent.text(), originalText)
           const func = hasText ? 'show' : 'hide'
           $parent.closest('li')[func]()
           this.$selectItems.filter(`[data-group="${group}"]`).closest('li')[func]()
@@ -725,6 +820,11 @@ class MultipleSelect {
     }
     this.$el.before(this.$parent).show()
     this.$parent.remove()
+
+    if (this.fromHtml) {
+      delete this.options.data
+      this.fromHtml = false
+    }
   }
 }
 

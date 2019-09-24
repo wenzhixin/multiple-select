@@ -1,7 +1,7 @@
 <script>
   init({
-    title: 'The Styler',
-    desc: 'Use <code>styler</code> to custom the item style.',
+    title: 'The checkInvert',
+    desc: 'Methods: <code>$select.multipleSelect(\'checkInvert\')</code> to invert check all items.',
     links: ['multiple-select.css'],
     scripts: ['multiple-select.js']
   })
@@ -16,11 +16,21 @@ select {
 <div>
   <div class="form-group row">
     <label class="col-sm-2">
+      Methods
+    </label>
+
+    <div class="col-sm-10">
+      <button id="checkInvert" class="btn btn-secondary">Check Invert</button>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2">
       Basic Select
     </label>
 
     <div class="col-sm-10">
-      <select id="basic" multiple="multiple">
+      <select multiple="multiple">
         <option value="1">January</option>
         <option value="2">February</option>
         <option value="3">March</option>
@@ -43,7 +53,7 @@ select {
     </label>
 
     <div class="col-sm-10">
-      <select id="group" multiple="multiple">
+      <select multiple="multiple">
         <optgroup label="Group 1">
           <option value="1">Option 1</option>
           <option value="2">Option 2</option>
@@ -65,27 +75,13 @@ select {
 </div>
 
 <script>
-  function mounted() {
-    $('#basic').multipleSelect({
-      styler: function (row) {
-        if (+row.value === 1) {
-          return 'background-color: #ffee00; color: #ff0000;'
-        }
-        if (+row.value === 6) {
-          return 'background-color: #000; color: #fff;'
-        }
-      }
-    })
+  var $select = $('select')
 
-    $('#group').multipleSelect({
-      styler: function (row) {
-        if (row.type === 'optgroup') {
-          return 'color: #777; font-weight: normal;'
-        }
-        if (+row.value === 1) {
-          return 'color: blue;'
-        }
-      }
+  function mounted() {
+    $select.multipleSelect()
+
+    $('#checkInvert').click(function () {
+      $select.multipleSelect('checkInvert')
     })
   }
 </script>

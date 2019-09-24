@@ -7,24 +7,24 @@
   $ = $ && $.hasOwnProperty('default') ? $['default'] : $;
 
   /**
-   * Multiple Select en-US translation
+   * Multiple Select es-ES translation
    * Author: Zhixin Wen<wenzhixin2010@gmail.com>
    */
 
-  $.fn.multipleSelect.locales['en-US'] = {
+  $.fn.multipleSelect.locales['es-ES'] = {
     formatSelectAll: function formatSelectAll() {
-      return '[Select all]';
+      return '[Seleccionar todo]';
     },
     formatAllSelected: function formatAllSelected() {
-      return 'All selected';
+      return 'Todos seleccionados';
     },
     formatCountSelected: function formatCountSelected(count, total) {
-      return count + ' of ' + total + ' selected';
+      return count + ' de ' + total + ' seleccionado';
     },
     formatNoMatchesFound: function formatNoMatchesFound() {
-      return 'No matches found';
+      return 'No se encontraron coincidencias';
     }
   };
-  $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['en-US']);
+  $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['es-ES']);
 
 }));

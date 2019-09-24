@@ -3,6 +3,7 @@
     v-model="currentValue"
     :name="name"
     :multiple="!single"
+    :disabled="disabled"
   >
     <slot/>
   </select>
@@ -22,7 +23,7 @@ export default {
 
   props: {
     value: {
-      type: [String, Array],
+      type: [String, Number, Array],
       default: undefined
     },
     name: {
@@ -30,6 +31,10 @@ export default {
       default: undefined
     },
     single: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
       type: Boolean,
       default: false
     },
@@ -58,6 +63,28 @@ export default {
   },
 
   watch: {
+    value () {
+      if (this.currentValue === this.value) {
+        return
+      }
+      this.currentValue = this.value
+      this._initDefaultValue()
+    },
+    single () {
+      this._initSelect()
+    },
+    disabled () {
+      this.$nextTick(() => {
+        if (this.disabled) {
+          this.disable()
+        } else {
+          this.enable()
+        }
+      })
+    },
+    width () {
+      this._initSelect()
+    },
     options: {
       handler () {
         this._initSelect()
@@ -67,7 +94,7 @@ export default {
 
     data: {
       handler () {
-        this.load(deepCopy(this.data))
+        this._initSelect()
       },
       deep: true
     }
@@ -75,9 +102,15 @@ export default {
 
   mounted () {
     this.$select = $(this.$el).change(() => {
-      const value = this.$select.val()
-      this.$emit('input', value)
-      this.$emit('change', value)
+      const selects = this.getSelects()
+      if (!selects.length) {
+        return
+      }
+
+      this.currentValue = Array.isArray(this.currentValue) ?
+        selects : selects[0]
+      this.$emit('input', this.currentValue)
+      this.$emit('change', this.currentValue)
     })
 
     for (const event in $.fn.multipleSelect.defaults) {
@@ -89,6 +122,7 @@ export default {
     }
 
     this._initSelect()
+    this._initDefaultValue()
   },
 
   methods: {
@@ -105,6 +139,13 @@ export default {
       } else {
         this.refreshOptions(options)
       }
+    },
+
+    _initDefaultValue () {
+      this.$nextTick(() => {
+        this.setSelects(Array.isArray(this.currentValue) ?
+          this.currentValue : [this.currentValue])
+      })
     },
 
     ...(() => {

@@ -1,4 +1,4 @@
-const VERSION = '1.4.0'
+const VERSION = '1.4.1'
 
 const DEFAULTS = {
   name: '',
@@ -17,6 +17,7 @@ const DEFAULTS = {
   maxHeight: 250,
   position: 'bottom',
 
+  displayHtml: false,
   displayValues: false,
   displayTitle: false,
   displayDelimiter: ', ',
@@ -32,6 +33,10 @@ const DEFAULTS = {
   filterGroup: false,
   filterPlaceholder: '',
   filterAcceptOnEnter: false,
+  filterByDataLength: undefined,
+  customFilter (label, text) { // originalLabel, originalText
+    return label.includes(text)
+  },
 
   animate: undefined,
 
@@ -97,7 +102,9 @@ const METHODS = [
   'getSelects', 'setSelects',
   'enable', 'disable',
   'open', 'close',
+  'check', 'uncheck',
   'checkAll', 'uncheckAll',
+  'checkInvert',
   'focus', 'blur',
   'refresh', 'destroy'
 ]

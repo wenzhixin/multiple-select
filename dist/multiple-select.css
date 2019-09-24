@@ -20,8 +20,6 @@
   line-height: 26px;
   color: #444;
   text-decoration: none;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
   border-radius: 4px;
   background-color: #fff;
 }
@@ -47,18 +45,23 @@
 }
 .ms-choice > div {
   position: absolute;
-  top: 0;
-  right: 0;
-  width: 20px;
-  height: 25px;
-  background: url("multiple-select.png") left top no-repeat;
+  width: 0;
+  height: 0;
+  top: 50%;
+  right: 8px;
+  margin-top: -2px;
+  border-color: #888 transparent transparent transparent;
+  border-style: solid;
+  border-width: 5px 4px 0 4px;
 }
 .ms-choice > div.open {
-  background-position: right top;
+  border-color: transparent transparent #888 transparent;
+  border-width: 0 4px 5px 4px;
 }
 
 .ms-drop {
-  width: 100%;
+  width: auto;
+  min-width: 100%;
   overflow: hidden;
   display: none;
   margin-top: -1px;
@@ -68,20 +71,14 @@
   background: #fff;
   color: #000;
   border: 1px solid #aaa;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
   border-radius: 4px;
 }
 .ms-drop.bottom {
   top: 100%;
-  -webkit-box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
-  -moz-box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
   box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
 }
 .ms-drop.top {
   bottom: 100%;
-  -webkit-box-shadow: 0 -4px 5px rgba(0, 0, 0, 0.15);
-  -moz-box-shadow: 0 -4px 5px rgba(0, 0, 0, 0.15);
   box-shadow: 0 -4px 5px rgba(0, 0, 0, 0.15);
 }
 
@@ -89,44 +86,24 @@
   display: inline-block;
   margin: 0;
   min-height: 26px;
-  padding: 4px;
+  padding: 2px;
   position: relative;
   white-space: nowrap;
   width: 100%;
   z-index: 10000;
-  -webkit-box-sizing: border-box;
-  -khtml-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
 .ms-search input {
   width: 100%;
   height: auto !important;
   min-height: 24px;
-  padding: 0 20px 0 5px;
+  padding: 0 5px;
   margin: 0;
   outline: 0;
   font-family: sans-serif;
   border: 1px solid #aaa;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  border-radius: 0;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
+  border-radius: 5px;
   box-shadow: none;
-  background: #fff url("multiple-select.png") no-repeat 100% -22px;
-  background: url("multiple-select.png") no-repeat 100% -22px, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, white), color-stop(0.99, #eeeeee));
-  background: url("multiple-select.png") no-repeat 100% -22px, -webkit-linear-gradient(center bottom, white 85%, #eeeeee 99%);
-  background: url("multiple-select.png") no-repeat 100% -22px, -moz-linear-gradient(center bottom, white 85%, #eeeeee 99%);
-  background: url("multiple-select.png") no-repeat 100% -22px, -o-linear-gradient(bottom, white 85%, #eeeeee 99%);
-  background: url("multiple-select.png") no-repeat 100% -22px, -ms-linear-gradient(top, #ffffff 85%, #eeeeee 99%);
-  background: url("multiple-select.png") no-repeat 100% -22px, linear-gradient(to bottom, #ffffff 85%, #eeeeee 99%);
-  -webkit-box-sizing: border-box;
-  -khtml-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
 }
 
 .ms-drop ul {
@@ -168,6 +145,9 @@
 .ms-drop ul > li label.optgroup {
   font-weight: bold;
 }
+.ms-drop ul > li.hide-radio {
+  padding: 0;
+}
 .ms-drop ul > li.hide-radio:focus, .ms-drop ul > li.hide-radio:hover {
   background-color: #f8f9fa;
 }
@@ -177,10 +157,13 @@
 }
 .ms-drop ul > li.hide-radio label {
   margin-bottom: 0;
-  padding: 5px 0;
+  padding: 5px 8px;
 }
 .ms-drop ul > li.hide-radio input {
   display: none;
+}
+.ms-drop ul > li.option-level-1 label {
+  padding-left: 28px;
 }
 .ms-drop input[type=radio], .ms-drop input[type=checkbox] {
   margin: 5px;

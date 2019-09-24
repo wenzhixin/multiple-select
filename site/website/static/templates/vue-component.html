@@ -1,0 +1,106 @@
+<script>
+  init({
+    title: 'Vue Component',
+    desc: 'Use Plugin: <a href="https://vuejs.org/" target="_blank">Vue.js</a> and multiple-select-vue.',
+    links: ['multiple-select.css'],
+    scripts: [
+      'https://cdn.jsdelivr.net/npm/vue',
+      'multiple-select.js',
+      'https://unpkg.com/multiple-select@1.4.1/dist/multiple-select-vue.min.js'
+    ],
+  })
+</script>
+
+<div id="app">
+  <div class="form-group row">
+    <label class="col-sm-2">
+      Options
+    </label>
+
+    <div class="col-sm-10">
+      <label><input type="checkbox" v-model="single"> single</label>
+      <label><input type="checkbox" v-model="disabled"> disabled</label>
+      <label><input type="checkbox" v-model="options.filter"> filter</label>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2">
+      Component
+    </label>
+
+    <div class="col-sm-10">
+      <multiple-select
+        ref="select"
+        v-model="value"
+        :single="single"
+        :disabled="disabled"
+        width="100%"
+        :options="options"
+        :data="data"
+      ></multiple-select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2">
+      Methods
+    </label>
+
+    <div class="col-sm-10">
+      <button class="btn btn-secondary" @click="getSelects">getSelects</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function mounted() {
+    new Vue({
+      el: '#app',
+      components: {
+        MultipleSelect
+      },
+      data () {
+        return {
+          value: 1, // or [1, 2] with multiple select
+          single: true,
+          disabled: false,
+          options: {
+            filter: false
+          },
+          data: [
+            {
+              text: 'January',
+              value: 1
+            },
+            {
+              text: 'February',
+              value: 2
+            },
+            {
+              text: 'March',
+              value: 3
+            },
+            {
+              text: 'April',
+              value: 4
+            },
+            {
+              text: 'May',
+              value: 5
+            },
+            {
+              text: 'June',
+              value: 6
+            }
+          ]
+        }
+      },
+      methods: {
+        getSelects () {
+          alert(this.$refs.select.getSelects())
+        }
+      }
+    })
+  }
+</script>

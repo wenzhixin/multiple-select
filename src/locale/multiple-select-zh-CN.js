@@ -1,5 +1,5 @@
 /**
- * Multiple Select English translation
+ * Multiple Select zh-CN translation
  * Author: Zhixin Wen<wenzhixin2010@gmail.com>
  */
 

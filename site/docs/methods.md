@@ -35,7 +35,7 @@ $('#multiple').multipleSelect('method', parameter)
 
 - **Parameter:** `type`
 
-- **Detail:** Gets the selected values. The `type` can be `'value'` or `'text'`, default is `'value'`.
+- **Detail:** Gets the selected values. The `type` can be `'value'`, `'text'` or 'html', default is `'value'` (added `html` from 1.4.1).
 
 - **Example:** [setSelects-getSelects](/examples#setSelects-getSelects.html)
 
@@ -79,6 +79,22 @@ $('#multiple').multipleSelect('method', parameter)
 
 - **Example:** [open-close](/examples#open-close.html)
 
+## check
+
+- **Parameter:**  `value`
+
+- **Detail:** Check an option (from 1.4.1).
+
+- **Example:** [check-uncheck](/examples#check-uncheck.html)
+
+## uncheck
+
+- **Parameter:**  -
+
+- **Detail:** Uncheck an option (from 1.4.1).
+
+- **Example:** [check-uncheck](/examples#check-uncheck.html)
+
 ## checkAll
 
 - **Parameter:**  -
@@ -94,6 +110,14 @@ $('#multiple').multipleSelect('method', parameter)
 - **Detail:** Uncheck all checkboxes.
 
 - **Example:** [checkAll-uncheckAll](/examples#checkAll-uncheckAll.html)
+
+## checkInvert
+
+- **Parameter:**  -
+
+- **Detail:** Invert check of current checkboxes, not work with `single` option (from 1.4.1).
+
+- **Example:** [checkInvert](/examples#checkInvert.html)
 
 ## focus
 
