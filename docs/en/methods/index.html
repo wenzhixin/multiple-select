@@ -75,7 +75,7 @@
 <h2><a class="anchor" aria-hidden="true" id="getselects"></a><a href="#getselects" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>getSelects</h2>
 <ul>
 <li><p><strong>Parameter:</strong> <code>type</code></p></li>
-<li><p><strong>Detail:</strong> Gets the selected values. The <code>type</code> can be <code>'value'</code> or <code>'text'</code>, default is <code>'value'</code>.</p></li>
+<li><p><strong>Detail:</strong> Gets the selected values. The <code>type</code> can be <code>'value'</code>, <code>'text'</code> or 'html', default is <code>'value'</code> (added <code>html</code> from 1.4.1).</p></li>
 <li><p><strong>Example:</strong> <a href="/examples#setSelects-getSelects.html">setSelects-getSelects</a></p></li>
 </ul>
 <h2><a class="anchor" aria-hidden="true" id="setselects"></a><a href="#setselects" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>setSelects</h2>
@@ -108,6 +108,18 @@
 <li><p><strong>Detail:</strong> Close multiple select.</p></li>
 <li><p><strong>Example:</strong> <a href="/examples#open-close.html">open-close</a></p></li>
 </ul>
+<h2><a class="anchor" aria-hidden="true" id="check"></a><a href="#check" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>check</h2>
+<ul>
+<li><p><strong>Parameter:</strong>  <code>value</code></p></li>
+<li><p><strong>Detail:</strong> Check an option (from 1.4.1).</p></li>
+<li><p><strong>Example:</strong> <a href="/examples#check-uncheck.html">check-uncheck</a></p></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="uncheck"></a><a href="#uncheck" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>uncheck</h2>
+<ul>
+<li><p><strong>Parameter:</strong>  -</p></li>
+<li><p><strong>Detail:</strong> Uncheck an option (from 1.4.1).</p></li>
+<li><p><strong>Example:</strong> <a href="/examples#check-uncheck.html">check-uncheck</a></p></li>
+</ul>
 <h2><a class="anchor" aria-hidden="true" id="checkall"></a><a href="#checkall" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>checkAll</h2>
 <ul>
 <li><p><strong>Parameter:</strong>  -</p></li>
@@ -119,6 +131,12 @@
 <li><p><strong>Parameter:</strong>  -</p></li>
 <li><p><strong>Detail:</strong> Uncheck all checkboxes.</p></li>
 <li><p><strong>Example:</strong> <a href="/examples#checkAll-uncheckAll.html">checkAll-uncheckAll</a></p></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="checkinvert"></a><a href="#checkinvert" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>checkInvert</h2>
+<ul>
+<li><p><strong>Parameter:</strong>  -</p></li>
+<li><p><strong>Detail:</strong> Invert check of current checkboxes, not work with <code>single</code> option (from 1.4.1).</p></li>
+<li><p><strong>Example:</strong> <a href="/examples#checkInvert.html">checkInvert</a></p></li>
 </ul>
 <h2><a class="anchor" aria-hidden="true" id="focus"></a><a href="#focus" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>focus</h2>
 <ul>
@@ -144,4 +162,4 @@
 <li><p><strong>Detail:</strong> Destroy the Multiple Select. If you want remove the multiple select properties.</p></li>
 <li><p><strong>Example:</strong> <a href="/examples#destroy.html">destroy</a></p></li>
 </ul>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/events"><span class="arrow-prev">← </span><span>Events</span></a><a class="docs-next button" href="/docs/en/localizations"><span>Localizations</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#getoptions">getOptions</a></li><li><a href="#refreshoptions">refreshOptions</a></li><li><a href="#getselects">getSelects</a></li><li><a href="#setselects">setSelects</a></li><li><a href="#enable">enable</a></li><li><a href="#disable">disable</a></li><li><a href="#open">open</a></li><li><a href="#close">close</a></li><li><a href="#checkall">checkAll</a></li><li><a href="#uncheckall">uncheckAll</a></li><li><a href="#focus">focus</a></li><li><a href="#blur">blur</a></li><li><a href="#refresh">refresh</a></li><li><a href="#destroy">destroy</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="copyright">Copyright © 2010-2019 wenzhixin.net.cn</section></footer></div></body></html>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/events"><span class="arrow-prev">← </span><span>Events</span></a><a class="docs-next button" href="/docs/en/localizations"><span>Localizations</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#getoptions">getOptions</a></li><li><a href="#refreshoptions">refreshOptions</a></li><li><a href="#getselects">getSelects</a></li><li><a href="#setselects">setSelects</a></li><li><a href="#enable">enable</a></li><li><a href="#disable">disable</a></li><li><a href="#open">open</a></li><li><a href="#close">close</a></li><li><a href="#check">check</a></li><li><a href="#uncheck">uncheck</a></li><li><a href="#checkall">checkAll</a></li><li><a href="#uncheckall">uncheckAll</a></li><li><a href="#checkinvert">checkInvert</a></li><li><a href="#focus">focus</a></li><li><a href="#blur">blur</a></li><li><a href="#refresh">refresh</a></li><li><a href="#destroy">destroy</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="copyright">Copyright © 2010-2019 wenzhixin.net.cn</section></footer></div></body></html>

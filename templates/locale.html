@@ -5,43 +5,55 @@
     links: ['multiple-select.css'],
     scripts: [
       'multiple-select.js',
-      'https://unpkg.com/multiple-select@1.4.0/dist/multiple-select-locale-all.min.js'
+      'https://unpkg.com/multiple-select@1.4.1/dist/multiple-select-locale-all.min.js'
     ]
   })
 </script>
 
 <style>
 select {
-  width: 500px;
-}
-.mb20 {
-  margin-bottom: 20px;
+  width: 100%;
 }
 </style>
 
-<div class="mb20">
-  <select id="locale">
-    <option value="en-US">English</option>
-    <option value="zh-CN">简体中文</option>
-    <option value="zh-TW">繁體中文</option>
-  </select>
-</div>
-
 <div>
-  <select id="select" multiple="multiple">
-    <option value="1">January</option>
-    <option value="2">February</option>
-    <option value="3">March</option>
-    <option value="4">April</option>
-    <option value="5">May</option>
-    <option value="6">June</option>
-    <option value="7">July</option>
-    <option value="8">August</option>
-    <option value="9">September</option>
-    <option value="10">October</option>
-    <option value="11">November</option>
-    <option value="12">December</option>
-  </select>
+  <div class="form-group row">
+    <label class="col-sm-2">
+      Locale Select
+    </label>
+
+    <div class="col-sm-10">
+      <select id="locale">
+        <option value="en-US">English</option>
+        <option value="es-ES">Spanish</option>
+        <option value="zh-CN">简体中文</option>
+        <option value="zh-TW">繁體中文</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2">
+      Result Select
+    </label>
+
+    <div class="col-sm-10">
+      <select id="select" multiple="multiple">
+        <option value="1">January</option>
+        <option value="2">February</option>
+        <option value="3">March</option>
+        <option value="4">April</option>
+        <option value="5">May</option>
+        <option value="6">June</option>
+        <option value="7">July</option>
+        <option value="8">August</option>
+        <option value="9">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+      </select>
+    </div>
+  </div>
 </div>
 
 <script>

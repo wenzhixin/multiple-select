@@ -1,23 +1,6 @@
-$(function () {
-  var url = location.search.replace(/\?v=\d+&/, '').replace(/\?v=162&/, '')
-  $.ajax({
-    type: 'GET',
-    url: url + '?v=162', // todo: add version to solve cache problem
-    dataType: 'html',
-    global: false,
-    cache: true, // (warning: setting it to false will cause a timestamp and will call the request twice)
-    success: function (data) {
-      $('#example').html(data)
-      $('#source').text(_beautifySource(data))
-      window.hljs.initHighlightingOnLoad()
-    }
-  })
-})
-
 window._config = {
-  isDebug: location.hash.slice(1) === 'is-debug' ||
-  ['localhost'].indexOf(location.hostname) > -1,
-  cdnUrl: 'https://unpkg.com/multiple-select@1.4.0/dist/',
+  isDebug: ['localhost'].indexOf(location.hostname) > -1,
+  cdnUrl: 'https://unpkg.com/multiple-select@1.4.1/dist/',
   localUrl: 'http://localhost:8080/github/multiple-select/src/'
 }
 
@@ -137,6 +120,38 @@ function _beautifySource(data) {
 
   return lines.join('\n')
 }
+
+$(function () {
+  var query = {}
+  location.search.substring(1).split('&').forEach(function (item) {
+    query[item.split('=')[0]] = item.split('=')[1]
+  })
+  var url = query.url
+  var isSource = location.hash.substring(1) === 'view-source'
+
+  delete query.url
+
+  $.ajax({
+    type: 'GET',
+    url: url + '?' + $.param(query),
+    dataType: 'html',
+    global: false,
+    cache: true, // (warning: setting it to false will cause a timestamp and will call the request twice)
+    success: function (data) {
+      if (isSource) {
+        $('#example').hide().html(data)
+        $('.source-pre').show()
+        $('#source').text(_beautifySource(data))
+        window.hljs.initHighlightingOnLoad()
+      } else {
+        $('#example').html(data)
+      }
+    },
+    error: function () {
+      parent.location.href = 'index.html'
+    }
+  })
+})
 
 window.init = function (options_) {
   var options = $.extend({

@@ -1,7 +1,7 @@
 <script>
   init({
     title: 'Basic Select',
-    desc: 'Multiple Select can take a regular select box.',
+    desc: 'Custom i18n options.',
     links: ['multiple-select.css'],
     scripts: ['multiple-select.js']
   })
@@ -9,24 +9,34 @@
 
 <style>
 select {
-  width: 500px;
+  width: 100%;
 }
 </style>
 
-<select multiple="multiple">
-  <option value="1">一月</option>
-  <option value="2">二月</option>
-  <option value="3">三月</option>
-  <option value="4">四月</option>
-  <option value="5">五月</option>
-  <option value="6">六月</option>
-  <option value="7">七月</option>
-  <option value="8">八月</option>
-  <option value="9">九月</option>
-  <option value="10">十月</option>
-  <option value="11">十一月</option>
-  <option value="12">十二月</option>
-</select>
+<div>
+  <div class="form-group row">
+    <label class="col-sm-2">
+      Basic Select
+    </label>
+
+    <div class="col-sm-10">
+      <select multiple="multiple">
+        <option value="1">一月</option>
+        <option value="2">二月</option>
+        <option value="3">三月</option>
+        <option value="4">四月</option>
+        <option value="5">五月</option>
+        <option value="6">六月</option>
+        <option value="7">七月</option>
+        <option value="8">八月</option>
+        <option value="9">九月</option>
+        <option value="10">十月</option>
+        <option value="11">十一月</option>
+        <option value="12">十二月</option>
+      </select>
+    </div>
+  </div>
+</div>
 
 <script>
   function mounted() {
