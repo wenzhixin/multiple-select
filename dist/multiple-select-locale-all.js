@@ -7,7 +7,7 @@
   $ = $ && $.hasOwnProperty('default') ? $['default'] : $;
 
   /**
-   * Multiple Select English translation
+   * Multiple Select en-US translation
    * Author: Zhixin Wen<wenzhixin2010@gmail.com>
    */
 
@@ -28,7 +28,28 @@
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['en-US']);
 
   /**
-   * Multiple Select English translation
+   * Multiple Select es-ES translation
+   * Author: Zhixin Wen<wenzhixin2010@gmail.com>
+   */
+
+  $.fn.multipleSelect.locales['es-ES'] = {
+    formatSelectAll: function formatSelectAll() {
+      return '[Seleccionar todo]';
+    },
+    formatAllSelected: function formatAllSelected() {
+      return 'Todos seleccionados';
+    },
+    formatCountSelected: function formatCountSelected(count, total) {
+      return count + ' de ' + total + ' seleccionado';
+    },
+    formatNoMatchesFound: function formatNoMatchesFound() {
+      return 'No se encontraron coincidencias';
+    }
+  };
+  $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['es-ES']);
+
+  /**
+   * Multiple Select zh-CN translation
    * Author: Zhixin Wen<wenzhixin2010@gmail.com>
    */
 
@@ -49,7 +70,7 @@
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['zh-CN']);
 
   /**
-   * Multiple Select English translation
+   * Multiple Select zh-TW translation
    * Author: Zhixin Wen<wenzhixin2010@gmail.com>
    */
 

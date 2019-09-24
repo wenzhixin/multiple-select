@@ -7,7 +7,7 @@
   $ = $ && $.hasOwnProperty('default') ? $['default'] : $;
 
   /**
-   * Multiple Select English translation
+   * Multiple Select zh-TW translation
    * Author: Zhixin Wen<wenzhixin2010@gmail.com>
    */
 

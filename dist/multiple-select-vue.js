@@ -1690,6 +1690,7 @@
 	//
 	//
 	//
+	//
 	var $ = window.jQuery;
 
 	var deepCopy = function deepCopy(arg) {
@@ -1704,7 +1705,7 @@
 	  name: 'MultipleSelect',
 	  props: {
 	    value: {
-	      type: [String, Array],
+	      type: [String, Number, Array],
 	      default: undefined
 	    },
 	    name: {
@@ -1712,6 +1713,10 @@
 	      default: undefined
 	    },
 	    single: {
+	      type: Boolean,
+	      default: false
+	    },
+	    disabled: {
 	      type: Boolean,
 	      default: false
 	    },
@@ -1738,6 +1743,32 @@
 	    };
 	  },
 	  watch: {
+	    value: function value() {
+	      if (this.currentValue === this.value) {
+	        return;
+	      }
+
+	      this.currentValue = this.value;
+
+	      this._initDefaultValue();
+	    },
+	    single: function single() {
+	      this._initSelect();
+	    },
+	    disabled: function disabled() {
+	      var _this = this;
+
+	      this.$nextTick(function () {
+	        if (_this.disabled) {
+	          _this.disable();
+	        } else {
+	          _this.enable();
+	        }
+	      });
+	    },
+	    width: function width() {
+	      this._initSelect();
+	    },
 	    options: {
 	      handler: function handler() {
 	        this._initSelect();
@@ -1746,20 +1777,26 @@
 	    },
 	    data: {
 	      handler: function handler() {
-	        this.load(deepCopy(this.data));
+	        this._initSelect();
 	      },
 	      deep: true
 	    }
 	  },
 	  mounted: function mounted() {
-	    var _this = this;
+	    var _this2 = this;
 
 	    this.$select = $(this.$el).change(function () {
-	      var value = _this.$select.val();
+	      var selects = _this2.getSelects();
 
-	      _this.$emit('input', value);
+	      if (!selects.length) {
+	        return;
+	      }
 
-	      _this.$emit('change', value);
+	      _this2.currentValue = Array.isArray(_this2.currentValue) ? selects : selects[0];
+
+	      _this2.$emit('input', _this2.currentValue);
+
+	      _this2.$emit('change', _this2.currentValue);
 	    });
 
 	    var _loop = function _loop(event) {
@@ -1769,7 +1806,7 @@
 	            args[_key] = arguments[_key];
 	          }
 
-	          _this.$emit.apply(_this, [event].concat(args));
+	          _this2.$emit.apply(_this2, [event].concat(args));
 	        };
 	      }
 	    };
@@ -1779,6 +1816,8 @@
 	    }
 
 	    this._initSelect();
+
+	    this._initDefaultValue();
 	  },
 	  methods: _objectSpread2({
 	    _initSelect: function _initSelect() {
@@ -1794,6 +1833,13 @@
 	      } else {
 	        this.refreshOptions(options);
 	      }
+	    },
+	    _initDefaultValue: function _initDefaultValue() {
+	      var _this3 = this;
+
+	      this.$nextTick(function () {
+	        _this3.setSelects(Array.isArray(_this3.currentValue) ? _this3.currentValue : [_this3.currentValue]);
+	      });
 	    }
 	  }, function () {
 	    var res = {};
@@ -1942,7 +1988,7 @@
 	          expression: "currentValue"
 	        }
 	      ],
-	      attrs: { name: _vm.name, multiple: !_vm.single },
+	      attrs: { name: _vm.name, multiple: !_vm.single, disabled: _vm.disabled },
 	      on: {
 	        change: function($event) {
 	          var $$selectedVal = Array.prototype.filter

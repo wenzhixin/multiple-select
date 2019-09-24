@@ -99,21 +99,27 @@ class Index extends React.Component {
 
             <div className="blockElement fourByGridBlock">
               <div className="blockContent">
-                <h2>Latest release v1.4.0 (2019-09-01)</h2>
-                <MarkdownBlock>- **New:** Added `data` support.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added vue component.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added `locale` support.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added `getOptions` method.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added `singleRadio` option to support hide radio buttons.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added new website.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added bower.json.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added vue-starter example.</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Improved the label element for select.</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Improved text display only one option.</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Fixed IE build error with core-js devDependencies.</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Fixed `onCheckAll/onUncheckAll` trigger bug.</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Fixed `disabled` options cannot show after filtering.</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Fixed `single` filter bug.</MarkdownBlock>
+                <h2>Latest release v1.4.1 (2019-09-24)</h2>
+                <MarkdownBlock>- **New:** Added `displayHtml` option.</MarkdownBlock>
+                <MarkdownBlock>- **New:** Added `html` type of `getSelects` method.</MarkdownBlock>
+                <MarkdownBlock>- **New:** Added level support for single group.</MarkdownBlock>
+                <MarkdownBlock>- **New:** Added `filterByDataLength` option.</MarkdownBlock>
+                <MarkdownBlock>- **New:** Added `customFilter` option support.</MarkdownBlock>
+                <MarkdownBlock>- **New:** Added optgroup `styler` support and updated parameter.</MarkdownBlock>
+                <MarkdownBlock>- **New:** Added `check` and `uncheck` methods.</MarkdownBlock>
+                <MarkdownBlock>- **New:** Added checkInvert method.</MarkdownBlock>
+                <MarkdownBlock>- **New:** Added `es-ES` locale.</MarkdownBlock>
+                <MarkdownBlock>- **New:** Added data-* attributes support.</MarkdownBlock>
+                <MarkdownBlock>- **New:** Added `disabled` prop of vue component.</MarkdownBlock>
+                <MarkdownBlock>- **New:** Added Number support for `v-model` of vue component.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Improved default `width` of select.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Improved `single` select style and label bug.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Improved `v-model` and data of vue component.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Fixed init cannot select all bug.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Fixed refresh method bug.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Fixed `filterAcceptOnEnter` bug with `single` option.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Removed multiple-select png.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Disabled `esc` action when `keepOpen` is true.</MarkdownBlock>
               </div>
             </div>
           </div>
