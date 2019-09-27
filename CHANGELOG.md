@@ -2,6 +2,7 @@
 
 ### 1.4.2
 
+- **Update:** Improved onAfterCreate event.
 - **Update:** Fixed destroyed bug of vue component.
 
 ### 1.4.1
