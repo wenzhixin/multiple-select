@@ -1,5 +1,9 @@
 ## Changelog
 
+### 1.4.2
+
+- **Update:** Fixed destroyed bug of vue component.
+
 ### 1.4.1
 
 - **New:** Added `displayHtml` option.

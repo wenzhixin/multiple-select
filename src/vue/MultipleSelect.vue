@@ -125,6 +125,10 @@ export default {
     this._initDefaultValue()
   },
 
+  destroyed () {
+    this.destroy()
+  },
+
   methods: {
     _initSelect () {
       const options = {
