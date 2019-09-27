@@ -14,6 +14,7 @@ class MultipleSelect {
     this.initFilter()
     this.initDrop()
     this.initView()
+    this.options.onAfterCreate()
   }
 
   initLocale () {
@@ -105,8 +106,6 @@ class MultipleSelect {
         }
       })
     }
-
-    this.options.onAfterCreate()
   }
 
   initData () {
