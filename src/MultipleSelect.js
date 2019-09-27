@@ -653,7 +653,7 @@ class MultipleSelect {
 
         html.push('[')
         html.push(text)
-        if ($children.length > $selected.length) {
+        if ($children.length >= $selected.length) {
           const list = []
           $selected.each((j, elem) => {
             list.push($(elem).parent().text())
