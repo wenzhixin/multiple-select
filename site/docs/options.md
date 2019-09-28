@@ -69,6 +69,15 @@ Option format:
 ]
 ```
 
+Or String/Number Array:
+
+```js
+['option1']
+
+
+[1]
+```
+
 - **Default:** []
 
 - **Example:** <a href="/examples#data.html">The Data</a>.
