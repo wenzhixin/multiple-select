@@ -2,6 +2,7 @@
 
 ### 1.4.2
 
+- **New:** Added string/number array support for `data` option.
 - **Update:** Improved onAfterCreate event.
 - **Update:** Fixed destroyed bug of vue component.
 - **Update:** Fixed display bug of only one member of group.

@@ -121,7 +121,15 @@ class MultipleSelect {
           })
         }
       })
-      this.data = this.options.data
+      this.data = this.options.data.map(it => {
+        if (typeof it === 'string' || typeof it === 'number') {
+          return {
+            text: it,
+            value: it
+          }
+        }
+        return it
+      })
       return
     }
 
