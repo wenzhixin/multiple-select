@@ -85,7 +85,7 @@ There is an [vue-starter](https://github.com/wenzhixin/multiple-select/tree/deve
 
 ```js
 import jQuery from 'jquery'
-window.jQuery = jQuery
+window.$ = window.jQuery = jQuery
 ```
 
 `plugins/select.js`
