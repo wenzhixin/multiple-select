@@ -42,7 +42,7 @@ class MultipleSelect {
     const name = el.getAttribute('name') || this.options.name || ''
 
     // hide select element
-    this.$el = this.$el.hide()
+    this.$el.hide()
 
     // label element
     this.$label = this.$el.closest('label')
@@ -340,6 +340,8 @@ class MultipleSelect {
     }
 
     this.$parent.css('width', this.options.width || computedWidth)
+
+    this.$el.show().addClass('ms-offscreen')
   }
 
   events () {
@@ -825,7 +827,7 @@ class MultipleSelect {
     if (!this.$parent) {
       return
     }
-    this.$el.before(this.$parent).show()
+    this.$el.before(this.$parent).removeClass('ms-offscreen')
     this.$parent.remove()
 
     if (this.fromHtml) {
