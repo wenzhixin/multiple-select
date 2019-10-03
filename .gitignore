@@ -5,8 +5,8 @@ build
 docs_
 
 # use scss instead
-src/multiple-select.css
-src/multiple-select.css.map
+src/**/*.css
+src/**/*.css.map
 
 # Common IDE files
 nbproject

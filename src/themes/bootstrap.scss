@@ -1,0 +1,14 @@
+.ms-parent.form-control {
+  padding: 0;
+
+  .ms-choice {
+    height: 100%;
+    border: 0;
+    outline: 0;
+
+    > span {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+}
