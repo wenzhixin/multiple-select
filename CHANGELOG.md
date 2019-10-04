@@ -4,6 +4,7 @@
 
 - **New:** Added string/number array support for `data` option.
 - **New:** Added required attribute support.
+- **New:** Added bootstrap(v3, v4) themes.
 - **Update:** Improved onAfterCreate event.
 - **Update:** Fixed destroyed bug of vue component.
 - **Update:** Fixed display bug of only one member of group.
