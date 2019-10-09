@@ -8,6 +8,7 @@
 - **Update:** Improved `onAfterCreate` event.
 - **Update:** Fixed `destroyed` bug of vue component.
 - **Update:** Fixed display bug of only one member of group.
+- **Update:** Fixed single group filter bug.
 
 ### 1.4.1
 
