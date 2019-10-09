@@ -258,7 +258,7 @@ class MultipleSelect {
 
     this.$searchInput = this.$drop.find('.ms-search input')
     this.$selectAll = this.$drop.find(`input[${this.selectAllName}]`)
-    this.$selectGroups = this.$drop.find(`input[${this.selectGroupName}]`)
+    this.$selectGroups = this.$drop.find(`input[${this.selectGroupName}],span[${this.selectGroupName}]`)
     this.$selectItems = this.$drop.find(`input[${this.selectItemName}]:enabled`)
     this.$disableItems = this.$drop.find(`input[${this.selectItemName}]:disabled`)
     this.$noResults = this.$drop.find('.ms-no-results')
@@ -285,7 +285,7 @@ class MultipleSelect {
           row.disabled ? 'disabled' : '', row.group
         ),
         this.options.hideOptgroupCheckboxes || this.options.single
-          ? ''
+          ? sprintf`<span ${s}></span>`(this.selectGroupName)
           : sprintf`<input type="checkbox" ${s} ${s}>`(
             this.selectGroupName, row.disabled ? 'disabled="disabled"' : ''
           ),
@@ -646,7 +646,11 @@ class MultipleSelect {
       values.push($(el).val())
     })
 
-    if (type === 'text' && this.$selectGroups.length) {
+    if (
+      type === 'text' &&
+      this.$selectGroups.length &&
+      !this.options.single
+    ) {
       texts = []
       this.$selectGroups.each((i, el) => {
         const html = []
@@ -803,8 +807,11 @@ class MultipleSelect {
           $parent.closest('li')[func]()
           this.$selectItems.filter(`[data-group="${group}"]`).closest('li')[func]()
         } else {
-          const $items = this.$selectItems.filter(':visible')
-          const hasText = $items.filter(sprintf`[data-group="${s}"]`(group)).length
+          const hasText = this.$selectItems
+            .filter(`[data-group="${group}"]`)
+            .closest('li').filter(':visible')
+            .length
+
           $parent.closest('li')[hasText ? 'show' : 'hide']()
         }
       })
