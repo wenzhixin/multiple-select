@@ -756,7 +756,7 @@
     }
   });
 
-  var VERSION = '1.4.1';
+  var VERSION = '1.4.2';
   var DEFAULTS = {
     name: '',
     placeholder: '',
@@ -2714,7 +2714,7 @@
   };
 
   function _templateObject26() {
-    var data = _taggedTemplateLiteral(["[data-group=\"", "\"]"]);
+    var data = _taggedTemplateLiteral(["[value=\"", "\"]"]);
 
     _templateObject26 = function _templateObject26() {
       return data;
@@ -2754,7 +2754,7 @@
   }
 
   function _templateObject22() {
-    var data = _taggedTemplateLiteral(["[value=\"", "\"]"]);
+    var data = _taggedTemplateLiteral(["[", "][data-group=\"", "\"]"]);
 
     _templateObject22 = function _templateObject22() {
       return data;
@@ -2764,7 +2764,7 @@
   }
 
   function _templateObject21() {
-    var data = _taggedTemplateLiteral(["[", "][data-group=\"", "\"]"]);
+    var data = _taggedTemplateLiteral(["input[", "]:checked"]);
 
     _templateObject21 = function _templateObject21() {
       return data;
@@ -2774,7 +2774,7 @@
   }
 
   function _templateObject20() {
-    var data = _taggedTemplateLiteral(["input[", "]:checked"]);
+    var data = _taggedTemplateLiteral(["[data-group=\"", "\"]"]);
 
     _templateObject20 = function _templateObject20() {
       return data;
@@ -2794,7 +2794,7 @@
   }
 
   function _templateObject18() {
-    var data = _taggedTemplateLiteral(["[data-group=\"", "\"]"]);
+    var data = _taggedTemplateLiteral(["<span>", "</span>"]);
 
     _templateObject18 = function _templateObject18() {
       return data;
@@ -2804,7 +2804,7 @@
   }
 
   function _templateObject17() {
-    var data = _taggedTemplateLiteral(["<span>", "</span>"]);
+    var data = _taggedTemplateLiteral([" data-group=\"", "\""]);
 
     _templateObject17 = function _templateObject17() {
       return data;
@@ -2814,7 +2814,7 @@
   }
 
   function _templateObject16() {
-    var data = _taggedTemplateLiteral([" data-group=\"", "\""]);
+    var data = _taggedTemplateLiteral(["<input type=\"", "\" value=\"", "\" ", "", "", "", ">"]);
 
     _templateObject16 = function _templateObject16() {
       return data;
@@ -2824,7 +2824,7 @@
   }
 
   function _templateObject15() {
-    var data = _taggedTemplateLiteral(["<input type=\"", "\" value=\"", "\" ", "", "", "", ">"]);
+    var data = _taggedTemplateLiteral(["<label class=\"", "\">"]);
 
     _templateObject15 = function _templateObject15() {
       return data;
@@ -2834,7 +2834,7 @@
   }
 
   function _templateObject14() {
-    var data = _taggedTemplateLiteral(["<label class=\"", "\">"]);
+    var data = _taggedTemplateLiteral(["<li class=\"", " ", "\" ", " ", ">"]);
 
     _templateObject14 = function _templateObject14() {
       return data;
@@ -2844,7 +2844,7 @@
   }
 
   function _templateObject13() {
-    var data = _taggedTemplateLiteral(["<li class=\"", " ", "\" ", " ", ">"]);
+    var data = _taggedTemplateLiteral(["style=\"", "\""]);
 
     _templateObject13 = function _templateObject13() {
       return data;
@@ -2854,7 +2854,7 @@
   }
 
   function _templateObject12() {
-    var data = _taggedTemplateLiteral(["style=\"", "\""]);
+    var data = _taggedTemplateLiteral(["<input type=\"checkbox\" ", " ", ">"]);
 
     _templateObject12 = function _templateObject12() {
       return data;
@@ -2864,7 +2864,7 @@
   }
 
   function _templateObject11() {
-    var data = _taggedTemplateLiteral(["<input type=\"checkbox\" ", " ", ">"]);
+    var data = _taggedTemplateLiteral(["<span ", "></span>"]);
 
     _templateObject11 = function _templateObject11() {
       return data;
@@ -2992,6 +2992,7 @@
         this.initFilter();
         this.initDrop();
         this.initView();
+        this.options.onAfterCreate();
       }
     }, {
       key: "initLocale",
@@ -3022,7 +3023,7 @@
         var el = this.$el[0];
         var name = el.getAttribute('name') || this.options.name || ''; // hide select element
 
-        this.$el = this.$el.hide(); // label element
+        this.$el.hide(); // label element
 
         this.$label = this.$el.closest('label');
 
@@ -3069,8 +3070,6 @@
             }
           });
         }
-
-        this.options.onAfterCreate();
       }
     }, {
       key: "initData",
@@ -3088,7 +3087,16 @@
               });
             }
           });
-          this.data = this.options.data;
+          this.data = this.options.data.map(function (it) {
+            if (typeof it === 'string' || typeof it === 'number') {
+              return {
+                text: it,
+                value: it
+              };
+            }
+
+            return it;
+          });
           return;
         }
 
@@ -3226,7 +3234,7 @@
         this.$drop.find('.multiple').css('width', "".concat(this.options.multipleWidth, "px"));
         this.$searchInput = this.$drop.find('.ms-search input');
         this.$selectAll = this.$drop.find("input[".concat(this.selectAllName, "]"));
-        this.$selectGroups = this.$drop.find("input[".concat(this.selectGroupName, "]"));
+        this.$selectGroups = this.$drop.find("input[".concat(this.selectGroupName, "],span[").concat(this.selectGroupName, "]"));
         this.$selectItems = this.$drop.find("input[".concat(this.selectItemName, "]:enabled"));
         this.$disableItems = this.$drop.find("input[".concat(this.selectItemName, "]:disabled"));
         this.$noResults = this.$drop.find('.ms-no-results');
@@ -3252,7 +3260,7 @@
           var _style = _customStyle ? sprintf(_templateObject9(), s)(_customStyle) : '';
 
           var html = [];
-          html.push(["<li class=\"group ".concat(classes, "\" ").concat(_style, ">"), sprintf(_templateObject10(), s, s)(row.disabled ? 'disabled' : '', row.group), this.options.hideOptgroupCheckboxes || this.options.single ? '' : sprintf(_templateObject11(), s, s)(this.selectGroupName, row.disabled ? 'disabled="disabled"' : ''), row.label, '</label>', '</li>'].join(''));
+          html.push(["<li class=\"group ".concat(classes, "\" ").concat(_style, ">"), sprintf(_templateObject10(), s, s)(row.disabled ? 'disabled' : '', row.group), this.options.hideOptgroupCheckboxes || this.options.single ? sprintf(_templateObject11(), s)(this.selectGroupName) : sprintf(_templateObject12(), s, s)(this.selectGroupName, row.disabled ? 'disabled="disabled"' : ''), row.label, '</label>', '</li>'].join(''));
           html.push(row.children.map(function (child) {
             return _this6.initListItem(child, 1);
           }).join(''));
@@ -3260,14 +3268,14 @@
         }
 
         var customStyle = this.options.styler(row);
-        var style = customStyle ? sprintf(_templateObject12(), s)(customStyle) : '';
+        var style = customStyle ? sprintf(_templateObject13(), s)(customStyle) : '';
         classes += row.classes || '';
 
         if (level && this.options.single) {
           classes += "option-level-".concat(level, " ");
         }
 
-        return [sprintf(_templateObject13(), s, s, s, s)(multiple, classes, title, style), sprintf(_templateObject14(), s)(row.disabled ? 'disabled' : ''), sprintf(_templateObject15(), s, s, s, s, s, s)(type, row.value, this.selectItemName, row.selected ? ' checked="checked"' : '', row.disabled ? ' disabled="disabled"' : '', sprintf(_templateObject16(), s)(row.group)), sprintf(_templateObject17(), s)(row.text), '</label>', '</li>'].join('');
+        return [sprintf(_templateObject14(), s, s, s, s)(multiple, classes, title, style), sprintf(_templateObject15(), s)(row.disabled ? 'disabled' : ''), sprintf(_templateObject16(), s, s, s, s, s, s)(type, row.value, this.selectItemName, row.selected ? ' checked="checked"' : '', row.disabled ? ' disabled="disabled"' : '', sprintf(_templateObject17(), s)(row.group)), sprintf(_templateObject18(), s)(row.text), '</label>', '</li>'].join('');
       }
     }, {
       key: "initView",
@@ -3285,6 +3293,7 @@
         }
 
         this.$parent.css('width', this.options.width || computedWidth);
+        this.$el.show().addClass('ms-offscreen');
       }
     }, {
       key: "events",
@@ -3374,7 +3383,7 @@
 
           var $items = _this7.$selectItems.filter(':visible');
 
-          var $children = $items.filter(sprintf(_templateObject18(), s)(group));
+          var $children = $items.filter(sprintf(_templateObject19(), s)(group));
           var checked = $children.length !== $children.filter(':checked').length;
           $children.prop('checked', checked);
 
@@ -3574,7 +3583,7 @@
 
         $.each(this.$selectGroups, function (i, val) {
           var group = $(val).parent()[0].getAttribute('data-group');
-          var $children = $items.filter(sprintf(_templateObject19(), s)(group));
+          var $children = $items.filter(sprintf(_templateObject20(), s)(group));
           $(val).prop('checked', $children.length && $children.length === $children.filter(':checked').length);
         });
       }
@@ -3606,19 +3615,19 @@
 
         var texts = [];
         var values = [];
-        this.$drop.find(sprintf(_templateObject20(), s)(this.selectItemName)).each(function (i, el) {
+        this.$drop.find(sprintf(_templateObject21(), s)(this.selectItemName)).each(function (i, el) {
           texts.push($(el).next()[type === 'html' ? 'html' : 'text']());
           values.push($(el).val());
         });
 
-        if (type === 'text' && this.$selectGroups.length) {
+        if (type === 'text' && this.$selectGroups.length && !this.options.single) {
           texts = [];
           this.$selectGroups.each(function (i, el) {
             var html = [];
             var text = $.trim($(el).parent().text());
             var group = $(el).parent().data('group');
 
-            var $children = _this8.$drop.find(sprintf(_templateObject21(), s, s)(_this8.selectItemName, group));
+            var $children = _this8.$drop.find(sprintf(_templateObject22(), s, s)(_this8.selectItemName, group));
 
             var $selected = $children.filter(':checked');
 
@@ -3629,7 +3638,7 @@
             html.push('[');
             html.push(text);
 
-            if ($children.length > $selected.length) {
+            if ($children.length >= $selected.length) {
               var list = [];
               $selected.each(function (j, elem) {
                 list.push($(elem).parent().text());
@@ -3652,9 +3661,9 @@
         this.$selectItems.prop('checked', false);
         this.$disableItems.prop('checked', false);
         $.each(values, function (i, value) {
-          _this9.$selectItems.filter(sprintf(_templateObject22(), s)(value)).prop('checked', true);
+          _this9.$selectItems.filter(sprintf(_templateObject23(), s)(value)).prop('checked', true);
 
-          _this9.$disableItems.filter(sprintf(_templateObject23(), s)(value)).prop('checked', true);
+          _this9.$disableItems.filter(sprintf(_templateObject24(), s)(value)).prop('checked', true);
         });
         this.$selectAll.prop('checked', this.$selectItems.length === this.$selectItems.filter(':checked').length + this.$disableItems.filter(':checked').length);
         $.each(this.$selectGroups, function (i, val) {
@@ -3694,8 +3703,8 @@
     }, {
       key: "_check",
       value: function _check(value, checked) {
-        this.$selectItems.filter(sprintf(_templateObject24(), s)(value)).prop('checked', checked);
-        this.$disableItems.filter(sprintf(_templateObject25(), s)(value)).prop('checked', checked);
+        this.$selectItems.filter(sprintf(_templateObject25(), s)(value)).prop('checked', checked);
+        this.$disableItems.filter(sprintf(_templateObject26(), s)(value)).prop('checked', checked);
         this.update();
         this.updateOptGroupSelect(true);
         this.updateSelectAll(true, true);
@@ -3792,9 +3801,8 @@
 
               _this10.$selectItems.filter("[data-group=\"".concat(group, "\"]")).closest('li')[func]();
             } else {
-              var $items = _this10.$selectItems.filter(':visible');
+              var _hasText = _this10.$selectItems.filter("[data-group=\"".concat(group, "\"]")).closest('li').filter(':visible').length;
 
-              var _hasText = $items.filter(sprintf(_templateObject26(), s)(group)).length;
               $parent.closest('li')[_hasText ? 'show' : 'hide']();
             }
           }); // Check if no matches found
@@ -3819,7 +3827,7 @@
           return;
         }
 
-        this.$el.before(this.$parent).show();
+        this.$el.before(this.$parent).removeClass('ms-offscreen');
         this.$parent.remove();
 
         if (this.fromHtml) {

@@ -1819,6 +1819,9 @@
 
 	    this._initDefaultValue();
 	  },
+	  destroyed: function destroyed() {
+	    this.destroy();
+	  },
 	  methods: _objectSpread2({
 	    _initSelect: function _initSelect() {
 	      var options = _objectSpread2({}, deepCopy(this.options), {

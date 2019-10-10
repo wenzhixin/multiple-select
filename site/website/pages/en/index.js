@@ -99,27 +99,14 @@ class Index extends React.Component {
 
             <div className="blockElement fourByGridBlock">
               <div className="blockContent">
-                <h2>Latest release v1.4.1 (2019-09-24)</h2>
-                <MarkdownBlock>- **New:** Added `displayHtml` option.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added `html` type of `getSelects` method.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added level support for single group.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added `filterByDataLength` option.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added `customFilter` option support.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added optgroup `styler` support and updated parameter.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added `check` and `uncheck` methods.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added checkInvert method.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added `es-ES` locale.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added data-* attributes support.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added `disabled` prop of vue component.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added Number support for `v-model` of vue component.</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Improved default `width` of select.</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Improved `single` select style and label bug.</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Improved `v-model` and data of vue component.</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Fixed init cannot select all bug.</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Fixed refresh method bug.</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Fixed `filterAcceptOnEnter` bug with `single` option.</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Removed multiple-select png.</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Disabled `esc` action when `keepOpen` is true.</MarkdownBlock>
+                <h2>Latest release v1.4.2 (2019-10-10)</h2>
+                <MarkdownBlock>- **New:** Added `string/number` array support for `data` option.</MarkdownBlock>
+                <MarkdownBlock>- **New:** Added `required` attribute support.</MarkdownBlock>
+                <MarkdownBlock>- **New:** Added bootstrap(v3, v4) themes support.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Improved `onAfterCreate` event.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Fixed `destroyed` bug of vue component.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Fixed display bug of only one member of group.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Fixed single group filter bug.</MarkdownBlock>
               </div>
             </div>
           </div>
