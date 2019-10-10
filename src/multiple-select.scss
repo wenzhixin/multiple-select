@@ -2,6 +2,20 @@
  * @author zhixin wen <wenzhixin2010@gmail.com>
  */
 
+.ms-offscreen {
+  clip: rect(0 0 0 0)!important;
+  width: 1px!important;
+  height: 1px!important;
+  border: 0!important;
+  margin: 0!important;
+  padding: 0!important;
+  overflow: hidden!important;
+  position: absolute!important;
+  outline: 0!important;
+  left: auto!important;
+  top: auto!important;
+}
+
 .ms-parent {
   display: inline-block;
   position: relative;

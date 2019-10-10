@@ -1,5 +1,15 @@
 ## Changelog
 
+### 1.4.2
+
+- **New:** Added `string/number` array support for `data` option.
+- **New:** Added `required` attribute support.
+- **New:** Added bootstrap(v3, v4) themes support.
+- **Update:** Improved `onAfterCreate` event.
+- **Update:** Fixed `destroyed` bug of vue component.
+- **Update:** Fixed display bug of only one member of group.
+- **Update:** Fixed single group filter bug.
+
 ### 1.4.1
 
 - **New:** Added `displayHtml` option.

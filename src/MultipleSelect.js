@@ -14,6 +14,7 @@ class MultipleSelect {
     this.initFilter()
     this.initDrop()
     this.initView()
+    this.options.onAfterCreate()
   }
 
   initLocale () {
@@ -41,7 +42,7 @@ class MultipleSelect {
     const name = el.getAttribute('name') || this.options.name || ''
 
     // hide select element
-    this.$el = this.$el.hide()
+    this.$el.hide()
 
     // label element
     this.$label = this.$el.closest('label')
@@ -105,8 +106,6 @@ class MultipleSelect {
         }
       })
     }
-
-    this.options.onAfterCreate()
   }
 
   initData () {
@@ -122,7 +121,15 @@ class MultipleSelect {
           })
         }
       })
-      this.data = this.options.data
+      this.data = this.options.data.map(it => {
+        if (typeof it === 'string' || typeof it === 'number') {
+          return {
+            text: it,
+            value: it
+          }
+        }
+        return it
+      })
       return
     }
 
@@ -251,7 +258,7 @@ class MultipleSelect {
 
     this.$searchInput = this.$drop.find('.ms-search input')
     this.$selectAll = this.$drop.find(`input[${this.selectAllName}]`)
-    this.$selectGroups = this.$drop.find(`input[${this.selectGroupName}]`)
+    this.$selectGroups = this.$drop.find(`input[${this.selectGroupName}],span[${this.selectGroupName}]`)
     this.$selectItems = this.$drop.find(`input[${this.selectItemName}]:enabled`)
     this.$disableItems = this.$drop.find(`input[${this.selectItemName}]:disabled`)
     this.$noResults = this.$drop.find('.ms-no-results')
@@ -278,7 +285,7 @@ class MultipleSelect {
           row.disabled ? 'disabled' : '', row.group
         ),
         this.options.hideOptgroupCheckboxes || this.options.single
-          ? ''
+          ? sprintf`<span ${s}></span>`(this.selectGroupName)
           : sprintf`<input type="checkbox" ${s} ${s}>`(
             this.selectGroupName, row.disabled ? 'disabled="disabled"' : ''
           ),
@@ -333,6 +340,8 @@ class MultipleSelect {
     }
 
     this.$parent.css('width', this.options.width || computedWidth)
+
+    this.$el.show().addClass('ms-offscreen')
   }
 
   events () {
@@ -637,7 +646,11 @@ class MultipleSelect {
       values.push($(el).val())
     })
 
-    if (type === 'text' && this.$selectGroups.length) {
+    if (
+      type === 'text' &&
+      this.$selectGroups.length &&
+      !this.options.single
+    ) {
       texts = []
       this.$selectGroups.each((i, el) => {
         const html = []
@@ -654,7 +667,7 @@ class MultipleSelect {
 
         html.push('[')
         html.push(text)
-        if ($children.length > $selected.length) {
+        if ($children.length >= $selected.length) {
           const list = []
           $selected.each((j, elem) => {
             list.push($(elem).parent().text())
@@ -794,8 +807,11 @@ class MultipleSelect {
           $parent.closest('li')[func]()
           this.$selectItems.filter(`[data-group="${group}"]`).closest('li')[func]()
         } else {
-          const $items = this.$selectItems.filter(':visible')
-          const hasText = $items.filter(sprintf`[data-group="${s}"]`(group)).length
+          const hasText = this.$selectItems
+            .filter(`[data-group="${group}"]`)
+            .closest('li').filter(':visible')
+            .length
+
           $parent.closest('li')[hasText ? 'show' : 'hide']()
         }
       })
@@ -818,7 +834,7 @@ class MultipleSelect {
     if (!this.$parent) {
       return
     }
-    this.$el.before(this.$parent).show()
+    this.$el.before(this.$parent).removeClass('ms-offscreen')
     this.$parent.remove()
 
     if (this.fromHtml) {
