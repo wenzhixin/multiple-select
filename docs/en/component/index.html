@@ -60,6 +60,7 @@
   <span class="hljs-attribute">ref</span>=<span class="hljs-string">"select"</span>
   <span class="hljs-attribute">v-model</span>=<span class="hljs-string">"select"</span>
   <span class="hljs-attribute">width</span>=<span class="hljs-string">"200"</span>
+  :<span class="hljs-attribute">data</span>=<span class="hljs-string">"data"</span>
   :<span class="hljs-attribute">options</span>=<span class="hljs-string">"options"</span>
   @<span class="hljs-attribute">change</span>=<span class="hljs-string">"onChange"</span>
 /&gt;
@@ -100,6 +101,43 @@
 <p>Define the width property of the select, support a percentage setting.</p></li>
 <li><p><strong>Default:</strong> <code>undefined</code></p></li>
 </ul>
+<h3><a class="anchor" aria-hidden="true" id="data"></a><a href="#data" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>data</h3>
+<ul>
+<li><p><strong>Type:</strong> <code>Array</code></p></li>
+<li><p><strong>Detail:</strong></p>
+<p>The data to be loaded.</p>
+<p>Group format:</p></li>
+</ul>
+<pre><code class="hljs css language-js">[
+  {
+    <span class="hljs-attr">type</span>: <span class="hljs-string">'optgroup'</span>,
+    <span class="hljs-attr">label</span>: <span class="hljs-string">'Group 1'</span>,
+    <span class="hljs-attr">children</span>: [
+      {
+        <span class="hljs-attr">text</span>: <span class="hljs-string">'Option 1'</span>,
+        <span class="hljs-attr">value</span>: <span class="hljs-number">1</span>
+      }
+    ]
+  }
+]
+</code></pre>
+<p>Option format:</p>
+<pre><code class="hljs css language-js">[
+  {
+    <span class="hljs-attr">text</span>: <span class="hljs-string">'Option 1'</span>,
+    <span class="hljs-attr">value</span>: <span class="hljs-number">1</span>
+  }
+]
+</code></pre>
+<p>Or String/Number Array:</p>
+<pre><code class="hljs css language-js">[<span class="hljs-string">'option1'</span>]
+
+
+[<span class="hljs-number">1</span>]
+</code></pre>
+<ul>
+<li><strong>Default:</strong> <code>undefined</code></li>
+</ul>
 <h3><a class="anchor" aria-hidden="true" id="options"></a><a href="#options" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>options</h3>
 <ul>
 <li><p><strong>Type:</strong> <code>Object</code></p></li>
@@ -119,4 +157,4 @@
 <p>The calling method syntax: <code>this.$refs.select.methodName(parameter)</code>.</p>
 <p>Example: <code>this.$refs.select.getOptions()</code>.</p>
 <p>All methods are defined in <a href="/docs/en/methods/">Methods API</a>.</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/webpack"><span class="arrow-prev">← </span><span>Webpack</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#usage-example">Usage Example</a></li><li><a href="#props">Props</a><ul class="toc-headings"><li><a href="#v-model">v-model</a></li><li><a href="#name">name</a></li><li><a href="#single">single</a></li><li><a href="#disabled">disabled</a></li><li><a href="#width">width</a></li><li><a href="#options">options</a></li></ul></li><li><a href="#events">Events</a><ul class="toc-headings"><li><a href="#change">change</a></li><li><a href="#other-events">other events</a></li></ul></li><li><a href="#methods">Methods</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="copyright">Copyright © 2010-2019 wenzhixin.net.cn</section></footer></div></body></html>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/webpack"><span class="arrow-prev">← </span><span>Webpack</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#usage-example">Usage Example</a></li><li><a href="#props">Props</a><ul class="toc-headings"><li><a href="#v-model">v-model</a></li><li><a href="#name">name</a></li><li><a href="#single">single</a></li><li><a href="#disabled">disabled</a></li><li><a href="#width">width</a></li><li><a href="#data">data</a></li><li><a href="#options">options</a></li></ul></li><li><a href="#events">Events</a><ul class="toc-headings"><li><a href="#change">change</a></li><li><a href="#other-events">other events</a></li></ul></li><li><a href="#methods">Methods</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="copyright">Copyright © 2010-2019 wenzhixin.net.cn</section></footer></div></body></html>
