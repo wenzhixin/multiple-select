@@ -103,12 +103,9 @@ export default {
   mounted () {
     this.$select = $(this.$el).change(() => {
       const selects = this.getSelects()
-      if (!selects.length) {
-        return
-      }
-
       this.currentValue = Array.isArray(this.currentValue) ?
-        selects : selects[0]
+        selects : (selects.length ? selects[0] : undefined)
+
       this.$emit('input', this.currentValue)
       this.$emit('change', this.currentValue)
     })
@@ -122,11 +119,15 @@ export default {
     }
 
     this._initSelect()
-    this._initDefaultValue()
-  },
 
-  destroyed () {
-    this.destroy()
+    if (
+      !this.currentValue ||
+      Array.isArray(this.currentValue) && !this.currentValue.length
+    ) {
+      return
+    }
+
+    this._initDefaultValue()
   },
 
   methods: {

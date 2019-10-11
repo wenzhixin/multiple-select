@@ -1,5 +1,10 @@
 ## Changelog
 
+### 1.4.3
+
+- **Update:** Fixed `defaultValue` error without `v-model`.
+- **Update:** Fixed uncheck all cannot trigger `change` bug.
+
 ### 1.4.2
 
 - **New:** Added `string/number` array support for `data` option.
