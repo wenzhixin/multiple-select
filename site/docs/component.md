@@ -12,6 +12,7 @@ title: Component
   ref="select"
   v-model="select"
   width="200"
+  :data="data"
   :options="options"
   @change="onChange"
 />
@@ -66,6 +67,53 @@ title: Component
 - **Detail:**
 
   Define the width property of the select, support a percentage setting.
+
+- **Default:** `undefined`
+
+### data
+
+- **Type:** `Array`
+
+- **Detail:**
+
+  The data to be loaded.
+
+  Group format:
+
+```js
+[
+  {
+    type: 'optgroup',
+    label: 'Group 1',
+    children: [
+      {
+        text: 'Option 1',
+        value: 1
+      }
+    ]
+  }
+]
+```
+
+Option format:
+
+```js
+[
+  {
+    text: 'Option 1',
+    value: 1
+  }
+]
+```
+
+Or String/Number Array:
+
+```js
+['option1']
+
+
+[1]
+```
 
 - **Default:** `undefined`
 
