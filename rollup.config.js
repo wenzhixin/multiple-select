@@ -2,7 +2,7 @@ import glob from 'glob'
 import babel from 'rollup-plugin-babel'
 import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
-import minify from 'rollup-plugin-babel-minify'
+import { terser } from 'rollup-plugin-terser'
 import inject from 'rollup-plugin-inject'
 import multiEntry from 'rollup-plugin-multi-entry'
 import vue from 'rollup-plugin-vue'
@@ -37,8 +37,12 @@ const plugins = [
 ]
 
 if (production) {
-  plugins.push(minify({
-    comments: false
+  plugins.push(terser({
+    output: {
+      comments () {
+        return false
+      }
+    }
   }))
 }
 

@@ -4,6 +4,7 @@
 
 - **Update:** Fixed `defaultValue` error without `v-model`.
 - **Update:** Fixed uncheck all cannot trigger `change` bug.
+- **Update:** Fixed min version throw cannot convert object to primitive value error.
 
 ### 1.4.2
 

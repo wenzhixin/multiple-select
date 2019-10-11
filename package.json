@@ -65,11 +65,11 @@
     "npm-run-all": "^4.1.5",
     "rollup": "^1.19.4",
     "rollup-plugin-babel": "^4.3.3",
-    "rollup-plugin-babel-minify": "^9.0.0",
     "rollup-plugin-commonjs": "^10.0.2",
     "rollup-plugin-inject": "^3.0.1",
     "rollup-plugin-multi-entry": "^2.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^5.1.2",
     "rollup-plugin-vue": "^5.0.1",
     "testcafe": "^1.4.1",
     "vue-template-compiler": "^2.6.10"
