@@ -83,18 +83,18 @@ export default {
       })
     },
     width () {
-      this._initSelect()
+      this._init()
     },
     options: {
       handler () {
-        this._initSelect()
+        this._init()
       },
       deep: true
     },
 
     data: {
       handler () {
-        this._initSelect()
+        this._init()
       },
       deep: true
     }
@@ -118,19 +118,23 @@ export default {
       }
     }
 
-    this._initSelect()
-
-    if (
-      !this.currentValue ||
-      Array.isArray(this.currentValue) && !this.currentValue.length
-    ) {
-      return
-    }
-
-    this._initDefaultValue()
+    this._init()
   },
 
   methods: {
+    _init () {
+      this._initSelect()
+
+      if (
+        !this.currentValue ||
+        Array.isArray(this.currentValue) && !this.currentValue.length
+      ) {
+        return
+      }
+
+      this._initDefaultValue()
+    },
+
     _initSelect () {
       const options = {
         ...deepCopy(this.options),
