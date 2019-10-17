@@ -25,3 +25,26 @@
 .bd-content #codefund #cf {
   margin-bottom: 20px!important;
 }
+
+.nav-footer {
+  text-align: center;
+}
+
+.footer-links {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 1em;
+  display: inline-block;
+}
+
+.footer-links li {
+  display: inline-block;
+}
+
+.footer-links li a {
+  color: #aaa;
+}
+
+.footer-links li+li {
+  margin-left: 1rem;
+}
