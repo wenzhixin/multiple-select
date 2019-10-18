@@ -54,13 +54,13 @@ select {
 
   function mounted() {
     $select.multipleSelect()
+
+    $('#destroyBtn').click(function () {
+      $select.multipleSelect('destroy')
+    })
+
+    $('#buildBtn').click(function () {
+      $select.multipleSelect()
+    })
   }
-
-  $('#destroyBtn').click(function () {
-    $select.multipleSelect('destroy')
-  })
-
-  $('#buildBtn').click(function () {
-    $select.multipleSelect()
-  })
 </script>
