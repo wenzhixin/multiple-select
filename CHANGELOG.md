@@ -2,10 +2,12 @@
 
 ### 1.4.3
 
+- **Update:** Updated vue-es build filename.
 - **Update:** Fixed `defaultValue` error without `v-model`.
 - **Update:** Fixed uncheck all cannot trigger `change` bug.
 - **Update:** Fixed `v-model` not work bug when `props` changed.
 - **Update:** Fixed min version throw cannot convert object to primitive value error.
+- **Update:** Removed label spaces of customFilter params.
 
 ### 1.4.2
 
