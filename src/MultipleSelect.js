@@ -788,9 +788,9 @@ class MultipleSelect {
         this.$selectItems.each((i, el) => {
           const $parent = $(el).parent()
           const hasText = this.options.customFilter(
-            removeDiacritics($parent.text().toLowerCase()),
+            removeDiacritics($parent.text().trim().toLowerCase()),
             removeDiacritics(text),
-            $parent.text(), originalText)
+            $parent.text().trim(), originalText)
           $parent.closest('li')[hasText ? 'show' : 'hide']()
         })
       }
