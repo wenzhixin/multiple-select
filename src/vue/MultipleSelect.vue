@@ -1,6 +1,5 @@
 <template>
   <select
-    v-model="currentValue"
     :name="name"
     :multiple="!single"
     :disabled="disabled"
@@ -83,18 +82,18 @@ export default {
       })
     },
     width () {
-      this._init()
+      this._initSelectValue()
     },
     options: {
       handler () {
-        this._init()
+        this._initSelectValue()
       },
       deep: true
     },
 
     data: {
       handler () {
-        this._init()
+        this._initSelectValue()
       },
       deep: true
     }
@@ -110,6 +109,15 @@ export default {
       this.$emit('change', this.currentValue)
     })
 
+    if (
+      !this.currentValue ||
+      Array.isArray(this.currentValue) && !this.currentValue.length
+    ) {
+      this.currentValue = this.$select.val()
+      this.$emit('input', this.currentValue)
+      this.$emit('change', this.currentValue)
+    }
+
     for (const event in $.fn.multipleSelect.defaults) {
       if (/^on[A-Z]/.test(event)) {
         $.fn.multipleSelect.defaults[event] = (...args) => {
@@ -118,11 +126,11 @@ export default {
       }
     }
 
-    this._init()
+    this._initSelectValue()
   },
 
   methods: {
-    _init () {
+    _initSelectValue () {
       this._initSelect()
 
       if (
