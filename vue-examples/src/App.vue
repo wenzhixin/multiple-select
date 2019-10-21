@@ -38,50 +38,47 @@
           class="corner-ribbon"
           href="javascript:"
           :title="title"
-          @click="isSource = !isSource"
+          @click="toggle"
         >
           {{ title }}
         </a>
       </div>
-      <Main
-        :current="current"
-        :is-source="isSource"
-      />
+      <router-view />
     </div>
   </div>
 </template>
 
 <script>
 import MS from './assets/MS'
-import Main from './views/Main'
 
 export default {
   name: 'App',
-  components: {
-    Main
-  },
   data () {
     return {
       list: MS,
-      current: 'SingleRow',
-      currentUrl: 'single-row.html',
       isSource: false
     }
   },
   computed: {
     title () {
       return this.isSource ? 'View Example' : 'View Source'
+    },
+    currentUrl () {
+      return this.$route.params.current + '.html'
     }
   },
   methods: {
     onSelect (item) {
-      this.current = item.url.replace('.html', '')
-        .replace(/^(\w)|-(\w)/g, ($0, $1, $2) => {
-          return $1 && $1.toUpperCase() || $2 && $2.toUpperCase()
-        })
-
-      this.currentUrl = item.url
+      if (this.currentUrl === item.url) {
+        return
+      }
+      this.$router.push('/' + item.url.replace('.html', ''))
       this.isSource = false
+    },
+    toggle () {
+      this.isSource = !this.isSource
+      this.$router.push('/' + this.$route.params.current +
+        (this.isSource ? '/view-source' : ''))
     }
   }
 }

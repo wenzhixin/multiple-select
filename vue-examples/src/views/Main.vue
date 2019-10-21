@@ -47,10 +47,6 @@ export default {
     current: {
       type: String,
       default: ''
-    },
-    isSource: {
-      type: Boolean,
-      default: false
     }
   },
   data () {
@@ -59,8 +55,14 @@ export default {
     }
   },
   computed: {
+    isSource () {
+      return this.$route.name === 'view-source'
+    },
     component () {
-      return registry.components.find(it => it.name === this.current)
+      const name = this.current.replace(/^(\w)|-(\w)/g, ($0, $1, $2) => {
+        return $1 && $1.toUpperCase() || $2 && $2.toUpperCase()
+      })
+      return registry.components.find(it => it.name === name)
     },
     componentLoader () {
       return this.component && this.component.default
