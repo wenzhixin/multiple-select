@@ -31,18 +31,18 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #codefund {
   margin: 0 0 20px 0!important;
   display: flex;
   justify-content: flex-end;
 }
 
-#codefund .cf-wrapper {
+#codefund /deep/ .cf-wrapper {
   font-size: 13px!important;
 }
 
-#codefund .cf-powered-by {
+#codefund /deep/ .cf-powered-by {
   margin-top: 0!important;
 }
 </style>
