@@ -8,6 +8,7 @@
 - **Update:** Fixed `v-model` not work bug when `props` changed.
 - **Update:** Fixed min version throw cannot convert object to primitive value error.
 - **Update:** Removed label spaces of customFilter params.
+- **Update:** Removed text spaces of the option label.
 
 ### 1.4.2
 

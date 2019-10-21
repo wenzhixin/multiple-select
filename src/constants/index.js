@@ -44,7 +44,7 @@ const DEFAULTS = {
     return false
   },
   textTemplate ($elm) {
-    return $elm[0].innerHTML
+    return $elm[0].innerHTML.trim()
   },
   labelTemplate ($elm) {
     return $elm[0].getAttribute('label')
