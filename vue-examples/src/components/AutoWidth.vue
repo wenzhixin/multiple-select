@@ -32,7 +32,6 @@
 
       <div class="col-sm-9">
         <MultipleSelect
-
           single
           :data="data"
         />

@@ -43,6 +43,11 @@
                 "description": "Use <code>locale: true</code> to set the locale."
             },
             {
+                "title": "Large Select",
+                "url": "large-select.html",
+                "description": "Large select with filter."
+            },
+            {
                 "title": "The Themes",
                 "url": "themes.html",
                 "description": "Multiple select with bootstrap theme."
