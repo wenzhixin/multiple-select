@@ -110,7 +110,7 @@ export default {
     })
 
     if (
-      !this.currentValue ||
+      typeof this.currentValue === 'undefined' ||
       Array.isArray(this.currentValue) && !this.currentValue.length
     ) {
       this.currentValue = this.$select.val()
@@ -121,7 +121,7 @@ export default {
     for (const event in $.fn.multipleSelect.defaults) {
       if (/^on[A-Z]/.test(event)) {
         $.fn.multipleSelect.defaults[event] = (...args) => {
-          this.$emit(event, ...args)
+          this.$emit(event.replace(/([A-Z])/g, '-$1').toLowerCase(), ...args)
         }
       }
     }
@@ -134,7 +134,7 @@ export default {
       this._initSelect()
 
       if (
-        !this.currentValue ||
+        typeof this.currentValue === 'undefined' ||
         Array.isArray(this.currentValue) && !this.currentValue.length
       ) {
         return

@@ -3,6 +3,7 @@
 ### 1.4.3
 
 - **Update:** Updated vue-es build filename.
+- **Update:** Updated event name to lowercase hyphen format of vue component.
 - **Update:** Fixed `defaultValue` error without `v-model`.
 - **Update:** Fixed uncheck all cannot trigger `change` bug.
 - **Update:** Fixed `v-model` not work bug when `props` changed.
