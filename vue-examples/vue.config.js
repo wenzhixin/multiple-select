@@ -1,5 +1,6 @@
 module.exports = {
-  publicPath: './',
+  publicPath: process.env.NODE_ENV === 'production' ? '/vue-examples' : './',
+  css: { extract: false },
   chainWebpack: config => {
     config
       .plugin('html')
