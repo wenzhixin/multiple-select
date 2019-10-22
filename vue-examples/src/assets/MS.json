@@ -1,0 +1,277 @@
+[
+    {
+        "name": "Welcomes",
+        "list": [
+            {
+                "title": "Single Select",
+                "url": "single-row.html",
+                "description": "Use <code>single: true</code> to enable single row select."
+            },
+            {
+                "title": "Multiple Select",
+                "url": "basic.html",
+                "description": "Multiple select without any options."
+            },
+            {
+                "title": "Auto Width",
+                "url": "auto-width.html",
+                "description": "Auto width by default without setting width style."
+            },
+            {
+                "title": "Disabled Select",
+                "url": "disabled.html",
+                "description": "Show a disabled select width disabled attribute."
+            },
+            {
+                "title": "Selected/Disabled Options",
+                "url": "selected-disabled.html",
+                "description": "Selected or Disabled options."
+            },
+            {
+                "title": "Submit Select",
+                "url": "submit-select.html",
+                "description": "Submit select with <code>name</code> attribute in form."
+            },
+            {
+                "title": "The Data",
+                "url": "data.html",
+                "description": "Use <code>data</code> as data source."
+            },
+            {
+                "title": "The Locale",
+                "url": "locale.html",
+                "description": "Use <code>locale: true</code> to set the locale."
+            },
+            {
+                "title": "Large Select",
+                "url": "large-select.html",
+                "description": "Large select with filter."
+            },
+            {
+                "title": "The Themes",
+                "url": "themes.html",
+                "description": "Multiple select with bootstrap theme."
+            }
+        ]
+    },
+    {
+        "name": "Options",
+        "list": [
+            {
+                "title": "The Placeholder",
+                "url": "placeholder.html",
+                "description": "Use <code>placeholder</code> attribute or <code>placeholder: \\'\\'</code> option to set placeholder."
+            },
+            {
+                "title": "Single Radio",
+                "url": "single-radio.html",
+                "description": "Use <code>singleRadio: true</code> to show the radio input."
+            },
+            {
+                "title": "Hide Select All",
+                "url": "hide-select-all.html",
+                "description": "Use <code>selectAll: false</code> to hide select all."
+            },
+            {
+                "title": "Multiple Items",
+                "url": "multiple-items.html",
+                "description": "Use <code>multiple</code> and <code>multipleWidth</code> options to enable multiple items."
+            },
+            {
+                "title": "Hide Optgroup Check",
+                "url": "hide-optgroup-checkboxes.html",
+                "description": "Use <code>hideOptgroupCheckboxes: true</code> option to hide the optgroup checkboxes."
+            },
+            {
+                "title": "Custom Dropdown Width",
+                "url": "custom-dropdown-width.html",
+                "description": "Use <code>dropWidth: 580</code> option to custom the dropdown width."
+            },
+            {
+                "title": "Max Height",
+                "url": "max-height.html",
+                "description": "Use <code>maxHeight: 140</code> option to custom the dropdown max height."
+            },
+            {
+                "title": "The Position",
+                "url": "position.html",
+                "description": "Use <code>position: \\'top\\'</code> to set the select dropdown in top position."
+            },
+            {
+                "title": "Display Values",
+                "url": "display-values.html",
+                "description": "Use <code>displayValues: true</code> option to display selected values instead text."
+            },
+            {
+                "title": "Display Title",
+                "url": "display-title.html",
+                "description": "Use <code>displayTitle: true</code> option to display title of selected text."
+            },
+            {
+                "title": "Display Delimiter",
+                "url": "display-delimiter.html",
+                "description": "Use <code>displayDelimiter: \\' | \\'</code> option to custom the display delimiter."
+            },
+            {
+                "title": "Minimum Count Selected",
+                "url": "minimum-count-selected.html",
+                "description": "Use <code>minimumCountSelected: 8</code> option and the <code>%s of %s selected</code> will be shown only if more than 8 items where selected."
+            },
+            {
+                "title": "The Ellipsis",
+                "url": "ellipsis.html",
+                "description": "Use <code>ellipsis: true</code> option to display <code>...</code> after selected options instead of <code>%s of %s selected</code>."
+            },
+            {
+                "title": "Is Open",
+                "url": "is-open.html",
+                "description": "Use <code>isOpen: true</code> to open the dropdown by default."
+            },
+            {
+                "title": "Keep Open",
+                "url": "keep-open.html",
+                "description": "Use <code>keepOpen: true</code> to keep the select dropdown always open."
+            },
+            {
+                "title": "Open On Hover",
+                "url": "open-on-hover.html",
+                "description": "Use <code>openOnHover: true</code> to open the select dropdown by hover instead of click."
+            },
+            {
+                "title": "The Container",
+                "url": "container.html",
+                "description": "Use <code>container</code> option to solve the cut off problem for example parent node is <code>overflow: hidden</code>."
+            },
+            {
+                "title": "The Filter",
+                "url": "filter.html",
+                "description": "Use <code>filter: true</code> to enable filter feature."
+            },
+            {
+                "title": "Filter Only Optgroup",
+                "url": "filter-group.html",
+                "description": "Use <code>filterGroup: true</code> to filter optgroups only and not options."
+            },
+            {
+                "title": "Filter Placeholder",
+                "url": "filter-placeholder.html",
+                "description": "Use <code>filterPlaceholder: \\'The filter placeholder\\'</code> to set the filter placeholder."
+            },
+            {
+                "title": "Filter Accept On Enter",
+                "url": "filter-accept-on-enter.html",
+                "description": "Use <code>filterAcceptOnEnter: true</code> option to speed up keyboard use. Enter filter text and then hit <code>enter</code> or <code>space</code> will auto click <code>select all</code> and close the dropdown."
+            },
+            {
+                "title": "Filter By Data Length",
+                "url": "filter-by-data-length.html",
+                "description": "Use <code>filterByDataLength: 10</code> option to auto enable filter when the data length is more than 10."
+            },
+            {
+                "title": "Custom Filter",
+                "url": "custom-filter.html",
+                "description": "Use <code>customFilter</code> to custom filter, in this case we filter by <code>startWith</code>."
+            },
+            {
+                "title": "The Animate",
+                "url": "animate.html",
+                "description": "Use <code>animate</code> to define the animate of open or close the dropdown."
+            },
+            {
+                "title": "The Styler",
+                "url": "styler.html",
+                "description": "Use <code>styler</code> to custom the item style."
+            },
+            {
+                "title": "Text Template",
+                "url": "text-template.html",
+                "description": "Use <code>textTemplate</code> to custom the text template."
+            },
+            {
+                "title": "Label Template",
+                "url": "label-template.html",
+                "description": "Use <code>labelTemplate</code> to custom the optgroup label template."
+            }
+        ]
+    },
+    {
+        "name": "Methods",
+        "list": [
+            {
+                "title": "The getOptions",
+                "url": "getOptions.html",
+                "description": "Use <code>multipleSelect(\\'getOptions\\')</code> to get the options object."
+            },
+            {
+                "title": "The refreshOptions",
+                "url": "refreshOptions.html",
+                "description": "Use <code>multipleSelect(\\'refreshOptions\\', {})</code> to refresh the options object."
+            },
+            {
+                "title": "The setSelects/getSelects",
+                "url": "setSelects-getSelects.html",
+                "description": "Use <code>multipleSelect(\\'setSelects\\', [])</code> and <code>multipleSelect(\\'getSelects\\')</code> to set selects and get selects."
+            },
+            {
+                "title": "The enable/disable",
+                "url": "enable-disable.html",
+                "description": "Use <code>multipleSelect(\\'enable\\')</code> and <code>multipleSelect(\\'disable\\')</code> to enable and disable select."
+            },
+            {
+                "title": "The open/close",
+                "url": "open-close.html",
+                "description": "Use <code>multipleSelect(\\'open\\')</code> and <code>multipleSelect(\\'close\\')</code> to open and close the select dropdown list."
+            },
+            {
+                "title": "The check/uncheck",
+                "url": "check-uncheck.html",
+                "description": "Methods: <code>multipleSelect(\\'check\\', 2)</code> and <code>multipleSelect(\\'uncheck\\', 2)</code> to check and uncheck a select option."
+            },
+            {
+                "title": "The checkAll/uncheckAll",
+                "url": "checkAll-uncheckAll.html",
+                "description": "Use <code>multipleSelect(\\'checkAll\\')</code> and <code>multipleSelect(\\'uncheckAll\\')</code> to check and uncheck all options."
+            },
+            {
+                "title": "The checkInvert",
+                "url": "checkInvert.html",
+                "description": "Methods: <code>$select.multipleSelect(\\'checkInvert\\')</code> to invert check all items."
+            },
+            {
+                "title": "The focus/blur",
+                "url": "focus-blur.html",
+                "description": "Use <code>multipleSelect(\\'focus\\')</code> and <code>multipleSelect(\\'blur\\')</code> to focus and blur the select."
+            },
+            {
+                "title": "The refresh",
+                "url": "refresh.html",
+                "description": "Use <code>multiple(\\'refresh\\')</code> to refresh/reload the Multiple Select. If you\\'re dynamically adding/removing option tags on the original select via AJAX or DOM manipulation methods, call refresh to reflect the changes."
+            },
+            {
+                "title": "The destroy",
+                "url": "destroy.html",
+                "description": "Use <code>multiple(\\destroy\\')</code> to destroy the select."
+            }
+        ]
+    },
+    {
+        "name": "Events",
+        "list": [
+            {
+                "title": "The Events",
+                "url": "events.html",
+                "description": "Multiple Select has some callback events."
+            }
+        ]
+    },
+    {
+        "name": "I18N",
+        "list": [
+            {
+                "title": "The i18n",
+                "url": "i18n.html",
+                "description": "Custom i18n options."
+            }
+        ]
+    }
+]

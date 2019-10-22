@@ -5,6 +5,10 @@ SOURCE_BRANCH="master"
 TARGET_BRANCH="gh-pages"
 
 function doCompile {
+    cd vue-examples
+    npm install
+    npm run build
+    cd ..
     npm run docs
     cp -r site/website/build/multiple-select/* build
 }
