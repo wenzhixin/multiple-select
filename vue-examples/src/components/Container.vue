@@ -54,7 +54,7 @@
         With container
       </label>
 
-      <div class="col-sm-10 container">
+      <div id="container" class="col-sm-10">
         <div class="parent">
           <MultipleSelect
             :options="options"
@@ -109,7 +109,7 @@ export default {
       title: 'The Container',
       desc: 'Use <code>container</code> option to solve the cut off problem for example parent node is <code>overflow: hidden</code>.',
       options: {
-        container: '.container'
+        container: '#container'
       }
     }
   }
