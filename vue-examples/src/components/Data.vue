@@ -2,13 +2,26 @@
   <div>
     <div class="form-group row">
       <label class="col-sm-2">
-        Basic Select
+        Basic Array
       </label>
 
       <div class="col-sm-10">
         <MultipleSelect
           multiple
           :data="basicData"
+        />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2">
+        Basic Object
+      </label>
+
+      <div class="col-sm-10">
+        <MultipleSelect
+          multiple
+          :data="objectData"
         />
       </div>
     </div>
@@ -41,7 +54,7 @@
 
     <div class="form-group row">
       <label class="col-sm-2">
-        Group Select
+        Group Array
       </label>
 
       <div class="col-sm-10">
@@ -110,6 +123,20 @@ export default {
           value: 12
         }
       ],
+      objectData: {
+        1: 'January',
+        2: 'February',
+        3: 'March',
+        4: 'April',
+        5: 'May',
+        6: 'June',
+        7: 'July',
+        8: 'August',
+        9: 'September',
+        10: 'October',
+        11: 'November',
+        12: 'December'
+      },
       stringData: [
         'January', 'February', 'March'
       ],

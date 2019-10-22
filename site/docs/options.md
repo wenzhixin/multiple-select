@@ -69,6 +69,14 @@ Option format:
 ]
 ```
 
+Or Object:
+
+```js
+{
+  1: 'Option 1'
+}
+```
+
 Or String/Number Array:
 
 ```js

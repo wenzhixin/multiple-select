@@ -2,6 +2,7 @@
 
 ### 1.4.3
 
+- **New:** Added `object` support for `data` option.
 - **Update:** Updated vue-es build filename.
 - **Update:** Updated event name to lowercase hyphen format of vue component.
 - **Update:** Fixed `defaultValue` error without `v-model`.

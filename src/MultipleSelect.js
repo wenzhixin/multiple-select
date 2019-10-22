@@ -112,24 +112,35 @@ class MultipleSelect {
     const data = []
 
     if (this.options.data) {
-      this.options.data.forEach((row, i) => {
-        if (row.type === 'optgroup') {
-          row.group = row.group || `group_${i}`
+      if (Array.isArray(this.options.data)) {
+        this.options.data.forEach((row, i) => {
+          if (row.type === 'optgroup') {
+            row.group = row.group || `group_${i}`
 
-          row.children.forEach(child => {
-            child.group = child.group || row.group
+            row.children.forEach(child => {
+              child.group = child.group || row.group
+            })
+          }
+        })
+
+        this.data = this.options.data.map(it => {
+          if (typeof it === 'string' || typeof it === 'number') {
+            return {
+              text: it,
+              value: it
+            }
+          }
+          return it
+        })
+      } else if (typeof this.options.data === 'object') {
+        for (const [value, text] of Object.entries(this.options.data)) {
+          data.push({
+            value,
+            text
           })
         }
-      })
-      this.data = this.options.data.map(it => {
-        if (typeof it === 'string' || typeof it === 'number') {
-          return {
-            text: it,
-            value: it
-          }
-        }
-        return it
-      })
+        this.data = data
+      }
       return
     }
 
