@@ -99,14 +99,16 @@ class Index extends React.Component {
 
             <div className="blockElement fourByGridBlock">
               <div className="blockContent">
-                <h2>Latest release v1.4.2 (2019-10-10)</h2>
-                <MarkdownBlock>- **New:** Added `string/number` array support for `data` option.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added `required` attribute support.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added bootstrap(v3, v4) themes support.</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Improved `onAfterCreate` event.</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Fixed `destroyed` bug of vue component.</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Fixed display bug of only one member of group.</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Fixed single group filter bug.</MarkdownBlock>
+                <h2>Latest release v1.4.3 (2019-10-22)</h2>
+                <MarkdownBlock>- **New:** Added `object` support for `data` option.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Updated vue-es build filename.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Updated event name to lowercase hyphen format of vue component.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Fixed `defaultValue` error without `v-model`.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Fixed uncheck all cannot trigger `change` bug.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Fixed `v-model` not work bug when `props` changed.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Fixed min version throw cannot convert object to primitive value error.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Removed label spaces of customFilter params.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Removed text spaces of the option label.</MarkdownBlock>
               </div>
             </div>
           </div>

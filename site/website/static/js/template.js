@@ -1,6 +1,6 @@
 window._config = {
   isDebug: ['localhost'].indexOf(location.hostname) > -1,
-  cdnUrl: 'https://unpkg.com/multiple-select@1.4.2/dist/',
+  cdnUrl: 'https://unpkg.com/multiple-select@1.4.3/dist/',
   localUrl: 'http://localhost:8080/github/multiple-select/src/'
 }
 

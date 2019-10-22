@@ -54,6 +54,48 @@
     }));
   }
 
+  function _slicedToArray(arr, i) {
+    return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();
+  }
+
+  function _arrayWithHoles(arr) {
+    if (Array.isArray(arr)) return arr;
+  }
+
+  function _iterableToArrayLimit(arr, i) {
+    if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) {
+      return;
+    }
+
+    var _arr = [];
+    var _n = true;
+    var _d = false;
+    var _e = undefined;
+
+    try {
+      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+        _arr.push(_s.value);
+
+        if (i && _arr.length === i) break;
+      }
+    } catch (err) {
+      _d = true;
+      _e = err;
+    } finally {
+      try {
+        if (!_n && _i["return"] != null) _i["return"]();
+      } finally {
+        if (_d) throw _e;
+      }
+    }
+
+    return _arr;
+  }
+
+  function _nonIterableRest() {
+    throw new TypeError("Invalid attempt to destructure non-iterable instance");
+  }
+
   var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
   function createCommonjsModule(fn, module) {
@@ -756,7 +798,58 @@
     }
   });
 
-  var VERSION = '1.4.2';
+  // a string of all valid unicode whitespaces
+  // eslint-disable-next-line max-len
+  var whitespaces = '\u0009\u000A\u000B\u000C\u000D\u0020\u00A0\u1680\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u3000\u2028\u2029\uFEFF';
+
+  var whitespace = '[' + whitespaces + ']';
+  var ltrim = RegExp('^' + whitespace + whitespace + '*');
+  var rtrim = RegExp(whitespace + whitespace + '*$');
+
+  // `String.prototype.{ trim, trimStart, trimEnd, trimLeft, trimRight }` methods implementation
+  var createMethod$1 = function (TYPE) {
+    return function ($this) {
+      var string = String(requireObjectCoercible($this));
+      if (TYPE & 1) string = string.replace(ltrim, '');
+      if (TYPE & 2) string = string.replace(rtrim, '');
+      return string;
+    };
+  };
+
+  var stringTrim = {
+    // `String.prototype.{ trimLeft, trimStart }` methods
+    // https://tc39.github.io/ecma262/#sec-string.prototype.trimstart
+    start: createMethod$1(1),
+    // `String.prototype.{ trimRight, trimEnd }` methods
+    // https://tc39.github.io/ecma262/#sec-string.prototype.trimend
+    end: createMethod$1(2),
+    // `String.prototype.trim` method
+    // https://tc39.github.io/ecma262/#sec-string.prototype.trim
+    trim: createMethod$1(3)
+  };
+
+  var non = '\u200B\u0085\u180E';
+
+  // check that a method works with the correct list
+  // of whitespaces and has a correct name
+  var forcedStringTrimMethod = function (METHOD_NAME) {
+    return fails(function () {
+      return !!whitespaces[METHOD_NAME]() || non[METHOD_NAME]() != non || whitespaces[METHOD_NAME].name !== METHOD_NAME;
+    });
+  };
+
+  var $trim = stringTrim.trim;
+
+
+  // `String.prototype.trim` method
+  // https://tc39.github.io/ecma262/#sec-string.prototype.trim
+  _export({ target: 'String', proto: true, forced: forcedStringTrimMethod('trim') }, {
+    trim: function trim() {
+      return $trim(this);
+    }
+  });
+
+  var VERSION = '1.4.3';
   var DEFAULTS = {
     name: '',
     placeholder: '',
@@ -796,7 +889,7 @@
       return false;
     },
     textTemplate: function textTemplate($elm) {
-      return $elm[0].innerHTML;
+      return $elm[0].innerHTML.trim();
     },
     labelTemplate: function labelTemplate($elm) {
       return $elm[0].getAttribute('label');
@@ -966,7 +1059,7 @@
   var push = [].push;
 
   // `Array.prototype.{ forEach, map, filter, some, every, find, findIndex }` methods implementation
-  var createMethod$1 = function (TYPE) {
+  var createMethod$2 = function (TYPE) {
     var IS_MAP = TYPE == 1;
     var IS_FILTER = TYPE == 2;
     var IS_SOME = TYPE == 3;
@@ -1002,25 +1095,25 @@
   var arrayIteration = {
     // `Array.prototype.forEach` method
     // https://tc39.github.io/ecma262/#sec-array.prototype.foreach
-    forEach: createMethod$1(0),
+    forEach: createMethod$2(0),
     // `Array.prototype.map` method
     // https://tc39.github.io/ecma262/#sec-array.prototype.map
-    map: createMethod$1(1),
+    map: createMethod$2(1),
     // `Array.prototype.filter` method
     // https://tc39.github.io/ecma262/#sec-array.prototype.filter
-    filter: createMethod$1(2),
+    filter: createMethod$2(2),
     // `Array.prototype.some` method
     // https://tc39.github.io/ecma262/#sec-array.prototype.some
-    some: createMethod$1(3),
+    some: createMethod$2(3),
     // `Array.prototype.every` method
     // https://tc39.github.io/ecma262/#sec-array.prototype.every
-    every: createMethod$1(4),
+    every: createMethod$2(4),
     // `Array.prototype.find` method
     // https://tc39.github.io/ecma262/#sec-array.prototype.find
-    find: createMethod$1(5),
+    find: createMethod$2(5),
     // `Array.prototype.findIndex` method
     // https://tc39.github.io/ecma262/#sec-array.prototype.findIndex
-    findIndex: createMethod$1(6)
+    findIndex: createMethod$2(6)
   };
 
   var $forEach = arrayIteration.forEach;
@@ -1725,6 +1818,46 @@
     });
   }
 
+  var propertyIsEnumerable = objectPropertyIsEnumerable.f;
+
+  // `Object.{ entries, values }` methods implementation
+  var createMethod$3 = function (TO_ENTRIES) {
+    return function (it) {
+      var O = toIndexedObject(it);
+      var keys = objectKeys(O);
+      var length = keys.length;
+      var i = 0;
+      var result = [];
+      var key;
+      while (length > i) {
+        key = keys[i++];
+        if (!descriptors || propertyIsEnumerable.call(O, key)) {
+          result.push(TO_ENTRIES ? [key, O[key]] : O[key]);
+        }
+      }
+      return result;
+    };
+  };
+
+  var objectToArray = {
+    // `Object.entries` method
+    // https://tc39.github.io/ecma262/#sec-object.entries
+    entries: createMethod$3(true),
+    // `Object.values` method
+    // https://tc39.github.io/ecma262/#sec-object.values
+    values: createMethod$3(false)
+  };
+
+  var $entries = objectToArray.entries;
+
+  // `Object.entries` method
+  // https://tc39.github.io/ecma262/#sec-object.entries
+  _export({ target: 'Object', stat: true }, {
+    entries: function entries(O) {
+      return $entries(O);
+    }
+  });
+
   var TO_STRING_TAG$1 = wellKnownSymbol('toStringTag');
   // ES3 wrong here
   var CORRECT_ARGUMENTS = classofRaw(function () { return arguments; }()) == 'Arguments';
@@ -1768,7 +1901,7 @@
   }
 
   // `String.prototype.{ codePointAt, at }` methods implementation
-  var createMethod$2 = function (CONVERT_TO_STRING) {
+  var createMethod$4 = function (CONVERT_TO_STRING) {
     return function ($this, pos) {
       var S = String(requireObjectCoercible($this));
       var position = toInteger(pos);
@@ -1786,10 +1919,10 @@
   var stringMultibyte = {
     // `String.prototype.codePointAt` method
     // https://tc39.github.io/ecma262/#sec-string.prototype.codepointat
-    codeAt: createMethod$2(false),
+    codeAt: createMethod$4(false),
     // `String.prototype.at` method
     // https://github.com/mathiasbynens/String.prototype.at
-    charAt: createMethod$2(true)
+    charAt: createMethod$4(true)
   };
 
   var charAt = stringMultibyte.charAt;
@@ -2133,57 +2266,6 @@
       }
     ];
   }, !SUPPORTS_Y);
-
-  // a string of all valid unicode whitespaces
-  // eslint-disable-next-line max-len
-  var whitespaces = '\u0009\u000A\u000B\u000C\u000D\u0020\u00A0\u1680\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u3000\u2028\u2029\uFEFF';
-
-  var whitespace = '[' + whitespaces + ']';
-  var ltrim = RegExp('^' + whitespace + whitespace + '*');
-  var rtrim = RegExp(whitespace + whitespace + '*$');
-
-  // `String.prototype.{ trim, trimStart, trimEnd, trimLeft, trimRight }` methods implementation
-  var createMethod$3 = function (TYPE) {
-    return function ($this) {
-      var string = String(requireObjectCoercible($this));
-      if (TYPE & 1) string = string.replace(ltrim, '');
-      if (TYPE & 2) string = string.replace(rtrim, '');
-      return string;
-    };
-  };
-
-  var stringTrim = {
-    // `String.prototype.{ trimLeft, trimStart }` methods
-    // https://tc39.github.io/ecma262/#sec-string.prototype.trimstart
-    start: createMethod$3(1),
-    // `String.prototype.{ trimRight, trimEnd }` methods
-    // https://tc39.github.io/ecma262/#sec-string.prototype.trimend
-    end: createMethod$3(2),
-    // `String.prototype.trim` method
-    // https://tc39.github.io/ecma262/#sec-string.prototype.trim
-    trim: createMethod$3(3)
-  };
-
-  var non = '\u200B\u0085\u180E';
-
-  // check that a method works with the correct list
-  // of whitespaces and has a correct name
-  var forcedStringTrimMethod = function (METHOD_NAME) {
-    return fails(function () {
-      return !!whitespaces[METHOD_NAME]() || non[METHOD_NAME]() != non || whitespaces[METHOD_NAME].name !== METHOD_NAME;
-    });
-  };
-
-  var $trim = stringTrim.trim;
-
-
-  // `String.prototype.trim` method
-  // https://tc39.github.io/ecma262/#sec-string.prototype.trim
-  _export({ target: 'String', proto: true, forced: forcedStringTrimMethod('trim') }, {
-    trim: function trim() {
-      return $trim(this);
-    }
-  });
 
   // iterable DOM collections
   // flag - `iterable` interface - 'entries', 'keys', 'values', 'forEach' methods
@@ -3079,24 +3161,40 @@
         var data = [];
 
         if (this.options.data) {
-          this.options.data.forEach(function (row, i) {
-            if (row.type === 'optgroup') {
-              row.group = row.group || "group_".concat(i);
-              row.children.forEach(function (child) {
-                child.group = child.group || row.group;
+          if (Array.isArray(this.options.data)) {
+            this.options.data.forEach(function (row, i) {
+              if (row.type === 'optgroup') {
+                row.group = row.group || "group_".concat(i);
+                row.children.forEach(function (child) {
+                  child.group = child.group || row.group;
+                });
+              }
+            });
+            this.data = this.options.data.map(function (it) {
+              if (typeof it === 'string' || typeof it === 'number') {
+                return {
+                  text: it,
+                  value: it
+                };
+              }
+
+              return it;
+            });
+          } else if (_typeof(this.options.data) === 'object') {
+            for (var _i = 0, _Object$entries = Object.entries(this.options.data); _i < _Object$entries.length; _i++) {
+              var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+                  value = _Object$entries$_i[0],
+                  text = _Object$entries$_i[1];
+
+              data.push({
+                value: value,
+                text: text
               });
             }
-          });
-          this.data = this.options.data.map(function (it) {
-            if (typeof it === 'string' || typeof it === 'number') {
-              return {
-                text: it,
-                value: it
-              };
-            }
 
-            return it;
-          });
+            this.data = data;
+          }
+
           return;
         }
 
@@ -3782,7 +3880,7 @@
             this.$selectItems.each(function (i, el) {
               var $parent = $(el).parent();
 
-              var hasText = _this10.options.customFilter(removeDiacritics($parent.text().toLowerCase()), removeDiacritics(text), $parent.text(), originalText);
+              var hasText = _this10.options.customFilter(removeDiacritics($parent.text().trim().toLowerCase()), removeDiacritics(text), $parent.text().trim(), originalText);
 
               $parent.closest('li')[hasText ? 'show' : 'hide']();
             });
