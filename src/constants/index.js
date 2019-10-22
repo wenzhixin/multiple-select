@@ -1,4 +1,4 @@
-const VERSION = '1.4.2'
+const VERSION = '1.4.3'
 
 const DEFAULTS = {
   name: '',
@@ -44,7 +44,7 @@ const DEFAULTS = {
     return false
   },
   textTemplate ($elm) {
-    return $elm[0].innerHTML
+    return $elm[0].innerHTML.trim()
   },
   labelTemplate ($elm) {
     return $elm[0].getAttribute('label')

@@ -20,6 +20,12 @@
 
 #codefund {
   margin: 0 0 20px 0!important;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#codefund #cf {
+  margin: 0!important;
 }
 
 #codefund .cf-wrapper {

@@ -1,5 +1,17 @@
 ## Changelog
 
+### 1.4.3
+
+- **New:** Added `object` support for `data` option.
+- **Update:** Updated vue-es build filename.
+- **Update:** Updated event name to lowercase hyphen format of vue component.
+- **Update:** Fixed `defaultValue` error without `v-model`.
+- **Update:** Fixed uncheck all cannot trigger `change` bug.
+- **Update:** Fixed `v-model` not work bug when `props` changed.
+- **Update:** Fixed min version throw cannot convert object to primitive value error.
+- **Update:** Removed label spaces of customFilter params.
+- **Update:** Removed text spaces of the option label.
+
 ### 1.4.2
 
 - **New:** Added `string/number` array support for `data` option.

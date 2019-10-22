@@ -1,6 +1,5 @@
 <template>
   <select
-    v-model="currentValue"
     :name="name"
     :multiple="!single"
     :disabled="disabled"
@@ -83,18 +82,18 @@ export default {
       })
     },
     width () {
-      this._initSelect()
+      this._initSelectValue()
     },
     options: {
       handler () {
-        this._initSelect()
+        this._initSelectValue()
       },
       deep: true
     },
 
     data: {
       handler () {
-        this._initSelect()
+        this._initSelectValue()
       },
       deep: true
     }
@@ -103,33 +102,47 @@ export default {
   mounted () {
     this.$select = $(this.$el).change(() => {
       const selects = this.getSelects()
-      if (!selects.length) {
-        return
-      }
-
       this.currentValue = Array.isArray(this.currentValue) ?
-        selects : selects[0]
+        selects : (selects.length ? selects[0] : undefined)
+
       this.$emit('input', this.currentValue)
       this.$emit('change', this.currentValue)
     })
 
+    if (
+      typeof this.currentValue === 'undefined' ||
+      Array.isArray(this.currentValue) && !this.currentValue.length
+    ) {
+      this.currentValue = this.$select.val()
+      this.$emit('input', this.currentValue)
+      this.$emit('change', this.currentValue)
+    }
+
     for (const event in $.fn.multipleSelect.defaults) {
       if (/^on[A-Z]/.test(event)) {
         $.fn.multipleSelect.defaults[event] = (...args) => {
-          this.$emit(event, ...args)
+          this.$emit(event.replace(/([A-Z])/g, '-$1').toLowerCase(), ...args)
         }
       }
     }
 
-    this._initSelect()
-    this._initDefaultValue()
-  },
-
-  destroyed () {
-    this.destroy()
+    this._initSelectValue()
   },
 
   methods: {
+    _initSelectValue () {
+      this._initSelect()
+
+      if (
+        typeof this.currentValue === 'undefined' ||
+        Array.isArray(this.currentValue) && !this.currentValue.length
+      ) {
+        return
+      }
+
+      this._initDefaultValue()
+    },
+
     _initSelect () {
       const options = {
         ...deepCopy(this.options),

@@ -106,6 +106,14 @@ Option format:
 ]
 ```
 
+Or Object:
+
+```js
+{
+  1: 'Option 1'
+}
+```
+
 Or String/Number Array:
 
 ```js
@@ -139,9 +147,11 @@ The original change event of select.
 
 ### other events
 
-The calling method syntax: `@onEvent="onEvent"`.
+The calling method syntax: `@on-event="onEvent"`.
 
 All events are defined in [Events API](/docs/en/events/).
+
+**Note:** you need to convert event name to lowercase + hyphen format, for example: `onClick` should be `on-click`.
 
 ## Methods
 
