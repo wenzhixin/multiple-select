@@ -78,7 +78,7 @@ export default {
   data () {
     return {
       title: 'Single Row',
-      desc: 'Use <code>single: true</code> to enable single row select.'
+      desc: 'Use <code>single</code> to enable single row select.'
     }
   }
 }

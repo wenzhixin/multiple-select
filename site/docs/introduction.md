@@ -39,8 +39,8 @@ multiple-select/
 └── dist/
     ├── multiple-select-vue.js
     ├── multiple-select-vue.min.js
-    ├── multiple-select-vue.es.js
-    └── multiple-select-vue.es.min.js
+    ├── multiple-select-vue-es.js
+    └── multiple-select-vue-es.min.js
 ```
 
 * **multiple-select-vue.js:** UMD builds can be used directly in the browser via a `<script>` tag.

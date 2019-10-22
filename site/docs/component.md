@@ -131,7 +131,7 @@ Or String/Number Array:
 
 - **Detail:**
 
-  The [table options](/docs/en/options) of Multiple Select.
+  The [Options API](/docs/en/options) of Multiple Select.
 
 - **Default:** `{}`
 
