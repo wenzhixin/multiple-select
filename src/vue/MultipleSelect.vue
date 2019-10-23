@@ -42,7 +42,7 @@ export default {
       default: undefined
     },
     data: {
-      type: Array,
+      type: [Array, Object],
       default () {
         return undefined
       }

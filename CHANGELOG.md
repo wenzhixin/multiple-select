@@ -1,5 +1,9 @@
 ## Changelog
 
+### 1.4.4
+
+- **Update:** Fixed vue warning when `data` is Object.
+
 ### 1.4.3
 
 - **New:** Added `object` support for `data` option.
