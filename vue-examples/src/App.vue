@@ -56,7 +56,7 @@ export default {
   data () {
     return {
       list: MS,
-      isSource: false
+      isSource: this.$route.name === 'view-source'
     }
   },
   computed: {
