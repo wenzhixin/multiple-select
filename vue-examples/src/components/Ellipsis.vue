@@ -55,8 +55,6 @@
 export default {
   data () {
     return {
-      title: 'The Ellipsis',
-      desc: 'Use <code>ellipsis: true</code> option to display <code>...</code> after selected options instead of <code>%s of %s selected</code>.',
       options: {
         ellipsis: true,
         minimumCountSelected: 5

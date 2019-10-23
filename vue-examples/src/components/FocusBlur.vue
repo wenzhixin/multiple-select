@@ -74,12 +74,6 @@
 
 <script>
 export default {
-  data () {
-    return {
-      title: 'The focus/blur',
-      desc: 'Use <code>multipleSelect(\'focus\')</code> and <code>multipleSelect(\'blur\')</code> to focus and blur the select.'
-    }
-  },
   methods: {
     focus () {
       this.$refs.select.focus()

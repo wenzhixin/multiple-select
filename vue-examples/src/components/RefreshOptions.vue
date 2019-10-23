@@ -44,8 +44,6 @@
 export default {
   data () {
     return {
-      title: 'The refreshOptions',
-      desc: 'Use <code>multipleSelect(\'refreshOptions\', {})</code> to refresh the options object.',
       options: {
         filter: true
       }

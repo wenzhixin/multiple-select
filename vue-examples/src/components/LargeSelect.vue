@@ -23,8 +23,6 @@ export default {
       data.push(i)
     }
     return {
-      title: 'Large Select',
-      desc: 'Large select with filter.',
       data,
       options: {
         filter: true

@@ -52,8 +52,6 @@
 export default {
   data () {
     return {
-      title: 'Label Template',
-      desc: 'Use <code>labelTemplate</code> to custom the optgroup label template.',
       options: {
         labelTemplate ($el) {
           return '<i class="fa fa-star"></i>' + $el.attr('label')

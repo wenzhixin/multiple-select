@@ -55,8 +55,6 @@
 export default {
   data () {
     return {
-      title: 'Keep Open',
-      desc: 'Use <code>keepOpen: true</code> to keep the select dropdown always open.',
       options: {
         keepOpen: true
       }

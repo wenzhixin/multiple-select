@@ -43,8 +43,6 @@
 export default {
   data () {
     return {
-      title: 'The getOptions',
-      desc: 'Use <code>multipleSelect(\'getOptions\')</code> to get the options object.',
       options: {
         filter: true
       }

@@ -183,8 +183,6 @@
 export default {
   data () {
     return {
-      title: 'Auto Width',
-      desc: 'Auto width by default without setting width style.',
       data: [
         {
           value: 1,

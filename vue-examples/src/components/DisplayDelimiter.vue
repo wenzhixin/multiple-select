@@ -55,8 +55,6 @@
 export default {
   data () {
     return {
-      title: 'Display Delimiter',
-      desc: 'Use <code>displayDelimiter: \' | \'</code> option to custom the display delimiter.',
       options: {
         displayDelimiter: ' | '
       }

@@ -154,13 +154,5 @@
 
 <script>
 import 'multiple-select/dist/themes/bootstrap.css'
-
-export default {
-  data () {
-    return {
-      title: 'The Themes',
-      desc: 'Multiple select with bootstrap theme.'
-    }
-  }
-}
+export default {}
 </script>

@@ -55,8 +55,6 @@
 export default {
   data () {
     return {
-      title: 'Display Values',
-      desc: 'Use <code>displayValues: true</code> option to display selected values instead text.',
       options: {
         displayValues: true
       }

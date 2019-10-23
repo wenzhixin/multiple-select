@@ -55,8 +55,6 @@
 export default {
   data () {
     return {
-      title: 'Is Open',
-      desc: 'Use <code>isOpen: true</code> to open the dropdown by default.',
       options: {
         isOpen: true
       }

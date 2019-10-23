@@ -55,8 +55,6 @@
 export default {
   data () {
     return {
-      title: 'The Position',
-      desc: 'Use <code>position: \'top\'</code> to set the select dropdown in top position.',
       options: {
         position: 'top'
       }

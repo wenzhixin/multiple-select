@@ -55,8 +55,6 @@
 export default {
   data () {
     return {
-      title: 'Basic Select',
-      desc: 'Custom i18n options.',
       options: {
         filter: true,
         formatSelectAll () {

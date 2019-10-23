@@ -73,17 +73,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  data () {
-    return {
-      title: 'Single Row',
-      desc: 'Use <code>single</code> to enable single row select.'
-    }
-  }
-}
-</script>
-
 <style scoped>
 select {
   width: 100%;

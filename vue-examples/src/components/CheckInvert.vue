@@ -114,12 +114,6 @@
 
 <script>
 export default {
-  data () {
-    return {
-      title: 'The checkInvert',
-      desc: 'Methods: <code>$select.multipleSelect(\'checkInvert\')</code> to invert check all items.'
-    }
-  },
   methods: {
     checkInvert () {
       this.$refs.basic.checkInvert()

@@ -112,8 +112,6 @@
 export default {
   data () {
     return {
-      title: 'Filter Placeholder',
-      desc: 'Use <code>filterPlaceholder: \'The filter placeholder\'</code> to set the filter placeholder.',
       options: {
         filter: true,
         filterPlaceholder: 'The filter placeholder'

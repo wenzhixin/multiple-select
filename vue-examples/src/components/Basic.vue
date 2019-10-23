@@ -93,17 +93,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  data () {
-    return {
-      title: 'Multiple Select',
-      desc: 'Multiple select without any options.'
-    }
-  }
-}
-</script>
-
 <style scoped>
 select {
   width: 100%;

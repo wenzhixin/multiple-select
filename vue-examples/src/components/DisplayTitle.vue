@@ -55,8 +55,6 @@
 export default {
   data () {
     return {
-      title: 'Display Title',
-      desc: 'Use <code>displayTitle: true</code> option to display title of selected text.',
       options: {
         displayTitle: true
       }
