@@ -70,8 +70,6 @@
 export default {
   data () {
     return {
-      title: 'Hide Optgroup Checkboxes',
-      desc: 'Use <code>hideOptgroupCheckboxes: true</code> option to hide the optgroup checkboxes.',
       options: {
         multiple: true,
         hideOptgroupCheckboxes: true,

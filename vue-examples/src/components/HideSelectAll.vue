@@ -31,8 +31,6 @@
 export default {
   data () {
     return {
-      title: 'Hide Select All',
-      desc: 'Use <code>selectAll: false</code> to hide select all.',
       options: {
         selectAll: false
       }

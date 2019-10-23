@@ -81,8 +81,6 @@
 export default {
   data () {
     return {
-      title: 'Filter Only Optgroup',
-      desc: 'Use <code>filterGroup: true</code> to filter optgroups only and not options.',
       options: {
         filter: true,
         filterGroup: true

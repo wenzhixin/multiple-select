@@ -101,8 +101,6 @@
 export default {
   data () {
     return {
-      title: 'The Styler',
-      desc: 'Use <code>styler</code> to custom the item style.',
       basicOptions: {
         styler (row) {
           if (+row.value === 1) {

@@ -10,7 +10,7 @@
           </h1>
           <p
             class="bd-lead"
-            v-html="data.desc"
+            v-html="data.description"
           />
         </div>
         <div class="col-md-5">
@@ -38,6 +38,7 @@
 <script>
 import registry from '@/registry'
 import Codefund from './Codefund'
+import MS from '@/assets/MS'
 
 export default {
   components: {
@@ -71,7 +72,11 @@ export default {
       return this.component && this.component.source.default
     },
     data () {
-      return this.componentLoader.data()
+      const list = []
+      for (const row of MS) {
+        list.push(...row.list)
+      }
+      return list.find(it => it.url === this.current + '.html')
     }
   },
   watch: {

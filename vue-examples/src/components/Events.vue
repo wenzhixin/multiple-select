@@ -78,8 +78,6 @@
 export default {
   data () {
     return {
-      title: 'The Events',
-      desc: 'Multiple Select has some callback events.',
       options: {
         filter: true
       },

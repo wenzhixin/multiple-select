@@ -55,8 +55,6 @@
 export default {
   data () {
     return {
-      title: 'Minimum Count Selected',
-      desc: 'Use <code>minimumCountSelected: 8</code> option and the <code>%s of %s selected</code> will be shown only if more than 8 items where selected.',
       options: {
         minimumCountSelected: 8
       }

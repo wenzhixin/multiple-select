@@ -102,12 +102,6 @@
 
 <script>
 export default {
-  data () {
-    return {
-      title: 'The check/uncheck',
-      desc: 'Methods: <code>multipleSelect(\'check\', 2)</code> and <code>multipleSelect(\'uncheck\', 2)</code> to check and uncheck a select option.'
-    }
-  },
   methods: {
     check () {
       this.$refs.single.check(2)

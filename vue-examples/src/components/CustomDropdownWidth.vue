@@ -109,8 +109,6 @@
 export default {
   data () {
     return {
-      title: 'Custom Dropdown Width',
-      desc: 'Use <code>dropWidth: 580</code> option to custom the dropdown width.',
       options: {
         multiple: true,
         width: 500,

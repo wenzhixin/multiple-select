@@ -71,12 +71,6 @@
 import $ from 'jquery'
 
 export default {
-  data () {
-    return {
-      title: 'Submit Select',
-      desc: 'Submit select with <code>name</code> attribute in form.'
-    }
-  },
   methods: {
     submit () {
       alert($('form').serialize())

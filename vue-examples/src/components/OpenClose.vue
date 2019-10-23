@@ -74,12 +74,6 @@
 
 <script>
 export default {
-  data () {
-    return {
-      title: 'The open/close',
-      desc: 'Use <code>multipleSelect(\'open\')</code> and <code>multipleSelect(\'close\')</code> to open and close the select dropdown list.'
-    }
-  },
   methods: {
     open () {
       setTimeout(() => {

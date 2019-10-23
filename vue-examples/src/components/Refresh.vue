@@ -85,8 +85,6 @@
 export default {
   data () {
     return {
-      title: 'The refresh',
-      desc: 'Use <code>multiple(\'refresh\')</code> to refresh/reload the Multiple Select. If you\'re dynamically adding/removing option tags on the original select via AJAX or DOM manipulation methods, call refresh to reflect the changes.',
       input: '',
       selected: false,
       disabled: false,

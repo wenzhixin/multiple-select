@@ -116,12 +116,6 @@
 
 <script>
 export default {
-  data () {
-    return {
-      title: 'The checkAll/uncheckAll',
-      desc: 'Use <code>multipleSelect(\'checkAll\')</code> and <code>multipleSelect(\'uncheckAll\')</code> to check and uncheck all options.'
-    }
-  },
   methods: {
     checkAll () {
       this.$refs.basic.checkAll()

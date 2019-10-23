@@ -57,17 +57,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  data () {
-    return {
-      title: 'Disabled Select',
-      desc: 'Show a disabled select width disabled attribute.'
-    }
-  }
-}
-</script>
-
 <style scoped>
 select {
   width: 100%;

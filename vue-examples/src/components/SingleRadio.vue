@@ -79,8 +79,6 @@
 export default {
   data () {
     return {
-      title: 'Single Radio',
-      desc: 'Use <code>singleRadio: true</code> to show the radio input.',
       options: {
         singleRadio: true
       }

@@ -74,12 +74,6 @@
 
 <script>
 export default {
-  data () {
-    return {
-      title: 'The setSelects/getSelects',
-      desc: 'Use <code>multipleSelect(\'setSelects\', [])</code> and <code>multipleSelect(\'getSelects\')</code> to set selects and get selects.'
-    }
-  },
   methods: {
     setSelects () {
       this.$refs.select.setSelects([

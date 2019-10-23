@@ -55,8 +55,6 @@
 export default {
   data () {
     return {
-      title: 'Open On Hover',
-      desc: 'Use <code>openOnHover: true</code> to open the select dropdown by hover instead of click.',
       options: {
         openOnHover: true
       }

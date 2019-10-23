@@ -219,8 +219,6 @@
 export default {
   data () {
     return {
-      title: 'Filter Accept On Enter',
-      desc: 'Use <code>filterAcceptOnEnter: true</code> option to speed up keyboard use. Enter filter text and then hit <code>enter</code> or <code>space</code> will auto click <code>select all</code> and close the dropdown.',
       options: {
         filter: true,
         filterAcceptOnEnter: true
