@@ -40,7 +40,7 @@
             {
                 "title": "The Locale",
                 "url": "locale.html",
-                "description": "Use <code>locale: true</code> to set the locale."
+                "description": "Use <code>locale</code> to set the locale."
             },
             {
                 "title": "Large Select",

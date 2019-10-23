@@ -74,12 +74,6 @@
 
 <script>
 export default {
-  data () {
-    return {
-      title: 'The enable/disable',
-      desc: 'Use <code>multipleSelect(\'enable\')</code> and <code>multipleSelect(\'disable\')</code> to enable and disable select.'
-    }
-  },
   methods: {
     enable () {
       this.$refs.select.enable()

@@ -94,8 +94,6 @@
 export default {
   data () {
     return {
-      title: 'Custom Filter',
-      desc: 'Use <code>customFilter</code> to custom filter, in this case we filter by <code>startWith</code>.',
       caseSensitive: false,
       options: {
         filter: true,

@@ -450,8 +450,6 @@
 export default {
   data () {
     return {
-      title: 'The Filter',
-      desc: 'Use <code>filter: true</code> to enable filter feature.',
       options: {
         filter: true
       }

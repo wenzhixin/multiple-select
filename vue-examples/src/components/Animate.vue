@@ -97,8 +97,6 @@
 export default {
   data () {
     return {
-      title: 'The Animate',
-      desc: 'Use <code>animate</code> to define the animate of open or close the dropdown.',
       options: {
         animate: undefined
       }

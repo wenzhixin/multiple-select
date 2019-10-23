@@ -101,8 +101,6 @@
 export default {
   data () {
     return {
-      title: 'The Placeholder',
-      desc: 'Use <code>placeholder</code> attribute or <code>placeholder: \'\'</code> option to set placeholder.',
       options: {
         placeholder: 'Here is the placeholder via options'
       }

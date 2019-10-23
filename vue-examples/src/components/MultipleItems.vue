@@ -173,8 +173,6 @@
 export default {
   data () {
     return {
-      title: 'Multiple Items',
-      desc: 'Use <code>multiple</code> and <code>multipleWidth</code> options to enable multiple items.',
       options: {
         multiple: true,
         multipleWidth: 60

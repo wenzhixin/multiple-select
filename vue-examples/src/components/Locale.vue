@@ -78,13 +78,11 @@
 </template>
 
 <script>
-// import 'multiple-select/dist/multiple-select-locale-all'
+import 'multiple-select/dist/multiple-select-locale-all'
 
 export default {
   data () {
     return {
-      title: 'The Locale',
-      desc: 'Use <code>locale: true</code> to set the locale.',
       options: {
         locale: 'en-US'
       }

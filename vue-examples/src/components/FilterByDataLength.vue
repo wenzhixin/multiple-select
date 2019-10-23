@@ -236,8 +236,6 @@
 export default {
   data () {
     return {
-      title: 'Filter By Data Length',
-      desc: 'Use <code>filterByDataLength: 10</code> option to auto enable filter when the data length is more than 10.',
       options: {
         filterByDataLength: 10
       }

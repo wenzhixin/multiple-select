@@ -71,8 +71,6 @@
 export default {
   data () {
     return {
-      title: 'The Data',
-      desc: 'Use <code>data</code> as data source.',
       basicData: [
         {
           text: 'January',

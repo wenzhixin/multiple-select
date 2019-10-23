@@ -115,17 +115,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  data () {
-    return {
-      title: 'Selected/Disabled Options',
-      desc: 'Selected or Disabled options.'
-    }
-  }
-}
-</script>
-
 <style scoped>
 select {
   width: 100%;

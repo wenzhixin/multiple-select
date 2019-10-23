@@ -55,8 +55,6 @@
 export default {
   data () {
     return {
-      title: 'Text Template',
-      desc: 'Use <code>textTemplate</code> to custom the text template.',
       options: {
         displayHtml: true,
         textTemplate ($el) {

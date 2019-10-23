@@ -74,12 +74,6 @@
 
 <script>
 export default {
-  data () {
-    return {
-      title: 'The destroy',
-      desc: 'Use <code>multiple(destroy\')</code> to destroy the select.'
-    }
-  },
   methods: {
     destroy () {
       this.$refs.select.destroy()

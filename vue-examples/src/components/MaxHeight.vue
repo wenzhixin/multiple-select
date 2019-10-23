@@ -55,8 +55,6 @@
 export default {
   data () {
     return {
-      title: 'Max Height',
-      desc: 'Use <code>maxHeight: 140</code> option to custom the dropdown max height.',
       options: {
         maxHeight: 140
       }
