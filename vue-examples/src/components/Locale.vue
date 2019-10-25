@@ -79,6 +79,7 @@
 
 <script>
 import 'multiple-select/dist/multiple-select-locale-all'
+import $ from 'jquery'
 $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['en-US'])
 
 export default {
