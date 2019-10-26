@@ -3,7 +3,8 @@ import {
   compareObjects,
   removeDiacritics,
   findByParam,
-  setDataKeys
+  setDataKeys,
+  removeUndefined
 } from './utils/index.js'
 
 class MultipleSelect {
@@ -167,7 +168,12 @@ class MultipleSelect {
       row.disabled = groupDisabled || elm.disabled
       row.classes = elm.getAttribute('class') || ''
       row.title = elm.getAttribute('title') || ''
-      row._value = $elm.data('value') // value for object
+      if ($elm.data('value')) {
+        row._value = $elm.data('value') // value for object
+      }
+      if (Object.keys($elm.data()).length) {
+        row._data = $elm.data()
+      }
 
       return row
     }
@@ -179,6 +185,9 @@ class MultipleSelect {
       row.selected = !!elm.selected
       row.disabled = elm.disabled
       row.children = []
+      if (Object.keys($elm.data()).length) {
+        row._data = $elm.data()
+      }
 
       $.each($elm.children(), (j, elem) => {
         row.children.push(this.initRow(j, elem, row.disabled))
@@ -446,18 +455,20 @@ class MultipleSelect {
       const group = findByParam(this.data, '_key', $this.data('key'))
 
       this._checkGroup(group, checked)
-      this.options.onOptgroupClick({
+      this.options.onOptgroupClick(removeUndefined({
         label: group.label,
         selected: group.selected,
+        data: group._data,
         children: group.children.map(child => {
-          return {
+          return removeUndefined({
             text: child.text,
             value: child.value,
             selected: child.selected,
-            disabled: child.disabled
-          }
+            disabled: child.disabled,
+            data: child._data
+          })
         })
-      })
+      }))
     })
 
     this.$selectItems.off('click').on('click', e => {
@@ -466,11 +477,12 @@ class MultipleSelect {
       const option = findByParam(this.data, '_key', $this.data('key'))
 
       this._check(option, checked)
-      this.options.onClick({
+      this.options.onClick(removeUndefined({
         text: option.text,
         value: option.value,
-        selected: option.selected
-      })
+        selected: option.selected,
+        data: option._data
+      }))
 
       if (this.options.single && this.options.isOpen && !this.options.keepOpen) {
         this.close()

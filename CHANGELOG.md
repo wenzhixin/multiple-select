@@ -5,7 +5,8 @@
 - **New:** Rewrite display and data logic code.
 - **New:** Added object `value` supported.
 - **New:** Added object for `v-model` supported.
-- **New:** Added it-IT locale.
+- **New:** Added `data` attributes of optgroup and option supported.
+- **New:** Added `it-IT` locale.
 - **Update:** Improved events trigger logic.
 - **Update:** Updated parameters of `onOptgroupClick` and `onClick` events.
 - **Update:** Fixed vue warning when `data` is Object.

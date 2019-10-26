@@ -149,9 +149,15 @@ const findByParam = (data, param, value) => {
   }
 }
 
+const removeUndefined = obj => {
+  Object.keys(obj).forEach(key => obj[key] === undefined ? delete obj[key] : '')
+  return obj
+}
+
 export {
   compareObjects,
   removeDiacritics,
   setDataKeys,
-  findByParam
+  findByParam,
+  removeUndefined
 }
