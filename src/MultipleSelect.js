@@ -311,7 +311,6 @@ class MultipleSelect {
     html.push('</ul>')
 
     this.$drop.html(html.join(''))
-    this.$drop.find('>ul').css('max-height', `${this.options.maxHeight}px`)
     this.$drop.find('.multiple').css('width', `${this.options.multipleWidth}px`)
 
     this.$searchInput = this.$drop.find('.ms-search input')
@@ -557,6 +556,13 @@ class MultipleSelect {
         .css('min-width', 'auto')
         .outerWidth(this.$parent.outerWidth())
     }
+
+    let maxHeight = this.options.maxHeight
+    if (this.options.maxHeightUnit === 'row') {
+      maxHeight = this.$drop.find('.ms-select-all').outerHeight() *
+        this.options.maxHeight
+    }
+    this.$drop.find('>ul').css('max-height', `${maxHeight}px`)
 
     if (this.data.length && this.options.filter) {
       this.$searchInput.val('')

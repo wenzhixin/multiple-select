@@ -220,6 +220,18 @@ Or String/Number Array:
 
 - **Example:** <a href="/examples#max-height.html">Max Height</a>
 
+## maxHeightUnit
+
+- **Attribute:** `data-max-height-unit`
+
+- **Type:** String
+
+- **Detail:** Define the unit of the `maxHeight` option, can only be 'px' or 'row'.
+
+- **Default:** `px`
+
+- **Example:** <a href="/examples#max-height-unit.html">Max Height Unit</a>
+
 ## position
 
 - **Attribute:** `data-position`

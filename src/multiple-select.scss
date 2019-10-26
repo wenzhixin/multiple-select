@@ -155,14 +155,14 @@
   ul {
     overflow: auto;
     margin: 0;
-    padding: 5px 0;
+    padding: 0;
 
     > li {
       list-style: none;
       display: list-item;
       background-image: none;
       position: static;
-      padding: 0 8px;
+      padding: .25rem 8px;
 
       .disabled {
         opacity: .35;
@@ -189,6 +189,7 @@
       label {
         position: relative;
         padding-left: 1.25rem;
+        margin-bottom: 0;
         font-weight: normal;
         display: block;
         white-space: nowrap;
@@ -233,7 +234,7 @@
   input {
     &[type="radio"], &[type="checkbox"] {
       position: absolute;
-      margin-top: 0.3rem;
+      margin-top: .3rem;
       margin-left: -1.25rem;
     }
   }
