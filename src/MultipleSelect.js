@@ -70,8 +70,15 @@ class MultipleSelect {
     this.options.placeholder = this.options.placeholder ||
       el.getAttribute('placeholder') || ''
 
+    this.tabIndex = el.getAttribute('tabindex')
+    let tabIndex = ''
+    if (this.tabIndex !== null) {
+      this.$el.attr('tabindex', -1)
+      tabIndex = this.tabIndex && `tabindex="${this.tabIndex}"`
+    }
+
     this.$choice = $(`
-      <button type="button" class="ms-choice">
+      <button type="button" class="ms-choice"${tabIndex}>
       <span class="placeholder">${this.options.placeholder}</span>
       <div></div>
       </button>
@@ -875,6 +882,10 @@ class MultipleSelect {
     }
     this.$el.before(this.$parent).removeClass('ms-offscreen')
     this.$parent.remove()
+
+    if (this.tabIndex !== null) {
+      this.$el.attr('tabindex', this.tabIndex)
+    }
 
     if (this.fromHtml) {
       delete this.options.data

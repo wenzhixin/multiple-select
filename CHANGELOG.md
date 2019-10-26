@@ -6,6 +6,7 @@
 - **New:** Added object `value` supported.
 - **New:** Added object for `v-model` supported.
 - **New:** Added `data` attributes of optgroup and option supported.
+- **New:** Added `tabindex` attribute supported.
 - **New:** Added `it-IT` locale.
 - **Update:** Improved events trigger logic.
 - **Update:** Updated parameters of `onOptgroupClick` and `onClick` events.
