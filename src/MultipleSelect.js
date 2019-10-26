@@ -80,12 +80,14 @@ class MultipleSelect {
     this.$choice = $(`
       <button type="button" class="ms-choice"${tabIndex}>
       <span class="placeholder">${this.options.placeholder}</span>
-      <div></div>
+      ${this.options.showClear ? '<div class="icon-close"></div>' : ''}
+      <div class="icon-caret"></div>
       </button>
     `)
 
     // default position is bottom
     this.$drop = $(`<div class="ms-drop ${this.options.position}" />`)
+    this.$close = this.$choice.find('.icon-close')
 
     if (this.options.dropWidth) {
       this.$drop.css('width', this.options.dropWidth)
@@ -396,6 +398,9 @@ class MultipleSelect {
   events () {
     const toggleOpen = e => {
       e.preventDefault()
+      if ($(e.target).hasClass('icon-close')) {
+        return
+      }
       this[this.options.isOpen ? 'close' : 'open']()
     }
 
@@ -422,6 +427,15 @@ class MultipleSelect {
         this.close()
         this.$choice.focus()
       }
+    })
+
+    this.$close.off('click').on('click', e => {
+      e.preventDefault()
+      this._checkAll(false, true)
+      this.initSelected(false)
+      this.updateSelected()
+      this.update()
+      this.options.onClear()
     })
 
     this.$searchInput.off('keydown').on('keydown', e => {

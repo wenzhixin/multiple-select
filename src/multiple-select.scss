@@ -61,7 +61,27 @@
         color: #999;
       }
     }
-    div {
+    div.icon-close {
+      position: absolute;
+      top: 0px;
+      right: 16px;
+      height: 100%;
+      width: 16px;
+
+      &:before {
+        content: '×';
+        color: #888;
+        font-weight: bold;
+        position: absolute;
+        top: 50%;
+        margin-top: -14px;
+      }
+
+      &:hover:before {
+        color: #333;
+      }
+    }
+    div.icon-caret {
       position: absolute;
       width: 0;
       height: 0;

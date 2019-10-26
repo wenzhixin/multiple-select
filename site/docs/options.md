@@ -412,6 +412,18 @@ Or String/Number Array:
 
 - **Example:** <a href="/examples#custom-filter.html">Custom Filter</a>
 
+## showClear
+
+- **Attribute:** `data-show-clear`
+
+- **Type:** undefined
+
+- **Detail:** Show the clear icon to uncheck all selected items.
+
+- **Default:** `false`
+
+- **Example:** <a href="/examples#show-clear.html">Show Clear</a>
+
 ## animate
 
 - **Attribute:** `data-animate`
