@@ -48,6 +48,11 @@
                 "description": "Large select with filter."
             },
             {
+                "title": "V-Model",
+                "url": "v-model.html",
+                "description": "Multiple select with v-model."
+            },
+            {
                 "title": "The Themes",
                 "url": "themes.html",
                 "description": "Multiple select with bootstrap theme."

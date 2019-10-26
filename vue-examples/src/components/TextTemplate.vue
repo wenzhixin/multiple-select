@@ -56,7 +56,6 @@ export default {
   data () {
     return {
       options: {
-        displayHtml: true,
         textTemplate ($el) {
           return '<i class="fa fa-star"></i>' + $el.html()
         }

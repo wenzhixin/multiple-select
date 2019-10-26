@@ -7,6 +7,7 @@
 
       <div class="col-sm-10">
         <MultipleSelect
+          width="500"
           :options="options"
         >
           <option value="1">
@@ -111,7 +112,6 @@ export default {
     return {
       options: {
         multiple: true,
-        width: 500,
         multipleWidth: 70,
         dropWidth: 580
       }

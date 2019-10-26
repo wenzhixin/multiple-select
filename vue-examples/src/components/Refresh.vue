@@ -26,7 +26,7 @@
             type="checkbox"
           > Selected
         </label>
-        <label class="checkbox">
+        <label class="checkbox ml-3">
           <input
             v-model="disabled"
             type="checkbox"
