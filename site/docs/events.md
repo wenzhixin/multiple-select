@@ -67,6 +67,12 @@ Example: [The Event](/examples#events.html)
 
 - **Detail:** Fires when a checkbox is checked or unchecked. The `view` parameter is an object, it contains `text, value, selected, data`.
 
+## onClear
+
+- **Parameter:** -
+
+- **Detail:** Fires when click the clear icon.
+
 ## onFilter
 
 - **Parameter:** `text`

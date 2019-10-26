@@ -178,6 +178,11 @@
                 "description": "Use <code>customFilter</code> to custom filter, in this case we filter by <code>startWith</code>."
             },
             {
+                "title": "Show Clear",
+                "url": "show-clear.html",
+                "description": "Use <code>showClear</code> to show the clear icon to uncheck all selected items."
+            },
+            {
                 "title": "The Animate",
                 "url": "animate.html",
                 "description": "Use <code>animate</code> to define the animate of open or close the dropdown."

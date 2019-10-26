@@ -37,6 +37,7 @@ const DEFAULTS = {
     return label.includes(text)
   },
 
+  showClear: false,
   animate: undefined,
 
   styler () {
@@ -74,6 +75,9 @@ const DEFAULTS = {
     return false
   },
   onFilter () {
+    return false
+  },
+  onClear () {
     return false
   },
   onAfterCreate () {
