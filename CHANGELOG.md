@@ -2,12 +2,13 @@
 
 ### 1.5.0
 
-- **New:** Rewrite display and data logic code.
+- **New:** Rewrote display and data logic code.
 - **New:** Added object `value` supported.
 - **New:** Added object for `v-model` supported.
 - **New:** Added `data` attributes of optgroup and option supported.
 - **New:** Added `tabindex` attribute supported.
 - **New:** Added `showClear` option and `onClear` event.
+- **New:** Added `maxHeightUnit` option.
 - **New:** Added `it-IT` locale.
 - **Update:** Improved events trigger logic.
 - **Update:** Updated parameters of `onOptgroupClick` and `onClick` events.

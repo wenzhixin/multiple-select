@@ -15,6 +15,7 @@ const DEFAULTS = {
   width: undefined,
   dropWidth: undefined,
   maxHeight: 250,
+  maxHeightUnit: 'px',
   position: 'bottom',
 
   displayValues: false,

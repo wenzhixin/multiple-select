@@ -98,6 +98,11 @@
                 "description": "Use <code>maxHeight: 140</code> option to custom the dropdown max height."
             },
             {
+                "title": "Max Height Unit",
+                "url": "max-height-unit.html",
+                "description": "Use <code>maxHeightUnit: \\'row\\'</code> option to set the max height unit."
+            },
+            {
                 "title": "The Position",
                 "url": "position.html",
                 "description": "Use <code>position: \\'top\\'</code> to set the select dropdown in top position."
