@@ -59,13 +59,13 @@ Example: [The Event](/examples#events.html)
 
 - **Parameter:** `view`
 
-- **Detail:** Fires when a an optgroup label is clicked on. The `view` parameter is an object, it contains `label, checked, children`.
+- **Detail:** Fires when a an optgroup label is clicked on. The `view` parameter is an object, it contains `label, selected, children`, the `children` contains `text, value, selected, disabled`.
 
 ## onClick
 
 - **Parameter:** `view`
 
-- **Detail:** Fires when a checkbox is checked or unchecked. The `view` parameter is an object, it contains `label, value, checked`.
+- **Detail:** Fires when a checkbox is checked or unchecked. The `view` parameter is an object, it contains `text, value, selected`.
 
 ## onFilter
 

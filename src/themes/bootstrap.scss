@@ -10,4 +10,18 @@
       transform: translateY(-50%);
     }
   }
+
+  &.form-control-sm {
+    .ms-drop input[type=radio],
+    .ms-drop input[type=checkbox] {
+      margin-top: 0.4rem;
+    }
+  }
+
+  &.form-control-lg {
+    .ms-drop input[type=radio],
+    .ms-drop input[type=checkbox] {
+      margin-top: 0.5rem;
+    }
+  }
 }

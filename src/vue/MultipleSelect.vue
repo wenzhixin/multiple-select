@@ -22,7 +22,7 @@ export default {
 
   props: {
     value: {
-      type: [String, Number, Array],
+      type: [String, Number, Array, Object],
       default: undefined
     },
     name: {
@@ -100,10 +100,24 @@ export default {
   },
 
   mounted () {
+    if (this.$slots.default) {
+      for (const el of this.$slots.default) {
+        if (el.elm.nodeName === 'OPTION' && el.data.domProps && el.data.domProps.value) {
+          $(el.elm).data('value', el.data.domProps.value)
+        }
+      }
+    }
+
     this.$select = $(this.$el).change(() => {
       const selects = this.getSelects()
-      this.currentValue = Array.isArray(this.currentValue) ?
-        selects : (selects.length ? selects[0] : undefined)
+
+      if (Array.isArray(this.currentValue)) {
+        this.currentValue = selects
+      } else if (typeof this.currentValue === 'number') {
+        this.currentValue = selects.length ? +selects[0] : undefined
+      } else {
+        this.currentValue = selects.length ? selects[0] : undefined
+      }
 
       this.$emit('input', this.currentValue)
       this.$emit('change', this.currentValue)
@@ -148,7 +162,7 @@ export default {
         ...deepCopy(this.options),
         single: this.single,
         width: this.width,
-        data: deepCopy(this.data)
+        data: this.data
       }
       if (!this._hasInit) {
         this.$select.multipleSelect(options)
@@ -161,7 +175,7 @@ export default {
     _initDefaultValue () {
       this.$nextTick(() => {
         this.setSelects(Array.isArray(this.currentValue) ?
-          this.currentValue : [this.currentValue])
+          this.currentValue : [this.currentValue], true)
       })
     },
 

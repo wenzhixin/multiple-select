@@ -167,6 +167,8 @@
       }
 
       label {
+        position: relative;
+        padding-left: 1.25rem;
         font-weight: normal;
         display: block;
         white-space: nowrap;
@@ -210,7 +212,9 @@
 
   input {
     &[type="radio"], &[type="checkbox"] {
-      margin: 5px;
+      position: absolute;
+      margin-top: 0.3rem;
+      margin-left: -1.25rem;
     }
   }
 

@@ -232,18 +232,6 @@ Or String/Number Array:
 
 - **Example:** <a href="/examples#position.html">The Position</a>
 
-## displayHtml
-
-- **Attribute:** `data-display-html`
-
-- **Type:** Boolean
-
-- **Detail:** Display html values instead text (from 1.4.1).
-
-- **Default:** `false`
-
-- **Example:** <a href="/examples#text-template.html">Text Template</a>
-
 ## displayValues
 
 - **Attribute:** `data-display-values`

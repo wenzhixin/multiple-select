@@ -1,5 +1,10 @@
 import Constants from './constants/index.js'
-import {s, sprintf, compareObjects, removeDiacritics} from './utils/index.js'
+import {
+  compareObjects,
+  removeDiacritics,
+  findByParam,
+  setDataKeys
+} from './utils/index.js'
 
 class MultipleSelect {
   constructor ($el, options) {
@@ -11,6 +16,7 @@ class MultipleSelect {
     this.initLocale()
     this.initContainer()
     this.initData()
+    this.initSelected(true)
     this.initFilter()
     this.initDrop()
     this.initView()
@@ -54,23 +60,24 @@ class MultipleSelect {
     }
 
     // restore class and title from select element
-    this.$parent = $(sprintf`<div class="ms-parent ${s}" ${s}/>`(
-      el.getAttribute('class') || '',
-      sprintf`title="${s}"`(el.getAttribute('title'))
-    ))
+    this.$parent = $(`
+      <div class="ms-parent ${el.getAttribute('class') || ''}"
+      title="${el.getAttribute('title') || ''}" />
+    `)
 
     // add placeholder to choice button
     this.options.placeholder = this.options.placeholder ||
       el.getAttribute('placeholder') || ''
-    this.$choice = $(sprintf`
+
+    this.$choice = $(`
       <button type="button" class="ms-choice">
-      <span class="placeholder">${s}</span>
+      <span class="placeholder">${this.options.placeholder}</span>
       <div></div>
       </button>
-    `(this.options.placeholder))
+    `)
 
     // default position is bottom
-    this.$drop = $(sprintf`<div class="ms-drop ${s}"></div>`(this.options.position))
+    this.$drop = $(`<div class="ms-drop ${this.options.position}" />`)
 
     if (this.options.dropWidth) {
       this.$drop.css('width', this.options.dropWidth)
@@ -113,16 +120,6 @@ class MultipleSelect {
 
     if (this.options.data) {
       if (Array.isArray(this.options.data)) {
-        this.options.data.forEach((row, i) => {
-          if (row.type === 'optgroup') {
-            row.group = row.group || `group_${i}`
-
-            row.children.forEach(child => {
-              child.group = child.group || row.group
-            })
-          }
-        })
-
         this.data = this.options.data.map(it => {
           if (typeof it === 'string' || typeof it === 'number') {
             return {
@@ -141,53 +138,87 @@ class MultipleSelect {
         }
         this.data = data
       }
-      return
+    } else {
+      $.each(this.$el.children(), (i, elm) => {
+        const row = this.initRow(i, elm)
+        if (row) {
+          data.push(this.initRow(i, elm))
+        }
+      })
+
+      this.options.data = data
+      this.data = data
+      this.fromHtml = true
     }
 
-    $.each(this.$el.children(), (i, elm) => {
-      const row = this.initRow(i, elm)
-      if (row) {
-        data.push(this.initRow(i, elm))
-      }
-    })
-
-    this.options.data = data
-    this.data = data
-    this.fromHtml = true
+    setDataKeys(this.data)
   }
 
-  initRow (i, elm, group, groupDisabled) {
+  initRow (i, elm, groupDisabled) {
     const row = {}
     const $elm = $(elm)
 
     if ($elm.is('option')) {
       row.type = 'option'
-      row.group = group
       row.text = this.options.textTemplate($elm)
       row.value = elm.value
-      row.selected = elm.selected
+      row.visible = true
+      row.selected = !!elm.selected
       row.disabled = groupDisabled || elm.disabled
       row.classes = elm.getAttribute('class') || ''
-      row.title = elm.getAttribute('title')
+      row.title = elm.getAttribute('title') || ''
+      row._value = $elm.data('value') // value for object
 
       return row
     }
 
     if ($elm.is('optgroup')) {
       row.type = 'optgroup'
-      row.group = `group_${i}`
       row.label = this.options.labelTemplate($elm)
+      row.visible = true
+      row.selected = !!elm.selected
       row.disabled = elm.disabled
       row.children = []
 
       $.each($elm.children(), (j, elem) => {
-        row.children.push(this.initRow(j, elem, row.group, row.disabled))
+        row.children.push(this.initRow(j, elem, row.disabled))
       })
 
       return row
     }
 
     return null
+  }
+
+  initSelected (ignoreTrigger) {
+    let selectedTotal = 0
+
+    for (const row of this.data) {
+      if (row.type === 'optgroup') {
+        const selectedCount = row.children.filter(child => {
+          return child.selected && !child.disabled && child.visible
+        }).length
+
+        row.selected = selectedCount && selectedCount ===
+          row.children.filter(child => !child.disabled && child.visible).length
+
+        selectedTotal += selectedCount
+      } else {
+        selectedTotal += row.selected && !row.disabled && row.visible ? 1 : 0
+      }
+    }
+
+    this.allSelected = this.data.filter(row => {
+      return row.selected && !row.disabled && row.visible
+    }).length === this.data.filter(row => !row.disabled && row.visible).length
+
+    if (!ignoreTrigger) {
+      if (this.allSelected) {
+        this.options.onCheckAll()
+      } else if (selectedTotal === 0) {
+        this.options.onUncheckAll()
+      }
+    }
   }
 
   initFilter () {
@@ -211,11 +242,11 @@ class MultipleSelect {
     this.initList()
     this.events()
     this.update(true)
-    this.updateOptGroupSelect(true)
-    this.updateSelectAll(false, true)
 
     if (this.options.isOpen) {
-      this.open()
+      setTimeout(() => {
+        this.open()
+      }, 50)
     }
 
     if (this.options.openOnHover) {
@@ -235,7 +266,7 @@ class MultipleSelect {
         <div class="ms-search">
           <input type="text" autocomplete="off" autocorrect="off"
             autocapitalize="off" spellcheck="false"
-            ${sprintf`placeholder="${s}"`(this.options.filterPlaceholder)}>
+            placeholder="${this.options.filterPlaceholder}">
         </div>
       `)
     }
@@ -243,28 +274,26 @@ class MultipleSelect {
     html.push('<ul>')
 
     if (this.options.selectAll && !this.options.single) {
-      html.push([
-        '<li class="ms-select-all">',
-        '<label>',
-        sprintf`<input type="checkbox" ${s} />`(this.selectAllName),
-        `<span>${this.options.formatSelectAll()}</span>`,
-        '</label>',
-        '</li>'
-      ].join(''))
+      html.push(`
+        <li class="ms-select-all">
+        <label>
+        <input type="checkbox" ${this.selectAllName}${this.allSelected ? ' checked="checked"' : ''} />
+        <span>${this.options.formatSelectAll()}</span>
+        </label>
+        </li>
+      `)
     }
 
     html.push(this.data.map(row => {
       return this.initListItem(row)
     }).join(''))
 
-    html.push(sprintf`<li class="ms-no-results">${s}</li>`(
-      this.options.formatNoMatchesFound()
-    ))
+    html.push(`<li class="ms-no-results">${this.options.formatNoMatchesFound()}</li>`)
 
     html.push('</ul>')
 
     this.$drop.html(html.join(''))
-    this.$drop.find('ul').css('max-height', `${this.options.maxHeight}px`)
+    this.$drop.find('>ul').css('max-height', `${this.options.maxHeight}px`)
     this.$drop.find('.multiple').css('width', `${this.options.multipleWidth}px`)
 
     this.$searchInput = this.$drop.find('.ms-search input')
@@ -276,7 +305,7 @@ class MultipleSelect {
   }
 
   initListItem (row, level = 0) {
-    const title = sprintf`title="${s}"`(row.title)
+    const title = row.title ? `title="${row.title}"` : ''
     const multiple = this.options.multiple ? 'multiple' : ''
     const type = this.options.single ? 'radio' : 'checkbox'
     let classes = ''
@@ -285,25 +314,37 @@ class MultipleSelect {
       classes = 'hide-radio '
     }
 
+    if (row.selected) {
+      classes += 'selected '
+    }
+
     if (row.type === 'optgroup') {
       const customStyle = this.options.styler(row)
-      const style = customStyle ? sprintf`style="${s}"`(customStyle) : ''
+      const style = customStyle ? `style="${customStyle}"` : ''
       const html = []
+      const group = this.options.hideOptgroupCheckboxes || this.options.single ?
+        `<span ${this.selectGroupName} data-key="${row._key}"></span>` :
+        `<input type="checkbox"
+          ${this.selectGroupName}
+          data-key="${row._key}"
+          ${row.selected ? ' checked="checked"' : ''}
+          ${row.disabled ? ' disabled="disabled"' : ''}
+        >`
 
-      html.push([
-        `<li class="group ${classes}" ${style}>`,
-        sprintf`<label class="optgroup ${s}" data-group="${s}">`(
-          row.disabled ? 'disabled' : '', row.group
-        ),
-        this.options.hideOptgroupCheckboxes || this.options.single
-          ? sprintf`<span ${s}></span>`(this.selectGroupName)
-          : sprintf`<input type="checkbox" ${s} ${s}>`(
-            this.selectGroupName, row.disabled ? 'disabled="disabled"' : ''
-          ),
-        row.label,
-        '</label>',
-        '</li>'
-      ].join(''))
+      if (
+        !classes.includes('hide-radio') &&
+        (this.options.hideOptgroupCheckboxes || this.options.single)
+      ) {
+        classes += 'hide-radio '
+      }
+
+      html.push(`
+        <li class="group ${classes}" ${style}>
+        <label class="optgroup${row.disabled ? ' disabled' : ''}">
+        ${group}${row.label}
+        </label>
+        </li>
+      `)
 
       html.push(row.children.map(child => {
         return this.initListItem(child, 1)
@@ -313,46 +354,27 @@ class MultipleSelect {
     }
 
     const customStyle = this.options.styler(row)
-    const style = customStyle ? sprintf`style="${s}"`(customStyle) : ''
-    classes += (row.classes || '')
+    const style = customStyle ? `style="${customStyle}"` : ''
+    classes += row.classes || ''
 
     if (level && this.options.single) {
       classes += `option-level-${level} `
     }
 
-    return [
-      sprintf`<li class="${s} ${s}" ${s} ${s}>`(multiple, classes, title, style),
-      sprintf`<label class="${s}">`(row.disabled ? 'disabled' : ''),
-      sprintf`<input type="${s}" value="${s}" ${s}${s}${s}${s}>`(
-        type,
-        row.value,
-        this.selectItemName,
-        row.selected ? ' checked="checked"' : '',
-        row.disabled ? ' disabled="disabled"' : '',
-        sprintf` data-group="${s}"`(row.group)
-      ),
-      sprintf`<span>${s}</span>`(row.text),
-      '</label>',
-      '</li>'
-    ].join('')
-  }
-
-  initView () {
-    let computedWidth
-
-    if (window.getComputedStyle) {
-      computedWidth = window.getComputedStyle(this.$el[0]).width
-
-      if (computedWidth === 'auto') {
-        computedWidth = this.$drop.outerWidth() + 20
-      }
-    } else {
-      computedWidth = this.$el.outerWidth() + 20
-    }
-
-    this.$parent.css('width', this.options.width || computedWidth)
-
-    this.$el.show().addClass('ms-offscreen')
+    return `
+      <li class="${multiple} ${classes}" ${title} ${style}>
+      <label class="${row.disabled ? 'disabled' : ''}">
+      <input type="${type}"
+        value="${row.value}"
+        data-key="${row._key}"
+        ${this.selectItemName}
+        ${row.selected ? ' checked="checked"' : ''}
+        ${row.disabled ? ' disabled="disabled"' : ''}
+      >
+      <span>${row.text}</span>
+      </label>
+      </li>
+    `
   }
 
   events () {
@@ -415,37 +437,24 @@ class MultipleSelect {
     })
 
     this.$selectAll.off('click').on('click', e => {
-      const checked = $(e.currentTarget).prop('checked')
-      const $items = this.$selectItems.filter(':visible')
-
-      if ($items.length === this.$selectItems.length) {
-        this[checked ? 'checkAll' : 'uncheckAll']()
-      } else { // when the filter option is true
-        this.$selectGroups.prop('checked', checked)
-        $items.prop('checked', checked)
-        this.options[checked ? 'onCheckAll' : 'onUncheckAll']()
-        this.update()
-      }
+      this._checkAll($(e.currentTarget).prop('checked'))
     })
 
     this.$selectGroups.off('click').on('click', e => {
       const $this = $(e.currentTarget)
-      const group = $this.parent()[0].getAttribute('data-group')
-      const $items = this.$selectItems.filter(':visible')
-      const $children = $items.filter(sprintf`[data-group="${s}"]`(group))
-      const checked = $children.length !== $children.filter(':checked').length
+      const checked = $this.prop('checked')
+      const group = findByParam(this.data, '_key', $this.data('key'))
 
-      $children.prop('checked', checked)
-      this.updateSelectAll(true)
-      this.update()
+      this._checkGroup(group, checked)
       this.options.onOptgroupClick({
-        label: $this.parent().text(),
-        checked,
-        children: $children.get().map(el => {
+        label: group.label,
+        selected: group.selected,
+        children: group.children.map(child => {
           return {
-            label: $(el).parent().text(),
-            value: $(el).val(),
-            check: $(el).prop('checked')
+            text: child.text,
+            value: child.value,
+            selected: child.selected,
+            disabled: child.disabled
           }
         })
       })
@@ -453,29 +462,38 @@ class MultipleSelect {
 
     this.$selectItems.off('click').on('click', e => {
       const $this = $(e.currentTarget)
+      const checked = $this.prop('checked')
+      const option = findByParam(this.data, '_key', $this.data('key'))
 
-      if (this.options.single) {
-        const clickedVal = $this.val()
-        this.$selectItems.filter((i, el) => {
-          return $(el).val() !== clickedVal
-        }).each((i, el) => {
-          $(el).prop('checked', false)
-        })
-      }
-
-      this.updateSelectAll(true)
-      this.update()
-      this.updateOptGroupSelect()
+      this._check(option, checked)
       this.options.onClick({
-        label: $this.parent().text(),
-        value: $this.val(),
-        checked: $this.prop('checked')
+        text: option.text,
+        value: option.value,
+        selected: option.selected
       })
 
       if (this.options.single && this.options.isOpen && !this.options.keepOpen) {
         this.close()
       }
     })
+  }
+
+  initView () {
+    let computedWidth
+
+    if (window.getComputedStyle) {
+      computedWidth = window.getComputedStyle(this.$el[0]).width
+
+      if (computedWidth === 'auto') {
+        computedWidth = this.$drop.outerWidth() + 20
+      }
+    } else {
+      computedWidth = this.$el.outerWidth() + 20
+    }
+
+    this.$parent.css('width', this.options.width || computedWidth)
+
+    this.$el.show().addClass('ms-offscreen')
   }
 
   open () {
@@ -510,7 +528,7 @@ class MultipleSelect {
     if (this.data.length && this.options.filter) {
       this.$searchInput.val('')
       this.$searchInput.focus()
-      this.filter()
+      this.filter(true)
     }
     this.options.onOpen()
   }
@@ -545,16 +563,15 @@ class MultipleSelect {
   }
 
   update (ignoreTrigger) {
+    const valueSelects = this.getSelects()
     let textSelects = this.getSelects('text')
 
-    if (this.options.displayHtml) {
-      textSelects = this.getSelects('html')
-    } else if (this.options.displayValues) {
-      textSelects = this.getSelects()
+    if (this.options.displayValues) {
+      textSelects = valueSelects
     }
 
     const $span = this.$choice.find('>span')
-    const sl = textSelects.length
+    const sl = valueSelects.length
     let html = ''
 
     if (sl === 0) {
@@ -585,50 +602,35 @@ class MultipleSelect {
     // set selects to select
     this.$el.val(this.getSelects())
 
-    // add selected class to selected li
-    this.$drop.find('li').removeClass('selected')
-    this.$drop.find('input:checked').each((i, el) => {
-      $(el).parents('li').first().addClass('selected')
-    })
-
     // trigger <select> change event
     if (!ignoreTrigger) {
       this.$el.trigger('change')
     }
   }
 
-  updateSelectAll (triggerEvent, all = false) {
-    let $items = this.$selectItems
+  updateSelected () {
+    for (const row of this.data) {
+      this.$drop.find(`input[data-key=${row._key}]`).prop('checked', row.selected)
+        .closest('li').toggleClass('selected', row.selected)
+        .toggle(row.visible)
 
-    if (!all) {
-      $items = $items.filter(':visible')
-    }
+      this.$drop.find(`span[data-key=${row._key}]`)
+        .closest('li').toggle(row.visible)
 
-    const selectedLength = $items.filter(':checked').length
-
-    this.$selectAll.prop('checked', selectedLength === $items.length)
-
-    if (triggerEvent) {
-      if (selectedLength === $items.length) {
-        this.options.onCheckAll()
-      } else if (selectedLength === 0) {
-        this.options.onUncheckAll()
+      if (row.type === 'optgroup') {
+        for (const child of row.children) {
+          this.$drop.find(`[data-key=${child._key}]`).prop('checked', child.selected)
+            .closest('li').toggleClass('selected', child.selected)
+            .toggle(child.visible)
+        }
       }
     }
-  }
 
-  updateOptGroupSelect (all = false) {
-    let $items = this.$selectItems
+    const noResult = this.data.filter(row => row.visible).length === 0
 
-    if (!all) {
-      $items = $items.filter(':visible')
-    }
-    $.each(this.$selectGroups, (i, val) => {
-      const group = $(val).parent()[0].getAttribute('data-group')
-      const $children = $items.filter(sprintf`[data-group="${s}"]`(group))
-      $(val).prop('checked', $children.length &&
-        $children.length === $children.filter(':checked').length)
-    })
+    this.$selectAll.prop('checked', this.allSelected)
+      .closest('li').toggle(!noResult)
+    this.$noResults.toggle(noResult)
   }
 
   getOptions () {
@@ -649,67 +651,61 @@ class MultipleSelect {
   }
 
   // value html, or text, default: 'value'
-  getSelects (type) {
-    let texts = []
+  getSelects (type = 'value') {
     const values = []
-    this.$drop.find(sprintf`input[${s}]:checked`(this.selectItemName)).each((i, el) => {
-      texts.push($(el).next()[type === 'html' ? 'html' : 'text']())
-      values.push($(el).val())
-    })
-
-    if (
-      type === 'text' &&
-      this.$selectGroups.length &&
-      !this.options.single
-    ) {
-      texts = []
-      this.$selectGroups.each((i, el) => {
-        const html = []
-        const text = $.trim($(el).parent().text())
-        const group = $(el).parent().data('group')
-        const $children = this.$drop.find(sprintf`[${s}][data-group="${s}"]`(
-          this.selectItemName, group
-        ))
-        const $selected = $children.filter(':checked')
-
-        if (!$selected.length) {
-          return
+    for (const row of this.data) {
+      if (row.type === 'optgroup') {
+        const selectedChildren = row.children.filter(child => child.selected)
+        if (!selectedChildren.length) {
+          continue
         }
 
-        html.push('[')
-        html.push(text)
-        if ($children.length >= $selected.length) {
-          const list = []
-          $selected.each((j, elem) => {
-            list.push($(elem).parent().text())
-          })
-          html.push(`: ${list.join(', ')}`)
+        if (type === 'value' || this.options.single) {
+          values.push(...selectedChildren.map(child => {
+            return type === 'value' ? child._value || child[type] : child[type]
+          }))
+        } else {
+          const value = []
+          value.push('[')
+          value.push(row.label)
+          value.push(`: ${selectedChildren.map(child => child[type]).join(', ')}`)
+          value.push(']')
+          values.push(value.join(''))
         }
-        html.push(']')
-        texts.push(html.join(''))
-      })
+      } else if (row.selected) {
+        values.push(type === 'value' ? row._value || row[type] : row[type])
+      }
     }
-    return ['html', 'text'].includes(type) ? texts : values
+    return values
   }
 
-  setSelects (values) {
-    this.$selectItems.prop('checked', false)
-    this.$disableItems.prop('checked', false)
-    $.each(values, (i, value) => {
-      this.$selectItems.filter(sprintf`[value="${s}"]`(value)).prop('checked', true)
-      this.$disableItems.filter(sprintf`[value="${s}"]`(value)).prop('checked', true)
-    })
-    this.$selectAll.prop('checked', this.$selectItems.length ===
-      this.$selectItems.filter(':checked').length + this.$disableItems.filter(':checked').length)
+  setSelects (values, ignoreTrigger) {
+    let hasChanged = false
+    const _setSelects = rows => {
+      for (const row of rows) {
+        let selected = values.includes(row._value || row.value)
+        if (!selected && row.value === +row.value + '') {
+          selected = values.includes(+row.value)
+        }
+        if (row.selected !== selected) {
+          hasChanged = true
+        }
+        row.selected = selected
+      }
+    }
 
-    $.each(this.$selectGroups, (i, val) => {
-      const group = $(val).parent()[0].getAttribute('data-group')
-      const $children = this.$selectItems.filter(`[data-group="${group}"]`)
-      $(val).prop('checked', $children.length &&
-        $children.length === $children.filter(':checked').length)
-    })
+    for (const row of this.data) {
+      if (row.type === 'optgroup') {
+        _setSelects(row.children)
+      } else {
+        _setSelects([row])
+      }
+    }
 
-    this.update(false)
+    if (hasChanged) {
+      this.updateSelected()
+      this.update(ignoreTrigger)
+    }
   }
 
   enable () {
@@ -721,52 +717,86 @@ class MultipleSelect {
   }
 
   check (value) {
-    if (this.options.single) {
-      this.$selectItems.prop('checked', false)
-      this.$disableItems.prop('checked', false)
+    const option = findByParam(this.data, 'value', value)
+    if (!option) {
+      return
     }
-    this._check(value, true)
+    this._check(option, true)
   }
 
   uncheck (value) {
-    this._check(value, false)
+    const option = findByParam(this.data, 'value', value)
+    if (!option) {
+      return
+    }
+    this._check(option, false)
   }
 
-  _check (value, checked) {
-    this.$selectItems.filter(sprintf`[value="${s}"]`(value)).prop('checked', checked)
-    this.$disableItems.filter(sprintf`[value="${s}"]`(value)).prop('checked', checked)
+  _check (option, checked) {
+    if (this.options.single) {
+      this._checkAll(false, true)
+    }
+    option.selected = checked
+    this.initSelected()
+    this.updateSelected()
     this.update()
-    this.updateOptGroupSelect(true)
-    this.updateSelectAll(true, true)
   }
 
   checkAll () {
     this._checkAll(true)
-    this.options.onCheckAll()
   }
 
   uncheckAll () {
     this._checkAll(false)
-    this.options.onUncheckAll()
   }
 
-  _checkAll (checked) {
-    this.$selectItems.prop('checked', checked)
-    this.$selectGroups.prop('checked', checked)
-    this.$selectAll.prop('checked', checked)
-    this.update()
+  _checkAll (checked, ignoreUpdate) {
+    for (const row of this.data) {
+      if (row.type === 'optgroup') {
+        this._checkGroup(row, checked, true)
+      } else if (!row.disabled && (ignoreUpdate || row.visible)) {
+        row.selected = checked
+      }
+    }
+
+    if (!ignoreUpdate) {
+      this.initSelected()
+      this.updateSelected()
+      this.update()
+    }
+  }
+
+  _checkGroup (group, checked, ignoreUpdate) {
+    group.selected = checked
+    group.children.forEach(row => {
+      if (!row.disabled && (ignoreUpdate || row.visible)) {
+        row.selected = checked
+      }
+    })
+
+    if (!ignoreUpdate) {
+      this.initSelected()
+      this.updateSelected()
+      this.update()
+    }
   }
 
   checkInvert () {
     if (this.options.single) {
       return
     }
-    this.$selectItems.each((i, el) => {
-      $(el).prop('checked', !$(el).prop('checked'))
-    })
+    for (const row of this.data) {
+      if (row.type === 'optgroup') {
+        for (const child of row.children) {
+          child.selected = !child.selected
+        }
+      } else {
+        row.selected = !row.selected
+      }
+    }
+    this.initSelected()
+    this.updateSelected()
     this.update()
-    this.updateOptGroupSelect(true)
-    this.updateSelectAll(true, true)
   }
 
   focus () {
@@ -784,61 +814,47 @@ class MultipleSelect {
     this.init()
   }
 
-  filter () {
+  filter (ignoreTrigger) {
     const originalText = $.trim(this.$searchInput.val())
     const text = originalText.toLowerCase()
 
-    if (text.length === 0) {
-      this.$selectAll.closest('li').show()
-      this.$selectItems.closest('li').show()
-      this.$disableItems.closest('li').show()
-      this.$selectGroups.closest('li').show()
-      this.$noResults.hide()
-    } else {
-      if (!this.options.filterGroup) {
-        this.$selectItems.each((i, el) => {
-          const $parent = $(el).parent()
-          const hasText = this.options.customFilter(
-            removeDiacritics($parent.text().trim().toLowerCase()),
-            removeDiacritics(text),
-            $parent.text().trim(), originalText)
-          $parent.closest('li')[hasText ? 'show' : 'hide']()
-        })
-      }
-      this.$disableItems.closest('li').hide()
-      this.$selectGroups.each((i, el) => {
-        const $parent = $(el).parent()
-        const group = $parent[0].getAttribute('data-group')
+    for (const row of this.data) {
+      if (row.type === 'optgroup') {
         if (this.options.filterGroup) {
-          const hasText = this.options.customFilter(
-            removeDiacritics($parent.text().toLowerCase()),
+          const visible = this.options.customFilter(
+            removeDiacritics(row.label.toLowerCase()),
             removeDiacritics(text),
-            $parent.text(), originalText)
-          const func = hasText ? 'show' : 'hide'
-          $parent.closest('li')[func]()
-          this.$selectItems.filter(`[data-group="${group}"]`).closest('li')[func]()
+            row.label, originalText)
+
+          row.visible = visible
+          for (const child of row.children) {
+            child.visible = visible
+          }
         } else {
-          const hasText = this.$selectItems
-            .filter(`[data-group="${group}"]`)
-            .closest('li').filter(':visible')
-            .length
+          for (const child of row.children) {
+            child.visible = this.options.customFilter(
+              removeDiacritics(child.text.toLowerCase()),
+              removeDiacritics(text),
+              child.text, originalText)
+          }
+          row.visible = row.children.filter(child => child.visible).length > 0
 
-          $parent.closest('li')[hasText ? 'show' : 'hide']()
+          console.log(row.visible)
         }
-      })
-
-      // Check if no matches found
-      if (this.$selectItems.closest('li').filter(':visible').length) {
-        this.$selectAll.closest('li').show()
-        this.$noResults.hide()
       } else {
-        this.$selectAll.closest('li').hide()
-        this.$noResults.show()
+        row.visible = this.options.customFilter(
+          removeDiacritics(row.text.toLowerCase()),
+          removeDiacritics(text),
+          row.text, originalText)
       }
     }
-    this.updateOptGroupSelect()
-    this.updateSelectAll()
-    this.options.onFilter(text)
+
+    this.initSelected(true)
+    this.updateSelected()
+
+    if (!ignoreTrigger) {
+      this.options.onFilter(text)
+    }
   }
 
   destroy () {

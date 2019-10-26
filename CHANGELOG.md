@@ -1,8 +1,14 @@
 ## Changelog
 
-### 1.4.4
+### 1.5.0
 
+- **New:** Rewrite display and data logic code.
+- **New:** Added object `value` supported.
+- **New:** Added object for `v-model` supported.
+- **Update:** Improved events trigger logic.
+- **Update:** Updated parameters of `onOptgroupClick` and `onClick` events.
 - **Update:** Fixed vue warning when `data` is Object.
+- **Update:** Removed `displayHtml` option and display html by default.
 
 ### 1.4.3
 
