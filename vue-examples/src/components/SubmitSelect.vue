@@ -9,7 +9,6 @@
         <div class="col-sm-10">
           <MultipleSelect
             name="select1"
-            single
           >
             <option value="1">
               First
@@ -35,6 +34,7 @@
         <div class="col-sm-10">
           <MultipleSelect
             name="select2"
+            multiple
             required
           >
             <option value="1">

@@ -34,24 +34,28 @@ function _createClass(Constructor, protoProps, staticProps) {
   return Constructor;
 }
 
-function _taggedTemplateLiteral(strings, raw) {
-  if (!raw) {
-    raw = strings.slice(0);
-  }
-
-  return Object.freeze(Object.defineProperties(strings, {
-    raw: {
-      value: Object.freeze(raw)
-    }
-  }));
-}
-
 function _slicedToArray(arr, i) {
   return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();
 }
 
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+}
+
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) {
+    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
+
+    return arr2;
+  }
+}
+
 function _arrayWithHoles(arr) {
   if (Array.isArray(arr)) return arr;
+}
+
+function _iterableToArray(iter) {
+  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
 }
 
 function _iterableToArrayLimit(arr, i) {
@@ -82,6 +86,10 @@ function _iterableToArrayLimit(arr, i) {
   }
 
   return _arr;
+}
+
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance");
 }
 
 function _nonIterableRest() {
@@ -841,14 +849,16 @@ _export({ target: 'String', proto: true, forced: forcedStringTrimMethod('trim') 
   }
 });
 
-var VERSION = '1.4.3';
+var VERSION = '1.5.0';
+var BLOCK_ROWS = 50;
+var CLUSTER_BLOCKS = 4;
 var DEFAULTS = {
   name: '',
   placeholder: '',
   data: undefined,
   locale: undefined,
   selectAll: true,
-  single: false,
+  single: undefined,
   singleRadio: false,
   multiple: false,
   hideOptgroupCheckboxes: false,
@@ -856,8 +866,8 @@ var DEFAULTS = {
   width: undefined,
   dropWidth: undefined,
   maxHeight: 250,
+  maxHeightUnit: 'px',
   position: 'bottom',
-  displayHtml: false,
   displayValues: false,
   displayTitle: false,
   displayDelimiter: ', ',
@@ -876,6 +886,7 @@ var DEFAULTS = {
     // originalLabel, originalText
     return label.includes(text);
   },
+  showClear: false,
   animate: undefined,
   styler: function styler() {
     return false;
@@ -913,6 +924,9 @@ var DEFAULTS = {
   onFilter: function onFilter() {
     return false;
   },
+  onClear: function onClear() {
+    return false;
+  },
   onAfterCreate: function onAfterCreate() {
     return false;
   }
@@ -935,6 +949,8 @@ var METHODS = ['getOptions', 'refreshOptions', 'getSelects', 'setSelects', 'enab
 Object.assign(DEFAULTS, EN);
 var Constants = {
   VERSION: VERSION,
+  BLOCK_ROWS: BLOCK_ROWS,
+  CLUSTER_BLOCKS: CLUSTER_BLOCKS,
   DEFAULTS: DEFAULTS,
   METHODS: METHODS,
   LOCALES: {
@@ -1850,6 +1866,16 @@ _export({ target: 'Object', stat: true }, {
   }
 });
 
+var FAILS_ON_PRIMITIVES = fails(function () { objectKeys(1); });
+
+// `Object.keys` method
+// https://tc39.github.io/ecma262/#sec-object.keys
+_export({ target: 'Object', stat: true, forced: FAILS_ON_PRIMITIVES }, {
+  keys: function keys(it) {
+    return objectKeys(toObject(it));
+  }
+});
+
 var TO_STRING_TAG$1 = wellKnownSymbol('toStringTag');
 // ES3 wrong here
 var CORRECT_ARGUMENTS = classofRaw(function () { return arguments; }()) == 'Arguments';
@@ -2341,15 +2367,151 @@ for (var COLLECTION_NAME$1 in domIterables) {
   }
 }
 
-var FAILS_ON_PRIMITIVES = fails(function () { objectKeys(1); });
+var VirtualScroll =
+/*#__PURE__*/
+function () {
+  function VirtualScroll(options) {
+    var _this = this;
 
-// `Object.keys` method
-// https://tc39.github.io/ecma262/#sec-object.keys
-_export({ target: 'Object', stat: true, forced: FAILS_ON_PRIMITIVES }, {
-  keys: function keys(it) {
-    return objectKeys(toObject(it));
+    _classCallCheck(this, VirtualScroll);
+
+    this.rows = options.rows;
+    this.scrollEl = options.scrollEl;
+    this.contentEl = options.contentEl;
+    this.callback = options.callback;
+    this.cache = {};
+    this.scrollTop = this.scrollEl.scrollTop;
+    this.initDOM(this.rows);
+    this.scrollEl.scrollTop = this.scrollTop;
+    this.lastCluster = 0;
+
+    var onScroll = function onScroll() {
+      if (_this.lastCluster !== (_this.lastCluster = _this.getNum())) {
+        _this.initDOM(_this.rows);
+
+        _this.callback();
+      }
+    };
+
+    this.scrollEl.addEventListener('scroll', onScroll, false);
+
+    this.destroy = function () {
+      _this.contentEl.innerHtml = '';
+
+      _this.scrollEl.removeEventListener('scroll', onScroll, false);
+    };
   }
-});
+
+  _createClass(VirtualScroll, [{
+    key: "initDOM",
+    value: function initDOM(rows) {
+      if (typeof this.clusterHeight === 'undefined') {
+        this.cache.scrollTop = this.scrollEl.scrollTop;
+        this.cache.data = this.contentEl.innerHTML = rows[0] + rows[0] + rows[0];
+        this.getRowsHeight(rows);
+      }
+
+      var data = this.initData(rows, this.getNum());
+      var thisRows = data.rows.join('');
+      var dataChanged = this.checkChanges('data', thisRows);
+      var topOffsetChanged = this.checkChanges('top', data.topOffset);
+      var bottomOffsetChanged = this.checkChanges('bottom', data.bottomOffset);
+      var html = [];
+
+      if (dataChanged && topOffsetChanged) {
+        if (data.topOffset) {
+          html.push(this.getExtra('top', data.topOffset));
+        }
+
+        html.push(thisRows);
+
+        if (data.bottomOffset) {
+          html.push(this.getExtra('bottom', data.bottomOffset));
+        }
+
+        this.contentEl.innerHTML = html.join('');
+      } else if (bottomOffsetChanged) {
+        this.contentEl.lastChild.style.height = "".concat(data.bottomOffset, "px");
+      }
+    }
+  }, {
+    key: "getRowsHeight",
+    value: function getRowsHeight() {
+      if (typeof this.itemHeight === 'undefined') {
+        var nodes = this.contentEl.children;
+        var node = nodes[Math.floor(nodes.length / 2)];
+        this.itemHeight = node.offsetHeight;
+      }
+
+      this.blockHeight = this.itemHeight * Constants.BLOCK_ROWS;
+      this.clusterRows = Constants.BLOCK_ROWS * Constants.CLUSTER_BLOCKS;
+      this.clusterHeight = this.blockHeight * Constants.CLUSTER_BLOCKS;
+    }
+  }, {
+    key: "getNum",
+    value: function getNum() {
+      this.scrollTop = this.scrollEl.scrollTop;
+      return Math.floor(this.scrollTop / (this.clusterHeight - this.blockHeight)) || 0;
+    }
+  }, {
+    key: "initData",
+    value: function initData(rows, num) {
+      if (rows.length < Constants.BLOCK_ROWS) {
+        return {
+          topOffset: 0,
+          bottomOffset: 0,
+          rowsAbove: 0,
+          rows: rows
+        };
+      }
+
+      var start = Math.max((this.clusterRows - Constants.BLOCK_ROWS) * num, 0);
+      var end = start + this.clusterRows;
+      var topOffset = Math.max(start * this.itemHeight, 0);
+      var bottomOffset = Math.max((rows.length - end) * this.itemHeight, 0);
+      var thisRows = [];
+      var rowsAbove = start;
+
+      if (topOffset < 1) {
+        rowsAbove++;
+      }
+
+      for (var i = start; i < end; i++) {
+        rows[i] && thisRows.push(rows[i]);
+      }
+
+      this.dataStart = start;
+      this.dataEnd = end;
+      return {
+        topOffset: topOffset,
+        bottomOffset: bottomOffset,
+        rowsAbove: rowsAbove,
+        rows: thisRows
+      };
+    }
+  }, {
+    key: "checkChanges",
+    value: function checkChanges(type, value) {
+      var changed = value !== this.cache[type];
+      this.cache[type] = value;
+      return changed;
+    }
+  }, {
+    key: "getExtra",
+    value: function getExtra(className, height) {
+      var tag = document.createElement('li');
+      tag.className = "virtual-scroll-".concat(className);
+
+      if (height) {
+        tag.style.height = "".concat(height, "px");
+      }
+
+      return tag.outerHTML;
+    }
+  }]);
+
+  return VirtualScroll;
+}();
 
 var max$2 = Math.max;
 var min$3 = Math.min;
@@ -2467,41 +2629,6 @@ fixRegexpWellKnownSymbolLogic('replace', 2, function (REPLACE, nativeReplace, ma
     });
   }
 });
-
-// sprintf format specifiers
-var s = 's';
-
-var sprintf = function sprintf(strings) {
-  for (var _len = arguments.length, formats = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-    formats[_key - 1] = arguments[_key];
-  }
-
-  return function () {
-    for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-      args[_key2] = arguments[_key2];
-    }
-
-    var retStr = '';
-    return strings.slice(0, -1).some(function (str, i) {
-      switch (formats[i]) {
-        default:
-          throw new TypeError('Unrecognized sprintf format');
-
-        case 's':
-          {
-            var arg = args[i];
-
-            if (arg === null || arg === undefined) {
-              return true;
-            }
-
-            retStr += str + arg;
-            return false;
-          }
-      }
-    }) ? '' : retStr + strings.slice(-1);
-  };
-};
 
 var compareObjects = function compareObjects(objectA, objectB, compareLength) {
   var aKeys = Object.keys(objectA);
@@ -2787,265 +2914,90 @@ var removeDiacritics = function removeDiacritics(str) {
   }, str);
 };
 
-function _templateObject26() {
-  var data = _taggedTemplateLiteral(["[value=\"", "\"]"]);
-
-  _templateObject26 = function _templateObject26() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject25() {
-  var data = _taggedTemplateLiteral(["[value=\"", "\"]"]);
-
-  _templateObject25 = function _templateObject25() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject24() {
-  var data = _taggedTemplateLiteral(["[value=\"", "\"]"]);
-
-  _templateObject24 = function _templateObject24() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject23() {
-  var data = _taggedTemplateLiteral(["[value=\"", "\"]"]);
-
-  _templateObject23 = function _templateObject23() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject22() {
-  var data = _taggedTemplateLiteral(["[", "][data-group=\"", "\"]"]);
-
-  _templateObject22 = function _templateObject22() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject21() {
-  var data = _taggedTemplateLiteral(["input[", "]:checked"]);
-
-  _templateObject21 = function _templateObject21() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject20() {
-  var data = _taggedTemplateLiteral(["[data-group=\"", "\"]"]);
-
-  _templateObject20 = function _templateObject20() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject19() {
-  var data = _taggedTemplateLiteral(["[data-group=\"", "\"]"]);
-
-  _templateObject19 = function _templateObject19() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject18() {
-  var data = _taggedTemplateLiteral(["<span>", "</span>"]);
-
-  _templateObject18 = function _templateObject18() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject17() {
-  var data = _taggedTemplateLiteral([" data-group=\"", "\""]);
-
-  _templateObject17 = function _templateObject17() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject16() {
-  var data = _taggedTemplateLiteral(["<input type=\"", "\" value=\"", "\" ", "", "", "", ">"]);
-
-  _templateObject16 = function _templateObject16() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject15() {
-  var data = _taggedTemplateLiteral(["<label class=\"", "\">"]);
-
-  _templateObject15 = function _templateObject15() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject14() {
-  var data = _taggedTemplateLiteral(["<li class=\"", " ", "\" ", " ", ">"]);
-
-  _templateObject14 = function _templateObject14() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject13() {
-  var data = _taggedTemplateLiteral(["style=\"", "\""]);
-
-  _templateObject13 = function _templateObject13() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject12() {
-  var data = _taggedTemplateLiteral(["<input type=\"checkbox\" ", " ", ">"]);
-
-  _templateObject12 = function _templateObject12() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject11() {
-  var data = _taggedTemplateLiteral(["<span ", "></span>"]);
-
-  _templateObject11 = function _templateObject11() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject10() {
-  var data = _taggedTemplateLiteral(["<label class=\"optgroup ", "\" data-group=\"", "\">"]);
-
-  _templateObject10 = function _templateObject10() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject9() {
-  var data = _taggedTemplateLiteral(["style=\"", "\""]);
-
-  _templateObject9 = function _templateObject9() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject8() {
-  var data = _taggedTemplateLiteral(["title=\"", "\""]);
-
-  _templateObject8 = function _templateObject8() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject7() {
-  var data = _taggedTemplateLiteral(["<li class=\"ms-no-results\">", "</li>"]);
-
-  _templateObject7 = function _templateObject7() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject6() {
-  var data = _taggedTemplateLiteral(["<input type=\"checkbox\" ", " />"]);
-
-  _templateObject6 = function _templateObject6() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject5() {
-  var data = _taggedTemplateLiteral(["placeholder=\"", "\""]);
-
-  _templateObject5 = function _templateObject5() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject4() {
-  var data = _taggedTemplateLiteral(["<div class=\"ms-drop ", "\"></div>"]);
-
-  _templateObject4 = function _templateObject4() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n      <button type=\"button\" class=\"ms-choice\">\n      <span class=\"placeholder\">", "</span>\n      <div></div>\n      </button>\n    "]);
-
-  _templateObject3 = function _templateObject3() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject2() {
-  var data = _taggedTemplateLiteral(["title=\"", "\""]);
-
-  _templateObject2 = function _templateObject2() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject() {
-  var data = _taggedTemplateLiteral(["<div class=\"ms-parent ", "\" ", "/>"]);
-
-  _templateObject = function _templateObject() {
-    return data;
-  };
-
-  return data;
-}
+var setDataKeys = function setDataKeys(data) {
+  var total = 0;
+  data.forEach(function (row, i) {
+    if (row.type === 'optgroup') {
+      row._key = "group_".concat(i);
+      row.visible = typeof row.visible === 'undefined' ? true : row.visible;
+      row.children.forEach(function (child, j) {
+        child._key = "option_".concat(i, "_").concat(j);
+        child.visible = typeof child.visible === 'undefined' ? true : child.visible;
+      });
+      total += row.children.length;
+    } else {
+      row._key = "option_".concat(i);
+      row.visible = typeof row.visible === 'undefined' ? true : row.visible;
+      total += 1;
+    }
+  });
+  return total;
+};
+
+var findByParam = function findByParam(data, param, value) {
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    for (var _iterator = data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var row = _step.value;
+
+      if (row[param] === value || row[param] === +row[param] + '' && +row[param] === value) {
+        return row;
+      }
+
+      if (row.type === 'optgroup') {
+        var _iteratorNormalCompletion2 = true;
+        var _didIteratorError2 = false;
+        var _iteratorError2 = undefined;
+
+        try {
+          for (var _iterator2 = row.children[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+            var child = _step2.value;
+
+            if (child[param] === value || child[param] === +child[param] + '' && +child[param] === value) {
+              return child;
+            }
+          }
+        } catch (err) {
+          _didIteratorError2 = true;
+          _iteratorError2 = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+              _iterator2.return();
+            }
+          } finally {
+            if (_didIteratorError2) {
+              throw _iteratorError2;
+            }
+          }
+        }
+      }
+    }
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator.return != null) {
+        _iterator.return();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
+};
+
+var removeUndefined = function removeUndefined(obj) {
+  Object.keys(obj).forEach(function (key) {
+    return obj[key] === undefined ? delete obj[key] : '';
+  });
+  return obj;
+};
 
 var MultipleSelect =
 /*#__PURE__*/
@@ -3063,6 +3015,7 @@ function () {
       this.initLocale();
       this.initContainer();
       this.initData();
+      this.initSelected(true);
       this.initFilter();
       this.initDrop();
       this.initView();
@@ -3107,15 +3060,29 @@ function () {
 
       if (this.$label.find('>input').length) {
         this.$label = null;
+      } // single or multiple
+
+
+      if (typeof this.options.single === 'undefined') {
+        this.options.single = el.getAttribute('multiple') === null;
       } // restore class and title from select element
 
 
-      this.$parent = $(sprintf(_templateObject(), s, s)(el.getAttribute('class') || '', sprintf(_templateObject2(), s)(el.getAttribute('title')))); // add placeholder to choice button
+      this.$parent = $("\n      <div class=\"ms-parent ".concat(el.getAttribute('class') || '', "\"\n      title=\"").concat(el.getAttribute('title') || '', "\" />\n    ")); // add placeholder to choice button
 
       this.options.placeholder = this.options.placeholder || el.getAttribute('placeholder') || '';
-      this.$choice = $(sprintf(_templateObject3(), s)(this.options.placeholder)); // default position is bottom
+      this.tabIndex = el.getAttribute('tabindex');
+      var tabIndex = '';
 
-      this.$drop = $(sprintf(_templateObject4(), s)(this.options.position));
+      if (this.tabIndex !== null) {
+        this.$el.attr('tabindex', -1);
+        tabIndex = this.tabIndex && "tabindex=\"".concat(this.tabIndex, "\"");
+      }
+
+      this.$choice = $("\n      <button type=\"button\" class=\"ms-choice\"".concat(tabIndex, ">\n      <span class=\"placeholder\">").concat(this.options.placeholder, "</span>\n      ").concat(this.options.showClear ? '<div class="icon-close"></div>' : '', "\n      <div class=\"icon-caret\"></div>\n      </button>\n    ")); // default position is bottom
+
+      this.$drop = $("<div class=\"ms-drop ".concat(this.options.position, "\" />"));
+      this.$close = this.$choice.find('.icon-close');
 
       if (this.options.dropWidth) {
         this.$drop.css('width', this.options.dropWidth);
@@ -3154,14 +3121,6 @@ function () {
 
       if (this.options.data) {
         if (Array.isArray(this.options.data)) {
-          this.options.data.forEach(function (row, i) {
-            if (row.type === 'optgroup') {
-              row.group = row.group || "group_".concat(i);
-              row.children.forEach(function (child) {
-                child.group = child.group || row.group;
-              });
-            }
-          });
           this.data = this.options.data.map(function (it) {
             if (typeof it === 'string' || typeof it === 'number') {
               return {
@@ -3186,24 +3145,24 @@ function () {
 
           this.data = data;
         }
+      } else {
+        $.each(this.$el.children(), function (i, elm) {
+          var row = _this2.initRow(i, elm);
 
-        return;
+          if (row) {
+            data.push(_this2.initRow(i, elm));
+          }
+        });
+        this.options.data = data;
+        this.data = data;
+        this.fromHtml = true;
       }
 
-      $.each(this.$el.children(), function (i, elm) {
-        var row = _this2.initRow(i, elm);
-
-        if (row) {
-          data.push(_this2.initRow(i, elm));
-        }
-      });
-      this.options.data = data;
-      this.data = data;
-      this.fromHtml = true;
+      this.dataTotal = setDataKeys(this.data);
     }
   }, {
     key: "initRow",
-    value: function initRow(i, elm, group, groupDisabled) {
+    value: function initRow(i, elm, groupDisabled) {
       var _this3 = this;
 
       var row = {};
@@ -3211,24 +3170,39 @@ function () {
 
       if ($elm.is('option')) {
         row.type = 'option';
-        row.group = group;
         row.text = this.options.textTemplate($elm);
         row.value = elm.value;
-        row.selected = elm.selected;
+        row.visible = true;
+        row.selected = !!elm.selected;
         row.disabled = groupDisabled || elm.disabled;
         row.classes = elm.getAttribute('class') || '';
-        row.title = elm.getAttribute('title');
+        row.title = elm.getAttribute('title') || '';
+
+        if ($elm.data('value')) {
+          row._value = $elm.data('value'); // value for object
+        }
+
+        if (Object.keys($elm.data()).length) {
+          row._data = $elm.data();
+        }
+
         return row;
       }
 
       if ($elm.is('optgroup')) {
         row.type = 'optgroup';
-        row.group = "group_".concat(i);
         row.label = this.options.labelTemplate($elm);
+        row.visible = true;
+        row.selected = !!elm.selected;
         row.disabled = elm.disabled;
         row.children = [];
+
+        if (Object.keys($elm.data()).length) {
+          row._data = $elm.data();
+        }
+
         $.each($elm.children(), function (j, elem) {
-          row.children.push(_this3.initRow(j, elem, row.group, row.disabled));
+          row.children.push(_this3.initRow(j, elem, row.disabled));
         });
         return row;
       }
@@ -3236,25 +3210,27 @@ function () {
       return null;
     }
   }, {
-    key: "initFilter",
-    value: function initFilter() {
-      if (this.options.filter || !this.options.filterByDataLength) {
-        return;
-      }
-
-      var length = 0;
+    key: "initSelected",
+    value: function initSelected(ignoreTrigger) {
+      var selectedTotal = 0;
       var _iteratorNormalCompletion = true;
       var _didIteratorError = false;
       var _iteratorError = undefined;
 
       try {
         for (var _iterator = this.data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var option = _step.value;
+          var row = _step.value;
 
-          if (option.type === 'optgroup') {
-            length += option.children.length;
+          if (row.type === 'optgroup') {
+            var selectedCount = row.children.filter(function (child) {
+              return child.selected && !child.disabled && child.visible;
+            }).length;
+            row.selected = selectedCount && selectedCount === row.children.filter(function (child) {
+              return !child.disabled && child.visible;
+            }).length;
+            selectedTotal += selectedCount;
           } else {
-            length += 1;
+            selectedTotal += row.selected && !row.disabled && row.visible ? 1 : 0;
           }
         }
       } catch (err) {
@@ -3272,6 +3248,59 @@ function () {
         }
       }
 
+      this.allSelected = this.data.filter(function (row) {
+        return row.selected && !row.disabled && row.visible;
+      }).length === this.data.filter(function (row) {
+        return !row.disabled && row.visible;
+      }).length;
+
+      if (!ignoreTrigger) {
+        if (this.allSelected) {
+          this.options.onCheckAll();
+        } else if (selectedTotal === 0) {
+          this.options.onUncheckAll();
+        }
+      }
+    }
+  }, {
+    key: "initFilter",
+    value: function initFilter() {
+      this.filterText = '';
+
+      if (this.options.filter || !this.options.filterByDataLength) {
+        return;
+      }
+
+      var length = 0;
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
+
+      try {
+        for (var _iterator2 = this.data[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+          var option = _step2.value;
+
+          if (option.type === 'optgroup') {
+            length += option.children.length;
+          } else {
+            length += 1;
+          }
+        }
+      } catch (err) {
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+            _iterator2.return();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
+      }
+
       this.options.filter = length > this.options.filterByDataLength;
     }
   }, {
@@ -3280,13 +3309,12 @@ function () {
       var _this4 = this;
 
       this.initList();
-      this.events();
       this.update(true);
-      this.updateOptGroupSelect(true);
-      this.updateSelectAll(false, true);
 
       if (this.options.isOpen) {
-        this.open();
+        setTimeout(function () {
+          _this4.open();
+        }, 50);
       }
 
       if (this.options.openOnHover) {
@@ -3300,72 +3328,276 @@ function () {
   }, {
     key: "initList",
     value: function initList() {
-      var _this5 = this;
-
       var html = [];
 
       if (this.options.filter) {
-        html.push("\n        <div class=\"ms-search\">\n          <input type=\"text\" autocomplete=\"off\" autocorrect=\"off\"\n            autocapitalize=\"off\" spellcheck=\"false\"\n            ".concat(sprintf(_templateObject5(), s)(this.options.filterPlaceholder), ">\n        </div>\n      "));
+        html.push("\n        <div class=\"ms-search\">\n          <input type=\"text\" autocomplete=\"off\" autocorrect=\"off\"\n            autocapitalize=\"off\" spellcheck=\"false\"\n            placeholder=\"".concat(this.options.filterPlaceholder, "\">\n        </div>\n      "));
       }
 
-      html.push('<ul>');
+      html.push('<ul></ul>');
+      this.$drop.html(html.join(''));
+      this.$ul = this.$drop.find('>ul');
+      this.initListItems();
+    }
+  }, {
+    key: "initListItems",
+    value: function initListItems() {
+      var _this5 = this;
+
+      var rows = this.getListRows();
+      var offset = 0;
 
       if (this.options.selectAll && !this.options.single) {
-        html.push(['<li class="ms-select-all">', '<label>', sprintf(_templateObject6(), s)(this.selectAllName), "<span>".concat(this.options.formatSelectAll(), "</span>"), '</label>', '</li>'].join(''));
+        offset = -1;
       }
 
-      html.push(this.data.map(function (row) {
-        return _this5.initListItem(row);
-      }).join(''));
-      html.push(sprintf(_templateObject7(), s)(this.options.formatNoMatchesFound()));
-      html.push('</ul>');
-      this.$drop.html(html.join(''));
-      this.$drop.find('ul').css('max-height', "".concat(this.options.maxHeight, "px"));
-      this.$drop.find('.multiple').css('width', "".concat(this.options.multipleWidth, "px"));
-      this.$searchInput = this.$drop.find('.ms-search input');
-      this.$selectAll = this.$drop.find("input[".concat(this.selectAllName, "]"));
-      this.$selectGroups = this.$drop.find("input[".concat(this.selectGroupName, "],span[").concat(this.selectGroupName, "]"));
-      this.$selectItems = this.$drop.find("input[".concat(this.selectItemName, "]:enabled"));
-      this.$disableItems = this.$drop.find("input[".concat(this.selectItemName, "]:disabled"));
-      this.$noResults = this.$drop.find('.ms-no-results');
+      if (rows.length > Constants.BLOCK_ROWS * Constants.CLUSTER_BLOCKS) {
+        if (this.virtualScroll) {
+          this.virtualScroll.destroy();
+        }
+
+        var dropVisible = this.$drop.is(':visible');
+
+        if (!dropVisible) {
+          this.$drop.css('left', -10000).show();
+        }
+
+        var updateDataOffset = function updateDataOffset() {
+          _this5.updateDataStart = _this5.virtualScroll.dataStart + offset;
+          _this5.updateDataEnd = _this5.virtualScroll.dataEnd + offset;
+
+          if (_this5.updateDataStart < 0) {
+            _this5.updateDataStart = 0;
+          }
+        };
+
+        this.virtualScroll = new VirtualScroll({
+          rows: rows,
+          scrollEl: this.$ul[0],
+          contentEl: this.$ul[0],
+          callback: function callback() {
+            updateDataOffset();
+
+            _this5.events();
+          }
+        });
+        updateDataOffset();
+
+        if (!dropVisible) {
+          this.$drop.css('left', 0).hide();
+        }
+      } else {
+        this.$ul.html(rows.join(''));
+        this.updateDataStart = 0;
+        this.updateDataEnd = this.updateData.length;
+        this.virtualScroll = null;
+      }
+
+      this.events();
+    }
+  }, {
+    key: "getListRows",
+    value: function getListRows() {
+      var _this6 = this;
+
+      var rows = [];
+
+      if (this.options.selectAll && !this.options.single) {
+        rows.push("\n        <li class=\"ms-select-all\">\n        <label>\n        <input type=\"checkbox\" ".concat(this.selectAllName).concat(this.allSelected ? ' checked="checked"' : '', " />\n        <span>").concat(this.options.formatSelectAll(), "</span>\n        </label>\n        </li>\n      "));
+      }
+
+      this.updateData = [];
+      this.data.forEach(function (row) {
+        rows.push.apply(rows, _toConsumableArray(_this6.initListItem(row)));
+      });
+      rows.push("<li class=\"ms-no-results\">".concat(this.options.formatNoMatchesFound(), "</li>"));
+      return rows;
     }
   }, {
     key: "initListItem",
     value: function initListItem(row) {
-      var _this6 = this;
+      var _this7 = this;
 
       var level = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-      var title = sprintf(_templateObject8(), s)(row.title);
+      var title = row.title ? "title=\"".concat(row.title, "\"") : '';
       var multiple = this.options.multiple ? 'multiple' : '';
       var type = this.options.single ? 'radio' : 'checkbox';
       var classes = '';
+
+      if (!row.visible) {
+        return [];
+      }
+
+      this.updateData.push(row);
 
       if (this.options.single && !this.options.singleRadio) {
         classes = 'hide-radio ';
       }
 
+      if (row.selected) {
+        classes += 'selected ';
+      }
+
       if (row.type === 'optgroup') {
         var _customStyle = this.options.styler(row);
 
-        var _style = _customStyle ? sprintf(_templateObject9(), s)(_customStyle) : '';
+        var _style = _customStyle ? "style=\"".concat(_customStyle, "\"") : '';
 
         var html = [];
-        html.push(["<li class=\"group ".concat(classes, "\" ").concat(_style, ">"), sprintf(_templateObject10(), s, s)(row.disabled ? 'disabled' : '', row.group), this.options.hideOptgroupCheckboxes || this.options.single ? sprintf(_templateObject11(), s)(this.selectGroupName) : sprintf(_templateObject12(), s, s)(this.selectGroupName, row.disabled ? 'disabled="disabled"' : ''), row.label, '</label>', '</li>'].join(''));
-        html.push(row.children.map(function (child) {
-          return _this6.initListItem(child, 1);
-        }).join(''));
-        return html.join('');
+        var group = this.options.hideOptgroupCheckboxes || this.options.single ? "<span ".concat(this.selectGroupName, " data-key=\"").concat(row._key, "\"></span>") : "<input type=\"checkbox\"\n          ".concat(this.selectGroupName, "\n          data-key=\"").concat(row._key, "\"\n          ").concat(row.selected ? ' checked="checked"' : '', "\n          ").concat(row.disabled ? ' disabled="disabled"' : '', "\n        >");
+
+        if (!classes.includes('hide-radio') && (this.options.hideOptgroupCheckboxes || this.options.single)) {
+          classes += 'hide-radio ';
+        }
+
+        html.push("\n        <li class=\"group ".concat(classes, "\" ").concat(_style, ">\n        <label class=\"optgroup").concat(this.options.single || row.disabled ? ' disabled' : '', "\">\n        ").concat(group).concat(row.label, "\n        </label>\n        </li>\n      "));
+        row.children.forEach(function (child) {
+          html.push.apply(html, _toConsumableArray(_this7.initListItem(child, 1)));
+        });
+        return html;
       }
 
       var customStyle = this.options.styler(row);
-      var style = customStyle ? sprintf(_templateObject13(), s)(customStyle) : '';
+      var style = customStyle ? "style=\"".concat(customStyle, "\"") : '';
       classes += row.classes || '';
 
       if (level && this.options.single) {
         classes += "option-level-".concat(level, " ");
       }
 
-      return [sprintf(_templateObject14(), s, s, s, s)(multiple, classes, title, style), sprintf(_templateObject15(), s)(row.disabled ? 'disabled' : ''), sprintf(_templateObject16(), s, s, s, s, s, s)(type, row.value, this.selectItemName, row.selected ? ' checked="checked"' : '', row.disabled ? ' disabled="disabled"' : '', sprintf(_templateObject17(), s)(row.group)), sprintf(_templateObject18(), s)(row.text), '</label>', '</li>'].join('');
+      return ["\n      <li class=\"".concat(multiple, " ").concat(classes, "\" ").concat(title, " ").concat(style, ">\n      <label class=\"").concat(row.disabled ? 'disabled' : '', "\">\n      <input type=\"").concat(type, "\"\n        value=\"").concat(row.value, "\"\n        data-key=\"").concat(row._key, "\"\n        ").concat(this.selectItemName, "\n        ").concat(row.selected ? ' checked="checked"' : '', "\n        ").concat(row.disabled ? ' disabled="disabled"' : '', "\n      >\n      <span>").concat(row.text, "</span>\n      </label>\n      </li>\n    ")];
+    }
+  }, {
+    key: "events",
+    value: function events() {
+      var _this8 = this;
+
+      this.$searchInput = this.$drop.find('.ms-search input');
+      this.$selectAll = this.$drop.find("input[".concat(this.selectAllName, "]"));
+      this.$selectGroups = this.$drop.find("input[".concat(this.selectGroupName, "],span[").concat(this.selectGroupName, "]"));
+      this.$selectItems = this.$drop.find("input[".concat(this.selectItemName, "]:enabled"));
+      this.$disableItems = this.$drop.find("input[".concat(this.selectItemName, "]:disabled"));
+      this.$noResults = this.$drop.find('.ms-no-results');
+
+      var toggleOpen = function toggleOpen(e) {
+        e.preventDefault();
+
+        if ($(e.target).hasClass('icon-close')) {
+          return;
+        }
+
+        _this8[_this8.options.isOpen ? 'close' : 'open']();
+      };
+
+      if (this.$label && this.$label.length) {
+        this.$label.off('click').on('click', function (e) {
+          if (e.target.nodeName.toLowerCase() !== 'label') {
+            return;
+          }
+
+          toggleOpen(e);
+
+          if (!_this8.options.filter || !_this8.options.isOpen) {
+            _this8.focus();
+          }
+
+          e.stopPropagation(); // Causes lost focus otherwise
+        });
+      }
+
+      this.$choice.off('click').on('click', toggleOpen).off('focus').on('focus', this.options.onFocus).off('blur').on('blur', this.options.onBlur);
+      this.$parent.off('keydown').on('keydown', function (e) {
+        // esc key
+        if (e.which === 27 && !_this8.options.keepOpen) {
+          _this8.close();
+
+          _this8.$choice.focus();
+        }
+      });
+      this.$close.off('click').on('click', function (e) {
+        e.preventDefault();
+
+        _this8._checkAll(false, true);
+
+        _this8.initSelected(false);
+
+        _this8.updateSelected();
+
+        _this8.update();
+
+        _this8.options.onClear();
+      });
+      this.$searchInput.off('keydown').on('keydown', function (e) {
+        // Ensure shift-tab causes lost focus from filter as with clicking away
+        if (e.keyCode === 9 && e.shiftKey) {
+          _this8.close();
+        }
+      }).off('keyup').on('keyup', function (e) {
+        // enter or space
+        // Avoid selecting/deselecting if no choices made
+        if (_this8.options.filterAcceptOnEnter && [13, 32].includes(e.which) && _this8.$searchInput.val()) {
+          if (_this8.options.single) {
+            var $items = _this8.$selectItems.closest('li').filter(':visible');
+
+            if ($items.length) {
+              _this8.setSelects([$items.first().find("input[".concat(_this8.selectItemName, "]")).val()]);
+            }
+          } else {
+            _this8.$selectAll.click();
+          }
+
+          _this8.close();
+
+          _this8.focus();
+
+          return;
+        }
+
+        _this8.filter();
+      });
+      this.$selectAll.off('click').on('click', function (e) {
+        _this8._checkAll($(e.currentTarget).prop('checked'));
+      });
+      this.$selectGroups.off('click').on('click', function (e) {
+        var $this = $(e.currentTarget);
+        var checked = $this.prop('checked');
+        var group = findByParam(_this8.data, '_key', $this.data('key'));
+
+        _this8._checkGroup(group, checked);
+
+        _this8.options.onOptgroupClick(removeUndefined({
+          label: group.label,
+          selected: group.selected,
+          data: group._data,
+          children: group.children.map(function (child) {
+            return removeUndefined({
+              text: child.text,
+              value: child.value,
+              selected: child.selected,
+              disabled: child.disabled,
+              data: child._data
+            });
+          })
+        }));
+      });
+      this.$selectItems.off('click').on('click', function (e) {
+        var $this = $(e.currentTarget);
+        var checked = $this.prop('checked');
+        var option = findByParam(_this8.data, '_key', $this.data('key'));
+
+        _this8._check(option, checked);
+
+        _this8.options.onClick(removeUndefined({
+          text: option.text,
+          value: option.value,
+          selected: option.selected,
+          data: option._data
+        }));
+
+        if (_this8.options.single && _this8.options.isOpen && !_this8.options.keepOpen) {
+          _this8.close();
+        }
+      });
     }
   }, {
     key: "initView",
@@ -3384,144 +3616,6 @@ function () {
 
       this.$parent.css('width', this.options.width || computedWidth);
       this.$el.show().addClass('ms-offscreen');
-    }
-  }, {
-    key: "events",
-    value: function events() {
-      var _this7 = this;
-
-      var toggleOpen = function toggleOpen(e) {
-        e.preventDefault();
-
-        _this7[_this7.options.isOpen ? 'close' : 'open']();
-      };
-
-      if (this.$label && this.$label.length) {
-        this.$label.off('click').on('click', function (e) {
-          if (e.target.nodeName.toLowerCase() !== 'label') {
-            return;
-          }
-
-          toggleOpen(e);
-
-          if (!_this7.options.filter || !_this7.options.isOpen) {
-            _this7.focus();
-          }
-
-          e.stopPropagation(); // Causes lost focus otherwise
-        });
-      }
-
-      this.$choice.off('click').on('click', toggleOpen).off('focus').on('focus', this.options.onFocus).off('blur').on('blur', this.options.onBlur);
-      this.$parent.off('keydown').on('keydown', function (e) {
-        // esc key
-        if (e.which === 27 && !_this7.options.keepOpen) {
-          _this7.close();
-
-          _this7.$choice.focus();
-        }
-      });
-      this.$searchInput.off('keydown').on('keydown', function (e) {
-        // Ensure shift-tab causes lost focus from filter as with clicking away
-        if (e.keyCode === 9 && e.shiftKey) {
-          _this7.close();
-        }
-      }).off('keyup').on('keyup', function (e) {
-        // enter or space
-        // Avoid selecting/deselecting if no choices made
-        if (_this7.options.filterAcceptOnEnter && [13, 32].includes(e.which) && _this7.$searchInput.val()) {
-          if (_this7.options.single) {
-            var $items = _this7.$selectItems.closest('li').filter(':visible');
-
-            if ($items.length) {
-              _this7.setSelects([$items.first().find("input[".concat(_this7.selectItemName, "]")).val()]);
-            }
-          } else {
-            _this7.$selectAll.click();
-          }
-
-          _this7.close();
-
-          _this7.focus();
-
-          return;
-        }
-
-        _this7.filter();
-      });
-      this.$selectAll.off('click').on('click', function (e) {
-        var checked = $(e.currentTarget).prop('checked');
-
-        var $items = _this7.$selectItems.filter(':visible');
-
-        if ($items.length === _this7.$selectItems.length) {
-          _this7[checked ? 'checkAll' : 'uncheckAll']();
-        } else {
-          // when the filter option is true
-          _this7.$selectGroups.prop('checked', checked);
-
-          $items.prop('checked', checked);
-
-          _this7.options[checked ? 'onCheckAll' : 'onUncheckAll']();
-
-          _this7.update();
-        }
-      });
-      this.$selectGroups.off('click').on('click', function (e) {
-        var $this = $(e.currentTarget);
-        var group = $this.parent()[0].getAttribute('data-group');
-
-        var $items = _this7.$selectItems.filter(':visible');
-
-        var $children = $items.filter(sprintf(_templateObject19(), s)(group));
-        var checked = $children.length !== $children.filter(':checked').length;
-        $children.prop('checked', checked);
-
-        _this7.updateSelectAll(true);
-
-        _this7.update();
-
-        _this7.options.onOptgroupClick({
-          label: $this.parent().text(),
-          checked: checked,
-          children: $children.get().map(function (el) {
-            return {
-              label: $(el).parent().text(),
-              value: $(el).val(),
-              check: $(el).prop('checked')
-            };
-          })
-        });
-      });
-      this.$selectItems.off('click').on('click', function (e) {
-        var $this = $(e.currentTarget);
-
-        if (_this7.options.single) {
-          var clickedVal = $this.val();
-
-          _this7.$selectItems.filter(function (i, el) {
-            return $(el).val() !== clickedVal;
-          }).each(function (i, el) {
-            $(el).prop('checked', false);
-          });
-        }
-
-        _this7.updateSelectAll(true);
-
-        _this7.update();
-
-        _this7.updateOptGroupSelect();
-
-        _this7.options.onClick({
-          label: $this.parent().text(),
-          value: $this.val(),
-          checked: $this.prop('checked')
-        });
-
-        if (_this7.options.single && _this7.options.isOpen && !_this7.options.keepOpen) {
-          _this7.close();
-        }
-      });
     }
   }, {
     key: "open",
@@ -3551,10 +3645,19 @@ function () {
         }).css('min-width', 'auto').outerWidth(this.$parent.outerWidth());
       }
 
+      var maxHeight = this.options.maxHeight;
+
+      if (this.options.maxHeightUnit === 'row') {
+        maxHeight = this.$drop.find('>ul>li').first().outerHeight() * this.options.maxHeight;
+      }
+
+      this.$drop.find('>ul').css('max-height', "".concat(maxHeight, "px"));
+      this.$drop.find('.multiple').css('width', "".concat(this.options.multipleWidth, "px"));
+
       if (this.data.length && this.options.filter) {
         this.$searchInput.val('');
         this.$searchInput.focus();
-        this.filter();
+        this.filter(true);
       }
 
       this.options.onOpen();
@@ -3594,28 +3697,27 @@ function () {
   }, {
     key: "update",
     value: function update(ignoreTrigger) {
+      var valueSelects = this.getSelects();
       var textSelects = this.getSelects('text');
 
-      if (this.options.displayHtml) {
-        textSelects = this.getSelects('html');
-      } else if (this.options.displayValues) {
-        textSelects = this.getSelects();
+      if (this.options.displayValues) {
+        textSelects = valueSelects;
       }
 
       var $span = this.$choice.find('>span');
-      var sl = textSelects.length;
+      var sl = valueSelects.length;
       var html = '';
 
       if (sl === 0) {
         $span.addClass('placeholder').html(this.options.placeholder);
       } else if (sl < this.options.minimumCountSelected) {
         html = textSelects.join(this.options.displayDelimiter);
-      } else if (this.options.formatAllSelected() && sl === this.$selectItems.length + this.$disableItems.length) {
+      } else if (this.options.formatAllSelected() && sl === this.dataTotal) {
         html = this.options.formatAllSelected();
       } else if (this.options.ellipsis && sl > this.options.minimumCountSelected) {
         html = "".concat(textSelects.slice(0, this.options.minimumCountSelected).join(this.options.displayDelimiter), "...");
       } else if (this.options.formatCountSelected() && sl > this.options.minimumCountSelected) {
-        html = this.options.formatCountSelected(sl, this.$selectItems.length + this.$disableItems.length);
+        html = this.options.formatCountSelected(sl, this.dataTotal);
       } else {
         html = textSelects.join(this.options.displayDelimiter);
       }
@@ -3629,53 +3731,33 @@ function () {
       } // set selects to select
 
 
-      this.$el.val(this.getSelects()); // add selected class to selected li
-
-      this.$drop.find('li').removeClass('selected');
-      this.$drop.find('input:checked').each(function (i, el) {
-        $(el).parents('li').first().addClass('selected');
-      }); // trigger <select> change event
+      this.$el.val(this.getSelects()); // trigger <select> change event
 
       if (!ignoreTrigger) {
         this.$el.trigger('change');
       }
     }
   }, {
-    key: "updateSelectAll",
-    value: function updateSelectAll(triggerEvent) {
-      var all = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-      var $items = this.$selectItems;
-
-      if (!all) {
-        $items = $items.filter(':visible');
+    key: "updateSelected",
+    value: function updateSelected() {
+      for (var i = this.updateDataStart; i < this.updateDataEnd; i++) {
+        var row = this.updateData[i];
+        this.$drop.find("input[data-key=".concat(row._key, "]")).prop('checked', row.selected).closest('li').toggleClass('selected', row.selected);
       }
 
-      var selectedLength = $items.filter(':checked').length;
-      this.$selectAll.prop('checked', selectedLength === $items.length);
+      var noResult = this.data.filter(function (row) {
+        return row.visible;
+      }).length === 0;
 
-      if (triggerEvent) {
-        if (selectedLength === $items.length) {
-          this.options.onCheckAll();
-        } else if (selectedLength === 0) {
-          this.options.onUncheckAll();
-        }
-      }
-    }
-  }, {
-    key: "updateOptGroupSelect",
-    value: function updateOptGroupSelect() {
-      var all = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-      var $items = this.$selectItems;
-
-      if (!all) {
-        $items = $items.filter(':visible');
+      if (this.$selectAll.length) {
+        this.$selectAll.prop('checked', this.allSelected).closest('li').toggle(!noResult);
       }
 
-      $.each(this.$selectGroups, function (i, val) {
-        var group = $(val).parent()[0].getAttribute('data-group');
-        var $children = $items.filter(sprintf(_templateObject20(), s)(group));
-        $(val).prop('checked', $children.length && $children.length === $children.filter(':checked').length);
-      });
+      this.$noResults.toggle(noResult);
+
+      if (this.virtualScroll) {
+        this.virtualScroll.rows = this.getListRows();
+      }
     }
   }, {
     key: "getOptions",
@@ -3700,70 +3782,135 @@ function () {
 
   }, {
     key: "getSelects",
-    value: function getSelects(type) {
-      var _this8 = this;
-
-      var texts = [];
+    value: function getSelects() {
+      var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'value';
       var values = [];
-      this.$drop.find(sprintf(_templateObject21(), s)(this.selectItemName)).each(function (i, el) {
-        texts.push($(el).next()[type === 'html' ? 'html' : 'text']());
-        values.push($(el).val());
-      });
+      var _iteratorNormalCompletion3 = true;
+      var _didIteratorError3 = false;
+      var _iteratorError3 = undefined;
 
-      if (type === 'text' && this.$selectGroups.length && !this.options.single) {
-        texts = [];
-        this.$selectGroups.each(function (i, el) {
-          var html = [];
-          var text = $.trim($(el).parent().text());
-          var group = $(el).parent().data('group');
+      try {
+        for (var _iterator3 = this.data[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+          var row = _step3.value;
 
-          var $children = _this8.$drop.find(sprintf(_templateObject22(), s, s)(_this8.selectItemName, group));
-
-          var $selected = $children.filter(':checked');
-
-          if (!$selected.length) {
-            return;
-          }
-
-          html.push('[');
-          html.push(text);
-
-          if ($children.length >= $selected.length) {
-            var list = [];
-            $selected.each(function (j, elem) {
-              list.push($(elem).parent().text());
+          if (row.type === 'optgroup') {
+            var selectedChildren = row.children.filter(function (child) {
+              return child.selected;
             });
-            html.push(": ".concat(list.join(', ')));
-          }
 
-          html.push(']');
-          texts.push(html.join(''));
-        });
+            if (!selectedChildren.length) {
+              continue;
+            }
+
+            if (type === 'value' || this.options.single) {
+              values.push.apply(values, _toConsumableArray(selectedChildren.map(function (child) {
+                return type === 'value' ? child._value || child[type] : child[type];
+              })));
+            } else {
+              var value = [];
+              value.push('[');
+              value.push(row.label);
+              value.push(": ".concat(selectedChildren.map(function (child) {
+                return child[type];
+              }).join(', ')));
+              value.push(']');
+              values.push(value.join(''));
+            }
+          } else if (row.selected) {
+            values.push(type === 'value' ? row._value || row[type] : row[type]);
+          }
+        }
+      } catch (err) {
+        _didIteratorError3 = true;
+        _iteratorError3 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion3 && _iterator3.return != null) {
+            _iterator3.return();
+          }
+        } finally {
+          if (_didIteratorError3) {
+            throw _iteratorError3;
+          }
+        }
       }
 
-      return ['html', 'text'].includes(type) ? texts : values;
+      return values;
     }
   }, {
     key: "setSelects",
-    value: function setSelects(values) {
-      var _this9 = this;
+    value: function setSelects(values, ignoreTrigger) {
+      var hasChanged = false;
 
-      this.$selectItems.prop('checked', false);
-      this.$disableItems.prop('checked', false);
-      $.each(values, function (i, value) {
-        _this9.$selectItems.filter(sprintf(_templateObject23(), s)(value)).prop('checked', true);
+      var _setSelects = function _setSelects(rows) {
+        var _iteratorNormalCompletion4 = true;
+        var _didIteratorError4 = false;
+        var _iteratorError4 = undefined;
 
-        _this9.$disableItems.filter(sprintf(_templateObject24(), s)(value)).prop('checked', true);
-      });
-      this.$selectAll.prop('checked', this.$selectItems.length === this.$selectItems.filter(':checked').length + this.$disableItems.filter(':checked').length);
-      $.each(this.$selectGroups, function (i, val) {
-        var group = $(val).parent()[0].getAttribute('data-group');
+        try {
+          for (var _iterator4 = rows[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+            var row = _step4.value;
+            var selected = values.includes(row._value || row.value);
 
-        var $children = _this9.$selectItems.filter("[data-group=\"".concat(group, "\"]"));
+            if (!selected && row.value === +row.value + '') {
+              selected = values.includes(+row.value);
+            }
 
-        $(val).prop('checked', $children.length && $children.length === $children.filter(':checked').length);
-      });
-      this.update(false);
+            if (row.selected !== selected) {
+              hasChanged = true;
+            }
+
+            row.selected = selected;
+          }
+        } catch (err) {
+          _didIteratorError4 = true;
+          _iteratorError4 = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion4 && _iterator4.return != null) {
+              _iterator4.return();
+            }
+          } finally {
+            if (_didIteratorError4) {
+              throw _iteratorError4;
+            }
+          }
+        }
+      };
+
+      var _iteratorNormalCompletion5 = true;
+      var _didIteratorError5 = false;
+      var _iteratorError5 = undefined;
+
+      try {
+        for (var _iterator5 = this.data[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+          var row = _step5.value;
+
+          if (row.type === 'optgroup') {
+            _setSelects(row.children);
+          } else {
+            _setSelects([row]);
+          }
+        }
+      } catch (err) {
+        _didIteratorError5 = true;
+        _iteratorError5 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion5 && _iterator5.return != null) {
+            _iterator5.return();
+          }
+        } finally {
+          if (_didIteratorError5) {
+            throw _iteratorError5;
+          }
+        }
+      }
+
+      if (hasChanged) {
+        this.updateSelected();
+        this.update(ignoreTrigger);
+      }
     }
   }, {
     key: "enable",
@@ -3778,48 +3925,100 @@ function () {
   }, {
     key: "check",
     value: function check(value) {
-      if (this.options.single) {
-        this.$selectItems.prop('checked', false);
-        this.$disableItems.prop('checked', false);
+      var option = findByParam(this.data, 'value', value);
+
+      if (!option) {
+        return;
       }
 
-      this._check(value, true);
+      this._check(option, true);
     }
   }, {
     key: "uncheck",
     value: function uncheck(value) {
-      this._check(value, false);
+      var option = findByParam(this.data, 'value', value);
+
+      if (!option) {
+        return;
+      }
+
+      this._check(option, false);
     }
   }, {
     key: "_check",
-    value: function _check(value, checked) {
-      this.$selectItems.filter(sprintf(_templateObject25(), s)(value)).prop('checked', checked);
-      this.$disableItems.filter(sprintf(_templateObject26(), s)(value)).prop('checked', checked);
+    value: function _check(option, checked) {
+      if (this.options.single) {
+        this._checkAll(false, true);
+      }
+
+      option.selected = checked;
+      this.initSelected();
+      this.updateSelected();
       this.update();
-      this.updateOptGroupSelect(true);
-      this.updateSelectAll(true, true);
     }
   }, {
     key: "checkAll",
     value: function checkAll() {
       this._checkAll(true);
-
-      this.options.onCheckAll();
     }
   }, {
     key: "uncheckAll",
     value: function uncheckAll() {
       this._checkAll(false);
-
-      this.options.onUncheckAll();
     }
   }, {
     key: "_checkAll",
-    value: function _checkAll(checked) {
-      this.$selectItems.prop('checked', checked);
-      this.$selectGroups.prop('checked', checked);
-      this.$selectAll.prop('checked', checked);
-      this.update();
+    value: function _checkAll(checked, ignoreUpdate) {
+      var _iteratorNormalCompletion6 = true;
+      var _didIteratorError6 = false;
+      var _iteratorError6 = undefined;
+
+      try {
+        for (var _iterator6 = this.data[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
+          var row = _step6.value;
+
+          if (row.type === 'optgroup') {
+            this._checkGroup(row, checked, true);
+          } else if (!row.disabled && (ignoreUpdate || row.visible)) {
+            row.selected = checked;
+          }
+        }
+      } catch (err) {
+        _didIteratorError6 = true;
+        _iteratorError6 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion6 && _iterator6.return != null) {
+            _iterator6.return();
+          }
+        } finally {
+          if (_didIteratorError6) {
+            throw _iteratorError6;
+          }
+        }
+      }
+
+      if (!ignoreUpdate) {
+        this.initSelected();
+        this.updateSelected();
+        this.update();
+      }
+    }
+  }, {
+    key: "_checkGroup",
+    value: function _checkGroup(group, checked, ignoreUpdate) {
+      group.selected = checked;
+      group.children.forEach(function (row) {
+        if (!row.disabled && (ignoreUpdate || row.visible)) {
+          row.selected = checked;
+        }
+      });
+
+      if (!ignoreUpdate) {
+        this.initSelected();
+        this.updateSelected();
+        this.update();
+      }
     }
   }, {
     key: "checkInvert",
@@ -3828,12 +4027,60 @@ function () {
         return;
       }
 
-      this.$selectItems.each(function (i, el) {
-        $(el).prop('checked', !$(el).prop('checked'));
-      });
+      var _iteratorNormalCompletion7 = true;
+      var _didIteratorError7 = false;
+      var _iteratorError7 = undefined;
+
+      try {
+        for (var _iterator7 = this.data[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
+          var row = _step7.value;
+
+          if (row.type === 'optgroup') {
+            var _iteratorNormalCompletion8 = true;
+            var _didIteratorError8 = false;
+            var _iteratorError8 = undefined;
+
+            try {
+              for (var _iterator8 = row.children[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
+                var child = _step8.value;
+                child.selected = !child.selected;
+              }
+            } catch (err) {
+              _didIteratorError8 = true;
+              _iteratorError8 = err;
+            } finally {
+              try {
+                if (!_iteratorNormalCompletion8 && _iterator8.return != null) {
+                  _iterator8.return();
+                }
+              } finally {
+                if (_didIteratorError8) {
+                  throw _iteratorError8;
+                }
+              }
+            }
+          } else {
+            row.selected = !row.selected;
+          }
+        }
+      } catch (err) {
+        _didIteratorError7 = true;
+        _iteratorError7 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion7 && _iterator7.return != null) {
+            _iterator7.return();
+          }
+        } finally {
+          if (_didIteratorError7) {
+            throw _iteratorError7;
+          }
+        }
+      }
+
+      this.initSelected();
+      this.updateSelected();
       this.update();
-      this.updateOptGroupSelect(true);
-      this.updateSelectAll(true, true);
     }
   }, {
     key: "focus",
@@ -3855,60 +4102,105 @@ function () {
     }
   }, {
     key: "filter",
-    value: function filter() {
-      var _this10 = this;
-
+    value: function filter(ignoreTrigger) {
       var originalText = $.trim(this.$searchInput.val());
       var text = originalText.toLowerCase();
 
-      if (text.length === 0) {
-        this.$selectAll.closest('li').show();
-        this.$selectItems.closest('li').show();
-        this.$disableItems.closest('li').show();
-        this.$selectGroups.closest('li').show();
-        this.$noResults.hide();
-      } else {
-        if (!this.options.filterGroup) {
-          this.$selectItems.each(function (i, el) {
-            var $parent = $(el).parent();
+      if (this.filterText === text) {
+        return;
+      }
 
-            var hasText = _this10.options.customFilter(removeDiacritics($parent.text().trim().toLowerCase()), removeDiacritics(text), $parent.text().trim(), originalText);
+      this.filterText = text;
+      var _iteratorNormalCompletion9 = true;
+      var _didIteratorError9 = false;
+      var _iteratorError9 = undefined;
 
-            $parent.closest('li')[hasText ? 'show' : 'hide']();
-          });
-        }
+      try {
+        for (var _iterator9 = this.data[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
+          var row = _step9.value;
 
-        this.$disableItems.closest('li').hide();
-        this.$selectGroups.each(function (i, el) {
-          var $parent = $(el).parent();
-          var group = $parent[0].getAttribute('data-group');
+          if (row.type === 'optgroup') {
+            if (this.options.filterGroup) {
+              var visible = this.options.customFilter(removeDiacritics(row.label.toLowerCase()), removeDiacritics(text), row.label, originalText);
+              row.visible = visible;
+              var _iteratorNormalCompletion10 = true;
+              var _didIteratorError10 = false;
+              var _iteratorError10 = undefined;
 
-          if (_this10.options.filterGroup) {
-            var hasText = _this10.options.customFilter(removeDiacritics($parent.text().toLowerCase()), removeDiacritics(text), $parent.text(), originalText);
+              try {
+                for (var _iterator10 = row.children[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
+                  var child = _step10.value;
+                  child.visible = visible;
+                }
+              } catch (err) {
+                _didIteratorError10 = true;
+                _iteratorError10 = err;
+              } finally {
+                try {
+                  if (!_iteratorNormalCompletion10 && _iterator10.return != null) {
+                    _iterator10.return();
+                  }
+                } finally {
+                  if (_didIteratorError10) {
+                    throw _iteratorError10;
+                  }
+                }
+              }
+            } else {
+              var _iteratorNormalCompletion11 = true;
+              var _didIteratorError11 = false;
+              var _iteratorError11 = undefined;
 
-            var func = hasText ? 'show' : 'hide';
-            $parent.closest('li')[func]();
+              try {
+                for (var _iterator11 = row.children[Symbol.iterator](), _step11; !(_iteratorNormalCompletion11 = (_step11 = _iterator11.next()).done); _iteratorNormalCompletion11 = true) {
+                  var _child = _step11.value;
+                  _child.visible = this.options.customFilter(removeDiacritics(_child.text.toLowerCase()), removeDiacritics(text), _child.text, originalText);
+                }
+              } catch (err) {
+                _didIteratorError11 = true;
+                _iteratorError11 = err;
+              } finally {
+                try {
+                  if (!_iteratorNormalCompletion11 && _iterator11.return != null) {
+                    _iterator11.return();
+                  }
+                } finally {
+                  if (_didIteratorError11) {
+                    throw _iteratorError11;
+                  }
+                }
+              }
 
-            _this10.$selectItems.filter("[data-group=\"".concat(group, "\"]")).closest('li')[func]();
+              row.visible = row.children.filter(function (child) {
+                return child.visible;
+              }).length > 0;
+            }
           } else {
-            var _hasText = _this10.$selectItems.filter("[data-group=\"".concat(group, "\"]")).closest('li').filter(':visible').length;
-
-            $parent.closest('li')[_hasText ? 'show' : 'hide']();
+            row.visible = this.options.customFilter(removeDiacritics(row.text.toLowerCase()), removeDiacritics(text), row.text, originalText);
           }
-        }); // Check if no matches found
-
-        if (this.$selectItems.closest('li').filter(':visible').length) {
-          this.$selectAll.closest('li').show();
-          this.$noResults.hide();
-        } else {
-          this.$selectAll.closest('li').hide();
-          this.$noResults.show();
+        }
+      } catch (err) {
+        _didIteratorError9 = true;
+        _iteratorError9 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion9 && _iterator9.return != null) {
+            _iterator9.return();
+          }
+        } finally {
+          if (_didIteratorError9) {
+            throw _iteratorError9;
+          }
         }
       }
 
-      this.updateOptGroupSelect();
-      this.updateSelectAll();
-      this.options.onFilter(text);
+      this.initListItems();
+      this.initSelected(ignoreTrigger);
+      this.updateSelected();
+
+      if (!ignoreTrigger) {
+        this.options.onFilter(text);
+      }
     }
   }, {
     key: "destroy",
@@ -3919,6 +4211,10 @@ function () {
 
       this.$el.before(this.$parent).removeClass('ms-offscreen');
       this.$parent.remove();
+
+      if (this.tabIndex !== null) {
+        this.$el.attr('tabindex', this.tabIndex);
+      }
 
       if (this.fromHtml) {
         delete this.options.data;

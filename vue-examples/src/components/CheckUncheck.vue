@@ -29,7 +29,6 @@
       <div class="col-sm-10">
         <MultipleSelect
           ref="single"
-          single
         >
           <option value="1">
             Value 1
@@ -49,6 +48,7 @@
       <div class="col-sm-10">
         <MultipleSelect
           ref="multiple"
+          multiple
         >
           <option
             value="1"
@@ -71,6 +71,7 @@
       <div class="col-sm-10">
         <MultipleSelect
           ref="group"
+          multiple
         >
           <optgroup label="Group 1">
             <option

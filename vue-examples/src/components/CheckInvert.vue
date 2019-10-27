@@ -23,6 +23,7 @@
       <div class="col-sm-10">
         <MultipleSelect
           ref="basic"
+          multiple
         >
           <option value="1">
             January
@@ -72,6 +73,7 @@
       <div class="col-sm-10">
         <MultipleSelect
           ref="group"
+          multiple
         >
           <optgroup label="Group 1">
             <option value="1">

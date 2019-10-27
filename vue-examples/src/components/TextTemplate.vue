@@ -7,6 +7,7 @@
 
       <div class="col-sm-10">
         <MultipleSelect
+          multiple
           :options="options"
         >
           <option value="1">
@@ -56,7 +57,6 @@ export default {
   data () {
     return {
       options: {
-        displayHtml: true,
         textTemplate ($el) {
           return '<i class="fa fa-star"></i>' + $el.html()
         }

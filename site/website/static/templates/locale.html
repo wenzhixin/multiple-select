@@ -5,7 +5,7 @@
     links: ['multiple-select.min.css'],
     scripts: [
       'multiple-select.min.js',
-      'https://unpkg.com/multiple-select@1.4.3/dist/multiple-select-locale-all.min.js'
+      'https://unpkg.com/multiple-select@1.5.0/dist/multiple-select-locale-all.min.js'
     ]
   })
 </script>
@@ -64,9 +64,7 @@ select {
   }
 
   function mounted() {
-    $('#locale').multipleSelect({
-      single: true
-    }).change(function () {
+    $('#locale').multipleSelect().change(function () {
       updateLocale($(this).val())
     }).change()
   }

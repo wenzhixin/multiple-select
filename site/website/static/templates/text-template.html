@@ -41,7 +41,6 @@ select {
 <script>
   function mounted() {
     $('select').multipleSelect({
-      displayHtml: true,
       textTemplate: function ($el) {
         return '<i class="fa fa-star"></i>' + $el.html()
       }

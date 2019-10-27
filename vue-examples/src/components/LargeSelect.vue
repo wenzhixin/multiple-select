@@ -7,6 +7,7 @@
 
       <div class="col-sm-10">
         <MultipleSelect
+          multiple
           :data="data"
           :options="options"
         />
@@ -19,7 +20,7 @@
 export default {
   data () {
     const data = []
-    for (let i = 0; i < 2000; i++) {
+    for (let i = 0; i < 10000; i++) {
       data.push(i)
     }
     return {

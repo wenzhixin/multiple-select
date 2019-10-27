@@ -1,5 +1,23 @@
 ## Changelog
 
+### 1.5.0
+
+- **New:** Rewrote display and data logic code.
+- **New:** Added `single` or `multiple` can be auto supported.
+- **New:** Added virtual scroll to support large data.
+- **New:** Added object `value` supported.
+- **New:** Added object for `v-model` supported.
+- **New:** Added `data` attributes of optgroup and option supported.
+- **New:** Added `tabindex` attribute supported.
+- **New:** Added `showClear` option and `onClear` event.
+- **New:** Added `maxHeightUnit` option.
+- **New:** Added `it-IT` locale.
+- **Update:** Improved events trigger logic.
+- **Update:** Updated the `single` group style.
+- **Update:** Updated parameters of `onOptgroupClick` and `onClick` events.
+- **Update:** Fixed vue warning when `data` is Object.
+- **Update:** Removed `displayHtml` option and display html by default.
+
 ### 1.4.3
 
 - **New:** Added `object` support for `data` option.

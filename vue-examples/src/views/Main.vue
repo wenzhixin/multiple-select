@@ -76,7 +76,9 @@ export default {
       for (const row of MS) {
         list.push(...row.list)
       }
-      return list.find(it => it.url === this.current + '.html')
+      const data = list.find(it => it.url === this.current + '.html')
+      data.description = data.description.replace(/\\'/g, '\'')
+      return data
     }
   },
   watch: {

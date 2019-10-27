@@ -1,28 +1,3 @@
-// sprintf format specifiers
-const s = 's'
-
-const sprintf = (strings, ...formats) => {
-  return (...args) => {
-    let retStr = ''
-    return strings.slice(0, -1).some((str, i) => {
-      switch (formats[i]) {
-        default:
-          throw new TypeError('Unrecognized sprintf format')
-        case 's': {
-          const arg = args[i]
-          if (arg === null || arg === undefined) {
-            return true
-          }
-          retStr += str + arg
-          return false
-        }
-      }
-    })
-      ? ''
-      : retStr + strings.slice(-1)
-  }
-}
-
 const compareObjects = (objectA, objectB, compareLength) => {
   const aKeys = Object.keys(objectA)
   const bKeys = Object.keys(objectB)
@@ -136,9 +111,61 @@ const removeDiacritics = str => {
   }, str)
 }
 
+const setDataKeys = data => {
+  let total = 0
+
+  data.forEach((row, i) => {
+    if (row.type === 'optgroup') {
+      row._key = `group_${i}`
+      row.visible = typeof row.visible === 'undefined' ? true : row.visible
+
+      row.children.forEach((child, j) => {
+        child._key = `option_${i}_${j}`
+        child.visible = typeof child.visible === 'undefined' ? true : child.visible
+      })
+
+      total += row.children.length
+    } else {
+      row._key = `option_${i}`
+      row.visible = typeof row.visible === 'undefined' ? true : row.visible
+
+      total += 1
+    }
+  })
+
+  return total
+}
+
+const findByParam = (data, param, value) => {
+  for (const row of data) {
+    if (
+      row[param] === value ||
+      row[param] === +row[param] + '' && +row[param] === value
+    ) {
+      return row
+    }
+    if (row.type === 'optgroup') {
+      for (const child of row.children) {
+        if (
+          child[param] === value ||
+          child[param] === +child[param] + '' && +child[param] === value
+        ) {
+          return child
+        }
+      }
+    }
+  }
+}
+
+const removeUndefined = obj => {
+  Object.keys(obj).forEach(key => obj[key] === undefined ? delete obj[key] : '')
+  return obj
+}
+
 export {
-  s,
-  sprintf,
   compareObjects,
-  removeDiacritics
+  removeDiacritics,
+  setDataKeys,
+  findByParam,
+  removeUndefined
 }

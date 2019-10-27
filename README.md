@@ -7,6 +7,7 @@ To get started checkout examples and documentation at <http://multiple-select.we
 ## Examples
 
 * http://multiple-select.wenzhixin.net.cn/examples
+* http://multiple-select.wenzhixin.net.cn/vue-examples
 * http://multiple-select-live.wenzhixin.net.cn/
 
 ## Changelog

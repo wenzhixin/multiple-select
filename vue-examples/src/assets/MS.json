@@ -5,12 +5,17 @@
             {
                 "title": "Single Select",
                 "url": "single-row.html",
-                "description": "Use <code>single: true</code> to enable single row select."
+                "description": "Single select without any options."
             },
             {
                 "title": "Multiple Select",
                 "url": "basic.html",
                 "description": "Multiple select without any options."
+            },
+            {
+                "title": "Multiple Items",
+                "url": "multiple-items.html",
+                "description": "Use <code>multiple</code> and <code>multipleWidth</code> options to enable multiple items."
             },
             {
                 "title": "Auto Width",
@@ -48,6 +53,11 @@
                 "description": "Large select with filter."
             },
             {
+                "title": "V-Model",
+                "url": "v-model.html",
+                "description": "Multiple select with v-model."
+            },
+            {
                 "title": "The Themes",
                 "url": "themes.html",
                 "description": "Multiple select with bootstrap theme."
@@ -73,11 +83,6 @@
                 "description": "Use <code>selectAll: false</code> to hide select all."
             },
             {
-                "title": "Multiple Items",
-                "url": "multiple-items.html",
-                "description": "Use <code>multiple</code> and <code>multipleWidth</code> options to enable multiple items."
-            },
-            {
                 "title": "Hide Optgroup Check",
                 "url": "hide-optgroup-checkboxes.html",
                 "description": "Use <code>hideOptgroupCheckboxes: true</code> option to hide the optgroup checkboxes."
@@ -91,6 +96,11 @@
                 "title": "Max Height",
                 "url": "max-height.html",
                 "description": "Use <code>maxHeight: 140</code> option to custom the dropdown max height."
+            },
+            {
+                "title": "Max Height Unit",
+                "url": "max-height-unit.html",
+                "description": "Use <code>maxHeightUnit: \\'row\\'</code> option to set the max height unit."
             },
             {
                 "title": "The Position",
@@ -171,6 +181,11 @@
                 "title": "Custom Filter",
                 "url": "custom-filter.html",
                 "description": "Use <code>customFilter</code> to custom filter, in this case we filter by <code>startWith</code>."
+            },
+            {
+                "title": "Show Clear",
+                "url": "show-clear.html",
+                "description": "Use <code>showClear</code> to show the clear icon to uncheck all selected items."
             },
             {
                 "title": "The Animate",

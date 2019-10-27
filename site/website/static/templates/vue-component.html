@@ -6,8 +6,8 @@
     scripts: [
       'https://cdn.jsdelivr.net/npm/vue',
       'multiple-select.min.js',
-      'https://unpkg.com/multiple-select@1.4.3/dist/multiple-select-vue.min.js'
-    ],
+      'https://unpkg.com/multiple-select@1.5.0/dist/multiple-select-vue.min.js'
+    ]
   })
 </script>
 
@@ -33,7 +33,7 @@
       <multiple-select
         ref="select"
         v-model="value"
-        :single="single"
+        :multiple="!single"
         :disabled="disabled"
         width="100%"
         :options="options"

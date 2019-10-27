@@ -6,7 +6,7 @@
       </label>
 
       <div class="col-sm-10">
-        <MultipleSelect>
+        <MultipleSelect multiple>
           <option
             value="1"
             selected="selected"
@@ -63,7 +63,7 @@
       </label>
 
       <div class="col-sm-10">
-        <MultipleSelect>
+        <MultipleSelect multiple>
           <optgroup
             label="Group 1"
             disabled="disabled"

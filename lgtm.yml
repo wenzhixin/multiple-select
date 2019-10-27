@@ -1,0 +1,7 @@
+extraction:
+  javascript:
+    index:
+      filters:
+        - exclude: "dist"
+        - exclude: "site/website/pages/en/index.js"
+        - exclude: "site/website/pages/en/help-with-translations.js"

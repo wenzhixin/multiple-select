@@ -1,4 +1,6 @@
-const VERSION = '1.4.3'
+const VERSION = '1.5.0'
+const BLOCK_ROWS = 50
+const CLUSTER_BLOCKS = 4
 
 const DEFAULTS = {
   name: '',
@@ -7,7 +9,7 @@ const DEFAULTS = {
   locale: undefined,
 
   selectAll: true,
-  single: false,
+  single: undefined,
   singleRadio: false,
   multiple: false,
   hideOptgroupCheckboxes: false,
@@ -15,9 +17,9 @@ const DEFAULTS = {
   width: undefined,
   dropWidth: undefined,
   maxHeight: 250,
+  maxHeightUnit: 'px',
   position: 'bottom',
 
-  displayHtml: false,
   displayValues: false,
   displayTitle: false,
   displayDelimiter: ', ',
@@ -38,6 +40,7 @@ const DEFAULTS = {
     return label.includes(text)
   },
 
+  showClear: false,
   animate: undefined,
 
   styler () {
@@ -77,6 +80,9 @@ const DEFAULTS = {
   onFilter () {
     return false
   },
+  onClear () {
+    return false
+  },
   onAfterCreate () {
     return false
   }
@@ -113,6 +119,10 @@ Object.assign(DEFAULTS, EN)
 
 const Constants = {
   VERSION,
+
+  BLOCK_ROWS,
+
+  CLUSTER_BLOCKS,
 
   DEFAULTS,
 

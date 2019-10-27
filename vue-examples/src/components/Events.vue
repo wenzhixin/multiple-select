@@ -23,6 +23,7 @@
 
       <div class="col-sm-10">
         <MultipleSelect
+          multiple
           :options="options"
           @on-open="onOpen"
           @on-close="onClose"

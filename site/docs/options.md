@@ -130,9 +130,9 @@ Or String/Number Array:
 
 - **Type:** Boolean
 
-- **Detail:** Allows you to select only one option.
+- **Detail:** Allows you to select only one option, if the select has not multiple attribute, this option will auto set to `true`.
 
-- **Default:** `false`
+- **Default:** `undefined`
 
 - **Example:** <a href="/examples#single-row.html">Single Row</a>
 
@@ -220,6 +220,18 @@ Or String/Number Array:
 
 - **Example:** <a href="/examples#max-height.html">Max Height</a>
 
+## maxHeightUnit
+
+- **Attribute:** `data-max-height-unit`
+
+- **Type:** String
+
+- **Detail:** Define the unit of the `maxHeight` option, can only be 'px' or 'row'.
+
+- **Default:** `px`
+
+- **Example:** <a href="/examples#max-height-unit.html">Max Height Unit</a>
+
 ## position
 
 - **Attribute:** `data-position`
@@ -231,18 +243,6 @@ Or String/Number Array:
 - **Default:** `bottom`
 
 - **Example:** <a href="/examples#position.html">The Position</a>
-
-## displayHtml
-
-- **Attribute:** `data-display-html`
-
-- **Type:** Boolean
-
-- **Detail:** Display html values instead text (from 1.4.1).
-
-- **Default:** `false`
-
-- **Example:** <a href="/examples#text-template.html">Text Template</a>
 
 ## displayValues
 
@@ -423,6 +423,18 @@ Or String/Number Array:
 - **Default:** `{ return label.includes(text) }`
 
 - **Example:** <a href="/examples#custom-filter.html">Custom Filter</a>
+
+## showClear
+
+- **Attribute:** `data-show-clear`
+
+- **Type:** undefined
+
+- **Detail:** Show the clear icon to uncheck all selected items.
+
+- **Default:** `false`
+
+- **Example:** <a href="/examples#show-clear.html">Show Clear</a>
 
 ## animate
 

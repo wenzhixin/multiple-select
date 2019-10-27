@@ -26,7 +26,7 @@
             type="checkbox"
           > Selected
         </label>
-        <label class="checkbox">
+        <label class="checkbox ml-3">
           <input
             v-model="disabled"
             type="checkbox"
@@ -53,6 +53,7 @@
       </label>
       <div class="col-sm-10">
         <MultipleSelect
+          multiple
           :data="data"
         />
       </div>
@@ -65,6 +66,7 @@
       <div class="col-sm-10">
         <MultipleSelect
           ref="select"
+          multiple
         >
           <option
             v-for="item of data"

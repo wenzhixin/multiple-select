@@ -49,6 +49,7 @@
 
       <div class="col-sm-10">
         <MultipleSelect
+          multiple
           :options="options"
         >
           <option value="1">

@@ -3,6 +3,7 @@
     <MultipleSelect
       ref="select"
       v-model="months"
+      multiple
       name="months"
       width="200"
       :options="options"

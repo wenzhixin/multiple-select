@@ -61,7 +61,27 @@
         color: #999;
       }
     }
-    div {
+    div.icon-close {
+      position: absolute;
+      top: 0px;
+      right: 16px;
+      height: 100%;
+      width: 16px;
+
+      &:before {
+        content: '×';
+        color: #888;
+        font-weight: bold;
+        position: absolute;
+        top: 50%;
+        margin-top: -14px;
+      }
+
+      &:hover:before {
+        color: #333;
+      }
+    }
+    div.icon-caret {
       position: absolute;
       width: 0;
       height: 0;
@@ -135,18 +155,20 @@
   ul {
     overflow: auto;
     margin: 0;
-    padding: 5px 0;
+    padding: 0;
 
     > li {
       list-style: none;
       display: list-item;
       background-image: none;
       position: static;
-      padding: 0 8px;
+      padding: .25rem 8px;
 
       .disabled {
+        font-weight: normal!important;
         opacity: .35;
         filter: Alpha(Opacity = 35);
+        cursor: default;
       }
 
       &.multiple {
@@ -167,6 +189,9 @@
       }
 
       label {
+        position: relative;
+        padding-left: 1.25rem;
+        margin-bottom: 0;
         font-weight: normal;
         display: block;
         white-space: nowrap;
@@ -210,7 +235,9 @@
 
   input {
     &[type="radio"], &[type="checkbox"] {
-      margin: 5px;
+      position: absolute;
+      margin-top: .3rem;
+      margin-left: -1.25rem;
     }
   }
 
