@@ -100,13 +100,7 @@ export default {
   },
 
   mounted () {
-    if (this.$slots.default) {
-      for (const el of this.$slots.default) {
-        if (el.elm.nodeName === 'OPTION' && el.data.domProps && el.data.domProps.value) {
-          $(el.elm).data('value', el.data.domProps.value)
-        }
-      }
-    }
+    this._refresh()
 
     this.$select = $(this.$el).change(() => {
       const selects = this.getSelects()
@@ -124,10 +118,12 @@ export default {
     })
 
     if (
-      typeof this.currentValue === 'undefined' ||
-      Array.isArray(this.currentValue) && !this.currentValue.length
+      this.$select.val() &&
+      (typeof this.currentValue === 'undefined' ||
+      Array.isArray(this.currentValue) && !this.currentValue.length)
     ) {
       this.currentValue = this.$select.val()
+
       this.$emit('input', this.currentValue)
       this.$emit('change', this.currentValue)
     }
@@ -187,7 +183,22 @@ export default {
         }
       }
       return res
-    })()
+    })(),
+
+    _refresh () {
+      if (this.$slots.default) {
+        for (const el of this.$slots.default) {
+          if (el.elm.nodeName === 'OPTION' && el.data.domProps && el.data.domProps.value) {
+            $(el.elm).data('value', el.data.domProps.value)
+          }
+        }
+      }
+    },
+
+    refresh () {
+      this._refresh()
+      this.$select.multipleSelect('refresh')
+    }
   }
 }
 </script>
