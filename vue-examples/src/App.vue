@@ -124,7 +124,11 @@ export default {
   text-decoration: none;
 }
 
-.btn-secondary + .btn-secondary {
+.btn + .btn {
   margin-left: 10px;
+}
+
+.ms-drop li+li {
+  margin-top: 0!important;
 }
 </style>

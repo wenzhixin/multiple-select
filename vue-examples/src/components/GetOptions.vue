@@ -23,6 +23,7 @@
       <div class="col-sm-10">
         <MultipleSelect
           ref="select"
+          multiple
         >
           <option value="text1">
             text1

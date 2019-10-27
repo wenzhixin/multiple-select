@@ -6,9 +6,7 @@
       </label>
 
       <div class="col-sm-9">
-        <MultipleSelect
-          single
-        >
+        <MultipleSelect>
           <option value="1">
             First
           </option>
@@ -32,7 +30,6 @@
 
       <div class="col-sm-9">
         <MultipleSelect
-          single
           :data="data"
         />
       </div>
@@ -44,9 +41,7 @@
       </label>
 
       <div class="col-sm-9">
-        <MultipleSelect
-          single
-        >
+        <MultipleSelect>
           <option value="1">
             This is the first option and value is 1
           </option>
@@ -70,7 +65,6 @@
 
       <div class="col-sm-9">
         <MultipleSelect
-          single
           width="200"
         >
           <option value="1">
@@ -95,7 +89,7 @@
       </label>
 
       <div class="col-sm-9">
-        <MultipleSelect>
+        <MultipleSelect multiple>
           <optgroup label="Group 1">
             <option value="1">
               Option 1
@@ -139,7 +133,7 @@
       </label>
 
       <div class="col-sm-9">
-        <MultipleSelect>
+        <MultipleSelect multiple>
           <optgroup label="This is group 1">
             <option value="1">
               This is option 1

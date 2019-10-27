@@ -26,7 +26,30 @@ select {
 
   <div class="form-group row">
     <label class="col-sm-2">
-      Basic Select
+      Single Select
+    </label>
+
+    <div class="col-sm-10">
+      <select>
+        <option value="1">January</option>
+        <option value="2">February</option>
+        <option value="3">March</option>
+        <option value="4">April</option>
+        <option value="5">May</option>
+        <option value="6">June</option>
+        <option value="7">July</option>
+        <option value="8">August</option>
+        <option value="9">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2">
+      Multiple Select
     </label>
 
     <div class="col-sm-10">
@@ -51,13 +74,13 @@ select {
 <script>
   function mounted() {
     $('select').multipleSelect({
-      maxHeight: $('#number').val(),
+      maxHeight: +$('#number').val(),
       maxHeightUnit: 'row'
     })
 
     $('#number').change(function () {
       $('select').multipleSelect('refreshOptions', {
-        maxHeight: $('#number').val(),
+        maxHeight: +$('#number').val(),
         maxHeightUnit: 'row'
       })
     })

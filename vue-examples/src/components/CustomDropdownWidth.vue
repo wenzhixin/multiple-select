@@ -8,6 +8,7 @@
       <div class="col-sm-10">
         <MultipleSelect
           width="500"
+          multiple
           :options="options"
         >
           <option value="1">

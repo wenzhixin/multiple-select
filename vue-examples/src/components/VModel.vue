@@ -9,7 +9,6 @@
         <MultipleSelect
           v-model="model1"
           :data="data"
-          single
           @change="change1"
         />
       </div>
@@ -23,7 +22,6 @@
       <div class="col-sm-10">
         <MultipleSelect
           v-model="model2"
-          single
           @change="change2"
         >
           <option
@@ -46,7 +44,6 @@
         <MultipleSelect
           v-model="model3"
           :data="objectData"
-          single
           @change="change3"
         />
       </div>

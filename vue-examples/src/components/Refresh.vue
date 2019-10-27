@@ -53,6 +53,7 @@
       </label>
       <div class="col-sm-10">
         <MultipleSelect
+          multiple
           :data="data"
         />
       </div>
@@ -65,6 +66,7 @@
       <div class="col-sm-10">
         <MultipleSelect
           ref="select"
+          multiple
         >
           <option
             v-for="item of data"

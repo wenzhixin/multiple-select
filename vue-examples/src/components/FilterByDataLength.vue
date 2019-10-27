@@ -7,7 +7,6 @@
 
       <div class="col-sm-10">
         <MultipleSelect
-          single
           :options="options"
         >
           <option value="1">
@@ -51,6 +50,7 @@
 
       <div class="col-sm-10">
         <MultipleSelect
+          multiple
           :options="options"
         >
           <option value="1">
@@ -136,6 +136,7 @@
 
       <div class="col-sm-10">
         <MultipleSelect
+          multiple
           :options="options"
         >
           <optgroup label="Group 1">
@@ -185,6 +186,7 @@
 
       <div class="col-sm-10">
         <MultipleSelect
+          multiple
           :options="options"
         >
           <optgroup label="Group 1">

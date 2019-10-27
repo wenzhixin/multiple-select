@@ -9,6 +9,7 @@
         <MultipleSelect
           class="form-control form-control-sm"
           placeholder="form-control-sm"
+          multiple
         >
           <option value="1">
             January
@@ -59,6 +60,7 @@
         <MultipleSelect
           class="form-control"
           placeholder="form-control"
+          multiple
         >
           <option value="1">
             January
@@ -109,6 +111,7 @@
         <MultipleSelect
           class="form-control form-control-lg"
           placeholder="form-control-lg"
+          multiple
         >
           <option value="1">
             January

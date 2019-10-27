@@ -130,9 +130,9 @@ Or String/Number Array:
 
 - **Type:** Boolean
 
-- **Detail:** Allows you to select only one option.
+- **Detail:** Allows you to select only one option, if the select has not multiple attribute, this option will auto set to `true`.
 
-- **Default:** `false`
+- **Default:** `undefined`
 
 - **Example:** <a href="/examples#single-row.html">Single Row</a>
 

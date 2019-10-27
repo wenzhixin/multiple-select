@@ -8,7 +8,6 @@
       <div class="col-sm-10">
         <MultipleSelect
           v-model="options.locale"
-          single
         >
           <option value="en-US">
             English
@@ -33,6 +32,7 @@
 
       <div class="col-sm-10">
         <MultipleSelect
+          multiple
           :options="options"
         >
           <option value="1">

@@ -64,9 +64,7 @@ select {
   }
 
   function mounted() {
-    $('#locale').multipleSelect({
-      single: true
-    }).change(function () {
+    $('#locale').multipleSelect().change(function () {
       updateLocale($(this).val())
     }).change()
   }

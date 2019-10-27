@@ -7,7 +7,7 @@
 
       <div class="col-sm-10">
         <div class="parent">
-          <MultipleSelect>
+          <MultipleSelect multiple>
             <option value="1">
               January
             </option>
@@ -60,6 +60,7 @@
       >
         <div class="parent">
           <MultipleSelect
+            multiple
             :options="options"
           >
             <option value="1">
