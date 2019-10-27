@@ -13,6 +13,11 @@
                 "description": "Multiple select without any options."
             },
             {
+                "title": "Multiple Items",
+                "url": "multiple-items.html",
+                "description": "Use <code>multiple</code> and <code>multipleWidth</code> options to enable multiple items."
+            },
+            {
                 "title": "Auto Width",
                 "url": "auto-width.html",
                 "description": "Auto width by default without setting width style."
@@ -76,11 +81,6 @@
                 "title": "Hide Select All",
                 "url": "hide-select-all.html",
                 "description": "Use <code>selectAll: false</code> to hide select all."
-            },
-            {
-                "title": "Multiple Items",
-                "url": "multiple-items.html",
-                "description": "Use <code>multiple</code> and <code>multipleWidth</code> options to enable multiple items."
             },
             {
                 "title": "Hide Optgroup Check",
