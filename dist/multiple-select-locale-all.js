@@ -49,6 +49,27 @@
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['es-ES']);
 
   /**
+   * Multiple Select it-IT translation
+   * Author: Giuseppe Lodi Rizzini
+   */
+
+  $.fn.multipleSelect.locales['it-IT'] = {
+    formatSelectAll: function formatSelectAll() {
+      return '[Seleziona tutti]';
+    },
+    formatAllSelected: function formatAllSelected() {
+      return 'Tutti selezionati';
+    },
+    formatCountSelected: function formatCountSelected(count, total) {
+      return count + ' di ' + total + ' selezionati';
+    },
+    formatNoMatchesFound: function formatNoMatchesFound() {
+      return 'Nessun risultato';
+    }
+  };
+  $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['it-IT']);
+
+  /**
    * Multiple Select zh-CN translation
    * Author: Zhixin Wen<wenzhixin2010@gmail.com>
    */

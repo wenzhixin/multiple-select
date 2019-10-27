@@ -10,7 +10,7 @@
   "dependencies": {
     "core-js": "^2.6.5",
     "jquery": "^3.4.1",
-    "multiple-select": "^1.4.3",
+    "multiple-select": "^1.5.0",
     "vue": "^2.6.10"
   },
   "devDependencies": {

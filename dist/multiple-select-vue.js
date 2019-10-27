@@ -2001,15 +2001,15 @@
 	  name: 'MultipleSelect',
 	  props: {
 	    value: {
-	      type: [String, Number, Array],
+	      type: [String, Number, Array, Object],
 	      default: undefined
 	    },
 	    name: {
 	      type: String,
 	      default: undefined
 	    },
-	    single: {
-	      type: Boolean,
+	    multiple: {
+	      type: [Boolean, String],
 	      default: false
 	    },
 	    disabled: {
@@ -2021,7 +2021,7 @@
 	      default: undefined
 	    },
 	    data: {
-	      type: Array,
+	      type: [Array, Object],
 	      default: function _default() {
 	        return undefined;
 	      }
@@ -2048,7 +2048,7 @@
 
 	      this._initDefaultValue();
 	    },
-	    single: function single() {
+	    multiple: function multiple() {
 	      this._initSelect();
 	    },
 	    disabled: function disabled() {
@@ -2081,17 +2081,25 @@
 	  mounted: function mounted() {
 	    var _this2 = this;
 
+	    this._refresh();
+
 	    this.$select = $(this.$el).change(function () {
 	      var selects = _this2.getSelects();
 
-	      _this2.currentValue = Array.isArray(_this2.currentValue) ? selects : selects.length ? selects[0] : undefined;
+	      if (Array.isArray(_this2.currentValue)) {
+	        _this2.currentValue = selects;
+	      } else if (typeof _this2.currentValue === 'number') {
+	        _this2.currentValue = selects.length ? +selects[0] : undefined;
+	      } else {
+	        _this2.currentValue = selects.length ? selects[0] : undefined;
+	      }
 
 	      _this2.$emit('input', _this2.currentValue);
 
 	      _this2.$emit('change', _this2.currentValue);
 	    });
 
-	    if (typeof this.currentValue === 'undefined' || Array.isArray(this.currentValue) && !this.currentValue.length) {
+	    if (this.$select.val() && (typeof this.currentValue === 'undefined' || Array.isArray(this.currentValue) && !this.currentValue.length)) {
 	      this.currentValue = this.$select.val();
 	      this.$emit('input', this.currentValue);
 	      this.$emit('change', this.currentValue);
@@ -2127,9 +2135,9 @@
 	    },
 	    _initSelect: function _initSelect() {
 	      var options = _objectSpread2({}, deepCopy(this.options), {
-	        single: this.single,
+	        single: !this.multiple,
 	        width: this.width,
-	        data: deepCopy(this.data)
+	        data: this.data
 	      });
 
 	      if (!this._hasInit) {
@@ -2143,7 +2151,7 @@
 	      var _this3 = this;
 
 	      this.$nextTick(function () {
-	        _this3.setSelects(Array.isArray(_this3.currentValue) ? _this3.currentValue : [_this3.currentValue]);
+	        _this3.setSelects(Array.isArray(_this3.currentValue) ? _this3.currentValue : [_this3.currentValue], true);
 	      });
 	    }
 	  }, function () {
@@ -2186,7 +2194,43 @@
 	    }
 
 	    return res;
-	  }())
+	  }(), {
+	    _refresh: function _refresh() {
+	      if (this.$slots.default) {
+	        var _iteratorNormalCompletion2 = true;
+	        var _didIteratorError2 = false;
+	        var _iteratorError2 = undefined;
+
+	        try {
+	          for (var _iterator2 = this.$slots.default[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+	            var el = _step2.value;
+
+	            if (el.elm.nodeName === 'OPTION' && el.data.domProps && el.data.domProps.value) {
+	              $(el.elm).data('value', el.data.domProps.value);
+	            }
+	          }
+	        } catch (err) {
+	          _didIteratorError2 = true;
+	          _iteratorError2 = err;
+	        } finally {
+	          try {
+	            if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+	              _iterator2.return();
+	            }
+	          } finally {
+	            if (_didIteratorError2) {
+	              throw _iteratorError2;
+	            }
+	          }
+	        }
+	      }
+	    },
+	    refresh: function refresh() {
+	      this._refresh();
+
+	      this.$select.multipleSelect('refresh');
+	    }
+	  })
 	};
 
 	function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier
@@ -2285,7 +2329,7 @@
 	  return _c(
 	    "select",
 	    {
-	      attrs: { name: _vm.name, multiple: !_vm.single, disabled: _vm.disabled }
+	      attrs: { name: _vm.name, multiple: _vm.multiple, disabled: _vm.disabled }
 	    },
 	    [_vm._t("default")],
 	    2

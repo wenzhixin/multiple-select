@@ -1,4 +1,4 @@
-const VERSION = '1.4.3'
+const VERSION = '1.5.0'
 const BLOCK_ROWS = 50
 const CLUSTER_BLOCKS = 4
 
