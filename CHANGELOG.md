@@ -3,6 +3,7 @@
 ### 1.5.0
 
 - **New:** Rewrote display and data logic code.
+- **New:** Added single or multiple can be auto supported.
 - **New:** Added object `value` supported.
 - **New:** Added object for `v-model` supported.
 - **New:** Added `data` attributes of optgroup and option supported.

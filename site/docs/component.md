@@ -22,7 +22,7 @@ title: Component
 
 ### v-model
 
-- **Type:** `String | Array`
+- **Type:** `Number | String | Array | Object`
 
 - **Detail:**
 
@@ -40,13 +40,13 @@ title: Component
 
 - **Default:** `undefined`
 
-### single
+### multiple
 
-- **Type:** `Boolean`
+- **Type:** `Boolean | String`
 
 - **Detail:**
 
-  Allows you to select only one option.
+  Single or multiple select.
 
 - **Default:** `false`
 

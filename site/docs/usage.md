@@ -25,7 +25,15 @@ Include jQuery library and `multiple-select.min.js` in the head tag or at the ve
 Call a multiple select with id select with JavaScript.
 
 ```html
-<select id="select" multiple="multiple">
+<!-- Single Select -->
+<select>
+    <option value="1">January</option>
+    ...
+    <option value="12">December</option>
+</select>
+
+<!-- Multiple Select -->
+<select multiple="multiple">
     <option value="1">January</option>
     ...
     <option value="12">December</option>
@@ -33,7 +41,7 @@ Call a multiple select with id select with JavaScript.
 ```
 
 ```js
-$('#select').multipleSelect()
+$('select').multipleSelect()
 ```
 
 ## Starter template
@@ -54,7 +62,24 @@ Put it all together and your pages should look like this:
     <link rel="stylesheet" href="https://unpkg.com/multiple-select@1.4.3/dist/multiple-select.min.css">
   </head>
   <body>
-    <select id="select" multiple="multiple">
+    <!-- Single Select -->
+    <select>
+      <option value="1">January</option>
+      <option value="2">February</option>
+      <option value="3">March</option>
+      <option value="4">April</option>
+      <option value="5">May</option>
+      <option value="6">June</option>
+      <option value="7">July</option>
+      <option value="8">August</option>
+      <option value="9">September</option>
+      <option value="10">October</option>
+      <option value="11">November</option>
+      <option value="12">December</option>
+    </select>
+
+    <!-- Multiple Select -->
+    <select multiple="multiple">
       <option value="1">January</option>
       <option value="2">February</option>
       <option value="3">March</option>
@@ -73,9 +98,7 @@ Put it all together and your pages should look like this:
     <script src="https://unpkg.com/multiple-select@1.4.3/dist/multiple-select.min.js"></script>
     <script>
       $(function () {
-        $('#select').multipleSelect({
-          width: 500
-        })
+        $('select').multipleSelect()
       })
     </script>
   </body>

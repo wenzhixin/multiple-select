@@ -8,6 +8,7 @@
       <div class="col-sm-10">
         <MultipleSelect
           placeholder="Here is the placeholder via attribute"
+          multiple
         >
           <option value="1">
             January
@@ -56,6 +57,7 @@
 
       <div class="col-sm-10">
         <MultipleSelect
+          multiple
           :options="options"
         >
           <optgroup label="Group 1">

@@ -1,7 +1,7 @@
 <template>
   <select
     :name="name"
-    :multiple="!single"
+    :multiple="multiple"
     :disabled="disabled"
   >
     <slot/>
@@ -29,8 +29,8 @@ export default {
       type: String,
       default: undefined
     },
-    single: {
-      type: Boolean,
+    multiple: {
+      type: [Boolean, String],
       default: false
     },
     disabled: {
@@ -69,7 +69,7 @@ export default {
       this.currentValue = this.value
       this._initDefaultValue()
     },
-    single () {
+    multiple () {
       this._initSelect()
     },
     disabled () {
@@ -160,7 +160,7 @@ export default {
     _initSelect () {
       const options = {
         ...deepCopy(this.options),
-        single: this.single,
+        single: !this.multiple,
         width: this.width,
         data: this.data
       }

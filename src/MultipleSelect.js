@@ -60,6 +60,11 @@ class MultipleSelect {
       this.$label = null
     }
 
+    // single or multiple
+    if (typeof this.options.single === 'undefined') {
+      this.options.single = el.getAttribute('multiple') === null
+    }
+
     // restore class and title from select element
     this.$parent = $(`
       <div class="ms-parent ${el.getAttribute('class') || ''}"
@@ -357,7 +362,7 @@ class MultipleSelect {
 
       html.push(`
         <li class="group ${classes}" ${style}>
-        <label class="optgroup${row.disabled ? ' disabled' : ''}">
+        <label class="optgroup${this.options.single || row.disabled ? ' disabled' : ''}">
         ${group}${row.label}
         </label>
         </li>
@@ -559,7 +564,7 @@ class MultipleSelect {
 
     let maxHeight = this.options.maxHeight
     if (this.options.maxHeightUnit === 'row') {
-      maxHeight = this.$drop.find('.ms-select-all').outerHeight() *
+      maxHeight = this.$drop.find('>ul>li').first().outerHeight() *
         this.options.maxHeight
     }
     this.$drop.find('>ul').css('max-height', `${maxHeight}px`)

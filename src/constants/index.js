@@ -7,7 +7,7 @@ const DEFAULTS = {
   locale: undefined,
 
   selectAll: true,
-  single: false,
+  single: undefined,
   singleRadio: false,
   multiple: false,
   hideOptgroupCheckboxes: false,

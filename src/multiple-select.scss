@@ -165,8 +165,10 @@
       padding: .25rem 8px;
 
       .disabled {
+        font-weight: normal!important;
         opacity: .35;
         filter: Alpha(Opacity = 35);
+        cursor: default;
       }
 
       &.multiple {

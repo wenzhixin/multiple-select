@@ -29,6 +29,7 @@
       <div class="col-sm-10">
         <MultipleSelect
           ref="select"
+          multiple
         >
           <option value="1">
             January
