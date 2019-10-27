@@ -1,4 +1,6 @@
 const VERSION = '1.4.3'
+const BLOCK_ROWS = 50
+const CLUSTER_BLOCKS = 4
 
 const DEFAULTS = {
   name: '',
@@ -117,6 +119,10 @@ Object.assign(DEFAULTS, EN)
 
 const Constants = {
   VERSION,
+
+  BLOCK_ROWS,
+
+  CLUSTER_BLOCKS,
 
   DEFAULTS,
 

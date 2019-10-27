@@ -112,6 +112,8 @@ const removeDiacritics = str => {
 }
 
 const setDataKeys = data => {
+  let total = 0
+
   data.forEach((row, i) => {
     if (row.type === 'optgroup') {
       row._key = `group_${i}`
@@ -121,11 +123,17 @@ const setDataKeys = data => {
         child._key = `option_${i}_${j}`
         child.visible = typeof child.visible === 'undefined' ? true : child.visible
       })
+
+      total += row.children.length
     } else {
       row._key = `option_${i}`
       row.visible = typeof row.visible === 'undefined' ? true : row.visible
+
+      total += 1
     }
   })
+
+  return total
 }
 
 const findByParam = (data, param, value) => {
