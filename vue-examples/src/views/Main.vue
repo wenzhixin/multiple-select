@@ -37,7 +37,7 @@
 
 <script>
 import registry from '@/registry'
-import Codefund from './Codefund'
+import Codefund from '@/components/Codefund'
 import MS from '@/assets/MS'
 
 export default {
