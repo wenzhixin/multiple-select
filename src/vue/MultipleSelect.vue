@@ -99,6 +99,15 @@ export default {
     }
   },
 
+  beforeUpdate () {
+    if (this.slotDefault || this.slotDefault !== this.$slots.default) {
+      this.slotDefault = this.$slots.default
+      this.$nextTick(() => {
+        this._initSelectValue()
+      })
+    }
+  },
+
   mounted () {
     this._refresh()
 

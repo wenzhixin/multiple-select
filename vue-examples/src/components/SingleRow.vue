@@ -25,7 +25,7 @@
 
     <div class="form-group row">
       <label class="col-sm-2">
-        Basic Select
+        Multiple Select
       </label>
 
       <div class="col-sm-10">
@@ -94,7 +94,7 @@
 
     <div class="form-group row">
       <label class="col-sm-2">
-        Group Select
+        Multiple Select
       </label>
 
       <div class="col-sm-10">

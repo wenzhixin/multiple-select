@@ -1,5 +1,9 @@
 ## Changelog
 
+### 1.5.1
+
+- **New:** Added watch slot change supported.
+
 ### 1.5.0
 
 - **New:** Rewrote display and data logic code.
