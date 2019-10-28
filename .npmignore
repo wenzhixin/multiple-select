@@ -1,7 +1,9 @@
 site
+docs_
 test
 tools
 vue-starter
+vue-examples
 .browserslistrc
 .eslintignore
 .eslintrc.js
