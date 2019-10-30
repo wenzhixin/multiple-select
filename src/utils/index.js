@@ -162,10 +162,16 @@ const removeUndefined = obj => {
   return obj
 }
 
+const getDocumentClickEvent = (id = '') => {
+  id = id || `${+new Date()}${~~(Math.random() * 1000000)}`
+  return `click.multiple-select-${id}`
+}
+
 export {
   compareObjects,
   removeDiacritics,
   setDataKeys,
   findByParam,
-  removeUndefined
+  removeUndefined,
+  getDocumentClickEvent
 }

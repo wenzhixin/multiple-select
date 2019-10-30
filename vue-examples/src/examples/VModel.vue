@@ -9,6 +9,7 @@
         <MultipleSelect
           v-model="model1"
           :data="data"
+          multiple
           @change="change1"
         />
       </div>
@@ -45,6 +46,20 @@
           v-model="model3"
           :data="objectData"
           @change="change3"
+        />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2">
+        Group v-model
+      </label>
+
+      <div class="col-sm-10">
+        <MultipleSelect
+          v-model="group"
+          :data="groupData"
+          multiple
         />
       </div>
     </div>
@@ -129,9 +144,32 @@ export default {
     return {
       data,
       objectData,
-      model1: 1,
+      groupData: [
+        {
+          type: 'optgroup',
+          label: 'Group 1',
+          children: [
+            {
+              text: 'January',
+              value: 1
+            }
+          ]
+        },
+        {
+          type: 'optgroup',
+          label: 'Group 2',
+          children: [
+            {
+              text: 'July',
+              value: 7
+            }
+          ]
+        }
+      ],
+      model1: [1],
       model2: data[0],
-      model3: objectData[0].value
+      model3: objectData[0].value,
+      group: [1, 7]
     }
   },
   methods: {

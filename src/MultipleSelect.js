@@ -5,7 +5,8 @@ import {
   removeDiacritics,
   findByParam,
   setDataKeys,
-  removeUndefined
+  removeUndefined,
+  getDocumentClickEvent
 } from './utils/index.js'
 
 class MultipleSelect {
@@ -112,7 +113,8 @@ class MultipleSelect {
     this.selectItemName = `data-name="selectItem${name}"`
 
     if (!this.options.keepOpen) {
-      $(document).click(e => {
+      const clickEvent = getDocumentClickEvent(this.$el.attr('id'))
+      $(document).off(clickEvent).on(clickEvent, e => {
         if (
           $(e.target)[0] === this.$choice[0] ||
           $(e.target).parents('.ms-choice')[0] === this.$choice[0]
@@ -807,6 +809,7 @@ class MultipleSelect {
     }
 
     if (hasChanged) {
+      this.initSelected(ignoreTrigger)
       this.updateSelected()
       this.update(ignoreTrigger)
     }
