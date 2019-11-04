@@ -64,7 +64,7 @@
         Option Select
       </label>
       <div class="col-sm-10">
-        <!-- <MultipleSelect
+        <MultipleSelect
           ref="select"
           multiple
         >
@@ -77,7 +77,7 @@
           >
             {{ item.text }}
           </option>
-        </MultipleSelect> -->
+        </MultipleSelect>
       </div>
     </div>
   </div>
@@ -115,10 +115,6 @@ export default {
         disabled: this.disabled
       })
 
-      // use <option> need call refresh method
-      // this.$nextTick(() => {
-      //   this.$refs.select.refresh()
-      // })
       this.input = ''
     }
   }
