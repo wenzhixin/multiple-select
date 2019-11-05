@@ -99,22 +99,10 @@ class Index extends React.Component {
 
             <div className="blockElement fourByGridBlock">
               <div className="blockContent">
-                <h2>Latest release v1.5.0 (2019-10-28)</h2>
-                <MarkdownBlock>- **New:** Rewrote display and data logic code.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added `single` or `multiple` can be auto supported.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added virtual scroll to support large data.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added object `value` supported.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added object for `v-model` supported.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added `data` attributes of optgroup and option supported.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added `tabindex` attribute supported.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added `showClear` option and `onClear` event.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added `maxHeightUnit` option.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added `it-IT` locale.</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Improved events trigger logic.</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Updated the `single` group style.</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Updated parameters of `onOptgroupClick` and `onClick` events.</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Fixed vue warning when `data` is Object.</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Removed `displayHtml` option and display html by default.</MarkdownBlock>
+                <h2>Latest release v1.5.1 (2019-11-5)</h2>
+                <MarkdownBlock>- **New:** Added watch slot change supported.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Fixed `v-model` not check all bug.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Fixed document event trigger multiple times bug.</MarkdownBlock>
               </div>
             </div>
           </div>
