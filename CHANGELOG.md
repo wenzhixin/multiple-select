@@ -1,5 +1,11 @@
 ## Changelog
 
+### 1.5.1
+
+- **New:** Added watch slot change supported.
+- **Update:** Fixed `v-model` not check all bug.
+- **Update:** Fixed document event trigger multiple times bug.
+
 ### 1.5.0
 
 - **New:** Rewrote display and data logic code.

@@ -2072,25 +2072,37 @@ var script = {
       deep: true
     }
   },
-  mounted: function mounted() {
+  beforeUpdate: function beforeUpdate() {
     var _this2 = this;
+
+    if (this.slotDefault || this.slotDefault !== this.$slots.default) {
+      this.slotDefault = this.$slots.default;
+      this.$nextTick(function () {
+        _this2._refresh();
+
+        _this2._initSelectValue();
+      });
+    }
+  },
+  mounted: function mounted() {
+    var _this3 = this;
 
     this._refresh();
 
     this.$select = $(this.$el).change(function () {
-      var selects = _this2.getSelects();
+      var selects = _this3.getSelects();
 
-      if (Array.isArray(_this2.currentValue)) {
-        _this2.currentValue = selects;
-      } else if (typeof _this2.currentValue === 'number') {
-        _this2.currentValue = selects.length ? +selects[0] : undefined;
+      if (Array.isArray(_this3.currentValue)) {
+        _this3.currentValue = selects;
+      } else if (typeof _this3.currentValue === 'number') {
+        _this3.currentValue = selects.length ? +selects[0] : undefined;
       } else {
-        _this2.currentValue = selects.length ? selects[0] : undefined;
+        _this3.currentValue = selects.length ? selects[0] : undefined;
       }
 
-      _this2.$emit('input', _this2.currentValue);
+      _this3.$emit('input', _this3.currentValue);
 
-      _this2.$emit('change', _this2.currentValue);
+      _this3.$emit('change', _this3.currentValue);
     });
 
     if (this.$select.val() && (typeof this.currentValue === 'undefined' || Array.isArray(this.currentValue) && !this.currentValue.length)) {
@@ -2106,7 +2118,7 @@ var script = {
             args[_key] = arguments[_key];
           }
 
-          _this2.$emit.apply(_this2, [event.replace(/([A-Z])/g, '-$1').toLowerCase()].concat(args));
+          _this3.$emit.apply(_this3, [event.replace(/([A-Z])/g, '-$1').toLowerCase()].concat(args));
         };
       }
     };
@@ -2142,10 +2154,10 @@ var script = {
       }
     },
     _initDefaultValue: function _initDefaultValue() {
-      var _this3 = this;
+      var _this4 = this;
 
       this.$nextTick(function () {
-        _this3.setSelects(Array.isArray(_this3.currentValue) ? _this3.currentValue : [_this3.currentValue], true);
+        _this4.setSelects(Array.isArray(_this4.currentValue) ? _this4.currentValue : [_this4.currentValue], true);
       });
     }
   }, function () {

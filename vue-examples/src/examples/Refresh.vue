@@ -115,10 +115,6 @@ export default {
         disabled: this.disabled
       })
 
-      // use <option> need call refresh method
-      this.$nextTick(() => {
-        this.$refs.select.refresh()
-      })
       this.input = ''
     }
   }
