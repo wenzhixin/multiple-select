@@ -330,6 +330,9 @@ class MultipleSelect {
         if (this.updateDataStart < 0) {
           this.updateDataStart = 0
         }
+        if (this.updateDataEnd > this.data.length) {
+          this.updateDataEnd = this.data.length
+        }
       }
 
       this.virtualScroll = new VirtualScroll({
