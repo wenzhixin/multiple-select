@@ -1,5 +1,9 @@
 ## Changelog
 
+### 1.5.2
+
+- **Update:** Fixed virtual scroll bottom select bug.
+
 ### 1.5.1
 
 - **New:** Added watch slot change supported.
