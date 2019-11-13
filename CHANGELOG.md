@@ -1,5 +1,10 @@
 ## Changelog
 
+### 1.5.2
+
+- **Update:** Fixed virtual scroll bottom select bug.
+- **Update:** Fixed element not destroyed bug using `v-if`.
+
 ### 1.5.1
 
 - **New:** Added watch slot change supported.

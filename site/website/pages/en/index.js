@@ -99,10 +99,9 @@ class Index extends React.Component {
 
             <div className="blockElement fourByGridBlock">
               <div className="blockContent">
-                <h2>Latest release v1.5.1 (2019-11-5)</h2>
-                <MarkdownBlock>- **New:** Added watch slot change supported.</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Fixed `v-model` not check all bug.</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Fixed document event trigger multiple times bug.</MarkdownBlock>
+                <h2>Latest release v1.5.2 (2019-11-13)</h2>
+                <MarkdownBlock>- **Update:** Fixed virtual scroll bottom select bug.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Fixed element not destroyed bug using `v-if`.</MarkdownBlock>
               </div>
             </div>
           </div>

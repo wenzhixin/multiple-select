@@ -2084,6 +2084,9 @@ var script = {
       });
     }
   },
+  destroyed: function destroyed() {
+    this.destroy(true);
+  },
   mounted: function mounted() {
     var _this3 = this;
 
