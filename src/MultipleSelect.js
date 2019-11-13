@@ -976,11 +976,12 @@ class MultipleSelect {
       return
     }
     this.$el.before(this.$parent).removeClass('ms-offscreen')
-    this.$parent.remove()
 
     if (this.tabIndex !== null) {
       this.$el.attr('tabindex', this.tabIndex)
     }
+
+    this.$parent.remove()
 
     if (this.fromHtml) {
       delete this.options.data

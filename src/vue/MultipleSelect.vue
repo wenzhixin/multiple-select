@@ -109,6 +109,10 @@ export default {
     }
   },
 
+  destroyed () {
+    this.destroy(true)
+  },
+
   mounted () {
     this._refresh()
 
