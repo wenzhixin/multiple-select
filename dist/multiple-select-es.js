@@ -849,7 +849,7 @@ _export({ target: 'String', proto: true, forced: forcedStringTrimMethod('trim') 
   }
 });
 
-var VERSION = '1.5.1';
+var VERSION = '1.5.2';
 var BLOCK_ROWS = 50;
 var CLUSTER_BLOCKS = 4;
 var DEFAULTS = {
@@ -3376,6 +3376,10 @@ function () {
           if (_this5.updateDataStart < 0) {
             _this5.updateDataStart = 0;
           }
+
+          if (_this5.updateDataEnd > _this5.data.length) {
+            _this5.updateDataEnd = _this5.data.length;
+          }
         };
 
         this.virtualScroll = new VirtualScroll({
@@ -4218,11 +4222,12 @@ function () {
       }
 
       this.$el.before(this.$parent).removeClass('ms-offscreen');
-      this.$parent.remove();
 
       if (this.tabIndex !== null) {
         this.$el.attr('tabindex', this.tabIndex);
       }
+
+      this.$parent.remove();
 
       if (this.fromHtml) {
         delete this.options.data;
