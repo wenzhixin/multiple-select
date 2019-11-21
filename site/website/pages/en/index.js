@@ -58,7 +58,7 @@ class HomeSplash extends React.Component {
           <ProjectTitle siteConfig={siteConfig} />
           <PromoSection>
             <Button href={docUrl('download.html')}>Getting started</Button>
-            <Button href={docUrl('documentation.html')}>Documentation</Button>
+            <Button href={docUrl('options.html')}>Documentation</Button>
           </PromoSection>
         </div>
       </SplashContainer>
