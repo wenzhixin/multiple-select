@@ -225,7 +225,7 @@ class MultipleSelect {
           return child.selected && !child.disabled && child.visible
         }).length
 
-        row.selected = selectedCount && selectedCount ===
+        row.selected = !this.options.single && selectedCount && selectedCount ===
           row.children.filter(child => !child.disabled && child.visible).length
 
         selectedTotal += selectedCount
