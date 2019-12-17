@@ -54,6 +54,7 @@
     "@babel/core": "^7.6.4",
     "@babel/preset-env": "^7.5.5",
     "@mysticatea/eslint-plugin": "^11.0.0",
+    "axe-core": "^3.4.0",
     "axe-testcafe": "^3.0.0",
     "core-js": "^3.2.1",
     "cssmin-cli": "^0.0.5",
