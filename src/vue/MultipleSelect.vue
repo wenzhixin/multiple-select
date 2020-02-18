@@ -132,6 +132,7 @@ export default {
     })
 
     if (
+      this._hasInit &&
       this.$select.val() &&
       (typeof this.currentValue === 'undefined' ||
       Array.isArray(this.currentValue) && !this.currentValue.length)
