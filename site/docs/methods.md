@@ -41,9 +41,9 @@ $('#multiple').multipleSelect('method', parameter)
 
 ## setSelects
 
-- **Parameter:**  `values`
+- **Parameter:**  `values, type`
 
-- **Detail:** Sets the selected values. The `values` should be an array.
+- **Detail:** Sets the selected values. The `values` should be an array. The `type` can be `'value'`, `'text'`, default is `'value'`.
 
 - **Example:** [setSelects-getSelects](/examples#setSelects-getSelects.html)
 

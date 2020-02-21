@@ -18,6 +18,18 @@
         >
           GetSelects
         </button>
+        <button
+          class="btn btn-secondary"
+          @click="setSelectsByText"
+        >
+          SetSelects by 'text'
+        </button>
+        <button
+          class="btn btn-secondary"
+          @click="getSelectsByText"
+        >
+          GetSelects by 'text'
+        </button>
       </div>
     </div>
 
@@ -84,7 +96,16 @@ export default {
 
     getSelects () {
       alert('Selected values: ' + this.$refs.select.getSelects())
-      alert('Selected texts: ' + this.$refs.select.getSelects('text'))
+    },
+
+    setSelectsByText () {
+      this.$refs.select.setSelects([
+        'February', 'April'
+      ])
+    },
+
+    getSelectsByText () {
+      alert('Selected values: ' + this.$refs.select.getSelects('text'))
     }
   }
 }

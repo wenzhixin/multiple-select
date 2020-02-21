@@ -788,13 +788,18 @@ class MultipleSelect {
     return values
   }
 
-  setSelects (values, ignoreTrigger) {
+  setSelects (values, type = 'value', ignoreTrigger = false) {
     let hasChanged = false
     const _setSelects = rows => {
       for (const row of rows) {
-        let selected = values.includes(row._value || row.value)
-        if (!selected && row.value === +row.value + '') {
-          selected = values.includes(+row.value)
+        let selected = false
+        if (type === 'text') {
+          selected = values.includes(row.text)
+        } else {
+          selected = values.includes(row._value || row.value)
+          if (!selected && row.value === +row.value + '') {
+            selected = values.includes(+row.value)
+          }
         }
         if (row.selected !== selected) {
           hasChanged = true
