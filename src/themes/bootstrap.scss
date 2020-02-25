@@ -24,4 +24,34 @@
       margin-top: 0.5rem;
     }
   }
+
+  &.ms-dropdown {
+    .ms-drop ul > li {
+
+      &.group.hide-radio label.optgroup {
+        margin-bottom: 0;
+        font-size: .875rem;
+        color: #6c757d;
+        white-space: nowrap;
+        opacity: 1;
+      }
+
+      &.hide-radio.option-level-1 label {
+        padding-left: 8px;
+      }
+    }
+
+    &.ms-dropdown-divider {
+      .ms-drop ul > li {
+
+        &.group.hide-radio label.optgroup {
+          border-top: 1px solid #e9ecef;
+        }
+
+        &.group:first-child label.optgroup {
+          border-top: none;
+        }
+      }
+    }
+  }
 }
