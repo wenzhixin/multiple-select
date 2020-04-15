@@ -230,6 +230,11 @@
           padding-left: 28px;
         }
       }
+
+      &.option-divider {
+        padding: 0;
+        border-top: 1px solid #e9ecef;
+      }
     }
   }
 

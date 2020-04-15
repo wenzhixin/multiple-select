@@ -120,16 +120,20 @@ const setDataKeys = data => {
       row.visible = typeof row.visible === 'undefined' ? true : row.visible
 
       row.children.forEach((child, j) => {
-        child._key = `option_${i}_${j}`
         child.visible = typeof child.visible === 'undefined' ? true : child.visible
-      })
 
-      total += row.children.length
+        if (!child.divider) {
+          child._key = `option_${i}_${j}`
+          total += 1
+        }
+      })
     } else {
-      row._key = `option_${i}`
       row.visible = typeof row.visible === 'undefined' ? true : row.visible
 
-      total += 1
+      if (!row.divider) {
+        row._key = `option_${i}`
+        total += 1
+      }
     }
   })
 
