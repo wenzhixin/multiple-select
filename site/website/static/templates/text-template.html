@@ -41,8 +41,12 @@ select {
 <script>
   function mounted() {
     $('select').multipleSelect({
+      filter: true,
       textTemplate: function ($el) {
         return '<i class="fa fa-star"></i>' + $el.html()
+      },
+      customFilter: function (label, text) {
+        return $('<div/>').append(label).text().includes(text)
       }
     })
   }

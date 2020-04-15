@@ -190,6 +190,10 @@ class MultipleSelect {
       }
       if (Object.keys($elm.data()).length) {
         row._data = $elm.data()
+
+        if (row._data.divider) {
+          row.divider = row._data.divider
+        }
       }
 
       return row
@@ -227,7 +231,7 @@ class MultipleSelect {
 
         if (row.children.length) {
           row.selected = !this.options.single && selectedCount && selectedCount ===
-            row.children.filter(child => !child.disabled && child.visible).length
+            row.children.filter(child => !child.disabled && child.visible && !child.divider).length
         }
 
         selectedTotal += selectedCount
@@ -238,7 +242,7 @@ class MultipleSelect {
 
     this.allSelected = this.data.filter(row => {
       return row.selected && !row.disabled && row.visible
-    }).length === this.data.filter(row => !row.disabled && row.visible).length
+    }).length === this.data.filter(row => !row.disabled && row.visible && !row.divider).length
 
     if (!ignoreTrigger) {
       if (this.allSelected) {
@@ -446,6 +450,10 @@ class MultipleSelect {
 
     if (level && this.options.single) {
       classes += `option-level-${level} `
+    }
+
+    if (row.divider) {
+      return '<li class="option-divider"/>'
     }
 
     return [`
@@ -871,7 +879,7 @@ class MultipleSelect {
     for (const row of this.data) {
       if (row.type === 'optgroup') {
         this._checkGroup(row, checked, true)
-      } else if (!row.disabled && (ignoreUpdate || row.visible)) {
+      } else if (!row.disabled && !row.divider && (ignoreUpdate || row.visible)) {
         row.selected = checked
       }
     }
@@ -886,7 +894,7 @@ class MultipleSelect {
   _checkGroup (group, checked, ignoreUpdate) {
     group.selected = checked
     group.children.forEach(row => {
-      if (!row.disabled && (ignoreUpdate || row.visible)) {
+      if (!row.disabled && !row.divider && (ignoreUpdate || row.visible)) {
         row.selected = checked
       }
     })
@@ -905,10 +913,14 @@ class MultipleSelect {
     for (const row of this.data) {
       if (row.type === 'optgroup') {
         for (const child of row.children) {
-          child.selected = !child.selected
+          if (!child.divider) {
+            child.selected = !child.selected
+          }
         }
       } else {
-        row.selected = !row.selected
+        if (!row.divider) {
+          row.selected = !row.selected
+        }
       }
     }
     this.initSelected()
