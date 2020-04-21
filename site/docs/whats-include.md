@@ -5,7 +5,7 @@ title: What's included
 
 The Multiple Select source code download includes the precompiled CSS, JavaScript, and provides both compiled and minified variations, along with documentation.
 
-<div id="codefund"></div>
+<div id="gg"></div>
 
 More specifically, it includes the following and more:
 

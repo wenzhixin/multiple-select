@@ -5,7 +5,7 @@ title: Usage
 
 The Multiple Select plugin displays data in a tabular format, via JavaScript.
 
-<div id="codefund"></div>
+<div id="gg"></div>
 
 ## Via JavaScript
 

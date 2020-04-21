@@ -42,7 +42,8 @@ const siteConfig = {
   // Add custom scripts here that would be placed in <script> tags.
   scripts: [
     'https://buttons.github.io/buttons.js',
-    'https://codefund.io/properties/292/funder.js'
+    'https://code.jquery.com/jquery-3.5.0.slim.min.js',
+    'https://gg.wenzhixin.net.cn/wenzhixin/gg.js'
   ],
 
   separateCss: [

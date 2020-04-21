@@ -5,7 +5,7 @@ title: Localizations
 
 The localizations API of Multiple Select.
 
-<div id="codefund"></div>
+<div id="gg"></div>
 
 The localizations syntax:
 

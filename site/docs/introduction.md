@@ -5,7 +5,7 @@ title: Introduction
 
 We have a Multiple Select Component for [Vue.js 2.0+](https://vuejs.org), and it should be able to work with the full [API](/docs/en/options/).
 
-<div id="codefund"></div>
+<div id="gg"></div>
 
 ## Installation
 

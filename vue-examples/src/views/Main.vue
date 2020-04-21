@@ -15,7 +15,7 @@
         </div>
         <div class="col-md-5">
           <transition name="fade">
-            <Codefund v-if="!hideCodefund" />
+            <Ads v-if="!hideAds" />
           </transition>
         </div>
       </div>
@@ -37,12 +37,12 @@
 
 <script>
 import registry from '@/registry'
-import Codefund from '@/components/Codefund'
+import Ads from '@/components/Ads'
 import MS from '@/assets/MS'
 
 export default {
   components: {
-    Codefund
+    Ads
   },
   props: {
     current: {
@@ -52,7 +52,7 @@ export default {
   },
   data () {
     return {
-      hideCodefund: false
+      hideAds: false
     }
   },
   computed: {
@@ -83,17 +83,17 @@ export default {
   },
   watch: {
     current () {
-      this.updateCodefund()
+      this.updateAds()
     },
     isSource () {
-      this.updateCodefund()
+      this.updateAds()
     }
   },
   methods: {
-    updateCodefund () {
-      this.hideCodefund = true
+    updateAds () {
+      this.hideAds = true
       setTimeout(() => {
-        this.hideCodefund = false
+        this.hideAds = false
       }, 500)
     }
   }
