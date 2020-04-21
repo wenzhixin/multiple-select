@@ -3,7 +3,7 @@ id: browser
 title: Browser
 ---
 
-<div id="codefund"></div>
+<div id="gg"></div>
 
 ## VueJS JavaScript
 

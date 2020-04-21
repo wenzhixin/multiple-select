@@ -5,7 +5,7 @@ title: Methods
 
 The methods API of Multiple Select.
 
-<div id="codefund"></div>
+<div id="gg"></div>
 
 The calling method syntax:
 

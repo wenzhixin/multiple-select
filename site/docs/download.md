@@ -5,7 +5,7 @@ title: Download
 
 Multiple Select has a few easy ways to quickly get started, each one appealing to a different skill level and use case. Read through to see what suits your particular needs.
 
-<div id="codefund"></div>
+<div id="gg"></div>
 
 ## Source code
 
