@@ -3,7 +3,7 @@ id: component
 title: Component
 ---
 
-<div id="codefund"></div>
+<div id="gg"></div>
 
 ## Usage Example
 

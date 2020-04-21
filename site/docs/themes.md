@@ -5,7 +5,7 @@ title: Themes
 
 The Themes of Multiple Select.
 
-<div id="codefund"></div>
+<div id="gg"></div>
 
 Example: [The Themes](/examples#themes.html)
 

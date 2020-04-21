@@ -3,7 +3,7 @@ id: webpack
 title: Webpack
 ---
 
-<div id="codefund"></div>
+<div id="gg"></div>
 
 ## Importing JavaScript
 

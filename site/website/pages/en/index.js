@@ -78,7 +78,7 @@ class Index extends React.Component {
         <h2>Designed for HTML Select tag</h2>
         <MarkdownBlock>Multiple Select has been designed to reduce development time and to require no specific knowledge from developers. It is both featherweight and feature-rich.</MarkdownBlock>
 
-        <div id="codefund" style={{width: '330px', margin: '0 auto !important'}}></div>
+        <div id="gg" style={{width: '330px', margin: '0 auto !important'}}></div>
       </div>
     )
 

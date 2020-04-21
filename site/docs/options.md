@@ -5,7 +5,7 @@ title: Options
 
 The options API of Multiple Select.
 
-<div id="codefund"></div>
+<div id="gg"></div>
 
 The Options are defined in `jQuery.fn.multipleSelect.defaults`.
 

@@ -1,23 +1,22 @@
-.template-body {
-  padding: 0 1rem!important;
-  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-}
+<template>
+  <div ref="gg">
+    <div id="gg" />
+  </div>
+</template>
 
-.bd-title {
-  font-size: 3rem;
-  margin-top: 2rem;
-  margin-bottom: .5rem;
-  font-weight: 300;
+<script>
+export default {
+  mounted () {
+    const script = document.createElement('script')
+    script.setAttribute('type', 'text/javascript')
+    script.setAttribute('src', 'https://gg.wenzhixin.net.cn/wenzhixin/gg.js')
+    script.setAttribute('async', 'async')
+    this.$refs.gg.appendChild(script)
+  }
 }
+</script>
 
-.title-desc {
-  min-height: 162px;
-}
-
-.bd-lead {
-  max-width: 100%;
-}
-
+<style>
 #carbonads {
   display: flex;
   justify-content: flex-end;
@@ -54,10 +53,6 @@
   justify-content: flex-end;
 }
 
-#codefund #cf {
-  margin: 0!important;
-}
-
 #codefund .cf-wrapper {
   font-size: 13px!important;
 }
@@ -65,9 +60,4 @@
 #codefund .cf-powered-by {
   margin-top: 0!important;
 }
-
-@media (max-width: 991.98px) {
-  body {
-    padding: 0 !important;
-  }
-}
+</style>

@@ -5,7 +5,7 @@ title: Events
 
 The events API of Multiple Select.
 
-<div id="codefund"></div>
+<div id="gg"></div>
 
 To use event syntax:
 
