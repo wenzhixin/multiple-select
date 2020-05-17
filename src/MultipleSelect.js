@@ -804,7 +804,7 @@ class MultipleSelect {
       for (const row of rows) {
         let selected = false
         if (type === 'text') {
-          selected = values.includes(row.text)
+          selected = values.includes($(row.text).text().trim())
         } else {
           selected = values.includes(row._value || row.value)
           if (!selected && row.value === +row.value + '') {
