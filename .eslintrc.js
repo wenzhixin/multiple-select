@@ -36,16 +36,16 @@ module.exports = {
   ],
   'rules': {
     'indent': ['error',
-    2,
-    {
-      'SwitchCase': 1,
-      'MemberExpression': 1,
-      'ArrayExpression': 1,
-      'FunctionDeclaration': {'parameters': 'first'},
-      'CallExpression': {'arguments': 1},
-      'ImportDeclaration': 'first',
-      'ObjectExpression': 1
-    }
+      2,
+      {
+        'SwitchCase': 1,
+        'MemberExpression': 1,
+        'ArrayExpression': 1,
+        'FunctionDeclaration': {'parameters': 'first'},
+        'CallExpression': {'arguments': 1},
+        'ImportDeclaration': 'first',
+        'ObjectExpression': 1
+      }
     ],
     'quotes': ['error', 'single'],
     'semi': ['error', 'never'],
