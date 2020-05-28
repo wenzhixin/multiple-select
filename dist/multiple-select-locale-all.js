@@ -110,5 +110,25 @@
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['zh-TW']);
+ /**
+     * Multiple Select pt-BR translation
+     * Author: Lucas Aguiar
+     */
 
+    $.fn.multipleSelect.locales['pt-BR'] = {
+        formatSelectAll: function formatSelectAll() {
+            return '[Selecionar todos]';
+        },
+        formatAllSelected: function foWWWrmatAllSelected() {
+            return 'Todos selecionados';
+        },
+        formatCountSelected: function formatCountSelected(count, total) {
+            return count + ' de ' + total + ' selecionado';
+        },
+        formatNoMatchesFound: function formatNoMatchesFound() {
+            return 'Nenhum resultado encontrado';
+        }
+    };
+    $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['pt-BR']);
+                      
 }));
