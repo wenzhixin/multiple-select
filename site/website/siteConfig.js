@@ -42,7 +42,7 @@ const siteConfig = {
   // Add custom scripts here that would be placed in <script> tags.
   scripts: [
     'https://buttons.github.io/buttons.js',
-    'https://code.jquery.com/jquery-3.5.0.slim.min.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js',
     'https://gg.wenzhixin.net.cn/wenzhixin/gg.js'
   ],
 
