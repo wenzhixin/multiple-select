@@ -618,6 +618,7 @@ class MultipleSelect {
       return
     }
     this.options.isOpen = true
+    this.$parent.addClass('ms-parent-open')
     this.$choice.find('>div').addClass('open')
     this.$drop[this.animateMethod('show')]()
 
@@ -660,6 +661,7 @@ class MultipleSelect {
 
   close () {
     this.options.isOpen = false
+    this.$parent.removeClass('ms-parent-open')
     this.$choice.find('>div').removeClass('open')
     this.$drop[this.animateMethod('hide')]()
     if (this.options.container) {
