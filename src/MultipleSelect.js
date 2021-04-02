@@ -1012,7 +1012,7 @@ class MultipleSelect {
   }
 
   trigger (_name, ...args) {
-    const name = `${_name}.bs.table`
+    const name = `${_name}.bs.select`
 
     this.options[Constants.EVENTS[name]](...[...args, this])
     this.$el.trigger($.Event(name, { sender: this }), args)
