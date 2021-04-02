@@ -115,7 +115,7 @@ const METHODS = [
   'refresh', 'destroy'
 ]
 
-EVENTS = {
+const EVENTS = {
   'open.bs.select': 'onOpen',
   'close.bs.select': 'onClose',
   'check-all.bs.select': 'onCheckAll',
