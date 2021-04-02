@@ -115,6 +115,19 @@ const METHODS = [
   'refresh', 'destroy'
 ]
 
+EVENTS = {
+  'open.bs.select': 'onOpen',
+  'close.bs.select': 'onClose',
+  'check-all.bs.select': 'onCheckAll',
+  'uncheck-all.bs.select': 'onUncheckAll',
+  'focus.bs.select': 'onFocus',
+  'blur.bs.select': 'onBlur',
+  'opt-group-click.bs.select': 'onOptgroupClick',
+  'click.bs.select': 'onClick',
+  'filter.bs.select': 'onFilter',
+  'after-create.bs.select': 'onAfterCreate',
+}
+
 Object.assign(DEFAULTS, EN)
 
 const Constants = {
@@ -127,6 +140,8 @@ const Constants = {
   DEFAULTS,
 
   METHODS,
+
+  EVENTS,
 
   LOCALES: {
     en: EN,

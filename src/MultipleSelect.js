@@ -10,6 +10,7 @@ import {
 } from './utils/index.js'
 
 class MultipleSelect {
+
   constructor ($el, options) {
     this.$el = $el
     this.options = $.extend({}, Constants.DEFAULTS, options)
@@ -23,7 +24,7 @@ class MultipleSelect {
     this.initFilter()
     this.initDrop()
     this.initView()
-    this.options.onAfterCreate()
+    this.trigger('after-create')
   }
 
   initLocale () {
@@ -246,9 +247,9 @@ class MultipleSelect {
 
     if (!ignoreTrigger) {
       if (this.allSelected) {
-        this.options.onCheckAll()
+        this.trigger('check-all')
       } else if (selectedTotal === 0) {
-        this.options.onUncheckAll()
+        this.trigger('uncheck-all')
       }
     }
   }
@@ -502,8 +503,8 @@ class MultipleSelect {
     }
 
     this.$choice.off('click').on('click', toggleOpen)
-      .off('focus').on('focus', this.options.onFocus)
-      .off('blur').on('blur', this.options.onBlur)
+      .off('focus').on('focus', this.trigger('focus'))
+      .off('blur').on('blur', this.trigger('blur'))
 
     this.$parent.off('keydown').on('keydown', e => {
       // esc key
@@ -560,7 +561,7 @@ class MultipleSelect {
       const group = findByParam(this.data, '_key', $this.data('key'))
 
       this._checkGroup(group, checked)
-      this.options.onOptgroupClick(removeUndefined({
+      this.trigger('onOptgroupClick', removeUndefined({
         label: group.label,
         selected: group.selected,
         data: group._data,
@@ -582,7 +583,7 @@ class MultipleSelect {
       const option = findByParam(this.data, '_key', $this.data('key'))
 
       this._check(option, checked)
-      this.options.onClick(removeUndefined({
+      this.trigger('click', removeUndefined({
         text: option.text,
         value: option.value,
         selected: option.selected,
@@ -656,7 +657,7 @@ class MultipleSelect {
       this.$searchInput.focus()
       this.filter(true)
     }
-    this.options.onOpen()
+    this.trigger('open')
   }
 
   close () {
@@ -671,7 +672,7 @@ class MultipleSelect {
         'left': 'auto'
       })
     }
-    this.options.onClose()
+    this.trigger('close')
   }
 
   animateMethod (method) {
@@ -988,7 +989,7 @@ class MultipleSelect {
     this.updateSelected()
 
     if (!ignoreTrigger) {
-      this.options.onFilter(text)
+      this.trigger('filter', text)
     }
   }
 
@@ -1008,6 +1009,13 @@ class MultipleSelect {
       delete this.options.data
       this.fromHtml = false
     }
+  }
+
+  trigger (_name, ...args) {
+    const name = `${_name}.bs.table`
+
+    this.options[Constants.EVENTS[name]](...[...args, this])
+    this.$el.trigger($.Event(name, { sender: this }), args)
   }
 }
 
