@@ -16,12 +16,12 @@ function initUrl() {
 function loadUrl(url_) {
   var template = 'templates/template.html'
 
-  var url = template + '?v=191&url=' + url_
+  var url = template + '?v=192&url=' + url_
   if (window._config.isDebug) {
     url = template + '?t=' + (+new Date()) + '&url=' + url_
   }
   if (window._config.isViewSource) {
-    url = template + '?v=191&view-source&url=' + url_ + '#view-source'
+    url = template + '?v=192&view-source&url=' + url_ + '#view-source'
   }
   $('iframe').attr('src', url)
 

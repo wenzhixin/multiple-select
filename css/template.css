@@ -48,24 +48,6 @@
   color: #777 !important;
 }
 
-#codefund {
-  margin: 0 0 20px 0!important;
-  display: flex;
-  justify-content: flex-end;
-}
-
-#codefund #cf {
-  margin: 0!important;
-}
-
-#codefund .cf-wrapper {
-  font-size: 13px!important;
-}
-
-#codefund .cf-powered-by {
-  margin-top: 0!important;
-}
-
 @media (max-width: 991.98px) {
   body {
     padding: 0 !important;
