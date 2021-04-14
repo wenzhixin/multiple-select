@@ -107,7 +107,7 @@ function _beautifySource(data) {
   var result = []
   result = result.concat($.map(obj.links, _getLink))
   result.push('')
-  result.push('<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>')
+  result.push('<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>')
   result = result.concat($.map(obj.scripts, function (script) {
     return _getScript(script, true)
   }))
@@ -142,7 +142,7 @@ $(function () {
         $('#example').hide().html(data)
         $('.source-pre').show()
         $('#source').text(_beautifySource(data))
-        window.hljs.initHighlightingOnLoad()
+        window.hljs.highlightAll()
       } else {
         $('#example').html(data)
       }

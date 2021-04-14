@@ -46,18 +46,4 @@ export default {
   display: block;
   color: #777 !important;
 }
-
-#codefund {
-  margin: 0 0 20px 0!important;
-  display: flex;
-  justify-content: flex-end;
-}
-
-#codefund .cf-wrapper {
-  font-size: 13px!important;
-}
-
-#codefund .cf-powered-by {
-  margin-top: 0!important;
-}
 </style>
