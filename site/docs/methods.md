@@ -89,7 +89,7 @@ $('#multiple').multipleSelect('method', parameter)
 
 ## uncheck
 
-- **Parameter:**  -
+- **Parameter:**  `value`
 
 - **Detail:** Uncheck an option (from 1.4.1).
 
