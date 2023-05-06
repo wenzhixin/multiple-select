@@ -6,27 +6,6 @@
 
   $ = $ && $.hasOwnProperty('default') ? $['default'] : $;
 
-  /**
-   * Multiple Select en-US translation
-   * Author: Zhixin Wen<wenzhixin2010@gmail.com>
-   */
-
-  $.fn.multipleSelect.locales['en-US'] = {
-    formatSelectAll: function formatSelectAll() {
-      return '[Select all]';
-    },
-    formatAllSelected: function formatAllSelected() {
-      return 'All selected';
-    },
-    formatCountSelected: function formatCountSelected(count, total) {
-      return count + ' of ' + total + ' selected';
-    },
-    formatNoMatchesFound: function formatNoMatchesFound() {
-      return 'No matches found';
-    }
-  };
-  $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['en-US']);
-
 /**
  * Multiple Select da-DK translation
  * Author: HThuren<thuren.henrik@gmail.com>
@@ -216,4 +195,25 @@ $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['vi-VN'])
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['zh-TW']);
 
+    /**
+   * Multiple Select en-US translation
+   * Author: Zhixin Wen<wenzhixin2010@gmail.com>
+   */
+
+    $.fn.multipleSelect.locales['en-US'] = {
+      formatSelectAll: function formatSelectAll() {
+        return '[Select all]';
+      },
+      formatAllSelected: function formatAllSelected() {
+        return 'All selected';
+      },
+      formatCountSelected: function formatCountSelected(count, total) {
+        return count + ' of ' + total + ' selected';
+      },
+      formatNoMatchesFound: function formatNoMatchesFound() {
+        return 'No matches found';
+      }
+    };
+    $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['en-US']);
+    
 }));
