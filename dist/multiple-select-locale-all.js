@@ -34,7 +34,7 @@ $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['cz-CS'])
 
 $.fn.multipleSelect.locales['da-DK'] = {
   formatSelectAll () {
-    return '[Vælg alle]'
+    return '[Vælg/fravælg alle]'
   },
   formatAllSelected () {
     return 'Alle valgt'
