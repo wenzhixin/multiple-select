@@ -13,7 +13,7 @@
 
 $.fn.multipleSelect.locales['da-DK'] = {
   formatSelectAll () {
-    return '[Vælg alle]'
+    return '[Vælg/fravælg alle]'
   },
   formatAllSelected () {
     return 'Alle valgt'
