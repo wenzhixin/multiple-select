@@ -108,6 +108,7 @@ const EN = {
 
 const METHODS = [
   'getOptions', 'refreshOptions',
+  'getData',
   'getSelects', 'setSelects',
   'enable', 'disable',
   'open', 'close',

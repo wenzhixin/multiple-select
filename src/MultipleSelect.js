@@ -765,6 +765,10 @@ class MultipleSelect {
     }
   }
 
+  getData () {
+    return this.options.data
+  }
+
   getOptions () {
     // deep copy and remove data
     const options = $.extend({}, this.options)

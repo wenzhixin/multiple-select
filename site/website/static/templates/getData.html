@@ -1,0 +1,54 @@
+<script>
+  init({
+    title: 'The getData',
+    desc: 'Use <code>multipleSelect(\'getData\')</code> to get the loaded data.',
+    links: ['multiple-select.min.css'],
+    scripts: ['multiple-select.min.js']
+  })
+</script>
+
+<style>
+select {
+  width: 100%;
+}
+</style>
+
+<div>
+  <div class="form-group row">
+    <label class="col-sm-2">
+      Methods
+    </label>
+
+    <div class="col-sm-10">
+      <button id="getData" class="btn btn-secondary">getData</button>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2">
+      Basic Select
+    </label>
+
+    <div class="col-sm-10">
+      <select multiple="multiple">
+        <option value="text1">text1</option>
+        <option value="text2">text2</option>
+        <option value="text3">text3</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<script>
+  var $select = $('select')
+
+  function mounted() {
+    $select.multipleSelect({
+      filter: true
+    })
+
+    $('#getData').click(function() {
+      alert(JSON.stringify($select.multipleSelect('getData'), null, 4))
+    })
+  }
+</script>
