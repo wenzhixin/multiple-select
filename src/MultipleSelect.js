@@ -28,7 +28,7 @@ class MultipleSelect {
 
   initLocale () {
     if (this.options.locale) {
-      const {locales} = $.fn.multipleSelect
+      const { locales } = $.fn.multipleSelect
       const parts = this.options.locale.split(/-|_/)
 
       parts[0] = parts[0].toLowerCase()
@@ -90,6 +90,7 @@ class MultipleSelect {
 
     this.tabIndex = el.getAttribute('tabindex')
     let tabIndex = ''
+
     if (this.tabIndex !== null) {
       this.$el.attr('tabindex', -1)
       tabIndex = this.tabIndex && `tabindex="${this.tabIndex}"`
@@ -125,6 +126,7 @@ class MultipleSelect {
 
     if (!this.options.keepOpen) {
       const clickEvent = getDocumentClickEvent(this.$el.attr('id'))
+
       $(document).off(clickEvent).on(clickEvent, e => {
         if (
           $(e.target)[0] === this.$choice[0] ||
@@ -134,8 +136,8 @@ class MultipleSelect {
         }
         if (
           ($(e.target)[0] === this.$drop[0] ||
-          ($(e.target).parents('.ms-drop')[0] !== this.$drop[0] &&
-          e.target !== el)) &&
+          $(e.target).parents('.ms-drop')[0] !== this.$drop[0] &&
+          e.target !== el) &&
           this.options.isOpen
         ) {
           this.close()
@@ -170,6 +172,7 @@ class MultipleSelect {
     } else {
       $.each(this.$el.children(), (i, elm) => {
         const row = this.initRow(i, elm)
+
         if (row) {
           data.push(this.initRow(i, elm))
         }
@@ -272,6 +275,7 @@ class MultipleSelect {
     }
 
     let length = 0
+
     for (const option of this.data) {
       if (option.type === 'optgroup') {
         length += option.children.length
@@ -337,6 +341,7 @@ class MultipleSelect {
       }
 
       const dropVisible = this.$drop.is(':visible')
+
       if (!dropVisible) {
         this.$drop.css('left', -10000).show()
       }
@@ -457,6 +462,7 @@ class MultipleSelect {
 
     const customStyle = this.options.styler(row)
     const style = customStyle ? `style="${customStyle}"` : ''
+
     classes += row.classes || ''
 
     if (level && this.options.single) {
@@ -548,6 +554,7 @@ class MultipleSelect {
       ) {
         if (this.options.single) {
           const $items = this.$selectItems.closest('li').filter(':visible')
+
           if ($items.length) {
             this.setSelects([$items.first().find(`input[${this.selectItemName}]`).val()])
           }
@@ -645,6 +652,7 @@ class MultipleSelect {
 
     if (this.options.container) {
       const offset = this.$drop.offset()
+
       this.$drop.appendTo($(this.options.container))
       this.$drop.offset({
         top: offset.top,
@@ -655,6 +663,7 @@ class MultipleSelect {
     }
 
     let maxHeight = this.options.maxHeight
+
     if (this.options.maxHeightUnit === 'row') {
       maxHeight = this.$drop.find('>ul>li').first().outerHeight() *
         this.options.maxHeight
@@ -678,8 +687,8 @@ class MultipleSelect {
     if (this.options.container) {
       this.$parent.append(this.$drop)
       this.$drop.css({
-        'top': 'auto',
-        'left': 'auto'
+        top: 'auto',
+        left: 'auto'
       })
     }
     this.options.onClose()
@@ -747,6 +756,7 @@ class MultipleSelect {
   updateSelected () {
     for (let i = this.updateDataStart; i < this.updateDataEnd; i++) {
       const row = this.updateData[i]
+
       this.$drop.find(`input[data-key=${row._key}]`).prop('checked', row.selected)
         .closest('li').toggleClass('selected', row.selected)
     }
@@ -772,6 +782,7 @@ class MultipleSelect {
   getOptions () {
     // deep copy and remove data
     const options = $.extend({}, this.options)
+
     delete options.data
     return $.extend(true, {}, options)
   }
@@ -789,9 +800,11 @@ class MultipleSelect {
   // value html, or text, default: 'value'
   getSelects (type = 'value') {
     const values = []
+
     for (const row of this.data) {
       if (row.type === 'optgroup') {
         const selectedChildren = row.children.filter(child => child.selected)
+
         if (!selectedChildren.length) {
           continue
         }
@@ -802,6 +815,7 @@ class MultipleSelect {
           }))
         } else {
           const value = []
+
           value.push('[')
           value.push(row.label)
           value.push(`: ${selectedChildren.map(child => child[type]).join(', ')}`)
@@ -820,11 +834,12 @@ class MultipleSelect {
     const _setSelects = rows => {
       for (const row of rows) {
         let selected = false
+
         if (type === 'text') {
           selected = values.includes($('<div>').html(row.text).text().trim())
         } else {
           selected = values.includes(row._value || row.value)
-          if (!selected && row.value === +row.value + '') {
+          if (!selected && row.value === `${+row.value}`) {
             selected = values.includes(+row.value)
           }
         }
@@ -860,6 +875,7 @@ class MultipleSelect {
 
   check (value) {
     const option = findByParam(this.data, 'value', value)
+
     if (!option) {
       return
     }
@@ -868,6 +884,7 @@ class MultipleSelect {
 
   uncheck (value) {
     const option = findByParam(this.data, 'value', value)
+
     if (!option) {
       return
     }
@@ -934,10 +951,8 @@ class MultipleSelect {
             child.selected = !child.selected
           }
         }
-      } else {
-        if (!row.divider) {
-          row.selected = !row.selected
-        }
+      } else if (!row.divider) {
+        row.selected = !row.selected
       }
     }
     this.initSelected()

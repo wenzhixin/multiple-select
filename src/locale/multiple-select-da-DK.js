@@ -11,7 +11,7 @@ $.fn.multipleSelect.locales['da-DK'] = {
     return 'Alle valgt'
   },
   formatCountSelected (count, total) {
-    return count + ' af ' + total + ' valgt'
+    return `${count} af ${total} valgt`
   },
   formatNoMatchesFound () {
     return 'Søgning uden resultat'

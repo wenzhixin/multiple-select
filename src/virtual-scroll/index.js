@@ -62,6 +62,7 @@ class VirtualScroll {
     if (typeof this.itemHeight === 'undefined') {
       const nodes = this.contentEl.children
       const node = nodes[Math.floor(nodes.length / 2)]
+
       this.itemHeight = node.offsetHeight
     }
     this.blockHeight = this.itemHeight * Constants.BLOCK_ROWS
@@ -89,6 +90,7 @@ class VirtualScroll {
     const bottomOffset = Math.max((rows.length - end) * this.itemHeight, 0)
     const thisRows = []
     let rowsAbove = start
+
     if (topOffset < 1) {
       rowsAbove++
     }
@@ -109,12 +111,14 @@ class VirtualScroll {
 
   checkChanges (type, value) {
     const changed = value !== this.cache[type]
+
     this.cache[type] = value
     return changed
   }
 
   getExtra (className, height) {
     const tag = document.createElement('li')
+
     tag.className = `virtual-scroll-${className}`
     if (height) {
       tag.style.height = `${height}px`

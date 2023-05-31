@@ -1,5 +1,3 @@
 {
-  "reject": [
-    "jquery"
-  ]
+  "reject": "rollup-plugin-vue"
 }

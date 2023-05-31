@@ -11,7 +11,7 @@ $.fn.multipleSelect.locales['hu-HU'] = {
     return 'Összes kiválasztva'
   },
   formatCountSelected (count, total) {
-    return count + ' / ' + total + ' kiválasztva'
+    return `${count} / ${total} kiválasztva`
   },
   formatNoMatchesFound () {
     return 'Nincs találat'

@@ -32,6 +32,7 @@ async function axeCheckWithConfig (t) {
     // https://github.com/dequelabs/axe-core/blob/develop/doc/API.md#results-object
     // , (err, results) {}
   )
+
   await t.expect(violations.length === 0).ok(createReport(violations))
 }
 

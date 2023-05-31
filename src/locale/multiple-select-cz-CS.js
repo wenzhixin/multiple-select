@@ -11,7 +11,7 @@ $.fn.multipleSelect.locales['cz-CS'] = {
     return 'Vše vybráno'
   },
   formatCountSelected (count, total) {
-    return count + ' z ' + total + ' vybráno'
+    return `${count} z ${total} vybráno`
   },
   formatNoMatchesFound () {
     return 'Nebylo nalezeno'

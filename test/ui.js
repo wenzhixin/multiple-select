@@ -1,6 +1,6 @@
 // https://github.com/DevExpress/testcafe
 // https://devexpress.github.io/testcafe/documentation/test-api/
-import {Selector} from 'testcafe'
+import { Selector } from 'testcafe'
 
 fixture`TestCafe UI tests`
   .page`http://localhost:3000/examples#basic.html`

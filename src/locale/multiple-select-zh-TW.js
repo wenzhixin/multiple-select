@@ -11,7 +11,7 @@ $.fn.multipleSelect.locales['zh-TW'] = {
     return '已選擇所有記錄'
   },
   formatCountSelected (count, total) {
-    return '已從' + total + '條記錄中選擇' + count + '條'
+    return `已從${total}條記錄中選擇${count}條`
   },
   formatNoMatchesFound () {
     return '沒有找到記錄'

@@ -11,7 +11,7 @@ $.fn.multipleSelect.locales['vi-VN'] = {
     return 'Chọn tất cả'
   },
   formatCountSelected (count, total) {
-    return 'Đã chọn ' + count + ' trong ' + total
+    return `Đã chọn ${count} trong ${total}`
   },
   formatNoMatchesFound () {
     return 'Không tìm thấy kết quả.'

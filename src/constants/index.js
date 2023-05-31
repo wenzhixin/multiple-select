@@ -99,7 +99,7 @@ const EN = {
     return 'All selected'
   },
   formatCountSelected (count, total) {
-    return count + ' of ' + total + ' selected'
+    return `${count} of ${total} selected`
   },
   formatNoMatchesFound () {
     return 'No matches found'

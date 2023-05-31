@@ -11,7 +11,7 @@ $.fn.multipleSelect.locales['ru-RU'] = {
     return 'Выбрано все'
   },
   formatCountSelected (count, total) {
-    return count + ' из ' + total + ' выбрано'
+    return `${count} из ${total} выбрано`
   },
   formatNoMatchesFound () {
     return 'Совпадений не найдено'
