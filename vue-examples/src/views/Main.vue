@@ -25,17 +25,15 @@
       <div v-if="!isSource">
         <component :is="componentLoader" />
       </div>
-      <highlight-code
-        v-else
-        lang="vue"
-      >
-        {{ componentSource }}
-      </highlight-code>
+      <pre v-else><code class="html">{{ componentSource }}</code></pre>
     </div>
   </div>
 </template>
 
 <script>
+import hljs from 'highlight.js/lib/core'
+import xml from 'highlight.js/lib/languages/xml'
+import 'highlight.js/styles/default.css'
 import registry from '@/registry'
 import Ads from '@/components/Ads'
 import MS from '@/assets/MS'
@@ -87,7 +85,12 @@ export default {
     },
     isSource () {
       this.updateAds()
+      this.updateHighlight()
     }
+  },
+  mounted () {
+    hljs.registerLanguage('xml', xml)
+    this.updateHighlight()
   },
   methods: {
     updateAds () {
@@ -95,6 +98,13 @@ export default {
       setTimeout(() => {
         this.hideAds = false
       }, 500)
+    },
+    updateHighlight () {
+      this.$nextTick(() => {
+        document.querySelectorAll('pre code').forEach(el => {
+          hljs.highlightElement(el)
+        })
+      })
     }
   }
 }
