@@ -1246,24 +1246,24 @@
 	});
 
 	/**
-	 * Multiple Select es-ES translation
-	 * Author: Zhixin Wen<wenzhixin2010@gmail.com>
+	 * Multiple Select vi-VN translation
+	 * Author: hoangbaovu <ineo.vn>
 	 */
 
-	$$1.fn.multipleSelect.locales['es-ES'] = {
+	$$1.fn.multipleSelect.locales['vi-VN'] = {
 	  formatSelectAll: function formatSelectAll() {
-	    return '[Seleccionar todo]';
+	    return '[Tất cả]';
 	  },
 	  formatAllSelected: function formatAllSelected() {
-	    return 'Todos seleccionados';
+	    return 'Chọn tất cả';
 	  },
 	  formatCountSelected: function formatCountSelected(count, total) {
-	    return "".concat(count, " de ").concat(total, " seleccionado");
+	    return "\u0110\xE3 ch\u1ECDn ".concat(count, " trong ").concat(total);
 	  },
 	  formatNoMatchesFound: function formatNoMatchesFound() {
-	    return 'No se encontraron coincidencias';
+	    return 'Không tìm thấy kết quả.';
 	  }
 	};
-	$$1.extend($$1.fn.multipleSelect.defaults, $$1.fn.multipleSelect.locales['es-ES']);
+	$$1.extend($$1.fn.multipleSelect.defaults, $$1.fn.multipleSelect.locales['vi-VN']);
 
 }));

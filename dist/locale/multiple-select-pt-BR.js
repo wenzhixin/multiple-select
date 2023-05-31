@@ -1246,24 +1246,24 @@
 	});
 
 	/**
-	 * Multiple Select es-ES translation
-	 * Author: Zhixin Wen<wenzhixin2010@gmail.com>
+	 * Multiple Select pt-BR translation
+	 * Author: Lucas Aguiar<lucas99.abreu@gmail.com>
 	 */
 
-	$$1.fn.multipleSelect.locales['es-ES'] = {
+	$$1.fn.multipleSelect.locales['pt-BR'] = {
 	  formatSelectAll: function formatSelectAll() {
-	    return '[Seleccionar todo]';
+	    return '[Selecionar todos]';
 	  },
 	  formatAllSelected: function formatAllSelected() {
-	    return 'Todos seleccionados';
+	    return 'Todos selecionados';
 	  },
 	  formatCountSelected: function formatCountSelected(count, total) {
-	    return "".concat(count, " de ").concat(total, " seleccionado");
+	    return "".concat(count, " de ").concat(total, " selecionado(s)");
 	  },
 	  formatNoMatchesFound: function formatNoMatchesFound() {
-	    return 'No se encontraron coincidencias';
+	    return 'Nenhum resultado encontrado';
 	  }
 	};
-	$$1.extend($$1.fn.multipleSelect.defaults, $$1.fn.multipleSelect.locales['es-ES']);
+	$$1.extend($$1.fn.multipleSelect.defaults, $$1.fn.multipleSelect.locales['pt-BR']);
 
 }));

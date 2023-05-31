@@ -1246,24 +1246,24 @@
 	});
 
 	/**
-	 * Multiple Select es-ES translation
-	 * Author: Zhixin Wen<wenzhixin2010@gmail.com>
+	 * Multiple Select cz-CS translation
+	 * Author: Matej Puhony<info@puhony.eu>
 	 */
 
-	$$1.fn.multipleSelect.locales['es-ES'] = {
+	$$1.fn.multipleSelect.locales['cz-CS'] = {
 	  formatSelectAll: function formatSelectAll() {
-	    return '[Seleccionar todo]';
+	    return '[Vybrat vše]';
 	  },
 	  formatAllSelected: function formatAllSelected() {
-	    return 'Todos seleccionados';
+	    return 'Vše vybráno';
 	  },
 	  formatCountSelected: function formatCountSelected(count, total) {
-	    return "".concat(count, " de ").concat(total, " seleccionado");
+	    return "".concat(count, " z ").concat(total, " vybr\xE1no");
 	  },
 	  formatNoMatchesFound: function formatNoMatchesFound() {
-	    return 'No se encontraron coincidencias';
+	    return 'Nebylo nalezeno';
 	  }
 	};
-	$$1.extend($$1.fn.multipleSelect.defaults, $$1.fn.multipleSelect.locales['es-ES']);
+	$$1.extend($$1.fn.multipleSelect.defaults, $$1.fn.multipleSelect.locales['cz-CS']);
 
 }));

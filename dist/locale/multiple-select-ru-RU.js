@@ -1246,24 +1246,24 @@
 	});
 
 	/**
-	 * Multiple Select es-ES translation
+	 * Multiple Select ru-RU translation
 	 * Author: Zhixin Wen<wenzhixin2010@gmail.com>
 	 */
 
-	$$1.fn.multipleSelect.locales['es-ES'] = {
+	$$1.fn.multipleSelect.locales['ru-RU'] = {
 	  formatSelectAll: function formatSelectAll() {
-	    return '[Seleccionar todo]';
+	    return '[Выбрать все]';
 	  },
 	  formatAllSelected: function formatAllSelected() {
-	    return 'Todos seleccionados';
+	    return 'Выбрано все';
 	  },
 	  formatCountSelected: function formatCountSelected(count, total) {
-	    return "".concat(count, " de ").concat(total, " seleccionado");
+	    return "".concat(count, " \u0438\u0437 ").concat(total, " \u0432\u044B\u0431\u0440\u0430\u043D\u043E");
 	  },
 	  formatNoMatchesFound: function formatNoMatchesFound() {
-	    return 'No se encontraron coincidencias';
+	    return 'Совпадений не найдено';
 	  }
 	};
-	$$1.extend($$1.fn.multipleSelect.defaults, $$1.fn.multipleSelect.locales['es-ES']);
+	$$1.extend($$1.fn.multipleSelect.defaults, $$1.fn.multipleSelect.locales['ru-RU']);
 
 }));
