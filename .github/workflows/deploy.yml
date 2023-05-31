@@ -1,0 +1,36 @@
+name: Deploy Site
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: '0'
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'yarn'
+
+      - name: Build theme with node
+        run: |
+          VERSION=`git rev-list --count ${{ github.ref }}`
+          cd ${{ github.workspace }}/vue-examples
+          yarn install
+          yarn build
+          cd ..
+          yarn docs
+          mv site/website/build/multiple-select _gh_pages
+          find _gh_pages -type f -exec sed -i "s/v=VERSION/v=$VERSION/g" {} \;
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4.3.3
+        with:
+          branch: gh-pages
+          folder: _gh_pages

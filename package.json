@@ -23,10 +23,10 @@
     "css:build": "run-s css:build:*",
     "clean": "rm -rf dist",
     "build": "run-s lint clean *:build",
-    "docs": "cd site/website && npm install && npm run build",
-    "docs-server": "cd site/website && npm run start",
+    "docs": "cd site/website && yarn install && yarn build",
+    "docs-server": "cd site/website && yarn start",
     "css:dev": "node-sass --watch --output-style expanded src -o src",
-    "dev": "npm run css:dev & npm run docs-server",
+    "dev": "yarn css:dev & yarn docs-server",
     "test": "testcafe chrome test/**/*.js --skip-js-errors"
   },
   "peerDependencies": {
