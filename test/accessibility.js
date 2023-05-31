@@ -20,9 +20,7 @@ async function axeCheckWithConfig (t) {
     {
       exclude: [
         // Ignore bootstrap docs (should be fixed by them)
-        ['.bs-docs-footer'],
-        // Ignore codefund
-        ['*[class|="cf"]']
+        ['.bs-docs-footer']
       ]
     },
     // https://github.com/dequelabs/axe-core/blob/develop/doc/API.md#options-parameter

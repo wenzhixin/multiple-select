@@ -54,11 +54,11 @@ select {
   function mounted() {
     $('select').multipleSelect({
       filter: true,
-      customFilter: function (label, text, originalLabel, originalText) {
+      customFilter: function ({ text, search, originalText, originalSearch }) {
         if ($('input').prop('checked')) {
-          return originalLabel.indexOf(originalText) === 0
+          return originalText.indexOf(originalSearch) === 0
         }
-        return label.indexOf(text) === 0
+        return text.indexOf(search) === 0
       }
     })
   }

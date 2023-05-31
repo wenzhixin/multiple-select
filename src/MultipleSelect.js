@@ -50,6 +50,17 @@ class MultipleSelect {
     const el = this.$el[0]
     const name = el.getAttribute('name') || this.options.name || ''
 
+    if (this.options.classes) {
+      this.$el.addClass(this.options.classes)
+    }
+    if (this.options.classPrefix) {
+      this.$el.addClass(this.options.classPrefix)
+
+      if (this.options.size) {
+        this.$el.addClass(`${this.options.classPrefix}-${this.options.size}`)
+      }
+    }
+
     // hide select element
     this.$el.hide()
 
@@ -69,7 +80,7 @@ class MultipleSelect {
 
     // restore class and title from select element
     this.$parent = $(`
-      <div class="ms-parent ${el.getAttribute('class') || ''}"
+      <div class="ms-parent ${el.getAttribute('class') || ''} ${this.options.classes}"
       title="${el.getAttribute('title') || ''}" />
     `)
 
@@ -754,6 +765,10 @@ class MultipleSelect {
     }
   }
 
+  getData () {
+    return this.options.data
+  }
+
   getOptions () {
     // deep copy and remove data
     const options = $.extend({}, this.options)
@@ -806,7 +821,7 @@ class MultipleSelect {
       for (const row of rows) {
         let selected = false
         if (type === 'text') {
-          selected = values.includes($(row.text).text().trim())
+          selected = values.includes($('<div>').html(row.text).text().trim())
         } else {
           selected = values.includes(row._value || row.value)
           if (!selected && row.value === +row.value + '') {
@@ -946,21 +961,24 @@ class MultipleSelect {
   }
 
   filter (ignoreTrigger) {
-    const originalText = $.trim(this.$searchInput.val())
-    const text = originalText.toLowerCase()
+    const originalSearch = $.trim(this.$searchInput.val())
+    const search = originalSearch.toLowerCase()
 
-    if (this.filterText === text) {
+    if (this.filterText === search) {
       return
     }
-    this.filterText = text
+    this.filterText = search
 
     for (const row of this.data) {
       if (row.type === 'optgroup') {
         if (this.options.filterGroup) {
-          const visible = this.options.customFilter(
-            removeDiacritics(row.label.toLowerCase()),
-            removeDiacritics(text),
-            row.label, originalText)
+          const visible = this.options.customFilter({
+            label: removeDiacritics(row.label.toLowerCase()),
+            search: removeDiacritics(search),
+            originalLabel: row.label,
+            originalSearch,
+            row
+          })
 
           row.visible = visible
           for (const child of row.children) {
@@ -968,18 +986,25 @@ class MultipleSelect {
           }
         } else {
           for (const child of row.children) {
-            child.visible = this.options.customFilter(
-              removeDiacritics(child.text.toLowerCase()),
-              removeDiacritics(text),
-              child.text, originalText)
+            child.visible = this.options.customFilter({
+              text: removeDiacritics(child.text.toLowerCase()),
+              search: removeDiacritics(search),
+              originalText: child.text,
+              originalSearch,
+              row: child,
+              parent: row
+            })
           }
           row.visible = row.children.filter(child => child.visible).length > 0
         }
       } else {
-        row.visible = this.options.customFilter(
-          removeDiacritics(row.text.toLowerCase()),
-          removeDiacritics(text),
-          row.text, originalText)
+        row.visible = this.options.customFilter({
+          text: removeDiacritics(row.text.toLowerCase()),
+          search: removeDiacritics(search),
+          originalText: row.text,
+          originalSearch,
+          row
+        })
       }
     }
 
@@ -988,7 +1013,7 @@ class MultipleSelect {
     this.updateSelected()
 
     if (!ignoreTrigger) {
-      this.options.onFilter(text)
+      this.options.onFilter(search)
     }
   }
 

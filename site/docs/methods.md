@@ -13,6 +13,14 @@ The calling method syntax:
 $('#multiple').multipleSelect('method', parameter)
 ```
 
+## getData
+
+- **Parameter:** -
+
+- **Detail:** Gets the loaded data of the select (from v1.6.0).
+
+- **Example:** [getData](/examples#getData.html)
+
 ## getOptions
 
 - **Parameter:** -
