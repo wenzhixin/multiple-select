@@ -50,6 +50,17 @@ class MultipleSelect {
     const el = this.$el[0]
     const name = el.getAttribute('name') || this.options.name || ''
 
+    if (this.options.classes) {
+      this.$el.addClass(this.options.classes)
+    }
+    if (this.options.classPrefix) {
+      this.$el.addClass(this.options.classPrefix)
+
+      if (this.options.size) {
+        this.$el.addClass(`${this.options.classPrefix}-${this.options.size}`)
+      }
+    }
+
     // hide select element
     this.$el.hide()
 
@@ -69,7 +80,7 @@ class MultipleSelect {
 
     // restore class and title from select element
     this.$parent = $(`
-      <div class="ms-parent ${el.getAttribute('class') || ''}"
+      <div class="ms-parent ${el.getAttribute('class') || ''} ${this.options.classes}"
       title="${el.getAttribute('title') || ''}" />
     `)
 
@@ -806,7 +817,7 @@ class MultipleSelect {
       for (const row of rows) {
         let selected = false
         if (type === 'text') {
-          selected = values.includes($(row.text).text().trim())
+          selected = values.includes($('<div>').html(row.text).text().trim())
         } else {
           selected = values.includes(row._value || row.value)
           if (!selected && row.value === +row.value + '') {

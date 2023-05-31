@@ -41,6 +41,10 @@ export default {
       type: [Number, String],
       default: undefined
     },
+    size: {
+      type: String,
+      default: undefined
+    },
     data: {
       type: [Array, Object],
       default () {
@@ -173,6 +177,7 @@ export default {
         ...deepCopy(this.options),
         single: !this.multiple,
         width: this.width,
+        size: this.size,
         data: this.data
       }
       if (!this._hasInit) {
@@ -185,8 +190,12 @@ export default {
 
     _initDefaultValue () {
       this.$nextTick(() => {
-        this.setSelects(Array.isArray(this.currentValue) ?
-          this.currentValue : [this.currentValue], null, true)
+        try {
+          this.setSelects(Array.isArray(this.currentValue) ?
+            this.currentValue : [this.currentValue], null, true)
+        } catch (e) {
+          // ignore error
+        }
       })
     },
 

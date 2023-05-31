@@ -5,6 +5,8 @@ const CLUSTER_BLOCKS = 4
 const DEFAULTS = {
   name: '',
   placeholder: '',
+  classes: '',
+  classPrefix: '',
   data: undefined,
   locale: undefined,
 
@@ -15,6 +17,7 @@ const DEFAULTS = {
   hideOptgroupCheckboxes: false,
   multipleWidth: 80,
   width: undefined,
+  size: undefined,
   dropWidth: undefined,
   maxHeight: 250,
   maxHeightUnit: 'px',
