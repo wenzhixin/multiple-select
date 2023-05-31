@@ -1,5 +1,5 @@
 const VERSION = '1.5.2'
-const BLOCK_ROWS = 50
+const BLOCK_ROWS = 500
 const CLUSTER_BLOCKS = 4
 
 const DEFAULTS = {
