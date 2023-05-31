@@ -36,8 +36,8 @@ const DEFAULTS = {
   filterPlaceholder: '',
   filterAcceptOnEnter: false,
   filterByDataLength: undefined,
-  customFilter (label, text) { // originalLabel, originalText
-    return label.includes(text)
+  customFilter ({ text, label, search }) {
+    return (label || text).includes(search)
   },
 
   showClear: false,

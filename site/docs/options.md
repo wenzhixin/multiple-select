@@ -457,9 +457,9 @@ The Options are defined in `jQuery.fn.multipleSelect.defaults`.
 
 - **Type:** function
 
-- **Detail:** The custom filter function, return boolean to filter or not, contains parameter: `label, text, originalLabel, originalText` (from 1.4.1).
+- **Detail:** The custom filter function, return boolean to filter or not, contains parameter: `{ text, label, search }` (from 1.6.0).
 
-- **Default:** `{ return label.includes(text) }`
+- **Default:** `{ return (label || text).includes(search) }`
 
 - **Example:** <a href="/examples#custom-filter.html">Custom Filter</a>
 
