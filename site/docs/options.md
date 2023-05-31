@@ -33,6 +33,30 @@ The Options are defined in `jQuery.fn.multipleSelect.defaults`.
 
 - **Example:** <a href="/examples#placeholder.html">The Placeholder</a>
 
+## classes
+
+- **Attribute:** `data-classes`
+
+- **Type:** String
+
+- **Detail:** The class name of select.
+
+- **Default:** `''`
+
+- **Example:** <a href="/examples#classes.html">The Classes</a>
+
+## classPrefix
+
+- **Attribute:** `data-class-prefix`
+
+- **Type:** String
+
+- **Detail:** The class prefix of select.
+
+- **Default:** `''`
+
+- **Example:** <a href="/examples#classes.html">The Classes</a>
+
 ## data
 
 - **Attribute:** `-`
@@ -41,50 +65,89 @@ The Options are defined in `jQuery.fn.multipleSelect.defaults`.
 
 - **Detail:** The data to be loaded.
 
-Group format:
+  The optgroup object contains these parameters:
 
-```js
-[
+  * `type`: `'optgroup'`.
+  * `label`: the label of optgroup.
+  * `visible`: where to display this optgroup.
+  * `selected`: where to select this optgroup.
+  * `disabled`: where to disable this optgroup.
+  * `children`: the options of this optgroup.
+
+  Examples:
+
+  ```html
+  <optgroup label="group1">
+    <option value="1">option 1</option>
+  </optgroup>
+  ```
+
+  ```js
+  [
+    {
+      type: 'optgroup',
+      label: 'Group 1',
+      children: [
+        {
+          text: 'Option 1',
+          value: 1
+        }
+      ]
+    }
+  ]
+  ```
+
+  The option object contains these parameters:
+
+  * `text`: the text of option.
+  * `value`: the value of option.
+  * `visible`: where to display this option.
+  * `selected`: where to select this option.
+  * `disabled`: where to disable this option.
+  * `classes`: the class of the option.
+  * `title`: the title of the option.
+  * `divider`: display this option as a divider.
+
+  Examples:
+
+  ```html
+  <option value="1">Option 1</option>
+  <option data-divider="true"></option>
+  <option value="2">Option 2</option>
+  ```
+
+  ```js
+  [
+    {
+      text: 'Option 1',
+      value: 1
+    },
+    {
+      divider: true
+    },
+    {
+      text: 'Option 2',
+      value: 2
+    }
+  ]
+  ```
+
+  Or Object:
+
+  ```js
   {
-    type: 'optgroup',
-    label: 'Group 1',
-    children: [
-      {
-        text: 'Option 1',
-        value: 1
-      }
-    ]
+    1: 'Option 1'
   }
-]
-```
+  ```
 
-Option format:
+  Or String/Number Array:
 
-```js
-[
-  {
-    text: 'Option 1',
-    value: 1
-  }
-]
-```
-
-Or Object:
-
-```js
-{
-  1: 'Option 1'
-}
-```
-
-Or String/Number Array:
-
-```js
-['option1']
+  ```js
+  ['option1']
 
 
-[1]
-```
+  [1]
+  ```
 
 - **Default:** []
 
@@ -195,6 +258,19 @@ Or String/Number Array:
 - **Default:** `undefined`
 
 - **Example:** <a href="/examples#custom-dropdown-width.html">Custom Dropdown Width</a>
+
+## size
+
+- **Attribute:** `data-size`
+
+- **Type:** String
+
+- **Detail:** The size of select.
+
+- **Default:** `''`
+
+- **Example:** <a href="/examples#classes.html">The Classes</a>
+
 
 ## dropWidth
 
@@ -418,9 +494,9 @@ Or String/Number Array:
 
 - **Type:** function
 
-- **Detail:** The custom filter function, return boolean to filter or not, contains parameter: `label, text, originalLabel, originalText` (from 1.4.1).
+- **Detail:** The custom filter function, return boolean to filter or not, contains parameter: `{ text, label, search }` (from 1.6.0).
 
-- **Default:** `{ return label.includes(text) }`
+- **Default:** `{ return (label || text).includes(search) }`
 
 - **Example:** <a href="/examples#custom-filter.html">Custom Filter</a>
 

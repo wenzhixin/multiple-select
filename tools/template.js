@@ -47,6 +47,7 @@ async function run () {
   }
 
   let content = (await fs.readFile(`${__dirname}/example.tpl`)).toString()
+
   content = content.replace(/@title@/, options.title || '')
     .replace(/@desc@/, options.desc || '')
 
@@ -54,6 +55,7 @@ async function run () {
   console.info(`${options.name}.html`)
 
   let list = (await fs.readFile(`${__dirname}/../docs/_includes/example-list.md`)).toString()
+
   list += `<li><a href="../examples#${options.name}.html">${options.title}</a></li>\n`
   await fs.writeFile(`${__dirname}/../docs/_includes/example-list.md`, list)
 }

@@ -11,7 +11,7 @@ $.fn.multipleSelect.locales['it-IT'] = {
     return 'Tutti selezionati'
   },
   formatCountSelected (count, total) {
-    return count + ' di ' + total + ' selezionati'
+    return `${count} di ${total} selezionati`
   },
   formatNoMatchesFound () {
     return 'Nessun risultato'

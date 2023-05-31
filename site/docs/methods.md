@@ -13,6 +13,14 @@ The calling method syntax:
 $('#multiple').multipleSelect('method', parameter)
 ```
 
+## getData
+
+- **Parameter:** -
+
+- **Detail:** Gets the loaded data of the select (from v1.6.0).
+
+- **Example:** [getData](/examples#getData.html)
+
 ## getOptions
 
 - **Parameter:** -
@@ -41,9 +49,9 @@ $('#multiple').multipleSelect('method', parameter)
 
 ## setSelects
 
-- **Parameter:**  `values`
+- **Parameter:**  `values, type`
 
-- **Detail:** Sets the selected values. The `values` should be an array.
+- **Detail:** Sets the selected values. The `values` should be an array. The `type` can be `'value'`, `'text'`, default is `'value'`.
 
 - **Example:** [setSelects-getSelects](/examples#setSelects-getSelects.html)
 
@@ -89,7 +97,7 @@ $('#multiple').multipleSelect('method', parameter)
 
 ## uncheck
 
-- **Parameter:**  -
+- **Parameter:**  `value`
 
 - **Detail:** Uncheck an option (from 1.4.1).
 

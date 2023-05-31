@@ -43,6 +43,11 @@
                 "description": "Use <code>data</code> as data source."
             },
             {
+                "title": "The Divider",
+                "url": "divider.html",
+                "description": "Display an option as a divider."
+            },
+            {
                 "title": "The Locale",
                 "url": "locale.html",
                 "description": "Use <code>locale</code> to set the locale."

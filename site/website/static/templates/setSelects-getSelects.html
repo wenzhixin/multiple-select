@@ -22,6 +22,8 @@ select {
     <div class="col-sm-10">
       <button id="setSelectsBtn" class="btn btn-secondary">SetSelects</button>
       <button id="getSelectsBtn" class="btn btn-secondary">GetSelects</button>
+      <button id="setSelectsBtn2" class="btn btn-secondary">SetSelects by 'text'</button>
+      <button id="getSelectsBtn2" class="btn btn-secondary">GetSelects by 'text'</button>
     </div>
   </div>
 
@@ -61,7 +63,14 @@ select {
 
     $('#getSelectsBtn').click(function () {
       alert('Selected values: ' + $select.multipleSelect('getSelects'))
-      alert('Selected texts: ' + $select.multipleSelect('getSelects', 'text'))
+    })
+
+    $('#setSelectsBtn2').click(function () {
+      $select.multipleSelect('setSelects', ['February', 'April'], 'text')
+    })
+
+    $('#getSelectsBtn2').click(function () {
+      alert('Selected values: ' + $select.multipleSelect('getSelects', 'text'))
     })
   }
 </script>

@@ -28,7 +28,7 @@ class MultipleSelect {
 
   initLocale () {
     if (this.options.locale) {
-      const {locales} = $.fn.multipleSelect
+      const { locales } = $.fn.multipleSelect
       const parts = this.options.locale.split(/-|_/)
 
       parts[0] = parts[0].toLowerCase()
@@ -50,6 +50,17 @@ class MultipleSelect {
     const el = this.$el[0]
     const name = el.getAttribute('name') || this.options.name || ''
 
+    if (this.options.classes) {
+      this.$el.addClass(this.options.classes)
+    }
+    if (this.options.classPrefix) {
+      this.$el.addClass(this.options.classPrefix)
+
+      if (this.options.size) {
+        this.$el.addClass(`${this.options.classPrefix}-${this.options.size}`)
+      }
+    }
+
     // hide select element
     this.$el.hide()
 
@@ -69,7 +80,7 @@ class MultipleSelect {
 
     // restore class and title from select element
     this.$parent = $(`
-      <div class="ms-parent ${el.getAttribute('class') || ''}"
+      <div class="ms-parent ${el.getAttribute('class') || ''} ${this.options.classes}"
       title="${el.getAttribute('title') || ''}" />
     `)
 
@@ -79,6 +90,7 @@ class MultipleSelect {
 
     this.tabIndex = el.getAttribute('tabindex')
     let tabIndex = ''
+
     if (this.tabIndex !== null) {
       this.$el.attr('tabindex', -1)
       tabIndex = this.tabIndex && `tabindex="${this.tabIndex}"`
@@ -114,6 +126,7 @@ class MultipleSelect {
 
     if (!this.options.keepOpen) {
       const clickEvent = getDocumentClickEvent(this.$el.attr('id'))
+
       $(document).off(clickEvent).on(clickEvent, e => {
         if (
           $(e.target)[0] === this.$choice[0] ||
@@ -123,8 +136,8 @@ class MultipleSelect {
         }
         if (
           ($(e.target)[0] === this.$drop[0] ||
-          ($(e.target).parents('.ms-drop')[0] !== this.$drop[0] &&
-          e.target !== el)) &&
+          $(e.target).parents('.ms-drop')[0] !== this.$drop[0] &&
+          e.target !== el) &&
           this.options.isOpen
         ) {
           this.close()
@@ -159,6 +172,7 @@ class MultipleSelect {
     } else {
       $.each(this.$el.children(), (i, elm) => {
         const row = this.initRow(i, elm)
+
         if (row) {
           data.push(this.initRow(i, elm))
         }
@@ -190,6 +204,10 @@ class MultipleSelect {
       }
       if (Object.keys($elm.data()).length) {
         row._data = $elm.data()
+
+        if (row._data.divider) {
+          row.divider = row._data.divider
+        }
       }
 
       return row
@@ -225,8 +243,10 @@ class MultipleSelect {
           return child.selected && !child.disabled && child.visible
         }).length
 
-        row.selected = selectedCount && selectedCount ===
-          row.children.filter(child => !child.disabled && child.visible).length
+        if (row.children.length) {
+          row.selected = !this.options.single && selectedCount && selectedCount ===
+            row.children.filter(child => !child.disabled && child.visible && !child.divider).length
+        }
 
         selectedTotal += selectedCount
       } else {
@@ -236,7 +256,7 @@ class MultipleSelect {
 
     this.allSelected = this.data.filter(row => {
       return row.selected && !row.disabled && row.visible
-    }).length === this.data.filter(row => !row.disabled && row.visible).length
+    }).length === this.data.filter(row => !row.disabled && row.visible && !row.divider).length
 
     if (!ignoreTrigger) {
       if (this.allSelected) {
@@ -255,6 +275,7 @@ class MultipleSelect {
     }
 
     let length = 0
+
     for (const option of this.data) {
       if (option.type === 'optgroup') {
         length += option.children.length
@@ -320,6 +341,7 @@ class MultipleSelect {
       }
 
       const dropVisible = this.$drop.is(':visible')
+
       if (!dropVisible) {
         this.$drop.css('left', -10000).show()
       }
@@ -440,10 +462,15 @@ class MultipleSelect {
 
     const customStyle = this.options.styler(row)
     const style = customStyle ? `style="${customStyle}"` : ''
+
     classes += row.classes || ''
 
     if (level && this.options.single) {
       classes += `option-level-${level} `
+    }
+
+    if (row.divider) {
+      return '<li class="option-divider"/>'
     }
 
     return [`
@@ -527,6 +554,7 @@ class MultipleSelect {
       ) {
         if (this.options.single) {
           const $items = this.$selectItems.closest('li').filter(':visible')
+
           if ($items.length) {
             this.setSelects([$items.first().find(`input[${this.selectItemName}]`).val()])
           }
@@ -608,6 +636,7 @@ class MultipleSelect {
       return
     }
     this.options.isOpen = true
+    this.$parent.addClass('ms-parent-open')
     this.$choice.find('>div').addClass('open')
     this.$drop[this.animateMethod('show')]()
 
@@ -623,6 +652,7 @@ class MultipleSelect {
 
     if (this.options.container) {
       const offset = this.$drop.offset()
+
       this.$drop.appendTo($(this.options.container))
       this.$drop.offset({
         top: offset.top,
@@ -633,6 +663,7 @@ class MultipleSelect {
     }
 
     let maxHeight = this.options.maxHeight
+
     if (this.options.maxHeightUnit === 'row') {
       maxHeight = this.$drop.find('>ul>li').first().outerHeight() *
         this.options.maxHeight
@@ -650,13 +681,14 @@ class MultipleSelect {
 
   close () {
     this.options.isOpen = false
+    this.$parent.removeClass('ms-parent-open')
     this.$choice.find('>div').removeClass('open')
     this.$drop[this.animateMethod('hide')]()
     if (this.options.container) {
       this.$parent.append(this.$drop)
       this.$drop.css({
-        'top': 'auto',
-        'left': 'auto'
+        top: 'auto',
+        left: 'auto'
       })
     }
     this.options.onClose()
@@ -724,6 +756,7 @@ class MultipleSelect {
   updateSelected () {
     for (let i = this.updateDataStart; i < this.updateDataEnd; i++) {
       const row = this.updateData[i]
+
       this.$drop.find(`input[data-key=${row._key}]`).prop('checked', row.selected)
         .closest('li').toggleClass('selected', row.selected)
     }
@@ -742,9 +775,14 @@ class MultipleSelect {
     }
   }
 
+  getData () {
+    return this.options.data
+  }
+
   getOptions () {
     // deep copy and remove data
     const options = $.extend({}, this.options)
+
     delete options.data
     return $.extend(true, {}, options)
   }
@@ -762,9 +800,11 @@ class MultipleSelect {
   // value html, or text, default: 'value'
   getSelects (type = 'value') {
     const values = []
+
     for (const row of this.data) {
       if (row.type === 'optgroup') {
         const selectedChildren = row.children.filter(child => child.selected)
+
         if (!selectedChildren.length) {
           continue
         }
@@ -775,6 +815,7 @@ class MultipleSelect {
           }))
         } else {
           const value = []
+
           value.push('[')
           value.push(row.label)
           value.push(`: ${selectedChildren.map(child => child[type]).join(', ')}`)
@@ -788,13 +829,19 @@ class MultipleSelect {
     return values
   }
 
-  setSelects (values, ignoreTrigger) {
+  setSelects (values, type = 'value', ignoreTrigger = false) {
     let hasChanged = false
     const _setSelects = rows => {
       for (const row of rows) {
-        let selected = values.includes(row._value || row.value)
-        if (!selected && row.value === +row.value + '') {
-          selected = values.includes(+row.value)
+        let selected = false
+
+        if (type === 'text') {
+          selected = values.includes($('<div>').html(row.text).text().trim())
+        } else {
+          selected = values.includes(row._value || row.value)
+          if (!selected && row.value === `${+row.value}`) {
+            selected = values.includes(+row.value)
+          }
         }
         if (row.selected !== selected) {
           hasChanged = true
@@ -828,6 +875,7 @@ class MultipleSelect {
 
   check (value) {
     const option = findByParam(this.data, 'value', value)
+
     if (!option) {
       return
     }
@@ -836,6 +884,7 @@ class MultipleSelect {
 
   uncheck (value) {
     const option = findByParam(this.data, 'value', value)
+
     if (!option) {
       return
     }
@@ -864,7 +913,7 @@ class MultipleSelect {
     for (const row of this.data) {
       if (row.type === 'optgroup') {
         this._checkGroup(row, checked, true)
-      } else if (!row.disabled && (ignoreUpdate || row.visible)) {
+      } else if (!row.disabled && !row.divider && (ignoreUpdate || row.visible)) {
         row.selected = checked
       }
     }
@@ -879,7 +928,7 @@ class MultipleSelect {
   _checkGroup (group, checked, ignoreUpdate) {
     group.selected = checked
     group.children.forEach(row => {
-      if (!row.disabled && (ignoreUpdate || row.visible)) {
+      if (!row.disabled && !row.divider && (ignoreUpdate || row.visible)) {
         row.selected = checked
       }
     })
@@ -898,9 +947,11 @@ class MultipleSelect {
     for (const row of this.data) {
       if (row.type === 'optgroup') {
         for (const child of row.children) {
-          child.selected = !child.selected
+          if (!child.divider) {
+            child.selected = !child.selected
+          }
         }
-      } else {
+      } else if (!row.divider) {
         row.selected = !row.selected
       }
     }
@@ -925,21 +976,24 @@ class MultipleSelect {
   }
 
   filter (ignoreTrigger) {
-    const originalText = $.trim(this.$searchInput.val())
-    const text = originalText.toLowerCase()
+    const originalSearch = $.trim(this.$searchInput.val())
+    const search = originalSearch.toLowerCase()
 
-    if (this.filterText === text) {
+    if (this.filterText === search) {
       return
     }
-    this.filterText = text
+    this.filterText = search
 
     for (const row of this.data) {
       if (row.type === 'optgroup') {
         if (this.options.filterGroup) {
-          const visible = this.options.customFilter(
-            removeDiacritics(row.label.toLowerCase()),
-            removeDiacritics(text),
-            row.label, originalText)
+          const visible = this.options.customFilter({
+            label: removeDiacritics(row.label.toLowerCase()),
+            search: removeDiacritics(search),
+            originalLabel: row.label,
+            originalSearch,
+            row
+          })
 
           row.visible = visible
           for (const child of row.children) {
@@ -947,18 +1001,25 @@ class MultipleSelect {
           }
         } else {
           for (const child of row.children) {
-            child.visible = this.options.customFilter(
-              removeDiacritics(child.text.toLowerCase()),
-              removeDiacritics(text),
-              child.text, originalText)
+            child.visible = this.options.customFilter({
+              text: removeDiacritics(child.text.toLowerCase()),
+              search: removeDiacritics(search),
+              originalText: child.text,
+              originalSearch,
+              row: child,
+              parent: row
+            })
           }
           row.visible = row.children.filter(child => child.visible).length > 0
         }
       } else {
-        row.visible = this.options.customFilter(
-          removeDiacritics(row.text.toLowerCase()),
-          removeDiacritics(text),
-          row.text, originalText)
+        row.visible = this.options.customFilter({
+          text: removeDiacritics(row.text.toLowerCase()),
+          search: removeDiacritics(search),
+          originalText: row.text,
+          originalSearch,
+          row
+        })
       }
     }
 
@@ -967,7 +1028,7 @@ class MultipleSelect {
     this.updateSelected()
 
     if (!ignoreTrigger) {
-      this.options.onFilter(text)
+      this.options.onFilter(search)
     }
   }
 

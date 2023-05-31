@@ -1,10 +1,10 @@
-import glob from 'glob'
-import babel from 'rollup-plugin-babel'
-import resolve from 'rollup-plugin-node-resolve'
-import commonjs from 'rollup-plugin-commonjs'
+import { globSync } from 'glob'
+import babel from '@rollup/plugin-babel'
+import resolve from '@rollup/plugin-node-resolve'
+import commonjs from '@rollup/plugin-commonjs'
 import { terser } from 'rollup-plugin-terser'
 import inject from 'rollup-plugin-inject'
-import multiEntry from 'rollup-plugin-multi-entry'
+import multiEntry from '@rollup/plugin-multi-entry'
 import vue from 'rollup-plugin-vue'
 
 let found
@@ -32,6 +32,7 @@ const plugins = [
   resolve(),
   commonjs(),
   babel({
+    babelHelpers: 'bundled',
     exclude: 'node_modules/**'
   })
 ]
@@ -47,6 +48,7 @@ if (production) {
 }
 
 let out = 'dist/multiple-select.js'
+
 if (production) {
   out = out.replace(/.js$/, '.min.js')
 }
@@ -94,7 +96,7 @@ config.push({
   ]
 })
 
-const files = glob.sync('src/locale/**/*.js')
+const files = globSync('src/locale/**/*.js')
 
 for (const file of files) {
   out = `dist/${file.replace('src/', '')}`

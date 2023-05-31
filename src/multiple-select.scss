@@ -72,9 +72,6 @@
         content: '×';
         color: #888;
         font-weight: bold;
-        position: absolute;
-        top: 50%;
-        margin-top: -14px;
       }
 
       &:hover:before {
@@ -229,6 +226,11 @@
         label {
           padding-left: 28px;
         }
+      }
+
+      &.option-divider {
+        padding: 0;
+        border-top: 1px solid #e9ecef;
       }
     }
   }

@@ -1,10 +1,12 @@
-const VERSION = '1.5.2'
-const BLOCK_ROWS = 50
+const VERSION = '1.6.0'
+const BLOCK_ROWS = 500
 const CLUSTER_BLOCKS = 4
 
 const DEFAULTS = {
   name: '',
   placeholder: '',
+  classes: '',
+  classPrefix: '',
   data: undefined,
   locale: undefined,
 
@@ -15,6 +17,7 @@ const DEFAULTS = {
   hideOptgroupCheckboxes: false,
   multipleWidth: 80,
   width: undefined,
+  size: undefined,
   dropWidth: undefined,
   maxHeight: 250,
   maxHeightUnit: 'px',
@@ -36,8 +39,8 @@ const DEFAULTS = {
   filterPlaceholder: '',
   filterAcceptOnEnter: false,
   filterByDataLength: undefined,
-  customFilter (label, text) { // originalLabel, originalText
-    return label.includes(text)
+  customFilter ({ text, label, search }) {
+    return (label || text).includes(search)
   },
 
   showClear: false,
@@ -96,7 +99,7 @@ const EN = {
     return 'All selected'
   },
   formatCountSelected (count, total) {
-    return count + ' of ' + total + ' selected'
+    return `${count} of ${total} selected`
   },
   formatNoMatchesFound () {
     return 'No matches found'
@@ -105,6 +108,7 @@ const EN = {
 
 const METHODS = [
   'getOptions', 'refreshOptions',
+  'getData',
   'getSelects', 'setSelects',
   'enable', 'disable',
   'open', 'close',
