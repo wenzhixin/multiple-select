@@ -1,0 +1,155 @@
+<script>
+  init({
+    title: 'The Divider',
+    desc: 'Display an option as a divider.',
+    links: ['multiple-select.min.css'],
+    scripts: ['multiple-select.min.js']
+  })
+</script>
+
+<style>
+select {
+  width: 100%;
+}
+</style>
+
+<div>
+  <div class="form-group row">
+    <label class="col-sm-2">
+      Single Select
+    </label>
+
+    <div class="col-sm-10">
+      <select class="select">
+        <option value="1">January</option>
+        <option value="2">February</option>
+        <option value="3">March</option>
+        <option value="4">April</option>
+        <option data-divider="true"></option>
+        <option value="5">May</option>
+        <option value="6">June</option>
+        <option value="7">July</option>
+        <option value="8">August</option>
+        <option data-divider="true"></option>
+        <option value="9">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2">
+      Multiple Select
+    </label>
+
+    <div class="col-sm-10">
+      <select multiple="multiple" class="select">
+        <option value="1">January</option>
+        <option value="2">February</option>
+        <option value="3">March</option>
+        <option value="4">April</option>
+        <option data-divider="true"></option>
+        <option value="5">May</option>
+        <option value="6">June</option>
+        <option value="7">July</option>
+        <option value="8">August</option>
+        <option data-divider="true"></option>
+        <option value="9">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2">
+      Group Select
+    </label>
+
+    <div class="col-sm-10">
+      <select multiple="multiple" class="select">
+        <option data-divider="true"></option>
+        <optgroup label="Group 1">
+          <option value="1">January</option>
+          <option value="2">February</option>
+          <option value="3">March</option>
+          <option data-divider="true"></option>
+          <option value="4">April</option>
+          <option value="5">May</option>
+          <option value="6">June</option>
+        </optgroup>
+        <option data-divider="true"></option>
+        <optgroup label="Group 2">
+          <option value="7">July</option>
+          <option value="8">August</option>
+          <option value="9">September</option>
+          <option data-divider="true"></option>
+          <option value="10">October</option>
+          <option value="11">November</option>
+          <option value="12">December</option>
+        </optgroup>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2">
+      Data Select 1
+    </label>
+
+    <div class="col-sm-10">
+      <select class="data-select"></select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2">
+      Data Select 2
+    </label>
+
+    <div class="col-sm-10">
+      <select multiple="multiple" class="data-select"></select>
+    </div>
+  </div>
+</div>
+
+<script>
+  function mounted() {
+    $('.select').multipleSelect()
+
+    $('.data-select').multipleSelect({
+      data: [
+        {
+          value: 1,
+          text: 'Option 1'
+        },
+        {
+          value: 2,
+          text: 'Option 2'
+        },
+        {
+          value: 3,
+          text: 'Option 3'
+        },
+        {
+          divider: true
+        },
+        {
+          value: 4,
+          text: 'Option 4'
+        },
+        {
+          value: 5,
+          text: 'Option 5'
+        },
+        {
+          value: 6,
+          text: 'Option 6'
+        }
+      ]
+    })
+  }
+</script>

@@ -73,13 +73,41 @@
 <li><p><strong>Default:</strong> <code>''</code></p></li>
 <li><p><strong>Example:</strong> <a href="/examples#placeholder.html">The Placeholder</a></p></li>
 </ul>
+<h2><a class="anchor" aria-hidden="true" id="classes"></a><a href="#classes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>classes</h2>
+<ul>
+<li><p><strong>Attribute:</strong> <code>data-classes</code></p></li>
+<li><p><strong>Type:</strong> String</p></li>
+<li><p><strong>Detail:</strong> The class name of select.</p></li>
+<li><p><strong>Default:</strong> <code>''</code></p></li>
+<li><p><strong>Example:</strong> <a href="/examples#classes.html">The Classes</a></p></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="classprefix"></a><a href="#classprefix" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>classPrefix</h2>
+<ul>
+<li><p><strong>Attribute:</strong> <code>data-class-prefix</code></p></li>
+<li><p><strong>Type:</strong> String</p></li>
+<li><p><strong>Detail:</strong> The class prefix of select.</p></li>
+<li><p><strong>Default:</strong> <code>''</code></p></li>
+<li><p><strong>Example:</strong> <a href="/examples#classes.html">The Classes</a></p></li>
+</ul>
 <h2><a class="anchor" aria-hidden="true" id="data"></a><a href="#data" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>data</h2>
 <ul>
 <li><p><strong>Attribute:</strong> <code>-</code></p></li>
 <li><p><strong>Type:</strong> Array</p></li>
-<li><p><strong>Detail:</strong> The data to be loaded.</p></li>
+<li><p><strong>Detail:</strong> The data to be loaded.</p>
+<p>The optgroup object contains these parameters:</p>
+<ul>
+<li><code>type</code>: <code>'optgroup'</code>.</li>
+<li><code>label</code>: the label of optgroup.</li>
+<li><code>visible</code>: where to display this optgroup.</li>
+<li><code>selected</code>: where to select this optgroup.</li>
+<li><code>disabled</code>: where to disable this optgroup.</li>
+<li><code>children</code>: the options of this optgroup.</li>
 </ul>
-<p>Group format:</p>
+<p>Examples:</p>
+<pre><code class="hljs css language-html"><span class="hljs-tag">&lt;<span class="hljs-name">optgroup</span> <span class="hljs-attr">label</span>=<span class="hljs-string">"group1"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"1"</span>&gt;</span>option 1<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">optgroup</span>&gt;</span>
+</code></pre>
 <pre><code class="hljs css language-js">[
   {
     <span class="hljs-attr">type</span>: <span class="hljs-string">'optgroup'</span>,
@@ -93,11 +121,33 @@
   }
 ]
 </code></pre>
-<p>Option format:</p>
+<p>The option object contains these parameters:</p>
+<ul>
+<li><code>text</code>: the text of option.</li>
+<li><code>value</code>: the value of option.</li>
+<li><code>visible</code>: where to display this option.</li>
+<li><code>selected</code>: where to select this option.</li>
+<li><code>disabled</code>: where to disable this option.</li>
+<li><code>classes</code>: the class of the option.</li>
+<li><code>title</code>: the title of the option.</li>
+<li><code>divider</code>: display this option as a divider.</li>
+</ul>
+<p>Examples:</p>
+<pre><code class="hljs css language-html"><span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"1"</span>&gt;</span>Option 1<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">data-divider</span>=<span class="hljs-string">"true"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"2"</span>&gt;</span>Option 2<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+</code></pre>
 <pre><code class="hljs css language-js">[
   {
     <span class="hljs-attr">text</span>: <span class="hljs-string">'Option 1'</span>,
     <span class="hljs-attr">value</span>: <span class="hljs-number">1</span>
+  },
+  {
+    <span class="hljs-attr">divider</span>: <span class="hljs-literal">true</span>
+  },
+  {
+    <span class="hljs-attr">text</span>: <span class="hljs-string">'Option 2'</span>,
+    <span class="hljs-attr">value</span>: <span class="hljs-number">2</span>
   }
 ]
 </code></pre>
@@ -111,8 +161,7 @@
 
 
 [<span class="hljs-number">1</span>]
-</code></pre>
-<ul>
+</code></pre></li>
 <li><p><strong>Default:</strong> []</p></li>
 <li><p><strong>Example:</strong> <a href="/examples#data.html">The Data</a>.</p></li>
 </ul>
@@ -188,6 +237,14 @@ Allows for fallback locales, if loaded, in the following order:</p>
 <li><p><strong>Detail:</strong> Define the width property of the select, support a percentage setting.</p></li>
 <li><p><strong>Default:</strong> <code>undefined</code></p></li>
 <li><p><strong>Example:</strong> <a href="/examples#custom-dropdown-width.html">Custom Dropdown Width</a></p></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="size"></a><a href="#size" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>size</h2>
+<ul>
+<li><p><strong>Attribute:</strong> <code>data-size</code></p></li>
+<li><p><strong>Type:</strong> String</p></li>
+<li><p><strong>Detail:</strong> The size of select.</p></li>
+<li><p><strong>Default:</strong> <code>''</code></p></li>
+<li><p><strong>Example:</strong> <a href="/examples#classes.html">The Classes</a></p></li>
 </ul>
 <h2><a class="anchor" aria-hidden="true" id="dropwidth"></a><a href="#dropwidth" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>dropWidth</h2>
 <ul>
@@ -337,8 +394,8 @@ Allows for fallback locales, if loaded, in the following order:</p>
 <ul>
 <li><p><strong>Attribute:</strong> <code>-</code></p></li>
 <li><p><strong>Type:</strong> function</p></li>
-<li><p><strong>Detail:</strong> The custom filter function, return boolean to filter or not, contains parameter: <code>label, text, originalLabel, originalText</code> (from 1.4.1).</p></li>
-<li><p><strong>Default:</strong> <code>{ return label.includes(text) }</code></p></li>
+<li><p><strong>Detail:</strong> The custom filter function, return boolean to filter or not, contains parameter: <code>{ text, label, search }</code> (from 1.6.0).</p></li>
+<li><p><strong>Default:</strong> <code>{ return (label || text).includes(search) }</code></p></li>
 <li><p><strong>Example:</strong> <a href="/examples#custom-filter.html">Custom Filter</a></p></li>
 </ul>
 <h2><a class="anchor" aria-hidden="true" id="showclear"></a><a href="#showclear" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>showClear</h2>
@@ -381,4 +438,4 @@ Allows for fallback locales, if loaded, in the following order:</p>
 <li><p><strong>Default:</strong> <code>{ return $elm[0].getAttribute('label') }</code></p></li>
 <li><p><strong>Example:</strong> <a href="/examples#label-template.html">Label Template</a></p></li>
 </ul>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-next button" href="/docs/en/events"><span>Events</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#name">name</a></li><li><a href="#placeholder">placeholder</a></li><li><a href="#data">data</a></li><li><a href="#locale">locale</a></li><li><a href="#selectall">selectAll</a></li><li><a href="#single">single</a></li><li><a href="#singleradio">singleRadio</a></li><li><a href="#multiple">multiple</a></li><li><a href="#hideoptgroupcheckboxes">hideOptgroupCheckboxes</a></li><li><a href="#multiplewidth">multipleWidth</a></li><li><a href="#width">width</a></li><li><a href="#dropwidth">dropWidth</a></li><li><a href="#maxheight">maxHeight</a></li><li><a href="#maxheightunit">maxHeightUnit</a></li><li><a href="#position">position</a></li><li><a href="#displayvalues">displayValues</a></li><li><a href="#displaytitle">displayTitle</a></li><li><a href="#displaydelimiter">displayDelimiter</a></li><li><a href="#minimumcountselected">minimumCountSelected</a></li><li><a href="#ellipsis">ellipsis</a></li><li><a href="#isopen">isOpen</a></li><li><a href="#keepopen">keepOpen</a></li><li><a href="#openonhover">openOnHover</a></li><li><a href="#container">container</a></li><li><a href="#filter">filter</a></li><li><a href="#filtergroup">filterGroup</a></li><li><a href="#filterplaceholder">filterPlaceholder</a></li><li><a href="#filteracceptonenter">filterAcceptOnEnter</a></li><li><a href="#filterbydatalength">filterByDataLength</a></li><li><a href="#customfilter">customFilter</a></li><li><a href="#showclear">showClear</a></li><li><a href="#animate">animate</a></li><li><a href="#styler">styler</a></li><li><a href="#texttemplate">textTemplate</a></li><li><a href="#labeltemplate">labelTemplate</a></li></ul></nav></div><footer class="nav-footer" id="footer"><ul class="footer-links"><li><a href="https://github.com/wenzhixin/multiple-select" target="_blank">GitHub</a></li><li><a href="https://twitter.com/wenzhixin2010" target="_blank">Twitter</a></li><li><a href="http://wenzhixin.net.cn/" target="_blank">My website</a></li><li><a href="http://repos.wenzhixin.net.cn/" target="_blank">My repos</a></li><li><a href="mailto:wenzhixin2010@gmail.com">Email</a></li></ul><section class="copyright">Copyright © 2010-2021 wenzhixin.net.cn</section></footer></div></body></html>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-next button" href="/docs/en/events"><span>Events</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#name">name</a></li><li><a href="#placeholder">placeholder</a></li><li><a href="#classes">classes</a></li><li><a href="#classprefix">classPrefix</a></li><li><a href="#data">data</a></li><li><a href="#locale">locale</a></li><li><a href="#selectall">selectAll</a></li><li><a href="#single">single</a></li><li><a href="#singleradio">singleRadio</a></li><li><a href="#multiple">multiple</a></li><li><a href="#hideoptgroupcheckboxes">hideOptgroupCheckboxes</a></li><li><a href="#multiplewidth">multipleWidth</a></li><li><a href="#width">width</a></li><li><a href="#size">size</a></li><li><a href="#dropwidth">dropWidth</a></li><li><a href="#maxheight">maxHeight</a></li><li><a href="#maxheightunit">maxHeightUnit</a></li><li><a href="#position">position</a></li><li><a href="#displayvalues">displayValues</a></li><li><a href="#displaytitle">displayTitle</a></li><li><a href="#displaydelimiter">displayDelimiter</a></li><li><a href="#minimumcountselected">minimumCountSelected</a></li><li><a href="#ellipsis">ellipsis</a></li><li><a href="#isopen">isOpen</a></li><li><a href="#keepopen">keepOpen</a></li><li><a href="#openonhover">openOnHover</a></li><li><a href="#container">container</a></li><li><a href="#filter">filter</a></li><li><a href="#filtergroup">filterGroup</a></li><li><a href="#filterplaceholder">filterPlaceholder</a></li><li><a href="#filteracceptonenter">filterAcceptOnEnter</a></li><li><a href="#filterbydatalength">filterByDataLength</a></li><li><a href="#customfilter">customFilter</a></li><li><a href="#showclear">showClear</a></li><li><a href="#animate">animate</a></li><li><a href="#styler">styler</a></li><li><a href="#texttemplate">textTemplate</a></li><li><a href="#labeltemplate">labelTemplate</a></li></ul></nav></div><footer class="nav-footer" id="footer"><ul class="footer-links"><li><a href="https://github.com/wenzhixin/multiple-select" target="_blank">GitHub</a></li><li><a href="https://twitter.com/wenzhixin2010" target="_blank">Twitter</a></li><li><a href="http://wenzhixin.net.cn/" target="_blank">My website</a></li><li><a href="http://repos.wenzhixin.net.cn/" target="_blank">My repos</a></li><li><a href="mailto:wenzhixin2010@gmail.com">Email</a></li></ul><section class="copyright">Copyright © 2010-2023 wenzhixin.net.cn</section></footer></div></body></html>
