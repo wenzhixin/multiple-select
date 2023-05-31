@@ -12,7 +12,6 @@ src/**/*.css.map
 nbproject
 .~lock.*
 package-lock.json
-*.lock
 .buildpath
 .idea
 .project
