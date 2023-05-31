@@ -8,8 +8,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "core-js": "^3.1.2",
-    "jquery": "^3.4.1",
+    "core-js": "^3.30.2",
+    "jquery": "^3.7.0",
     "multiple-select": "^1.6.0",
     "vue": "^2.6.10",
     "vue-highlight.js": "^3.1.0",
@@ -24,7 +24,7 @@
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "raw-loader": "^3.1.0",
-    "vue-template-compiler": "^2.6.10"
+    "vue-template-compiler": "^2.7.14"
   },
   "eslintConfig": {
     "root": true,
