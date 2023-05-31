@@ -59,7 +59,7 @@ Put it all together and your pages should look like this:
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Hello, Multiple Select!</title>
 
-    <link rel="stylesheet" href="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/multiple-select@1.6.0/dist/multiple-select.min.css">
   </head>
   <body>
     <!-- Single Select -->
@@ -95,7 +95,7 @@ Put it all together and your pages should look like this:
     </select>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
-    <script src="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.js"></script>
+    <script src="https://unpkg.com/multiple-select@1.6.0/dist/multiple-select.min.js"></script>
     <script>
       $(function () {
         $('select').multipleSelect()

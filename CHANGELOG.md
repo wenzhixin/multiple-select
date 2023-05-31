@@ -1,5 +1,23 @@
 ## Changelog
 
+### 1.6.0
+
+- **New:**: Added `setSelects` by text support.
+- **New:**: Added `divider` option support.
+- **New:**: Added `classes`, `classPrefix` and `size` options.
+- **New:**: Added `dropdown` support for bootstrap theme.
+- **New:**: Added class for `ms-parent` when open the select.
+- **New:**: Added `getData` method.
+- **New:**: Added `fr-FR`, `vi-VN`, `ru-RU`, `hu-HU`, `da-DK`, `pt-BR` and `cz-CS` locales.
+- **New:**: Added index.d.ts to support TypeScript.
+- **Update:** Fixed one item of group selected bug.
+- **Update:** Fixed not check group with no children bug.
+- **Update:** Fixed clear button display error.
+- **Update:** Fixed init multiple times bug in vue component.
+- **Update:** Updated `font-size` to use percent instead.
+- **Update:** Updated the default parameter of `customFilter` option.
+- **Update:** Updated the `BLOCK_ROWS` to 500.
+
 ### 1.5.2
 
 - **Update:** Fixed virtual scroll bottom select bug.

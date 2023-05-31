@@ -99,9 +99,22 @@ class Index extends React.Component {
 
             <div className="blockElement fourByGridBlock">
               <div className="blockContent">
-                <h2>Latest release v1.5.2 (2019-11-13)</h2>
-                <MarkdownBlock>- **Update:** Fixed virtual scroll bottom select bug.</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Fixed element not destroyed bug using `v-if`.</MarkdownBlock>
+                <h2>Latest release v1.6.0 (2023-05-31)</h2>
+                <MarkdownBlock>- **New:**: Added `setSelects` by text support.</MarkdownBlock>
+                <MarkdownBlock>- **New:**: Added `divider` option support.</MarkdownBlock>
+                <MarkdownBlock>- **New:**: Added `classes`, `classPrefix` and `size` options.</MarkdownBlock>
+                <MarkdownBlock>- **New:**: Added `dropdown` support for bootstrap theme.</MarkdownBlock>
+                <MarkdownBlock>- **New:**: Added class for `ms-parent` when open the select.</MarkdownBlock>
+                <MarkdownBlock>- **New:**: Added `getData` method.</MarkdownBlock>
+                <MarkdownBlock>- **New:**: Added `fr-FR`, `vi-VN`, `ru-RU`, `hu-HU`, `da-DK`, `pt-BR` and `cz-CS` locales.</MarkdownBlock>
+                <MarkdownBlock>- **New:**: Added index.d.ts to support TypeScript.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Fixed one item of group selected bug.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Fixed not check group with no children bug.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Fixed clear button display error.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Fixed init multiple times bug in vue component.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Updated `font-size` to use percent instead.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Updated the default parameter of `customFilter` option.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Updated the `BLOCK_ROWS` to 500.</MarkdownBlock>
               </div>
             </div>
           </div>
