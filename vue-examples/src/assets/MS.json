@@ -78,6 +78,11 @@
                 "description": "Use <code>placeholder</code> attribute or <code>placeholder: \\'\\'</code> option to set placeholder."
             },
             {
+                "title": "The Classes",
+                "url": "classes.html",
+                "description": "Use <code>classes, classPrefix, size</code> to define the class and size of select."
+            },
+            {
                 "title": "Single Radio",
                 "url": "single-radio.html",
                 "description": "Use <code>singleRadio: true</code> to show the radio input."
@@ -217,6 +222,11 @@
     {
         "name": "Methods",
         "list": [
+            {
+                "title": "The getData",
+                "url": "getData.html",
+                "description": "Use <code>multipleSelect(\\'getData\\')</code> to get the loaded data."
+            },
             {
                 "title": "The getOptions",
                 "url": "getOptions.html",
