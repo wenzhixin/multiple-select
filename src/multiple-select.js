@@ -43,6 +43,7 @@ $.fn.multipleSelect = function (option, ...args) {
   return typeof value !== 'undefined' ? value : this
 }
 
+$.fn.multipleSelect.Constructor = MultipleSelect
 $.fn.multipleSelect.defaults = Constants.DEFAULTS
 $.fn.multipleSelect.locales = Constants.LOCALES
 $.fn.multipleSelect.methods = Constants.METHODS
