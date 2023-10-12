@@ -976,7 +976,7 @@ class MultipleSelect {
   }
 
   filter (ignoreTrigger) {
-    const originalSearch = $.trim(this.$searchInput.val())
+    const originalSearch = this.$searchInput.val().trim()
     const search = originalSearch.toLowerCase()
 
     if (this.filterText === search) {
@@ -1028,7 +1028,7 @@ class MultipleSelect {
     this.updateSelected()
 
     if (!ignoreTrigger) {
-      this.options.onFilter(search)
+      this.options.onFilter(originalSearch)
     }
   }
 
