@@ -3,6 +3,7 @@
 ### 1.6.1
 
 - **Update:** Added `$.fn.multipleSelect.Constructor` to support extension.
+- **Update:** Updated `onFilter` event parameter to original search.
 
 ### 1.6.0
 
