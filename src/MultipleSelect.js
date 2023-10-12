@@ -598,6 +598,16 @@ class MultipleSelect {
       const $this = $(e.currentTarget)
       const checked = $this.prop('checked')
       const option = findByParam(this.data, '_key', $this.data('key'))
+      const close = () => {
+        if (this.options.single && this.options.isOpen && !this.options.keepOpen) {
+          this.close()
+        }
+      }
+
+      if (this.options.onBeforeClick(option) === false) {
+        close()
+        return
+      }
 
       this._check(option, checked)
       this.options.onClick(removeUndefined({
@@ -607,9 +617,7 @@ class MultipleSelect {
         data: option._data
       }))
 
-      if (this.options.single && this.options.isOpen && !this.options.keepOpen) {
-        this.close()
-      }
+      close()
     })
   }
 
