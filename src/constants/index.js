@@ -77,6 +77,9 @@ const DEFAULTS = {
   onOptgroupClick () {
     return false
   },
+  onBeforeClick () {
+    return true
+  },
   onClick () {
     return false
   },
