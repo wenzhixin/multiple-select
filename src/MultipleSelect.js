@@ -92,9 +92,9 @@ class MultipleSelect {
     let tabIndex = ''
 
     if (this.tabIndex !== null) {
-      this.$el.attr('tabindex', -1)
       tabIndex = this.tabIndex && `tabindex="${this.tabIndex}"`
     }
+    this.$el.attr('tabindex', -1)
 
     this.$choice = $(`
       <button type="button" class="ms-choice"${tabIndex}>
@@ -386,9 +386,9 @@ class MultipleSelect {
 
     if (this.options.selectAll && !this.options.single) {
       rows.push(`
-        <li class="ms-select-all">
+        <li class="ms-select-all" tabindex="0">
         <label>
-        <input type="checkbox" ${this.selectAllName}${this.allSelected ? ' checked="checked"' : ''} />
+        <input type="checkbox" ${this.selectAllName}${this.allSelected ? ' checked="checked"' : ''} tabindex="-1" />
         <span>${this.options.formatSelectAll()}</span>
         </label>
         </li>
@@ -436,6 +436,7 @@ class MultipleSelect {
           data-key="${row._key}"
           ${row.selected ? ' checked="checked"' : ''}
           ${row.disabled ? ' disabled="disabled"' : ''}
+          tabindex="-1"
         >`
 
       if (
@@ -446,7 +447,7 @@ class MultipleSelect {
       }
 
       html.push(`
-        <li class="group ${classes}" ${style}>
+        <li class="group ${classes}" ${style} tabindex="${classes.includes('hide-radio') || row.disabled ? -1 : 0}">
         <label class="optgroup${this.options.single || row.disabled ? ' disabled' : ''}">
         ${group}${row.label}
         </label>
@@ -474,7 +475,7 @@ class MultipleSelect {
     }
 
     return [`
-      <li class="${multiple} ${classes}" ${title} ${style}>
+      <li class="${multiple} ${classes}" ${title} ${style} tabindex="${row.disabled ? -1 : 0}">
       <label class="${row.disabled ? 'disabled' : ''}">
       <input type="${type}"
         value="${row.value}"
@@ -482,6 +483,7 @@ class MultipleSelect {
         ${this.selectItemName}
         ${row.selected ? ' checked="checked"' : ''}
         ${row.disabled ? ' disabled="disabled"' : ''}
+        tabindex="-1"
       >
       <span>${row.text}</span>
       </label>
@@ -598,6 +600,16 @@ class MultipleSelect {
       const $this = $(e.currentTarget)
       const checked = $this.prop('checked')
       const option = findByParam(this.data, '_key', $this.data('key'))
+      const close = () => {
+        if (this.options.single && this.options.isOpen && !this.options.keepOpen) {
+          this.close()
+        }
+      }
+
+      if (this.options.onBeforeClick(option) === false) {
+        close()
+        return
+      }
 
       this._check(option, checked)
       this.options.onClick(removeUndefined({
@@ -607,8 +619,38 @@ class MultipleSelect {
         data: option._data
       }))
 
-      if (this.options.single && this.options.isOpen && !this.options.keepOpen) {
-        this.close()
+      close()
+    })
+
+    this.$ul.find('li').off('keydown').on('keydown', e => {
+      const $this = $(e.currentTarget)
+      let $divider
+      let $li
+
+      switch (e.key) {
+        case 'ArrowUp':
+          e.preventDefault()
+          $divider = $this.prev('li.option-divider')
+          $li = $divider.length ? $divider : $this
+
+          $li.prev().trigger('focus')
+          break
+        case 'ArrowDown':
+          e.preventDefault()
+          $divider = $this.next('li.option-divider')
+          $li = $divider.length ? $divider : $this
+
+          $li.next().trigger('focus')
+          break
+        case 'Enter':
+          e.preventDefault()
+          $this.find('input').trigger('click')
+          if (this.options.single) {
+            this.$choice.trigger('focus')
+          }
+          break
+        default:
+          // ignore
       }
     })
   }
@@ -976,7 +1018,7 @@ class MultipleSelect {
   }
 
   filter (ignoreTrigger) {
-    const originalSearch = $.trim(this.$searchInput.val())
+    const originalSearch = this.$searchInput.val().trim()
     const search = originalSearch.toLowerCase()
 
     if (this.filterText === search) {
@@ -988,7 +1030,7 @@ class MultipleSelect {
       if (row.type === 'optgroup') {
         if (this.options.filterGroup) {
           const visible = this.options.customFilter({
-            label: removeDiacritics(row.label.toLowerCase()),
+            label: removeDiacritics(row.label.toString().toLowerCase()),
             search: removeDiacritics(search),
             originalLabel: row.label,
             originalSearch,
@@ -1002,7 +1044,7 @@ class MultipleSelect {
         } else {
           for (const child of row.children) {
             child.visible = this.options.customFilter({
-              text: removeDiacritics(child.text.toLowerCase()),
+              text: removeDiacritics(child.text.toString().toLowerCase()),
               search: removeDiacritics(search),
               originalText: child.text,
               originalSearch,
@@ -1014,7 +1056,7 @@ class MultipleSelect {
         }
       } else {
         row.visible = this.options.customFilter({
-          text: removeDiacritics(row.text.toLowerCase()),
+          text: removeDiacritics(row.text.toString().toLowerCase()),
           search: removeDiacritics(search),
           originalText: row.text,
           originalSearch,
@@ -1028,7 +1070,7 @@ class MultipleSelect {
     this.updateSelected()
 
     if (!ignoreTrigger) {
-      this.options.onFilter(search)
+      this.options.onFilter(originalSearch)
     }
   }
 

@@ -1,6 +1,6 @@
 /**
  * @author zhixin wen <wenzhixin2010@gmail.com>
- * @version 1.6.0
+ * @version 1.7.0
  *
  * http://wenzhixin.net.cn/p/multiple-select/
  */
@@ -43,6 +43,7 @@ $.fn.multipleSelect = function (option, ...args) {
   return typeof value !== 'undefined' ? value : this
 }
 
+$.fn.multipleSelect.Constructor = MultipleSelect
 $.fn.multipleSelect.defaults = Constants.DEFAULTS
 $.fn.multipleSelect.locales = Constants.LOCALES
 $.fn.multipleSelect.methods = Constants.METHODS

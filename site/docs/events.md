@@ -61,6 +61,12 @@ Example: [The Event](/examples#events.html)
 
 - **Detail:** Fires when a an optgroup label is clicked on. The `view` parameter is an object, it contains `label, selected, children, data`, the `children` contains `text, value, selected, disabled, data`.
 
+## onBeforeClick
+
+- **Parameter:** `view`
+
+- **Detail:** Fires before a checkbox is clicked. The `view` parameter is an object, it contains `text, value, selected, data`. Return `false` to prevent the click event.
+
 ## onClick
 
 - **Parameter:** `view`

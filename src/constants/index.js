@@ -1,4 +1,4 @@
-const VERSION = '1.6.0'
+const VERSION = '1.7.0'
 const BLOCK_ROWS = 500
 const CLUSTER_BLOCKS = 4
 
@@ -76,6 +76,9 @@ const DEFAULTS = {
   },
   onOptgroupClick () {
     return false
+  },
+  onBeforeClick () {
+    return true
   },
   onClick () {
     return false

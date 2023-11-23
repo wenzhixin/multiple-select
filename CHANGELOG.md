@@ -1,15 +1,23 @@
 ## Changelog
 
+### 1.7.0
+
+- **New:** Added `onBeforeClick` event.
+- **New:** Added `$.fn.multipleSelect.Constructor` to support extension.
+- **New:** Added keyboard actions.
+- **New:** Added `ja-JP` locale.
+- **Update:** Updated `onFilter` event parameter to original search.
+
 ### 1.6.0
 
-- **New:**: Added `setSelects` by text support.
-- **New:**: Added `divider` option support.
-- **New:**: Added `classes`, `classPrefix` and `size` options.
-- **New:**: Added `dropdown` support for bootstrap theme.
-- **New:**: Added class for `ms-parent` when open the select.
-- **New:**: Added `getData` method.
-- **New:**: Added `fr-FR`, `vi-VN`, `ru-RU`, `hu-HU`, `da-DK`, `pt-BR` and `cz-CS` locales.
-- **New:**: Added index.d.ts to support TypeScript.
+- **New:** Added `setSelects` by text support.
+- **New:** Added `divider` option support.
+- **New:** Added `classes`, `classPrefix` and `size` options.
+- **New:** Added `dropdown` support for bootstrap theme.
+- **New:** Added class for `ms-parent` when open the select.
+- **New:** Added `getData` method.
+- **New:** Added `fr-FR`, `vi-VN`, `ru-RU`, `hu-HU`, `da-DK`, `pt-BR` and `cz-CS` locales.
+- **New:** Added index.d.ts to support TypeScript.
 - **Update:** Fixed one item of group selected bug.
 - **Update:** Fixed not check group with no children bug.
 - **Update:** Fixed clear button display error.
