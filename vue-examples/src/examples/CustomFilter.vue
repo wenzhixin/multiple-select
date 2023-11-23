@@ -98,11 +98,11 @@ export default {
       caseSensitive: false,
       options: {
         filter: true,
-        customFilter: (label, text, originalLabel, originalText) => {
+        customFilter: ({ search, text, originalSearch, originalText }) => {
           if (this.caseSensitive) {
-            return originalLabel.indexOf(originalText) === 0
+            return originalText.indexOf(originalSearch) === 0
           }
-          return label.indexOf(text) === 0
+          return text.indexOf(search) === 0
         }
       }
     }
