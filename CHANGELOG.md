@@ -4,8 +4,8 @@
 
 - **New:** Added `onBeforeClick` event.
 - **New:** Added `$.fn.multipleSelect.Constructor` to support extension.
-- **New:** Added `ja-JP` locale.
 - **New:** Added keyboard actions.
+- **New:** Added `ja-JP` locale.
 - **Update:** Updated `onFilter` event parameter to original search.
 
 ### 1.6.0

@@ -11,7 +11,7 @@
     "core-js": "^3.30.2",
     "highlight.js": "^11.8.0",
     "jquery": "^3.7.0",
-    "multiple-select": "^1.6.0",
+    "multiple-select": "^1.7.0",
     "vue": "^2.7.14",
     "vue-router": "^3.6.5",
     "vuex": "^3.6.2"
