@@ -1,9 +1,11 @@
 ## Changelog
 
-### 1.6.1
+### 1.7.0
 
 - **New:** Added `onBeforeClick` event.
 - **New:** Added `$.fn.multipleSelect.Constructor` to support extension.
+- **New:** Added `ja-JP` locale.
+- **New:** Added keyboard actions.
 - **Update:** Updated `onFilter` event parameter to original search.
 
 ### 1.6.0
