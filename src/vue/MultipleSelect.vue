@@ -104,8 +104,10 @@ export default {
   },
 
   beforeUpdate () {
-    if (this.slotDefault || this.slotDefault !== this.$slots.default) {
-      this.slotDefault = this.$slots.default
+    const defaultSlot = this.getSlotDefault()
+
+    if (this.slotDefault || this.slotDefault !== defaultSlot) {
+      this.slotDefault = defaultSlot
       this.$nextTick(() => {
         this._refresh()
         this._initSelectValue()
@@ -159,6 +161,13 @@ export default {
   },
 
   methods: {
+    getSlotDefault () {
+      if (typeof this.$slots.default === 'function') {
+        // for vue3+
+        return this.$slots.default()
+      }
+      return this.$slots.default
+    },
     _initSelectValue () {
       this._initSelect()
 
@@ -210,13 +219,11 @@ export default {
     })(),
 
     _refresh () {
-      if (this.$slots.default) {
-        for (const el of this.$slots.default) {
-          if (el.elm.nodeName === 'OPTION' && el.data.domProps && el.data.domProps.value) {
-            $(el.elm).data('value', el.data.domProps.value)
-          }
+      this.$el.querySelectorAll('option').forEach(el => {
+        if (el.value) {
+          $(el).data('value', el.value)
         }
-      }
+      })
     },
 
     refresh () {
