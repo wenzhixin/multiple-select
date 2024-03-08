@@ -5,7 +5,7 @@ module.exports = {
     'node': true
   },
   'extends': [
-    'plugin:vue/recommended',
+    'plugin:vue/vue3-essential',
     'eslint:recommended'
   ],
   'rules': {
@@ -136,9 +136,10 @@ module.exports = {
     ],
     'vue/no-v-html': [
       'off'
-    ]
+    ],
+    'vue/multi-word-component-names': 'off'
   },
   'parserOptions': {
-    'parser': 'babel-eslint'
+    'ecmaVersion': 'latest'
   }
 }
