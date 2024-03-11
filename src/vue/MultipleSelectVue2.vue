@@ -4,7 +4,7 @@
     :multiple="multiple"
     :disabled="disabled"
   >
-    <slot />
+    <slot/>
   </select>
 </template>
 
@@ -17,25 +17,10 @@ const deepCopy = arg => {
   return $.extend(true, Array.isArray(arg) ? [] : {}, arg)
 }
 
-const getEventNames = () => {
-  const events = []
-
-  for (const event in $.fn.multipleSelect.defaults) {
-    if (/^on[A-Z]/.test(event)) {
-      events.push(event.replace(/([A-Z])/g, '-$1').toLowerCase())
-    }
-  }
-  return events
-}
-
 export default {
   name: 'MultipleSelect',
 
   props: {
-    modelValue: {
-      type: [String, Number, Array, Object],
-      default: undefined
-    },
     value: {
       type: [String, Number, Array, Object],
       default: undefined
@@ -74,28 +59,18 @@ export default {
     }
   },
 
-  emits: ['update:modelValue', 'change', ...getEventNames()],
-
   data () {
     return {
-      currentValue: this.value === undefined ? this.modelValue : this.value,
-      children: []
+      currentValue: this.value
     }
   },
 
   watch: {
-    modelValue (val) {
-      if (this.currentValue === val) {
+    value () {
+      if (this.currentValue === this.value) {
         return
       }
-      this.currentValue = val
-      this._initDefaultValue()
-    },
-    value (val) {
-      if (this.currentValue === val) {
-        return
-      }
-      this.currentValue = val
+      this.currentValue = this.value
       this._initDefaultValue()
     },
     multiple () {
@@ -129,22 +104,18 @@ export default {
   },
 
   beforeUpdate () {
-    const children = this.$el.querySelectorAll('option,optgroup')
+    const defaultSlot = this.getSlotDefault()
 
-    if (
-      children.length !== this.children.length ||
-      !Array.prototype.every.call(children, (item, index) => item === this.children[index])
-    ) {
-      // option or optgroup dom change
+    if (this.slotDefault || this.slotDefault !== defaultSlot) {
+      this.slotDefault = defaultSlot
       this.$nextTick(() => {
         this._refresh()
         this._initSelectValue()
       })
-      this.children = children
     }
   },
 
-  unmounted () {
+  destroyed () {
     this.destroy(true)
   },
 
@@ -162,7 +133,7 @@ export default {
         this.currentValue = selects.length ? selects[0] : undefined
       }
 
-      this.$emit('update:modelValue', this.currentValue)
+      this.$emit('input', this.currentValue)
       this.$emit('change', this.currentValue)
     })
 
@@ -174,7 +145,7 @@ export default {
     ) {
       this.currentValue = this.$select.val()
 
-      this.$emit('update:modelValue', this.currentValue)
+      this.$emit('input', this.currentValue)
       this.$emit('change', this.currentValue)
     }
 
@@ -190,6 +161,13 @@ export default {
   },
 
   methods: {
+    getSlotDefault () {
+      if (typeof this.$slots.default === 'function') {
+        // for vue3+
+        return this.$slots.default()
+      }
+      return this.$slots.default
+    },
     _initSelectValue () {
       this._initSelect()
 
@@ -211,7 +189,6 @@ export default {
         size: this.size,
         data: this.data
       }
-
       if (!this._hasInit) {
         this.$select.multipleSelect(options)
         this._hasInit = true
@@ -233,7 +210,6 @@ export default {
 
     ...(() => {
       const res = {}
-
       for (const method of $.fn.multipleSelect.methods) {
         res[method] = function (...args) {
           return this.$select.multipleSelect(method, ...args)

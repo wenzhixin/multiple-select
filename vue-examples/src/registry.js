@@ -1,13 +1,18 @@
-const ctx = require.context('./examples', false, /vue$/)
-const raw = require.context('!!raw-loader!./examples/', false, /vue$/)
-const components = ctx.keys().map(ctx)
-const sources = raw.keys().map(raw)
+const modules = import.meta.glob('./examples/*.vue')
+const raws = import.meta.glob('./examples/*.vue', { as: 'raw' })
+const components = []
 
-for (let i = 0; i < components.length; i++) {
-  const name = ctx.keys()[i].replace('./', '').replace('.vue', '')
-  components[i].name = name
-  components[i].source = sources[i]
+for (const path in modules) {
+  const name = (/examples\/(.*).vue/.exec(path))[1]
+
+  components.push({
+    path: '/' + name,
+    component: modules[path],
+    name,
+    source: raws[path]
+  })
 }
+
 export default {
   components
 }

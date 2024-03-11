@@ -1,11 +1,14 @@
-import Vue from 'vue'
+import { createApp } from 'vue'
 import App from './App.vue'
 import './plugins/select'
 import router from './router'
 
-Vue.config.productionTip = false
+import MultipleSelect from 'multiple-select/src/vue/MultipleSelect.vue'
 
-new Vue({
-  router,
-  render: h => h(App)
-}).$mount('#app')
+const app = createApp(App)
+
+app.use(router)
+app.component('MultipleSelect', MultipleSelect)
+app.__VUE_PROD_DEVTOOLS__ = process.env.NODE_ENV === 'development'
+
+app.mount('#app')
