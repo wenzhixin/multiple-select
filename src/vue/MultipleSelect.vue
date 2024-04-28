@@ -128,7 +128,7 @@ export default {
     }
   },
 
-  beforeUpdate () {
+  updated () {
     const children = this.$el.querySelectorAll('option,optgroup')
 
     if (
