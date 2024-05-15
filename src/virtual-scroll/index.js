@@ -72,7 +72,8 @@ class VirtualScroll {
 
   getNum () {
     this.scrollTop = this.scrollEl.scrollTop
-    return Math.floor(this.scrollTop / (this.clusterHeight - this.blockHeight)) || 0
+    const num = Math.floor(this.scrollTop / (this.clusterHeight - this.blockHeight)) || 0
+    return num === Infinity ? 0 : num
   }
 
   initData (rows, num) {
