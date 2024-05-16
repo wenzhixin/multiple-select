@@ -204,6 +204,10 @@ export default {
     },
 
     _initSelect () {
+      if (!this.$select) {
+        // before mounted
+        return
+      }
       const options = {
         ...deepCopy(this.options),
         single: !this.multiple,
@@ -223,8 +227,10 @@ export default {
     _initDefaultValue () {
       this.$nextTick(() => {
         try {
-          this.setSelects(Array.isArray(this.currentValue) ?
-            this.currentValue : [this.currentValue], null, true)
+          const currentValue = this.currentValue.__v_raw || this.currentValue
+
+          this.setSelects(Array.isArray(currentValue) ?
+            currentValue : [currentValue], null, true)
         } catch (e) {
           // ignore error
         }
