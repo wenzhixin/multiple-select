@@ -2,11 +2,12 @@ import Constants from './constants/index.js'
 import VirtualScroll from './virtual-scroll/index.js'
 import {
   compareObjects,
-  removeDiacritics,
   findByParam,
-  setDataKeys,
+  getDocumentClickEvent,
+  removeDiacritics,
   removeUndefined,
-  getDocumentClickEvent
+  setDataKeys,
+  toRaw
 } from './utils/index.js'
 
 class MultipleSelect {
@@ -880,7 +881,9 @@ class MultipleSelect {
         if (type === 'text') {
           selected = values.includes($('<div>').html(row.text).text().trim())
         } else {
-          selected = values.includes(row._value || row.value)
+          const value = toRaw(row._value || row.value)
+
+          selected = values.some(item => toRaw(item) === value)
           if (!selected && row.value === `${+row.value}`) {
             selected = values.includes(+row.value)
           }
