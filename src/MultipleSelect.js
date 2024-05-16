@@ -199,8 +199,8 @@ class MultipleSelect {
       row.disabled = groupDisabled || elm.disabled
       row.classes = elm.getAttribute('class') || ''
       row.title = elm.getAttribute('title') || ''
-      if ($elm.data('value')) {
-        row._value = $elm.data('value') // value for object
+      if (elm._value || $elm.data('value')) {
+        row._value = elm._value || $elm.data('value') // value for object
       }
       if (Object.keys($elm.data()).length) {
         row._data = $elm.data()
