@@ -376,7 +376,10 @@ class MultipleSelect {
       this.$ul.html(rows.join(''))
       this.updateDataStart = 0
       this.updateDataEnd = this.updateData.length
-      this.virtualScroll = null
+      if (this.virtualScroll) {
+        this.virtualScroll.destroy()
+        this.virtualScroll = null
+      }
     }
     this.events()
   }

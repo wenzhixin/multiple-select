@@ -17,7 +17,8 @@ class VirtualScroll {
     this.lastCluster = 0
 
     const onScroll = () => {
-      if (this.lastCluster !== (this.lastCluster = this.getNum())) {
+      if (typeof this.clusterHeight === 'undefined' ||
+          this.lastCluster !== (this.lastCluster = this.getNum())) {
         this.initDOM(this.rows)
         this.callback()
       }
@@ -63,17 +64,21 @@ class VirtualScroll {
       const nodes = this.contentEl.children
       const node = nodes[Math.floor(nodes.length / 2)]
 
-      this.itemHeight = node.offsetHeight
+      if ($(node).is(':visible')) {
+        this.itemHeight = node.offsetHeight
+        this.blockHeight = this.itemHeight * Constants.BLOCK_ROWS
+        this.clusterHeight = this.blockHeight * Constants.CLUSTER_BLOCKS
+      }
     }
-    this.blockHeight = this.itemHeight * Constants.BLOCK_ROWS
     this.clusterRows = Constants.BLOCK_ROWS * Constants.CLUSTER_BLOCKS
-    this.clusterHeight = this.blockHeight * Constants.CLUSTER_BLOCKS
   }
 
   getNum () {
+    if (typeof this.clusterHeight === 'undefined') {
+      return 0
+    }
     this.scrollTop = this.scrollEl.scrollTop
-    const num = Math.floor(this.scrollTop / (this.clusterHeight - this.blockHeight)) || 0
-    return num === Infinity ? 0 : num
+    return Math.floor(this.scrollTop / (this.clusterHeight - this.blockHeight)) || 0
   }
 
   initData (rows, num) {
