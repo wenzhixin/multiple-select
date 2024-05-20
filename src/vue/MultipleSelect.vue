@@ -135,17 +135,23 @@ export default {
       children.length !== this.children.length ||
       !Array.prototype.every.call(children, (item, index) => item === this.children[index])
     ) {
-      // option or optgroup dom change
-      this.$nextTick(() => {
-        this._refresh()
-        this._initSelectValue()
-      })
+      this._update()
+      this.observer.disconnect()
+
+      for (const child of children) {
+        this.observer.observe(child, {
+          attributes: true,
+          childList: true,
+          subtree: true
+        })
+      }
       this.children = children
     }
   },
 
   unmounted () {
     this.destroy(true)
+    this.observer.disconnect()
   },
 
   mounted () {
@@ -164,6 +170,10 @@ export default {
 
       this.$emit('update:modelValue', this.currentValue)
       this.$emit('change', this.currentValue)
+    })
+
+    this.observer = new MutationObserver(() => {
+      this._update()
     })
 
     if (
@@ -190,6 +200,13 @@ export default {
   },
 
   methods: {
+    _update () {
+      this.$nextTick(() => {
+        this._refresh()
+        this._initSelectValue()
+      })
+    },
+
     _initSelectValue () {
       this._initSelect()
 
