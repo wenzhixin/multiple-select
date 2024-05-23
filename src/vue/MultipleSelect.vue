@@ -230,7 +230,7 @@ export default {
         single: !this.multiple,
         width: this.width,
         size: this.size,
-        data: this.data
+        data: deepCopy(this.data)
       }
 
       if (!this._hasInit) {
