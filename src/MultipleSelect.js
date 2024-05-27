@@ -159,7 +159,7 @@ class MultipleSelect {
               value: it
             }
           }
-          return it
+          return { ...it }
         })
       } else if (typeof this.options.data === 'object') {
         for (const [value, text] of Object.entries(this.options.data)) {
