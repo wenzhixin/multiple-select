@@ -10,7 +10,12 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      ...process.env.NODE_ENV === 'production' ?
+        {} :
+        {
+          'multiple-select': fileURLToPath(new URL('../', import.meta.url))
+        }
     },
     extensions: ['.js', '.vue', '.json']
   },
