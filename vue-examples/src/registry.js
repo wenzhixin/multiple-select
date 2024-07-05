@@ -3,6 +3,9 @@ const raws = import.meta.glob('./examples/*.vue', { as: 'raw' })
 const components = []
 
 for (const path in modules) {
+  if (!modules[path]) {
+    continue
+  }
   const name = (/examples\/(.*).vue/.exec(path))[1]
 
   components.push({

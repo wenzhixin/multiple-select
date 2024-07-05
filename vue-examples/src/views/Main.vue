@@ -96,6 +96,14 @@ const updateAds = () => {
   }, 500)
 }
 
+const updateHighlight = () => {
+  nextTick(() => {
+    document.querySelectorAll('pre code').forEach(el => {
+      hljs.highlightElement(el)
+    })
+  })
+}
+
 watch(props.current, () => {
   updateAds()
 })
@@ -108,14 +116,6 @@ onMounted(() => {
   hljs.registerLanguage('xml', xml)
   updateHighlight()
 })
-
-const updateHighlight = () => {
-  nextTick(() => {
-    document.querySelectorAll('pre code').forEach(el => {
-      hljs.highlightElement(el)
-    })
-  })
-}
 </script>
 
 <style scoped>
