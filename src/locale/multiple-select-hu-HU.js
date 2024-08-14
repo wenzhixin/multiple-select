@@ -3,7 +3,7 @@
  * Author: Péter Báthory<bathory86p@gmail.com>
  */
 
-$.fn.multipleSelect.locales['hu-HU'] = {
+export default {
   formatSelectAll () {
     return '[Összes kiválasztása]'
   },
@@ -17,5 +17,3 @@ $.fn.multipleSelect.locales['hu-HU'] = {
     return 'Nincs találat'
   }
 }
-
-$.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['hu-HU'])

@@ -13,15 +13,6 @@ Import Multiple Select’s JavaScript by adding this line to your app’s entry 
 import 'multiple-select/dist/multiple-select.js'
 ```
 
-Of course, you can also import locales you need:
-
-```js
-// import locale
-import 'multiple-select/dist/locale/multiple-select-zh-CN.js'
-```
-
-By default, Multiple Select is dependent on [jQuery](https://jquery.com/), these are defined as peerDependencies, this means that you will have to make sure to add both of them to your `package.json` using `npm install --save jquery`.
-
 ## Importing CSS
 
 Import Multiple Select’s CSS by adding this line to your app’s entry point:
@@ -81,21 +72,12 @@ export default {
 
 There is an [vue-starter](https://github.com/wenzhixin/multiple-select/tree/develop/vue-starter) example in our project.
 
-`plugins/jquery.js`
-
-```js
-import jQuery from 'jquery'
-window.$ = window.jQuery = jQuery
-```
-
 `plugins/select.js`
 
 ```js
 import 'multiple-select/dist/multiple-select.min.css'
 
-import './jquery.js'
 import Vue from 'vue'
-import 'multiple-select/dist/multiple-select.js'
 import MultipleSelect from 'multiple-select/dist/multiple-select-vue.js'
 
 Vue.component('MultipleSelect', MultipleSelect)

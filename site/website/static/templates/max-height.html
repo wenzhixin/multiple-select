@@ -2,8 +2,7 @@
   init({
     title: 'Max Height',
     desc: 'Use <code>maxHeight: 140</code> option to custom the dropdown max height.',
-    links: ['multiple-select.min.css'],
-    scripts: ['multiple-select.min.js']
+    links: ['multiple-select.min.css']
   })
 </script>
 
@@ -39,10 +38,10 @@ select {
   </div>
 </div>
 
-<script>
-  function mounted() {
-    $('select').multipleSelect({
-      maxHeight: 140
-    })
-  }
+<script type="module">
+  import MultipleSelect from 'multiple-select'
+
+  new MultipleSelect(document.querySelector('select'), {
+    maxHeight: 140
+  })
 </script>

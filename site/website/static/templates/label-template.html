@@ -2,8 +2,7 @@
   init({
     title: 'Label Template',
     desc: 'Use <code>labelTemplate</code> to custom the optgroup label template.',
-    links: ['multiple-select.min.css'],
-    scripts: ['multiple-select.min.js']
+    links: ['multiple-select.min.css']
   })
 </script>
 
@@ -41,12 +40,12 @@ select {
   </div>
 </div>
 
-<script>
-  function mounted() {
-    $('select').multipleSelect({
-      labelTemplate: function ($el) {
-        return '<i class="fa fa-star"></i>' + $el.attr('label')
-      }
-    })
-  }
+<script type="module">
+  import MultipleSelect from 'multiple-select'
+
+  new MultipleSelect(document.querySelector('select'), {
+    labelTemplate: function (el) {
+      return '<i class="fa fa-star"></i>' + el.getAttribute('label')
+    }
+  })
 </script>

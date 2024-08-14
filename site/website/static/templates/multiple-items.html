@@ -2,8 +2,7 @@
   init({
     title: 'Multiple Items',
     desc: 'Use <code>multiple</code> and <code>multipleWidth</code> options to enable multiple items.',
-    links: ['multiple-select.min.css'],
-    scripts: ['multiple-select.min.js']
+    links: ['multiple-select.min.css']
   })
 </script>
 
@@ -88,11 +87,13 @@ select {
   </div>
 </div>
 
-<script>
-  function mounted() {
-    $('select').multipleSelect({
+<script type="module">
+  import MultipleSelect from 'multiple-select'
+
+  document.querySelectorAll('select').forEach(el => {
+    new MultipleSelect(el, {
       multiple: true,
       multipleWidth: 60
     })
-  }
+  })
 </script>

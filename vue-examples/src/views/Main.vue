@@ -67,17 +67,13 @@ const componentLoader = computed(() => {
   })
 })
 
-const componentSourceLoader = computed(() => {
-  const c = getComponent()
-  return c && c.source()
-})
 const componentSource = ref('')
 
-watch([componentSourceLoader], () => {
-  componentSourceLoader.value.then(data => {
+watch(() => props.current, () => {
+  getComponent()?.source().then(data => {
     componentSource.value = data
   })
-})
+}, { immediate: true })
 
 const data = computed(() => {
   const list = []

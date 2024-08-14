@@ -2,8 +2,7 @@
   init({
     title: 'Open On Hover',
     desc: 'Use <code>openOnHover: true</code> to open the select dropdown by hover instead of click.',
-    links: ['multiple-select.min.css'],
-    scripts: ['multiple-select.min.js']
+    links: ['multiple-select.min.css']
   })
 </script>
 
@@ -38,10 +37,10 @@ select {
   </div>
 </div>
 
-<script>
-  function mounted() {
-    $('select').multipleSelect({
-      openOnHover: true
-    })
-  }
+<script type="module">
+  import MultipleSelect from 'multiple-select'
+
+  new MultipleSelect(document.querySelector('select'), {
+    openOnHover: true
+  })
 </script>

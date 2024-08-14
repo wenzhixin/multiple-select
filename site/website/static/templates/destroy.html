@@ -2,8 +2,7 @@
   init({
     title: 'The destroy',
     desc: 'Use <code>multiple(\destroy\')</code> to destroy the select.',
-    links: ['multiple-select.min.css'],
-    scripts: ['multiple-select.min.js']
+    links: ['multiple-select.min.css']
   })
 </script>
 
@@ -49,18 +48,23 @@ select {
   </div>
 </div>
 
-<script>
-  var $select = $('select')
+<script type="module">
+  import MultipleSelect from 'multiple-select'
 
-  function mounted() {
-    $select.multipleSelect()
-
-    $('#destroyBtn').click(function () {
-      $select.multipleSelect('destroy')
-    })
-
-    $('#buildBtn').click(function () {
-      $select.multipleSelect()
-    })
+  const selects = document.querySelectorAll('select')
+  
+  function build () {
+    for (const el of selects) {
+      new MultipleSelect(el)
+    }
   }
+  function destroy () {
+    for (const el of selects) {
+      el._MultipleSelect?.destroy()
+    }
+  }
+
+  build()
+  document.getElementById('destroyBtn').addEventListener('click', destroy)
+  document.getElementById('buildBtn').addEventListener('click', build)
 </script>

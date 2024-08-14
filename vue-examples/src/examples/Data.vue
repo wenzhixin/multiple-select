@@ -66,6 +66,20 @@
         />
       </div>
     </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2">
+        Basic Array width Object value
+      </label>
+
+      <div class="col-sm-10">
+        <MultipleSelect
+          v-model="objVal"
+          multiple
+          :data="objectValue"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -207,7 +221,51 @@ export default {
             }
           ]
         }
+      ],
+      objVal: [],
+      objectValue: [
+      {
+          text: 'January',
+          value: {
+            sort: 'Jan',
+            days: [31]
+          }
+        },
+        {
+          text: 'February',
+          value: {
+            sort: 'Feb',
+            days: [28, 29]
+          }
+        },
+        {
+          text: 'March',
+          value: {
+            sort: 'Mar',
+            days: [31]
+          }
+        },
+        {
+          text: 'April',
+          value: 4,
+          value: {
+            sort: 'Apr',
+            days: [30]
+          }
+        },
+        {
+          text: 'May',
+          value: {
+            sort: 'May',
+            days: [31]
+          }
+        }
       ]
+    }
+  },
+  watch: {
+    objVal (val) {
+      console.log(val)
     }
   }
 }

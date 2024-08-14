@@ -2,8 +2,7 @@
   init({
     title: 'Hide Optgroup Checkboxes',
     desc: 'Use <code>hideOptgroupCheckboxes: true</code> option to hide the optgroup checkboxes.',
-    links: ['multiple-select.min.css'],
-    scripts: ['multiple-select.min.js']
+    links: ['multiple-select.min.css']
   })
 </script>
 
@@ -47,12 +46,12 @@ select {
   </div>
 </div>
 
-<script>
-  function mounted() {
-    $('select').multipleSelect({
-      multiple: true,
-      hideOptgroupCheckboxes: true,
-      multipleWidth: 60
-    })
-  }
+<script type="module">
+  import MultipleSelect from 'multiple-select'
+
+  new MultipleSelect(document.querySelector('select'), {
+    multiple: true,
+    hideOptgroupCheckboxes: true,
+    multipleWidth: 60
+  })
 </script>

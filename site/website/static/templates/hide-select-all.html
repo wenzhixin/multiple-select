@@ -2,8 +2,7 @@
   init({
     title: 'Hide Select All',
     desc: 'Use <code>selectAll: false</code> to hide select all.',
-    links: ['multiple-select.min.css'],
-    scripts: ['multiple-select.min.js']
+    links: ['multiple-select.min.css']
   })
 </script>
 
@@ -30,10 +29,10 @@ select {
   </div>
 </div>
 
-<script>
-  function mounted() {
-    $('select').multipleSelect({
-      selectAll: false
-    })
-  }
+<script type="module">
+  import MultipleSelect from 'multiple-select'
+
+  new MultipleSelect(document.querySelector('select'), {
+    selectAll: false
+  })
 </script>

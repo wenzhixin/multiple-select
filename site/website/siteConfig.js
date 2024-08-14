@@ -1,6 +1,6 @@
 const siteConfig = {
   title: 'Multiple Select',
-  tagline: 'Multiple Select is a jQuery plugin to select multiple elements with checkboxes :).',
+  tagline: 'Multiple Select is a pure JavaScript plugin to select multiple elements with checkboxes :).',
   url: 'http://multiple-select.wenzhixin.net.cn',
   baseUrl: '/',
 

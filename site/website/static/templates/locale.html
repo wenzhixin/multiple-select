@@ -2,11 +2,7 @@
   init({
     title: 'The Locale',
     desc: 'Use <code>locale</code> to set the locale.',
-    links: ['multiple-select.min.css'],
-    scripts: [
-      'multiple-select.min.js',
-      'https://unpkg.com/multiple-select@1.7.0/dist/multiple-select-locale-all.min.js'
-    ]
+    links: ['multiple-select.min.css']
   })
 </script>
 
@@ -56,16 +52,21 @@ select {
   </div>
 </div>
 
-<script>
+<script type="module">
+  import MultipleSelect from 'multiple-select'
+
   function updateLocale(locale) {
-    $('#select').multipleSelect('destroy').multipleSelect({
+    new MultipleSelect(document.getElementById('select'), {
       locale: locale
     })
   }
 
-  function mounted() {
-    $('#locale').multipleSelect().change(function () {
-      updateLocale($(this).val())
-    }).change()
-  }
+  const locale = document.getElementById('locale')
+
+  new MultipleSelect(locale, {
+    onChange: () => {
+      updateLocale(locale.value)
+    }
+  })
+  updateLocale(locale.value)
 </script>

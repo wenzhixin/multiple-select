@@ -10,7 +10,11 @@ The methods API of Multiple Select.
 The calling method syntax:
 
 ```js
-$('#multiple').multipleSelect('method', parameter)
+const select = document.getElementById('multiple')
+const ms = new MultipleSelect(select)
+// or `const ms = select._MultipleSelect`
+
+ms[method](parameter)
 ```
 
 ## getData

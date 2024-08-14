@@ -23,47 +23,64 @@ function loadUrl(url_) {
   if (window._config.isViewSource) {
     url = template + '?v=VERSION&view-source&url=' + url_ + '#view-source'
   }
-  $('iframe').attr('src', url)
+  document.querySelector('iframe').setAttribute('src', url)
 
-  $('.navGroup li.navListItemActive').removeClass('navListItemActive')
-  $('a[href="../examples#' + url_ + '"]').parent().addClass('navListItemActive')
+  document.querySelectorAll('.navGroup li.navListItemActive').forEach(item => {
+    item.classList.remove('navListItemActive')
+  })
+  document.querySelectorAll('a[href="../examples#' + url_ + '"]').forEach(item => {
+    item.parentElement.classList.add('navListItemActive')
+  })
 }
 
 function autoScrollNavigation () {
-  var $el = $('.docsNavContainer li.navListItemActive')
-  $('.docsNavContainer').scrollTop(0)
-  if ($el.length && $el.offset().top > $(window).height() / 2) {
-    $('.docsNavContainer').scrollTop($el.offset().top - $(window).height() / 2)
+  var container = document.querySelector('.docsNavContainer')
+  var el = container.querySelector('li.navListItemActive')
+  var top = el && el.getBoundingClientRect().top
+
+  container.scrollTop = 0
+  if (el && top > window.innerHeight / 2) {
+    container.scrollTop = top - window.innerHeight / 2
+  }
+}
+
+function updateCornerRibbon () {
+  var isSource = /view-source$/.test(location.hash)
+  var title = isSource ? 'View Example' : 'View Source'
+
+  document.querySelectorAll('.corner-ribbon').forEach(el => {
+    el.setAttribute('title', title)
+    el.innerText = title
+  })
+}
+
+function handleCornerRibbonClick () {
+  updateCornerRibbon()
+  var isSource = /view-source$/.test(location.hash)
+  if (isSource) {
+    location.hash = location.hash.replace('#view-source', '')
+  } else {
+    if (location.hash.indexOf('view-source') === -1) {
+      location.hash += '#view-source'
+    }
   }
 }
 
 function initViewSource () {
-  var isSource = /view-source$/.test(location.hash)
-  var title = 'View Source'
-  if (isSource) {
-    title = 'View Example'
-  }
-  $('.corner-ribbon').off('click').click(function () {
-    if (isSource) {
-      location.hash = location.hash.replace('#view-source', '')
-    } else {
-      if (location.hash.indexOf('view-source') === -1) {
-        location.hash += '#view-source'
-      }
-    }
-  }).attr('title', title).text(title)
+  updateCornerRibbon()
+  document.querySelectorAll('.corner-ribbon').forEach(item => {
+    item.addEventListener('click', handleCornerRibbonClick)
+  })
 }
 
-$(function () {
-  $(window).hashchange(function () {
-    var href = initUrl()
-    loadUrl(href)
+(function () {
+  window.addEventListener('hashchange', function (e) {
+    loadUrl(initUrl())
     autoScrollNavigation()
     initViewSource()
   })
 
-  var href = initUrl()
-  loadUrl(href)
+  loadUrl(initUrl())
   autoScrollNavigation()
   initViewSource()
-})
+})()

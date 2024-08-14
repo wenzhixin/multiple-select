@@ -3,7 +3,7 @@
  * Author: Nozomi Anzai<nozomi.anzai@gmail.com>
  */
 
-$.fn.multipleSelect.locales['ja-JP'] = {
+export default {
   formatSelectAll () {
     return '[すべて選択]'
   },
@@ -17,5 +17,3 @@ $.fn.multipleSelect.locales['ja-JP'] = {
     return '見つかりません'
   }
 }
-
-$.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['ja-JP'])

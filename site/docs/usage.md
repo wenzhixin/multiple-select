@@ -15,11 +15,10 @@ Include `multiple-select.min.css` in the head tag your html document.
 <link rel="stylesheet" href="multiple-select.min.css">
 ```
 
-Include jQuery library and `multiple-select.min.js` in the head tag or at the very bottom of your document, just before the closing body tag (usually recommended for better performance).
+Include `multiple-select.global.min.js` in the head tag or at the very bottom of your document, just before the closing body tag (usually recommended for better performance).
 
 ```html
-<script src="jquery.min.js"></script>
-<script src="multiple-select.min.js"></script>
+<script src="multiple-select.global.min.js"></script>
 ```
 
 Call a multiple select with id select with JavaScript.
@@ -41,7 +40,9 @@ Call a multiple select with id select with JavaScript.
 ```
 
 ```js
-$('select').multipleSelect()
+document.querySelectorAll('select').forEach(el => {
+  new MultipleSelect(el)
+})
 ```
 
 ## Starter template
@@ -59,7 +60,7 @@ Put it all together and your pages should look like this:
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Hello, Multiple Select!</title>
 
-    <link rel="stylesheet" href="https://unpkg.com/multiple-select@1.7.0/dist/multiple-select.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/multiple-select@3/dist/multiple-select.min.css">
   </head>
   <body>
     <!-- Single Select -->
@@ -94,11 +95,10 @@ Put it all together and your pages should look like this:
       <option value="12">December</option>
     </select>
 
-    <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
-    <script src="https://unpkg.com/multiple-select@1.7.0/dist/multiple-select.min.js"></script>
+    <script src="https://unpkg.com/multiple-select@3/dist/multiple-select.global.min.js"></script>
     <script>
-      $(function () {
-        $('select').multipleSelect()
+      document.querySelectorAll('select').forEach(el => {
+        new MultipleSelect(el)
       })
     </script>
   </body>

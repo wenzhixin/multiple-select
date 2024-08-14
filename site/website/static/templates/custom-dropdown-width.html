@@ -2,8 +2,7 @@
   init({
     title: 'Custom Dropdown Width',
     desc: 'Use <code>dropWidth: 580</code> option to custom the dropdown width.',
-    links: ['multiple-select.min.css'],
-    scripts: ['multiple-select.min.js']
+    links: ['multiple-select.min.css']
   })
 </script>
 <div>
@@ -49,13 +48,15 @@
   </div>
 </div>
 
-<script>
-  function mounted() {
-    $('select').multipleSelect({
+<script type="module">
+  import MultipleSelect from 'multiple-select'
+
+  document.querySelectorAll('select').forEach(el => {
+    new MultipleSelect(el, {
       multiple: true,
       width: 500,
       multipleWidth: 70,
       dropWidth: 580
     })
-  }
+  })
 </script>

@@ -2,8 +2,7 @@
   init({
     title: 'The Divider',
     desc: 'Display an option as a divider.',
-    links: ['multiple-select.min.css'],
-    scripts: ['multiple-select.min.js']
+    links: ['multiple-select.min.css']
   })
 </script>
 
@@ -116,11 +115,14 @@ select {
   </div>
 </div>
 
-<script>
-  function mounted() {
-    $('.select').multipleSelect()
+<script type="module">
+  import MultipleSelect from 'multiple-select'
 
-    $('.data-select').multipleSelect({
+  document.querySelectorAll('.select').forEach(el => {
+    new MultipleSelect(el)
+  })
+  document.querySelectorAll('.data-select').forEach(el => {
+    new MultipleSelect(el, {
       data: [
         {
           value: 1,
@@ -151,5 +153,5 @@ select {
         }
       ]
     })
-  }
+  })
 </script>

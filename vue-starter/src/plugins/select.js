@@ -1,4 +1,4 @@
-import 'multiple-select/dist/multiple-select.css'
-import './jquery.js'
-import 'multiple-select/dist/multiple-select.js'
+import 'multiple-select/src/multiple-select.scss'
+import MultipleSelect from 'multiple-select/src/MultipleSelect.js'
 
+Object.assign(MultipleSelect.defaultOptions, MultipleSelect.defaultOptions.LOCALES['en-US'])

@@ -89,6 +89,7 @@ class Index extends React.Component {
             <div className="blockElement fourByGridBlock">
               <div className="blockContent">
                 <h2>Features</h2>
+                <MarkdownBlock>- Written in pure JavaScript without other dependencies.</MarkdownBlock>
                 <MarkdownBlock>- Default option allows showing a checkbox.</MarkdownBlock>
                 <MarkdownBlock>- Ability to grouping elements.</MarkdownBlock>
                 <MarkdownBlock>- Supports to show multiple items in a single row.</MarkdownBlock>
@@ -99,12 +100,9 @@ class Index extends React.Component {
 
             <div className="blockElement fourByGridBlock">
               <div className="blockContent">
-                <h2>Latest release v1.7.0 (2023-11-23)</h2>
-                <MarkdownBlock>- **New:** Added `onBeforeClick` event.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added `$.fn.multipleSelect.Constructor` to support extension.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added keyboard actions.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added `ja-JP` locale.</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Updated `onFilter` event parameter to original search.</MarkdownBlock>
+                <h2>Latest release v3.0.0 (2024-08-20)</h2>
+                <MarkdownBlock>- **New:** Removed jQuery dependency.</MarkdownBlock>
+                <MarkdownBlock>- **New:** Added Vue3 support, ended Vue2 support.</MarkdownBlock>
               </div>
             </div>
           </div>

@@ -2,8 +2,7 @@
   init({
     title: 'The Styler',
     desc: 'Use <code>styler</code> to custom the item style.',
-    links: ['multiple-select.min.css'],
-    scripts: ['multiple-select.min.js']
+    links: ['multiple-select.min.css']
   })
 </script>
 
@@ -64,28 +63,27 @@ select {
   </div>
 </div>
 
-<script>
-  function mounted() {
-    $('#basic').multipleSelect({
-      styler: function (row) {
-        if (+row.value === 1) {
-          return 'background-color: #ffee00; color: #ff0000;'
-        }
-        if (+row.value === 6) {
-          return 'background-color: #000; color: #fff;'
-        }
-      }
-    })
+<script type="module">
+  import MultipleSelect from 'multiple-select'
 
-    $('#group').multipleSelect({
-      styler: function (row) {
-        if (row.type === 'optgroup') {
-          return 'color: #777; font-weight: normal;'
-        }
-        if (+row.value === 1) {
-          return 'color: blue;'
-        }
+  new MultipleSelect(document.getElementById('basic'), {
+    styler: function (row) {
+      if (+row.value === 1) {
+        return 'background-color: #ffee00; color: #ff0000;'
       }
-    })
-  }
+      if (+row.value === 6) {
+        return 'background-color: #000; color: #fff;'
+      }
+    }
+  })
+  new MultipleSelect(document.getElementById('group'), {
+    styler: function (row) {
+      if (row.type === 'optgroup') {
+        return 'color: #777; font-weight: normal;'
+      }
+      if (+row.value === 1) {
+        return 'color: blue;'
+      }
+    }
+  })
 </script>

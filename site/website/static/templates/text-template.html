@@ -2,8 +2,7 @@
   init({
     title: 'Text Template',
     desc: 'Use <code>textTemplate</code> to custom the text template.',
-    links: ['multiple-select.min.css'],
-    scripts: ['multiple-select.min.js']
+    links: ['multiple-select.min.css']
   })
 </script>
 
@@ -38,16 +37,22 @@ select {
   </div>
 </div>
 
-<script>
-  function mounted() {
-    $('select').multipleSelect({
-      filter: true,
-      textTemplate: function ($el) {
-        return '<i class="fa fa-star"></i>' + $el.html()
-      },
-      customFilter: function (label, text) {
-        return $('<div/>').append(label).text().includes(text)
-      }
-    })
+<script type="module">
+  import MultipleSelect from 'multiple-select'
+
+  const innerText = html => {
+    const div = document.createElement('div')
+    div.innerHTML = html
+    return div.innerText
   }
+
+  new MultipleSelect(document.querySelector('select'), {
+    filter: true,
+    textTemplate: function (el) {
+      return '<i class="fa fa-star"></i>' + el.innerHTML
+    },
+    customFilter: function (label, text) {
+      return innerText(label).includes(text)
+    }
+  })
 </script>

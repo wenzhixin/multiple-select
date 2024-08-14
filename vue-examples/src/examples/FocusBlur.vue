@@ -30,6 +30,8 @@
         <MultipleSelect
           ref="select"
           multiple
+          @onFocus="handleFocus"
+          @onBlur="handleBlur"
         >
           <option value="1">
             January
@@ -81,7 +83,13 @@ export default {
     },
     blur () {
       this.$refs.select.blur()
-    }
+    },
+    handleFocus () {
+      console.log('Focus fired')
+    },
+    handleBlur () {
+      console.log('Blur fired')
+    },
   }
 }
 </script>

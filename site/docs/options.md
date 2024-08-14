@@ -7,7 +7,7 @@ The options API of Multiple Select.
 
 <div id="gg"></div>
 
-The Options are defined in `jQuery.fn.multipleSelect.defaults`.
+The Options are defined in `MultipleSelect.defaultOptions`.
 
 ## name
 
@@ -542,9 +542,9 @@ The Options are defined in `jQuery.fn.multipleSelect.defaults`.
 
 - **Type:** function
 
-- **Detail:** The item textTemplate function, return string to custom the item text, contains parameter: `$elm`.
+- **Detail:** The item textTemplate function, return string to custom the item text, contains parameter: `elm`.
 
-- **Default:** `{ return $elm[0].innerHTML }`
+- **Default:** `{ return elm.innerHTML }`
 
 - **Example:** <a href="/examples#text-template.html">Text Template</a>
 
@@ -554,8 +554,8 @@ The Options are defined in `jQuery.fn.multipleSelect.defaults`.
 
 - **Type:** function
 
-- **Detail:** The item labelTemplate function, return string to custom the optgroup label, contains parameter: `$elm`.
+- **Detail:** The item labelTemplate function, return string to custom the optgroup label, contains parameter: `elm`.
 
-- **Default:** `{ return $elm[0].getAttribute('label') }`
+- **Default:** `{ return elm.getAttribute('label') }`
 
 - **Example:** <a href="/examples#label-template.html">Label Template</a>

@@ -2,8 +2,7 @@
   init({
     title: 'Filter Accept On Enter',
     desc: 'Use <code>filterAcceptOnEnter: true</code> option to speed up keyboard use. Enter filter text and then hit <code>enter</code> or <code>space</code> will auto click <code>select all</code> and close the dropdown.',
-    links: ['multiple-select.min.css'],
-    scripts: ['multiple-select.min.js']
+    links: ['multiple-select.min.css']
   })
 </script>
 
@@ -98,12 +97,13 @@ select {
     </div>
   </div>
 </div>
+<script type="module">
+  import MultipleSelect from 'multiple-select'
 
-<script>
-  function mounted() {
-    $('select').multipleSelect({
+  document.querySelectorAll('select').forEach(el => {
+    new MultipleSelect(el, {
       filter: true,
       filterAcceptOnEnter: true
     })
-  }
+  })
 </script>

@@ -7,11 +7,11 @@
 <script>
 export default {
   mounted () {
-    const script = document.createElement('script')
-    script.setAttribute('type', 'text/javascript')
-    script.setAttribute('src', 'https://gg.wenzhixin.net.cn/wenzhixin/gg.js')
-    script.setAttribute('async', 'async')
-    this.$refs.gg.appendChild(script)
+    // const script = document.createElement('script')
+    // script.setAttribute('type', 'text/javascript')
+    // script.setAttribute('src', 'https://gg.wenzhixin.net.cn/wenzhixin/gg.js')
+    // script.setAttribute('async', 'async')
+    // this.$refs.gg.appendChild(script)
   }
 }
 </script>

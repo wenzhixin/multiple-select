@@ -10,7 +10,7 @@ The localizations API of Multiple Select.
 The localizations syntax:
 
 ```js
-$('#multiple').multipleSelect({
+new MultipleSelect(document.getElementById('multiple'), {
   formatMessage: function () {
     return 'Format message'
   }

@@ -2,8 +2,7 @@
   init({
     title: 'The Animate',
     desc: 'Use <code>animate</code> to define the animate of open or close the dropdown.',
-    links: ['multiple-select.min.css'],
-    scripts: ['multiple-select.min.js']
+    links: ['multiple-select.min.css']
   })
 </script>
 
@@ -65,14 +64,19 @@ select {
   </div>
 </div>
 
-<script>
-  function mounted() {
-    $('select').multipleSelect()
+<script type="module">
+  import MultipleSelect from 'multiple-select'
 
-    $('[name="animate"]').click(function () {
-      $('select').multipleSelect('destroy').multipleSelect({
-        animate: $(this).val()
+  document.querySelectorAll('select').forEach(el => {
+    new MultipleSelect(el)
+  })
+  document.querySelectorAll('input[name="animate"]').forEach(el => {
+    el.addEventListener('click', e => {
+      document.querySelectorAll('select').forEach(el => {
+        new MultipleSelect(el, {
+          animate: e.target.value
+        })
       })
     })
-  }
+  })
 </script>

@@ -1,10 +1,8 @@
-import { globSync } from 'glob'
 import babel from '@rollup/plugin-babel'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import { terser } from 'rollup-plugin-terser'
 import inject from 'rollup-plugin-inject'
-import multiEntry from '@rollup/plugin-multi-entry'
 import vue from 'rollup-plugin-vue'
 
 let found
@@ -18,16 +16,11 @@ const env = process.argv.find(flag => {
 
 const production = env === 'PRODUCTION'
 
-const external = ['jquery']
-const globals = {
-  jquery: 'jQuery'
-}
 const config = []
 const plugins = [
   inject({
     include: '**/*.js',
-    exclude: 'node_modules/**',
-    $: 'jquery'
+    exclude: 'node_modules/**'
   }),
   resolve(),
   commonjs(),
@@ -47,29 +40,27 @@ if (production) {
   }))
 }
 
-let out = 'dist/multiple-select.js'
+let out = 'dist/multiple-select.global.js'
 
 if (production) {
   out = out.replace(/.js$/, '.min.js')
 }
 config.push({
-  input: 'src/multiple-select.js',
+  input: 'src/MultipleSelect.global.js',
   output: {
     name: 'MultipleSelect',
     file: out,
-    format: 'umd',
-    globals
+    format: 'umd'
   },
-  external,
   plugins
 })
 
-out = 'dist/multiple-select-es.js'
+out = 'dist/multiple-select.js'
 if (production) {
   out = out.replace(/.js$/, '.min.js')
 }
 config.push({
-  input: 'src/multiple-select.js',
+  input: 'src/MultipleSelect.js',
   output: {
     file: out,
     format: 'esm'
@@ -77,63 +68,7 @@ config.push({
   plugins: plugins.slice(1)
 })
 
-out = 'dist/multiple-select-locale-all.js'
-if (production) {
-  out = out.replace(/.js$/, '.min.js')
-}
-config.push({
-  input: 'src/locale/**/*.js',
-  output: {
-    name: 'MultipleSelect',
-    file: out,
-    format: 'umd',
-    globals
-  },
-  external,
-  plugins: [
-    multiEntry(),
-    ...plugins
-  ]
-})
-
-const files = globSync('src/locale/**/*.js')
-
-for (const file of files) {
-  out = `dist/${file.replace('src/', '')}`
-  if (production) {
-    out = out.replace(/.js$/, '.min.js')
-  }
-  config.push({
-    input: file,
-    output: {
-      name: 'MultipleSelect',
-      file: out,
-      format: 'umd',
-      globals
-    },
-    external,
-    plugins
-  })
-}
-
 out = 'dist/multiple-select-vue.js'
-if (production) {
-  out = out.replace(/.js$/, '.min.js')
-}
-config.push({
-  input: 'src/vue/index.js',
-  output: {
-    name: 'MultipleSelect',
-    file: out,
-    format: 'umd'
-  },
-  plugins: [
-    vue(),
-    ...plugins
-  ]
-})
-
-out = 'dist/multiple-select-vue-es.js'
 if (production) {
   out = out.replace(/.js$/, '.min.js')
 }

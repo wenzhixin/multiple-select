@@ -5,11 +5,12 @@
 [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/paypalme/wenzhixin)
 [![Package Quality](https://npm.packagequality.com/shield/multiple-select.svg)](https://packagequality.com/#?package=multiple-select)
 
-Multiple select is a jQuery plugin to select multiple elements with checkboxes :).
+Multiple select is a pure JavaScript plugin to select multiple elements with checkboxes :).
 
 To get started checkout examples and documentation at <http://multiple-select.wenzhixin.net.cn>.
 
 > [!NOTE]
+> Version 3.x of this package removed jQuery. If you're still on jQuery, install the previous version with `npm i multiple-select@1`
 > Version 2.x of this package is compatible with Vue 3 default. If you're still on Vue 2, install the previous version with `npm i multiple-select@1`
 
 ## Examples

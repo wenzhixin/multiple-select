@@ -2,8 +2,7 @@
   init({
     title: 'Max Height Unit',
     desc: 'Use <code>maxHeightUnit: \'row\'</code> option to set the max height unit.',
-    links: ['multiple-select.min.css'],
-    scripts: ['multiple-select.min.js']
+    links: ['multiple-select.min.css']
   })
 </script>
 
@@ -71,18 +70,23 @@ select {
   </div>
 </div>
 
-<script>
-  function mounted() {
-    $('select').multipleSelect({
-      maxHeight: +$('#number').val(),
+<script type="module">
+  import MultipleSelect from 'multiple-select'
+
+  const input = document.getElementById('number')
+  const selects = Array.from(document.querySelectorAll('select')).map(el => {
+    return new MultipleSelect(el, {
+      maxHeight: +input.value,
       maxHeightUnit: 'row'
     })
+  })
 
-    $('#number').change(function () {
-      $('select').multipleSelect('refreshOptions', {
-        maxHeight: +$('#number').val(),
+  input.addEventListener('change', e => {
+    selects.forEach(item => {
+      item.refreshOptions({
+        maxHeight: +input.value,
         maxHeightUnit: 'row'
       })
     })
-  }
+  })
 </script>

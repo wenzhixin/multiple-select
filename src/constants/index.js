@@ -1,4 +1,4 @@
-const VERSION = '1.7.0'
+const VERSION = '3.0.0'
 const BLOCK_ROWS = 500
 const CLUSTER_BLOCKS = 4
 
@@ -49,11 +49,11 @@ const DEFAULTS = {
   styler () {
     return false
   },
-  textTemplate ($elm) {
-    return $elm[0].innerHTML.trim()
+  textTemplate (elm) {
+    return elm.innerHTML.trim()
   },
-  labelTemplate ($elm) {
-    return $elm[0].getAttribute('label')
+  labelTemplate (elm) {
+    return elm.getAttribute('label')
   },
 
   onOpen () {

@@ -10,13 +10,20 @@ title: Browser
 In addition to the files that [Usage](/docs/en/usage) mentions, you also need to include our vue component file.
 
 ```html
-<script src="https://unpkg.com/multiple-select@1.7.0/dist/multiple-select-vue.min.js"></script>
+<script type="importmap">
+  {
+    "imports": {
+      "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js",
+      "multiple-select": "https://unpkg.com/multiple-select@3/dist/multiple-select-vue.min.js"
+    }
+  }
+</script>
 ```
 
 ## Usage
 
 ```html
-<div id="select">
+<div id="app">
   <multiple-select
     v-model="select"
     @change="onChange"
@@ -27,21 +34,24 @@ In addition to the files that [Usage](/docs/en/usage) mentions, you also need to
   </multiple-select>
 </div>
 
-<script>
-  new Vue({
-    el: '#select',
-    components: {
-      'MultipleSelect': MultipleSelect
-    },
-    data: {
-      select: 1
-    },
-    methods: {
-      onChange () {
+<script type="module">
+  import { createApp, ref } from 'vue'
+  import MultipleSelect from 'multiple-select'
 
+  const app = createApp({
+    setup () {
+      const select = ref(1)
+
+      return {
+        select,
+        onChange () {
+          console.log('changed')
+        }
       }
     }
   })
+  app.component('MultipleSelect', MultipleSelect)
+  app.mount('#app')
 </script>
 ```
 
@@ -56,7 +66,7 @@ In addition to the files that [Usage](/docs/en/usage) mentions, you also need to
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Hello, Multiple Select!</title>
 
-    <link rel="stylesheet" href="https://unpkg.com/multiple-select@1.7.0/dist/multiple-select.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/multiple-select@3/dist/multiple-select.min.css">
   </head>
   <body>
     <div id="select">
@@ -91,16 +101,25 @@ In addition to the files that [Usage](/docs/en/usage) mentions, you also need to
       </multiple-select>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
-    <script src="https://unpkg.com/multiple-select@1.7.0/dist/multiple-select.min.js"></script>
-    <script src="https://unpkg.com/multiple-select@1.7.0/dist/multiple-select-vue.min.js"></script>
-    <script>
-      new Vue({
-        el: '#select',
-        components: {
-          'MultipleSelect': MultipleSelect
+    <script type="importmap">
+      {
+        "imports": {
+          "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js",
+          "multiple-select": "https://unpkg.com/multiple-select@3/dist/multiple-select-vue.min.js"
+        }
+      }
+    </script>
+    <script type="module">
+      import { createApp, ref } from 'vue'
+      import MultipleSelect from 'multiple-select'
+
+      const app = createApp({
+        setup () {
+          return {}
         }
       })
+      app.component('MultipleSelect', MultipleSelect)
+      app.mount('#app')
     </script>
   </body>
 </html>

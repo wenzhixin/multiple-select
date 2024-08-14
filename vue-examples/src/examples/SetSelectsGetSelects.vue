@@ -101,7 +101,7 @@ export default {
     setSelectsByText () {
       this.$refs.select.setSelects([
         'February', 'April'
-      ])
+      ], 'text')
     },
 
     getSelectsByText () {

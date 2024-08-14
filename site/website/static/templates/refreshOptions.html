@@ -2,8 +2,7 @@
   init({
     title: 'The refreshOptions',
     desc: 'Use <code>multipleSelect(\'refreshOptions\', {})</code> to refresh the options object.',
-    links: ['multiple-select.min.css'],
-    scripts: ['multiple-select.min.js']
+    links: ['multiple-select.min.css']
   })
 </script>
 
@@ -39,18 +38,17 @@ select {
   </div>
 </div>
 
-<script>
-  var $select = $('select')
+<script type="module">
+  import MultipleSelect from 'multiple-select'
 
-  function mounted() {
-    $select.multipleSelect({
-      filter: true
+  let enable = true
+  const select = new MultipleSelect(document.querySelector('select'), {
+    filter: enable
+  })
+  document.getElementById('refreshOptions').addEventListener('click', () => {
+    enable = !enable
+    select.refreshOptions({
+      filter: enable
     })
-
-    $('#refreshOptions').click(function() {
-      $select.multipleSelect('refreshOptions', {
-        filter: false
-      })
-    })
-  }
+  })
 </script>

@@ -23,10 +23,19 @@ The folks over at [UNPKG](https://unpkg.com/multiple-select) graciously provide 
 
 ```html
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://unpkg.com/multiple-select@1.7.0/dist/multiple-select.min.css">
+<link rel="stylesheet" href="https://unpkg.com/multiple-select@3/dist/multiple-select.min.css">
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://unpkg.com/multiple-select@1.7.0/dist/multiple-select.min.js"></script>
+<!-- Latest compiled and minified JavaScript by global -->
+<script src="https://unpkg.com/multiple-select@3/dist/multiple-select.global.min.js"></script>
+
+<!-- Latest compiled and minified JavaScript by import module -->
+<script type="importmap">
+  {
+    "imports": {
+      "multiple-select": "https://unpkg.com/multiple-select@3/dist/multiple-select.min.js"
+    }
+  }
+</script>
 ```
 
 ## NPM

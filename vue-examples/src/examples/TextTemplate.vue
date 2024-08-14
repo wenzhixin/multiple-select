@@ -53,18 +53,19 @@
 </template>
 
 <script>
-import $ from 'jquery'
-
 export default {
   data () {
     return {
       options: {
         filter: true,
-        textTemplate ($el) {
-          return '<i class="fa fa-star"></i>' + $el.html()
+        textTemplate (el) {
+          return '<i class="fa fa-star"></i>' + el.innerHTML
         },
         customFilter (label, text) {
-          return $('<div/>').append(label).text().includes(text)
+          const div = document.createElement('div')
+
+          div.innerHTML = label
+          return div.innerText.includes(text)
         }
       }
     }

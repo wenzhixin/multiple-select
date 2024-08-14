@@ -2,8 +2,7 @@
   init({
     title: 'Show Clear',
     desc: 'Use <code>showClear</code> to show the clear icon to uncheck all selected items.',
-    links: ['multiple-select.min.css'],
-    scripts: ['multiple-select.min.js']
+    links: ['multiple-select.min.css']
   })
 </script>
 
@@ -113,10 +112,12 @@ select {
   </div>
 </div>
 
-<script>
-  function mounted() {
-    $('select').multipleSelect({
+<script type="module">
+  import MultipleSelect from 'multiple-select'
+
+  document.querySelectorAll('select').forEach(el => {
+    new MultipleSelect(el, {
       showClear: true
     })
-  }
+  })
 </script>

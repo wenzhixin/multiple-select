@@ -2,8 +2,7 @@
   init({
     title: 'Display Title',
     desc: 'Use <code>displayTitle: true</code> option to display title of selected text.',
-    links: ['multiple-select.min.css'],
-    scripts: ['multiple-select.min.js']
+    links: ['multiple-select.min.css']
   })
 </script>
 
@@ -38,10 +37,12 @@ select {
   </div>
 </div>
 
-<script>
-  function mounted() {
-    $('select').multipleSelect({
+<script type="module">
+  import MultipleSelect from 'multiple-select'
+
+  document.querySelectorAll('select').forEach(el => {
+    new MultipleSelect(el, {
       displayTitle: true
     })
-  }
+  })
 </script>

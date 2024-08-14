@@ -2,8 +2,7 @@
   init({
     title: 'Classes',
     desc: 'Use <code>classes, classPrefix, size</code> to define the class and size of select.',
-    links: ['multiple-select.min.css', 'themes/bootstrap.min.css'],
-    scripts: ['multiple-select.min.js']
+    links: ['multiple-select.min.css', 'themes/bootstrap.min.css']
   })
 </script>
 
@@ -84,11 +83,13 @@
   </div>
 </div>
 
-<script>
-  function mounted() {
-    $('select').multipleSelect({
+<script type="module">
+  import MultipleSelect from 'multiple-select'
+
+  document.querySelectorAll('select').forEach(el => {
+    new MultipleSelect(el, {
       classes: 'form-control',
       classPrefix: 'form-control'
     })
-  }
+  })
 </script>

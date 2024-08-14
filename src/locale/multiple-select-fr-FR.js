@@ -3,7 +3,7 @@
  * Author: Francis Perron <francis@hivetek.com>
  */
 
-$.fn.multipleSelect.locales['fr-FR'] = {
+export default {
   formatSelectAll () {
     return '[Tout sélectionner]'
   },
@@ -17,5 +17,3 @@ $.fn.multipleSelect.locales['fr-FR'] = {
     return 'Aucun résultat'
   }
 }
-
-$.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['fr-FR'])

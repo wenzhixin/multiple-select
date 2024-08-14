@@ -4,9 +4,8 @@
     desc: 'Multiple select with bootstrap theme.',
     links: [
       'multiple-select.min.css',
-      'https://unpkg.com/multiple-select@1.7.0/dist/themes/bootstrap.min.css'
-    ],
-    scripts: ['multiple-select.min.js']
+      'https://unpkg.com/multiple-select@3/dist/themes/bootstrap.min.css'
+    ]
   })
 </script>
 
@@ -134,8 +133,10 @@
 </div>
 </div>
 
-<script>
-  function mounted() {
-    $('select').multipleSelect()
-  }
+<script type="module">
+  import MultipleSelect from 'multiple-select'
+
+  document.querySelectorAll('select').forEach(el => {
+    new MultipleSelect(el)
+  })
 </script>

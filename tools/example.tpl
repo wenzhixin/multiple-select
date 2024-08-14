@@ -2,8 +2,7 @@
   init({
     title: '@title@',
     desc: '@desc@',
-    links: ['multiple-select.css'],
-    scripts: ['multiple-select.js']
+    links: ['multiple-select.css']
   })
 </script>
 
@@ -28,8 +27,8 @@ select {
   <option value="12">December</option>
 </select>
 
-<script>
-  function mounted() {
-    $('select').multipleSelect()
-  }
+<script type="module">
+  import MultipleSelect from 'multiple-select'
+
+  new MultipleSelect(document.querySelector('select'))
 </script>

@@ -4,10 +4,10 @@
     "authors": [
         "zhixin <wenzhixin2010@gmail.com>"
     ],
-    "description": "A jQuery plugin to select multiple elements with checkboxes :)",
+    "description": "A pure JavaScript plugin to select multiple elements with checkboxes :)",
     "main": [
         "dist/multiple-select.min.css",
-        "dist/multiple-select.min.js"
+        "dist/multiple-select.global.min.js"
     ],
     "keywords": [
         "multiple.select",

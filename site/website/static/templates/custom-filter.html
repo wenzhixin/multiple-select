@@ -2,8 +2,7 @@
   init({
     title: 'Custom Filter',
     desc: 'Use <code>customFilter</code> to custom filter, in this case we filter by <code>startWith</code>.',
-    links: ['multiple-select.min.css'],
-    scripts: ['multiple-select.min.js']
+    links: ['multiple-select.min.css']
   })
 </script>
 
@@ -50,16 +49,18 @@ select {
   </div>
 </div>
 
-<script>
-  function mounted() {
-    $('select').multipleSelect({
+<script type="module">
+  import MultipleSelect from 'multiple-select'
+
+  document.querySelectorAll('select').forEach(el => {
+    new MultipleSelect(el, {
       filter: true,
       customFilter: function ({ text, search, originalText, originalSearch }) {
-        if ($('input').prop('checked')) {
+        if (document.querySelector('input[type="checkbox"]').checked) {
           return originalText.indexOf(originalSearch) === 0
         }
         return text.indexOf(search) === 0
       }
     })
-  }
+  })
 </script>

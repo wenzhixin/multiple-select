@@ -2,8 +2,7 @@
   init({
     title: 'Basic Select',
     desc: 'Custom i18n options.',
-    links: ['multiple-select.min.css'],
-    scripts: ['multiple-select.min.js']
+    links: ['multiple-select.min.css']
   })
 </script>
 
@@ -37,23 +36,22 @@ select {
     </div>
   </div>
 </div>
+<script type="module">
+  import MultipleSelect from 'multiple-select'
 
-<script>
-  function mounted() {
-    $('select').multipleSelect({
-      filter: true,
-      formatSelectAll () {
-        return '[全选]'
-      },
-      formatAllSelected () {
-        return '已选择所有记录'
-      },
-      formatCountSelected (count, total) {
-        return '已从 ' + total + ' 中选择 ' + count + ' 条记录'
-      },
-      formatNoMatchesFound () {
-        return '没有找到记录'
-      }
-    })
-  }
+  new MultipleSelect(document.querySelector('select'), {
+    filter: true,
+    formatSelectAll () {
+      return '[全选]'
+    },
+    formatAllSelected () {
+      return '已选择所有记录'
+    },
+    formatCountSelected (count, total) {
+      return '已从 ' + total + ' 中选择 ' + count + ' 条记录'
+    },
+    formatNoMatchesFound () {
+      return '没有找到记录'
+    }
+  })
 </script>

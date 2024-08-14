@@ -3,7 +3,7 @@
  * Author: Lucas Aguiar<lucas99.abreu@gmail.com>
  */
 
-$.fn.multipleSelect.locales['pt-BR'] = {
+export default {
   formatSelectAll () {
     return '[Selecionar todos]'
   },
@@ -17,5 +17,3 @@ $.fn.multipleSelect.locales['pt-BR'] = {
     return 'Nenhum resultado encontrado'
   }
 }
-
-$.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['pt-BR'])

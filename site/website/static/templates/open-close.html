@@ -2,8 +2,7 @@
   init({
     title: 'The open/close',
     desc: 'Use <code>multipleSelect(\'open\')</code> and <code>multipleSelect(\'close\')</code> to open and close the select dropdown list.',
-    links: ['multiple-select.min.css'],
-    scripts: ['multiple-select.min.js']
+    links: ['multiple-select.min.css']
   })
 </script>
 
@@ -49,20 +48,15 @@ select {
   </div>
 </div>
 
-<script>
-  var $select = $('select')
+<script type="module">
+  import MultipleSelect from 'multiple-select'
 
-  function mounted() {
-    $select.multipleSelect()
+  const select = new MultipleSelect(document.querySelector('select'))
 
-    $('#openBtn').click(function () {
-      setTimeout(function () {
-        $select.multipleSelect('open')
-      }, 100)
-    })
-
-    $('#closeBtn').click(function () {
-      $select.multipleSelect('close')
-    })
-  }
+  document.getElementById('openBtn').addEventListener('click', () => {
+    select.open()
+  })
+  document.getElementById('closeBtn').addEventListener('click', () => {
+    select.close()
+  })
 </script>

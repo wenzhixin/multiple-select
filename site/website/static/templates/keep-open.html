@@ -2,8 +2,7 @@
   init({
     title: 'Keep Open',
     desc: 'Use <code>keepOpen: true</code> to keep the select dropdown always open.',
-    links: ['multiple-select.min.css'],
-    scripts: ['multiple-select.min.js']
+    links: ['multiple-select.min.css']
   })
 </script>
 
@@ -38,10 +37,10 @@ select {
   </div>
 </div>
 
-<script>
-  function mounted() {
-    $('select').multipleSelect({
-      keepOpen: true
-    })
-  }
+<script type="module">
+  import MultipleSelect from 'multiple-select'
+
+  new MultipleSelect(document.querySelector('select'), {
+    keepOpen: true
+  })
 </script>

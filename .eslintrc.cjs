@@ -106,9 +106,5 @@ module.exports = {
     'spaced-comment': ['error', 'always'],
     'switch-colon-spacing': 'error',
     'template-curly-spacing': ['error', 'never']
-  },
-  globals: {
-    $: true,
-    jQuery: true
   }
 }

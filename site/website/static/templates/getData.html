@@ -2,8 +2,7 @@
   init({
     title: 'The getData',
     desc: 'Use <code>multipleSelect(\'getData\')</code> to get the loaded data.',
-    links: ['multiple-select.min.css'],
-    scripts: ['multiple-select.min.js']
+    links: ['multiple-select.min.css']
   })
 </script>
 
@@ -39,16 +38,13 @@ select {
   </div>
 </div>
 
-<script>
-  var $select = $('select')
+<script type="module">
+  import MultipleSelect from 'multiple-select'
 
-  function mounted() {
-    $select.multipleSelect({
-      filter: true
-    })
-
-    $('#getData').click(function() {
-      alert(JSON.stringify($select.multipleSelect('getData'), null, 4))
-    })
-  }
+  const select = new MultipleSelect(document.querySelector('select'), {
+    filter: true,
+  })
+  document.getElementById('getData').addEventListener('click', () => {
+    alert(JSON.stringify(select.getData()), null, 4)
+  })
 </script>

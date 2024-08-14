@@ -3,7 +3,7 @@
  * Author: hoangbaovu <ineo.vn>
  */
 
-$.fn.multipleSelect.locales['vi-VN'] = {
+export default {
   formatSelectAll () {
     return '[Tất cả]'
   },
@@ -17,5 +17,3 @@ $.fn.multipleSelect.locales['vi-VN'] = {
     return 'Không tìm thấy kết quả.'
   }
 }
-
-$.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['vi-VN'])

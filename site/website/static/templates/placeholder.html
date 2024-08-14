@@ -2,8 +2,7 @@
   init({
     title: 'The Placeholder',
     desc: 'Use <code>placeholder</code> attribute or <code>placeholder: \'\'</code> option to set placeholder.',
-    links: ['multiple-select.min.css'],
-    scripts: ['multiple-select.min.js']
+    links: ['multiple-select.min.css']
   })
 </script>
 
@@ -67,11 +66,11 @@ select {
   </div>
 </div>
 
-<script>
-  function mounted() {
-    $('#select1').multipleSelect()
-    $('#select2').multipleSelect({
-      placeholder: 'Here is the placeholder via javascript'
-    })
-  }
+<script type="module">
+  import MultipleSelect from 'multiple-select'
+
+  new MultipleSelect(document.getElementById('select1'))
+  new MultipleSelect(document.getElementById('select2'), {
+    placeholder: 'Here is the placeholder via javascript'
+  })
 </script>

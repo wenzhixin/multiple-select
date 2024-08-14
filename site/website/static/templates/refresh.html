@@ -2,8 +2,7 @@
   init({
     title: 'The refresh',
     desc: 'Use <code>multiple(\'refresh\')</code> to refresh/reload the Multiple Select. If you\'re dynamically adding/removing option tags on the original select via AJAX or DOM manipulation methods, call refresh to reflect the changes.',
-    links: ['multiple-select.min.css'],
-    scripts: ['multiple-select.min.js']
+    links: ['multiple-select.min.css']
   })
 </script>
 
@@ -59,34 +58,33 @@ select {
   </div>
 </div>
 
-<script>
-  var $select = $('select')
+<script type="module">
+  import MultipleSelect from 'multiple-select'
 
-  function mounted() {
-    $select.multipleSelect()
+  const select = new MultipleSelect(document.querySelector('select'))
 
-    $('#refreshAdd').click(function() {
-      var $input = $('#refreshInput')
-      var $selected = $('#refreshSelected')
-      var $disabled = $('#refreshDisabled')
-      var value = $.trim($input.val())
-      var $opt = $('<option />', {
-        value: value,
-        text: value
-      })
+  document.getElementById('refreshAdd').addEventListener('click', () => {
+    const input = document.getElementById('refreshInput')
+    const selected = document.getElementById('refreshSelected').checked
+    const disabled = document.getElementById('refreshDisabled').checke
+    const value = input.value.trim()
 
-      if (!value) {
-        $input.focus()
-        return
-      }
-      if ($selected.is(':checked')){
-        $opt.prop('selected', true)
-      }
-      if($disabled.is(':checked')){
-        $opt.attr('disabled', true)
-      }
-      $input.val('')
-      $select.append($opt).multipleSelect('refresh')
-    })
-  }
+    if (!value) {
+      input.focus()
+      return
+    }
+    const opt = document.createElement('option')
+
+    opt.setAttribute('value', value)
+    opt.innerText = value
+    if (selected) {
+      opt.setAttribute('selected', 'selected')
+    }
+    if (disabled) {
+      opt.setAttribute('checked', 'checked')
+    }
+    input.value = ''
+    document.querySelector('select').append(opt)
+    select.refresh()
+  })
 </script>

@@ -2,8 +2,7 @@
   init({
     title: 'The checkInvert',
     desc: 'Methods: <code>$select.multipleSelect(\'checkInvert\')</code> to invert check all items.',
-    links: ['multiple-select.min.css'],
-    scripts: ['multiple-select.min.js']
+    links: ['multiple-select.min.css']
   })
 </script>
 
@@ -74,14 +73,17 @@ select {
   </div>
 </div>
 
-<script>
-  var $select = $('select')
+<script type="module">
+  import MultipleSelect from 'multiple-select'
 
-  function mounted() {
-    $select.multipleSelect()
+  const selects =  document.querySelectorAll('select')
 
-    $('#checkInvert').click(function () {
-      $select.multipleSelect('checkInvert')
+  selects.forEach(el => {
+    new MultipleSelect(el)
+  })
+  document.getElementById('checkInvert').addEventListener('click', () => {
+    selects.forEach(el => {
+      el._MultipleSelect.checkInvert()
     })
-  }
+  })
 </script>

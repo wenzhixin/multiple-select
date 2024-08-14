@@ -3,11 +3,10 @@
     title: 'Vue Component',
     desc: 'Use Plugin: <a href="https://vuejs.org/" target="_blank">Vue.js</a> and multiple-select-vue.',
     links: ['multiple-select.min.css'],
-    scripts: [
-      'https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js',
-      'multiple-select.min.js',
-      'https://unpkg.com/multiple-select@1.7.0/dist/multiple-select-vue.min.js'
-    ]
+    modules: {
+      vue: 'https://unpkg.com/vue@3/dist/vue.esm-browser.js',
+      'multiple-select': 'multiple-select-vue.js'
+    }
   })
 </script>
 
@@ -52,55 +51,61 @@
     </div>
   </div>
 </div>
+ 
+<script type="module">
+  import { createApp, ref } from 'vue'
+  import MultipleSelect from 'multiple-select'
 
-<script>
-  function mounted() {
-    new Vue({
-      el: '#app',
-      components: {
-        MultipleSelect
-      },
-      data () {
-        return {
-          value: 1, // or [1, 2] with multiple select
-          single: true,
-          disabled: false,
-          options: {
-            filter: false
-          },
-          data: [
-            {
-              text: 'January',
-              value: 1
-            },
-            {
-              text: 'February',
-              value: 2
-            },
-            {
-              text: 'March',
-              value: 3
-            },
-            {
-              text: 'April',
-              value: 4
-            },
-            {
-              text: 'May',
-              value: 5
-            },
-            {
-              text: 'June',
-              value: 6
-            }
-          ]
+  const app = createApp({
+    setup (props) {
+      const select = ref(null)
+      const value = ref(1)
+      const single = ref(true)
+      const disabled = ref(false)
+      const options = ref({
+        filter: false
+      })
+      const data = [
+        {
+          text: 'January',
+          value: 1
+        },
+        {
+          text: 'February',
+          value: 2
+        },
+        {
+          text: 'March',
+          value: 3
+        },
+        {
+          text: 'April',
+          value: 4
+        },
+        {
+          text: 'May',
+          value: 5
+        },
+        {
+          text: 'June',
+          value: 6
         }
-      },
-      methods: {
+      ]
+
+      return {
+        value,
+        single,
+        disabled,
+        options,
+        data,
+        select,
         getSelects () {
-          alert(this.$refs.select.getSelects())
+          alert(select.value.getSelects())
         }
       }
-    })
-  }
+    }
+  })
+
+  app.component('MultipleSelect', MultipleSelect)
+  app.mount('#app')
 </script>

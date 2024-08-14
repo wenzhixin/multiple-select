@@ -1,9 +1,4 @@
 import 'multiple-select/src/multiple-select.scss'
+import MultipleSelect from 'multiple-select/src/MultipleSelect.js'
 
-import './jquery'
-import $ from 'jquery'
-import 'multiple-select/src/multiple-select.js'
-import 'multiple-select/src/locale/multiple-select-en-US'
-import 'multiple-select/src/locale/multiple-select-zh-CN'
-
-$.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['en-US'])
+Object.assign(MultipleSelect.defaultOptions, MultipleSelect.defaultOptions.LOCALES['en-US'])

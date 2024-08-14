@@ -2,8 +2,7 @@
   init({
     title: 'Submit Select',
     desc: 'Submit select with <code>name</code> attribute in form.',
-    links: ['multiple-select.min.css'],
-    scripts: ['multiple-select.min.js']
+    links: ['multiple-select.min.css']
   })
 </script>
 
@@ -54,13 +53,19 @@ select {
   </form>
 </div>
 
-<script>
-  function mounted() {
-    $('select').multipleSelect()
+<script type="module">
+  import MultipleSelect from 'multiple-select'
 
-    $('form').submit(function () {
-      alert($(this).serialize())
-      return false
+  document.querySelectorAll('select').forEach(el => {
+    new MultipleSelect(el)
+  })
+  document.querySelector('form').addEventListener('submit', e => {
+    const params = {}
+
+    e.target.querySelectorAll('[name]').forEach(el => {
+      params[el.name] = el.value
     })
-  }
+    alert(JSON.stringify(params, null, 4))
+    return false
+  })
 </script>

@@ -2,8 +2,7 @@
   init({
     title: 'The check/uncheck',
     desc: 'Methods: <code>multipleSelect(\'check\', 2)</code> and <code>multipleSelect(\'uncheck\', 2)</code> to check and uncheck a select option.',
-    links: ['multiple-select.min.css'],
-    scripts: ['multiple-select.min.js']
+    links: ['multiple-select.min.css']
   })
 </script>
 
@@ -71,18 +70,22 @@ select {
   </div>
 </div>
 
-<script>
-  var $select = $('select')
+<script type="module">
+  import MultipleSelect from 'multiple-select'
 
-  function mounted() {
-    $select.multipleSelect()
+  const selects = document.querySelectorAll('select')
 
-    $('#checkBtn').click(function () {
-      $select.multipleSelect('check', 2)
+  selects.forEach(el => {
+    return new MultipleSelect(el)
+  })
+  document.getElementById('checkBtn').addEventListener('click', () => {
+    selects.forEach(el => {
+      el._MultipleSelect.check(2)
     })
-
-    $('#uncheckBtn').click(function () {
-      $select.multipleSelect('uncheck', 2)
+  })
+  document.getElementById('uncheckBtn').addEventListener('click', () => {
+    selects.forEach(el => {
+      el._MultipleSelect.uncheck(2)
     })
-  }
+  })
 </script>

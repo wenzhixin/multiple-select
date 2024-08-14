@@ -2,8 +2,7 @@
   init({
     title: 'The Events',
     desc: 'Multiple Select has some callback events.',
-    links: ['multiple-select.min.css'],
-    scripts: ['multiple-select.min.js']
+    links: ['multiple-select.min.css']
   })
 </script>
 
@@ -51,47 +50,48 @@ select {
   </div>
 </div>
 
-<script>
-  var $log = $('textarea')
+<script type="module">
+  import MultipleSelect from 'multiple-select'
+
 
   function log(text) {
-    $log.append(text)
-    $log.scrollTop($log[0].scrollHeight - $log.height())
+    var log = document.querySelector('textarea')
+
+    log.append(text)
+    log.scrollTop = log.scrollHeight - log.clientHeight
   }
 
-  function mounted() {
-    $('select').multipleSelect({
-      filter: true,
-      onOpen: function () {
-        log('onOpen event fire!\n')
-      },
-      onClose: function () {
-        log('onClose event fire!\n')
-      },
-      onCheckAll: function () {
-        log('onCheckAll event fire!\n')
-      },
-      onUncheckAll: function () {
-        log('onUncheckAll event fire!\n')
-      },
-      onFocus: function () {
-        log('onFocus event fire!\n')
-      },
-      onBlur: function () {
-        log('onBlur event fire!\n')
-      },
-      onOptgroupClick: function (view) {
-        log('onOptgroupClick event fire! view: ' + JSON.stringify(view) + '\n')
-      },
-      onClick: function (view) {
-        log('onClick event fire! view: ' + JSON.stringify(view) + '\n')
-      },
-      onFilter: function (text) {
-        log('onFilter event fire! text: ' + text + '\n')
-      },
-      onAfterCreate: function () {
-        log('onAfterCreate event fire!\n')
-      }
-    })
-  }
+  new MultipleSelect(document.querySelector('select'), {
+    filter: true,
+    onOpen: function () {
+      log('onOpen event fire!\n')
+    },
+    onClose: function () {
+      log('onClose event fire!\n')
+    },
+    onCheckAll: function () {
+      log('onCheckAll event fire!\n')
+    },
+    onUncheckAll: function () {
+      log('onUncheckAll event fire!\n')
+    },
+    onFocus: function () {
+      log('onFocus event fire!\n')
+    },
+    onBlur: function () {
+      log('onBlur event fire!\n')
+    },
+    onOptgroupClick: function (view) {
+      log('onOptgroupClick event fire! view: ' + JSON.stringify(view) + '\n')
+    },
+    onClick: function (view) {
+      log('onClick event fire! view: ' + JSON.stringify(view) + '\n')
+    },
+    onFilter: function (text) {
+      log('onFilter event fire! text: ' + text + '\n')
+    },
+    onAfterCreate: function () {
+      log('onAfterCreate event fire!\n')
+    }
+  })
 </script>

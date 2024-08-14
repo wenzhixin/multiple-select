@@ -3,24 +3,19 @@
     :name="name"
     :multiple="multiple"
     :disabled="disabled"
+    @change="handleChange"
   >
     <slot />
   </select>
 </template>
 
 <script>
-const $ = window.jQuery
-const deepCopy = arg => {
-  if (!arg) {
-    return arg
-  }
-  return $.extend(true, Array.isArray(arg) ? [] : {}, arg)
-}
+import MultipleSelect from '../MultipleSelect.js'
 
 const getEventNames = () => {
   const events = []
 
-  for (const event in $.fn.multipleSelect.defaults) {
+  for (const event in MultipleSelect.defaultOptions) {
     if (/^on[A-Z]/.test(event)) {
       events.push(event.replace(/([A-Z])/g, '-$1').toLowerCase())
     }
@@ -79,7 +74,8 @@ export default {
   data () {
     return {
       currentValue: this.value === undefined ? this.modelValue : this.value,
-      children: []
+      children: [],
+      select: null
     }
   },
 
@@ -150,14 +146,40 @@ export default {
   },
 
   unmounted () {
-    this.destroy(true)
+    this.select.destroy()
     this.observer.disconnect()
   },
 
   mounted () {
-    this._refresh()
+    this.observer = new MutationObserver(() => {
+      this._update()
+    })
 
-    this.$select = $(this.$el).change(() => {
+    if (
+      this._hasInit &&
+      this.$el.value &&
+      (typeof this.currentValue === 'undefined' ||
+      Array.isArray(this.currentValue) && !this.currentValue.length)
+    ) {
+      this.currentValue = this.$el.value
+
+      this.$emit('update:modelValue', this.currentValue)
+      this.$emit('change', this.currentValue)
+    }
+
+    for (const event in MultipleSelect.defaultOptions) {
+      if (/^on[A-Z]/.test(event)) {
+        MultipleSelect.defaultOptions[event] = (...args) => {
+          this.$emit(event.replace(/([A-Z])/g, '-$1').toLowerCase(), ...args)
+        }
+      }
+    }
+
+    this._initSelectValue()
+  },
+
+  methods: {
+    handleChange () {
       const selects = this.getSelects()
 
       if (Array.isArray(this.currentValue)) {
@@ -170,39 +192,9 @@ export default {
 
       this.$emit('update:modelValue', this.currentValue)
       this.$emit('change', this.currentValue)
-    })
-
-    this.observer = new MutationObserver(() => {
-      this._update()
-    })
-
-    if (
-      this._hasInit &&
-      this.$select.val() &&
-      (typeof this.currentValue === 'undefined' ||
-      Array.isArray(this.currentValue) && !this.currentValue.length)
-    ) {
-      this.currentValue = this.$select.val()
-
-      this.$emit('update:modelValue', this.currentValue)
-      this.$emit('change', this.currentValue)
-    }
-
-    for (const event in $.fn.multipleSelect.defaults) {
-      if (/^on[A-Z]/.test(event)) {
-        $.fn.multipleSelect.defaults[event] = (...args) => {
-          this.$emit(event.replace(/([A-Z])/g, '-$1').toLowerCase(), ...args)
-        }
-      }
-    }
-
-    this._initSelectValue()
-  },
-
-  methods: {
+    },
     _update () {
       this.$nextTick(() => {
-        this._refresh()
         this._initSelectValue()
       })
     },
@@ -221,12 +213,12 @@ export default {
     },
 
     _initSelect () {
-      if (!this.$select) {
+      if (!this.$el) {
         // before mounted
         return
       }
       const options = {
-        ...deepCopy(this.options),
+        ...this.options,
         single: !this.multiple,
         width: this.width,
         size: this.size,
@@ -234,7 +226,7 @@ export default {
       }
 
       if (!this._hasInit) {
-        this.$select.multipleSelect(options)
+        this.select = new MultipleSelect(this.$el, options)
         this._hasInit = true
       } else {
         this.refreshOptions(options)
@@ -255,25 +247,16 @@ export default {
     ...(() => {
       const res = {}
 
-      for (const method of $.fn.multipleSelect.methods) {
+      for (const method of MultipleSelect.Constants.METHODS) {
         res[method] = function (...args) {
-          return this.$select.multipleSelect(method, ...args)
+          return this.select[method]?.(...args)
         }
       }
       return res
     })(),
 
-    _refresh () {
-      this.$el.querySelectorAll('option').forEach(el => {
-        if (el.value) {
-          $(el).data('value', el.value)
-        }
-      })
-    },
-
     refresh () {
-      this._refresh()
-      this.$select.multipleSelect('refresh')
+      this.select.refresh()
     }
   }
 }

@@ -10,7 +10,7 @@ The events API of Multiple Select.
 To use event syntax:
 
 ```js
-$('#select').multipleSelect({
+new MultipleSelect(document.getElementById('select'), {
   onEventName: function (arg1, arg2, ...) {
     // ...
   }

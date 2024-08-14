@@ -8,8 +8,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "jquery": "^3.4.1",
-    "multiple-select": "^2.0.0",
+    "multiple-select": "^3.0.0",
     "vue": "^3.4.0"
   },
   "devDependencies": {

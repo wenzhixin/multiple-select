@@ -2,8 +2,7 @@
   init({
     title: 'The setSelects/getSelects',
     desc: 'Use <code>multipleSelect(\'setSelects\', [])</code> and <code>multipleSelect(\'getSelects\')</code> to set selects and get selects.',
-    links: ['multiple-select.min.css'],
-    scripts: ['multiple-select.min.js']
+    links: ['multiple-select.min.css']
   })
 </script>
 
@@ -51,26 +50,23 @@ select {
   </div>
 </div>
 
-<script>
-  var $select = $('select')
+<script type="module">
+  import MultipleSelect from 'multiple-select'
 
-  function mounted() {
-    $select.multipleSelect()
-
-    $('#setSelectsBtn').click(function () {
-      $select.multipleSelect('setSelects', [1, 3])
-    })
-
-    $('#getSelectsBtn').click(function () {
-      alert('Selected values: ' + $select.multipleSelect('getSelects'))
-    })
-
-    $('#setSelectsBtn2').click(function () {
-      $select.multipleSelect('setSelects', ['February', 'April'], 'text')
-    })
-
-    $('#getSelectsBtn2').click(function () {
-      alert('Selected values: ' + $select.multipleSelect('getSelects', 'text'))
-    })
+  const select = new MultipleSelect(document.querySelector('select'))
+  const onClick = (id, callback) => {
+    document.getElementById(id).addEventListener('click', callback)
   }
+  onClick('setSelectsBtn', () => {
+    select.setSelects([1, 3])
+  })
+  onClick('getSelectsBtn', () => {
+    alert('Selected values: ' + select.getSelects())
+  })
+  onClick('setSelectsBtn2', () => {
+    select.setSelects(['February', 'April'], 'text')
+  })
+  onClick('getSelectsBtn2', () => {
+    alert('Selected values: ' + select.getSelects('text'))
+  })
 </script>

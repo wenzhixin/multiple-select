@@ -2,8 +2,7 @@
   init({
     title: 'The Container',
     desc: 'Use <code>container</code> option to solve the cut off problem for example parent node is <code>overflow: hidden</code>.',
-    links: ['multiple-select.min.css'],
-    scripts: ['multiple-select.min.js']
+    links: ['multiple-select.min.css']
   })
 </script>
 
@@ -68,8 +67,10 @@ select {
   </div>
 </div>
 
-<script>
-  function mounted() {
-    $('select').multipleSelect()
-  }
+<script type="module">
+  import MultipleSelect from 'multiple-select'
+
+  document.querySelectorAll('select').forEach(el => {
+    new MultipleSelect(el)
+  })
 </script>

@@ -3,7 +3,7 @@
  * Author: Matej Puhony<info@puhony.eu>
  */
 
-$.fn.multipleSelect.locales['cz-CS'] = {
+export default {
   formatSelectAll () {
     return '[Vybrat vše]'
   },
@@ -17,5 +17,3 @@ $.fn.multipleSelect.locales['cz-CS'] = {
     return 'Nebylo nalezeno'
   }
 }
-
-$.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['cz-CS'])

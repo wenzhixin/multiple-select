@@ -1,6 +1,9 @@
 <template>
   <div>
-    <form @submit.prevent="submit">
+    <form
+      ref="form"
+      @submit.prevent="submit"
+    >
       <div class="form-group row">
         <label class="col-sm-2">
           Single Select
@@ -68,12 +71,14 @@
 </template>
 
 <script>
-import $ from 'jquery'
-
 export default {
   methods: {
     submit () {
-      alert($('form').serialize())
+      const ret = {}
+      this.$refs.form.querySelectorAll('[name]').forEach(item => {
+        ret[item.name] = item.value
+      })
+      alert(JSON.stringify(ret, null, '    '))
       return false
     }
   }

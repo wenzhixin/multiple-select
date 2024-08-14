@@ -49,18 +49,26 @@ select {
   </div>
 </div>
 
-<script>
-  var $select = $('select')
+<script type="module">
+  import MultipleSelect from 'multiple-select'
 
-  function mounted() {
-    $select.multipleSelect()
+  const selects = document.querySelectorAll('select')
 
-    $('#enableBtn').click(function () {
-      $select.multipleSelect('enable')
-    })
-
-    $('#disableBtn').click(function () {
-      $select.multipleSelect('disable')
-    })
+  for (const el of selects) {
+    new MultipleSelect(el)
   }
+  
+  function enable () {
+    for (const el of selects) {
+      el._MultipleSelect.enable()
+    }
+  }
+  function disable () {
+    for (const el of selects) {
+      el._MultipleSelect.disable()
+    }
+  }
+
+  document.getElementById('enableBtn').addEventListener('click', enable)
+  document.getElementById('disableBtn').addEventListener('click', disable)
 </script>

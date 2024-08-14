@@ -178,6 +178,14 @@ const toRaw = proxy => {
   return proxy
 }
 
+const parseStyleValue = (val, unit = 'px') => {
+  const v = val || 0
+  const isNumber = typeof v === 'number' ||
+    typeof v === 'string' && /^[+-]?\d+(\.\d+)?$/.test(v.trim())
+
+  return isNumber ? v + unit : v
+}
+
 export {
   compareObjects,
   findByParam,
@@ -185,5 +193,6 @@ export {
   removeDiacritics,
   removeUndefined,
   setDataKeys,
-  toRaw
+  toRaw,
+  parseStyleValue
 }

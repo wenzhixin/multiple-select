@@ -1,7 +1,7 @@
 window._config = {
-  isDebug: ['localhost'].indexOf(location.hostname) > -1,
-  cdnUrl: 'https://unpkg.com/multiple-select@1.7.0/dist/',
-  localUrl: 'http://localhost:8080/github/multiple-select/src/'
+  isDebug: ['localhost'].includes(location.hostname),
+  cdnUrl: 'https://unpkg.com/multiple-select@3/dist/',
+  localUrl: '/multiple-select/dist/',
 }
 
 function _getLink(file) {
@@ -32,11 +32,11 @@ function _getScript(file, isScriptTag) {
 }
 
 function _link(file) {
-  $('head').append(_getLink(file))
+  document.head.insertAdjacentHTML('beforeend', _getLink(file))
 }
 
 function _script(file, callback) {
-  var head = document.getElementsByTagName('head')[0]
+  var head = document.head
   var script = document.createElement('script')
 
   if (window._config.isDebug && !/^http/.test(file)) {
@@ -92,73 +92,98 @@ function _scripts(scripts, callback) {
   })
 }
 
+function _importsScript (moduleMap) {
+  if (!moduleMap || !Object.keys(moduleMap).length) {
+    return
+  }
+  const imports = {}
+  for (var [k, v] of Object.entries(moduleMap)) {
+    imports[k] = _getScript(v)
+  }
+  const script = document.createElement('script')
+
+  script.setAttribute('type', 'importmap')
+  script.innerHTML = `\n${JSON.stringify({ imports }, null, 4)}\n`
+  return script
+}
+
+function _loadModuleMap(moduleMap) {
+  const script = _importsScript(moduleMap)
+
+  script && document.head.appendChild(script)
+}
+
 function _beautifySource(data) {
   var lines = data.split('\n')
   var scriptStart = lines.indexOf('<script>')
   var scriptEnd = lines.indexOf('</script>', scriptStart)
-  var strings = lines.slice(scriptStart + 1, scriptEnd)
-  strings = $.map(strings, function (s) {
-    return $.trim(s)
-  })
+  var strings = lines.slice(scriptStart + 1, scriptEnd).map(x => x.trim())
   /* eslint-disable no-control-regex */
   var obj = eval('(' + strings.join('').replace(/[^\u0000-\u007E]/g, '')
     .replace(/^init\((.*)\)$/, '$1') + ')')
 
-  var result = []
-  result = result.concat($.map(obj.links, _getLink))
-  result.push('')
-  result.push('<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>')
-  result = result.concat($.map(obj.scripts, function (script) {
-    return _getScript(script, true)
-  }))
-  lines = result.concat(lines.slice(scriptEnd + 1))
+  var result = obj.links.map(_getLink)
+  const imports = _importsScript(obj.modules || { 'multiple-select': 'multiple-select.js' })
+  
+  if (imports) {
+    result.push(imports.outerHTML)
+  }
 
-  var mountedStart = lines.indexOf('  function mounted() {')
-  var mountedEnd = lines.indexOf('  }', mountedStart)
-  lines[mountedStart] = '  $(function() {'
-  lines[mountedEnd] = '  })'
+  result = result.concat(obj.scripts?.map(x => _getScript(x, true)) || [])
+  lines = result.concat(lines.slice(scriptEnd + 1))
 
   return lines.join('\n')
 }
 
-$(function () {
-  var query = {}
-  location.search.substring(1).split('&').forEach(function (item) {
-    query[item.split('=')[0]] = item.split('=')[1]
-  })
-  var url = query.url
-  var isSource = location.hash.substring(1) === 'view-source'
+(function () {
+  var query = new URLSearchParams(location.search)
+  var url = query.get('url')
+  
 
-  delete query.url
+  query.delete('url')
 
-  $.ajax({
-    type: 'GET',
-    url: url + '?' + $.param(query),
-    dataType: 'html',
-    global: false,
-    cache: true, // (warning: setting it to false will cause a timestamp and will call the request twice)
-    success: function (data) {
-      if (isSource) {
-        $('#example').hide().html(data)
-        $('.source-pre').show()
-        $('#source').text(_beautifySource(data))
-        window.hljs.highlightAll()
-      } else {
-        $('#example').html(data)
-      }
-    },
-    error: function () {
+  fetch(url + '?' + query.toString()).then(res => {
+    if (!res.ok) {
       parent.location.href = 'index.html'
+      return
     }
+    res.text().then(data => {
+      var example = document.getElementById('example')
+      var source = document.getElementById('source')
+      var isSource = location.hash.substring(1) === 'view-source'
+
+      example.innerHTML = data
+      setTimeout(() => {
+        example.querySelectorAll('script').forEach(item => {
+          const script = document.createElement('script')
+          
+          script.innerHTML = item.innerHTML
+          for (const attr of item.attributes) {
+            script.setAttribute(attr.name, attr.value)
+          }
+          
+          example.append(script)
+        })
+        if (isSource) {
+          example.style.display = 'none'
+          document.querySelector('.source-pre').style.display = 'block'
+          source.innerText = _beautifySource(data)
+          window.hljs.highlightAll()
+        }
+      }, 1)
+    })
   })
-})
+})()
 
 window.init = function (options_) {
-  var options = $.extend({
+  var options = Object.assign({
     title: '',
     desc: '',
     links: [],
     scripts: [],
+    modules: {
+      'multiple-select': 'multiple-select.js'
+    },
     bootstrapVersion: 3,
     callback: function () {
       if (typeof window.mounted === 'function') {
@@ -167,10 +192,18 @@ window.init = function (options_) {
     }
   }, options_)
 
-  $('.bd-title span').html(options.title)
-  $('.bd-lead').html(options.desc)
-  $.each(options.links, function (i, file) {
+  document.querySelector('.bd-title span').innerHTML = options.title
+  document.querySelector('.bd-lead').innerHTML = options.desc
+  options.links.forEach(function (file) {
     _link(file)
   })
+  _loadModuleMap(options.modules)
   _scripts(options.scripts, options.callback)
+}
+
+window.importModule = function (file) {
+  return import(_getScript(file))
+}
+window.importDefault = function (file) {
+  return importModule(file).then(x => x.default)
 }

@@ -3,7 +3,7 @@
  * Author: Zhixin Wen<wenzhixin2010@gmail.com>
  */
 
-$.fn.multipleSelect.locales['en-US'] = {
+export default {
   formatSelectAll () {
     return '[Select all]'
   },
@@ -17,5 +17,3 @@ $.fn.multipleSelect.locales['en-US'] = {
     return 'No matches found'
   }
 }
-
-$.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['en-US'])

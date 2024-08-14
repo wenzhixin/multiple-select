@@ -3,7 +3,7 @@
  * Author: Zhixin Wen<wenzhixin2010@gmail.com>
  */
 
-$.fn.multipleSelect.locales['ru-RU'] = {
+export default {
   formatSelectAll () {
     return '[Выбрать все]'
   },
@@ -17,5 +17,3 @@ $.fn.multipleSelect.locales['ru-RU'] = {
     return 'Совпадений не найдено'
   }
 }
-
-$.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['ru-RU'])

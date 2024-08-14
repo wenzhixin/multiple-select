@@ -3,7 +3,7 @@
  * Author: Zhixin Wen<wenzhixin2010@gmail.com>
  */
 
-$.fn.multipleSelect.locales['es-ES'] = {
+export default {
   formatSelectAll () {
     return '[Seleccionar todo]'
   },
@@ -17,5 +17,3 @@ $.fn.multipleSelect.locales['es-ES'] = {
     return 'No se encontraron coincidencias'
   }
 }
-
-$.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['es-ES'])

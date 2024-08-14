@@ -3,7 +3,7 @@
  * Author: HThuren<thuren.henrik@gmail.com>
  */
 
-$.fn.multipleSelect.locales['da-DK'] = {
+export default {
   formatSelectAll () {
     return '[Vælg/fravælg alle]'
   },
@@ -17,5 +17,3 @@ $.fn.multipleSelect.locales['da-DK'] = {
     return 'Søgning uden resultat'
   }
 }
-
-$.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['da-DK'])

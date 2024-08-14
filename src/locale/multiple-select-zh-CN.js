@@ -3,7 +3,7 @@
  * Author: Zhixin Wen<wenzhixin2010@gmail.com>
  */
 
-$.fn.multipleSelect.locales['zh-CN'] = {
+export default {
   formatSelectAll () {
     return '[全选]'
   },
@@ -17,5 +17,3 @@ $.fn.multipleSelect.locales['zh-CN'] = {
     return '没有找到记录'
   }
 }
-
-$.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['zh-CN'])

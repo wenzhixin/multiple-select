@@ -2,8 +2,7 @@
   init({
     title: 'The focus/blur',
     desc: 'Use <code>multipleSelect(\'focus\')</code> and <code>multipleSelect(\'blur\')</code> to focus and blur the select.',
-    links: ['multiple-select.min.css'],
-    scripts: ['multiple-select.min.js']
+    links: ['multiple-select.min.css']
   })
 </script>
 
@@ -49,18 +48,26 @@ select {
   </div>
 </div>
 
-<script>
-  var $select = $('select')
+<script type="module">
+  import MultipleSelect from 'multiple-select'
 
-  function mounted() {
-    $select.multipleSelect()
+  const selects = document.querySelectorAll('select')
 
-    $('#focusBtn').click(function () {
-      $select.multipleSelect('focus')
-    })
-
-    $('#blurBtn').click(function () {
-      $select.multipleSelect('blur')
-    })
+  for (const el of selects) {
+    new MultipleSelect(el)
   }
+  
+  function focus () {
+    for (const el of selects) {
+      el._MultipleSelect.focus()
+    }
+  }
+  function blur () {
+    for (const el of selects) {
+      el._MultipleSelect.blur()
+    }
+  }
+
+  document.getElementById('focusBtn').addEventListener('click', focus)
+  document.getElementById('blurBtn').addEventListener('click', blur)
 </script>

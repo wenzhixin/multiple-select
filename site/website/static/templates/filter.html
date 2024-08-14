@@ -2,8 +2,7 @@
   init({
     title: 'The Filter',
     desc: 'Use <code>filter: true</code> to enable filter feature.',
-    links: ['multiple-select.min.css'],
-    scripts: ['multiple-select.min.js']
+    links: ['multiple-select.min.css']
   })
 </script>
 
@@ -213,10 +212,12 @@ select {
   </div>
 </div>
 
-<script>
-  function mounted() {
-    $('select').multipleSelect({
-      filter: true
+<script type="module">
+  import MultipleSelect from 'multiple-select'
+
+  document.querySelectorAll('select').forEach(el => {
+    new MultipleSelect(el, {
+      filter: true,
     })
-  }
+  })
 </script>

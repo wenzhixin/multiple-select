@@ -54,8 +54,8 @@ export default {
   data () {
     return {
       options: {
-        labelTemplate ($el) {
-          return '<i class="fa fa-star"></i>' + $el.attr('label')
+        labelTemplate (el) {
+          return '<i class="fa fa-star"></i>' + el.getAttribute('label')
         }
       }
     }

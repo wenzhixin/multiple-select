@@ -131,6 +131,7 @@
   white-space: nowrap;
   width: 100%;
   z-index: 10000;
+  box-sizing: border-box;
 
   input {
     width: 100%;
@@ -144,8 +145,6 @@
     border-radius: 5px;
     box-shadow: none;
   }
-
-  box-sizing: border-box;
 }
 
 .ms-drop {
