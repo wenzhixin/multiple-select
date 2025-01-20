@@ -473,11 +473,7 @@ class MultipleSelect {
     const customStyle = this.options.styler(row)
     const style = customStyle ? `style="${customStyle}"` : ''
 
-    classes += row.classes || ''
-
-    if (level && this.options.single) {
-      classes += `option-level-${level} `
-    }
+    classes += `${row.classes || ''} option-level-${level} `
 
     if (row.divider) {
       return '<li class="option-divider"/>'
@@ -816,7 +812,7 @@ class MultipleSelect {
 
     if (this.$selectAll.length) {
       this.$selectAll.prop('checked', this.allSelected)
-        .closest('li').toggle(!noResult)
+        .closest('li').toggleClass('selected', this.allSelected).toggle(!noResult)
     }
 
     this.$noResults.toggle(noResult)
