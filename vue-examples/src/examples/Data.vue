@@ -7,6 +7,7 @@
 
       <div class="col-sm-10">
         <MultipleSelect
+          v-model="basic"
           multiple
           :data="basicData"
         />
@@ -59,6 +60,7 @@
 
       <div class="col-sm-10">
         <MultipleSelect
+          v-model="groups"
           multiple
           :data="groupData"
         />
@@ -71,6 +73,7 @@
 export default {
   data () {
     return {
+      basic: [],
       basicData: [
         {
           text: 'January',
@@ -141,6 +144,7 @@ export default {
       numberData: [
         1, 2, 3
       ],
+      groups: [1],
       groupData: [
         {
           type: 'optgroup',
@@ -148,8 +152,7 @@ export default {
           children: [
             {
               text: 'January',
-              value: 1,
-              selected: true
+              value: 1
             },
             {
               text: 'February',

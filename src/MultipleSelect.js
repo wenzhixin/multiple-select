@@ -2,11 +2,12 @@ import Constants from './constants/index.js'
 import VirtualScroll from './virtual-scroll/index.js'
 import {
   compareObjects,
-  removeDiacritics,
   findByParam,
-  setDataKeys,
+  getDocumentClickEvent,
+  removeDiacritics,
   removeUndefined,
-  getDocumentClickEvent
+  setDataKeys,
+  toRaw
 } from './utils/index.js'
 
 class MultipleSelect {
@@ -158,7 +159,15 @@ class MultipleSelect {
               value: it
             }
           }
-          return it
+
+          if (it.children?.length) {
+            return {
+              ...it,
+              children: it.children.map(it => ({ ...it }))
+            }
+          }
+
+          return { ...it }
         })
       } else if (typeof this.options.data === 'object') {
         for (const [value, text] of Object.entries(this.options.data)) {
@@ -199,8 +208,8 @@ class MultipleSelect {
       row.disabled = groupDisabled || elm.disabled
       row.classes = elm.getAttribute('class') || ''
       row.title = elm.getAttribute('title') || ''
-      if ($elm.data('value')) {
-        row._value = $elm.data('value') // value for object
+      if (elm._value || $elm.data('value')) {
+        row._value = elm._value || $elm.data('value') // value for object
       }
       if (Object.keys($elm.data()).length) {
         row._data = $elm.data()
@@ -464,11 +473,7 @@ class MultipleSelect {
     const customStyle = this.options.styler(row)
     const style = customStyle ? `style="${customStyle}"` : ''
 
-    classes += row.classes || ''
-
-    if (level && this.options.single) {
-      classes += `option-level-${level} `
-    }
+    classes += `${row.classes || ''} option-level-${level} `
 
     if (row.divider) {
       return '<li class="option-divider"/>'
@@ -807,7 +812,7 @@ class MultipleSelect {
 
     if (this.$selectAll.length) {
       this.$selectAll.prop('checked', this.allSelected)
-        .closest('li').toggle(!noResult)
+        .closest('li').toggleClass('selected', this.allSelected).toggle(!noResult)
     }
 
     this.$noResults.toggle(noResult)
@@ -880,7 +885,9 @@ class MultipleSelect {
         if (type === 'text') {
           selected = values.includes($('<div>').html(row.text).text().trim())
         } else {
-          selected = values.includes(row._value || row.value)
+          const value = toRaw(row._value || row.value)
+
+          selected = values.some(item => toRaw(item) === value)
           if (!selected && row.value === `${+row.value}`) {
             selected = values.includes(+row.value)
           }

@@ -3,28 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build && mv dist/vue-examples.html ../site/website/pages && rm -rf ../site/website/static/vue-examples && mv dist ../site/website/static/vue-examples",
-    "lint": "vue-cli-service lint"
+    "serve": "vite",
+    "build": "vite build && mv dist/vue-examples.html ../site/website/pages && rm -rf ../site/website/static/vue-examples && mv dist ../site/website/static/vue-examples",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "core-js": "^3.30.2",
-    "highlight.js": "^11.8.0",
-    "jquery": "^3.7.0",
-    "multiple-select": "^1.7.0",
-    "vue": "^2.7.14",
-    "vue-router": "^3.6.5",
-    "vuex": "^3.6.2"
+    "highlight.js": "^11.9.0",
+    "jquery": "^3.7.1",
+    "multiple-select": "^2.0.7",
+    "vue": "^3.4.31",
+    "vue-router": "^4.4.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.0.4",
-    "@vue/cli-plugin-eslint": "^4.0.4",
-    "@vue/cli-service": "^4.0.4",
-    "babel-eslint": "^10.0.3",
-    "eslint": "^5.16.0",
-    "eslint-plugin-vue": "^5.0.0",
-    "raw-loader": "^3.1.0",
-    "vue-template-compiler": "^2.7.14"
+    "@vitejs/plugin-vue": "^5.0.5",
+    "autoprefixer": "^10.4.19",
+    "eslint": "^8.49.0",
+    "eslint-plugin-vue": "^9.27.0",
+    "vite": "^5.3.3"
   },
   "eslintConfig": {
     "root": true,
@@ -32,12 +27,12 @@
       "node": true
     },
     "extends": [
-      "plugin:vue/essential",
+      "plugin:vue/vue3-essential",
       "eslint:recommended"
     ],
     "rules": {},
     "parserOptions": {
-      "parser": "babel-eslint"
+      "ecmaVersion": "latest"
     }
   },
   "postcss": {
