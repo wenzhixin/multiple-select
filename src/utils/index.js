@@ -15,6 +15,32 @@ const compareObjects = (objectA, objectB, compareLength) => {
   return true
 }
 
+const findByParam = (data, param, value) => {
+  for (const row of data) {
+    if (
+      row[param] === value ||
+      row[param] === `${+row[param]}` && +row[param] === value
+    ) {
+      return row
+    }
+    if (row.type === 'optgroup') {
+      for (const child of row.children) {
+        if (
+          child[param] === value ||
+          child[param] === `${+child[param]}` && +child[param] === value
+        ) {
+          return child
+        }
+      }
+    }
+  }
+}
+
+const getDocumentClickEvent = (id = '') => {
+  id = id || `${+new Date()}${~~(Math.random() * 1000000)}`
+  return `click.multiple-select-${id}`
+}
+
 const removeDiacritics = str => {
   if (str.normalize) {
     return str.normalize('NFD').replace(/[\u0300-\u036F]/g, '')
@@ -111,6 +137,11 @@ const removeDiacritics = str => {
   }, str)
 }
 
+const removeUndefined = obj => {
+  Object.keys(obj).forEach(key => obj[key] === undefined ? delete obj[key] : '')
+  return obj
+}
+
 const setDataKeys = data => {
   let total = 0
 
@@ -140,42 +171,19 @@ const setDataKeys = data => {
   return total
 }
 
-const findByParam = (data, param, value) => {
-  for (const row of data) {
-    if (
-      row[param] === value ||
-      row[param] === `${+row[param]}` && +row[param] === value
-    ) {
-      return row
-    }
-    if (row.type === 'optgroup') {
-      for (const child of row.children) {
-        if (
-          child[param] === value ||
-          child[param] === `${+child[param]}` && +child[param] === value
-        ) {
-          return child
-        }
-      }
-    }
+const toRaw = proxy => {
+  if (proxy && typeof proxy === 'object' && proxy.__v_raw) {
+    return proxy.__v_raw
   }
-}
-
-const removeUndefined = obj => {
-  Object.keys(obj).forEach(key => obj[key] === undefined ? delete obj[key] : '')
-  return obj
-}
-
-const getDocumentClickEvent = (id = '') => {
-  id = id || `${+new Date()}${~~(Math.random() * 1000000)}`
-  return `click.multiple-select-${id}`
+  return proxy
 }
 
 export {
   compareObjects,
-  removeDiacritics,
-  setDataKeys,
   findByParam,
+  getDocumentClickEvent,
+  removeDiacritics,
   removeUndefined,
-  getDocumentClickEvent
+  setDataKeys,
+  toRaw
 }

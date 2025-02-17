@@ -1,14 +1,7 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import Main from '../views/Main.vue'
 
-Vue.use(VueRouter)
-
 const routes = [
-  {
-    path: '*',
-    redirect: '/single-row'
-  },
   {
     path: '/:current',
     name: 'current',
@@ -20,10 +13,15 @@ const routes = [
     name: 'view-source',
     component: Main,
     props: true
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: '/single-row'
   }
 ]
 
-const router = new VueRouter({
+const router = createRouter({
+  history: createWebHashHistory(),
   routes
 })
 

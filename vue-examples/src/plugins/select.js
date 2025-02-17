@@ -1,12 +1,9 @@
-import 'multiple-select/dist/multiple-select.min.css'
+import 'multiple-select/src/multiple-select.scss'
 
 import './jquery'
-import Vue from 'vue'
 import $ from 'jquery'
-import 'multiple-select/src/multiple-select'
-import 'multiple-select/dist/multiple-select-locale-all'
-
-import MultipleSelect from 'multiple-select/src/vue/MultipleSelect'
+import 'multiple-select/src/multiple-select.js'
+import 'multiple-select/src/locale/multiple-select-en-US'
+import 'multiple-select/src/locale/multiple-select-zh-CN'
 
 $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['en-US'])
-Vue.component('MultipleSelect', MultipleSelect)

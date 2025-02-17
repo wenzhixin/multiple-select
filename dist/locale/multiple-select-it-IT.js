@@ -7,7 +7,7 @@
 	var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
 	var check = function (it) {
-	  return it && it.Math == Math && it;
+	  return it && it.Math === Math && it;
 	};
 
 	// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
@@ -18,8 +18,9 @@
 	  // eslint-disable-next-line no-restricted-globals -- safe
 	  check(typeof self == 'object' && self) ||
 	  check(typeof commonjsGlobal == 'object' && commonjsGlobal) ||
+	  check(typeof commonjsGlobal == 'object' && commonjsGlobal) ||
 	  // eslint-disable-next-line no-new-func -- fallback
-	  (function () { return this; })() || commonjsGlobal || Function('return this')();
+	  (function () { return this; })() || Function('return this')();
 
 	var objectGetOwnPropertyDescriptor = {};
 
@@ -36,7 +37,7 @@
 	// Detect IE8's incomplete defineProperty implementation
 	var descriptors = !fails$a(function () {
 	  // eslint-disable-next-line es/no-object-defineproperty -- required for testing
-	  return Object.defineProperty({}, 1, { get: function () { return 7; } })[1] != 7;
+	  return Object.defineProperty({}, 1, { get: function () { return 7; } })[1] !== 7;
 	});
 
 	var fails$9 = fails$b;
@@ -115,7 +116,7 @@
 	  // eslint-disable-next-line no-prototype-builtins -- safe
 	  return !$Object$3('z').propertyIsEnumerable(0);
 	}) ? function (it) {
-	  return classof$3(it) == 'String' ? split(it, '') : $Object$3(it);
+	  return classof$3(it) === 'String' ? split(it, '') : $Object$3(it);
 	} : $Object$3;
 
 	// we can't use just `it == null` since of `document.all` special case
@@ -131,7 +132,7 @@
 	// `RequireObjectCoercible` abstract operation
 	// https://tc39.es/ecma262/#sec-requireobjectcoercible
 	var requireObjectCoercible$2 = function (it) {
-	  if (isNullOrUndefined$1(it)) throw $TypeError$6("Can't call method on " + it);
+	  if (isNullOrUndefined$1(it)) throw new $TypeError$6("Can't call method on " + it);
 	  return it;
 	};
 
@@ -223,7 +224,6 @@
 	var engineV8Version = version;
 
 	/* eslint-disable es/no-symbol -- required for testing */
-
 	var V8_VERSION$2 = engineV8Version;
 	var fails$7 = fails$b;
 	var global$8 = global$b;
@@ -232,7 +232,7 @@
 
 	// eslint-disable-next-line es/no-object-getownpropertysymbols -- required for testing
 	var symbolConstructorDetection = !!Object.getOwnPropertySymbols && !fails$7(function () {
-	  var symbol = Symbol();
+	  var symbol = Symbol('symbol detection');
 	  // Chrome 38 Symbol has incorrect toString conversion
 	  // `get-own-property-symbols` polyfill symbols converted to object are not Symbol instances
 	  // nb: Do not call `String` directly to avoid this being optimized out to `symbol+''` which will,
@@ -243,7 +243,6 @@
 	});
 
 	/* eslint-disable es/no-symbol -- required for testing */
-
 	var NATIVE_SYMBOL$1 = symbolConstructorDetection;
 
 	var useSymbolAsUid = NATIVE_SYMBOL$1
@@ -282,7 +281,7 @@
 	// `Assert: IsCallable(argument) is true`
 	var aCallable$1 = function (argument) {
 	  if (isCallable$8(argument)) return argument;
-	  throw $TypeError$5(tryToString(argument) + ' is not a function');
+	  throw new $TypeError$5(tryToString(argument) + ' is not a function');
 	};
 
 	var aCallable = aCallable$1;
@@ -308,7 +307,7 @@
 	  if (pref === 'string' && isCallable$7(fn = input.toString) && !isObject$6(val = call$2(fn, input))) return val;
 	  if (isCallable$7(fn = input.valueOf) && !isObject$6(val = call$2(fn, input))) return val;
 	  if (pref !== 'string' && isCallable$7(fn = input.toString) && !isObject$6(val = call$2(fn, input))) return val;
-	  throw $TypeError$4("Can't convert object to primitive value");
+	  throw new $TypeError$4("Can't convert object to primitive value");
 	};
 
 	var shared$3 = {exports: {}};
@@ -339,10 +338,10 @@
 	(shared$3.exports = function (key, value) {
 	  return store$2[key] || (store$2[key] = value !== undefined ? value : {});
 	})('versions', []).push({
-	  version: '3.30.2',
+	  version: '3.33.3',
 	  mode: 'global',
 	  copyright: '© 2014-2023 Denis Pushkarev (zloirock.ru)',
-	  license: 'https://github.com/zloirock/core-js/blob/v3.30.2/LICENSE',
+	  license: 'https://github.com/zloirock/core-js/blob/v3.33.3/LICENSE',
 	  source: 'https://github.com/zloirock/core-js'
 	});
 
@@ -419,7 +418,7 @@
 	    if (pref === undefined) pref = 'default';
 	    result = call$1(exoticToPrim, input, pref);
 	    if (!isObject$5(result) || isSymbol$1(result)) return result;
-	    throw $TypeError$3("Can't convert object to primitive value");
+	    throw new $TypeError$3("Can't convert object to primitive value");
 	  }
 	  if (pref === undefined) pref = 'number';
 	  return ordinaryToPrimitive(input, pref);
@@ -455,7 +454,7 @@
 	  // eslint-disable-next-line es/no-object-defineproperty -- required for testing
 	  return Object.defineProperty(createElement('div'), 'a', {
 	    get: function () { return 7; }
-	  }).a != 7;
+	  }).a !== 7;
 	});
 
 	var DESCRIPTORS$5 = descriptors;
@@ -493,7 +492,7 @@
 	  return Object.defineProperty(function () { /* empty */ }, 'prototype', {
 	    value: 42,
 	    writable: false
-	  }).prototype != 42;
+	  }).prototype !== 42;
 	});
 
 	var isObject$3 = isObject$7;
@@ -504,7 +503,7 @@
 	// `Assert: Type(argument) is Object`
 	var anObject$2 = function (argument) {
 	  if (isObject$3(argument)) return argument;
-	  throw $TypeError$2($String$1(argument) + ' is not an object');
+	  throw new $TypeError$2($String$1(argument) + ' is not an object');
 	};
 
 	var DESCRIPTORS$3 = descriptors;
@@ -546,7 +545,7 @@
 	  if (IE8_DOM_DEFINE) try {
 	    return $defineProperty(O, P, Attributes);
 	  } catch (error) { /* empty */ }
-	  if ('get' in Attributes || 'set' in Attributes) throw $TypeError$1('Accessors not supported');
+	  if ('get' in Attributes || 'set' in Attributes) throw new $TypeError$1('Accessors not supported');
 	  if ('value' in Attributes) O[P] = Attributes.value;
 	  return O;
 	};
@@ -637,7 +636,7 @@
 	  return function (it) {
 	    var state;
 	    if (!isObject$2(it) || (state = get(it)).type !== TYPE) {
-	      throw TypeError$1('Incompatible receiver, ' + TYPE + ' required');
+	      throw new TypeError$1('Incompatible receiver, ' + TYPE + ' required');
 	    } return state;
 	  };
 	};
@@ -650,7 +649,7 @@
 	  store.set = store.set;
 	  /* eslint-enable no-self-assign -- prototype methods protection */
 	  set = function (it, metadata) {
-	    if (store.has(it)) throw TypeError$1(OBJECT_ALREADY_INITIALIZED);
+	    if (store.has(it)) throw new TypeError$1(OBJECT_ALREADY_INITIALIZED);
 	    metadata.facade = it;
 	    store.set(it, metadata);
 	    return metadata;
@@ -665,7 +664,7 @@
 	  var STATE = sharedKey('state');
 	  hiddenKeys$2[STATE] = true;
 	  set = function (it, metadata) {
-	    if (hasOwn$3(it, STATE)) throw TypeError$1(OBJECT_ALREADY_INITIALIZED);
+	    if (hasOwn$3(it, STATE)) throw new TypeError$1(OBJECT_ALREADY_INITIALIZED);
 	    metadata.facade = it;
 	    createNonEnumerableProperty$1(it, STATE, metadata);
 	    return metadata;
@@ -838,10 +837,10 @@
 	    var value;
 	    // Array#includes uses SameValueZero equality algorithm
 	    // eslint-disable-next-line no-self-compare -- NaN check
-	    if (IS_INCLUDES && el != el) while (length > index) {
+	    if (IS_INCLUDES && el !== el) while (length > index) {
 	      value = O[index++];
 	      // eslint-disable-next-line no-self-compare -- NaN check
-	      if (value != value) return true;
+	      if (value !== value) return true;
 	    // Array#indexOf ignores holes, Array#includes - not
 	    } else for (;length > index; index++) {
 	      if ((IS_INCLUDES || index in O) && O[index] === el) return IS_INCLUDES || index || 0;
@@ -946,8 +945,8 @@
 
 	var isForced$1 = function (feature, detection) {
 	  var value = data[normalize(feature)];
-	  return value == POLYFILL ? true
-	    : value == NATIVE ? false
+	  return value === POLYFILL ? true
+	    : value === NATIVE ? false
 	    : isCallable$2(detection) ? fails$3(detection)
 	    : !!detection;
 	};
@@ -1023,7 +1022,7 @@
 	// https://tc39.es/ecma262/#sec-isarray
 	// eslint-disable-next-line es/no-array-isarray -- safe
 	var isArray$2 = Array.isArray || function isArray(argument) {
-	  return classof$2(argument) == 'Array';
+	  return classof$2(argument) === 'Array';
 	};
 
 	var $TypeError = TypeError;
@@ -1062,7 +1061,7 @@
 	var $Object = Object;
 
 	// ES3 wrong here
-	var CORRECT_ARGUMENTS = classofRaw(function () { return arguments; }()) == 'Arguments';
+	var CORRECT_ARGUMENTS = classofRaw(function () { return arguments; }()) === 'Arguments';
 
 	// fallback for IE11 Script Access Denied error
 	var tryGet = function (it, key) {
@@ -1080,7 +1079,7 @@
 	    // builtinTag case
 	    : CORRECT_ARGUMENTS ? classofRaw(O)
 	    // ES3 arguments fallback
-	    : (result = classofRaw(O)) == 'Object' && isCallable$1(O.callee) ? 'Arguments' : result;
+	    : (result = classofRaw(O)) === 'Object' && isCallable$1(O.callee) ? 'Arguments' : result;
 	};
 
 	var uncurryThis = functionUncurryThis;
@@ -1095,7 +1094,7 @@
 	var construct = getBuiltIn('Reflect', 'construct');
 	var constructorRegExp = /^\s*(?:class|function)\b/;
 	var exec = uncurryThis(constructorRegExp.exec);
-	var INCORRECT_TO_STRING = !constructorRegExp.exec(noop);
+	var INCORRECT_TO_STRING = !constructorRegExp.test(noop);
 
 	var isConstructorModern = function isConstructor(argument) {
 	  if (!isCallable(argument)) return false;

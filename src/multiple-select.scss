@@ -228,6 +228,10 @@
         }
       }
 
+      &.group ~ li.option-level-1:not(.hide-radio) > label {
+        padding-left: 40px;
+      }
+
       &.option-divider {
         padding: 0;
         border-top: 1px solid #e9ecef;

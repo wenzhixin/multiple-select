@@ -30,84 +30,92 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import hljs from 'highlight.js/lib/core'
 import xml from 'highlight.js/lib/languages/xml'
 import 'highlight.js/styles/default.css'
 import registry from '@/registry'
 import Ads from '@/components/Ads'
 import MS from '@/assets/MS'
+import { useRoute } from 'vue-router'
 
-export default {
-  components: {
-    Ads
-  },
-  props: {
-    current: {
-      type: String,
-      default: ''
-    }
-  },
-  data () {
-    return {
-      hideAds: false
-    }
-  },
-  computed: {
-    isSource () {
-      return this.$route.name === 'view-source'
-    },
-    component () {
-      const name = this.current.replace(/^(\w)|-(\w)/g, ($0, $1, $2) => {
-        return $1 && $1.toUpperCase() || $2 && $2.toUpperCase()
-      })
-      return registry.components.find(it => it.name === name)
-    },
-    componentLoader () {
-      return this.component && this.component.default
-    },
-    componentSource () {
-      return this.component && this.component.source.default
-    },
-    data () {
-      const list = []
-      for (const row of MS) {
-        list.push(...row.list)
-      }
-      const data = list.find(it => it.url === this.current + '.html')
-      data.description = data.description.replace(/\\'/g, '\'')
-      return data
-    }
-  },
-  watch: {
-    current () {
-      this.updateAds()
-    },
-    isSource () {
-      this.updateAds()
-      this.updateHighlight()
-    }
-  },
-  mounted () {
-    hljs.registerLanguage('xml', xml)
-    this.updateHighlight()
-  },
-  methods: {
-    updateAds () {
-      this.hideAds = true
-      setTimeout(() => {
-        this.hideAds = false
-      }, 500)
-    },
-    updateHighlight () {
-      this.$nextTick(() => {
-        document.querySelectorAll('pre code').forEach(el => {
-          hljs.highlightElement(el)
-        })
-      })
-    }
+import { defineAsyncComponent, ref, computed, onMounted, nextTick, watch } from 'vue'
+
+const hideAds = ref(false)
+const props = defineProps({
+  current: {
+    type: String,
+    default: ''
   }
+})
+const route = useRoute()
+const isSource = computed(() => {
+  return route.name === 'view-source'
+})
+
+const getComponent = () => {
+  const name = props.current.replace(/^(\w)|-(\w)/g, ($0, $1, $2) => {
+    return $1 && $1.toUpperCase() || $2 && $2.toUpperCase()
+  })
+  return registry.components.find(it => it.name === name)
 }
+
+const componentLoader = computed(() => {
+  const c = getComponent()
+  return c && defineAsyncComponent({
+    loader: c.component
+  })
+})
+
+const componentSourceLoader = computed(() => {
+  const c = getComponent()
+  return c && c.source()
+})
+const componentSource = ref('')
+
+watch([componentSourceLoader], () => {
+  componentSourceLoader.value.then(data => {
+    componentSource.value = data
+  })
+})
+
+const data = computed(() => {
+  const list = []
+  for (const row of MS) {
+    list.push(...row.list)
+  }
+  const data = list.find(it => it.url === props.current + '.html')
+  data.description = data.description.replace(/\\'/g, '\'')
+  return data
+})
+
+const updateAds = () => {
+  hideAds.value = true
+  setTimeout(() => {
+    hideAds.value = false
+  }, 500)
+}
+
+const updateHighlight = () => {
+  nextTick(() => {
+    document.querySelectorAll('pre code').forEach(el => {
+      hljs.highlightElement(el)
+    })
+  })
+}
+
+watch(props.current, () => {
+  updateAds()
+})
+watch(isSource, () => {
+  updateAds()
+  updateHighlight()
+})
+
+onMounted(() => {
+  hljs.registerLanguage('xml', xml)
+  updateHighlight()
+})
 </script>
 
 <style scoped>
