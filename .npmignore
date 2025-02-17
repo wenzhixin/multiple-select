@@ -5,8 +5,13 @@ tools
 vue-starter
 vue-examples
 .browserslistrc
+.editorconfig
 .eslintignore
-.eslintrc.js
+.eslintrc.cjs
+.github
 .ncurc.json
 .travis.yml
+bower.json
+lgtm.yml
+src/.babelrc.json
 rollup.config.js
