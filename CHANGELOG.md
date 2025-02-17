@@ -1,5 +1,14 @@
 ## Changelog
 
+### 2.0.9
+
+- **New:** Added `vue3` support.
+- **Update:** Fixed `v-model` select bug with proxy object.
+- **Update:** Fixed children's element change, not updated the select bug.
+- **Update:** Fixed data without clone change refresh the select bug.
+- **Update:** Fix data watch deep caused by the selected bug.
+- **Update:** Improved the indentation style of multiple select with group mode.
+
 ### 1.7.0
 
 - **New:** Added `onBeforeClick` event.

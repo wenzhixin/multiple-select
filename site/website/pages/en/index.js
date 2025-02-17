@@ -99,12 +99,13 @@ class Index extends React.Component {
 
             <div className="blockElement fourByGridBlock">
               <div className="blockContent">
-                <h2>Latest release v1.7.0 (2023-11-23)</h2>
-                <MarkdownBlock>- **New:** Added `onBeforeClick` event.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added `$.fn.multipleSelect.Constructor` to support extension.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added keyboard actions.</MarkdownBlock>
-                <MarkdownBlock>- **New:** Added `ja-JP` locale.</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Updated `onFilter` event parameter to original search.</MarkdownBlock>
+                <h2>Latest release v2.0.9 (2025-02-17)</h2>
+                <MarkdownBlock>- **New:** Added `vue3` support.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Fixed `v-model` select bug with proxy object.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Fixed children's element change, not updated the select bug.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Fixed data without clone change refresh the select bug.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Fix data watch deep caused by the selected bug.</MarkdownBlock>
+                <MarkdownBlock>- **Update:** Improved the indentation style of multiple select with group mode.</MarkdownBlock>
               </div>
             </div>
           </div>
