@@ -1,6 +1,6 @@
 /**
- * Multiple Select en-US translation
- * Author: Zhixin Wen<wenzhixin2010@gmail.com>
+ * Multiple Select id-ID translation
+ * Author: AdjadTea<adjadtea@gmail.com>
  */
 
 $.fn.multipleSelect.locales['id-ID'] = {
