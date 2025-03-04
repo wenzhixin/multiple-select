@@ -14,7 +14,7 @@ const siteConfig = {
     {doc: 'options', label: 'Documentation'},
     {page: 'examples', label: 'Examples'},
     {doc: 'introduction', label: 'Vue Component'},
-    {page: 'vue-examples', label: 'Vue Examples'},
+    {page: 'vue-examples/', label: 'Vue Examples'},
     {href: "http://multiple-select-live.wenzhixin.net.cn", external: true, label: "Online Editor"},
     {href: "https://github.com/wenzhixin/multiple-select", external: true, label: "GitHub"},
     {languages: true},
