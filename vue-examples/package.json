@@ -19,6 +19,7 @@
     "autoprefixer": "^10.4.20",
     "eslint": "^9.21.0",
     "eslint-plugin-vue": "^9.32.0",
+    "sass": "^1.85.1",
     "vite": "^6.2.0"
   },
   "eslintConfig": {
