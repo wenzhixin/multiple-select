@@ -24,10 +24,10 @@ npm install multiple-select
 
 ### UNPKG
 
-The folks over at [UNPKG](https://unpkg.com/multiple-select@1.7.0/dist/) graciously provide CDN support for CSS and JavaScript of Multiple Select. Just use these links.
+The folks over at [UNPKG](https://unpkg.com/multiple-select@2.0.9/dist/) graciously provide CDN support for CSS and JavaScript of Multiple Select. Just use these links.
 
 ```html
-https://unpkg.com/multiple-select@1.7.0
+https://unpkg.com/multiple-select@2.0.9
 ```
 
 ## Build Files
