@@ -14,7 +14,7 @@ function initUrl() {
 }
 
 function loadUrl(url_) {
-  var template = 'templates/template.html'
+  var template = '../templates/template.html'
 
   var url = template + '?v=VERSION&url=' + url_
   if (window._config.isDebug) {

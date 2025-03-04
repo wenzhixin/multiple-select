@@ -26,6 +26,7 @@ jobs:
           yarn build
           cd ..
           yarn docs
+          cp -r site/website/static/vue-examples/assets/* site/website/build/multiple-select/vue-examples/assets/
           mv site/website/build/multiple-select _gh_pages
           find _gh_pages -type f -exec sed -i "s/v=VERSION/v=$VERSION/g" {} \;
 

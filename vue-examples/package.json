@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vite",
-    "build": "vite build && mv dist/vue-examples.html ../site/website/pages && rm -rf ../site/website/static/vue-examples && mv dist ../site/website/static/vue-examples",
+    "build": "vite build && mv dist/index.prod.html ../site/website/pages/vue-examples.html && rm -rf ../site/website/static/vue-examples && mv dist ../site/website/static/vue-examples",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
