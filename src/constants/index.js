@@ -40,6 +40,7 @@ const DEFAULTS = {
   filterPlaceholder: '',
   filterAcceptOnEnter: false,
   filterByDataLength: undefined,
+  filterSelectAll: true,
   customFilter ({ text, label, search }) {
     return (label || text).includes(search)
   },
@@ -120,7 +121,8 @@ const METHODS = [
   'checkAll', 'uncheckAll',
   'checkInvert',
   'focus', 'blur',
-  'refresh', 'destroy'
+  'refresh', 'resetFilter',
+  'destroy'
 ]
 
 Object.assign(DEFAULTS, EN)

@@ -16,7 +16,7 @@
 
   .ms-drop {
     ul > li label {
-      padding-left: 1.2em;
+      padding-left: calc(1.2em + 4px);
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
@@ -26,7 +26,7 @@
         position: absolute;
         top: 50%;
         margin-top: -0.5em;
-        margin-left: -1.2em;
+        margin-left: calc(-1.2em - 4px);
       }
     }
   }

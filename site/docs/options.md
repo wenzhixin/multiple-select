@@ -57,6 +57,19 @@ The Options are defined in `jQuery.fn.multipleSelect.defaults`.
 
 - **Example:** <a href="/examples#classes.html">The Classes</a>
 
+
+## classInput
+
+- **Attribute:** `data-class-input`
+
+- **Type:** String
+
+- **Detail:** The class of input radio/checkbox.
+
+- **Default:** `''`
+
+- **Example:** <a href="/examples#themes.html">The Themes</a>
+
 ## data
 
 - **Attribute:** `-`
@@ -205,7 +218,7 @@ The Options are defined in `jQuery.fn.multipleSelect.defaults`.
 
 - **Type:** Boolean
 
-- **Detail:** Allows you to show the radio input when `single` is set to `true` (from v1.4.0).
+- **Detail:** Allows you to show the radio input when `single` is set to `true`.
 
 - **Default:** `false`
 
@@ -482,11 +495,23 @@ The Options are defined in `jQuery.fn.multipleSelect.defaults`.
 
 - **Type:** Number
 
-- **Detail:** Auto enable filter when the data(options) length is more than the set number (from 1.4.1).
+- **Detail:** Auto enable filter when the data(options) length is more than the set number.
 
 - **Default:** `undefined`
 
 - **Example:** <a href="/examples#filter-by-data-length.html">Filter By Data Length</a>
+
+## filterSelectAll
+
+- **Attribute:** `data-filter-select-all`
+
+- **Type:** Boolean
+
+- **Detail:** Show select all checkbox in the filter.
+
+- **Default:** `undefined`
+
+- **Example:** <a href="/examples#filter-select-all.html">Filter Select All</a>
 
 ## customFilter
 
@@ -494,7 +519,7 @@ The Options are defined in `jQuery.fn.multipleSelect.defaults`.
 
 - **Type:** function
 
-- **Detail:** The custom filter function returns a boolean to filter or not, containing parameter: `{ text, label, search }` (from 1.6.0).
+- **Detail:** The custom filter function returns a boolean to filter or not, containing parameter: `{ text, label, search }`.
 
 - **Default:** `{ return (label || text).includes(search) }`
 
