@@ -29,19 +29,19 @@ Example: [The Event](/examples#events.html)
 
 - **Parameter:** -
 
-- **Detail:** Fires when the dropdown list is close.
+- **Detail:** Fires when the dropdown list is closed.
 
 ## onCheckAll
 
 - **Parameter:** -
 
-- **Detail:** Fires when all the options are checked by either clicking the "Select all" checkbox or when the "checkall" method is programatically called.
+- **Detail:** Fires when all the options are checked by clicking the "Select all" checkbox or when the "checkAll" method is programmatically called.
 
 ## onUncheckAll
 
 - **Parameter:** -
 
-- **Detail:** Fires when all the options are unchecked by either clicking the "Select all" checkbox or when the "uncheckall" method is programatically called.
+- **Detail:** Fires when all the options are unchecked by either clicking the "Select all" checkbox or when the "uncheckAll" method is programmatically called.
 
 ## onFocus
 
@@ -77,13 +77,13 @@ Example: [The Event](/examples#events.html)
 
 - **Parameter:** -
 
-- **Detail:** Fires when click the clear icon.
+- **Detail:** Fires when clicking the clear icon.
 
 ## onFilter
 
 - **Parameter:** `text`
 
-- **Detail:** Fires after the Multiple Select is on filter.
+- **Detail:** Fires after the Multiple Select is on the filter.
 
 ## onAfterCreate
 

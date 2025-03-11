@@ -7,6 +7,7 @@ const DEFAULTS = {
   placeholder: '',
   classes: '',
   classPrefix: '',
+  classInput: '',
   data: undefined,
   locale: undefined,
 

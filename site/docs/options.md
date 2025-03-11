@@ -15,7 +15,7 @@ The Options are defined in `jQuery.fn.multipleSelect.defaults`.
 
 - **Type:** String
 
-- **Detail:** The name of select element.
+- **Detail:** The name of the select element.
 
 - **Default:** `''`
 
@@ -167,7 +167,7 @@ The Options are defined in `jQuery.fn.multipleSelect.defaults`.
   * First tries for the locale as specified,
   * Then tries the locale with '_' translated to '-' and the region code upper cased,
   * Then tries the short locale code (i.e. `'zh'` instead of `'zh-CN'`),
-  * And finally will use the last locale file loaded (or the default locale if no locales loaded).
+  * Finally, we will use the last locale file loaded (or the default locale if no locales are loaded).
 
   If left `undefined` or an empty string, use the last locale loaded (or `'en-US'` if no locale files loaded).
 
@@ -241,7 +241,7 @@ The Options are defined in `jQuery.fn.multipleSelect.defaults`.
 
 - **Type:** Number
 
-- **Detail:** Show multiple items width.
+- **Detail:** Show the width of multiple items.
 
 - **Default:** `80`
 
@@ -326,7 +326,7 @@ The Options are defined in `jQuery.fn.multipleSelect.defaults`.
 
 - **Type:** Boolean
 
-- **Detail:** Display selected values instead text.
+- **Detail:** Display selected values instead of text.
 
 - **Default:** `false`
 
@@ -350,7 +350,7 @@ The Options are defined in `jQuery.fn.multipleSelect.defaults`.
 
 - **Type:** String
 
-- **Detail:** Custom the display delimiter.
+- **Detail:** Customize the display delimiter.
 
 - **Default:** `, `
 
@@ -362,7 +362,7 @@ The Options are defined in `jQuery.fn.multipleSelect.defaults`.
 
 - **Type:** Number
 
-- **Detail:** `formatCountSelected` will be shown only if more than `minimumCountSelected` items where selected.
+- **Detail:** `formatCountSelected` will be shown only if more than `minimumCountSelected` items were selected.
 
 - **Default:** `3`
 
@@ -410,7 +410,7 @@ The Options are defined in `jQuery.fn.multipleSelect.defaults`.
 
 - **Type:** Boolean
 
-- **Detail:** Open the select dropdown by hover instead of click.
+- **Detail:** Open the select dropdown by hovering instead of clicking.
 
 - **Default:** `false`
 
@@ -422,7 +422,7 @@ The Options are defined in `jQuery.fn.multipleSelect.defaults`.
 
 - **Type:** object
 
-- **Detail:** Define custom container to solve the cut off problem for example parent node is `overflow: hidden`.
+- **Detail:** Define a custom container to solve the cut-off problem. For example, the parent node is `overflow: hidden`.
 
 - **Default:** `null`
 
@@ -470,7 +470,7 @@ The Options are defined in `jQuery.fn.multipleSelect.defaults`.
 
 - **Type:** Boolean
 
-- **Detail:** Speed up keyboard use. Enter filter text and then hit `enter` or `space` will auto click `select all` and close the dropdown.
+- **Detail:** Speed up keyboard use. Enter filter text and then hit `enter` or `space`. It will auto-click `select all` and close the dropdown.
 
 - **Default:** `false`
 
@@ -494,7 +494,7 @@ The Options are defined in `jQuery.fn.multipleSelect.defaults`.
 
 - **Type:** function
 
-- **Detail:** The custom filter function, return boolean to filter or not, contains parameter: `{ text, label, search }` (from 1.6.0).
+- **Detail:** The custom filter function returns a boolean to filter or not, containing parameter: `{ text, label, search }` (from 1.6.0).
 
 - **Default:** `{ return (label || text).includes(search) }`
 
@@ -518,7 +518,7 @@ The Options are defined in `jQuery.fn.multipleSelect.defaults`.
 
 - **Type:** undefined
 
-- **Detail:** Define the animate of open or close the dropdown. Can be `undefined`, `'fade'` and `'slide'`.
+- **Detail:** Define the animation of opening or closing the dropdown. It can be `undefined`, `'fade'` and `'slide'`.
 
 - **Default:** `undefined`
 
@@ -530,7 +530,7 @@ The Options are defined in `jQuery.fn.multipleSelect.defaults`.
 
 - **Type:** function
 
-- **Detail:** The item styler function, return style string to custom the item style, contains parameter: `row`. (updated 1.4.1)
+- **Detail:** The item styler function returns a style string to custom the item style, containing the parameter: `row`. (updated 1.4.1)
 
 - **Default:** `{ return false }`
 
@@ -542,7 +542,7 @@ The Options are defined in `jQuery.fn.multipleSelect.defaults`.
 
 - **Type:** function
 
-- **Detail:** The item textTemplate function, return string to custom the item text, contains parameter: `$elm`.
+- **Detail:** The item textTemplate function returns a string to customize the item text, containing the parameter `$elm`.
 
 - **Default:** `{ return $elm[0].innerHTML }`
 

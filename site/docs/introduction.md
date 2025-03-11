@@ -3,7 +3,7 @@ id: introduction
 title: Introduction
 ---
 
-We have a Multiple Select Component for [Vue.js 2.0+](https://vuejs.org), and it should be able to work with the full [API](/docs/en/options/).
+We have a Multiple Select Component for [Vue.js 2.0+](https://vuejs.org), and it should work with the full [API](/docs/en/options/).
 
 <div id="gg"></div>
 
@@ -16,7 +16,7 @@ We have a Multiple Select Component for [Vue.js 2.0+](https://vuejs.org), and it
 
 ### NPM
 
-Install and manage CSS, JavaScript, locales of Multiple Select using [npm](https://www.npmjs.com/package/multiple-select).
+Install and manage CSS, JavaScript, and locales of Multiple Select using [npm](https://www.npmjs.com/package/multiple-select).
 
 ```sh
 npm install multiple-select
@@ -24,7 +24,7 @@ npm install multiple-select
 
 ### UNPKG
 
-The folks over at [UNPKG](https://unpkg.com/multiple-select@2.0.9/dist/) graciously provide CDN support for CSS and JavaScript of Multiple Select. Just use these links.
+The folks over at [UNPKG](https://unpkg.com/multiple-select@2.0.9/dist/) graciously provide CDN support for Multiple Select's CSS and JavaScript. Just use these links.
 
 ```html
 https://unpkg.com/multiple-select@2.0.9
