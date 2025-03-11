@@ -390,7 +390,11 @@ class MultipleSelect {
   getListRows () {
     const rows = []
 
-    if (this.options.selectAll && !this.options.single) {
+    if (
+      this.options.selectAll &&
+      !this.options.single &&
+      (this.options.filterSelectAll || !this.filterText)
+    ) {
       rows.push(`
         <li class="ms-select-all" tabindex="0">
         <label>
@@ -1022,6 +1026,13 @@ class MultipleSelect {
   refresh () {
     this.destroy()
     this.init()
+  }
+
+  resetFilter () {
+    if (this.options.filter) {
+      this.$searchInput.val('')
+      this.filter(true)
+    }
   }
 
   filter (ignoreTrigger) {

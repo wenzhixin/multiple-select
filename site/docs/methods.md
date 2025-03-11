@@ -151,6 +151,14 @@ $('#multiple').multipleSelect('method', parameter)
 
 - **Example:** [refresh](/examples#refresh.html)
 
+## resetFilter
+
+- **Parameter:**  -
+
+- **Detail:** Reset the filter.
+
+- **Example:** [resetFilter](/examples#resetFilter.html)
+
 ## destroy
 
 - **Parameter:**  -
