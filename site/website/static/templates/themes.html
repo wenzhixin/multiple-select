@@ -4,14 +4,14 @@
     desc: 'Multiple select with bootstrap theme.',
     links: [
       'multiple-select.min.css',
-      'https://unpkg.com/multiple-select@2.0.9/dist/themes/bootstrap.min.css'
+      'themes/bootstrap.min.css'
     ],
     scripts: ['multiple-select.min.js']
   })
 </script>
 
 <div>
-  <div class="form-group row">
+  <div class="mb-3 row">
     <label class="col-sm-2 col-form-label col-form-label-sm">
       Select
     </label>
@@ -34,7 +34,7 @@
     </div>
   </div>
 
-  <div class="form-group row">
+  <div class="mb-3 row">
     <label class="col-sm-2 col-form-label">
       Select
     </label>
@@ -57,7 +57,7 @@
     </div>
   </div>
 
-  <div class="form-group row">
+  <div class="mb-3 row">
     <label class="col-sm-2 col-form-label col-form-label-lg">
       Select
     </label>
@@ -80,7 +80,86 @@
     </div>
   </div>
 
-  <div class="form-group row">
+
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label col-form-label-sm">
+      Select
+    </label>
+
+    <div class="col-sm-10">
+      <select multiple="multiple" class="form-control form-control-sm" placeholder="form-control-sm">
+        <optgroup label="Group 1">
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+          <option value="3">Option 3</option>
+        </optgroup>
+        <optgroup label="Group 2">
+          <option value="4">Option 4</option>
+          <option value="5">Option 5</option>
+          <option value="6">Option 6</option>
+        </optgroup>
+        <optgroup label="Group 3">
+          <option value="7">Option 7</option>
+          <option value="8">Option 8</option>
+          <option value="9">Option 9</option>
+        </optgroup>
+      </select>
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label">
+      Select
+    </label>
+
+    <div class="col-sm-10">
+      <select multiple="multiple" class="form-control" placeholder="form-control">
+        <optgroup label="Group 1">
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+          <option value="3">Option 3</option>
+        </optgroup>
+        <optgroup label="Group 2">
+          <option value="4">Option 4</option>
+          <option value="5">Option 5</option>
+          <option value="6">Option 6</option>
+        </optgroup>
+        <optgroup label="Group 3">
+          <option value="7">Option 7</option>
+          <option value="8">Option 8</option>
+          <option value="9">Option 9</option>
+        </optgroup>
+      </select>
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <label class="col-sm-2">
+      Multiple Select
+    </label>
+
+    <div class="col-sm-10">
+      <select multiple="multiple" class="form-control form-control-lg" placeholder="form-control-lg">
+        <optgroup label="Group 1">
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+          <option value="3">Option 3</option>
+        </optgroup>
+        <optgroup label="Group 2">
+          <option value="4">Option 4</option>
+          <option value="5">Option 5</option>
+          <option value="6">Option 6</option>
+        </optgroup>
+        <optgroup label="Group 3">
+          <option value="7">Option 7</option>
+          <option value="8">Option 8</option>
+          <option value="9">Option 9</option>
+        </optgroup>
+      </select>
+    </div>
+  </div>
+
+  <div class="mb-3 row">
     <label class="col-sm-2">
       Dropdown Select
     </label>
@@ -106,7 +185,7 @@
     </div>
   </div>
 
-  <div class="form-group row">
+  <div class="mb-3 row">
     <label class="col-sm-2">
       Dropdown Dividers
     </label>
@@ -136,6 +215,8 @@
 
 <script>
   function mounted() {
-    $('select').multipleSelect()
+    $('select').multipleSelect({
+      classInput: 'form-check-input'
+    })
   }
 </script>

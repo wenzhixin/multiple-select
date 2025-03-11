@@ -200,7 +200,7 @@
 * [bug] Fix #45, #64: update width option to support a percentage setting.
 * [bug] Trigger the checkbox on the entire line.
 * [bug] Added `noMatchesFound` option.
-* [bug] Update `seperator` to `separator`.
+* [bug] Update `separator` typo.
 * [enh] Allow object of options along with initial method.
 * [enh] Add a `filterAcceptOnEnter` option.
 * [enh] Put class on ms-parent div instead of ul.
@@ -259,7 +259,7 @@
 
 ### 1.0.5
 
-* Update the button text witdh.
+* Update the button text width.
 * Add keyboard support.
 
 ### 1.0.4

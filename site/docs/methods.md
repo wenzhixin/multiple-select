@@ -131,7 +131,7 @@ $('#multiple').multipleSelect('method', parameter)
 
 - **Parameter:**  -
 
-- **Detail:** Focus the multiple select.
+- **Detail:** Focus on the multiple select.
 
 - **Example:** [focus-blur](/examples#focus-blur.html)
 
@@ -155,6 +155,6 @@ $('#multiple').multipleSelect('method', parameter)
 
 - **Parameter:**  -
 
-- **Detail:** Destroy the Multiple Select. If you want remove the multiple select properties.
+- **Detail:** Destroy the Multiple Select. If you want to remove the multiple select properties.
 
 - **Example:** [destroy](/examples#destroy.html)
