@@ -99,7 +99,7 @@ class MultipleSelect {
 
     this.$choice = $(`
       <button type="button" class="ms-choice"${tabIndex}>
-      <span class="placeholder">${this.options.placeholder}</span>
+      <span class="ms-placeholder">${this.options.placeholder}</span>
       ${this.options.showClear ? '<div class="icon-close"></div>' : ''}
       <div class="icon-caret"></div>
       </button>
@@ -248,9 +248,7 @@ class MultipleSelect {
 
     for (const row of this.data) {
       if (row.type === 'optgroup') {
-        const selectedCount = row.children.filter(child => {
-          return child.selected && !child.disabled && child.visible
-        }).length
+        const selectedCount = row.children.filter(child => child.selected && !child.disabled && child.visible).length
 
         if (row.children.length) {
           row.selected = !this.options.single && selectedCount && selectedCount ===
@@ -263,9 +261,8 @@ class MultipleSelect {
       }
     }
 
-    this.allSelected = this.data.filter(row => {
-      return row.selected && !row.disabled && row.visible
-    }).length === this.data.filter(row => !row.disabled && row.visible && !row.divider).length
+    this.allSelected = this.data.filter(row => row.selected && !row.disabled && row.visible).length ===
+      this.data.filter(row => !row.disabled && row.visible && !row.divider).length
 
     if (!ignoreTrigger) {
       if (this.allSelected) {
@@ -393,11 +390,20 @@ class MultipleSelect {
   getListRows () {
     const rows = []
 
-    if (this.options.selectAll && !this.options.single) {
+    if (
+      this.options.selectAll &&
+      !this.options.single &&
+      (this.options.filterSelectAll || !this.filterText)
+    ) {
       rows.push(`
         <li class="ms-select-all" tabindex="0">
         <label>
-        <input type="checkbox" ${this.selectAllName}${this.allSelected ? ' checked="checked"' : ''} tabindex="-1" />
+        <input
+          type="checkbox" ${this.selectAllName}
+          ${this.allSelected ? ' checked="checked"' : ''}
+          ${this.options.classInput ? `class="${this.options.classInput}"` : ''}
+          tabindex="-1"
+        />
         <span>${this.options.formatSelectAll()}</span>
         </label>
         </li>
@@ -445,6 +451,7 @@ class MultipleSelect {
           data-key="${row._key}"
           ${row.selected ? ' checked="checked"' : ''}
           ${row.disabled ? ' disabled="disabled"' : ''}
+          ${this.options.classInput ? `class="${this.options.classInput}"` : ''}
           tabindex="-1"
         >`
 
@@ -488,6 +495,7 @@ class MultipleSelect {
         ${this.selectItemName}
         ${row.selected ? ' checked="checked"' : ''}
         ${row.disabled ? ' disabled="disabled"' : ''}
+        ${this.options.classInput ? `class="${this.options.classInput}"` : ''}
         tabindex="-1"
       >
       <span>${row.text}</span>
@@ -589,15 +597,13 @@ class MultipleSelect {
         label: group.label,
         selected: group.selected,
         data: group._data,
-        children: group.children.map(child => {
-          return removeUndefined({
-            text: child.text,
-            value: child.value,
-            selected: child.selected,
-            disabled: child.disabled,
-            data: child._data
-          })
-        })
+        children: group.children.map(child => removeUndefined({
+          text: child.text,
+          value: child.value,
+          selected: child.selected,
+          disabled: child.disabled,
+          data: child._data
+        }))
       }))
     })
 
@@ -769,7 +775,7 @@ class MultipleSelect {
     let html = ''
 
     if (sl === 0) {
-      $span.addClass('placeholder').html(this.options.placeholder)
+      $span.addClass('ms-placeholder').html(this.options.placeholder)
     } else if (sl < this.options.minimumCountSelected) {
       html = textSelects.join(this.options.displayDelimiter)
     } else if (this.options.formatAllSelected() && sl === this.dataTotal) {
@@ -784,7 +790,7 @@ class MultipleSelect {
     }
 
     if (html) {
-      $span.removeClass('placeholder').html(html)
+      $span.removeClass('ms-placeholder').html(html)
     }
 
     if (this.options.displayTitle) {
@@ -857,9 +863,7 @@ class MultipleSelect {
         }
 
         if (type === 'value' || this.options.single) {
-          values.push(...selectedChildren.map(child => {
-            return type === 'value' ? child._value || child[type] : child[type]
-          }))
+          values.push(...selectedChildren.map(child => type === 'value' ? child._value || child[type] : child[type]))
         } else {
           const value = []
 
@@ -1022,6 +1026,13 @@ class MultipleSelect {
   refresh () {
     this.destroy()
     this.init()
+  }
+
+  resetFilter () {
+    if (this.options.filter) {
+      this.$searchInput.val('')
+      this.filter(true)
+    }
   }
 
   filter (ignoreTrigger) {

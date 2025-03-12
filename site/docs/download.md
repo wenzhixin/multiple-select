@@ -3,13 +3,13 @@ id: download
 title: Download
 ---
 
-Multiple Select has a few easy ways to quickly get started, each one appealing to a different skill level and use case. Read through to see what suits your particular needs.
+Multiple Select offers several easy ways to quickly get started, each appealing to a different skill level and use case. Read through to see what suits your particular needs.
 
 <div id="gg"></div>
 
 ## Source code
 
-Source css, JavaScript, locales, and extensions, along with our docs.
+Source CSS, JavaScript, locales, and our docs.
 
 <a href="https://github.com/wenzhixin/multiple-select/releases" class="button" role="button">Download source</a>
 
@@ -19,11 +19,11 @@ Source css, JavaScript, locales, and extensions, along with our docs.
 
 ## CDN
 
-The folks over at [UNPKG](https://unpkg.com/multiple-select) graciously provide CDN support for CSS and JavaScript of Multiple Select. Just use these CDN links.
+The folks over at [UNPKG](https://unpkg.com/multiple-select) graciously provide CDN support for Multiple Select's CSS and JavaScript. Just use these CDN links.
 
 ```html
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://unpkg.com/multiple-select@2.0.9/dist/multiple-select.min.css">
+<link rel="stylesheet" href="https://unpkg.com/multiple-select@2.1.0/dist/multiple-select.min.css">
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://unpkg.com/multiple-select@2.0.9/dist/multiple-select.min.js"></script>
@@ -31,7 +31,7 @@ The folks over at [UNPKG](https://unpkg.com/multiple-select) graciously provide 
 
 ## NPM
 
-Install and manage Multiple Select's CSS, JavaScript using [NPM](http://npmjs.com).
+Install and manage Multiple Select's CSS and JavaScript using [NPM](http://npmjs.com).
 
 ```bash
 $ npm install multiple-select

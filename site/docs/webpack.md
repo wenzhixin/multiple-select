@@ -13,14 +13,14 @@ Import Multiple Select’s JavaScript by adding this line to your app’s entry 
 import 'multiple-select/dist/multiple-select.js'
 ```
 
-Of course, you can also import locales you need:
+Of course, you can also import the locales you need:
 
 ```js
 // import locale
 import 'multiple-select/dist/locale/multiple-select-zh-CN.js'
 ```
 
-By default, Multiple Select is dependent on [jQuery](https://jquery.com/), these are defined as peerDependencies, this means that you will have to make sure to add both of them to your `package.json` using `npm install --save jquery`.
+By default, Multiple Select is dependent on [jQuery](https://jquery.com/), which is defined as peer dependencies. This means that you will have to make sure to add both of them to your `package.json` using `npm install—-save jquery`.
 
 ## Importing CSS
 

@@ -3,19 +3,19 @@ id: usage
 title: Usage
 ---
 
-The Multiple Select plugin displays data in a tabular format, via JavaScript.
+The Multiple Select plugin displays data in a tabular format via JavaScript.
 
 <div id="gg"></div>
 
 ## Via JavaScript
 
-Include `multiple-select.min.css` in the head tag your html document.
+Include `multiple-select.min.css` in the head tag of your HTML document.
 
 ```html
 <link rel="stylesheet" href="multiple-select.min.css">
 ```
 
-Include jQuery library and `multiple-select.min.js` in the head tag or at the very bottom of your document, just before the closing body tag (usually recommended for better performance).
+Include jQuery library and `multiple-select.min.js` in the head tag or at the bottom of your document, just before the closing body tag (usually recommended for better performance).
 
 ```html
 <script src="jquery.min.js"></script>
@@ -46,9 +46,9 @@ $('select').multipleSelect()
 
 ## Starter template
 
-Be sure to have your pages set up with the latest design and development standards. That means using an HTML5 doctype and including a viewport meta tag for proper responsive behaviors.
+Be sure to set up your pages according to the latest design and development standards. That means using an HTML5 doctype and including a viewport meta tag for proper responsive behaviors.
 
-Put it all together and your pages should look like this:
+Put it all together, and your pages should look like this:
 
 ```html
 <!doctype html>
@@ -59,7 +59,7 @@ Put it all together and your pages should look like this:
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Hello, Multiple Select!</title>
 
-    <link rel="stylesheet" href="https://unpkg.com/multiple-select@2.0.9/dist/multiple-select.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/multiple-select@2.1.0/dist/multiple-select.min.css">
   </head>
   <body>
     <!-- Single Select -->

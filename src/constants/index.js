@@ -1,4 +1,4 @@
-const VERSION = '2.0.9'
+const VERSION = '2.1.0'
 const BLOCK_ROWS = 500
 const CLUSTER_BLOCKS = 4
 
@@ -7,6 +7,7 @@ const DEFAULTS = {
   placeholder: '',
   classes: '',
   classPrefix: '',
+  classInput: '',
   data: undefined,
   locale: undefined,
 
@@ -39,6 +40,7 @@ const DEFAULTS = {
   filterPlaceholder: '',
   filterAcceptOnEnter: false,
   filterByDataLength: undefined,
+  filterSelectAll: true,
   customFilter ({ text, label, search }) {
     return (label || text).includes(search)
   },
@@ -119,7 +121,8 @@ const METHODS = [
   'checkAll', 'uncheckAll',
   'checkInvert',
   'focus', 'blur',
-  'refresh', 'destroy'
+  'refresh', 'resetFilter',
+  'destroy'
 ]
 
 Object.assign(DEFAULTS, EN)

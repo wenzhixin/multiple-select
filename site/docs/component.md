@@ -66,7 +66,7 @@ title: Component
 
 - **Detail:**
 
-  Define the width property of the select, support a percentage setting.
+  Define the width property of the select and support a percentage setting.
 
 - **Default:** `undefined`
 
@@ -151,7 +151,7 @@ The calling method syntax: `@on-event="onEvent"`.
 
 All events are defined in [Events API](/docs/en/events/).
 
-**Note:** you need to convert event name to lowercase + hyphen format, for example: `onClick` should be `on-click`.
+**Note:** You need to convert the event name to lowercase + hyphen format; for example, `onClick` should be `on-click.`
 
 ## Methods
 

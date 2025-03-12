@@ -1,6 +1,6 @@
 {
   "name": "vue-examples",
-  "version": "0.1.0",
+  "version": "2.1.0",
   "private": true,
   "scripts": {
     "serve": "vite",

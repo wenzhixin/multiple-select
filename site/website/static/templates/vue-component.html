@@ -4,36 +4,40 @@
     desc: 'Use Plugin: <a href="https://vuejs.org/" target="_blank">Vue.js</a> and multiple-select-vue.',
     links: ['multiple-select.min.css'],
     scripts: [
-      'https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js',
+      'https://unpkg.com/vue@3/dist/vue.global.js',
       'multiple-select.min.js',
-      'https://unpkg.com/multiple-select@2.0.9/dist/multiple-select-vue.min.js'
+      'https://unpkg.com/multiple-select@2.1.0/dist/multiple-select-vue.umd.js'
     ]
   })
 </script>
 
 <div id="app">
-  <div class="form-group row">
+  <div class="mb-3 row">
     <label class="col-sm-2">
       Options
     </label>
 
     <div class="col-sm-10">
-      <label><input type="checkbox" v-model="single"> single</label>
-      <label><input type="checkbox" v-model="disabled"> disabled</label>
-      <label><input type="checkbox" v-model="options.filter"> filter</label>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" v-model="disabled">
+        <label class="form-check-label">disabled</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" v-model="filter">
+        <label class="form-check-label">filter</label>
+      </div>
     </div>
   </div>
 
-  <div class="form-group row">
+  <div class="mb-3 row">
     <label class="col-sm-2">
-      Component
+      Single Select
     </label>
 
     <div class="col-sm-10">
       <multiple-select
-        ref="select"
-        v-model="value"
-        :multiple="!single"
+        ref="my-select"
+        v-model="value1"
         :disabled="disabled"
         width="100%"
         :options="options"
@@ -42,7 +46,25 @@
     </div>
   </div>
 
-  <div class="form-group row">
+  <div class="mb-3 row">
+    <label class="col-sm-2">
+      Multiple Select
+    </label>
+
+    <div class="col-sm-10">
+      <multiple-select
+        ref="my-select"
+        v-model="value2"
+        multiple
+        :disabled="disabled"
+        width="100%"
+        :options="options"
+        :data="data"
+      ></multiple-select>
+    </div>
+  </div>
+
+  <div class="mb-3 row">
     <label class="col-sm-2">
       Methods
     </label>
@@ -55,52 +77,62 @@
 
 <script>
   function mounted() {
-    new Vue({
-      el: '#app',
-      components: {
-        MultipleSelect
-      },
-      data () {
-        return {
-          value: 1, // or [1, 2] with multiple select
-          single: true,
-          disabled: false,
-          options: {
-            filter: false
+    const { computed, createApp, ref, useTemplateRef } = window.Vue
+    const app = createApp({
+      setup () {
+        const value1 = ref(1)
+        const value2 = ref([1])
+        const disabled = ref(false)
+        const filter = ref(false)
+        const select = useTemplateRef('my-select')
+
+        const options = computed(() => ({
+          filter: filter.value
+        }))
+        const data = [
+          {
+            text: 'January',
+            value: 1
           },
-          data: [
-            {
-              text: 'January',
-              value: 1
-            },
-            {
-              text: 'February',
-              value: 2
-            },
-            {
-              text: 'March',
-              value: 3
-            },
-            {
-              text: 'April',
-              value: 4
-            },
-            {
-              text: 'May',
-              value: 5
-            },
-            {
-              text: 'June',
-              value: 6
-            }
-          ]
+          {
+            text: 'February',
+            value: 2
+          },
+          {
+            text: 'March',
+            value: 3
+          },
+          {
+            text: 'April',
+            value: 4
+          },
+          {
+            text: 'May',
+            value: 5
+          },
+          {
+            text: 'June',
+            value: 6
+          }
+        ]
+
+        const getSelects = () => {
+          alert(select.value.getSelects())
         }
-      },
-      methods: {
-        getSelects () {
-          alert(this.$refs.select.getSelects())
+
+        return {
+          value1,
+          value2,
+          disabled,
+          filter,
+          options,
+          data,
+          getSelects
         }
       }
     })
+
+    app.component('MultipleSelect', window.MultipleSelect)
+    app.mount('#app')
   }
 </script>

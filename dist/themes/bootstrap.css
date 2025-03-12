@@ -1,5 +1,8 @@
 .ms-parent.form-control {
   padding: 0;
+  border-radius: 0.2rem;
+  display: inline-block;
+  height: calc(1.5em + 0.75rem + 2px);
 }
 .ms-parent.form-control .ms-choice {
   height: 100%;
@@ -9,13 +12,35 @@
   top: 50%;
   transform: translateY(-50%);
 }
-.ms-parent.form-control.form-control-sm .ms-drop input[type=radio],
-.ms-parent.form-control.form-control-sm .ms-drop input[type=checkbox] {
-  margin-top: 0.4rem;
+.ms-parent.form-control .ms-drop ul > li:not(.hide-radio) label {
+  padding-left: calc(1.2em + 4px);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
-.ms-parent.form-control.form-control-lg .ms-drop input[type=radio],
-.ms-parent.form-control.form-control-lg .ms-drop input[type=checkbox] {
-  margin-top: 0.5rem;
+.ms-parent.form-control .ms-drop ul > li:not(.hide-radio) label input[type=radio],
+.ms-parent.form-control .ms-drop ul > li:not(.hide-radio) label input[type=checkbox] {
+  position: absolute;
+  top: 50%;
+  margin-top: -0.5em;
+  margin-left: calc(-1.2em - 4px);
+}
+.ms-parent.form-control .input-group-btn .ms-choice {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.ms-parent.form-control .input-group-btn.is-left .ms-choice {
+  border-radius: 4px 0 0 4px;
+  margin-left: 0;
+}
+.ms-parent.form-control .input-group-btn.is-left + .form-control {
+  margin-left: -1px;
+}
+.ms-parent.form-control.form-control-sm {
+  height: calc(1.5em + 0.5rem + 2px);
+}
+.ms-parent.form-control.form-control-lg {
+  height: calc(1.5em + 1rem + 2px);
 }
 .ms-parent.form-control.ms-dropdown .ms-drop ul > li.group.hide-radio label.optgroup {
   margin-bottom: 0;
