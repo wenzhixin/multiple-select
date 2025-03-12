@@ -26,6 +26,27 @@
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['cz-CS']);
 
   /**
+   * Multiple Select da-DK translation
+   * Author: HThuren<thuren.henrik@gmail.com>
+   */
+
+  $.fn.multipleSelect.locales['da-DK'] = {
+    formatSelectAll() {
+      return '[Vælg/fravælg alle]';
+    },
+    formatAllSelected() {
+      return 'Alle valgt';
+    },
+    formatCountSelected(count, total) {
+      return `${count} af ${total} valgt`;
+    },
+    formatNoMatchesFound() {
+      return 'Søgning uden resultat';
+    }
+  };
+  $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['da-DK']);
+
+  /**
    * Multiple Select en-US translation
    * Author: Zhixin Wen<wenzhixin2010@gmail.com>
    */
@@ -47,25 +68,25 @@
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['en-US']);
 
   /**
-   * Multiple Select da-DK translation
-   * Author: HThuren<thuren.henrik@gmail.com>
+   * Multiple Select es-ES translation
+   * Author: Zhixin Wen<wenzhixin2010@gmail.com>
    */
 
-  $.fn.multipleSelect.locales['da-DK'] = {
+  $.fn.multipleSelect.locales['es-ES'] = {
     formatSelectAll() {
-      return '[Vælg/fravælg alle]';
+      return '[Seleccionar todo]';
     },
     formatAllSelected() {
-      return 'Alle valgt';
+      return 'Todos seleccionados';
     },
     formatCountSelected(count, total) {
-      return `${count} af ${total} valgt`;
+      return `${count} de ${total} seleccionado`;
     },
     formatNoMatchesFound() {
-      return 'Søgning uden resultat';
+      return 'No se encontraron coincidencias';
     }
   };
-  $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['da-DK']);
+  $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['es-ES']);
 
   /**
    * Multiple Select fr-FR translation
@@ -129,27 +150,6 @@
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['id-ID']);
-
-  /**
-   * Multiple Select es-ES translation
-   * Author: Zhixin Wen<wenzhixin2010@gmail.com>
-   */
-
-  $.fn.multipleSelect.locales['es-ES'] = {
-    formatSelectAll() {
-      return '[Seleccionar todo]';
-    },
-    formatAllSelected() {
-      return 'Todos seleccionados';
-    },
-    formatCountSelected(count, total) {
-      return `${count} de ${total} seleccionado`;
-    },
-    formatNoMatchesFound() {
-      return 'No se encontraron coincidencias';
-    }
-  };
-  $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['es-ES']);
 
   /**
    * Multiple Select it-IT translation
