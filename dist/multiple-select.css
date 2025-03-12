@@ -55,7 +55,7 @@
   display: block;
   padding-left: 8px;
 }
-.ms-choice > span.placeholder {
+.ms-choice > span.ms-placeholder {
   color: #999;
 }
 .ms-choice > div.icon-close {

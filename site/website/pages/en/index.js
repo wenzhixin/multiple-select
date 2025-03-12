@@ -99,13 +99,17 @@ class Index extends React.Component {
 
             <div className="blockElement fourByGridBlock">
               <div id="latest-release" className="blockContent">
-                <h2>Latest release v2.0.9 (2025-02-17)</h2>
-                <MarkdownBlock>- **New:** Added `vue3` support.</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Fixed `v-model` select bug with proxy object.</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Fixed children's element change, not updated the select bug.</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Fixed data without clone change refresh the select bug.</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Fix data watch deep caused by the selected bug.</MarkdownBlock>
-                <MarkdownBlock>- **Update:** Improved the indentation style of multiple select with group mode.</MarkdownBlock>
+                <h2>Latest release 2.1.0 (2025-3-12)</h2>
+                <MarkdownBlock></MarkdownBlock>
+                <MarkdownBlock>* **New:** Added vue3 and bootstrap5 support.</MarkdownBlock>
+                <MarkdownBlock>* **New:** Added lint for js, scss, spell and editor.</MarkdownBlock>
+                <MarkdownBlock>* **New:** Added `classInput` option to show class of input radio/checkbox.</MarkdownBlock>
+                <MarkdownBlock>* **New:** Added `filterSelectAll` option to show/hide the select all checkbox in the filter.</MarkdownBlock>
+                <MarkdownBlock>* **New:** Added `resetFilter` method to reset the filter.</MarkdownBlock>
+                <MarkdownBlock>* **New:** Added id-ID locale.</MarkdownBlock>
+                <MarkdownBlock>* **Update:** Updated `placeholder` class to `ms-placeholder`.</MarkdownBlock>
+                <MarkdownBlock>* **Update:** Fixed alignment issue of single mode in the bootstrap theme.</MarkdownBlock>
+                <MarkdownBlock></MarkdownBlock>
               </div>
             </div>
           </div>

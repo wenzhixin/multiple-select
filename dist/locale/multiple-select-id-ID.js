@@ -5,24 +5,24 @@
 })(this, (function ($) { 'use strict';
 
   /**
-   * Multiple Select ru-RU translation
-   * Author: Zhixin Wen<wenzhixin2010@gmail.com>
+   * Multiple Select id-ID translation
+   * Author: AdjadTea<adjadtea@gmail.com>
    */
 
-  $.fn.multipleSelect.locales['ru-RU'] = {
+  $.fn.multipleSelect.locales['id-ID'] = {
     formatSelectAll() {
-      return '[Выбрать все]';
+      return '[Pilih Semua]';
     },
     formatAllSelected() {
-      return 'Выбрано все';
+      return 'Semua Dipilih';
     },
     formatCountSelected(count, total) {
-      return `${count} из ${total} выбрано`;
+      return `${count} of ${total} dipilih`;
     },
     formatNoMatchesFound() {
-      return 'Совпадений не найдено';
+      return 'Tidak ditemukan';
     }
   };
-  $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['ru-RU']);
+  $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['id-ID']);
 
 }));

@@ -10,7 +10,7 @@ title: Browser
 In addition to the files mentioned by [Usage](/docs/en/usage), you need to include our vue component file.
 
 ```html
-<script src="https://unpkg.com/multiple-select@2.0.9/dist/multiple-select-vue.min.js"></script>
+<script src="https://unpkg.com/multiple-select@2.1.0/dist/multiple-select-vue.min.js"></script>
 ```
 
 ## Usage

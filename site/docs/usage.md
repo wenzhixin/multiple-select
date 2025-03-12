@@ -59,7 +59,7 @@ Put it all together, and your pages should look like this:
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Hello, Multiple Select!</title>
 
-    <link rel="stylesheet" href="https://unpkg.com/multiple-select@2.0.9/dist/multiple-select.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/multiple-select@2.1.0/dist/multiple-select.min.css">
   </head>
   <body>
     <!-- Single Select -->
