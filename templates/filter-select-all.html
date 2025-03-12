@@ -1,7 +1,7 @@
 <script>
   init({
-    title: 'Filter Placeholder',
-    desc: 'Use <code>filterPlaceholder: \'The filter placeholder\'</code> to set the filter placeholder.',
+    title: 'Filter Select All',
+    desc: 'Use <code>filterSelectAll: false</code> to hide the select all checkbox in the filter.',
     links: ['multiple-select.min.css'],
     scripts: ['multiple-select.min.js']
   })
@@ -61,7 +61,7 @@ select {
   function mounted() {
     $('select').multipleSelect({
       filter: true,
-      filterPlaceholder: 'The filter placeholder'
+      filterSelectAll: false
     })
   }
 </script>
