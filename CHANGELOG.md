@@ -1,5 +1,16 @@
 ## Changelog
 
+### 2.1.0
+
+* **New:** Added vue3 and bootstrap5 support.
+* **New:** Added lint for js, scss, spell and editor.
+* **New:** Added `classInput` option to show class of input radio/checkbox.
+* **New:** Added `filterSelectAll` option to show/hide the select all checkbox in the filter.
+* **New:** Added `resetFilter` method to reset the filter.
+* **New:** Added id-ID locale.
+* **Update:** Updated `placeholder` class to `ms-placeholder`.
+* **Update:** Fixed alignment issue of single mode in the bootstrap theme.
+
 ### 2.0.9
 
 - **New:** Added `vue3` support.

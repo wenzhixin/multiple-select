@@ -15,7 +15,7 @@
   }
 
   .ms-drop {
-    ul > li label {
+    ul > li:not(.hide-radio) label {
       padding-left: calc(1.2em + 4px);
       overflow: hidden;
       white-space: nowrap;
