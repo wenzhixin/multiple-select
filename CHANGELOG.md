@@ -1,6 +1,6 @@
 ## Changelog
 
-### 2.1.0
+### 2.1.1
 
 * **New:** Added vue3 and bootstrap5 support.
 * **New:** Added lint for js, scss, spell and editor.

@@ -99,7 +99,7 @@ class Index extends React.Component {
 
             <div className="blockElement fourByGridBlock">
               <div id="latest-release" className="blockContent">
-                <h2>Latest release 2.1.0 (2025-3-12)</h2>
+                <h2>Latest release 2.1.1 (2025-3-12)</h2>
                 <MarkdownBlock></MarkdownBlock>
                 <MarkdownBlock>* **New:** Added vue3 and bootstrap5 support.</MarkdownBlock>
                 <MarkdownBlock>* **New:** Added lint for js, scss, spell and editor.</MarkdownBlock>
