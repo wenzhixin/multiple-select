@@ -95,7 +95,7 @@ Put it all together, and your pages should look like this:
     </select>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
-    <script src="https://unpkg.com/multiple-select@2.0.9/dist/multiple-select.min.js"></script>
+    <script src="https://unpkg.com/multiple-select@2.1.0/dist/multiple-select.min.js"></script>
     <script>
       $(function () {
         $('select').multipleSelect()
