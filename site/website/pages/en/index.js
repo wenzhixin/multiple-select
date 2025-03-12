@@ -98,7 +98,7 @@ class Index extends React.Component {
             </div>
 
             <div className="blockElement fourByGridBlock">
-              <div className="blockContent">
+              <div id="latest-release" className="blockContent">
                 <h2>Latest release v2.0.9 (2025-02-17)</h2>
                 <MarkdownBlock>- **New:** Added `vue3` support.</MarkdownBlock>
                 <MarkdownBlock>- **Update:** Fixed `v-model` select bug with proxy object.</MarkdownBlock>
