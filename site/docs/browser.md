@@ -56,7 +56,7 @@ In addition to the files mentioned by [Usage](/docs/en/usage), you need to inclu
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Hello, Multiple Select!</title>
 
-    <link rel="stylesheet" href="https://unpkg.com/multiple-select@2.0.9/dist/multiple-select.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/multiple-select@2.1.0/dist/multiple-select.min.css">
   </head>
   <body>
     <div id="select">
@@ -92,8 +92,8 @@ In addition to the files mentioned by [Usage](/docs/en/usage), you need to inclu
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
-    <script src="https://unpkg.com/multiple-select@2.0.9/dist/multiple-select.min.js"></script>
-    <script src="https://unpkg.com/multiple-select@2.0.9/dist/multiple-select-vue.min.js"></script>
+    <script src="https://unpkg.com/multiple-select@2.1.0/dist/multiple-select.min.js"></script>
+    <script src="https://unpkg.com/multiple-select@2.1.0/dist/multiple-select-vue.min.js"></script>
     <script>
       new Vue({
         el: '#select',
