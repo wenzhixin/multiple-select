@@ -26,7 +26,7 @@ The folks over at [UNPKG](https://unpkg.com/multiple-select) graciously provide 
 <link rel="stylesheet" href="https://unpkg.com/multiple-select@2.1.0/dist/multiple-select.min.css">
 
 <!-- Latest compiled and minified JavaScript -->
-<script src="https://unpkg.com/multiple-select@2.0.9/dist/multiple-select.min.js"></script>
+<script src="https://unpkg.com/multiple-select@2.1.0/dist/multiple-select.min.js"></script>
 ```
 
 ## NPM
