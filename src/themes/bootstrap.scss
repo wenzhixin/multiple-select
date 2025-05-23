@@ -1,8 +1,22 @@
 .ms-parent.form-control {
+  --ms-form-control-height: calc(1.5em + .75rem);
+
+  &.form-control-sm {
+    --ms-form-control-height: calc(1.5em + .5rem);
+  }
+
+  &.form-control-lg {
+    --ms-form-control-height: calc(1.5em + 1rem);
+  }
+
   padding: 0;
   border-radius: .2rem;
   display: inline-block;
-  height: calc(1.5em + .75rem + 2px);
+  height: calc(var(--ms-form-control-height) + 2px);
+
+  .icon-close::before {
+    line-height: var(--ms-form-control-height);
+  }
 
   .ms-choice {
     height: 100%;
@@ -15,42 +29,25 @@
   }
 
   .ms-drop {
-    ul > li:not(.hide-radio) label {
-      padding-left: calc(1.2em + 4px);
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
+    ul > li {
+      label {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
 
-      input[type="radio"],
-      input[type="checkbox"] {
-        position: absolute;
-        top: 50%;
-        margin-top: -0.5em;
-        margin-left: calc(-1.2em - 4px);
+      &:not(.hide-radio) label {
+        padding-left: calc(1.2em + 4px);
+
+        input[type="radio"],
+        input[type="checkbox"] {
+          position: absolute;
+          top: 50%;
+          margin-top: -0.5em;
+          margin-left: calc(-1.2em - 4px);
+        }
       }
     }
-  }
-
-  .input-group-btn .ms-choice {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-
-  .input-group-btn.is-left .ms-choice {
-    border-radius: 4px 0 0 4px;
-    margin-left: 0;
-  }
-
-  .input-group-btn.is-left + .form-control {
-    margin-left: -1px;
-  }
-
-  &.form-control-sm {
-    height: calc(1.5em + .5rem + 2px);
-  }
-
-  &.form-control-lg {
-    height: calc(1.5em + 1rem + 2px);
   }
 
   &.ms-dropdown {
@@ -78,6 +75,24 @@
           border-top: none;
         }
       }
+    }
+  }
+}
+
+.input-group-btn {
+  .ms-choice {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  &.is-left {
+    .ms-choice {
+      border-radius: 4px 0 0 4px;
+      margin-left: 0;
+    }
+
+    + .form-control {
+      margin-left: -1px;
     }
   }
 }
