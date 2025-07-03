@@ -807,14 +807,24 @@ class MultipleSelect {
   }
 
   updateSelected () {
+    const inputMap = {}
+
+    this.$drop.find('input[data-key]').each((i, el) => {
+      const $el = $(el)
+
+      inputMap[$el.data('key')] = $el
+    })
     for (let i = this.updateDataStart; i < this.updateDataEnd; i++) {
       const row = this.updateData[i]
+      const $el = inputMap[row._key]
 
-      this.$drop.find(`input[data-key=${row._key}]`).prop('checked', row.selected)
-        .closest('li').toggleClass('selected', row.selected)
+      if ($el) {
+        $el.prop('checked', row.selected)
+        $el.closest('li').toggleClass('selected', row.selected)
+      }
     }
 
-    const noResult = this.data.filter(row => row.visible).length === 0
+    const noResult = !this.data.some(row => row.visible)
 
     if (this.$selectAll.length) {
       this.$selectAll.prop('checked', this.allSelected)
