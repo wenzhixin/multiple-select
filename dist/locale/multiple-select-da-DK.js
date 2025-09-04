@@ -9,7 +9,7 @@
    * Author: HThuren<thuren.henrik@gmail.com>
    */
 
-  $.fn.multipleSelect.locales['da-DK'] = {
+  $.fn.multipleSelect.locales['da-DK'] = $.fn.multipleSelect.locales['da'] = {
     formatSelectAll() {
       return '[Vælg/fravælg alle]';
     },

@@ -1,5 +1,14 @@
 ## Changelog
 
+### 2.2.0
+
+* **New:** Added Bootstrap 5 dark theme support.
+* **New:** Added short format support for all locales.
+* **New:** Added `de-DE` and `ko-KR` locales.
+* **Update:** Improved selector performance for large data cases.
+* **Update:** Fixed close button display issue in Bootstrap theme.
+* **Update:** Fixed locale matching logic to properly handle short format locales.
+
 ### 2.1.1
 
 * **New:** Added vue3 and bootstrap5 support.

@@ -3,7 +3,7 @@
  * Author: Matej Puhony<info@puhony.eu>
  */
 
-$.fn.multipleSelect.locales['cz-CS'] = {
+$.fn.multipleSelect.locales['cz-CS'] = $.fn.multipleSelect.locales['cs'] = {
   formatSelectAll () {
     return '[Vybrat vše]'
   },

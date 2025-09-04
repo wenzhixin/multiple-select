@@ -219,11 +219,11 @@ export default {
     })(),
 
     _refresh () {
-      this.$el.querySelectorAll('option').forEach(el => {
+      for (const el of this.$el.options) {
         if (el.value) {
           $(el).data('value', el.value)
         }
-      })
+      }
     },
 
     refresh () {

@@ -9,7 +9,7 @@
    * Author: Lucas Aguiar<lucas99.abreu@gmail.com>
    */
 
-  $.fn.multipleSelect.locales['pt-BR'] = {
+  $.fn.multipleSelect.locales['pt-BR'] = $.fn.multipleSelect.locales['pt'] = {
     formatSelectAll() {
       return '[Selecionar todos]';
     },

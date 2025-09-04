@@ -117,8 +117,11 @@ const _sfc_main = {
     }
   },
   updated() {
-    const children = this.$el.querySelectorAll("option,optgroup");
-    if (children.length !== this.children.length || !Array.prototype.every.call(children, (item, index) => item === this.children[index])) {
+    const children = [
+      ...this.$el.options,
+      ...this.$el.getElementsByTagName("optgroup")
+    ];
+    if (children.length !== this.children.length || children.some((item, index) => item !== this.children[index])) {
       this._update();
       this.observer.disconnect();
       for (const child of children) {
@@ -216,11 +219,11 @@ const _sfc_main = {
       return res;
     })(),
     _refresh() {
-      this.$el.querySelectorAll("option").forEach((el) => {
+      for (const el of this.$el.options) {
         if (el.value) {
           $(el).data("value", el.value);
         }
-      });
+      }
     },
     refresh() {
       this._refresh();

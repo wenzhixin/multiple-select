@@ -37,12 +37,27 @@ class MultipleSelect {
         parts[1] = parts[1].toUpperCase()
       }
 
+      let localesToExtend = {}
+
       if (locales[this.options.locale]) {
-        $.extend(this.options, locales[this.options.locale])
+        localesToExtend = locales[this.options.locale]
       } else if (locales[parts.join('-')]) {
-        $.extend(this.options, locales[parts.join('-')])
+        localesToExtend = locales[parts.join('-')]
       } else if (locales[parts[0]]) {
-        $.extend(this.options, locales[parts[0]])
+        localesToExtend = locales[parts[0]]
+      }
+
+      this._defaultLocales = this._defaultLocales || {}
+      for (const [formatName, func] of Object.entries(localesToExtend)) {
+        const defaultLocale = Object.prototype.hasOwnProperty.call(this._defaultLocales, formatName) ?
+          this._defaultLocales[formatName] : Constants.DEFAULTS[formatName]
+
+        if (this.options[formatName] !== defaultLocale) {
+          continue
+        }
+
+        this.options[formatName] = func
+        this._defaultLocales[formatName] = func
       }
     }
   }
@@ -807,14 +822,24 @@ class MultipleSelect {
   }
 
   updateSelected () {
+    const inputMap = {}
+
+    this.$drop.find('input[data-key]').each((i, el) => {
+      const $el = $(el)
+
+      inputMap[$el.data('key')] = $el
+    })
     for (let i = this.updateDataStart; i < this.updateDataEnd; i++) {
       const row = this.updateData[i]
+      const $el = inputMap[row._key]
 
-      this.$drop.find(`input[data-key=${row._key}]`).prop('checked', row.selected)
-        .closest('li').toggleClass('selected', row.selected)
+      if ($el) {
+        $el.prop('checked', row.selected)
+        $el.closest('li').toggleClass('selected', row.selected)
+      }
     }
 
-    const noResult = this.data.filter(row => row.visible).length === 0
+    const noResult = !this.data.some(row => row.visible)
 
     if (this.$selectAll.length) {
       this.$selectAll.prop('checked', this.allSelected)
