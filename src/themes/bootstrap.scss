@@ -1,5 +1,21 @@
 .ms-parent.form-control {
+  // Form control height variables
   --ms-form-control-height: calc(1.5em + .75rem);
+
+  // Theme color variables
+  --ms-choice-bg: #fff;
+  --ms-choice-border: #aaa;
+  --ms-choice-color: #444;
+  --ms-drop-bg: #fff;
+  --ms-drop-border: #aaa;
+  --ms-drop-color: #000;
+  --ms-optgroup-color: #6c757d;
+  --ms-divider-color: #e9ecef;
+  --ms-hover-bg: #f8f9fa;
+  --ms-selected-bg: #007bff;
+  --ms-selected-color: #fff;
+  --ms-close-color: #888;
+  --ms-close-hover-color: #333;
 
   &.form-control-sm {
     --ms-form-control-height: calc(1.5em + .5rem);
@@ -21,14 +37,31 @@
   .ms-choice {
     height: 100%;
     border: 0;
+    background-color: var(--ms-choice-bg);
+    border-color: var(--ms-choice-border);
+    color: var(--ms-choice-color);
 
     > span {
       top: 50%;
       transform: translateY(-50%);
     }
+
+    > div.icon-close {
+      &::before {
+        color: var(--ms-close-color);
+      }
+
+      &:hover::before {
+        color: var(--ms-close-hover-color);
+      }
+    }
   }
 
   .ms-drop {
+    background-color: var(--ms-drop-bg);
+    border-color: var(--ms-drop-border);
+    color: var(--ms-drop-color);
+
     ul > li {
       label {
         overflow: hidden;
@@ -47,6 +80,22 @@
           margin-left: calc(-1.2em - 4px);
         }
       }
+
+      &.hide-radio {
+        &:focus,
+        &:hover {
+          background-color: var(--ms-hover-bg);
+        }
+
+        &.selected {
+          background-color: var(--ms-selected-bg);
+          color: var(--ms-selected-color);
+        }
+      }
+
+      &.option-divider {
+        border-top-color: var(--ms-divider-color);
+      }
     }
   }
 
@@ -55,7 +104,7 @@
       &.group.hide-radio label.optgroup {
         margin-bottom: 0;
         font-size: 87.5%;
-        color: #6c757d;
+        color: var(--ms-optgroup-color);
         white-space: nowrap;
         opacity: 1;
       }
@@ -68,7 +117,7 @@
     &.ms-dropdown-divider {
       .ms-drop ul > li {
         &.group.hide-radio label.optgroup {
-          border-top: 1px solid #e9ecef;
+          border-top: 1px solid var(--ms-divider-color);
         }
 
         &.group:first-child label.optgroup {
@@ -94,5 +143,25 @@
     + .form-control {
       margin-left: -1px;
     }
+  }
+}
+
+// Dark theme support for Bootstrap 5
+[data-bs-theme="dark"] {
+  .ms-parent.form-control {
+    // Override theme color variables for dark theme
+    --ms-choice-bg: var(--bs-body-bg);
+    --ms-choice-border: var(--bs-border-color);
+    --ms-choice-color: var(--bs-body-color);
+    --ms-drop-bg: var(--bs-body-bg);
+    --ms-drop-border: var(--bs-border-color);
+    --ms-drop-color: var(--bs-body-color);
+    --ms-optgroup-color: var(--bs-secondary-color);
+    --ms-divider-color: var(--bs-border-color);
+    --ms-hover-bg: var(--bs-secondary-bg);
+    --ms-selected-bg: var(--bs-primary);
+    --ms-selected-color: var(--bs-primary-text);
+    --ms-close-color: var(--bs-secondary-color);
+    --ms-close-hover-color: var(--bs-body-color);
   }
 }
