@@ -3,7 +3,7 @@
  * Author: Zhixin Wen<wenzhixin2010@gmail.com>
  */
 
-$.fn.multipleSelect.locales['ru-RU'] = {
+$.fn.multipleSelect.locales['ru-RU'] = $.fn.multipleSelect.locales['ru'] = {
   formatSelectAll () {
     return '[Выбрать все]'
   },

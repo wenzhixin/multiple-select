@@ -3,7 +3,7 @@
  * Author: Giuseppe Lodi Rizzini
  */
 
-$.fn.multipleSelect.locales['it-IT'] = {
+$.fn.multipleSelect.locales['it-IT'] = $.fn.multipleSelect.locales['it'] = {
   formatSelectAll () {
     return '[Seleziona tutti]'
   },

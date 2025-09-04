@@ -3,7 +3,7 @@
  * Author: Zhixin Wen<wenzhixin2010@gmail.com>
  */
 
-$.fn.multipleSelect.locales['en-US'] = {
+$.fn.multipleSelect.locales['en-US'] = $.fn.multipleSelect.locales['en'] = {
   formatSelectAll () {
     return '[Select all]'
   },

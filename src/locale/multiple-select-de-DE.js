@@ -3,7 +3,7 @@
  * Author: Igor Clukas
  */
 
-$.fn.multipleSelect.locales['de-DE'] = {
+$.fn.multipleSelect.locales['de-DE'] = $.fn.multipleSelect.locales['de'] = {
   formatSelectAll () {
     return '[Alle auswählen]'
   },

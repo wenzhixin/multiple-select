@@ -3,7 +3,7 @@
  * Author: Péter Báthory<bathory86p@gmail.com>
  */
 
-$.fn.multipleSelect.locales['hu-HU'] = {
+$.fn.multipleSelect.locales['hu-HU'] = $.fn.multipleSelect.locales['hu'] = {
   formatSelectAll () {
     return '[Összes kiválasztása]'
   },
