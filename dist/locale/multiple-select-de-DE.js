@@ -5,24 +5,24 @@
 })(this, (function ($) { 'use strict';
 
   /**
-   * Multiple Select vi-VN translation
-   * Author: hoangbaovu <ineo.vn>
+   * Multiple Select de-DE translation
+   * Author: Igor Clukas
    */
 
-  $.fn.multipleSelect.locales['vi-VN'] = $.fn.multipleSelect.locales['vi'] = {
+  $.fn.multipleSelect.locales['de-DE'] = $.fn.multipleSelect.locales['de'] = {
     formatSelectAll() {
-      return '[Tất cả]';
+      return '[Alle auswählen]';
     },
     formatAllSelected() {
-      return 'Chọn tất cả';
+      return 'Alle ausgewählt';
     },
     formatCountSelected(count, total) {
-      return `Đã chọn ${count} trong ${total}`;
+      return `${count} von ${total} ausgewählt`;
     },
     formatNoMatchesFound() {
-      return 'Không tìm thấy kết quả.';
+      return 'Keine Treffer';
     }
   };
-  $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['vi-VN']);
+  $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['de-DE']);
 
 }));

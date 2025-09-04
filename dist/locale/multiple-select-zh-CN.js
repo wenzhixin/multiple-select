@@ -9,7 +9,7 @@
    * Author: Zhixin Wen<wenzhixin2010@gmail.com>
    */
 
-  $.fn.multipleSelect.locales['zh-CN'] = {
+  $.fn.multipleSelect.locales['zh-CN'] = $.fn.multipleSelect.locales['zh'] = {
     formatSelectAll() {
       return '[全选]';
     },

@@ -9,7 +9,7 @@
    * Author: AdjadTea<adjadtea@gmail.com>
    */
 
-  $.fn.multipleSelect.locales['id-ID'] = {
+  $.fn.multipleSelect.locales['id-ID'] = $.fn.multipleSelect.locales['id'] = {
     formatSelectAll() {
       return '[Pilih Semua]';
     },

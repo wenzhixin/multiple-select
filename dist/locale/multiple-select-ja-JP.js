@@ -9,7 +9,7 @@
    * Author: Nozomi Anzai<nozomi.anzai@gmail.com>
    */
 
-  $.fn.multipleSelect.locales['ja-JP'] = {
+  $.fn.multipleSelect.locales['ja-JP'] = $.fn.multipleSelect.locales['ja'] = {
     formatSelectAll() {
       return '[すべて選択]';
     },

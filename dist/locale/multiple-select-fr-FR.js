@@ -9,7 +9,7 @@
    * Author: Francis Perron <francis@hivetek.com>
    */
 
-  $.fn.multipleSelect.locales['fr-FR'] = {
+  $.fn.multipleSelect.locales['fr-FR'] = $.fn.multipleSelect.locales['fr'] = {
     formatSelectAll() {
       return '[Tout sélectionner]';
     },

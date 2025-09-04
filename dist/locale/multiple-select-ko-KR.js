@@ -5,24 +5,24 @@
 })(this, (function ($) { 'use strict';
 
   /**
-   * Multiple Select vi-VN translation
-   * Author: hoangbaovu <ineo.vn>
+   * Multiple Select ko-KR translation
+   * Author: Zhixin Wen<wenzhixin2010@gmail.com>
    */
 
-  $.fn.multipleSelect.locales['vi-VN'] = $.fn.multipleSelect.locales['vi'] = {
+  $.fn.multipleSelect.locales['ko-KR'] = $.fn.multipleSelect.locales['ko'] = {
     formatSelectAll() {
-      return '[Tất cả]';
+      return '[전체선택]';
     },
     formatAllSelected() {
-      return 'Chọn tất cả';
+      return '전체 선택됨';
     },
     formatCountSelected(count, total) {
-      return `Đã chọn ${count} trong ${total}`;
+      return `${count}/${total} 선택됨`;
     },
     formatNoMatchesFound() {
-      return 'Không tìm thấy kết quả.';
+      return '검색 결과가 없습니다.';
     }
   };
-  $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['vi-VN']);
+  $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['ko-KR']);
 
 }));

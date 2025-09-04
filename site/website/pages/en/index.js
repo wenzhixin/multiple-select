@@ -99,7 +99,7 @@ class Index extends React.Component {
 
             <div className="blockElement fourByGridBlock">
               <div id="latest-release" className="blockContent">
-                <h2>Latest release 2.2.0 (2025-09-04)</h2>
+                <h2>Latest release 2.2.0 (2025-9-4)</h2>
                 <MarkdownBlock></MarkdownBlock>
                 <MarkdownBlock>* **New:** Added Bootstrap 5 dark theme support.</MarkdownBlock>
                 <MarkdownBlock>* **New:** Added short format support for all locales.</MarkdownBlock>
