@@ -99,16 +99,14 @@ class Index extends React.Component {
 
             <div className="blockElement fourByGridBlock">
               <div id="latest-release" className="blockContent">
-                <h2>Latest release 2.1.1 (2025-3-12)</h2>
+                <h2>Latest release 2.2.0 (2025-09-04)</h2>
                 <MarkdownBlock></MarkdownBlock>
-                <MarkdownBlock>* **New:** Added vue3 and bootstrap5 support.</MarkdownBlock>
-                <MarkdownBlock>* **New:** Added lint for js, scss, spell and editor.</MarkdownBlock>
-                <MarkdownBlock>* **New:** Added `classInput` option to show class of input radio/checkbox.</MarkdownBlock>
-                <MarkdownBlock>* **New:** Added `filterSelectAll` option to show/hide the select all checkbox in the filter.</MarkdownBlock>
-                <MarkdownBlock>* **New:** Added `resetFilter` method to reset the filter.</MarkdownBlock>
-                <MarkdownBlock>* **New:** Added id-ID locale.</MarkdownBlock>
-                <MarkdownBlock>* **Update:** Updated `placeholder` class to `ms-placeholder`.</MarkdownBlock>
-                <MarkdownBlock>* **Update:** Fixed alignment issue of single mode in the bootstrap theme.</MarkdownBlock>
+                <MarkdownBlock>* **New:** Added Bootstrap 5 dark theme support.</MarkdownBlock>
+                <MarkdownBlock>* **New:** Added short format support for all locales.</MarkdownBlock>
+                <MarkdownBlock>* **New:** Added `de-DE` and `ko-KR` locales.</MarkdownBlock>
+                <MarkdownBlock>* **Update:** Improved selector performance for large data cases.</MarkdownBlock>
+                <MarkdownBlock>* **Update:** Fixed close button display issue in Bootstrap theme.</MarkdownBlock>
+                <MarkdownBlock>* **Update:** Fixed locale matching logic to properly handle short format locales.</MarkdownBlock>
                 <MarkdownBlock></MarkdownBlock>
               </div>
             </div>
