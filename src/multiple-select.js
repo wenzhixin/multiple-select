@@ -1,6 +1,6 @@
 /**
  * @author zhixin wen <wenzhixin2010@gmail.com>
- * @version 2.1.1
+ * @version 2.2.0
  *
  * http://wenzhixin.net.cn/p/multiple-select/
  */
