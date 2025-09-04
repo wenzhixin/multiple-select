@@ -3,7 +3,7 @@
  * Author: Zhixin Wen<wenzhixin2010@gmail.com>
  */
 
-$.fn.multipleSelect.locales['ko-KR'] = {
+$.fn.multipleSelect.locales['ko-KR'] = $.fn.multipleSelect.locales['ko'] = {
   formatSelectAll () {
     return '[전체선택]'
   },
