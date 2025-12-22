@@ -2,20 +2,20 @@
   // Form control height variables
   --ms-form-control-height: calc(1.5em + .75rem);
 
-  // Theme color variables
-  --ms-choice-bg: #fff;
-  --ms-choice-border: #aaa;
-  --ms-choice-color: #444;
-  --ms-drop-bg: #fff;
-  --ms-drop-border: #aaa;
-  --ms-drop-color: #000;
-  --ms-optgroup-color: #6c757d;
-  --ms-divider-color: #e9ecef;
-  --ms-hover-bg: #f8f9fa;
-  --ms-selected-bg: #007bff;
+  // Theme color variables - mapping Bootstrap variables to --ms- variables for consistency
+  --ms-choice-bg: var(--bs-body-bg);
+  --ms-choice-color: var(--bs-body-color);
+  --ms-choice-border-radius: var(--bs-border-radius);
+  --ms-drop-bg: var(--bs-body-bg);
+  --ms-drop-border: var(--bs-border-color);
+  --ms-drop-color: var(--bs-body-color);
+  --ms-optgroup-color: var(--bs-secondary-color);
+  --ms-divider-color: var(--bs-border-color);
+  --ms-hover-bg: var(--bs-secondary-bg);
+  --ms-selected-bg: var(--bs-primary);
   --ms-selected-color: #fff;
-  --ms-close-color: #888;
-  --ms-close-hover-color: #333;
+  --ms-close-color: var(--bs-secondary-color);
+  --ms-close-hover-color: var(--bs-body-color);
 
   &.form-control-sm {
     --ms-form-control-height: calc(1.5em + .5rem);
@@ -26,7 +26,6 @@
   }
 
   padding: 0;
-  border-radius: .2rem;
   display: inline-block;
   height: calc(var(--ms-form-control-height) + 2px);
 
@@ -38,12 +37,20 @@
     height: 100%;
     border: 0;
     background-color: var(--ms-choice-bg);
-    border-color: var(--ms-choice-border);
     color: var(--ms-choice-color);
+    border-radius: var(--ms-choice-border-radius);
 
     > span {
       top: 50%;
       transform: translateY(-50%);
+    }
+
+    > div.icon-caret {
+      border-color: var(--ms-close-color) transparent transparent transparent;
+
+      &.open {
+        border-color: transparent transparent var(--ms-close-color) transparent;
+      }
     }
 
     > div.icon-close {
@@ -61,6 +68,7 @@
     background-color: var(--ms-drop-bg);
     border-color: var(--ms-drop-border);
     color: var(--ms-drop-color);
+    border-radius: var(--ms-choice-border-radius);
 
     ul > li {
       label {
@@ -126,6 +134,10 @@
       }
     }
   }
+
+  .ms-search input {
+    border-radius: var(--ms-choice-border-radius);
+  }
 }
 
 .input-group-btn {
@@ -136,32 +148,12 @@
 
   &.is-left {
     .ms-choice {
-      border-radius: 4px 0 0 4px;
+      border-radius: var(--ms-choice-border-radius) 0 0 var(--ms-choice-border-radius);
       margin-left: 0;
     }
 
     + .form-control {
       margin-left: -1px;
     }
-  }
-}
-
-// Dark theme support for Bootstrap 5
-[data-bs-theme="dark"] {
-  .ms-parent.form-control {
-    // Override theme color variables for dark theme
-    --ms-choice-bg: var(--bs-body-bg);
-    --ms-choice-border: var(--bs-border-color);
-    --ms-choice-color: var(--bs-body-color);
-    --ms-drop-bg: var(--bs-body-bg);
-    --ms-drop-border: var(--bs-border-color);
-    --ms-drop-color: var(--bs-body-color);
-    --ms-optgroup-color: var(--bs-secondary-color);
-    --ms-divider-color: var(--bs-border-color);
-    --ms-hover-bg: var(--bs-secondary-bg);
-    --ms-selected-bg: var(--bs-primary);
-    --ms-selected-color: var(--bs-primary-text);
-    --ms-close-color: var(--bs-secondary-color);
-    --ms-close-hover-color: var(--bs-body-color);
   }
 }
