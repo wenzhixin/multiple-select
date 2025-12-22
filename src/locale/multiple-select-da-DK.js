@@ -15,6 +15,15 @@ $.fn.multipleSelect.locales['da-DK'] = $.fn.multipleSelect.locales['da'] = {
   },
   formatNoMatchesFound () {
     return 'Søgning uden resultat'
+  },
+  formatFilterAll () {
+    return 'Alle'
+  },
+  formatFilterSelected () {
+    return 'Valgt'
+  },
+  formatFilterUnselected () {
+    return 'Ikke valgt'
   }
 }
 

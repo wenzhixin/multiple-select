@@ -15,6 +15,15 @@ $.fn.multipleSelect.locales['ja-JP'] = $.fn.multipleSelect.locales['ja'] = {
   },
   formatNoMatchesFound () {
     return '見つかりません'
+  },
+  formatFilterAll () {
+    return 'すべて'
+  },
+  formatFilterSelected () {
+    return '選択済み'
+  },
+  formatFilterUnselected () {
+    return '未選択'
   }
 }
 

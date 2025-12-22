@@ -15,6 +15,15 @@ $.fn.multipleSelect.locales['zh-TW'] = {
   },
   formatNoMatchesFound () {
     return '沒有找到記錄'
+  },
+  formatFilterAll () {
+    return '全部'
+  },
+  formatFilterSelected () {
+    return '已選擇'
+  },
+  formatFilterUnselected () {
+    return '未選擇'
   }
 }
 

@@ -15,6 +15,15 @@ $.fn.multipleSelect.locales['id-ID'] = $.fn.multipleSelect.locales['id'] = {
   },
   formatNoMatchesFound () {
     return 'Tidak ditemukan'
+  },
+  formatFilterAll () {
+    return 'Semua'
+  },
+  formatFilterSelected () {
+    return 'Dipilih'
+  },
+  formatFilterUnselected () {
+    return 'Tidak dipilih'
   }
 }
 

@@ -15,6 +15,15 @@ $.fn.multipleSelect.locales['cz-CS'] = $.fn.multipleSelect.locales['cs'] = {
   },
   formatNoMatchesFound () {
     return 'Nebylo nalezeno'
+  },
+  formatFilterAll () {
+    return 'Vše'
+  },
+  formatFilterSelected () {
+    return 'Vybráno'
+  },
+  formatFilterUnselected () {
+    return 'Nevybráno'
   }
 }
 

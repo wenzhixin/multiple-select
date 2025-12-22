@@ -465,6 +465,18 @@ The Options are defined in `jQuery.fn.multipleSelect.defaults`.
 
 - **Example:** <a href="/examples#filter-group.html">Filter Only Optgroup</a>
 
+## filterOptions
+
+- **Attribute:** `data-filter-options`
+
+- **Type:** Boolean
+
+- **Detail:** Show filter options (All, Selected, Unselected) in the filter. This option only works with multiple select. Note: This option requires `filter` to be enabled (`filter: true`).
+
+- **Default:** `false`
+
+- **Example:** <a href="/examples#filter-options.html">Filter Options</a>
+
 ## filterPlaceholder
 
 - **Attribute:** `data-filter-placeholder`
