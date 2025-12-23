@@ -138,6 +138,34 @@
   .ms-search input {
     border-radius: var(--ms-choice-border-radius);
   }
+
+  .ms-filter-options {
+    padding: 0.25rem;
+    border-bottom: 1px solid var(--ms-drop-border);
+    background-color: var(--ms-drop-bg);
+  }
+
+  .ms-filter-option {
+    line-height: calc(var(--ms-form-control-height) - 1rem);
+    padding: 0.25rem 0.375rem;
+    margin-right: 0.25rem;
+    border-radius: var(--ms-choice-border-radius);
+    color: var(--ms-optgroup-color);
+    background-color: var(--ms-choice-bg);
+    border: 1px solid var(--ms-drop-border);
+
+    &:hover {
+      background-color: var(--ms-hover-bg);
+      border-color: var(--ms-drop-border);
+      color: var(--ms-choice-color);
+    }
+
+    &.active {
+      background-color: var(--ms-selected-bg);
+      color: var(--ms-selected-color);
+      border-color: var(--ms-selected-bg);
+    }
+  }
 }
 
 .input-group-btn {

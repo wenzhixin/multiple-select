@@ -15,6 +15,15 @@ $.fn.multipleSelect.locales['ru-RU'] = $.fn.multipleSelect.locales['ru'] = {
   },
   formatNoMatchesFound () {
     return 'Совпадений не найдено'
+  },
+  formatFilterAll () {
+    return 'Все'
+  },
+  formatFilterSelected () {
+    return 'Выбрано'
+  },
+  formatFilterUnselected () {
+    return 'Не выбрано'
   }
 }
 
