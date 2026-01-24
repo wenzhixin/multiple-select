@@ -263,7 +263,8 @@ class MultipleSelect {
 
     for (const row of this.data) {
       if (row.type === 'optgroup') {
-        const selectedCount = row.children.filter(child => child.selected && !child.disabled && child.visible).length
+        const selectedCount = row.children.filter(child =>
+          child.selected && !child.disabled && child.visible && !child.divider).length
 
         if (row.children.length) {
           row.selected = !this.options.single && selectedCount && selectedCount ===
@@ -271,13 +272,18 @@ class MultipleSelect {
         }
 
         selectedTotal += selectedCount
-      } else {
+      } else if (!row.divider) {
         selectedTotal += row.selected && !row.disabled && row.visible ? 1 : 0
       }
     }
 
-    this.allSelected = this.data.filter(row => row.selected && !row.disabled && row.visible).length ===
-      this.data.filter(row => !row.disabled && row.visible && !row.divider).length
+    const selectableVisibleCount = this.data.filter(row =>
+      !row.disabled && row.visible && !row.divider).length
+    const selectedVisibleCount = this.data.filter(row =>
+      row.selected && !row.disabled && row.visible && !row.divider).length
+
+    this.allSelected = selectableVisibleCount > 0 &&
+      selectedVisibleCount === selectableVisibleCount
 
     if (!ignoreTrigger) {
       if (this.allSelected) {
@@ -881,7 +887,7 @@ class MultipleSelect {
       }
     }
 
-    const noResult = !this.data.some(row => row.visible)
+    const noResult = !this.data.some(row => row.visible && !row.divider)
 
     if (this.$selectAll.length) {
       this.$selectAll.prop('checked', this.allSelected)
@@ -1140,6 +1146,12 @@ class MultipleSelect {
     this.filterText = search
 
     for (const row of this.data) {
+      // Skip divider rows as they don't have text to filter
+      if (row.divider) {
+        row.visible = true
+        continue
+      }
+
       if (row.type === 'optgroup') {
         if (this.options.filterGroup) {
           const groupTextVisible = this.options.customFilter({
@@ -1154,6 +1166,12 @@ class MultipleSelect {
           let hasChildMatchingSelection = false
 
           for (const child of row.children) {
+            // Skip divider children as they don't have selection state
+            if (child.divider) {
+              child.visible = true
+              continue
+            }
+
             // Check child's selection status independently
             const childMatchesSelection = this.filterBySelection(true, child)
 
@@ -1169,6 +1187,12 @@ class MultipleSelect {
           row.visible = groupTextVisible && hasChildMatchingSelection
         } else {
           for (const child of row.children) {
+            // Skip divider children as they don't have text to filter
+            if (child.divider) {
+              child.visible = true
+              continue
+            }
+
             let visible = this.options.customFilter({
               text: removeDiacritics(child.text.toString().toLowerCase()),
               search: removeDiacritics(search),
@@ -1182,7 +1206,7 @@ class MultipleSelect {
             visible = this.filterBySelection(visible, child)
             child.visible = visible
           }
-          row.visible = row.children.filter(child => child.visible).length > 0
+          row.visible = row.children.filter(child => child.visible && !child.divider).length > 0
         }
       } else {
         let visible = this.options.customFilter({
