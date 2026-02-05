@@ -21,6 +21,15 @@
     },
     formatNoMatchesFound() {
       return 'Không tìm thấy kết quả.';
+    },
+    formatFilterAll() {
+      return 'Tất cả';
+    },
+    formatFilterSelected() {
+      return 'Đã chọn';
+    },
+    formatFilterUnselected() {
+      return 'Chưa chọn';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['vi-VN']);

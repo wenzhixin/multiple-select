@@ -21,6 +21,15 @@
     },
     formatNoMatchesFound() {
       return '見つかりません';
+    },
+    formatFilterAll() {
+      return 'すべて';
+    },
+    formatFilterSelected() {
+      return '選択済み';
+    },
+    formatFilterUnselected() {
+      return '未選択';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['ja-JP']);

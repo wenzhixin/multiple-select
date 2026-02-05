@@ -21,6 +21,15 @@
     },
     formatNoMatchesFound() {
       return 'Søgning uden resultat';
+    },
+    formatFilterAll() {
+      return 'Alle';
+    },
+    formatFilterSelected() {
+      return 'Valgt';
+    },
+    formatFilterUnselected() {
+      return 'Ikke valgt';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['da-DK']);

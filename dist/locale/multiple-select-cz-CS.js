@@ -21,6 +21,15 @@
     },
     formatNoMatchesFound() {
       return 'Nebylo nalezeno';
+    },
+    formatFilterAll() {
+      return 'Vše';
+    },
+    formatFilterSelected() {
+      return 'Vybráno';
+    },
+    formatFilterUnselected() {
+      return 'Nevybráno';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['cz-CS']);

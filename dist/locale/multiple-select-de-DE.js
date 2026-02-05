@@ -21,6 +21,15 @@
     },
     formatNoMatchesFound() {
       return 'Keine Treffer';
+    },
+    formatFilterAll() {
+      return 'Alle';
+    },
+    formatFilterSelected() {
+      return 'Ausgewählt';
+    },
+    formatFilterUnselected() {
+      return 'Nicht ausgewählt';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['de-DE']);

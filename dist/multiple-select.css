@@ -138,6 +138,46 @@
   box-sizing: border-box;
 }
 
+.ms-filter-options {
+  display: flex;
+  padding: 4px 4px;
+  border-bottom: 1px solid #eee;
+  background-color: #f9f9f9;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+.ms-filter-options::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.ms-filter-option {
+  line-height: 20px;
+  padding: 4px 6px;
+  margin-right: 4px;
+  cursor: pointer;
+  border-radius: 3px;
+  color: #666;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.ms-filter-option:hover {
+  background-color: #e9ecef;
+  border-color: #ccc;
+}
+.ms-filter-option.active {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
+.ms-filter-option:last-child {
+  margin-right: 0;
+}
+
 .ms-drop ul {
   overflow: auto;
   margin: 0;

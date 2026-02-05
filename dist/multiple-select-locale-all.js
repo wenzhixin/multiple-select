@@ -21,6 +21,15 @@
     },
     formatNoMatchesFound() {
       return 'Nebylo nalezeno';
+    },
+    formatFilterAll() {
+      return 'Vše';
+    },
+    formatFilterSelected() {
+      return 'Vybráno';
+    },
+    formatFilterUnselected() {
+      return 'Nevybráno';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['cz-CS']);
@@ -42,6 +51,15 @@
     },
     formatNoMatchesFound() {
       return 'Søgning uden resultat';
+    },
+    formatFilterAll() {
+      return 'Alle';
+    },
+    formatFilterSelected() {
+      return 'Valgt';
+    },
+    formatFilterUnselected() {
+      return 'Ikke valgt';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['da-DK']);
@@ -63,72 +81,18 @@
     },
     formatNoMatchesFound() {
       return 'Keine Treffer';
+    },
+    formatFilterAll() {
+      return 'Alle';
+    },
+    formatFilterSelected() {
+      return 'Ausgewählt';
+    },
+    formatFilterUnselected() {
+      return 'Nicht ausgewählt';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['de-DE']);
-
-  /**
-   * Multiple Select en-US translation
-   * Author: Zhixin Wen<wenzhixin2010@gmail.com>
-   */
-
-  $.fn.multipleSelect.locales['en-US'] = $.fn.multipleSelect.locales['en'] = {
-    formatSelectAll() {
-      return '[Select all]';
-    },
-    formatAllSelected() {
-      return 'All selected';
-    },
-    formatCountSelected(count, total) {
-      return `${count} of ${total} selected`;
-    },
-    formatNoMatchesFound() {
-      return 'No matches found';
-    }
-  };
-  $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['en-US']);
-
-  /**
-   * Multiple Select es-ES translation
-   * Author: Zhixin Wen<wenzhixin2010@gmail.com>
-   */
-
-  $.fn.multipleSelect.locales['es-ES'] = $.fn.multipleSelect.locales['es'] = {
-    formatSelectAll() {
-      return '[Seleccionar todo]';
-    },
-    formatAllSelected() {
-      return 'Todos seleccionados';
-    },
-    formatCountSelected(count, total) {
-      return `${count} de ${total} seleccionado`;
-    },
-    formatNoMatchesFound() {
-      return 'No se encontraron coincidencias';
-    }
-  };
-  $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['es-ES']);
-
-  /**
-   * Multiple Select fr-FR translation
-   * Author: Francis Perron <francis@hivetek.com>
-   */
-
-  $.fn.multipleSelect.locales['fr-FR'] = $.fn.multipleSelect.locales['fr'] = {
-    formatSelectAll() {
-      return '[Tout sélectionner]';
-    },
-    formatAllSelected() {
-      return 'Tous sélectionnés';
-    },
-    formatCountSelected(count, total) {
-      return `${count} de ${total} sélectionnés`;
-    },
-    formatNoMatchesFound() {
-      return 'Aucun résultat';
-    }
-  };
-  $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['fr-FR']);
 
   /**
    * Multiple Select hu-HU translation
@@ -147,6 +111,15 @@
     },
     formatNoMatchesFound() {
       return 'Nincs találat';
+    },
+    formatFilterAll() {
+      return 'Összes';
+    },
+    formatFilterSelected() {
+      return 'Kiválasztva';
+    },
+    formatFilterUnselected() {
+      return 'Nincs kiválasztva';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['hu-HU']);
@@ -168,6 +141,15 @@
     },
     formatNoMatchesFound() {
       return 'Nessun risultato';
+    },
+    formatFilterAll() {
+      return 'Tutti';
+    },
+    formatFilterSelected() {
+      return 'Selezionati';
+    },
+    formatFilterUnselected() {
+      return 'Non selezionati';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['it-IT']);
@@ -189,30 +171,78 @@
     },
     formatNoMatchesFound() {
       return 'Tidak ditemukan';
+    },
+    formatFilterAll() {
+      return 'Semua';
+    },
+    formatFilterSelected() {
+      return 'Dipilih';
+    },
+    formatFilterUnselected() {
+      return 'Tidak dipilih';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['id-ID']);
 
   /**
-   * Multiple Select ja-JP translation
-   * Author: Nozomi Anzai<nozomi.anzai@gmail.com>
+   * Multiple Select es-ES translation
+   * Author: Zhixin Wen<wenzhixin2010@gmail.com>
    */
 
-  $.fn.multipleSelect.locales['ja-JP'] = $.fn.multipleSelect.locales['ja'] = {
+  $.fn.multipleSelect.locales['es-ES'] = $.fn.multipleSelect.locales['es'] = {
     formatSelectAll() {
-      return '[すべて選択]';
+      return '[Seleccionar todo]';
     },
     formatAllSelected() {
-      return 'すべて選択';
+      return 'Todos seleccionados';
     },
     formatCountSelected(count, total) {
-      return `${total} 件中 ${count} 件選択`;
+      return `${count} de ${total} seleccionado`;
     },
     formatNoMatchesFound() {
-      return '見つかりません';
+      return 'No se encontraron coincidencias';
+    },
+    formatFilterAll() {
+      return 'Todos';
+    },
+    formatFilterSelected() {
+      return 'Seleccionados';
+    },
+    formatFilterUnselected() {
+      return 'No seleccionados';
     }
   };
-  $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['ja-JP']);
+  $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['es-ES']);
+
+  /**
+   * Multiple Select en-US translation
+   * Author: Zhixin Wen<wenzhixin2010@gmail.com>
+   */
+
+  $.fn.multipleSelect.locales['en-US'] = $.fn.multipleSelect.locales['en'] = {
+    formatSelectAll() {
+      return '[Select all]';
+    },
+    formatAllSelected() {
+      return 'All selected';
+    },
+    formatCountSelected(count, total) {
+      return `${count} of ${total} selected`;
+    },
+    formatNoMatchesFound() {
+      return 'No matches found';
+    },
+    formatFilterAll() {
+      return 'All';
+    },
+    formatFilterSelected() {
+      return 'Selected';
+    },
+    formatFilterUnselected() {
+      return 'Unselected';
+    }
+  };
+  $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['en-US']);
 
   /**
    * Multiple Select ko-KR translation
@@ -231,6 +261,15 @@
     },
     formatNoMatchesFound() {
       return '검색 결과가 없습니다.';
+    },
+    formatFilterAll() {
+      return '전체';
+    },
+    formatFilterSelected() {
+      return '선택됨';
+    },
+    formatFilterUnselected() {
+      return '선택 안됨';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['ko-KR']);
@@ -252,9 +291,48 @@
     },
     formatNoMatchesFound() {
       return 'Nenhum resultado encontrado';
+    },
+    formatFilterAll() {
+      return 'Todos';
+    },
+    formatFilterSelected() {
+      return 'Selecionados';
+    },
+    formatFilterUnselected() {
+      return 'Não selecionados';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['pt-BR']);
+
+  /**
+   * Multiple Select ja-JP translation
+   * Author: Nozomi Anzai<nozomi.anzai@gmail.com>
+   */
+
+  $.fn.multipleSelect.locales['ja-JP'] = $.fn.multipleSelect.locales['ja'] = {
+    formatSelectAll() {
+      return '[すべて選択]';
+    },
+    formatAllSelected() {
+      return 'すべて選択';
+    },
+    formatCountSelected(count, total) {
+      return `${total} 件中 ${count} 件選択`;
+    },
+    formatNoMatchesFound() {
+      return '見つかりません';
+    },
+    formatFilterAll() {
+      return 'すべて';
+    },
+    formatFilterSelected() {
+      return '選択済み';
+    },
+    formatFilterUnselected() {
+      return '未選択';
+    }
+  };
+  $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['ja-JP']);
 
   /**
    * Multiple Select ru-RU translation
@@ -273,30 +351,18 @@
     },
     formatNoMatchesFound() {
       return 'Совпадений не найдено';
+    },
+    formatFilterAll() {
+      return 'Все';
+    },
+    formatFilterSelected() {
+      return 'Выбрано';
+    },
+    formatFilterUnselected() {
+      return 'Не выбрано';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['ru-RU']);
-
-  /**
-   * Multiple Select vi-VN translation
-   * Author: hoangbaovu <ineo.vn>
-   */
-
-  $.fn.multipleSelect.locales['vi-VN'] = $.fn.multipleSelect.locales['vi'] = {
-    formatSelectAll() {
-      return '[Tất cả]';
-    },
-    formatAllSelected() {
-      return 'Chọn tất cả';
-    },
-    formatCountSelected(count, total) {
-      return `Đã chọn ${count} trong ${total}`;
-    },
-    formatNoMatchesFound() {
-      return 'Không tìm thấy kết quả.';
-    }
-  };
-  $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['vi-VN']);
 
   /**
    * Multiple Select zh-CN translation
@@ -315,9 +381,78 @@
     },
     formatNoMatchesFound() {
       return '没有找到记录';
+    },
+    formatFilterAll() {
+      return '全部';
+    },
+    formatFilterSelected() {
+      return '已选择';
+    },
+    formatFilterUnselected() {
+      return '未选择';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['zh-CN']);
+
+  /**
+   * Multiple Select vi-VN translation
+   * Author: hoangbaovu <ineo.vn>
+   */
+
+  $.fn.multipleSelect.locales['vi-VN'] = $.fn.multipleSelect.locales['vi'] = {
+    formatSelectAll() {
+      return '[Tất cả]';
+    },
+    formatAllSelected() {
+      return 'Chọn tất cả';
+    },
+    formatCountSelected(count, total) {
+      return `Đã chọn ${count} trong ${total}`;
+    },
+    formatNoMatchesFound() {
+      return 'Không tìm thấy kết quả.';
+    },
+    formatFilterAll() {
+      return 'Tất cả';
+    },
+    formatFilterSelected() {
+      return 'Đã chọn';
+    },
+    formatFilterUnselected() {
+      return 'Chưa chọn';
+    }
+  };
+  $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['vi-VN']);
+
+  /**
+   * Multiple Select fr-FR translation
+   * Author: Francis Perron <francis@hivetek.com>
+   */
+
+  $.fn.multipleSelect.locales['fr-FR'] = $.fn.multipleSelect.locales['fr'] = {
+    formatSelectAll() {
+      return '[Tout sélectionner]';
+    },
+    formatAllSelected() {
+      return 'Tous sélectionnés';
+    },
+    formatCountSelected(count, total) {
+      return `${count} de ${total} sélectionnés`;
+    },
+    formatNoMatchesFound() {
+      return 'Aucun résultat';
+    },
+    formatFilterAll() {
+      return 'Tous';
+    },
+    formatFilterSelected() {
+      return 'Sélectionnés';
+    },
+    formatFilterUnselected() {
+      return 'Non sélectionnés';
+    }
+  };
+  $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['fr-FR']);
 
   /**
    * Multiple Select zh-TW translation
@@ -336,6 +471,15 @@
     },
     formatNoMatchesFound() {
       return '沒有找到記錄';
+    },
+    formatFilterAll() {
+      return '全部';
+    },
+    formatFilterSelected() {
+      return '已選擇';
+    },
+    formatFilterUnselected() {
+      return '未選擇';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['zh-TW']);
