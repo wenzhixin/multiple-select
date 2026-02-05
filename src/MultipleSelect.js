@@ -263,7 +263,8 @@ class MultipleSelect {
 
     for (const row of this.data) {
       if (row.type === 'optgroup') {
-        const selectedCount = row.children.filter(child => child.selected && !child.disabled && child.visible).length
+        const selectedCount = row.children.filter(child =>
+          child.selected && !child.disabled && child.visible && !child.divider).length
 
         if (row.children.length) {
           row.selected = !this.options.single && selectedCount && selectedCount ===
@@ -271,13 +272,18 @@ class MultipleSelect {
         }
 
         selectedTotal += selectedCount
-      } else {
+      } else if (!row.divider) {
         selectedTotal += row.selected && !row.disabled && row.visible ? 1 : 0
       }
     }
 
-    this.allSelected = this.data.filter(row => row.selected && !row.disabled && row.visible).length ===
-      this.data.filter(row => !row.disabled && row.visible && !row.divider).length
+    const selectableVisibleCount = this.data.filter(row =>
+      !row.disabled && row.visible && !row.divider).length
+    const selectedVisibleCount = this.data.filter(row =>
+      row.selected && !row.disabled && row.visible && !row.divider).length
+
+    this.allSelected = selectableVisibleCount > 0 &&
+      selectedVisibleCount === selectableVisibleCount
 
     if (!ignoreTrigger) {
       if (this.allSelected) {
@@ -290,6 +296,7 @@ class MultipleSelect {
 
   initFilter () {
     this.filterText = ''
+    this.currentFilter = 'all'
 
     if (this.options.filter || !this.options.filterByDataLength) {
       return
@@ -338,6 +345,21 @@ class MultipleSelect {
             placeholder="${this.options.filterPlaceholder}">
         </div>
       `)
+
+      // Only show filter options for multiple select when filterOptions is true
+      if (!this.options.single && this.options.filterOptions) {
+        const allText = this.options.formatFilterAll()
+        const selectedText = this.options.formatFilterSelected()
+        const unselectedText = this.options.formatFilterUnselected()
+
+        html.push(`
+          <div class="ms-filter-options">
+            <span class="ms-filter-option active" data-filter="all" tabindex="0" role="button" aria-pressed="true">${allText}</span>
+            <span class="ms-filter-option" data-filter="selected" tabindex="0" role="button" aria-pressed="false">${selectedText}</span>
+            <span class="ms-filter-option" data-filter="unselected" tabindex="0" role="button" aria-pressed="false">${unselectedText}</span>
+          </div>
+        `)
+      }
     }
 
     html.push('<ul></ul>')
@@ -521,6 +543,7 @@ class MultipleSelect {
 
   events () {
     this.$searchInput = this.$drop.find('.ms-search input')
+    this.$filterOptions = this.$drop.find('.ms-filter-option')
     this.$selectAll = this.$drop.find(`input[${this.selectAllName}]`)
     this.$selectGroups = this.$drop.find(`input[${this.selectGroupName}],span[${this.selectGroupName}]`)
     this.$selectItems = this.$drop.find(`input[${this.selectItemName}]:enabled`)
@@ -596,6 +619,27 @@ class MultipleSelect {
         return
       }
       this.filter()
+    })
+
+    this.$filterOptions.off('click').on('click', e => {
+      const $this = $(e.currentTarget)
+      const filterType = $this.data('filter')
+
+      if (this.currentFilter === filterType) {
+        return
+      }
+
+      this.$filterOptions.removeClass('active')
+        .attr('aria-pressed', 'false')
+      $this.addClass('active')
+        .attr('aria-pressed', 'true')
+      this.currentFilter = filterType
+      this.filter(true) // Pass true to force filter execution
+    }).off('keydown').on('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault()
+        $(e.currentTarget).trigger('click')
+      }
     })
 
     this.$selectAll.off('click').on('click', e => {
@@ -730,14 +774,7 @@ class MultipleSelect {
         .outerWidth(this.$parent.outerWidth())
     }
 
-    let maxHeight = this.options.maxHeight
-
-    if (this.options.maxHeightUnit === 'row') {
-      maxHeight = this.$drop.find('>ul>li').first().outerHeight() *
-        this.options.maxHeight
-    }
-    this.$drop.find('>ul').css('max-height', `${maxHeight}px`)
-    this.$drop.find('.multiple').css('width', `${this.options.multipleWidth}px`)
+    this.resetView()
 
     if (this.data.length && this.options.filter) {
       this.$searchInput.val('')
@@ -760,6 +797,17 @@ class MultipleSelect {
       })
     }
     this.options.onClose()
+  }
+
+  resetView () {
+    let maxHeight = this.options.maxHeight
+
+    if (this.options.maxHeightUnit === 'row') {
+      maxHeight = this.$drop.find('>ul>li').first().outerHeight() *
+        this.options.maxHeight
+    }
+    this.$drop.find('>ul').css('max-height', `${maxHeight}px`)
+    this.$drop.find('.multiple').css('width', `${this.options.multipleWidth}px`)
   }
 
   animateMethod (method) {
@@ -839,7 +887,7 @@ class MultipleSelect {
       }
     }
 
-    const noResult = !this.data.some(row => row.visible)
+    const noResult = !this.data.some(row => row.visible && !row.divider)
 
     if (this.$selectAll.length) {
       this.$selectAll.prop('checked', this.allSelected)
@@ -1060,19 +1108,53 @@ class MultipleSelect {
     }
   }
 
+  /**
+   * Filter by selection status
+   * @param {boolean} visible - Current visibility status
+   * @param {Object} row - Row data
+   * @returns {boolean} - Updated visibility status
+   */
+  filterBySelection (visible, row) {
+    // If filterOptions is not enabled, always treat as 'all' filter
+    if (
+      !visible ||
+      !this.options.filterOptions ||
+      this.currentFilter === 'all'
+    ) {
+      return visible
+    }
+
+    switch (this.currentFilter) {
+      case 'selected':
+        return row.selected
+      case 'unselected':
+        return !row.selected
+      default:
+        return true
+    }
+  }
+
   filter (ignoreTrigger) {
     const originalSearch = this.$searchInput.val().trim()
     const search = originalSearch.toLowerCase()
 
-    if (this.filterText === search) {
+    // Return early only when the filter text hasn't changed and we're not forcing execution.
+    // Changes to filter type should be handled by calling this method with ignoreTrigger = true.
+    if (this.filterText === search && !ignoreTrigger) {
       return
     }
     this.filterText = search
 
     for (const row of this.data) {
+      // Skip divider rows as they don't have text to filter
+      if (row.divider) {
+        row.visible = true
+        continue
+      }
+
       if (row.type === 'optgroup') {
         if (this.options.filterGroup) {
-          const visible = this.options.customFilter({
+          const groupTextVisible = this.options.customFilter({
             label: removeDiacritics(row.label.toString().toLowerCase()),
             search: removeDiacritics(search),
             originalLabel: row.label,
@@ -1080,13 +1162,38 @@ class MultipleSelect {
             row
           })
 
-          row.visible = visible
+          // Check if any child passes the selection filter
+          let hasChildMatchingSelection = false
+
           for (const child of row.children) {
-            child.visible = visible
+            // Skip divider children as they don't have selection state
+            if (child.divider) {
+              child.visible = true
+              continue
+            }
+
+            // Check child's selection status independently
+            const childMatchesSelection = this.filterBySelection(true, child)
+
+            if (childMatchesSelection) {
+              hasChildMatchingSelection = true
+            }
+
+            // Child is visible if both group text matches and child matches selection
+            child.visible = groupTextVisible && childMatchesSelection
           }
+
+          // Group is visible if text matches AND at least one child matches selection
+          row.visible = groupTextVisible && hasChildMatchingSelection
         } else {
           for (const child of row.children) {
-            child.visible = this.options.customFilter({
+            // Skip divider children as they don't have text to filter
+            if (child.divider) {
+              child.visible = true
+              continue
+            }
+
+            let visible = this.options.customFilter({
               text: removeDiacritics(child.text.toString().toLowerCase()),
               search: removeDiacritics(search),
               originalText: child.text,
@@ -1094,23 +1201,32 @@ class MultipleSelect {
               row: child,
               parent: row
             })
+
+            // Further filter by selection status
+            visible = this.filterBySelection(visible, child)
+            child.visible = visible
           }
-          row.visible = row.children.filter(child => child.visible).length > 0
+          row.visible = row.children.filter(child => child.visible && !child.divider).length > 0
         }
       } else {
-        row.visible = this.options.customFilter({
+        let visible = this.options.customFilter({
           text: removeDiacritics(row.text.toString().toLowerCase()),
           search: removeDiacritics(search),
           originalText: row.text,
           originalSearch,
           row
         })
+
+        // Further filter by selection status
+        visible = this.filterBySelection(visible, row)
+        row.visible = visible
       }
     }
 
     this.initListItems()
     this.initSelected(ignoreTrigger)
     this.updateSelected()
+    this.resetView()
 
     if (!ignoreTrigger) {
       this.options.onFilter(originalSearch)

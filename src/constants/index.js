@@ -1,4 +1,4 @@
-const VERSION = '2.2.0'
+const VERSION = '2.3.0'
 const BLOCK_ROWS = 500
 const CLUSTER_BLOCKS = 4
 
@@ -37,6 +37,7 @@ const DEFAULTS = {
 
   filter: false,
   filterGroup: false,
+  filterOptions: false,
   filterPlaceholder: '',
   filterAcceptOnEnter: false,
   filterByDataLength: undefined,
@@ -108,6 +109,15 @@ const EN = {
   },
   formatNoMatchesFound () {
     return 'No matches found'
+  },
+  formatFilterAll () {
+    return 'All'
+  },
+  formatFilterSelected () {
+    return 'Selected'
+  },
+  formatFilterUnselected () {
+    return 'Unselected'
   }
 }
 

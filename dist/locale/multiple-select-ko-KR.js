@@ -21,6 +21,15 @@
     },
     formatNoMatchesFound() {
       return '검색 결과가 없습니다.';
+    },
+    formatFilterAll() {
+      return '전체';
+    },
+    formatFilterSelected() {
+      return '선택됨';
+    },
+    formatFilterUnselected() {
+      return '선택 안됨';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['ko-KR']);

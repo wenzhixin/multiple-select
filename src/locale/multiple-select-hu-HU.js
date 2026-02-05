@@ -15,6 +15,15 @@ $.fn.multipleSelect.locales['hu-HU'] = $.fn.multipleSelect.locales['hu'] = {
   },
   formatNoMatchesFound () {
     return 'Nincs találat'
+  },
+  formatFilterAll () {
+    return 'Összes'
+  },
+  formatFilterSelected () {
+    return 'Kiválasztva'
+  },
+  formatFilterUnselected () {
+    return 'Nincs kiválasztva'
   }
 }
 

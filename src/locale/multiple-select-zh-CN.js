@@ -15,6 +15,15 @@ $.fn.multipleSelect.locales['zh-CN'] = $.fn.multipleSelect.locales['zh'] = {
   },
   formatNoMatchesFound () {
     return '没有找到记录'
+  },
+  formatFilterAll () {
+    return '全部'
+  },
+  formatFilterSelected () {
+    return '已选择'
+  },
+  formatFilterUnselected () {
+    return '未选择'
   }
 }
 

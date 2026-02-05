@@ -21,6 +21,15 @@
     },
     formatNoMatchesFound() {
       return 'Tidak ditemukan';
+    },
+    formatFilterAll() {
+      return 'Semua';
+    },
+    formatFilterSelected() {
+      return 'Dipilih';
+    },
+    formatFilterUnselected() {
+      return 'Tidak dipilih';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['id-ID']);

@@ -99,14 +99,12 @@ class Index extends React.Component {
 
             <div className="blockElement fourByGridBlock">
               <div id="latest-release" className="blockContent">
-                <h2>Latest release 2.2.0 (2025-9-4)</h2>
+                <h2>Latest release 2.3.0 (2026-2-5)</h2>
                 <MarkdownBlock></MarkdownBlock>
-                <MarkdownBlock>* **New:** Added Bootstrap 5 dark theme support.</MarkdownBlock>
-                <MarkdownBlock>* **New:** Added short format support for all locales.</MarkdownBlock>
-                <MarkdownBlock>* **New:** Added `de-DE` and `ko-KR` locales.</MarkdownBlock>
-                <MarkdownBlock>* **Update:** Improved selector performance for large data cases.</MarkdownBlock>
-                <MarkdownBlock>* **Update:** Fixed close button display issue in Bootstrap theme.</MarkdownBlock>
-                <MarkdownBlock>* **Update:** Fixed locale matching logic to properly handle short format locales.</MarkdownBlock>
+                <MarkdownBlock>* **New:** Added `filterOptions` option with localization support.</MarkdownBlock>
+                <MarkdownBlock>* **New:** Enhanced Bootstrap theme with CSS variables.</MarkdownBlock>
+                <MarkdownBlock>* **Update:** Implemented disabled select styling in Bootstrap theme.</MarkdownBlock>
+                <MarkdownBlock>* **Update:** Fixed child visibility calculation with dividers.</MarkdownBlock>
                 <MarkdownBlock></MarkdownBlock>
               </div>
             </div>

@@ -1,5 +1,12 @@
 ## Changelog
 
+### 2.3.0
+
+* **New:** Added `filterOptions` option with localization support.
+* **New:** Enhanced Bootstrap theme with CSS variables.
+* **Update:** Implemented disabled select styling in Bootstrap theme.
+* **Update:** Fixed child visibility calculation with dividers.
+
 ### 2.2.0
 
 * **New:** Added Bootstrap 5 dark theme support.

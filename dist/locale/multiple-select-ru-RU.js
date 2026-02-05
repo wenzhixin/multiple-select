@@ -21,6 +21,15 @@
     },
     formatNoMatchesFound() {
       return 'Совпадений не найдено';
+    },
+    formatFilterAll() {
+      return 'Все';
+    },
+    formatFilterSelected() {
+      return 'Выбрано';
+    },
+    formatFilterUnselected() {
+      return 'Не выбрано';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['ru-RU']);

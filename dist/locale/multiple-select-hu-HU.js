@@ -21,6 +21,15 @@
     },
     formatNoMatchesFound() {
       return 'Nincs találat';
+    },
+    formatFilterAll() {
+      return 'Összes';
+    },
+    formatFilterSelected() {
+      return 'Kiválasztva';
+    },
+    formatFilterUnselected() {
+      return 'Nincs kiválasztva';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['hu-HU']);

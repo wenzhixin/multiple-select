@@ -15,6 +15,15 @@ $.fn.multipleSelect.locales['es-ES'] = $.fn.multipleSelect.locales['es'] = {
   },
   formatNoMatchesFound () {
     return 'No se encontraron coincidencias'
+  },
+  formatFilterAll () {
+    return 'Todos'
+  },
+  formatFilterSelected () {
+    return 'Seleccionados'
+  },
+  formatFilterUnselected () {
+    return 'No seleccionados'
   }
 }
 
