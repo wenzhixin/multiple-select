@@ -6,6 +6,7 @@
   --ms-choice-bg: var(--bs-body-bg);
   --ms-choice-color: var(--bs-body-color);
   --ms-choice-border-radius: var(--bs-border-radius);
+  --ms-choice-disabled-bg: var(--bs-secondary-bg);
   --ms-drop-bg: var(--bs-body-bg);
   --ms-drop-border: var(--bs-border-color);
   --ms-drop-color: var(--bs-body-color);
@@ -39,6 +40,10 @@
     background-color: var(--ms-choice-bg);
     color: var(--ms-choice-color);
     border-radius: var(--ms-choice-border-radius);
+
+    &.disabled {
+      background-color: var(--ms-choice-disabled-bg);
+    }
 
     > span {
       top: 50%;
