@@ -92,7 +92,9 @@ select {
   function mounted() {
     $('select').multipleSelect({
       multiple: true,
-      multipleWidth: 80
+      multipleWidth: 80,
+      filter: true,
+      filterOptions: true
     })
   }
 </script>

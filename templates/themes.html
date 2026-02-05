@@ -230,13 +230,61 @@
       </select>
     </div>
   </div>
+
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label">
+      Disabled
+    </label>
+
+    <div class="col-sm-10">
+      <select multiple="multiple" class="form-control" placeholder="Disabled select" disabled>
+        <option value="1">January</option>
+        <option value="2">February</option>
+        <option value="3">March</option>
+        <option value="4">April</option>
+        <option value="5">May</option>
+        <option value="6">June</option>
+        <option value="7">July</option>
+        <option value="8">August</option>
+        <option value="9">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <label class="col-sm-2 col-form-label">
+      Disabled Options
+    </label>
+
+    <div class="col-sm-10">
+      <select multiple="multiple" class="form-control" placeholder="Disabled options">
+        <option value="1">January</option>
+        <option value="2">February</option>
+        <option value="3" disabled>March (disabled)</option>
+        <option value="4">April</option>
+        <option value="5" disabled>May (disabled)</option>
+        <option value="6">June</option>
+        <option value="7">July</option>
+        <option value="8" disabled>August (disabled)</option>
+        <option value="9">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+      </select>
+    </div>
+  </div>
 </div>
 </div>
 
 <script>
   function mounted() {
     $('select').multipleSelect({
-      classInput: 'form-check-input'
+      classInput: 'form-check-input',
+      filter: true,
+      filterOptions: true
     })
   }
 </script>
