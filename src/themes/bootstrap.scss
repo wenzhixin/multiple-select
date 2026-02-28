@@ -76,6 +76,8 @@
     border-radius: var(--ms-choice-border-radius);
 
     ul > li {
+      padding-left: 0;
+
       label {
         overflow: hidden;
         white-space: nowrap;
@@ -83,7 +85,7 @@
       }
 
       &:not(.hide-radio) label {
-        padding-left: calc(1.2em + 4px);
+        padding-left: calc(1.2em + 12px);
 
         input[type="radio"],
         input[type="checkbox"] {
