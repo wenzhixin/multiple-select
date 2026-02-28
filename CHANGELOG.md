@@ -1,5 +1,10 @@
 ## Changelog
 
+### 2.3.1
+
+* **Update:** Replaced jQuery utilities with ES6+ alternatives.
+* **Update:** Fixed Bootstrap theme checkbox focus state outline being clipped.
+
 ### 2.3.0
 
 * **New:** Added `filterOptions` option with localization support.
