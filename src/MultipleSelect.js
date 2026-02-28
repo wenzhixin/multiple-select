@@ -2,6 +2,7 @@ import Constants from './constants/index.js'
 import VirtualScroll from './virtual-scroll/index.js'
 import {
   compareObjects,
+  extend,
   findByParam,
   getDocumentClickEvent,
   removeDiacritics,
@@ -13,7 +14,7 @@ import {
 class MultipleSelect {
   constructor ($el, options) {
     this.$el = $el
-    this.options = $.extend({}, Constants.DEFAULTS, options)
+    this.options = extend({}, Constants.DEFAULTS, options)
   }
 
   init () {
@@ -194,13 +195,13 @@ class MultipleSelect {
         this.data = data
       }
     } else {
-      $.each(this.$el.children(), (i, elm) => {
+      for (const [i, elm] of Array.from(this.$el.children()).entries()) {
         const row = this.initRow(i, elm)
 
         if (row) {
-          data.push(this.initRow(i, elm))
+          data.push(row)
         }
-      })
+      }
 
       this.options.data = data
       this.data = data
@@ -248,9 +249,9 @@ class MultipleSelect {
         row._data = $elm.data()
       }
 
-      $.each($elm.children(), (j, elem) => {
+      for (const [j, elem] of Array.from($elm.children()).entries()) {
         row.children.push(this.initRow(j, elem, row.disabled))
-      })
+      }
 
       return row
     }
@@ -907,10 +908,10 @@ class MultipleSelect {
 
   getOptions () {
     // deep copy and remove data
-    const options = $.extend({}, this.options)
+    const options = extend({}, this.options)
 
     delete options.data
-    return $.extend(true, {}, options)
+    return extend(true, {}, options)
   }
 
   refreshOptions (options) {
@@ -918,7 +919,7 @@ class MultipleSelect {
     if (compareObjects(this.options, options, true)) {
       return
     }
-    this.options = $.extend(this.options, options)
+    this.options = extend(this.options, options)
     this.destroy()
     this.init()
   }
