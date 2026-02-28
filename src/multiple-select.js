@@ -1,12 +1,13 @@
 /**
  * @author zhixin wen <wenzhixin2010@gmail.com>
- * @version 2.3.0
+ * @version 2.3.1
  *
  * http://wenzhixin.net.cn/p/multiple-select/
  */
 
 import Constants from './constants/index.js'
 import MultipleSelect from './MultipleSelect.js'
+import { extend } from './utils/index.js'
 
 $.fn.multipleSelect = function (option, ...args) {
   let value
@@ -15,7 +16,7 @@ $.fn.multipleSelect = function (option, ...args) {
     const $this = $(el)
     let data = $this.data('multipleSelect')
 
-    const options = $.extend(
+    const options = extend(
       {},
       $this.data(),
       typeof option === 'object' && option
@@ -27,7 +28,7 @@ $.fn.multipleSelect = function (option, ...args) {
     }
 
     if (typeof option === 'string') {
-      if ($.inArray(option, Constants.METHODS) < 0) {
+      if (!Constants.METHODS.includes(option)) {
         throw new Error(`Unknown method: ${option}`)
       }
       value = data[option](...args)
