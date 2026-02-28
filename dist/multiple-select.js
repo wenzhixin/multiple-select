@@ -240,6 +240,105 @@
     }
   }
 
+  /**
+   * Checks if a value is a plain object.
+   *
+   * @param {*} obj - The value to check.
+   * @returns {boolean} True if the value is a plain object, false otherwise.
+   */
+  const isObject = obj => {
+    if (typeof obj !== 'object' || obj === null) {
+      return false;
+    }
+
+    // Objects with null prototype are considered plain objects (jQuery compatible)
+    if (Object.getPrototypeOf(obj) === null) {
+      return true;
+    }
+    let proto = obj;
+    while (Object.getPrototypeOf(proto) !== null) {
+      proto = Object.getPrototypeOf(proto);
+    }
+    return Object.getPrototypeOf(obj) === proto;
+  };
+
+  /**
+   * Merges the contents of two or more objects together into the first object.
+   * This is a re-implementation of jQuery's extend function.
+   * Based on: https://github.com/jquery/jquery/blob/3.6.2/src/core.js#L132
+   *
+   * @param {boolean|Object} [deep=false] - If true, the merge becomes recursive (deep copy).
+   * @param {Object} target - The object to extend.
+   * @param {...Object} objects - The objects to merge into the target.
+   * @returns {Object} The extended target object.
+   */
+  const extend = (...args) => {
+    let target = args[0] || {};
+    let i = 1;
+    let deep = false;
+    let clone;
+
+    // Handle a deep copy situation
+    if (typeof target === 'boolean') {
+      deep = target;
+
+      // Skip the boolean and the target
+      target = args[i] || {};
+      i++;
+    }
+
+    // Handle case when target is a string or something (possible in deep copy)
+    if (typeof target !== 'object' && typeof target !== 'function') {
+      target = {};
+    }
+    for (; i < args.length; i++) {
+      const options = args[i];
+
+      // Ignore undefined/null values
+      if (typeof options === 'undefined' || options === null) {
+        continue;
+      }
+
+      // Extend the base object
+      // eslint-disable-next-line guard-for-in
+      for (const name in options) {
+        const copy = options[name];
+
+        // Prevent Object.prototype pollution
+        // Prevent never-ending loop
+        if (name === '__proto__' || target === copy) {
+          continue;
+        }
+        const copyIsArray = Array.isArray(copy);
+
+        // Recurse if we're merging plain objects or arrays
+        if (deep && copy && (isObject(copy) || copyIsArray)) {
+          const src = target[name];
+          if (copyIsArray && Array.isArray(src)) {
+            if (src.every(it => !isObject(it) && !Array.isArray(it))) {
+              target[name] = copy.slice();
+              continue;
+            }
+          }
+          if (copyIsArray && !Array.isArray(src)) {
+            clone = [];
+          } else if (!copyIsArray && !isObject(src)) {
+            clone = {};
+          } else {
+            clone = src;
+          }
+
+          // Never move original objects, clone them
+          target[name] = extend(deep, clone, copy);
+
+          // Don't bring in undefined values
+        } else if (copy !== undefined) {
+          target[name] = copy;
+        }
+      }
+    }
+    return target;
+  };
   const compareObjects = (objectA, objectB, compareLength) => {
     const aKeys = Object.keys(objectA);
     const bKeys = Object.keys(objectB);
@@ -570,7 +669,7 @@
   class MultipleSelect {
     constructor($el, options) {
       this.$el = $el;
-      this.options = $.extend({}, Constants.DEFAULTS, options);
+      this.options = extend({}, Constants.DEFAULTS, options);
     }
     init() {
       this.initLocale();
@@ -723,12 +822,12 @@
           this.data = data;
         }
       } else {
-        $.each(this.$el.children(), (i, elm) => {
+        for (const [i, elm] of Array.from(this.$el.children()).entries()) {
           const row = this.initRow(i, elm);
           if (row) {
-            data.push(this.initRow(i, elm));
+            data.push(row);
           }
-        });
+        }
         this.options.data = data;
         this.data = data;
         this.fromHtml = true;
@@ -768,9 +867,9 @@
         if (Object.keys($elm.data()).length) {
           row._data = $elm.data();
         }
-        $.each($elm.children(), (j, elem) => {
+        for (const [j, elem] of Array.from($elm.children()).entries()) {
           row.children.push(this.initRow(j, elem, row.disabled));
-        });
+        }
         return row;
       }
       return null;
@@ -1295,16 +1394,16 @@
     }
     getOptions() {
       // deep copy and remove data
-      const options = $.extend({}, this.options);
+      const options = extend({}, this.options);
       delete options.data;
-      return $.extend(true, {}, options);
+      return extend(true, {}, options);
     }
     refreshOptions(options) {
       // If the objects are equivalent then avoid the call of destroy / init methods
       if (compareObjects(this.options, options)) {
         return;
       }
-      this.options = $.extend(this.options, options);
+      this.options = extend(this.options, options);
       this.destroy();
       this.init();
     }
@@ -1599,13 +1698,13 @@
     this.each((i, el) => {
       const $this = $(el);
       let data = $this.data('multipleSelect');
-      const options = $.extend({}, $this.data(), typeof option === 'object' && option);
+      const options = extend({}, $this.data(), typeof option === 'object' && option);
       if (!data) {
         data = new MultipleSelect($this, options);
         $this.data('multipleSelect', data);
       }
       if (typeof option === 'string') {
-        if ($.inArray(option, Constants.METHODS) < 0) {
+        if (!Constants.METHODS.includes(option)) {
           throw new Error(`Unknown method: ${option}`);
         }
         value = data[option](...args);

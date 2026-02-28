@@ -61,13 +61,16 @@
   color: var(--ms-drop-color);
   border-radius: var(--ms-choice-border-radius);
 }
+.ms-parent.form-control .ms-drop ul > li {
+  padding-left: 0;
+}
 .ms-parent.form-control .ms-drop ul > li label {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 .ms-parent.form-control .ms-drop ul > li:not(.hide-radio) label {
-  padding-left: calc(1.2em + 4px);
+  padding-left: calc(1.2em + 12px);
 }
 .ms-parent.form-control .ms-drop ul > li:not(.hide-radio) label input[type=radio],
 .ms-parent.form-control .ms-drop ul > li:not(.hide-radio) label input[type=checkbox] {
