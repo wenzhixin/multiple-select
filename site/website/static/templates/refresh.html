@@ -69,7 +69,7 @@ select {
       var $input = $('#refreshInput')
       var $selected = $('#refreshSelected')
       var $disabled = $('#refreshDisabled')
-      var value = $.trim($input.val())
+      var value = $input.val().trim()
       var $opt = $('<option />', {
         value: value,
         text: value
