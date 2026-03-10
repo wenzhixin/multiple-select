@@ -100,7 +100,7 @@
             {
                 "title": "Custom Dropdown Width",
                 "url": "custom-dropdown-width.html",
-                "description": "Use <code>dropWidth: 580</code> option to custom the dropdown width."
+                "description": "Use <code>dropWidth: 580</code> option to custom the dropdown width, or use <code>width: 'auto'</code> option to auto adjust the width based on the selected text."
             },
             {
                 "title": "Max Height",

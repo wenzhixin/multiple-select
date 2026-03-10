@@ -1,6 +1,7 @@
 const VERSION = '2.3.1'
 const BLOCK_ROWS = 500
 const CLUSTER_BLOCKS = 4
+const ICON_WIDTH_OFFSET = 20
 
 const DEFAULTS = {
   name: '',
@@ -145,6 +146,8 @@ const Constants = {
   CLUSTER_BLOCKS,
 
   DEFAULTS,
+
+  ICON_WIDTH_OFFSET,
 
   METHODS,
 
