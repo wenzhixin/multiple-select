@@ -733,13 +733,15 @@ class MultipleSelect {
       computedWidth = window.getComputedStyle(this.$el[0]).width
 
       if (computedWidth === 'auto') {
-        computedWidth = this.$drop.outerWidth() + 20
+        computedWidth = this.$drop.outerWidth() + Constants.ICON_WIDTH_OFFSET
       }
     } else {
-      computedWidth = this.$el.outerWidth() + 20
+      computedWidth = this.$el.outerWidth() + Constants.ICON_WIDTH_OFFSET
     }
 
-    this.$parent.css('width', this.options.width || computedWidth)
+    if (this.options.width !== 'auto') {
+      this.$parent.css('width', this.options.width || computedWidth)
+    }
 
     this.$el.show().addClass('ms-offscreen')
   }
@@ -859,6 +861,32 @@ class MultipleSelect {
 
     if (this.options.displayTitle) {
       $span.prop('title', this.getSelects('text'))
+    }
+
+    if (this.options.width === 'auto') {
+      if (!this._autoWidthCanvas) {
+        this._autoWidthCanvas = document.createElement('canvas')
+        this._autoWidthContext = this._autoWidthCanvas.getContext('2d')
+      }
+
+      const context = this._autoWidthContext
+
+      if (context) {
+        const styles = window.getComputedStyle ? window.getComputedStyle($span[0]) : $span[0].style
+        const computedFont = styles.font && styles.font.trim()
+
+        context.font = computedFont ||
+          `${styles.fontWeight || 'normal'} ${styles.fontSize || '16px'} ${styles.fontFamily || 'sans-serif'}`
+
+        const textWidth = context.measureText($span.text()).width
+        const iconWidth = Constants.ICON_WIDTH_OFFSET + (this.$close.width() || 0)
+        const spanPadding = parseFloat($span.css('paddingLeft')) + parseFloat($span.css('paddingRight'))
+        const totalWidth = textWidth + iconWidth + spanPadding + 10
+
+        this.$parent.css('width', totalWidth)
+      } else {
+        this.$parent.css('width', 200)
+      }
     }
 
     // set selects to select
