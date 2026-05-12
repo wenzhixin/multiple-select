@@ -1,7 +1,7 @@
 <script>
   init({
     title: 'Custom Dropdown Width',
-    desc: 'Use <code>dropWidth: 580</code> option to custom the dropdown width, or use <code>width: \'auto\'</code> option to auto adjust the width based on the selected text.',
+    desc: 'Use <code>dropWidth: 580</code> option to customize the dropdown width. Use <code>width: \'auto\'</code> option to auto adjust the width based on the selected text and use <code>maxWidth: 80</code> to limit the auto width.',
     links: ['multiple-select.min.css'],
     scripts: ['multiple-select.min.js']
   })
@@ -62,6 +62,21 @@
       </select>
     </div>
   </div>
+
+  <div class="mb-3 row">
+    <label class="col-sm-2">
+      Auto width with maxWidth
+    </label>
+
+    <div class="col-sm-10">
+      <select name="auto-width-max">
+        <option value="1">First</option>
+        <option value="2">Second</option>
+        <option value="3">Third</option>
+        <option value="4">Fourth</option>
+      </select>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -75,6 +90,11 @@
 
     $('select[name="auto-width"]').multipleSelect({
       width: 'auto'
+    })
+
+    $('select[name="auto-width-max"]').multipleSelect({
+      width: 'auto',
+      maxWidth: 80
     })
   }
 </script>

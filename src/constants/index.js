@@ -19,6 +19,7 @@ const DEFAULTS = {
   hideOptgroupCheckboxes: false,
   multipleWidth: 80,
   width: undefined,
+  maxWidth: undefined,
   size: undefined,
   dropWidth: undefined,
   maxHeight: 250,

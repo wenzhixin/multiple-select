@@ -70,6 +70,16 @@ title: Component
 
 - **Default:** `undefined`
 
+### maxWidth
+
+- **Type:** `Number | String`
+
+- **Detail:**
+
+  Define the maximum width of the select when `width: 'auto'` is set. If the auto-calculated width exceeds this value, the width will be capped at `maxWidth`.
+
+- **Default:** `undefined`
+
 ### data
 
 - **Type:** `Array`
