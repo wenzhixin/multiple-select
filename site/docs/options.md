@@ -272,6 +272,18 @@ The Options are defined in `jQuery.fn.multipleSelect.defaults`.
 
 - **Example:** <a href="/examples#custom-dropdown-width.html">Custom Dropdown Width</a>
 
+## maxWidth
+
+- **Attribute:** `data-max-width`
+
+- **Type:** Number | String
+
+- **Detail:** Define the maximum width of the select when `width: 'auto'` is set. If the auto-calculated width exceeds this value, the width will be capped at `maxWidth`.
+
+- **Default:** `undefined`
+
+- **Example:** <a href="/examples#custom-dropdown-width.html">Custom Dropdown Width</a>
+
 ## size
 
 - **Attribute:** `data-size`

@@ -56,6 +56,10 @@ export default {
       type: [Number, String],
       default: undefined
     },
+    maxWidth: {
+      type: [Number, String],
+      default: undefined
+    },
     size: {
       type: String,
       default: undefined
@@ -111,6 +115,9 @@ export default {
       })
     },
     width () {
+      this._initSelectValue()
+    },
+    maxWidth () {
       this._initSelectValue()
     },
     options: {
@@ -232,6 +239,7 @@ export default {
         ...deepCopy(this.options),
         single: !this.multiple,
         width: this.width,
+        maxWidth: this.maxWidth,
         size: this.size,
         data: this.data
       }

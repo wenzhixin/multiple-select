@@ -881,7 +881,12 @@ class MultipleSelect {
         const textWidth = context.measureText($span.text()).width
         const iconWidth = Constants.ICON_WIDTH_OFFSET + (this.$close.width() || 0)
         const spanPadding = parseFloat($span.css('paddingLeft')) + parseFloat($span.css('paddingRight'))
-        const totalWidth = textWidth + iconWidth + spanPadding + 10
+        const maxWidth = this.options.maxWidth && parseFloat(this.options.maxWidth)
+        let totalWidth = textWidth + iconWidth + spanPadding + 10
+
+        if (maxWidth && totalWidth > maxWidth) {
+          totalWidth = maxWidth
+        }
 
         this.$parent.css('width', totalWidth)
       } else {
