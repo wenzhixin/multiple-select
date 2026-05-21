@@ -75,7 +75,7 @@
     color: var(--ms-drop-color);
     border-radius: var(--ms-choice-border-radius);
 
-    ul > li {
+    ul > li:not(.ms-no-results) {
       padding-left: 0;
 
       label {
