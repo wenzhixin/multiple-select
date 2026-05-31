@@ -168,9 +168,14 @@
                 "description": "Use <code>filter: true</code> to enable filter feature."
             },
             {
-                "title": "Filter Only Optgroup",
+                "title": "Filter Group",
                 "url": "filter-group.html",
                 "description": "Use <code>filterGroup: true</code> to filter optgroups only and not options."
+            },
+            {
+                "title": "Filter Only",
+                "url": "filter-only.html",
+                "description": "Use <code>filterOnly: true</code> to show a \"filter only\" button on each option. Click it to select only that option."
             },
             {
                 "title": "Filter Placeholder",

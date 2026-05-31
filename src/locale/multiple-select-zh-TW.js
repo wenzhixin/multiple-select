@@ -24,6 +24,9 @@ $.fn.multipleSelect.locales['zh-TW'] = {
   },
   formatFilterUnselected () {
     return '未選擇'
+  },
+  formatFilterOnly () {
+    return '僅選此項'
   }
 }
 

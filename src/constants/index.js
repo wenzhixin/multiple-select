@@ -48,6 +48,7 @@ const DEFAULTS = {
     return (label || text).includes(search)
   },
 
+  filterOnly: false,
   showClear: false,
   animate: undefined,
 
@@ -120,6 +121,9 @@ const EN = {
   },
   formatFilterUnselected () {
     return 'Unselected'
+  },
+  formatFilterOnly () {
+    return 'Only this'
   }
 }
 

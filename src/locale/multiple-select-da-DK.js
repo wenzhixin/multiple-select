@@ -24,6 +24,9 @@ $.fn.multipleSelect.locales['da-DK'] = $.fn.multipleSelect.locales['da'] = {
   },
   formatFilterUnselected () {
     return 'Ikke valgt'
+  },
+  formatFilterOnly () {
+    return 'Kun denne'
   }
 }
 

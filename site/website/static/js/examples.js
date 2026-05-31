@@ -54,7 +54,28 @@ function initViewSource () {
   }).attr('title', title).text(title)
 }
 
+function _getOrigin() {
+  if (window.location.origin) {
+    return window.location.origin
+  }
+  return window.location.protocol + '//' + window.location.hostname +
+    (window.location.port ? ':' + window.location.port : '')
+}
+
 $(function () {
+  var origin = _getOrigin()
+  window.addEventListener('message', function (e) {
+    if (e.origin !== origin) {
+      return
+    }
+    if (e.data && e.data.type === 'resize') {
+      var height = parseInt(e.data.height, 10)
+      if (height > 0) {
+        $('iframe').height(height)
+      }
+    }
+  })
+
   $(window).hashchange(function () {
     var href = initUrl()
     loadUrl(href)
