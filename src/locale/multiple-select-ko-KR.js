@@ -24,6 +24,9 @@ $.fn.multipleSelect.locales['ko-KR'] = $.fn.multipleSelect.locales['ko'] = {
   },
   formatFilterUnselected () {
     return '선택 안됨'
+  },
+  formatFilterOnly () {
+    return '이 항목만 선택'
   }
 }
 

@@ -489,6 +489,18 @@ The Options are defined in `jQuery.fn.multipleSelect.defaults`.
 
 - **Example:** <a href="/examples#filter-options.html">Filter Options</a>
 
+## filterOnly
+
+- **Attribute:** `data-filter-only`
+
+- **Type:** Boolean
+
+- **Detail:** Show a "filter only" button on each option in multiple select mode. When clicked, all options are unchecked and only the clicked option is selected. Only works with multiple select (not single select).
+
+- **Default:** `false`
+
+- **Example:** <a href="/examples#filter-only.html">Filter Only</a>
+
 ## filterPlaceholder
 
 - **Attribute:** `data-filter-placeholder`

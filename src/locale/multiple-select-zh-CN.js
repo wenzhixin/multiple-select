@@ -24,6 +24,9 @@ $.fn.multipleSelect.locales['zh-CN'] = $.fn.multipleSelect.locales['zh'] = {
   },
   formatFilterUnselected () {
     return '未选择'
+  },
+  formatFilterOnly () {
+    return '仅选此项'
   }
 }
 

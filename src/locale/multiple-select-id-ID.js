@@ -24,6 +24,9 @@ $.fn.multipleSelect.locales['id-ID'] = $.fn.multipleSelect.locales['id'] = {
   },
   formatFilterUnselected () {
     return 'Tidak dipilih'
+  },
+  formatFilterOnly () {
+    return 'Hanya ini'
   }
 }
 

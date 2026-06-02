@@ -24,6 +24,9 @@ $.fn.multipleSelect.locales['ru-RU'] = $.fn.multipleSelect.locales['ru'] = {
   },
   formatFilterUnselected () {
     return 'Не выбрано'
+  },
+  formatFilterOnly () {
+    return 'Только это'
   }
 }
 

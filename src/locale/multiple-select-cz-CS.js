@@ -24,6 +24,9 @@ $.fn.multipleSelect.locales['cz-CS'] = $.fn.multipleSelect.locales['cs'] = {
   },
   formatFilterUnselected () {
     return 'Nevybráno'
+  },
+  formatFilterOnly () {
+    return 'Pouze toto'
   }
 }
 

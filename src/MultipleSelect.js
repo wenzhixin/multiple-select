@@ -538,6 +538,7 @@ class MultipleSelect {
       >
       <span>${row.text}</span>
       </label>
+      ${this.options.filterOnly && !this.options.single && !row.disabled ? `<span class="ms-filter-only" data-key="${row._key}" role="button" tabindex="0">${this.options.formatFilterOnly()}</span>` : ''}
       </li>
     `]
   }
@@ -691,6 +692,49 @@ class MultipleSelect {
       }))
 
       close()
+    })
+
+    const $filterOnly = this.$drop.find('.ms-filter-only')
+
+    const handleFilterOnly = $this => {
+      const option = findByParam(this.data, '_key', $this.data('key'))
+
+      if (this.options.onBeforeClick({ ...option, filterOnly: true }) === false) {
+        return
+      }
+
+      for (const row of this.data) {
+        if (row.type === 'optgroup') {
+          row.children.forEach(child => {
+            if (!child.divider) {
+              child.selected = false
+            }
+          })
+        } else if (!row.divider) {
+          row.selected = false
+        }
+      }
+      this._check(option, true)
+      this.options.onClick(removeUndefined({
+        text: option.text,
+        value: option.value,
+        selected: option.selected,
+        data: option._data,
+        filterOnly: true
+      }))
+    }
+
+    $filterOnly.off('click').on('click', e => {
+      e.stopPropagation()
+      handleFilterOnly($(e.currentTarget))
+    })
+
+    $filterOnly.off('keydown').on('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault()
+        e.stopPropagation()
+        handleFilterOnly($(e.currentTarget))
+      }
     })
 
     this.$ul.find('li').off('keydown').on('keydown', e => {

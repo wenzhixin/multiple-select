@@ -24,6 +24,9 @@ $.fn.multipleSelect.locales['ja-JP'] = $.fn.multipleSelect.locales['ja'] = {
   },
   formatFilterUnselected () {
     return '未選択'
+  },
+  formatFilterOnly () {
+    return 'これのみ選択'
   }
 }
 

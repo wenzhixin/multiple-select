@@ -78,6 +78,15 @@
     ul > li:not(.ms-no-results) {
       padding-left: 0;
 
+      > .ms-filter-only {
+        color: var(--ms-selected-bg);
+        background-color: var(--ms-hover-bg);
+
+        &:focus {
+          outline-color: var(--ms-selected-bg);
+        }
+      }
+
       label {
         overflow: hidden;
         white-space: nowrap;

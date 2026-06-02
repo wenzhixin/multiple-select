@@ -157,6 +157,22 @@ $(function () {
   })
 })
 
+function _getOrigin() {
+  if (window.location.origin) {
+    return window.location.origin
+  }
+  return window.location.protocol + '//' + window.location.hostname +
+    (window.location.port ? ':' + window.location.port : '')
+}
+
+function _resizeIframe() {
+  var height = Math.max(
+    document.documentElement.scrollHeight,
+    document.body.scrollHeight
+  )
+  parent.postMessage({ type: 'resize', height: height }, _getOrigin())
+}
+
 window.init = function (options_) {
   var options = Object.assign({
     title: '',
@@ -168,6 +184,7 @@ window.init = function (options_) {
       if (typeof window.mounted === 'function') {
         window.mounted()
       }
+      _resizeIframe()
     }
   }, options_)
 
