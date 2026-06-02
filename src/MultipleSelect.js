@@ -691,6 +691,10 @@ class MultipleSelect {
         data: option._data
       }))
 
+      if (this.options.filterOnly) {
+        $this.trigger('blur')
+      }
+
       close()
     })
 
