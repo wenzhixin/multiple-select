@@ -44,11 +44,11 @@ const DEFAULTS = {
   filterAcceptOnEnter: false,
   filterByDataLength: undefined,
   filterSelectAll: true,
+  filterOnly: false,
   customFilter ({ text, label, search }) {
     return (label || text).includes(search)
   },
 
-  filterOnly: false,
   showClear: false,
   animate: undefined,
 
