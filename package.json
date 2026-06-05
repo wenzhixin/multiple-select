@@ -34,7 +34,7 @@
     "dev": "yarn css:dev & yarn docs-server"
   },
   "peerDependencies": {
-    "jquery": "3"
+    "jquery": ">=3 <5"
   },
   "repository": {
     "type": "git",
