@@ -5,7 +5,7 @@
 * **New:** Added `filterOnly` option to select only a single option.
 * **New:** Added `maxWidth` option to limit the auto width.
 * **New:** Auto refresh select width when the width attribute is `auto`.
-* **Update:** Upgraded jQuery peer dependency to `>=3` for jQuery 4 compatibility.
+* **Update:** Upgraded jQuery peer dependency to `>=3 <5` for jQuery 4 compatibility.
 * **Update:** Fixed no-results padding in Bootstrap theme.
 
 ### 2.3.1
