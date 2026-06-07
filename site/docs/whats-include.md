@@ -13,21 +13,27 @@ More specifically, it includes the following and more:
 multiple-select/
 ├── site/
 ├── src
-|   ├── constants
-|   ├── locale
-|   ├── utils
-|   ├── vue
-│   ├── MultipleSelect.js
-│   ├── multiple-select.css
-│   ├── multiple-select.js
+│   ├── constants
+│   ├── locale
+│   ├── themes
+│   ├── utils
+│   ├── virtual-scroll
+│   ├── vue
+│   ├── MultipleSelect.js
+│   ├── multiple-select.js
+│   └── multiple-select.scss
 ├── dist
-│   ├── multiple-select-es.js
-│   ├── multiple-select-es.min.js
-│   ├── multiple-select.css
-│   ├── multiple-select.js
-│   ├── multiple-select.min.css
-│   ├── multiple-select.min.js
+│   ├── locale/
+│   ├── themes/
+│   ├── multiple-select.css
+│   ├── multiple-select.js
+│   ├── multiple-select.min.css
+│   ├── multiple-select.min.js
+│   ├── multiple-select-locale-all.js
+│   ├── multiple-select-locale-all.min.js
+│   ├── multiple-select-vue.js
+│   └── multiple-select-vue.umd.js
 └── README.md
 ```
 
-The `src/` folder contains the source code for our CSS and JS. The `dist/` folder includes everything compiled and minified with `src/`. The `docs/` folder includes the source code for our documentation. Any other included file provides support for packages, license information, and development.
+The `src/` folder contains the source code for our CSS and JS. The `dist/` folder includes everything compiled and minified with `src/`. The `site/` folder includes the source code for our documentation. Any other included file provides support for packages, license information, and development.

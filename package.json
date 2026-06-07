@@ -1,12 +1,21 @@
 {
   "name": "multiple-select",
   "main": "dist/multiple-select.min.js",
-  "module": "dist/multiple-select-es.min.js",
   "version": "2.4.0",
   "type": "module",
   "title": "Multiple Select",
   "description": "Multiple select is a jQuery plugin to select multiple elements with checkboxes :).",
   "author": "wenzhixin <wenzhixin2010@gmail.com> (http://wenzhixin.net.cn/)",
+  "files": [
+    "dist/",
+    "src/",
+    "CHANGELOG.md",
+    "README.md",
+    "LICENSE",
+    "bower.json",
+    "index.d.ts",
+    "multiple-select.jquery.json"
+  ],
   "contributors": [
     "Brett Zamir"
   ],
