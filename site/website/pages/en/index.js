@@ -99,10 +99,13 @@ class Index extends React.Component {
 
             <div className="blockElement fourByGridBlock">
               <div id="latest-release" className="blockContent">
-                <h2>Latest release 2.3.1 (2026-2-28)</h2>
+                <h2>Latest release 2.4.0 (2026-6-7)</h2>
                 <MarkdownBlock></MarkdownBlock>
-                <MarkdownBlock>* **Update:** Replaced jQuery utilities with ES6+ alternatives.</MarkdownBlock>
-                <MarkdownBlock>* **Update:** Fixed Bootstrap theme checkbox focus state outline being clipped.</MarkdownBlock>
+                <MarkdownBlock>* **New:** Added `filterOnly` option to select only a single option.</MarkdownBlock>
+                <MarkdownBlock>* **New:** Added `maxWidth` option to limit the auto width.</MarkdownBlock>
+                <MarkdownBlock>* **New:** Auto refresh select width when the width attribute is `auto`.</MarkdownBlock>
+                <MarkdownBlock>* **Update:** Upgraded jQuery peer dependency to `>=3 <5` for jQuery 4 compatibility.</MarkdownBlock>
+                <MarkdownBlock>* **Update:** Fixed no-results padding in Bootstrap theme.</MarkdownBlock>
                 <MarkdownBlock></MarkdownBlock>
               </div>
             </div>

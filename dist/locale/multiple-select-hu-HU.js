@@ -30,6 +30,9 @@
     },
     formatFilterUnselected() {
       return 'Nincs kiválasztva';
+    },
+    formatFilterOnly() {
+      return 'Csak ez';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['hu-HU']);

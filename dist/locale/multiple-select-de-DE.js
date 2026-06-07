@@ -30,6 +30,9 @@
     },
     formatFilterUnselected() {
       return 'Nicht ausgewählt';
+    },
+    formatFilterOnly() {
+      return 'Nur diese';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['de-DE']);

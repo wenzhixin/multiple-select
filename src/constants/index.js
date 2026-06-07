@@ -1,4 +1,4 @@
-const VERSION = '2.3.1'
+const VERSION = '2.4.0'
 const BLOCK_ROWS = 500
 const CLUSTER_BLOCKS = 4
 const ICON_WIDTH_OFFSET = 20

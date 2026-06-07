@@ -30,6 +30,9 @@
     },
     formatFilterUnselected() {
       return 'Chưa chọn';
+    },
+    formatFilterOnly() {
+      return 'Chỉ chọn mục này';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['vi-VN']);

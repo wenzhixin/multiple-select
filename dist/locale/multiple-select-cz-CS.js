@@ -30,6 +30,9 @@
     },
     formatFilterUnselected() {
       return 'Nevybráno';
+    },
+    formatFilterOnly() {
+      return 'Pouze toto';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['cz-CS']);

@@ -30,6 +30,9 @@
     },
     formatFilterUnselected() {
       return '未选择';
+    },
+    formatFilterOnly() {
+      return '仅选此项';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['zh-CN']);

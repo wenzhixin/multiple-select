@@ -30,6 +30,9 @@
     },
     formatFilterUnselected() {
       return 'Tidak dipilih';
+    },
+    formatFilterOnly() {
+      return 'Hanya ini';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['id-ID']);

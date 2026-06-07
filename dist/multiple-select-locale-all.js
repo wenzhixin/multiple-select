@@ -5,6 +5,39 @@
 })(this, (function ($) { 'use strict';
 
   /**
+   * Multiple Select cz-CS translation
+   * Author: Matej Puhony<info@puhony.eu>
+   */
+
+  $.fn.multipleSelect.locales['cz-CS'] = $.fn.multipleSelect.locales['cs'] = {
+    formatSelectAll() {
+      return '[Vybrat vše]';
+    },
+    formatAllSelected() {
+      return 'Vše vybráno';
+    },
+    formatCountSelected(count, total) {
+      return `${count} z ${total} vybráno`;
+    },
+    formatNoMatchesFound() {
+      return 'Nebylo nalezeno';
+    },
+    formatFilterAll() {
+      return 'Vše';
+    },
+    formatFilterSelected() {
+      return 'Vybráno';
+    },
+    formatFilterUnselected() {
+      return 'Nevybráno';
+    },
+    formatFilterOnly() {
+      return 'Pouze toto';
+    }
+  };
+  $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['cz-CS']);
+
+  /**
    * Multiple Select da-DK translation
    * Author: HThuren<thuren.henrik@gmail.com>
    */
@@ -30,6 +63,9 @@
     },
     formatFilterUnselected() {
       return 'Ikke valgt';
+    },
+    formatFilterOnly() {
+      return 'Kun denne';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['da-DK']);
@@ -60,6 +96,9 @@
     },
     formatFilterUnselected() {
       return 'Nicht ausgewählt';
+    },
+    formatFilterOnly() {
+      return 'Nur diese';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['de-DE']);
@@ -90,6 +129,9 @@
     },
     formatFilterUnselected() {
       return 'Unselected';
+    },
+    formatFilterOnly() {
+      return 'Only this';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['en-US']);
@@ -120,6 +162,9 @@
     },
     formatFilterUnselected() {
       return 'No seleccionados';
+    },
+    formatFilterOnly() {
+      return 'Solo este';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['es-ES']);
@@ -150,6 +195,9 @@
     },
     formatFilterUnselected() {
       return 'Non sélectionnés';
+    },
+    formatFilterOnly() {
+      return 'Uniquement ceci';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['fr-FR']);
@@ -180,6 +228,9 @@
     },
     formatFilterUnselected() {
       return 'Nincs kiválasztva';
+    },
+    formatFilterOnly() {
+      return 'Csak ez';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['hu-HU']);
@@ -210,39 +261,12 @@
     },
     formatFilterUnselected() {
       return 'Tidak dipilih';
+    },
+    formatFilterOnly() {
+      return 'Hanya ini';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['id-ID']);
-
-  /**
-   * Multiple Select cz-CS translation
-   * Author: Matej Puhony<info@puhony.eu>
-   */
-
-  $.fn.multipleSelect.locales['cz-CS'] = $.fn.multipleSelect.locales['cs'] = {
-    formatSelectAll() {
-      return '[Vybrat vše]';
-    },
-    formatAllSelected() {
-      return 'Vše vybráno';
-    },
-    formatCountSelected(count, total) {
-      return `${count} z ${total} vybráno`;
-    },
-    formatNoMatchesFound() {
-      return 'Nebylo nalezeno';
-    },
-    formatFilterAll() {
-      return 'Vše';
-    },
-    formatFilterSelected() {
-      return 'Vybráno';
-    },
-    formatFilterUnselected() {
-      return 'Nevybráno';
-    }
-  };
-  $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['cz-CS']);
 
   /**
    * Multiple Select it-IT translation
@@ -270,6 +294,9 @@
     },
     formatFilterUnselected() {
       return 'Non selezionati';
+    },
+    formatFilterOnly() {
+      return 'Solo questo';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['it-IT']);
@@ -300,6 +327,9 @@
     },
     formatFilterUnselected() {
       return '未選択';
+    },
+    formatFilterOnly() {
+      return 'これのみ選択';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['ja-JP']);
@@ -330,6 +360,9 @@
     },
     formatFilterUnselected() {
       return '선택 안됨';
+    },
+    formatFilterOnly() {
+      return '이 항목만 선택';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['ko-KR']);
@@ -360,6 +393,9 @@
     },
     formatFilterUnselected() {
       return 'Não selecionados';
+    },
+    formatFilterOnly() {
+      return 'Apenas este';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['pt-BR']);
@@ -390,6 +426,9 @@
     },
     formatFilterUnselected() {
       return 'Не выбрано';
+    },
+    formatFilterOnly() {
+      return 'Только это';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['ru-RU']);
@@ -420,6 +459,9 @@
     },
     formatFilterUnselected() {
       return 'Chưa chọn';
+    },
+    formatFilterOnly() {
+      return 'Chỉ chọn mục này';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['vi-VN']);
@@ -450,6 +492,9 @@
     },
     formatFilterUnselected() {
       return '未选择';
+    },
+    formatFilterOnly() {
+      return '仅选此项';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['zh-CN']);
@@ -480,6 +525,9 @@
     },
     formatFilterUnselected() {
       return '未選擇';
+    },
+    formatFilterOnly() {
+      return '僅選此項';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['zh-TW']);
