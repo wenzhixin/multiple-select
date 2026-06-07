@@ -30,6 +30,9 @@
     },
     formatFilterUnselected() {
       return 'No seleccionados';
+    },
+    formatFilterOnly() {
+      return 'Solo este';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['es-ES']);

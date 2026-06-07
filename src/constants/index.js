@@ -1,6 +1,7 @@
-const VERSION = '2.3.1'
+const VERSION = '2.4.0'
 const BLOCK_ROWS = 500
 const CLUSTER_BLOCKS = 4
+const ICON_WIDTH_OFFSET = 20
 
 const DEFAULTS = {
   name: '',
@@ -18,6 +19,7 @@ const DEFAULTS = {
   hideOptgroupCheckboxes: false,
   multipleWidth: 80,
   width: undefined,
+  maxWidth: undefined,
   size: undefined,
   dropWidth: undefined,
   maxHeight: 250,
@@ -42,6 +44,7 @@ const DEFAULTS = {
   filterAcceptOnEnter: false,
   filterByDataLength: undefined,
   filterSelectAll: true,
+  filterOnly: false,
   customFilter ({ text, label, search }) {
     return (label || text).includes(search)
   },
@@ -118,6 +121,9 @@ const EN = {
   },
   formatFilterUnselected () {
     return 'Unselected'
+  },
+  formatFilterOnly () {
+    return 'Only this'
   }
 }
 
@@ -145,6 +151,8 @@ const Constants = {
   CLUSTER_BLOCKS,
 
   DEFAULTS,
+
+  ICON_WIDTH_OFFSET,
 
   METHODS,
 

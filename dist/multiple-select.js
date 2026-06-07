@@ -6,6 +6,7 @@
 
   const BLOCK_ROWS = 500;
   const CLUSTER_BLOCKS = 4;
+  const ICON_WIDTH_OFFSET = 20;
   const DEFAULTS = {
     name: '',
     placeholder: '',
@@ -21,6 +22,7 @@
     hideOptgroupCheckboxes: false,
     multipleWidth: 80,
     width: undefined,
+    maxWidth: undefined,
     size: undefined,
     dropWidth: undefined,
     maxHeight: 250,
@@ -42,6 +44,7 @@
     filterAcceptOnEnter: false,
     filterByDataLength: undefined,
     filterSelectAll: true,
+    filterOnly: false,
     customFilter({
       text,
       label,
@@ -118,6 +121,9 @@
     },
     formatFilterUnselected() {
       return 'Unselected';
+    },
+    formatFilterOnly() {
+      return 'Only this';
     }
   };
   const METHODS = ['getOptions', 'refreshOptions', 'getData', 'getSelects', 'setSelects', 'enable', 'disable', 'open', 'close', 'check', 'uncheck', 'checkAll', 'uncheckAll', 'checkInvert', 'focus', 'blur', 'refresh', 'resetFilter', 'destroy'];
@@ -126,6 +132,7 @@
     BLOCK_ROWS,
     CLUSTER_BLOCKS,
     DEFAULTS,
+    ICON_WIDTH_OFFSET,
     METHODS,
     LOCALES: {
       en: EN,
@@ -1091,6 +1098,7 @@
       >
       <span>${row.text}</span>
       </label>
+      ${this.options.filterOnly && !this.options.single && !row.disabled ? `<span class="ms-filter-only" data-key="${row._key}" role="button" tabindex="0">${this.options.formatFilterOnly()}</span>` : ''}
       </li>
     `];
     }
@@ -1217,7 +1225,50 @@
           selected: option.selected,
           data: option._data
         }));
+        if (this.options.filterOnly) {
+          $this.trigger('blur');
+        }
         close();
+      });
+      const $filterOnly = this.$drop.find('.ms-filter-only');
+      const handleFilterOnly = $this => {
+        const option = findByParam(this.data, '_key', $this.data('key'));
+        if (this.options.onBeforeClick({
+          ...option,
+          filterOnly: true
+        }) === false) {
+          return;
+        }
+        for (const row of this.data) {
+          if (row.type === 'optgroup') {
+            row.children.forEach(child => {
+              if (!child.divider) {
+                child.selected = false;
+              }
+            });
+          } else if (!row.divider) {
+            row.selected = false;
+          }
+        }
+        this._check(option, true);
+        this.options.onClick(removeUndefined({
+          text: option.text,
+          value: option.value,
+          selected: option.selected,
+          data: option._data,
+          filterOnly: true
+        }));
+      };
+      $filterOnly.off('click').on('click', e => {
+        e.stopPropagation();
+        handleFilterOnly($(e.currentTarget));
+      });
+      $filterOnly.off('keydown').on('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          e.stopPropagation();
+          handleFilterOnly($(e.currentTarget));
+        }
       });
       this.$ul.find('li').off('keydown').on('keydown', e => {
         const $this = $(e.currentTarget);
@@ -1252,12 +1303,14 @@
       if (window.getComputedStyle) {
         computedWidth = window.getComputedStyle(this.$el[0]).width;
         if (computedWidth === 'auto') {
-          computedWidth = this.$drop.outerWidth() + 20;
+          computedWidth = this.$drop.outerWidth() + Constants.ICON_WIDTH_OFFSET;
         }
       } else {
-        computedWidth = this.$el.outerWidth() + 20;
+        computedWidth = this.$el.outerWidth() + Constants.ICON_WIDTH_OFFSET;
       }
-      this.$parent.css('width', this.options.width || computedWidth);
+      if (this.options.width !== 'auto') {
+        this.$parent.css('width', this.options.width || computedWidth);
+      }
       this.$el.show().addClass('ms-offscreen');
     }
     open() {
@@ -1356,6 +1409,29 @@
       }
       if (this.options.displayTitle) {
         $span.prop('title', this.getSelects('text'));
+      }
+      if (this.options.width === 'auto') {
+        if (!this._autoWidthCanvas) {
+          this._autoWidthCanvas = document.createElement('canvas');
+          this._autoWidthContext = this._autoWidthCanvas.getContext('2d');
+        }
+        const context = this._autoWidthContext;
+        if (context) {
+          const styles = window.getComputedStyle ? window.getComputedStyle($span[0]) : $span[0].style;
+          const computedFont = styles.font && styles.font.trim();
+          context.font = computedFont || `${styles.fontWeight || 'normal'} ${styles.fontSize || '16px'} ${styles.fontFamily || 'sans-serif'}`;
+          const textWidth = context.measureText($span.text()).width;
+          const iconWidth = Constants.ICON_WIDTH_OFFSET + (this.$close.width() || 0);
+          const spanPadding = parseFloat($span.css('paddingLeft')) + parseFloat($span.css('paddingRight'));
+          const maxWidth = this.options.maxWidth && parseFloat(this.options.maxWidth);
+          let totalWidth = textWidth + iconWidth + spanPadding + 10;
+          if (maxWidth && totalWidth > maxWidth) {
+            totalWidth = maxWidth;
+          }
+          this.$parent.css('width', totalWidth);
+        } else {
+          this.$parent.css('width', 200);
+        }
       }
 
       // set selects to select

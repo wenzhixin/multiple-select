@@ -30,6 +30,9 @@
     },
     formatFilterUnselected() {
       return '未選択';
+    },
+    formatFilterOnly() {
+      return 'これのみ選択';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['ja-JP']);

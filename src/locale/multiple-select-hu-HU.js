@@ -24,6 +24,9 @@ $.fn.multipleSelect.locales['hu-HU'] = $.fn.multipleSelect.locales['hu'] = {
   },
   formatFilterUnselected () {
     return 'Nincs kiválasztva'
+  },
+  formatFilterOnly () {
+    return 'Csak ez'
   }
 }
 

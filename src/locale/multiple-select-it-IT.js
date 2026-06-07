@@ -24,6 +24,9 @@ $.fn.multipleSelect.locales['it-IT'] = $.fn.multipleSelect.locales['it'] = {
   },
   formatFilterUnselected () {
     return 'Non selezionati'
+  },
+  formatFilterOnly () {
+    return 'Solo questo'
   }
 }
 

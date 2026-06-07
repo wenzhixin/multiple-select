@@ -61,32 +61,39 @@
   color: var(--ms-drop-color);
   border-radius: var(--ms-choice-border-radius);
 }
-.ms-parent.form-control .ms-drop ul > li {
+.ms-parent.form-control .ms-drop ul > li:not(.ms-no-results) {
   padding-left: 0;
 }
-.ms-parent.form-control .ms-drop ul > li label {
+.ms-parent.form-control .ms-drop ul > li:not(.ms-no-results) > .ms-filter-only {
+  color: var(--ms-selected-bg);
+  background-color: var(--ms-hover-bg);
+}
+.ms-parent.form-control .ms-drop ul > li:not(.ms-no-results) > .ms-filter-only:focus {
+  outline-color: var(--ms-selected-bg);
+}
+.ms-parent.form-control .ms-drop ul > li:not(.ms-no-results) label {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-.ms-parent.form-control .ms-drop ul > li:not(.hide-radio) label {
+.ms-parent.form-control .ms-drop ul > li:not(.ms-no-results):not(.hide-radio) label {
   padding-left: calc(1.2em + 12px);
 }
-.ms-parent.form-control .ms-drop ul > li:not(.hide-radio) label input[type=radio],
-.ms-parent.form-control .ms-drop ul > li:not(.hide-radio) label input[type=checkbox] {
+.ms-parent.form-control .ms-drop ul > li:not(.ms-no-results):not(.hide-radio) label input[type=radio],
+.ms-parent.form-control .ms-drop ul > li:not(.ms-no-results):not(.hide-radio) label input[type=checkbox] {
   position: absolute;
   top: 50%;
   margin-top: -0.5em;
   margin-left: calc(-1.2em - 4px);
 }
-.ms-parent.form-control .ms-drop ul > li.hide-radio:focus, .ms-parent.form-control .ms-drop ul > li.hide-radio:hover {
+.ms-parent.form-control .ms-drop ul > li:not(.ms-no-results).hide-radio:focus, .ms-parent.form-control .ms-drop ul > li:not(.ms-no-results).hide-radio:hover {
   background-color: var(--ms-hover-bg);
 }
-.ms-parent.form-control .ms-drop ul > li.hide-radio.selected {
+.ms-parent.form-control .ms-drop ul > li:not(.ms-no-results).hide-radio.selected {
   background-color: var(--ms-selected-bg);
   color: var(--ms-selected-color);
 }
-.ms-parent.form-control .ms-drop ul > li.option-divider {
+.ms-parent.form-control .ms-drop ul > li:not(.ms-no-results).option-divider {
   border-top-color: var(--ms-divider-color);
 }
 .ms-parent.form-control.ms-dropdown .ms-drop ul > li.group.hide-radio label.optgroup {

@@ -187,7 +187,7 @@
   list-style: none;
   display: list-item;
   background-image: none;
-  position: static;
+  position: relative;
   padding: 0.25rem 8px;
 }
 .ms-drop ul > li .disabled {
@@ -248,6 +248,31 @@
 .ms-drop ul > li.option-divider {
   padding: 0;
   border-top: 1px solid #e9ecef;
+}
+.ms-drop ul > li > .ms-filter-only {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 0.25rem;
+  bottom: 0.25rem;
+  padding: 0 8px;
+  font-size: 12px;
+  color: #007bff;
+  cursor: pointer;
+  border-radius: 2px;
+  white-space: nowrap;
+  z-index: 1;
+  background-color: #f8f9fa;
+  align-items: center;
+  justify-content: center;
+}
+.ms-drop ul > li > .ms-filter-only:focus {
+  display: flex;
+  outline: 2px solid #007bff;
+  outline-offset: -2px;
+}
+.ms-drop ul > li:hover > .ms-filter-only, .ms-drop ul > li:focus > .ms-filter-only, .ms-drop ul > li:focus-within > .ms-filter-only {
+  display: flex;
 }
 .ms-drop input[type=radio], .ms-drop input[type=checkbox] {
   position: absolute;

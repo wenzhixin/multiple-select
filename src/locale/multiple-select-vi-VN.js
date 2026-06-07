@@ -24,6 +24,9 @@ $.fn.multipleSelect.locales['vi-VN'] = $.fn.multipleSelect.locales['vi'] = {
   },
   formatFilterUnselected () {
     return 'Chưa chọn'
+  },
+  formatFilterOnly () {
+    return 'Chỉ chọn mục này'
   }
 }
 

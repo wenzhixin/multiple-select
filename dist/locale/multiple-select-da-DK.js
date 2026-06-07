@@ -30,6 +30,9 @@
     },
     formatFilterUnselected() {
       return 'Ikke valgt';
+    },
+    formatFilterOnly() {
+      return 'Kun denne';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['da-DK']);

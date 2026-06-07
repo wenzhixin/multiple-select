@@ -30,6 +30,9 @@
     },
     formatFilterUnselected() {
       return '선택 안됨';
+    },
+    formatFilterOnly() {
+      return '이 항목만 선택';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['ko-KR']);

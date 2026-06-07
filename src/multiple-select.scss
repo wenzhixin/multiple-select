@@ -199,11 +199,13 @@
     padding: 0;
 
     > li {
+      $item-padding-y: .25rem;
+      $item-padding-x: 8px;
       list-style: none;
       display: list-item;
       background-image: none;
-      position: static;
-      padding: .25rem 8px;
+      position: relative;
+      padding: $item-padding-y $item-padding-x;
 
       .disabled {
         font-weight: normal!important;
@@ -279,6 +281,36 @@
       &.option-divider {
         padding: 0;
         border-top: 1px solid #e9ecef;
+      }
+
+      > .ms-filter-only {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: $item-padding-y;
+        bottom: $item-padding-y;
+        padding: 0 $item-padding-x;
+        font-size: 12px;
+        color: #007bff;
+        cursor: pointer;
+        border-radius: 2px;
+        white-space: nowrap;
+        z-index: 1;
+        background-color: #f8f9fa;
+        align-items: center;
+        justify-content: center;
+
+        &:focus {
+          display: flex;
+          outline: 2px solid #007bff;
+          outline-offset: -2px;
+        }
+      }
+
+      &:hover > .ms-filter-only,
+      &:focus > .ms-filter-only,
+      &:focus-within > .ms-filter-only {
+        display: flex;
       }
     }
   }

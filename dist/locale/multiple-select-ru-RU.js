@@ -30,6 +30,9 @@
     },
     formatFilterUnselected() {
       return 'Не выбрано';
+    },
+    formatFilterOnly() {
+      return 'Только это';
     }
   };
   $.extend($.fn.multipleSelect.defaults, $.fn.multipleSelect.locales['ru-RU']);
