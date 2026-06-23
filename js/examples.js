@@ -16,12 +16,12 @@ function initUrl() {
 function loadUrl(url_) {
   var template = '../templates/template.html'
 
-  var url = template + '?v=849&url=' + url_
+  var url = template + '?v=892&url=' + url_
   if (window._config.isDebug) {
     url = template + '?t=' + (+new Date()) + '&url=' + url_
   }
   if (window._config.isViewSource) {
-    url = template + '?v=849&view-source&url=' + url_ + '#view-source'
+    url = template + '?v=892&view-source&url=' + url_ + '#view-source'
   }
   $('iframe').attr('src', url)
 
@@ -54,7 +54,28 @@ function initViewSource () {
   }).attr('title', title).text(title)
 }
 
+function _getOrigin() {
+  if (window.location.origin) {
+    return window.location.origin
+  }
+  return window.location.protocol + '//' + window.location.hostname +
+    (window.location.port ? ':' + window.location.port : '')
+}
+
 $(function () {
+  var origin = _getOrigin()
+  window.addEventListener('message', function (e) {
+    if (e.origin !== origin) {
+      return
+    }
+    if (e.data && e.data.type === 'resize') {
+      var height = parseInt(e.data.height, 10)
+      if (height > 0) {
+        $('iframe').height(height)
+      }
+    }
+  })
+
   $(window).hashchange(function () {
     var href = initUrl()
     loadUrl(href)

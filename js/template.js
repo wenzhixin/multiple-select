@@ -1,6 +1,6 @@
 window._config = {
   isDebug: ['localhost'].indexOf(location.hostname) > -1,
-  cdnUrl: 'https://unpkg.com/multiple-select@2.3.0/dist/',
+  cdnUrl: 'https://unpkg.com/multiple-select@2.4.0/dist/',
   localUrl: 'http://localhost:8080/github/multiple-select/src/'
 }
 
@@ -97,18 +97,18 @@ function _beautifySource(data) {
   var scriptStart = lines.indexOf('<script>')
   var scriptEnd = lines.indexOf('</script>', scriptStart)
   var strings = lines.slice(scriptStart + 1, scriptEnd)
-  strings = $.map(strings, function (s) {
-    return $.trim(s)
+  strings = strings.map(function (s) {
+    return s.trim()
   })
   /* eslint-disable no-control-regex */
   var obj = eval('(' + strings.join('').replace(/[^\u0000-\u007E]/g, '')
     .replace(/^init\((.*)\)$/, '$1') + ')')
 
   var result = []
-  result = result.concat($.map(obj.links, _getLink))
+  result = result.concat(obj.links.map(_getLink))
   result.push('')
   result.push('<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>')
-  result = result.concat($.map(obj.scripts, function (script) {
+  result = result.concat(obj.scripts.map(function (script) {
     return _getScript(script, true)
   }))
   lines = result.concat(lines.slice(scriptEnd + 1))
@@ -133,7 +133,11 @@ $(function () {
 
   $.ajax({
     type: 'GET',
-    url: url + '?' + $.param(query),
+    url: url + '?' + Object.keys(query).filter(function(key) {
+      return query[key] !== null && query[key] !== undefined
+    }).map(function(key) {
+      return encodeURIComponent(key) + '=' + encodeURIComponent(query[key])
+    }).join('&'),
     dataType: 'html',
     global: false,
     cache: true, // (warning: setting it to false will cause a timestamp and will call the request twice)
@@ -153,8 +157,24 @@ $(function () {
   })
 })
 
+function _getOrigin() {
+  if (window.location.origin) {
+    return window.location.origin
+  }
+  return window.location.protocol + '//' + window.location.hostname +
+    (window.location.port ? ':' + window.location.port : '')
+}
+
+function _resizeIframe() {
+  var height = Math.max(
+    document.documentElement.scrollHeight,
+    document.body.scrollHeight
+  )
+  parent.postMessage({ type: 'resize', height: height }, _getOrigin())
+}
+
 window.init = function (options_) {
-  var options = $.extend({
+  var options = Object.assign({
     title: '',
     desc: '',
     links: [],
@@ -164,12 +184,13 @@ window.init = function (options_) {
       if (typeof window.mounted === 'function') {
         window.mounted()
       }
+      _resizeIframe()
     }
   }, options_)
 
   $('.bd-title span').html(options.title)
   $('.bd-lead').html(options.desc)
-  $.each(options.links, function (i, file) {
+  options.links.forEach(function (file) {
     _link(file)
   })
   _scripts(options.scripts, options.callback)
