@@ -104,7 +104,7 @@ class Index extends React.Component {
                 <MarkdownBlock>* **New:** Added `filterOnly` option to select only a single option.</MarkdownBlock>
                 <MarkdownBlock>* **New:** Added `maxWidth` option to limit the auto width.</MarkdownBlock>
                 <MarkdownBlock>* **New:** Auto refresh select width when the width attribute is `auto`.</MarkdownBlock>
-                <MarkdownBlock>* **Update:** Upgraded jQuery peer dependency to `>=3 <5` for jQuery 4 compatibility.</MarkdownBlock>
+                <MarkdownBlock>* **Update:** Upgraded jQuery peer dependency to `>=3,&lt;5` for jQuery 4 compatibility.</MarkdownBlock>
                 <MarkdownBlock>* **Update:** Fixed no-results padding in Bootstrap theme.</MarkdownBlock>
                 <MarkdownBlock></MarkdownBlock>
               </div>
