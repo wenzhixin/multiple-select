@@ -113,6 +113,11 @@
                 "description": "Use <code>maxHeightUnit: \\'row\\'</code> option to set the max height unit."
             },
             {
+                "title": "Max Visible Disabled",
+                "url": "max-visible-disabled.html",
+                "description": "Use <code>maxVisibleDisabled: 2</code> option to limit visible disabled options with expand/collapse buttons. Disabled options exceeding this value will be hidden."
+            },
+            {
                 "title": "The Position",
                 "url": "position.html",
                 "description": "Use <code>position: \\'top\\'</code> to set the select dropdown in top position."

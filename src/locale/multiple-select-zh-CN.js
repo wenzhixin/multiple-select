@@ -27,6 +27,12 @@ $.fn.multipleSelect.locales['zh-CN'] = $.fn.multipleSelect.locales['zh'] = {
   },
   formatFilterOnly () {
     return '仅选此项'
+  },
+  formatExpand () {
+    return '展开更多'
+  },
+  formatCollapse () {
+    return '收起'
   }
 }
 

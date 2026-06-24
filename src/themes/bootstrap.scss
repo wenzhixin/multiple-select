@@ -121,6 +121,17 @@
         border-top-color: var(--ms-divider-color);
       }
     }
+
+    .ms-expand-collapse {
+      .ms-expand,
+      .ms-collapse {
+        color: var(--ms-selected-bg);
+
+        &:focus-visible {
+          outline-color: var(--ms-selected-bg);
+        }
+      }
+    }
   }
 
   &.ms-dropdown {
