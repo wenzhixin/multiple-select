@@ -27,6 +27,12 @@ $.fn.multipleSelect.locales['hu-HU'] = $.fn.multipleSelect.locales['hu'] = {
   },
   formatFilterOnly () {
     return 'Csak ez'
+  },
+  formatExpand () {
+    return 'Több mutatása'
+  },
+  formatCollapse () {
+    return 'Kevesebb mutatása'
   }
 }
 

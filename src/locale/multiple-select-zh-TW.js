@@ -27,6 +27,12 @@ $.fn.multipleSelect.locales['zh-TW'] = {
   },
   formatFilterOnly () {
     return '僅選此項'
+  },
+  formatExpand () {
+    return '顯示更多'
+  },
+  formatCollapse () {
+    return '收起'
   }
 }
 

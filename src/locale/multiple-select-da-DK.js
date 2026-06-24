@@ -27,6 +27,12 @@ $.fn.multipleSelect.locales['da-DK'] = $.fn.multipleSelect.locales['da'] = {
   },
   formatFilterOnly () {
     return 'Kun denne'
+  },
+  formatExpand () {
+    return 'Vis mere'
+  },
+  formatCollapse () {
+    return 'Vis mindre'
   }
 }
 

@@ -333,6 +333,18 @@ The Options are defined in `jQuery.fn.multipleSelect.defaults`.
 
 - **Example:** <a href="/examples#max-height-unit.html">Max Height Unit</a>
 
+## maxVisibleDisabled
+
+- **Attribute:** `data-max-visible-disabled`
+
+- **Type:** Number
+
+- **Detail:** Define the maximum number of visible disabled options in the dropdown list. When disabled options exceed this value, shows expand/collapse buttons. Disabled options are moved to the end of the list, which also affects the order returned by `getSelects` and shown in the selected summary. Options inside optgroups are not limited. Set to `undefined` to disable. This option is ignored when the list is large enough to enable virtual scrolling.
+
+- **Default:** `undefined`
+
+- **Example:** <a href="/examples#max-visible-disabled.html">Max Visible Disabled</a>
+
 ## position
 
 - **Attribute:** `data-position`

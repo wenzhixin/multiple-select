@@ -24,6 +24,7 @@ const DEFAULTS = {
   dropWidth: undefined,
   maxHeight: 250,
   maxHeightUnit: 'px',
+  maxVisibleDisabled: undefined,
   position: 'bottom',
 
   displayValues: false,
@@ -124,6 +125,12 @@ const EN = {
   },
   formatFilterOnly () {
     return 'Only this'
+  },
+  formatExpand () {
+    return 'Show more'
+  },
+  formatCollapse () {
+    return 'Show less'
   }
 }
 

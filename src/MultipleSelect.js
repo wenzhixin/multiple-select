@@ -217,6 +217,7 @@ class MultipleSelect {
       this.fromHtml = true
     }
 
+    this.disabledSorted = false
     this.dataTotal = setDataKeys(this.data)
   }
 
@@ -381,8 +382,20 @@ class MultipleSelect {
   }
 
   initListItems () {
-    const rows = this.getListRows()
+    let rows = this.getListRows()
     let offset = 0
+
+    if (this.options.maxVisibleDisabled !== undefined && !this.disabledSorted) {
+      // Disabled options are moved to the end so that the hidden ones are
+      // grouped together. Virtual scroll lists do not render the
+      // expand/collapse control, so their original order is kept until
+      // filtering brings the list below the virtual scroll threshold.
+      if (rows.length <= Constants.BLOCK_ROWS * Constants.CLUSTER_BLOCKS) {
+        this.disabledSorted = true
+        this.sortDisabledOptions()
+        rows = this.getListRows()
+      }
+    }
 
     if (this.options.selectAll && !this.options.single) {
       offset = -1
@@ -431,7 +444,44 @@ class MultipleSelect {
       this.updateDataEnd = this.updateData.length
       this.virtualScroll = null
     }
+    this.initExpandCollapse()
     this.events()
+  }
+
+  sortDisabledOptions () {
+    this.data.sort((a, b) => {
+      // Optgroups count as enabled so the comparator stays consistent and
+      // disabled options are always moved to the very end
+      const aDisabled = a.type !== 'optgroup' && a.disabled
+      const bDisabled = b.type !== 'optgroup' && b.disabled
+
+      return (aDisabled ? 1 : 0) - (bDisabled ? 1 : 0)
+    })
+  }
+
+  initExpandCollapse () {
+    if (this.options.maxVisibleDisabled === undefined || this.virtualScroll) {
+      return
+    }
+
+    this.$ul.append(`
+      <li class="ms-expand-collapse" tabindex="0">
+        <button type="button" class="ms-expand">${this.options.formatExpand()}</button>
+        <button type="button" class="ms-collapse" style="display:none">${this.options.formatCollapse()}</button>
+      </li>
+    `)
+
+    this.$expandCollapse = this.$ul.find('.ms-expand-collapse')
+    this.$expand = this.$ul.find('.ms-expand')
+    this.$collapse = this.$ul.find('.ms-collapse')
+
+    this.$expand.off('click').on('click', () => {
+      this.expandDisabledList()
+    })
+
+    this.$collapse.off('click').on('click', () => {
+      this.collapseDisabledList()
+    })
   }
 
   getListRows () {
@@ -761,17 +811,21 @@ class MultipleSelect {
           $divider = $this.prev('li.option-divider')
           $li = $divider.length ? $divider : $this
 
-          $li.prev().trigger('focus')
+          this.focusSibling($li, 'prev')
           break
         case 'ArrowDown':
           e.preventDefault()
           $divider = $this.next('li.option-divider')
           $li = $divider.length ? $divider : $this
 
-          $li.next().trigger('focus')
+          this.focusSibling($li, 'next')
           break
         case 'Enter':
           e.preventDefault()
+          if ($this.hasClass('ms-expand-collapse')) {
+            $this.find('button:visible').first().trigger('click')
+            break
+          }
           $this.find('input').trigger('click')
           if (this.options.single) {
             this.$choice.trigger('focus')
@@ -868,6 +922,14 @@ class MultipleSelect {
     }
     this.$drop.find('>ul').css('max-height', `${maxHeight}px`)
     this.$drop.find('.multiple').css('width', `${this.options.multipleWidth}px`)
+
+    if (this.options.maxVisibleDisabled !== undefined && !this.virtualScroll) {
+      if (this.isExpanded) {
+        this.expandDisabledList()
+      } else {
+        this.collapseDisabledList()
+      }
+    }
   }
 
   animateMethod (method) {
@@ -1197,6 +1259,74 @@ class MultipleSelect {
       this.$searchInput.val('')
       this.filter(true)
     }
+  }
+
+  /**
+   * Move the focus to the previous/next visible list item, skipping the
+   * collapsed ones which cannot receive the focus
+   * @param {jQuery} $li - Current list item
+   * @param {string} method - `prev` or `next`
+   */
+  focusSibling ($li, method) {
+    let $sibling = $li[method]()
+
+    while ($sibling.length && !$sibling.is(':visible')) {
+      $sibling = $sibling[method]()
+    }
+
+    const $button = $sibling.find('button:visible').first()
+
+    if ($button.length) {
+      $button.trigger('focus')
+    } else {
+      $sibling.trigger('focus')
+    }
+  }
+
+  expandDisabledList () {
+    const expandFocused = this.$expand.is(':focus')
+
+    this.$drop.find('>ul>li').has('input:disabled').show()
+    this.$expand.hide()
+    this.$collapse.show()
+
+    if (expandFocused) {
+      this.$collapse.trigger('focus')
+    }
+    this.isExpanded = true
+  }
+
+  collapseDisabledList () {
+    const maxVisibleDisabled = this.options.maxVisibleDisabled
+    const collapseFocused = this.$collapse.is(':focus')
+
+    // Options inside optgroups are not moved to the end, so they are
+    // not limited by maxVisibleDisabled
+    const $disabledLi = this.$drop.find('>ul>li').has('input:disabled')
+      .not('.group, .ms-select-all, .ms-no-results, .option-level-1')
+
+    if ($disabledLi.length <= maxVisibleDisabled) {
+      this.$expandCollapse.hide()
+      this.isExpanded = false
+      return
+    }
+
+    this.$expandCollapse.show()
+    const visibleCount = Math.min(maxVisibleDisabled, $disabledLi.length)
+
+    $disabledLi.each((index, el) => {
+      if (index >= visibleCount) {
+        $(el).hide()
+      }
+    })
+
+    this.$expand.show()
+    this.$collapse.hide()
+
+    if (collapseFocused) {
+      this.$expand.trigger('focus')
+    }
+    this.isExpanded = false
   }
 
   /**
