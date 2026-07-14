@@ -105,12 +105,21 @@ class MultipleSelect {
     this.options.placeholder = this.options.placeholder ||
       el.getAttribute('placeholder') || ''
 
-    this.tabIndex = el.getAttribute('tabindex')
-    let tabIndex = ''
-
-    if (this.tabIndex !== null) {
-      tabIndex = this.tabIndex && `tabindex="${this.tabIndex}"`
+    // Cache the original tabindex in jQuery data so we can restore it on
+    // destroy and transfer it to the choice button. The native <select> is
+    // hidden via `.ms-offscreen` (not display:none), so it stays in the tab
+    // order; we set it to -1 and move focus to the visible `.ms-choice`.
+    // Caching avoids re-reading the -1 on re-init (e.g. Vue refreshOptions).
+    if (this.$el.data('ms-tabindex') === undefined) {
+      this.$el.data('ms-tabindex', el.getAttribute('tabindex'))
     }
+    this.tabIndex = this.$el.data('ms-tabindex')
+
+    // Move the original tabindex to the choice button. Explicit empty-string
+    // check needed since "-1"/"0" are truthy.
+    const tabIndex = this.tabIndex !== null && this.tabIndex !== '' ?
+      ` tabindex="${this.tabIndex}"` : ''
+
     this.$el.attr('tabindex', -1)
 
     this.$choice = $(`
@@ -1321,9 +1330,14 @@ class MultipleSelect {
     }
     this.$el.before(this.$parent).removeClass('ms-offscreen')
 
+    // Restore the original tabindex and clear the cache so a later init
+    // re-reads it from the DOM.
     if (this.tabIndex !== null) {
       this.$el.attr('tabindex', this.tabIndex)
+    } else {
+      this.$el.removeAttr('tabindex')
     }
+    this.$el.removeData('ms-tabindex')
 
     this.$parent.remove()
 
