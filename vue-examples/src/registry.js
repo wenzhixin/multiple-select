@@ -1,5 +1,5 @@
 const modules = import.meta.glob('./examples/*.vue')
-const raws = import.meta.glob('./examples/*.vue', { as: 'raw' })
+const raws = import.meta.glob('./examples/*.vue', { query: '?raw', import: 'default' })
 const components = []
 
 for (const path in modules) {
