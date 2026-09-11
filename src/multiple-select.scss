@@ -326,4 +326,26 @@
   .ms-no-results {
     display: none;
   }
+
+  .ms-expand-collapse {
+    .ms-expand,
+    .ms-collapse {
+      background: none;
+      border: none;
+      padding: 0;
+      color: #007bff;
+      cursor: pointer;
+      font-size: 13px;
+
+      &:hover,
+      &:focus-visible {
+        text-decoration: underline;
+      }
+
+      &:focus-visible {
+        outline: 2px solid #007bff;
+        outline-offset: 2px;
+      }
+    }
+  }
 }

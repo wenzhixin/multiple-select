@@ -217,6 +217,15 @@ class MultipleSelect {
       this.fromHtml = true
     }
 
+    if (this.options.maxVisibleDisabled !== undefined) {
+      this.data.sort((a, b) => {
+        if (a.type === 'optgroup' || b.type === 'optgroup') {
+          return 0
+        }
+        return (a.disabled ? 1 : 0) - (b.disabled ? 1 : 0)
+      })
+    }
+
     this.dataTotal = setDataKeys(this.data)
   }
 
@@ -378,6 +387,27 @@ class MultipleSelect {
     this.$ul = this.$drop.find('>ul')
 
     this.initListItems()
+
+    if (this.options.maxVisibleDisabled !== undefined && !this.virtualScroll) {
+      this.$ul.append(`
+        <li class="ms-expand-collapse">
+          <button type="button" class="ms-expand">${this.options.formatExpand()}</button>
+          <button type="button" class="ms-collapse" style="display:none">${this.options.formatCollapse()}</button>
+        </li>
+      `)
+
+      this.$expandCollapse = this.$ul.find('.ms-expand-collapse')
+      this.$expand = this.$ul.find('.ms-expand')
+      this.$collapse = this.$ul.find('.ms-collapse')
+
+      this.$expand.off('click').on('click', () => {
+        this.expandDisabledList()
+      })
+
+      this.$collapse.off('click').on('click', () => {
+        this.collapseDisabledList()
+      })
+    }
   }
 
   initListItems () {
@@ -868,6 +898,14 @@ class MultipleSelect {
     }
     this.$drop.find('>ul').css('max-height', `${maxHeight}px`)
     this.$drop.find('.multiple').css('width', `${this.options.multipleWidth}px`)
+
+    if (this.options.maxVisibleDisabled !== undefined) {
+      if (this.isExpanded) {
+        this.expandDisabledList()
+      } else {
+        this.collapseDisabledList()
+      }
+    }
   }
 
   animateMethod (method) {
@@ -1197,6 +1235,37 @@ class MultipleSelect {
       this.$searchInput.val('')
       this.filter(true)
     }
+  }
+
+  expandDisabledList () {
+    this.$drop.find('>ul>li').has('input:disabled').show()
+    this.$expand.hide()
+    this.$collapse.show()
+    this.isExpanded = true
+  }
+
+  collapseDisabledList () {
+    const maxVisibleDisabled = this.options.maxVisibleDisabled
+    const $disabledLi = this.$drop.find('>ul>li').has('input:disabled').not('.ms-select-all, .ms-no-results')
+
+    if ($disabledLi.length <= maxVisibleDisabled) {
+      this.$expandCollapse.hide()
+      this.isExpanded = false
+      return
+    }
+
+    this.$expandCollapse.show()
+    const visibleCount = Math.min(maxVisibleDisabled, $disabledLi.length)
+
+    $disabledLi.each((index, el) => {
+      if (index >= visibleCount) {
+        $(el).hide()
+      }
+    })
+
+    this.$expand.show()
+    this.$collapse.hide()
+    this.isExpanded = false
   }
 
   /**

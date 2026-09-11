@@ -27,6 +27,12 @@ $.fn.multipleSelect.locales['ko-KR'] = $.fn.multipleSelect.locales['ko'] = {
   },
   formatFilterOnly () {
     return '이 항목만 선택'
+  },
+  formatExpand () {
+    return '더 보기'
+  },
+  formatCollapse () {
+    return '접기'
   }
 }
 

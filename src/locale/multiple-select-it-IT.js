@@ -27,6 +27,12 @@ $.fn.multipleSelect.locales['it-IT'] = $.fn.multipleSelect.locales['it'] = {
   },
   formatFilterOnly () {
     return 'Solo questo'
+  },
+  formatExpand () {
+    return 'Mostra di più'
+  },
+  formatCollapse () {
+    return 'Mostra meno'
   }
 }
 

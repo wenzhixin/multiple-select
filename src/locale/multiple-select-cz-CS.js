@@ -27,6 +27,12 @@ $.fn.multipleSelect.locales['cz-CS'] = $.fn.multipleSelect.locales['cs'] = {
   },
   formatFilterOnly () {
     return 'Pouze toto'
+  },
+  formatExpand () {
+    return 'Zobrazit více'
+  },
+  formatCollapse () {
+    return 'Skrýt'
   }
 }
 

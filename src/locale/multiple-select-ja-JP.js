@@ -27,6 +27,12 @@ $.fn.multipleSelect.locales['ja-JP'] = $.fn.multipleSelect.locales['ja'] = {
   },
   formatFilterOnly () {
     return 'これのみ選択'
+  },
+  formatExpand () {
+    return 'もっと見る'
+  },
+  formatCollapse () {
+    return '閉じる'
   }
 }
 

@@ -27,6 +27,12 @@ $.fn.multipleSelect.locales['vi-VN'] = $.fn.multipleSelect.locales['vi'] = {
   },
   formatFilterOnly () {
     return 'Chỉ chọn mục này'
+  },
+  formatExpand () {
+    return 'Xem thêm'
+  },
+  formatCollapse () {
+    return 'Thu gọn'
   }
 }
 
