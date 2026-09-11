@@ -295,7 +295,18 @@ class MultipleSelect {
     this.allSelected = selectableVisibleCount > 0 &&
       selectedVisibleCount === selectableVisibleCount
 
-    if (!ignoreTrigger) {
+    // Do not emit onCheckAll / onUncheckAll while the user is filtering.
+    // The aggregate counts above only consider visible rows, so visibility
+    // changes (typing in the search input or switching the filterOption
+    // "all/selected/unselected" mode) can transiently make the aggregate
+    // appear as 0 or all without any actual selection change. Emitting the
+    // events in that case misleads consumers. See issue #580.
+    const noSearchFilter = this.filterText === ''
+    const noOptionFilter = !this.options.filterOptions ||
+      this.currentFilter === 'all'
+    const filteringActive = !noSearchFilter || !noOptionFilter
+
+    if (!ignoreTrigger && !filteringActive) {
       if (this.allSelected) {
         this.options.onCheckAll()
       } else if (selectedTotal === 0) {
