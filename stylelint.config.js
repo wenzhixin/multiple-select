@@ -2,6 +2,7 @@ export default {
   extends: 'stylelint-config-standard-scss',
   rules: {
     'alpha-value-notation': null,
+    'color-function-alias-notation': null,
     'color-function-notation': null,
     'hue-degree-notation': null,
     'no-descending-specificity': null,

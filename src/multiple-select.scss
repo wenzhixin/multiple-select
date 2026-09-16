@@ -3,6 +3,8 @@
  */
 
 .ms-offscreen {
+  /* Keep the deprecated `clip` instead of `clip-path` for older browsers */
+  /* stylelint-disable-next-line property-no-deprecated */
   clip: rect(0 0 0 0)!important;
   width: 1px!important;
   height: 1px!important;
@@ -61,23 +63,25 @@
         color: #999;
       }
     }
+
     div.icon-close {
       position: absolute;
-      top: 0px;
+      top: 0;
       right: 16px;
       height: 100%;
       width: 16px;
 
-      &:before {
+      &::before {
         content: '×';
         color: #888;
         font-weight: bold;
       }
 
-      &:hover:before {
+      &:hover::before {
         color: #333;
       }
     }
+
     div.icon-caret {
       position: absolute;
       width: 0;
@@ -85,13 +89,13 @@
       top: 50%;
       right: 8px;
       margin-top: -2px;
-      border-color: #888 transparent transparent transparent;
+      border-color: #888 transparent transparent;
       border-style: solid;
-      border-width: 5px 4px 0 4px;
+      border-width: 5px 4px 0;
 
       &.open {
-        border-color: transparent transparent #888 transparent;
-        border-width: 0 4px 5px 4px;
+        border-color: transparent transparent #888;
+        border-width: 0 4px 5px;
       }
     }
   }
@@ -150,7 +154,7 @@
 
 .ms-filter-options {
   display: flex;
-  padding: 4px 4px;
+  padding: 4px;
   border-bottom: 1px solid #eee;
   background-color: #f9f9f9;
   overflow-x: auto;
@@ -201,6 +205,7 @@
     > li {
       $item-padding-y: .25rem;
       $item-padding-x: 8px;
+
       list-style: none;
       display: list-item;
       background-image: none;
@@ -210,7 +215,7 @@
       .disabled {
         font-weight: normal!important;
         opacity: .35;
-        filter: Alpha(Opacity = 35);
+        filter: alpha(opacity = 35);
         cursor: default;
       }
 
