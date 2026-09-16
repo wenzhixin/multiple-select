@@ -1364,8 +1364,9 @@ class MultipleSelect {
    * Mark rows after the first `maxVisible` visible rows as hidden.
    * Called after `initData()` and `filter()` so filtered results are
    * also limited. Dividers don't count and follow the preceding option;
-   * optgroups are limited by their children. Stores the visible count
-   * before truncation in `visibleTotal` for the showing-count hint.
+   * optgroups are limited by their children. Groups hidden via the data
+   * API stay hidden and don't consume the limit. Stores the visible
+   * count before truncation in `visibleTotal` for the showing-count hint.
    */
   applyMaxVisible () {
     const { maxVisible } = this.options
@@ -1383,9 +1384,13 @@ class MultipleSelect {
 
     for (const row of this.data) {
       if (row.type === 'optgroup') {
-        let visibleChildren = 0
-
         prevVisible = false
+
+        if (!row.visible) {
+          continue
+        }
+
+        let visibleChildren = 0
 
         for (const child of row.children) {
           if (child.divider) {
