@@ -1134,7 +1134,7 @@ class MultipleSelect {
     let hasChanged = false
     const _setSelects = rows => {
       for (const row of rows) {
-        let selected = false
+        let selected
 
         if (type === 'text') {
           selected = values.includes($('<div>').html(row.text).text().trim())
