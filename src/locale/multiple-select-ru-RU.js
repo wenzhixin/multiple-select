@@ -27,6 +27,12 @@ $.fn.multipleSelect.locales['ru-RU'] = $.fn.multipleSelect.locales['ru'] = {
   },
   formatFilterOnly () {
     return 'Только это'
+  },
+  formatExpand () {
+    return 'Показать ещё'
+  },
+  formatCollapse () {
+    return 'Свернуть'
   }
 }
 

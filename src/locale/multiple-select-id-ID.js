@@ -27,6 +27,12 @@ $.fn.multipleSelect.locales['id-ID'] = $.fn.multipleSelect.locales['id'] = {
   },
   formatFilterOnly () {
     return 'Hanya ini'
+  },
+  formatExpand () {
+    return 'Tampilkan lebih'
+  },
+  formatCollapse () {
+    return 'Sembunyikan'
   }
 }
 

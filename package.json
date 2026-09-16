@@ -79,7 +79,7 @@
     "core-js": "^3.49.0",
     "cross-env": "^10.1.0",
     "cspell": "^10.0.1",
-    "editorconfig-checker": "^6.1.1",
+    "editorconfig-checker": "^6.2.0",
     "eslint": "^9.34.0",
     "eslint-plugin-import": "^2.32.0",
     "getopts": "^2.3.0",
