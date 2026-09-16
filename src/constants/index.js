@@ -25,6 +25,7 @@ const DEFAULTS = {
   maxHeight: 250,
   maxHeightUnit: 'px',
   maxVisibleDisabled: undefined,
+  maxVisible: undefined,
   position: 'bottom',
 
   displayValues: false,
@@ -131,6 +132,9 @@ const EN = {
   },
   formatCollapse () {
     return 'Show less'
+  },
+  formatShowingCount (visible, total) {
+    return `Showing ${visible} of ${total}`
   }
 }
 

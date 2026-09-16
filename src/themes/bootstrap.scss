@@ -132,6 +132,10 @@
         }
       }
     }
+
+    .ms-showing-count {
+      color: var(--ms-close-color);
+    }
   }
 
   &.ms-dropdown {

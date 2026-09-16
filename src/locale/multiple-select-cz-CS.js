@@ -33,6 +33,9 @@ $.fn.multipleSelect.locales['cz-CS'] = $.fn.multipleSelect.locales['cs'] = {
   },
   formatCollapse () {
     return 'Skrýt'
+  },
+  formatShowingCount (visible, total) {
+    return `Zobrazeno ${visible} z ${total}`
   }
 }
 

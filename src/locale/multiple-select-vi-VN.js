@@ -33,6 +33,9 @@ $.fn.multipleSelect.locales['vi-VN'] = $.fn.multipleSelect.locales['vi'] = {
   },
   formatCollapse () {
     return 'Thu gọn'
+  },
+  formatShowingCount (visible, total) {
+    return `Đang hiển thị ${visible} trong ${total}`
   }
 }
 

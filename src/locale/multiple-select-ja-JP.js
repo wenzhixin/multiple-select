@@ -33,6 +33,9 @@ $.fn.multipleSelect.locales['ja-JP'] = $.fn.multipleSelect.locales['ja'] = {
   },
   formatCollapse () {
     return '閉じる'
+  },
+  formatShowingCount (visible, total) {
+    return `${total} 件中 ${visible} 件を表示`
   }
 }
 

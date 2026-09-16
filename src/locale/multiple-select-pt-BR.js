@@ -33,6 +33,9 @@ $.fn.multipleSelect.locales['pt-BR'] = $.fn.multipleSelect.locales['pt'] = {
   },
   formatCollapse () {
     return 'Mostrar menos'
+  },
+  formatShowingCount (visible, total) {
+    return `Mostrando ${visible} de ${total}`
   }
 }
 

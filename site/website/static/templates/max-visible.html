@@ -1,0 +1,39 @@
+<script>
+  init({
+    title: 'Max Visible',
+    desc: 'Use <code>maxVisible: 10</code> option to render only the first 10 options in the dropdown list to improve performance with large data sets. Search results are also limited to the first 10 matches — enter a more specific keyword to narrow the results. Try searching <code>1</code> to see the showing-count hint.',
+    links: ['multiple-select.min.css'],
+    scripts: ['multiple-select.min.js']
+  })
+</script>
+
+
+<style>
+select {
+  width: 100%;
+}
+</style>
+
+<div>
+  <div class="mb-3 row">
+    <label class="col-sm-2">
+      Basic Select
+    </label>
+
+    <div class="col-sm-10">
+      <select multiple="multiple" id="select">
+    </div>
+  </div>
+</div>
+
+<script>
+  function mounted() {
+    var html = []
+    for (var i = 1; i <= 1000; i++) {
+      html.push('<option value="' + i + '">Option ' + i + '</option>')
+    }
+    $('#select').html(html.join('')).multipleSelect({
+      maxVisible: 10
+    })
+  }
+</script>

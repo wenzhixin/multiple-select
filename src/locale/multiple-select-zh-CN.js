@@ -33,6 +33,9 @@ $.fn.multipleSelect.locales['zh-CN'] = $.fn.multipleSelect.locales['zh'] = {
   },
   formatCollapse () {
     return '收起'
+  },
+  formatShowingCount (visible, total) {
+    return `已显示 ${visible} / ${total} 项`
   }
 }
 

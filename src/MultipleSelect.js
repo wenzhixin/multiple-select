@@ -219,6 +219,10 @@ class MultipleSelect {
 
     this.disabledSorted = false
     this.dataTotal = setDataKeys(this.data)
+
+    if (this.options.maxVisible !== undefined) {
+      this.applyMaxVisible()
+    }
   }
 
   initRow (i, elm, groupDisabled) {
@@ -308,6 +312,16 @@ class MultipleSelect {
   initFilter () {
     this.filterText = ''
     this.currentFilter = 'all'
+
+    // Options beyond maxVisible are only reachable through a specific search
+    if (
+      this.options.maxVisible !== undefined &&
+      this.dataTotal > this.options.maxVisible &&
+      !this.options.filter
+    ) {
+      this.options.filter = true
+      return
+    }
 
     if (this.options.filter || !this.options.filterByDataLength) {
       return
@@ -418,8 +432,10 @@ class MultipleSelect {
         if (this.updateDataStart < 0) {
           this.updateDataStart = 0
         }
-        if (this.updateDataEnd > this.data.length) {
-          this.updateDataEnd = this.data.length
+        // updateData contains only the rendered option rows, so it can be
+        // shorter than data when maxVisible or filtering hides rows
+        if (this.updateDataEnd > this.updateData.length) {
+          this.updateDataEnd = this.updateData.length
         }
       }
 
@@ -511,6 +527,14 @@ class MultipleSelect {
     this.data.forEach(row => {
       rows.push(...this.initListItem(row))
     })
+
+    if (
+      this.options.maxVisible !== undefined &&
+      this.visibleTotal > this.options.maxVisible
+    ) {
+      rows.push(`<li class="ms-showing-count">${this.options.formatShowingCount(
+        this.options.maxVisible, this.visibleTotal)}</li>`)
+    }
 
     rows.push(`<li class="ms-no-results">${this.options.formatNoMatchesFound()}</li>`)
 
@@ -1191,7 +1215,7 @@ class MultipleSelect {
   _checkAll (checked, ignoreUpdate) {
     for (const row of this.data) {
       if (row.type === 'optgroup') {
-        this._checkGroup(row, checked, true)
+        this._checkGroup(row, checked, true, !!ignoreUpdate)
       } else if (!row.disabled && !row.divider && (ignoreUpdate || row.visible)) {
         row.selected = checked
       }
@@ -1204,10 +1228,10 @@ class MultipleSelect {
     }
   }
 
-  _checkGroup (group, checked, ignoreUpdate) {
+  _checkGroup (group, checked, ignoreUpdate, ignoreVisible = ignoreUpdate) {
     group.selected = checked
     group.children.forEach(row => {
-      if (!row.disabled && !row.divider && (ignoreUpdate || row.visible)) {
+      if (!row.disabled && !row.divider && (ignoreVisible || row.visible)) {
         row.selected = checked
       }
     })
@@ -1263,14 +1287,21 @@ class MultipleSelect {
 
   /**
    * Move the focus to the previous/next visible list item, skipping the
-   * collapsed ones which cannot receive the focus
+   * collapsed ones and the non-interactive helper items which cannot
+   * receive the focus
    * @param {jQuery} $li - Current list item
    * @param {string} method - `prev` or `next`
    */
   focusSibling ($li, method) {
     let $sibling = $li[method]()
 
-    while ($sibling.length && !$sibling.is(':visible')) {
+    while (
+      $sibling.length &&
+        (
+          !$sibling.is(':visible') ||
+          $sibling.is('.ms-showing-count, .ms-no-results')
+        )
+    ) {
       $sibling = $sibling[method]()
     }
 
@@ -1327,6 +1358,62 @@ class MultipleSelect {
       this.$expand.trigger('focus')
     }
     this.isExpanded = false
+  }
+
+  /**
+   * Mark rows after the first `maxVisible` visible rows as hidden.
+   * Called after `initData()` and `filter()` so filtered results are
+   * also limited. Dividers don't count and follow the preceding option;
+   * optgroups are limited by their children. Stores the visible count
+   * before truncation in `visibleTotal` for the showing-count hint.
+   */
+  applyMaxVisible () {
+    const { maxVisible } = this.options
+    let count = 0
+    let visibleTotal = 0
+
+    const truncate = row => {
+      visibleTotal++
+      count++
+      row.visible = count <= maxVisible
+      return row.visible
+    }
+
+    let prevVisible = false
+
+    for (const row of this.data) {
+      if (row.type === 'optgroup') {
+        let visibleChildren = 0
+
+        prevVisible = false
+
+        for (const child of row.children) {
+          if (child.divider) {
+            // divider follows the previous option
+            child.visible = prevVisible
+            continue
+          }
+          if (child.visible) {
+            prevVisible = truncate(child)
+
+            if (child.visible) {
+              visibleChildren++
+            }
+          } else {
+            prevVisible = false
+          }
+        }
+        row.visible = visibleChildren > 0
+      } else if (row.divider) {
+        row.visible = prevVisible // divider follows the previous option
+      } else if (row.visible) {
+        prevVisible = truncate(row)
+      } else {
+        prevVisible = false
+      }
+    }
+
+    this.visibleTotal = visibleTotal
   }
 
   /**
@@ -1442,6 +1529,12 @@ class MultipleSelect {
         visible = this.filterBySelection(visible, row)
         row.visible = visible
       }
+    }
+
+    // Apply the maxVisible truncation on top of the filter result so that
+    // search and filterOptions results are also limited
+    if (this.options.maxVisible !== undefined) {
+      this.applyMaxVisible()
     }
 
     this.initListItems()

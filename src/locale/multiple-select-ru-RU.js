@@ -33,6 +33,9 @@ $.fn.multipleSelect.locales['ru-RU'] = $.fn.multipleSelect.locales['ru'] = {
   },
   formatCollapse () {
     return 'Свернуть'
+  },
+  formatShowingCount (visible, total) {
+    return `Показано ${visible} из ${total}`
   }
 }
 
