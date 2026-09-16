@@ -33,6 +33,9 @@ $.fn.multipleSelect.locales['hu-HU'] = $.fn.multipleSelect.locales['hu'] = {
   },
   formatCollapse () {
     return 'Kevesebb mutatása'
+  },
+  formatShowingCount (visible, total) {
+    return `${visible} / ${total} megjelenítve`
   }
 }
 

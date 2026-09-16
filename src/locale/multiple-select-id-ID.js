@@ -33,6 +33,9 @@ $.fn.multipleSelect.locales['id-ID'] = $.fn.multipleSelect.locales['id'] = {
   },
   formatCollapse () {
     return 'Sembunyikan'
+  },
+  formatShowingCount (visible, total) {
+    return `Menampilkan ${visible} dari ${total}`
   }
 }
 

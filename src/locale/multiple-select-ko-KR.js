@@ -33,6 +33,9 @@ $.fn.multipleSelect.locales['ko-KR'] = $.fn.multipleSelect.locales['ko'] = {
   },
   formatCollapse () {
     return '접기'
+  },
+  formatShowingCount (visible, total) {
+    return `${total}개 중 ${visible}개 표시`
   }
 }
 

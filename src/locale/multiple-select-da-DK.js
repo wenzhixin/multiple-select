@@ -33,6 +33,9 @@ $.fn.multipleSelect.locales['da-DK'] = $.fn.multipleSelect.locales['da'] = {
   },
   formatCollapse () {
     return 'Vis mindre'
+  },
+  formatShowingCount (visible, total) {
+    return `Viser ${visible} af ${total}`
   }
 }
 

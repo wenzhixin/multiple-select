@@ -345,6 +345,18 @@ The Options are defined in `jQuery.fn.multipleSelect.defaults`.
 
 - **Example:** <a href="/examples#max-visible-disabled.html">Max Visible Disabled</a>
 
+## maxVisible
+
+- **Attribute:** `data-max-visible`
+
+- **Type:** Number
+
+- **Detail:** Define the maximum number of options rendered in the dropdown list to improve performance with large data sets. Only the first N options (in original data order, options inside optgroups are also limited) are rendered in the DOM. Search and `filterOptions` results are also limited to the first N matches — enter a more specific keyword to narrow the results. The search box is enabled automatically when the data exceeds this value. A hint showing the visible and total count is displayed at the bottom of the list whenever options are truncated, including search and filter results. "Select all" only checks the visible options. Options beyond the first N, including selected ones, are not displayed in the list (use a more specific search to locate them). When combined with `maxVisibleDisabled`, the visible set is determined by the original data order, while the rendered order follows the `maxVisibleDisabled` reordering (disabled options moved to the end).
+
+- **Default:** `undefined`
+
+- **Example:** <a href="/examples#max-visible.html">Max Visible</a>
+
 ## position
 
 - **Attribute:** `data-position`
