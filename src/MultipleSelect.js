@@ -1174,6 +1174,10 @@ class MultipleSelect {
 
   disable () {
     this.$choice.addClass('disabled')
+    if (this.options.isOpen) {
+      this.close()
+      this.$drop.stop(true, true)
+    }
   }
 
   check (value) {
